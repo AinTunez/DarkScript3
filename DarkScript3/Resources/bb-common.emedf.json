@@ -13496,12 +13496,12 @@
     {
       "name": "Comparison Type",
       "values": {
-        "0": "==",
-        "1": "!=",
-        "2": ">",
-        "3": "<",
-        "4": ">=",
-        "5": "<="
+        "0": "Equal",
+        "1": "NotEqual",
+        "2": "Greater",
+        "3": "Less",
+        "4": "GreaterOrEqual",
+        "5": "LessOrEqual"
       }
     },
     {
@@ -13516,12 +13516,12 @@
     {
       "name": "Calculation Type",
       "values": {
-        "0": "+",
-        "1": "-",
-        "2": "\u00d7",
-        "3": "\u00f7",
-        "4": "mod",
-        "5": ":="
+        "0": "Add",
+        "1": "Sub",
+        "2": "Mult",
+        "3": "Div",
+        "4": "Mod",
+        "5": "Assign"
       }
     },
     {
