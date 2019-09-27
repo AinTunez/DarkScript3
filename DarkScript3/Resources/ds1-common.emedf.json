@@ -11821,9 +11821,9 @@
     {
       "name": "Number of Options",
       "values": {
-        "1": "1 Button",
-        "2": "2 Buttons",
-        "6": "No Button"
+        "1": "One Button",
+        "2": "Two Buttons",
+        "6": "No Buttons"
       }
     },
     {

@@ -16925,9 +16925,9 @@
     {
       "name": "Number of Options",
       "values": {
-        "1": "1 Button",
-        "2": "2 Buttons",
-        "6": "No Button"
+        "1": "One Button",
+        "2": "Two Buttons",
+        "6": "No Buttons"
       }
     },
     {
@@ -16942,17 +16942,17 @@
     {
       "name": "Sound Type",
       "values": {
-        "0": "a: Environmental Sound",
-        "1": "c: Character Motion",
-        "2": "f: Menu SE",
-        "3": "o: Object",
-        "4": "p: Cutscene SE",
-        "5": "s: SFX",
-        "6": "m: BGM",
-        "7": "v: Voice",
-        "8": "x: Depends On Floor Material",
-        "9": "b: Depends On Armor Material",
-        "10": "g: Ghost"
+        "0": "a_Environmental Sound",
+        "1": "c_Character Motion",
+        "2": "f_Menu SE",
+        "3": "o_Object",
+        "4": "p_Cutscene SE",
+        "5": "s_SFX",
+        "6": "m_BGM",
+        "7": "v_Voice",
+        "8": "x_Depends On Floor Material",
+        "9": "b_Depends On Armor Material",
+        "10": "g_Ghost"
       }
     },
     {
@@ -17285,11 +17285,11 @@
       "name": "Hollow Arena Match Type",
       "values": {
         "0": "Duel",
-        "1": "2 Player Brawl",
-        "2": "4 Player Brawl",
-        "3": "6 Player Brawl",
-        "4": "2 Versus 2",
-        "5": "3 Versus 3"
+        "1": "Two Player Brawl",
+        "2": "Four Player Brawl",
+        "3": "Six Player Brawl",
+        "4": "Two Versus Three",
+        "5": "Three Versus Three"
       }
     },
     {
@@ -17297,13 +17297,6 @@
       "values": {
         "0": "Win",
         "1": "Draw"
-      }
-    },
-    {
-      "name": "Gender",
-      "values": {
-        "0": "Male",
-        "1": "Female"
       }
     }
   ]

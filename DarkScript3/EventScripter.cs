@@ -24,6 +24,8 @@ namespace DarkScript3
 
         public Dictionary<EMEDF.InstrDoc, List<uint>> FuncBytePositions = new Dictionary<EMEDF.InstrDoc, List<uint>>();
 
+        public Dictionary<string, string> GlobalConstants = new Dictionary<string, string>();
+
         private List<string> LinkedFiles = new List<string>();
 
         public EventScripter(string file, string resource = "ds1-common.emedf.json")
@@ -50,7 +52,14 @@ namespace DarkScript3
             v8.AddHostType("REST", typeof(Event.RestBehaviorType));
             v8.AddHostType("Console", typeof(Console));
 
-            v8.Execute(File.ReadAllText("script.js"));
+            using (Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("DarkScript3.Resources.script.js"))
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    string result = reader.ReadToEnd();
+                    v8.Execute(result);
+                }
+            }
 
             if (resource == null)
             {
@@ -64,18 +73,35 @@ namespace DarkScript3
             }
         }
 
-        public Instruction MakeInstruction(int bank, int index, uint layer, object[] args)
-        {
-            Instruction ins = MakeInstruction(bank, index, args);
-            ins.Layer = layer;
-            return ins;
-        }
-
-        public Instruction MakeInstruction(int bank, int index, object[] args)
+        public Instruction MakeInstruction(Event evt, int bank, int index, object[] args)
         {
             EMEDF.InstrDoc doc = DOC[bank][index];
             if (args.Length < doc.Arguments.Length)
                 throw new Exception($"Instruction {bank}[{index}] ({doc.Name}) requires {doc.Arguments.Length} arguments.");
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                    
+                if (args[i] is string)
+                {
+                    if (doc == DOC[2000][0])
+                        throw new Exception("Event initializers cannot be dependent on parameters.");
+
+                    IEnumerable<int> nums = (args[i] as string).Substring(1).Split(':').Select(s => int.Parse(s));
+
+                    if (nums.Count() != 2)
+                        throw new Exception("Invalid parameter string: {" + args[i] + "}");
+
+                    int sourceStartByte = nums.ElementAt(0);
+                    int length = nums.ElementAt(1);
+                    uint targetStartByte = FuncBytePositions[doc][i];
+
+                    Parameter p = new Parameter(evt.Instructions.Count, targetStartByte, sourceStartByte, length);
+                    evt.Parameters.Add(p);
+
+                    args[i] = doc.Arguments[i].Default;
+                }
+            }
 
             List<object> properArgs = new List<object>();
             if (bank == 2000 && index == 0)
@@ -90,7 +116,6 @@ namespace DarkScript3
                 for (int i = 0; i < doc.Arguments.Length; i++)
                 {
                     EMEDF.ArgDoc argDoc = doc.Arguments[i];
-                    Console.WriteLine($"\t\tARG: {args[i]} ({argDoc.Type})");
                     if (argDoc.Type == 0) properArgs.Add(Convert.ToByte(args[i])); //u8
                     else if (argDoc.Type == 1) properArgs.Add(Convert.ToUInt16(args[i])); //u16
                     else if (argDoc.Type == 2) properArgs.Add(Convert.ToUInt32(args[i])); //u32
@@ -102,17 +127,19 @@ namespace DarkScript3
                     else throw new Exception("Invalid type in argument definition.");
                 }
             }
-            return new Instruction(bank, index, properArgs);
+            Instruction ins = new Instruction(bank, index, properArgs);
+            evt.Instructions.Add(ins);
+            return ins;
         }
 
         private EMEDF InitDocsFromResource(string streamPath)
         {
-            EMEDF DOC = EMEDF.Read("Resources\\" + streamPath);
+            EMEDF DOC = EMEDF.ReadStream(streamPath);
             foreach (EMEDF.EnumDoc enm in DOC.Enums)
             {
                 enm.Name = Regex.Replace(enm.Name, @"[^\w]", "");
                 StringBuilder code = new StringBuilder();
-                code.AppendLine($"var {enm.Name} = {{");
+                code.AppendLine($"const {enm.Name} = {{");
                 foreach (KeyValuePair<string, string> pair in enm.Values.ToList())
                 {
                     string val = Regex.Replace(enm.Values[pair.Key], @"[^\w]", "");
@@ -120,7 +147,6 @@ namespace DarkScript3
                     code.AppendLine($"{val}:{pair.Key},");
                 }
                 code.AppendLine("};");
-                Console.WriteLine(code.ToString());
                 v8.Execute(code.ToString());
             }
 
@@ -132,11 +158,15 @@ namespace DarkScript3
                     Functions[funcName] = ((int)bank.Index, (int)instr.Index);
                     FuncBytePositions[instr] = GetArgBytePositions(instr.Arguments.Select(i => (ArgType)i.Type).ToList());
                     
+                    foreach (var arg in instr.Arguments)
+                    {
+                        if (arg.EnumName != null)
+                            arg.EnumName = Regex.Replace(arg.EnumName, @"[^\w]", "");
+                    }
+
                     string argNames = string.Join(", ", instr.Arguments.Select(a => UTIL.CamelCaseName(a.Name.Replace("Class", "Class Name"))));
 
                     StringBuilder sb = new StringBuilder($"function {funcName} ({argNames}) {{");
-                    Console.WriteLine(sb.ToString() + "}");
-
                     sb.AppendLine($"    return _Instruction({bank.Index}, {instr.Index}, Array.from(arguments));");
                     sb.AppendLine("}");
 
@@ -181,7 +211,7 @@ namespace DarkScript3
                 string parameters = string.Join(", ", argNameList);
                 string eventHeaderLine = $"Event({id}, {restBehavior}, function() {{";
                 code.AppendLine(eventHeaderLine);
-                Console.WriteLine(eventHeaderLine);
+
                 for (int insIndex = 0; insIndex < evt.Instructions.Count; insIndex++)
                 {
                     Instruction ins = evt.Instructions[insIndex];
@@ -209,9 +239,25 @@ namespace DarkScript3
                     catch (Exception ex)
                     {
                         var sb = new StringBuilder();
-                        sb.AppendLine($@"Unable to unpack arguments for ""{funcName}""");
+                        sb.AppendLine($@"ERROR: Unable to unpack arguments for ""{funcName}""");
                         sb.AppendLine(ex.ToString());
                         throw new Exception(sb.ToString());
+                    }
+
+                    if (ins.Layer.HasValue)
+                    {
+                        List<int> bitList = new List<int>();
+                        for (int b = 0; b < 32; b++)
+                            if ((ins.Layer.Value & (1 << b)) != 0)
+                                bitList.Add(b);
+
+                        string layerString = $"$LAYERS({string.Join(", ", bitList)})";
+                        if (argString.Length > 0)
+                            argString += ", " + layerString;
+                        else
+                            argString += layerString;
+
+                        Console.WriteLine(layerString);
                     }
                    
                     string lineOfCode = $"\t{UTIL.TitleCaseName(doc.Name)}({argString});";
@@ -297,8 +343,10 @@ namespace DarkScript3
 
                 if (!isParam && argDoc.EnumName != null)
                 {
-                    var enm = DOC.Enums.First(e => e.Name == argDoc.EnumName);
-                    args[argIndex] = $"{enm.Name}.{enm.Values[args[argIndex]]}";
+                    var enm = DOC.Enums.First(e => e.Name == argDoc.EnumName);  
+                    string enumString = $"{enm.Name}.{enm.Values[args[argIndex]]}";
+                    if (GlobalConstants.ContainsKey(enumString)) enumString = GlobalConstants[enumString];
+                    args[argIndex] = enumString;
                 }
             }
             if (args.Length > 0) return string.Join(", ", args).Trim();

@@ -1,16 +1,19 @@
 ﻿var _event = void 0;
-var Default = REST.Default;
-var End = REST.End;
-var Restart = REST.Restart;
+const Default = REST.Default;
+const End = REST.End;
+const Restart = REST.Restart;
 
-function Event(id, restBehavior, params, instructions) {
+function Event(id, restBehavior, instructions) {
     var evt = new EVENT();
     evt.ID = id;
     evt.RestBehavior = restBehavior;
+
     _event = evt;
     instructions();
-    EVD.Events.Add(_event);
-    return _event;
+    _event = void 0;
+
+    EVD.Events.Add(evt);
+    return evt;
 }
 
 function _Instruction(bank, index, args) {
@@ -31,18 +34,17 @@ function _Instruction(bank, index, args) {
         argOut[i] = args[i];
     }
 
+    var ins = void 0;
     if (layer) {
-        var ins = Scripter.MakeInstruction(bank, index, layer, argOut);
-        _event.Instructions.Add(ins);
-        return ins;
+        ins = Scripter.MakeInstruction(_event, bank, index, layer, argOut);
     } else {
-        var ins = Scripter.MakeInstruction(bank, index, argOut);
-        _event.Instructions.Add(ins);
-        return ins;
+        ins = Scripter.MakeInstruction(_event, bank, index, argOut);
     }
+
+    return ins;
 }
 
-function LAYERS(...args) {
+function $LAYERS(...args) {
     var layer = 0;
     for (var i = 0; i < args.length; i++)
         layer |= 1 << args[i];
