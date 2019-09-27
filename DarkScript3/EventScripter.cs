@@ -16,7 +16,6 @@ namespace DarkScript3
     {
         public EMEVD EVD = new EMEVD();
 
-
         public EMEDF DOC { get; set; } = new EMEDF();
 
         private V8ScriptEngine v8 = new V8ScriptEngine();
@@ -27,7 +26,7 @@ namespace DarkScript3
 
         private List<string> LinkedFiles = new List<string>();
 
-        public EventScripter(string file, string resource = "ds3-common.emedf.json")
+        public EventScripter(string file, string resource = "ds1-common.emedf.json")
         {
             EVD = EMEVD.Read(file);
             InitAll(resource);
@@ -111,11 +110,18 @@ namespace DarkScript3
             EMEDF DOC = EMEDF.Read("Resources\\" + streamPath);
             foreach (EMEDF.EnumDoc enm in DOC.Enums)
             {
+                enm.Name = Regex.Replace(enm.Name, @"[^\w]", "");
+                StringBuilder code = new StringBuilder();
+                code.AppendLine($"var {enm.Name} = {{");
                 foreach (KeyValuePair<string, string> pair in enm.Values.ToList())
                 {
-                    string val = enm.Values[pair.Key];
-                    enm.Values[pair.Key] = Regex.Replace(val, @"[^\w]", "");
+                    string val = Regex.Replace(enm.Values[pair.Key], @"[^\w]", "");
+                    enm.Values[pair.Key] = val;
+                    code.AppendLine($"{val}:{pair.Key},");
                 }
+                code.AppendLine("};");
+                Console.WriteLine(code.ToString());
+                v8.Execute(code.ToString());
             }
 
             foreach (EMEDF.ClassDoc bank in DOC.Classes)
@@ -126,7 +132,6 @@ namespace DarkScript3
                     Functions[funcName] = ((int)bank.Index, (int)instr.Index);
                     FuncBytePositions[instr] = GetArgBytePositions(instr.Arguments.Select(i => (ArgType)i.Type).ToList());
                     
-
                     string argNames = string.Join(", ", instr.Arguments.Select(a => UTIL.CamelCaseName(a.Name.Replace("Class", "Class Name"))));
 
                     StringBuilder sb = new StringBuilder($"function {funcName} ({argNames}) {{");
@@ -182,7 +187,6 @@ namespace DarkScript3
                     Instruction ins = evt.Instructions[insIndex];
                     EMEDF.InstrDoc doc = DOC[ins.Bank][ins.ID];
                     string funcName = UTIL.TitleCaseName(doc.Name);
-                    //Console.WriteLine($"\t{funcName}");
 
                     IEnumerable<ArgType> argStruct = doc.Arguments.Select(arg => (ArgType)arg.Type);
                     string[] args = default;
@@ -190,7 +194,6 @@ namespace DarkScript3
 
                     try
                     {
-
                         if (doc == DOC[2000][0])
                         {
                             argStruct = Enumerable.Repeat(ArgType.Int32, ins.ArgData.Length / 4);
@@ -213,14 +216,11 @@ namespace DarkScript3
                    
                     string lineOfCode = $"\t{UTIL.TitleCaseName(doc.Name)}({argString});";
                     code.AppendLine(lineOfCode);
-                    Console.WriteLine(lineOfCode);
  
                 }
                 code.AppendLine("});");
                 code.AppendLine("");
-                Console.WriteLine("});");
             }
-            Console.WriteLine($"");
             return code.ToString();
         }
 
@@ -298,7 +298,7 @@ namespace DarkScript3
                 if (!isParam && argDoc.EnumName != null)
                 {
                     var enm = DOC.Enums.First(e => e.Name == argDoc.EnumName);
-                    args[argIndex] = enm.Values[args[argIndex]];
+                    args[argIndex] = $"{enm.Name}.{enm.Values[args[argIndex]]}";
                 }
             }
             if (args.Length > 0) return string.Join(", ", args).Trim();
@@ -363,15 +363,6 @@ namespace DarkScript3
                     words[i] = firstChar + rest;
                 }
                 return Regex.Replace(string.Join("", words), "[^\\w]", "");
-            }
-
-            public static string ParamCode(List<Parameter> parameters)
-            {
-                if (parameters.Count == 0) return "";
-                List<string> pStrings = new List<string>();
-                for (int i = 0; i < parameters.Count; i++)
-                    pStrings.Add($"ARG{i}");
-                return string.Join(", ", pStrings);
             }
         }
     }

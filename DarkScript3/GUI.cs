@@ -48,9 +48,10 @@ namespace DarkScript3
             ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                Scripter = new EventScripter(ofd.FileName);
+                var chooser = new GameChooser();
+                chooser.ShowDialog();
+                Scripter = new EventScripter(ofd.FileName, chooser.GameDocs);
                 editor.Text = Scripter.Unpack();
-
             }
         }
 
@@ -65,7 +66,8 @@ namespace DarkScript3
 
         private void EmevdDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            (new InfoViewer(Scripter)).Show();
+            if (Scripter == null) return;
+            (new InfoViewer(Scripter)).ShowDialog();
         }
     }
 }

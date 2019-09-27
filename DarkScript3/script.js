@@ -4,7 +4,6 @@ var End = REST.End;
 var Restart = REST.Restart;
 
 function Event(id, restBehavior, params, instructions) {
-    Console.WriteLine("Creating event " + id + "...");
     var evt = new EVENT();
     evt.ID = id;
     evt.RestBehavior = restBehavior;
@@ -16,6 +15,7 @@ function Event(id, restBehavior, params, instructions) {
 
 function _Instruction(bank, index, args) {
     if (!_event) return;
+
     var layer = void 0;
     if (args.length) {
         var lastArg = args.pop();
@@ -40,14 +40,11 @@ function _Instruction(bank, index, args) {
         _event.Instructions.Add(ins);
         return ins;
     }
-  
 }
-
 
 function LAYERS(...args) {
     var layer = 0;
-    for (var i = 0; i < args.length; i++) {
+    for (var i = 0; i < args.length; i++)
         layer |= 1 << args[i];
-    }
     return { layerValue: layer };
-}
+} 

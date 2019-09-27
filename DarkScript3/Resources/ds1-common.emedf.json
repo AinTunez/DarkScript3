@@ -11630,31 +11630,31 @@
     {
       "name": "Comparison Type",
       "values": {
-        "0": "==",
-        "1": "!=",
-        "2": ">",
-        "3": "<",
-        "4": ">=",
-        "5": "<="
+        "0": "Equal",
+        "1": "NotEqual",
+        "2": "Greater",
+        "3": "Less",
+        "4": "GreaterOrEqual",
+        "5": "LessOrEqual"
       }
     },
     {
       "name": "Logical Operation Type",
       "values": {
-        "0": "All ON",
-        "1": "All OFF",
-        "2": "Not All OFF",
-        "3": "Not All ON"
+        "0": "AllON",
+        "1": "AllOFF",
+        "2": "NotAllOFF",
+        "3": "NotAllON"
       }
     },
     {
       "name": "Calculation Type",
       "values": {
-        "0": "+",
-        "1": "-",
-        "2": "\u00d7",
-        "3": "\u00f7",
-        "4": "mod"
+        "0": "Add",
+        "1": "Sub",
+        "2": "Mult",
+        "3": "Div",
+        "4": "Mod"
       }
     },
     {
@@ -11701,13 +11701,13 @@
         "1": "TRUE"
       }
     },
-    {
-      "name": "\u25cb/\u00d7",
-      "values": {
-        "0": "\u00d7",
-        "1": "\u25cb"
-      }
-    },
+    //{
+    //  "name": "\u25cb/\u00d7",
+    //  "values": {
+    //    "0": "\u00d7",
+    //    "1": "\u25cb"
+    //  }
+    //},
     {
       "name": "Destruction State",
       "values": {

@@ -2187,7 +2187,7 @@
               "unk3": 0,
               "unk4": 0
             }
-          ]  
+          ]
         },
         {
           "name": "IF Multiplayer Network Penalized",
@@ -3774,7 +3774,7 @@
               "unk2": 0,
               "unk3": 0,
               "unk4": 0
-            }, 
+            },
             {
               "name": "Is Transformed",
               "type": 0,
@@ -5815,13 +5815,13 @@
               "unk3": 0,
               "unk4": 0
             }
-          ]   
+          ]
         },
         {
           "name": "GOTO IF Player Is Not In Own World (Excludes Arena)",
           "index": 12,
           "args": [
-             {
+            {
               "name": "Label",
               "type": 0,
               "enum_name": "Label",
@@ -5855,7 +5855,7 @@
           "name": "END IF Player Is Not In Own World (Excludes Arena)",
           "index": 13,
           "args": [
-             {
+            {
               "name": "Execution End Type",
               "type": 0,
               "enum_name": "Event End Type",
@@ -6357,7 +6357,7 @@
           "name": "END IF Character Has SpEffect",
           "index": 111,
           "args": [
-             {
+            {
               "name": "Execution End Type",
               "type": 0,
               "enum_name": "Event End Type",
@@ -6441,13 +6441,13 @@
               "unk3": 0,
               "unk4": 0
             }
-           ]    
+          ]
         },
         {
-           "name": "SKIP IF Character Has SpEffect",
-           "index": 112,
-           "args": [
-             {
+          "name": "SKIP IF Character Has SpEffect",
+          "index": 112,
+          "args": [
+            {
               "name": "Number Of Skipped Lines",
               "type": 0,
               "enum_name": null,
@@ -6531,7 +6531,7 @@
               "unk3": 0,
               "unk4": 0
             }
-           ]    
+          ]
         },
         {
           "name": "GOTO IF Player In/Outside Area",
@@ -6655,10 +6655,10 @@
               "unk3": 0,
               "unk4": 0
             }
-          ] 
+          ]
         },
         {
-            "name": "SKIP IF Player In/Outside Area",
+          "name": "SKIP IF Player In/Outside Area",
           "index": 202,
           "args": [
             {
@@ -8027,7 +8027,7 @@
               "unk3": 0,
               "unk4": 0
             }
-          ]   
+          ]
         },
         {
           "name": "Play Cutscene to Player and Change Current Map Ceremony",
@@ -8103,7 +8103,7 @@
               "unk3": 0,
               "unk4": 0
             }
-          ]   
+          ]
         },
         {
           "name": "Play Ongoing Cutscene and Warp Player",
@@ -10367,7 +10367,7 @@
               "unk3": 0,
               "unk4": 0
             }
-          ]  
+          ]
         },
         {
           "name": "Set Current Map Ceremony",
@@ -10571,7 +10571,7 @@
               "unk3": 0,
               "unk4": 0
             }
-          ]   
+          ]
         },
         {
           "name": "Reset Omission Mode Counts to Default",
@@ -10868,7 +10868,7 @@
           "name": "Disable Loading Screen Tips",
           "index": 76,
           "args": [
-             {
+            {
               "name": "Should Be Disabled",
               "type": 0,
               "enum_name": "BOOL",
@@ -11052,7 +11052,7 @@
           "name": "Place NPC Summon Sign (Works For Non-Embered Players)",
           "index": 81,
           "args": [
-           {
+            {
               "name": "Sign Type",
               "type": 5,
               "enum_name": "Summon Sign Type",
@@ -13425,7 +13425,7 @@
               "unk3": 0,
               "unk4": 0
             }
-          ]  
+          ]
         },
         {
           "name": "Set Character Talk Range",
@@ -14956,7 +14956,7 @@
               "unk3": 0,
               "unk4": 0
             }
-          ]   
+          ]
         }
       ]
     },
@@ -16703,12 +16703,12 @@
     {
       "name": "Comparison Type",
       "values": {
-        "0": "==",
-        "1": "!=",
-        "2": ">",
-        "3": "<",
-        "4": ">=",
-        "5": "<="
+        "0": "Equal",
+        "1": "NotEqual",
+        "2": "Greater",
+        "3": "Less",
+        "4": "GreaterOrEqual",
+        "5": "LessOrEqual"
       }
     },
     {
@@ -16723,12 +16723,12 @@
     {
       "name": "Calculation Type",
       "values": {
-        "0": "+",
-        "1": "-",
-        "2": "\u00d7",
-        "3": "\u00f7",
-        "4": "mod",
-        "5": ":="
+        "0": "Add",
+        "1": "Sub",
+        "2": "Mult",
+        "3": "Div",
+        "4": "Mod",
+        "5": "Assign"
       }
     },
     {
@@ -16790,13 +16790,13 @@
         "1": "TRUE"
       }
     },
-    {
-      "name": "\u25cb/\u00d7",
-      "values": {
-        "0": "\u00d7",
-        "1": "\u25cb"
-      }
-    },
+    //{
+    //  "name": "\u25cb/\u00d7",
+    //  "values": {
+    //    "0": "\u00d7",
+    //    "1": "\u25cb"
+    //  }
+    //},
     {
       "name": "Destruction State",
       "values": {
@@ -17289,7 +17289,7 @@
         "2": "4 Player Brawl",
         "3": "6 Player Brawl",
         "4": "2 Versus 2",
-        "5": "3 Versus 3"   
+        "5": "3 Versus 3"
       }
     },
     {
