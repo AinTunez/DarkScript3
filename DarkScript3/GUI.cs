@@ -103,7 +103,6 @@ namespace DarkScript3
         {
             e.ChangedRange.ClearStyle(Styles.ToArray());
 
-            //strings
             e.ChangedRange.SetStyle(TextStyles.String, new Regex(@""".*"""));
             e.ChangedRange.SetStyle(TextStyles.Keyword, new Regex(@"[^$]\b(function|var|const|new|true|false)\b[^$]")); //keywords
             e.ChangedRange.SetStyle(TextStyles.FunctionCall, new Regex(@"(?<range>(\w|\$)+)\s*\(")); //global constants
