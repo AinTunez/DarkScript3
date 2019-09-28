@@ -27,6 +27,7 @@ namespace DarkScript3
             InitializeComponent();
 
             menuStrip1.Renderer = new DarkToolStripRenderer();
+            statusStrip1.Renderer = new DarkToolStripRenderer();
         }
 
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -55,15 +56,16 @@ namespace DarkScript3
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var ofd = new OpenFileDialog();
+            OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                var chooser = new GameChooser();
+                GameChooser chooser = new GameChooser();
                 chooser.ShowDialog();
                 try
                 {
                     Scripter = new EventScripter(ofd.FileName, chooser.GameDocs);
+                    SFUtil.Backup(ofd.FileName);
                     if (File.Exists($"{ofd.FileName}.js"))
                     {
                         editor.Text = File.ReadAllText($"{ofd.FileName}.js");
@@ -158,6 +160,23 @@ namespace DarkScript3
                 new Regex(
                     @"\b(true|false|break|case|catch|const|continue|default|delete|do|else|export|for|function|if|in|instanceof|new|null|return|switch|this|throw|try|var|void|while|with|typeof)\b",
                     RegexCompiledOption);
+        }
+
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void ValidateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            File.WriteAllText("output/original.js", editor.Text);
+            
+            var evd = Scripter.Pack(editor.Text);
+            Scripter.EVD = evd;
+            editor.Text = Scripter.Unpack();
+            File.WriteAllText("output/processed.js", editor.Text);
+
+            MessageBox.Show("Files generated.");
         }
     }
 }

@@ -240,8 +240,6 @@ namespace SoulsFormats
                 /// 32-bit floating point number.
                 /// </summary>
                 Single = 6,
-
-                Text = 8
             }
 
             /// <summary>
@@ -280,6 +278,7 @@ namespace SoulsFormats
                                 throw new NotSupportedException($"Unsupported argument type: {arg.GetType()}");
                         }
                     }
+                    bw.Pad(4);
                     ArgData = bw.FinishBytes();
                 }
             }

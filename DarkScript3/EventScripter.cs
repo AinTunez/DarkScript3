@@ -59,7 +59,7 @@ namespace DarkScript3
             for (int i = 0; i < args.Length; i++)
             {
                 if (args[i] is bool)
-                    args[i] = (bool) args[i] ? 0 : 1;
+                    args[i] = (bool) args[i] ? 1 : 0;
                 else if (args[i] is string)
                 {
                     if (doc == DOC[2000][0])
@@ -159,9 +159,10 @@ namespace DarkScript3
                         string val = "$" + Regex.Replace(pair.Value, @"[^\w]", "");
                         enm.Values[pair.Key] = val;
                         EnumReplacements[$"{enm.Name}.{val}"] = val;
-
+                        string code = $"const {val} = {int.Parse(pair.Key)};";
+                        Console.WriteLine(code);
                         if (enm.Name != "ONOFF") //handled by ON/OFF/CHANGE
-                            v8.Execute($"const {val} = {int.Parse(pair.Key)};");
+                            v8.Execute(code);
                     }
                 } else
                 {
@@ -174,9 +175,9 @@ namespace DarkScript3
                         code.AppendLine($"{val}:{pair.Key},");
                     }
                     code.AppendLine("};");
+                    Console.WriteLine(code.ToString());
                     v8.Execute(code.ToString());
                 }
-                
             }
 
             foreach (EMEDF.ClassDoc bank in DOC.Classes)
