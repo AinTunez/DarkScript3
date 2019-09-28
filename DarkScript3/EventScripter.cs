@@ -59,15 +59,13 @@ namespace DarkScript3
             for (int i = 0; i < args.Length; i++)
             {
                 if (args[i] is bool)
-                {
                     args[i] = (bool) args[i] ? 0 : 1;
-                } else if (args[i] is string)
+                else if (args[i] is string)
                 {
                     if (doc == DOC[2000][0])
                         throw new Exception("Event initializers cannot be dependent on parameters.");
 
                     IEnumerable<int> nums = (args[i] as string).Substring(1).Split(':').Select(s => int.Parse(s));
-
                     if (nums.Count() != 2)
                         throw new Exception("Invalid parameter string: {" + args[i] + "}");
 
@@ -77,6 +75,7 @@ namespace DarkScript3
 
                     Parameter p = new Parameter(evt.Instructions.Count, targetStartByte, sourceStartByte, length);
                     evt.Parameters.Add(p);
+                    evt.Parameters = evt.Parameters.OrderBy(prm => prm.SourceStartByte).ToList();
 
                     args[i] = doc.Arguments[i].Default;
                 }
@@ -112,6 +111,12 @@ namespace DarkScript3
             return ins;
         }
 
+        public Instruction MakeInstruction(Event evt, int bank, int index, uint layer, object[] args)
+        {
+            Instruction ins = MakeInstruction(evt, bank, index, args);
+            ins.Layer = layer;
+            return ins;
+        }
 
         public void InitAll(string resource)
         {
@@ -129,7 +134,6 @@ namespace DarkScript3
             v8.Execute(Resource.Text("script.js"));
             v8.Execute(Resource.Text("globals.js"));
 
-
             if (resource == null)
             {
                 var chooser = new GameChooser();
@@ -140,12 +144,6 @@ namespace DarkScript3
             {
                 DOC = InitDocsFromResource(resource);
             }
-        }
-
-
-        private void InitGloablConstant(EMEDF.EnumDoc enm)
-        {
-
         }
 
         private EMEDF InitDocsFromResource(string streamPath)
@@ -161,6 +159,7 @@ namespace DarkScript3
                         string val = "$" + Regex.Replace(pair.Value, @"[^\w]", "");
                         enm.Values[pair.Key] = val;
                         EnumReplacements[$"{enm.Name}.{val}"] = val;
+
                         if (enm.Name != "ONOFF") //handled by ON/OFF/CHANGE
                             v8.Execute($"const {val} = {int.Parse(pair.Key)};");
                     }
@@ -184,7 +183,7 @@ namespace DarkScript3
             {
                 foreach (EMEDF.InstrDoc instr in bank.Instructions)
                 {
-                    string funcName = UTIL.TitleCaseName(instr.Name);
+                    string funcName = TitleCaseName(instr.Name);
                     Functions[funcName] = ((int)bank.Index, (int)instr.Index);
                     FuncBytePositions[instr] = GetArgBytePositions(instr.Arguments.Select(i => (ArgType)i.Type).ToList());
                     
@@ -194,9 +193,10 @@ namespace DarkScript3
                             arg.EnumName = Regex.Replace(arg.EnumName, @"[^\w]", "");
                     }
 
-                    string argNames = string.Join(", ", instr.Arguments.Select(a => UTIL.CamelCaseName(a.Name.Replace("Class", "Class Name"))));
+                    string argNames = string.Join(", ", instr.Arguments.Select(a => CamelCaseName(a.Name.Replace("Class", "Class Name"))));
 
-                    StringBuilder sb = new StringBuilder($"function {funcName} ({argNames}) {{");
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine($"function {funcName} ({argNames}) {{");
                     sb.AppendLine($"    return _Instruction({bank.Index}, {instr.Index}, Array.from(arguments));");
                     sb.AppendLine("}");
 
@@ -205,32 +205,11 @@ namespace DarkScript3
             }
             return DOC;
         }
-        private void InitLinkedFiles()
-        {
-            var reader = new BinaryReaderEx(false, EVD.StringData);
-            foreach (long offset in EVD.LinkedFileOffsets)
-            {
-                string linkedFile = reader.GetUTF16(offset);
-                LinkedFiles.Add(linkedFile);
-            }
-        }
 
-        private int ByteLengthFromType(long t)
-        {
-            if (t == 0) return 1; //u8
-            if (t == 1) return 2; //u16
-            if (t == 2) return 4; //u32
-            if (t == 3) return 1; //s8
-            if (t == 4) return 2; //s16
-            if (t == 5) return 4; //s32
-            if (t == 6) return 4; //f32
-            if (t == 8) return 4; //string position
-            throw new Exception("Invalid type in argument definition.");
-        }
         public EMEVD Pack(string code)
         {
             EVD.Events.Clear();
-            v8.Execute(code);
+            v8.Execute($"(function() {{ {code} }})();");
             return EVD;
         }
 
@@ -247,7 +226,6 @@ namespace DarkScript3
                 //each parameter's string representation
                 Dictionary<Parameter, string> paramNames = ParamNames(evt);
                 IEnumerable<string> argNameList = paramNames.Values.Distinct();
-
                 code.AppendLine($"// PARAMETERS: {string.Join(", ", argNameList)}");
                 code.AppendLine($"Event({id}, {restBehavior}, function() {{");
 
@@ -255,7 +233,7 @@ namespace DarkScript3
                 {
                     Instruction ins = evt.Instructions[insIndex];
                     EMEDF.InstrDoc doc = DOC[ins.Bank][ins.ID];
-                    string funcName = UTIL.TitleCaseName(doc.Name);
+                    string funcName = TitleCaseName(doc.Name);
 
                     IEnumerable<ArgType> argStruct = doc.Arguments.Select(arg => (ArgType)arg.Type);
                     string[] args = default;
@@ -285,28 +263,54 @@ namespace DarkScript3
 
                     if (ins.Layer.HasValue)
                     {
-                        List<int> bitList = new List<int>();
-                        for (int b = 0; b < 32; b++)
-                            if ((ins.Layer.Value & (1 << b)) != 0)
-                                bitList.Add(b);
-
-                        string layerString = $"$LAYERS({string.Join(", ", bitList)})";
+                        string str = LayerString(ins.Layer.Value);
                         if (argString.Length > 0)
-                            argString += ", " + layerString;
+                            argString = $"{argString}, {str}";
                         else
-                            argString += layerString;
-
-                        Console.WriteLine(layerString);
+                            argString = str;
                     }
-                   
-                    string lineOfCode = $"\t{UTIL.TitleCaseName(doc.Name)}({argString});";
+
+                    string lineOfCode = $"\t{TitleCaseName(doc.Name)}({argString});";
                     code.AppendLine(lineOfCode);
- 
+
                 }
                 code.AppendLine("});");
                 code.AppendLine("");
             }
             return code.ToString();
+        }
+
+        private void InitLinkedFiles()
+        {
+            var reader = new BinaryReaderEx(false, EVD.StringData);
+            foreach (long offset in EVD.LinkedFileOffsets)
+            {
+                string linkedFile = reader.GetUTF16(offset);
+                LinkedFiles.Add(linkedFile);
+            }
+        }
+
+        private int ByteLengthFromType(long t)
+        {
+            if (t == 0) return 1; //u8
+            if (t == 1) return 2; //u16
+            if (t == 2) return 4; //u32
+            if (t == 3) return 1; //s8
+            if (t == 4) return 2; //s16
+            if (t == 5) return 4; //s32
+            if (t == 6) return 4; //f32
+            if (t == 8) return 4; //string position
+            throw new Exception("Invalid type in argument definition.");
+        }
+
+        public string LayerString(uint layerValue)
+        {
+            List<int> bitList = new List<int>();
+            for (int b = 0; b < 32; b++)
+                if ((layerValue & (1 << b)) != 0)
+                    bitList.Add(b);
+
+            return $"$LAYERS({string.Join(", ", bitList)})";
         }
 
         public Dictionary<Parameter, string> ParamNames (Event evt)
@@ -400,48 +404,35 @@ namespace DarkScript3
             return positions;
         }
 
-        public static class UTIL
+        public static string TitleCaseName(string s)
         {
-            public static string TitleCaseName(string s)
+            if (string.IsNullOrEmpty(s)) return s;
+
+            string[] words = s.Split(' ');
+            for (int i = 0; i < words.Length; i++)
             {
-                if (s == null) return s;
+                if (words[i].Length == 0) continue;
 
-                string[] words = s.Split(' ');
-                for (int i = 0; i < words.Length; i++)
+                char firstChar = char.ToUpper(words[i][0]);
+                string rest = "";
+                if (words[i].Length > 1)
                 {
-                    if (words[i].Length == 0) continue;
-
-                    char firstChar = char.ToUpper(words[i][0]);
-                    string rest = "";
-                    if (words[i].Length > 1)
-                    {
-                        rest = words[i].Substring(1);
-                    }
-                    words[i] = firstChar + rest;
+                    rest = words[i].Substring(1);
                 }
-                return Regex.Replace(string.Join("", words), "[^\\w]", "");
+                words[i] = firstChar + rest;
             }
+            return Regex.Replace(string.Join("", words), "[^\\w]", "");
+        }
 
-            public static string CamelCaseName(string s)
-            {
-                if (s == null) return s;
-
-                string[] words = s.Split(' ');
-                words[0] = char.ToLower(words[0][0]) + words[0].Substring(1);
-                for (int i = 1; i < words.Length; i++)
-                {
-                    if (words[i].Length == 0) continue;
-
-                    char firstChar = char.ToUpper(words[i][0]);
-                    string rest = "";
-                    if (words[i].Length > 1)
-                    {
-                        rest = words[i].Substring(1);
-                    }
-                    words[i] = firstChar + rest;
-                }
-                return Regex.Replace(string.Join("", words), "[^\\w]", "");
-            }
+        public static string CamelCaseName(string s)
+        {
+            if (string.IsNullOrEmpty(s)) return s;
+            string name = TitleCaseName(s);
+            char firstChar = char.ToLower(name[0]);
+            if (name.Length > 1)
+                return firstChar + name.Substring(1);
+            else
+                return firstChar.ToString();
         }
     }
 }

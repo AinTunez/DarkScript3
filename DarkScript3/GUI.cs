@@ -20,6 +20,8 @@ namespace DarkScript3
     {
         public EventScripter Scripter;
 
+        public string EVD_Path;
+
         public GUI()
         {
             InitializeComponent();
@@ -29,9 +31,11 @@ namespace DarkScript3
 
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Scripter == null) return;
             try
             {
-                Scripter.Pack(editor.Text).Write("output/test.emevd.dcx", DCX.Type.DarkSouls3);
+                Scripter.Pack(editor.Text).Write(EVD_Path);
+                File.WriteAllText($"{EVD_Path}.js", editor.Text);
             }
             catch (Exception ex)
             {
@@ -40,9 +44,9 @@ namespace DarkScript3
                 {
                     string details = scriptException.ErrorDetails;
                     Console.WriteLine(details);
-                    //details = Regex.Replace(details, @"(\s+)at Script\s*\[.*\]:", "$1at ");
                     MessageBox.Show(details);
-                } else
+                }
+                else
                 {
                     MessageBox.Show(ex.ToString());
                 }
@@ -57,17 +61,32 @@ namespace DarkScript3
             {
                 var chooser = new GameChooser();
                 chooser.ShowDialog();
-                Scripter = new EventScripter(ofd.FileName, chooser.GameDocs);
-                editor.Text = Scripter.Unpack();
+                try
+                {
+                    Scripter = new EventScripter(ofd.FileName, chooser.GameDocs);
+                    if (File.Exists($"{ofd.FileName}.js"))
+                    {
+                        editor.Text = File.ReadAllText($"{ofd.FileName}.js");
+                    }
+                    else
+                    {
+                        editor.Text = Scripter.Unpack();
+                        EVD_Path = ofd.FileName;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
             }
         }
 
         private void GUI_Load(object sender, EventArgs e)
         {
-            var sb = new StringBuilder();
-            sb.AppendLine("Event(0, Default, null, function () {");
-            sb.AppendLine("\tInitializeEvent(0, 260, 11810000);");
-            sb.AppendLine("});");
+            //var sb = new StringBuilder();
+            //sb.AppendLine("Event(0, Default, null, function () {");
+            //sb.AppendLine("\tInitializeEvent(0, 260, 11810000);");
+            //sb.AppendLine("});");
             //editor.Text = sb.ToString();
         }
 
@@ -82,7 +101,7 @@ namespace DarkScript3
             var color = Color.FromArgb(r, g, b);
             return MakeStyle(new SolidBrush(color), f);
         }
-        
+
 
         private static TextStyle MakeStyle(Brush b, FontStyle f = FontStyle.Regular)
         {
@@ -94,26 +113,23 @@ namespace DarkScript3
 
         private static class TextStyles
         {
-            public static TextStyle Comment = MakeStyle(87,166,74);
-            public static TextStyle String = MakeStyle(214,157,133);
-            public static TextStyle Keyword = MakeStyle(86,156,214);
-            public static TextStyle FunctionCall = MakeStyle(78,201,176);
-            public static TextStyle EnumConstant = MakeStyle(181,206,168);
-            public static TextStyle Number = MakeStyle(181,206,168);
+            public static TextStyle Comment = MakeStyle(87, 166, 74);
+            public static TextStyle String = MakeStyle(214, 157, 133);
+            public static TextStyle Keyword = MakeStyle(86, 156, 214);
+            public static TextStyle FunctionCall = MakeStyle(78, 201, 176);
+            public static TextStyle EnumConstant = MakeStyle(181, 206, 168);
+            public static TextStyle Number = MakeStyle(181, 206, 168);
         }
 
         private void Editor_TextChanged(object sender, TextChangedEventArgs e)
         {
             e.ChangedRange.ClearStyle(Styles.ToArray());
-
-
-
-            e.ChangedRange.SetStyle(TextStyles.Comment, TextRegex.JScriptCommentRegex1);
-            e.ChangedRange.SetStyle(TextStyles.Comment, TextRegex.JScriptCommentRegex2);
-            e.ChangedRange.SetStyle(TextStyles.Comment, TextRegex.JScriptCommentRegex1);
-            e.ChangedRange.SetStyle(TextStyles.String, TextRegex.JScriptStringRegex);
-            e.ChangedRange.SetStyle(TextStyles.Keyword, TextRegex.JScriptKeywordRegex);
-            e.ChangedRange.SetStyle(TextStyles.Number, TextRegex.JScriptNumberRegex);
+            e.ChangedRange.SetStyle(TextStyles.Comment, JSRegex.Comment1);
+            e.ChangedRange.SetStyle(TextStyles.Comment, JSRegex.Comment2);
+            e.ChangedRange.SetStyle(TextStyles.Comment, JSRegex.Comment1);
+            e.ChangedRange.SetStyle(TextStyles.String, JSRegex.String);
+            e.ChangedRange.SetStyle(TextStyles.Keyword, JSRegex.Keyword);
+            e.ChangedRange.SetStyle(TextStyles.Number, JSRegex.Number);
             e.ChangedRange.SetStyle(TextStyles.EnumConstant, new Regex(@"(^|\W)(?<range>\$\w*)")); //accessors starting with $
 
         }
@@ -129,16 +145,16 @@ namespace DarkScript3
             }
         }
 
-        public static class TextRegex
+        public static class JSRegex
         {
-            public static Regex JScriptStringRegex = new Regex(@"""""|''|"".*?[^\\]""|'.*?[^\\]'", RegexCompiledOption);
-            public static Regex  JScriptCommentRegex1 = new Regex(@"//.*$", RegexOptions.Multiline | RegexCompiledOption);
-            public static Regex JScriptCommentRegex2 = new Regex(@"(/\*.*?\*/)|(/\*.*)", RegexOptions.Singleline | RegexCompiledOption);
-            public static Regex JScriptCommentRegex3 = new Regex(@"(/\*.*?\*/)|(.*\*/)",
+            public static Regex String = new Regex(@"""""|''|"".*?[^\\]""|'.*?[^\\]'", RegexCompiledOption);
+            public static Regex Comment1 = new Regex(@"//.*$", RegexOptions.Multiline | RegexCompiledOption);
+            public static Regex Comment2 = new Regex(@"(/\*.*?\*/)|(/\*.*)", RegexOptions.Singleline | RegexCompiledOption);
+            public static Regex Comment3 = new Regex(@"(/\*.*?\*/)|(.*\*/)",
                                              RegexOptions.Singleline | RegexOptions.RightToLeft | RegexCompiledOption);
-            public static Regex JScriptNumberRegex = new Regex(@"\b\d+[\.]?\d*([eE]\-?\d+)?[lLdDfF]?\b|\b0x[a-fA-F\d]+\b",
+            public static Regex Number = new Regex(@"\b\d+[\.]?\d*([eE]\-?\d+)?[lLdDfF]?\b|\b0x[a-fA-F\d]+\b",
                                            RegexCompiledOption);
-            public static Regex JScriptKeywordRegex =
+            public static Regex Keyword =
                 new Regex(
                     @"\b(true|false|break|case|catch|const|continue|default|delete|do|else|export|for|function|if|in|instanceof|new|null|return|switch|this|throw|try|var|void|while|with|typeof)\b",
                     RegexCompiledOption);
