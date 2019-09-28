@@ -169,6 +169,9 @@ namespace DarkScript3
 
         private void ValidateToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+
+
             File.WriteAllText("output/original.js", editor.Text);
             
             var evd = Scripter.Pack(editor.Text);

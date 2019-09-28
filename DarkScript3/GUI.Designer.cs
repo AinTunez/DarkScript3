@@ -35,12 +35,12 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.validateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.emevdDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.validateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.editor)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -127,6 +127,14 @@
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
+            // validateToolStripMenuItem
+            // 
+            this.validateToolStripMenuItem.Name = "validateToolStripMenuItem";
+            this.validateToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.validateToolStripMenuItem.Text = "Validate";
+            this.validateToolStripMenuItem.Visible = false;
+            this.validateToolStripMenuItem.Click += new System.EventHandler(this.ValidateToolStripMenuItem_Click);
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
@@ -167,13 +175,6 @@
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(50, 20);
             this.statusLabel.Text = "Ready";
-            // 
-            // validateToolStripMenuItem
-            // 
-            this.validateToolStripMenuItem.Name = "validateToolStripMenuItem";
-            this.validateToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.validateToolStripMenuItem.Text = "Validate";
-            this.validateToolStripMenuItem.Click += new System.EventHandler(this.ValidateToolStripMenuItem_Click);
             // 
             // GUI
             // 

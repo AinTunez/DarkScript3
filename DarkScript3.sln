@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoulsFormats", "SoulsFormat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DarkScript3", "DarkScript3\DarkScript3.csproj", "{26132F38-F7FC-465D-8044-4D45B5F79264}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompareEMEVD", "CompareEMEVD\CompareEMEVD.csproj", "{B0FB54B5-CB85-4F20-9143-BC58CF20BA9A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{26132F38-F7FC-465D-8044-4D45B5F79264}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26132F38-F7FC-465D-8044-4D45B5F79264}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26132F38-F7FC-465D-8044-4D45B5F79264}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0FB54B5-CB85-4F20-9143-BC58CF20BA9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0FB54B5-CB85-4F20-9143-BC58CF20BA9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0FB54B5-CB85-4F20-9143-BC58CF20BA9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0FB54B5-CB85-4F20-9143-BC58CF20BA9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5250,7 +5250,7 @@
               "name": "Flag State",
               "type": 0,
               "enum_name": "ON/OFF",
-              "default": 1,
+              "default": 0,
               "min": 0,
               "max": 0,
               "increment": 0,
