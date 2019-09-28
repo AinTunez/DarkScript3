@@ -23,6 +23,8 @@ namespace DarkScript3
         public GUI()
         {
             InitializeComponent();
+
+            menuStrip1.Renderer = new DarkToolStripRenderer();
         }
 
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)

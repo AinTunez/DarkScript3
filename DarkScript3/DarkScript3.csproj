@@ -233,6 +233,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DarkToolStripRenderer.cs" />
     <Compile Include="EMEDF.cs" />
     <Compile Include="EventScripter.cs" />
     <Compile Include="GameChooser.cs">
