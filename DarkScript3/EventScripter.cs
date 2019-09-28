@@ -244,12 +244,12 @@ namespace DarkScript3
                 string id = evt.ID.ToString();
                 string restBehavior = evt.RestBehavior.ToString();
 
+                //each parameter's string representation
                 Dictionary<Parameter, string> paramNames = ParamNames(evt);
                 IEnumerable<string> argNameList = paramNames.Values.Distinct();
 
-                string parameters = string.Join(", ", argNameList);
-                string eventHeaderLine = $"Event({id}, {restBehavior}, function() {{";
-                code.AppendLine(eventHeaderLine);
+                code.AppendLine($"// PARAMETERS: {string.Join(", ", argNameList)}");
+                code.AppendLine($"Event({id}, {restBehavior}, function() {{");
 
                 for (int insIndex = 0; insIndex < evt.Instructions.Count; insIndex++)
                 {

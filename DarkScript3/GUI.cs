@@ -92,8 +92,9 @@ namespace DarkScript3
 
         private static class TextStyles
         {
+            public static TextStyle Comment = MakeStyle(87,166,74);
             public static TextStyle String = MakeStyle(214,157,133);
-            public static TextStyle Keyword = MakeStyle(220,220,170);
+            public static TextStyle Keyword = MakeStyle(86,156,214);
             public static TextStyle FunctionCall = MakeStyle(78,201,176);
             public static TextStyle EnumConstant = MakeStyle(181,206,168);
             public static TextStyle Number = MakeStyle(181,206,168);
@@ -103,11 +104,42 @@ namespace DarkScript3
         {
             e.ChangedRange.ClearStyle(Styles.ToArray());
 
-            e.ChangedRange.SetStyle(TextStyles.String, new Regex(@""".*"""));
-            e.ChangedRange.SetStyle(TextStyles.Keyword, new Regex(@"[^$]\b(function|var|const|new|true|false)\b[^$]")); //keywords
-            e.ChangedRange.SetStyle(TextStyles.FunctionCall, new Regex(@"(?<range>(\w|\$)+)\s*\(")); //global constants
+
+
+            e.ChangedRange.SetStyle(TextStyles.Comment, TextRegex.JScriptCommentRegex1);
+            e.ChangedRange.SetStyle(TextStyles.Comment, TextRegex.JScriptCommentRegex2);
+            e.ChangedRange.SetStyle(TextStyles.Comment, TextRegex.JScriptCommentRegex1);
+            e.ChangedRange.SetStyle(TextStyles.String, TextRegex.JScriptStringRegex);
+            e.ChangedRange.SetStyle(TextStyles.Keyword, TextRegex.JScriptKeywordRegex);
+            e.ChangedRange.SetStyle(TextStyles.Number, TextRegex.JScriptNumberRegex);
             e.ChangedRange.SetStyle(TextStyles.EnumConstant, new Regex(@"(^|\W)(?<range>\$\w*)")); //accessors starting with $
-            e.ChangedRange.SetStyle(TextStyles.Number, new Regex(@"[\d.]+")); //numbers
+
+        }
+
+        public static RegexOptions RegexCompiledOption
+        {
+            get
+            {
+                if (PlatformType.GetOperationSystemPlatform() == Platform.X86)
+                    return RegexOptions.Compiled;
+                else
+                    return RegexOptions.None;
+            }
+        }
+
+        public static class TextRegex
+        {
+            public static Regex JScriptStringRegex = new Regex(@"""""|''|"".*?[^\\]""|'.*?[^\\]'", RegexCompiledOption);
+            public static Regex  JScriptCommentRegex1 = new Regex(@"//.*$", RegexOptions.Multiline | RegexCompiledOption);
+            public static Regex JScriptCommentRegex2 = new Regex(@"(/\*.*?\*/)|(/\*.*)", RegexOptions.Singleline | RegexCompiledOption);
+            public static Regex JScriptCommentRegex3 = new Regex(@"(/\*.*?\*/)|(.*\*/)",
+                                             RegexOptions.Singleline | RegexOptions.RightToLeft | RegexCompiledOption);
+            public static Regex JScriptNumberRegex = new Regex(@"\b\d+[\.]?\d*([eE]\-?\d+)?[lLdDfF]?\b|\b0x[a-fA-F\d]+\b",
+                                           RegexCompiledOption);
+            public static Regex JScriptKeywordRegex =
+                new Regex(
+                    @"\b(true|false|break|case|catch|const|continue|default|delete|do|else|export|for|function|if|in|instanceof|new|null|return|switch|this|throw|try|var|void|while|with|typeof)\b",
+                    RegexCompiledOption);
         }
     }
 }
