@@ -21,23 +21,21 @@ namespace DarkScript3
         [JsonProperty(PropertyName = "enums")]
         public EnumDoc[] Enums;
 
-        public static EMEDF Read(string path)
+        public static EMEDF ReadText(string input)
+        {
+            return JsonConvert.DeserializeObject<EMEDF>(input);
+        }
+
+        public static EMEDF ReadFile(string path)
         {
             string input = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<EMEDF>(input);
+            return ReadText(input);
         }
 
         public static EMEDF ReadStream(string resource)
         {
-            resource = "DarkScript3.Resources." + resource;
-            using (Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(resource))
-            {
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    string result = reader.ReadToEnd();
-                    return JsonConvert.DeserializeObject<EMEDF>(result); ;
-                }
-            }
+            string input = Resource.Text(resource);
+            return ReadText(input);
         }
 
         public class ClassDoc

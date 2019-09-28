@@ -24,7 +24,18 @@ namespace DarkScript3
 
         public Dictionary<EMEDF.InstrDoc, List<uint>> FuncBytePositions = new Dictionary<EMEDF.InstrDoc, List<uint>>();
 
-        public Dictionary<string, string> GlobalConstants = new Dictionary<string, string>();
+        public Dictionary<string, string> EnumReplacements = new Dictionary<string, string>
+        {
+            { "BOOL.TRUE", "true" }, 
+            { "BOOL.FALSE", "false" }
+        };
+
+        public List<string> EnumNamesForGlobalization = new List<string>
+        {
+            "ONOFF",
+            "ONOFFCHANGE",
+            "ConditionGroup"
+        };
 
         private List<string> LinkedFiles = new List<string>();
 
@@ -39,40 +50,6 @@ namespace DarkScript3
             if (evd != null) EVD = evd;
         }
 
-        public void InitAll(string resource)
-        {
-            v8.AddHostObject("$$$_host", new HostFunctions());
-            v8.AddHostObject("EVD", EVD);
-            v8.AddHostType("EMEVD", typeof(EMEVD));
-            v8.AddHostObject("Scripter", this);
-            v8.AddHostType("Object", typeof(object));
-            v8.AddHostType("EVENT", typeof(Event));
-            v8.AddHostType("INSTRUCTION", typeof(Instruction));
-            v8.AddHostType("PARAMETER", typeof(Parameter));
-            v8.AddHostType("REST", typeof(Event.RestBehaviorType));
-            v8.AddHostType("Console", typeof(Console));
-
-            using (Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("DarkScript3.Resources.script.js"))
-            {
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    string result = reader.ReadToEnd();
-                    v8.Execute(result);
-                }
-            }
-
-            if (resource == null)
-            {
-                var chooser = new GameChooser();
-                chooser.ShowDialog();
-                DOC = InitDocsFromResource(chooser.GameDocs);
-            }
-            else
-            {
-                DOC = InitDocsFromResource(resource);
-            }
-        }
-
         public Instruction MakeInstruction(Event evt, int bank, int index, object[] args)
         {
             EMEDF.InstrDoc doc = DOC[bank][index];
@@ -81,8 +58,10 @@ namespace DarkScript3
 
             for (int i = 0; i < args.Length; i++)
             {
-                    
-                if (args[i] is string)
+                if (args[i] is bool)
+                {
+                    args[i] = (bool) args[i] ? 0 : 1;
+                } else if (args[i] is string)
                 {
                     if (doc == DOC[2000][0])
                         throw new Exception("Event initializers cannot be dependent on parameters.");
@@ -110,8 +89,9 @@ namespace DarkScript3
                 properArgs.Add(Convert.ToUInt32(args[1]));
                 if (args.Length > 2)
                     for (int i = 2; i < args.Length; i++)
-                        properArgs.Add(Convert.ToUInt32(args[i]));
-            } else
+                        properArgs.Add(Convert.ToInt32(args[i]));
+            }
+            else
             {
                 for (int i = 0; i < doc.Arguments.Length; i++)
                 {
@@ -132,22 +112,72 @@ namespace DarkScript3
             return ins;
         }
 
+
+        public void InitAll(string resource)
+        {
+            v8.AddHostObject("$$$_host", new HostFunctions());
+            v8.AddHostObject("EVD", EVD);
+            v8.AddHostType("EMEVD", typeof(EMEVD));
+            v8.AddHostObject("Scripter", this);
+            v8.AddHostType("Object", typeof(object));
+            v8.AddHostType("EVENT", typeof(Event));
+            v8.AddHostType("INSTRUCTION", typeof(Instruction));
+            v8.AddHostType("PARAMETER", typeof(Parameter));
+            v8.AddHostType("REST", typeof(Event.RestBehaviorType));
+            v8.AddHostType("Console", typeof(Console));
+
+            v8.Execute(Resource.Text("script.js"));
+            v8.Execute(Resource.Text("globals.js"));
+
+
+            if (resource == null)
+            {
+                var chooser = new GameChooser();
+                chooser.ShowDialog();
+                DOC = InitDocsFromResource(chooser.GameDocs);
+            }
+            else
+            {
+                DOC = InitDocsFromResource(resource);
+            }
+        }
+
+
+        private void InitGloablConstant(EMEDF.EnumDoc enm)
+        {
+
+        }
+
         private EMEDF InitDocsFromResource(string streamPath)
         {
             EMEDF DOC = EMEDF.ReadStream(streamPath);
             foreach (EMEDF.EnumDoc enm in DOC.Enums)
             {
                 enm.Name = Regex.Replace(enm.Name, @"[^\w]", "");
-                StringBuilder code = new StringBuilder();
-                code.AppendLine($"const {enm.Name} = {{");
-                foreach (KeyValuePair<string, string> pair in enm.Values.ToList())
+                if (EnumNamesForGlobalization.Contains(enm.Name))
                 {
-                    string val = Regex.Replace(enm.Values[pair.Key], @"[^\w]", "");
-                    enm.Values[pair.Key] = val;
-                    code.AppendLine($"{val}:{pair.Key},");
+                    foreach (var pair in enm.Values.ToList())
+                    {
+                        string val = "$" + Regex.Replace(pair.Value, @"[^\w]", "");
+                        enm.Values[pair.Key] = val;
+                        EnumReplacements[$"{enm.Name}.{val}"] = val;
+                        if (enm.Name != "ONOFF") //handled by ON/OFF/CHANGE
+                            v8.Execute($"const {val} = {int.Parse(pair.Key)};");
+                    }
+                } else
+                {
+                    StringBuilder code = new StringBuilder();
+                    code.AppendLine($"const {enm.Name} = {{");
+                    foreach (var pair in enm.Values.ToList())
+                    {
+                        string val = Regex.Replace(pair.Value, @"[^\w]", "");
+                        enm.Values[pair.Key] = val;
+                        code.AppendLine($"{val}:{pair.Key},");
+                    }
+                    code.AppendLine("};");
+                    v8.Execute(code.ToString());
                 }
-                code.AppendLine("};");
-                v8.Execute(code.ToString());
+                
             }
 
             foreach (EMEDF.ClassDoc bank in DOC.Classes)
@@ -175,6 +205,16 @@ namespace DarkScript3
             }
             return DOC;
         }
+        private void InitLinkedFiles()
+        {
+            var reader = new BinaryReaderEx(false, EVD.StringData);
+            foreach (long offset in EVD.LinkedFileOffsets)
+            {
+                string linkedFile = reader.GetUTF16(offset);
+                LinkedFiles.Add(linkedFile);
+            }
+        }
+
         private int ByteLengthFromType(long t)
         {
             if (t == 0) return 1; //u8
@@ -187,7 +227,6 @@ namespace DarkScript3
             if (t == 8) return 4; //string position
             throw new Exception("Invalid type in argument definition.");
         }
-
         public EMEVD Pack(string code)
         {
             EVD.Events.Clear();
@@ -270,15 +309,6 @@ namespace DarkScript3
             return code.ToString();
         }
 
-        public void InitLinkedFiles()
-        {
-            var reader = new BinaryReaderEx(false, EVD.StringData);
-            foreach (long offset in EVD.LinkedFileOffsets)
-            {
-                string linkedFile = reader.GetUTF16(offset);
-                LinkedFiles.Add(linkedFile);
-            }
-        }
         public Dictionary<Parameter, string> ParamNames (Event evt)
         {
             Dictionary<long, List<Parameter>> paramValues = new Dictionary<long, List<Parameter>>();
@@ -345,7 +375,7 @@ namespace DarkScript3
                 {
                     var enm = DOC.Enums.First(e => e.Name == argDoc.EnumName);  
                     string enumString = $"{enm.Name}.{enm.Values[args[argIndex]]}";
-                    if (GlobalConstants.ContainsKey(enumString)) enumString = GlobalConstants[enumString];
+                    if (EnumReplacements.ContainsKey(enumString)) enumString = EnumReplacements[enumString];
                     args[argIndex] = enumString;
                 }
             }

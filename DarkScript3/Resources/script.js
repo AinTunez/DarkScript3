@@ -1,7 +1,8 @@
-﻿var _event = void 0;
-const Default = REST.Default;
+﻿const Default = REST.Default;
 const End = REST.End;
 const Restart = REST.Restart;
+
+var _event = void 0;
 
 function Event(id, restBehavior, instructions) {
     var evt = new EVENT();

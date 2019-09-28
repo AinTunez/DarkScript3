@@ -16770,8 +16770,8 @@
     {
       "name": "Count Direction",
       "values": {
-        "0": "Count Up",
-        "1": "Count Down"
+        "0": "Up",
+        "1": "Down"
       }
     },
     {
