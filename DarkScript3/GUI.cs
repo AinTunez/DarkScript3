@@ -48,7 +48,6 @@ namespace DarkScript3
                 if (scriptException != null)
                 {
                     string details = scriptException.ErrorDetails;
-                    Console.WriteLine(details);
                     MessageBox.Show(details);
                 }
                 else
@@ -240,7 +239,6 @@ namespace DarkScript3
             {
                 if (ToolTips.ContainsKey(e.HoveredWord))
                 {
-                    Console.WriteLine("ToolTipNeeded: " + e.HoveredWord);
                     (string title, string text) = ToolTips[e.HoveredWord];
                     e.ToolTipTitle = title;
                     e.ToolTipText = text;

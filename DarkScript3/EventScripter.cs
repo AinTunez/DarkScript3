@@ -410,7 +410,7 @@ namespace DarkScript3
 
         static List<string> Acronyms = new List<string>()
         {
-            "AI","HP","SE","SP","SFX","FFX"
+            "AI","HP","SE","SP","SFX","FFX","NPC"
         };
 
         public static string TitleCaseName(string s)

@@ -4981,7 +4981,7 @@
           ]
         },
         {
-          "name": "Play Cutscene and Randomly Warp Player + UNKNOWN 2002[06] (DS1R ONLY)",
+          "name": "Play Cutscene and Randomly Warp Player And UNKNOWN 2002[06] (DS1R ONLY)",
           "index": 6,
           "args": [
             {
@@ -5071,7 +5071,7 @@
           ]
         },
         {
-          "name": "Play Cutscene and Randomly Warp Player + UNKNOWN 2002[07] (DS1R ONLY)",
+          "name": "Play Cutscene and Randomly Warp Player And UNKNOWN 2002[07] (DS1R ONLY)",
           "index": 7,
           "args": [
             {
@@ -6723,7 +6723,7 @@
           ]
         },
         {
-          "name": "Force Animation Playback + UNKNOWN 2003[44] (DS1R ONLY)",
+          "name": "Force Animation Playback And UNKNOWN 2003[44] (DS1R ONLY)",
           "index": 44,
           "args": [
             {
@@ -6813,7 +6813,7 @@
           ]
         },
         {
-          "name": "Force Animation Playback + UNKNOWN 2003[46] (DS1R ONLY)",
+          "name": "Force Animation Playback And UNKNOWN 2003[46] (DS1R ONLY)",
           "index": 46,
           "args": [
             {
@@ -7868,7 +7868,7 @@
               "unk4": 0
             },
             {
-              "name": "NPC Part Group IDx",
+              "name": "NPC Part Group Index",
               "type": 4,
               "enum_name": "NPC Part Type",
               "default": 1,
@@ -8358,7 +8358,7 @@
           ]
         },
         {
-          "name": "Request Character AI Command + Event Value",
+          "name": "Request Character AI Command And Event Value",
           "index": 32,
           "args": [
             {
@@ -9271,7 +9271,7 @@
               "unk4": 0
             },
             {
-              "name": "Relative Target IDx",
+              "name": "Relative Target Index",
               "type": 5,
               "enum_name": null,
               "default": -1,
@@ -9685,7 +9685,7 @@
           ]
         },
         {
-          "name": "(De)activate ObjAct (Assign IDx)",
+          "name": "(De)activate ObjAct (Assign Index)",
           "index": 14,
           "args": [
             {
@@ -9717,7 +9717,7 @@
               "unk4": 0
             },
             {
-              "name": "Relative Target IDx",
+              "name": "Relative Target Index",
               "type": 5,
               "enum_name": null,
               "default": -1,
@@ -11624,7 +11624,7 @@
       "values": {
         "0": "Event Flag",
         "1": "Event ID",
-        "2": "Event ID + Slot Number"
+        "2": "Event ID And Slot Number"
       }
     },
     {
@@ -11641,10 +11641,10 @@
     {
       "name": "Logical Operation Type",
       "values": {
-        "0": "AllON",
-        "1": "AllOFF",
-        "2": "NotAllOFF",
-        "3": "NotAllON"
+        "0": "All ON",
+        "1": "All OFF",
+        "2": "Not All OFF",
+        "3": "Not All ON"
       }
     },
     {
