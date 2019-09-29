@@ -69,6 +69,7 @@ namespace DarkScript3
                 try
                 {
                     Scripter = new EventScripter(ofd.FileName, chooser.GameDocs);
+                    InitUI();
                     SFUtil.Backup(ofd.FileName);
                     if (File.Exists($"{ofd.FileName}.js"))
                     {
@@ -79,7 +80,6 @@ namespace DarkScript3
                         editor.Text = Scripter.Unpack();
                         EVD_Path = ofd.FileName;
                     }
-                    InitAutoComplete();
                     Text = $"DARKSCRIPT 3 - {Path.GetFileName(ofd.FileName)}";
                 }
                 catch (Exception ex)
@@ -100,7 +100,7 @@ namespace DarkScript3
             return map;
         }
 
-        private void InitAutoComplete()
+        private void InitUI()
         {
             PopupMenu = new AutocompleteMenu(editor);
             PopupMenu.BackColor = Color.FromArgb(37, 37, 38);
@@ -138,7 +138,9 @@ namespace DarkScript3
 
             PopupMenu.Items.SetAutocompleteItems(instructions);
 
-            Console.WriteLine(ToolTips.Keys.Count);
+            string rgx = $@"[^.]\b(?<range>{string.Join("|", Scripter.GlobalConstants)})\b";
+            Console.WriteLine(rgx);
+            JSRegex.GlobalConstant = new Regex(rgx);
         }
 
         private void GUI_Load(object sender, EventArgs e)
@@ -188,9 +190,11 @@ namespace DarkScript3
             e.ChangedRange.SetStyle(TextStyles.Comment, JSRegex.Comment2);
             e.ChangedRange.SetStyle(TextStyles.Comment, JSRegex.Comment1);
             e.ChangedRange.SetStyle(TextStyles.String, JSRegex.String);
+            e.ChangedRange.SetStyle(TextStyles.String, JSRegex.StringArg);
             e.ChangedRange.SetStyle(TextStyles.Keyword, JSRegex.Keyword);
             e.ChangedRange.SetStyle(TextStyles.Number, JSRegex.Number);
-            e.ChangedRange.SetStyle(TextStyles.EnumConstant, new Regex(@"(^|\W)(?<range>\$\w*)"));
+            //e.ChangedRange.SetStyle(TextStyles.EnumConstant, new Regex(@"(^|\W)(?<range>\$\w*)"));
+            e.ChangedRange.SetStyle(TextStyles.EnumConstant, JSRegex.GlobalConstant);
             e.ChangedRange.SetStyle(TextStyles.Property, new Regex(@"\w+\.(?<range>(\w|\$)+)"));
             e.ChangedRange.SetFoldingMarkers("{", "}");
             e.ChangedRange.SetFoldingMarkers(@"/\*", @"\*/");
@@ -210,6 +214,8 @@ namespace DarkScript3
 
         public static class JSRegex
         {
+            public static Regex GlobalConstant = new Regex(@"\bX\d+_\d+\b");
+            public static Regex StringArg = new Regex(@"\bX\d+_\d+\b");
             public static Regex String = new Regex(@"""""|''|"".*?[^\\]""|'.*?[^\\]'", RegexCompiledOption);
             public static Regex Comment1 = new Regex(@"//.*$", RegexOptions.Multiline | RegexCompiledOption);
             public static Regex Comment2 = new Regex(@"(/\*.*?\*/)|(/\*.*)", RegexOptions.Singleline | RegexCompiledOption);

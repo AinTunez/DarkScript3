@@ -24,6 +24,8 @@ namespace DarkScript3
 
         public Dictionary<EMEDF.InstrDoc, List<uint>> FuncBytePositions = new Dictionary<EMEDF.InstrDoc, List<uint>>();
 
+        public List<string> GlobalConstants = new List<string>() { "Default", "End", "Restart" };
+
         public Dictionary<string, string> EnumReplacements = new Dictionary<string, string>
         {
             { "BOOL.TRUE", "true" }, 
@@ -67,7 +69,7 @@ namespace DarkScript3
                     if (doc == DOC[2000][0])
                         throw new Exception("Event initializers cannot be dependent on parameters.");
 
-                    IEnumerable<int> nums = (args[i] as string).Substring(1).Split(':').Select(s => int.Parse(s));
+                    IEnumerable<int> nums = (args[i] as string).Substring(1).Split('_').Select(s => int.Parse(s));
                     if (nums.Count() != 2)
                         throw new Exception("Invalid parameter string: {" + args[i] + "}");
 
@@ -158,9 +160,10 @@ namespace DarkScript3
                 {
                     foreach (var pair in enm.Values.ToList())
                     {
-                        string val = "$" + Regex.Replace(pair.Value, @"[^\w]", "");
+                        string val = Regex.Replace(pair.Value, @"[^\w]", "");
                         enm.Values[pair.Key] = val;
                         EnumReplacements[$"{enm.Name}.{val}"] = val;
+                        GlobalConstants.Add(val);
                         string code = $"const {val} = {int.Parse(pair.Key)};";
                         if (enm.Name != "ONOFF") //handled by ON/OFF/CHANGE
                             v8.Execute(code);
@@ -222,17 +225,14 @@ namespace DarkScript3
             foreach (var evt in EVD.Events)
             {
                 string id = evt.ID.ToString();
-                string restBehavior = $"${evt.RestBehavior.ToString()}";
+                string restBehavior = evt.RestBehavior.ToString();
 
                 //each parameter's string representation
                 Dictionary<Parameter, string> paramNames = ParamNames(evt);
                 IEnumerable<string> argNameList = paramNames.Values.Distinct();
-                if (paramNames.Keys.Count > 1)
-                    code.AppendLine($"// PARAMETERS: {string.Join(", ", argNameList)}");
-                else
-                    code.AppendLine($"// PARAMETERS: (none)");
+                string evtArgs = string.Join(", ", argNameList);
 
-                code.AppendLine($"Event({id}, {restBehavior}, function() {{");
+                code.AppendLine($"Event({id}, {restBehavior}, function({evtArgs}) {{");
 
                 for (int insIndex = 0; insIndex < evt.Instructions.Count; insIndex++)
                 {
@@ -337,7 +337,7 @@ namespace DarkScript3
             {
                 foreach (var p in kv.Value)
                 {
-                    paramNames[p] = $"\"X{p.SourceStartByte}:{p.ByteCount}\"";
+                    paramNames[p] = $"X{p.SourceStartByte}_{p.ByteCount}";
                 }
                 ind++;
             }
@@ -364,7 +364,6 @@ namespace DarkScript3
         public string ArgumentString(string[] args, Instruction ins, int insIndex, Dictionary<Parameter, string> paramNames)
         {
             var insDoc = DOC[ins.Bank][ins.ID];
-            Console.WriteLine("Doc initialized");
             for (int argIndex = 0; argIndex < args.Count(); argIndex++)
             {
                 EMEDF.ArgDoc argDoc = insDoc.Arguments[argIndex];
@@ -382,7 +381,6 @@ namespace DarkScript3
 
                 if (!isParam && argDoc.EnumName != null)
                 {
-                    Console.WriteLine(argDoc.EnumName);
                     var enm = DOC.Enums.First(e => e.Name == argDoc.EnumName);
                     string enumString = $"{enm.Name}.{enm.Values[args[argIndex]]}";
                     if (EnumReplacements.ContainsKey(enumString)) enumString = EnumReplacements[enumString];
@@ -410,20 +408,30 @@ namespace DarkScript3
             return positions;
         }
 
+        static List<string> Acronyms = new List<string>()
+        {
+            "AI","HP","SE","SP","SFX","FFX"
+        };
+
         public static string TitleCaseName(string s)
         {
             if (string.IsNullOrEmpty(s)) return s;
 
-            string[] words = s.Split(' ');
+            string[] words = Regex.Replace(s, "[^\\w\\s]","").Split(' ');
             for (int i = 0; i < words.Length; i++)
             {
                 if (words[i].Length == 0) continue;
+                else if (Acronyms.Contains(words[i].ToUpper()))
+                {
+                    words[i] = words[i].ToUpper();
+                    continue;
+                }
 
                 char firstChar = char.ToUpper(words[i][0]);
                 string rest = "";
                 if (words[i].Length > 1)
                 {
-                    rest = words[i].Substring(1);
+                    rest = words[i].Substring(1).ToLower();
                 }
                 words[i] = firstChar + rest;
             }

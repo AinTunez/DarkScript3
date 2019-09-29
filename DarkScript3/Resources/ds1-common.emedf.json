@@ -8324,7 +8324,7 @@
           ]
         },
         {
-          "name": "Set Character MapHits",
+          "name": "Set Character Map Hits",
           "index": 31,
           "args": [
             {

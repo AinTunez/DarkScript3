@@ -1,6 +1,6 @@
-﻿const $Default = REST.Default;
-const $End = REST.End;
-const $Restart = REST.Restart;
+﻿const Default = REST.Default;
+const End = REST.End;
+const Restart = REST.Restart;
 
 var _event = void 0;
 
@@ -10,11 +10,19 @@ function Event(id, restBehavior, instructions) {
     evt.RestBehavior = restBehavior;
 
     _event = evt;
-    instructions();
+    instructions.apply(this, _GetArgs(instructions));
     _event = void 0;
 
     EVD.Events.Add(evt);
     return evt;
+}
+
+function _GetArgs(func) {
+    // First match everything inside the function argument parens.
+    var start = func.toString().indexOf("(");
+    var end = func.toString().indexOf(")");
+    var args = func.toString().substring(start, end).replace("(", "").replace(")", "");
+    return args.split(/\s*,\s*/).map(arg => arg);
 }
 
 function _Instruction(bank, index, args) {
