@@ -77,10 +77,7 @@ namespace DarkScript3
                     }
                     else
                     {
-                        Scripter = new EventScripter(ofd.FileName, chooser.GameDocs);
-                        InitUI();
-                        editor.Text = Scripter.Unpack();
-                        Text = $"DARKSCRIPT 3 - {Path.GetFileName(ofd.FileName)}";
+                        OpenEMEVDFile(ofd.FileName, chooser.GameDocs);
                     }
                 }
                 catch (Exception ex)
@@ -90,14 +87,19 @@ namespace DarkScript3
             }
         }
 
+        private void OpenEMEVDFile(string fileName, string gameDocs)
+        {
+            Scripter = new EventScripter(fileName, gameDocs);
+            InitUI();
+            editor.Text = Scripter.Unpack();
+            Text = $"DARKSCRIPT 3 - {Path.GetFileName(fileName)}";
+        }
+
         private void OpenJSFile(string fileName, string gameDocs)
         {
             string org = Path.GetFileNameWithoutExtension(fileName);
             SFUtil.Backup(org);
-            Scripter = new EventScripter(org, gameDocs);
-            InitUI();
-            editor.Text = File.ReadAllText(fileName);
-            Text = $"DARKSCRIPT 3 - {Path.GetFileName(org)}";
+            OpenEMEVDFile(org, gameDocs);
         }
 
 
@@ -205,12 +207,10 @@ namespace DarkScript3
             e.ChangedRange.SetStyle(TextStyles.String, JSRegex.StringArg);
             e.ChangedRange.SetStyle(TextStyles.Keyword, JSRegex.Keyword);
             e.ChangedRange.SetStyle(TextStyles.Number, JSRegex.Number);
-            //e.ChangedRange.SetStyle(TextStyles.EnumConstant, new Regex(@"(^|\W)(?<range>\$\w*)"));
             e.ChangedRange.SetStyle(TextStyles.EnumConstant, JSRegex.GlobalConstant);
-            e.ChangedRange.SetStyle(TextStyles.Property, new Regex(@"\w+\.(?<range>(\w|\$)+)"));
+            e.ChangedRange.SetStyle(TextStyles.Property, JSRegex.Property;
             e.ChangedRange.SetFoldingMarkers("{", "}");
             e.ChangedRange.SetFoldingMarkers(@"/\*", @"\*/");
-
         }
 
         public static RegexOptions RegexCompiledOption
@@ -226,6 +226,7 @@ namespace DarkScript3
 
         public static class JSRegex
         {
+            public static Regex Property = new Regex(@"(\w|\$)+\.(?<range>(\w|\$)+)"));
             public static Regex GlobalConstant = new Regex(@"\bX\d+_\d+\b");
             public static Regex StringArg = new Regex(@"\bX\d+_\d+\b");
             public static Regex String = new Regex(@"""""|''|"".*?[^\\]""|'.*?[^\\]'", RegexCompiledOption);
