@@ -69,7 +69,6 @@ namespace DarkScript3
                 try
                 {
                     Scripter = new EventScripter(ofd.FileName, chooser.GameDocs);
-                    InitAutoComplete();
                     SFUtil.Backup(ofd.FileName);
                     if (File.Exists($"{ofd.FileName}.js"))
                     {
@@ -80,6 +79,8 @@ namespace DarkScript3
                         editor.Text = Scripter.Unpack();
                         EVD_Path = ofd.FileName;
                     }
+                    InitAutoComplete();
+                    Text = $"DARKSCRIPT 3 - {Path.GetFileName(ofd.FileName)}";
                 }
                 catch (Exception ex)
                 {
@@ -120,7 +121,7 @@ namespace DarkScript3
                 return doc.Name.Replace(" ", "");
             }
 
-            var instructions = Scripter.Functions.Keys.Select(s =>
+            IEnumerable<AutocompleteItem> instructions = Scripter.Functions.Keys.Select(s =>
             {
                 var instr = Scripter.Functions[s];
                 var doc = Scripter.DOC[instr.classIndex][instr.instrIndex];
@@ -129,13 +130,15 @@ namespace DarkScript3
                 string toolTipTitle = s; 
                 string toolTipText = $"{instr.classIndex}[{instr.instrIndex}] ({string.Join(", ", doc.Arguments.Select(argString))})";
 
-                ToolTips[s] = (toolTipTitle, toolTipText);
-
                 return new AutocompleteItem(s, PopupMenu.ImageList.Images.IndexOfKey("instruction"), menuText, toolTipTitle, toolTipText);
             });
 
+            foreach (var item in instructions)
+                ToolTips[item.MenuText] = (item.ToolTipTitle, item.ToolTipText);
+
             PopupMenu.Items.SetAutocompleteItems(instructions);
 
+            Console.WriteLine(ToolTips.Keys.Count);
         }
 
         private void GUI_Load(object sender, EventArgs e)
@@ -225,28 +228,23 @@ namespace DarkScript3
             Close();
         }
 
-        private void ValidateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            File.WriteAllText("output/original.js", editor.Text);
-            
-            var evd = Scripter.Pack(editor.Text);
-            Scripter.EVD = evd;
-            editor.Text = Scripter.Unpack();
-            File.WriteAllText("output/processed.js", editor.Text);
-
-            MessageBox.Show("Files generated.");    
-        }
-
         private void Editor_ToolTipNeeded(object sender, ToolTipNeededEventArgs e)
         {
             if (!string.IsNullOrEmpty(e.HoveredWord))
             {
                 if (ToolTips.ContainsKey(e.HoveredWord))
                 {
-                    e.ToolTipTitle = ToolTips[e.HoveredWord].title;
-                    e.ToolTipText = ToolTips[e.HoveredWord].text;
+                    Console.WriteLine("ToolTipNeeded: " + e.HoveredWord);
+                    (string title, string text) = ToolTips[e.HoveredWord];
+                    e.ToolTipTitle = title;
+                    e.ToolTipText = text;
                 }
             }
+        }
+
+        private void DocumentationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Scripter == null) return;
         }
     }
 }
