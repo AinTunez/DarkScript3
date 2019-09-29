@@ -11754,7 +11754,7 @@
       "name": "Team Type",
       "values": {
         "-1": "Default",
-        "0": "Disabled",
+        "0": "None",
         "1": "Human",
         "2": "White Phantom",
         "3": "Black Phantom",

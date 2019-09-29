@@ -34,7 +34,9 @@ namespace DarkScript3
         {
             "ONOFF",
             "ONOFFCHANGE",
-            "ConditionGroup"
+            "ConditionGroup",
+            "ConditionState",
+            "DisabledEnabled",
         };
 
         private List<string> LinkedFiles = new List<string>();
@@ -160,7 +162,6 @@ namespace DarkScript3
                         enm.Values[pair.Key] = val;
                         EnumReplacements[$"{enm.Name}.{val}"] = val;
                         string code = $"const {val} = {int.Parse(pair.Key)};";
-                        Console.WriteLine(code);
                         if (enm.Name != "ONOFF") //handled by ON/OFF/CHANGE
                             v8.Execute(code);
                     }
@@ -175,7 +176,6 @@ namespace DarkScript3
                         code.AppendLine($"{val}:{pair.Key},");
                     }
                     code.AppendLine("};");
-                    Console.WriteLine(code.ToString());
                     v8.Execute(code.ToString());
                 }
             }
@@ -222,12 +222,16 @@ namespace DarkScript3
             foreach (var evt in EVD.Events)
             {
                 string id = evt.ID.ToString();
-                string restBehavior = evt.RestBehavior.ToString();
+                string restBehavior = $"${evt.RestBehavior.ToString()}";
 
                 //each parameter's string representation
                 Dictionary<Parameter, string> paramNames = ParamNames(evt);
                 IEnumerable<string> argNameList = paramNames.Values.Distinct();
-                code.AppendLine($"// PARAMETERS: {string.Join(", ", argNameList)}");
+                if (paramNames.Keys.Count > 1)
+                    code.AppendLine($"// PARAMETERS: {string.Join(", ", argNameList)}");
+                else
+                    code.AppendLine($"// PARAMETERS: (none)");
+
                 code.AppendLine($"Event({id}, {restBehavior}, function() {{");
 
                 for (int insIndex = 0; insIndex < evt.Instructions.Count; insIndex++)
@@ -360,7 +364,7 @@ namespace DarkScript3
         public string ArgumentString(string[] args, Instruction ins, int insIndex, Dictionary<Parameter, string> paramNames)
         {
             var insDoc = DOC[ins.Bank][ins.ID];
-
+            Console.WriteLine("Doc initialized");
             for (int argIndex = 0; argIndex < args.Count(); argIndex++)
             {
                 EMEDF.ArgDoc argDoc = insDoc.Arguments[argIndex];
@@ -378,7 +382,8 @@ namespace DarkScript3
 
                 if (!isParam && argDoc.EnumName != null)
                 {
-                    var enm = DOC.Enums.First(e => e.Name == argDoc.EnumName);  
+                    Console.WriteLine(argDoc.EnumName);
+                    var enm = DOC.Enums.First(e => e.Name == argDoc.EnumName);
                     string enumString = $"{enm.Name}.{enm.Values[args[argIndex]]}";
                     if (EnumReplacements.ContainsKey(enumString)) enumString = EnumReplacements[enumString];
                     args[argIndex] = enumString;

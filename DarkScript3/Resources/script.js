@@ -1,6 +1,6 @@
-﻿const Default = REST.Default;
-const End = REST.End;
-const Restart = REST.Restart;
+﻿const $Default = REST.Default;
+const $End = REST.End;
+const $Restart = REST.Restart;
 
 var _event = void 0;
 

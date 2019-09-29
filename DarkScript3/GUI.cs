@@ -9,9 +9,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using FastColoredTextBoxNS;
 using Microsoft.ClearScript;
 using Microsoft.ClearScript.V8;
+using FastColoredTextBoxNS;
 using SoulsFormats;
 
 namespace DarkScript3
@@ -21,6 +21,10 @@ namespace DarkScript3
         public EventScripter Scripter;
 
         public string EVD_Path;
+
+        public AutocompleteMenu PopupMenu;
+
+        Dictionary<string, (string title, string text)> ToolTips = new Dictionary<string, (string, string)>();
 
         public GUI()
         {
@@ -65,6 +69,7 @@ namespace DarkScript3
                 try
                 {
                     Scripter = new EventScripter(ofd.FileName, chooser.GameDocs);
+                    InitAutoComplete();
                     SFUtil.Backup(ofd.FileName);
                     if (File.Exists($"{ofd.FileName}.js"))
                     {
@@ -81,6 +86,56 @@ namespace DarkScript3
                     MessageBox.Show(ex.ToString());
                 }
             }
+        }
+
+        private Bitmap MakeColorImage(Color color)
+        {
+            var map = new Bitmap(16, 16);
+            using (Graphics gfx = Graphics.FromImage(map))
+            using (SolidBrush brush = new SolidBrush(color))
+            {
+                gfx.FillRectangle(brush, 1, 1, 14, 14);
+            }
+            return map;
+        }
+
+        private void InitAutoComplete()
+        {
+            PopupMenu = new AutocompleteMenu(editor);
+            PopupMenu.BackColor = Color.FromArgb(37, 37, 38);
+            PopupMenu.ForeColor = Color.FromArgb(240, 240, 240);
+            PopupMenu.SelectedColor = Color.FromArgb(0, 122, 204);
+            PopupMenu.Items.MaximumSize = new Size(400, 300);
+            PopupMenu.Items.Width = 250;
+            PopupMenu.AllowTabKey = true;
+            PopupMenu.AlwaysShowTooltip = true;
+
+            Image img = MakeColorImage(Color.FromArgb(255,255, 255));
+            PopupMenu.ImageList = new ImageList();
+            PopupMenu.ImageList.Images.Add("instruction", img);
+            
+           
+            string argString(EMEDF.ArgDoc doc)
+            {
+                return doc.Name.Replace(" ", "");
+            }
+
+            var instructions = Scripter.Functions.Keys.Select(s =>
+            {
+                var instr = Scripter.Functions[s];
+                var doc = Scripter.DOC[instr.classIndex][instr.instrIndex];
+
+                string menuText = s;
+                string toolTipTitle = s; 
+                string toolTipText = $"{instr.classIndex}[{instr.instrIndex}] ({string.Join(", ", doc.Arguments.Select(argString))})";
+
+                ToolTips[s] = (toolTipTitle, toolTipText);
+
+                return new AutocompleteItem(s, PopupMenu.ImageList.Images.IndexOfKey("instruction"), menuText, toolTipTitle, toolTipText);
+            });
+
+            PopupMenu.Items.SetAutocompleteItems(instructions);
+
         }
 
         private void GUI_Load(object sender, EventArgs e)
@@ -118,8 +173,8 @@ namespace DarkScript3
             public static TextStyle Comment = MakeStyle(87, 166, 74);
             public static TextStyle String = MakeStyle(214, 157, 133);
             public static TextStyle Keyword = MakeStyle(86, 156, 214);
-            public static TextStyle FunctionCall = MakeStyle(78, 201, 176);
-            public static TextStyle EnumConstant = MakeStyle(181, 206, 168);
+            public static TextStyle Property = MakeStyle(255, 150, 239);
+            public static TextStyle EnumConstant = MakeStyle(78, 201, 176);
             public static TextStyle Number = MakeStyle(181, 206, 168);
         }
 
@@ -132,7 +187,10 @@ namespace DarkScript3
             e.ChangedRange.SetStyle(TextStyles.String, JSRegex.String);
             e.ChangedRange.SetStyle(TextStyles.Keyword, JSRegex.Keyword);
             e.ChangedRange.SetStyle(TextStyles.Number, JSRegex.Number);
-            e.ChangedRange.SetStyle(TextStyles.EnumConstant, new Regex(@"(^|\W)(?<range>\$\w*)")); //accessors starting with $
+            e.ChangedRange.SetStyle(TextStyles.EnumConstant, new Regex(@"(^|\W)(?<range>\$\w*)"));
+            e.ChangedRange.SetStyle(TextStyles.Property, new Regex(@"\w+\.(?<range>(\w|\$)+)"));
+            e.ChangedRange.SetFoldingMarkers("{", "}");
+            e.ChangedRange.SetFoldingMarkers(@"/\*", @"\*/");
 
         }
 
@@ -169,9 +227,6 @@ namespace DarkScript3
 
         private void ValidateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-
-
             File.WriteAllText("output/original.js", editor.Text);
             
             var evd = Scripter.Pack(editor.Text);
@@ -179,7 +234,19 @@ namespace DarkScript3
             editor.Text = Scripter.Unpack();
             File.WriteAllText("output/processed.js", editor.Text);
 
-            MessageBox.Show("Files generated.");
+            MessageBox.Show("Files generated.");    
+        }
+
+        private void Editor_ToolTipNeeded(object sender, ToolTipNeededEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(e.HoveredWord))
+            {
+                if (ToolTips.ContainsKey(e.HoveredWord))
+                {
+                    e.ToolTipTitle = ToolTips[e.HoveredWord].title;
+                    e.ToolTipText = ToolTips[e.HoveredWord].text;
+                }
+            }
         }
     }
 }
