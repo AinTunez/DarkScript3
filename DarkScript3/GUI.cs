@@ -60,26 +60,28 @@ namespace DarkScript3
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx";
+            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx; *.emevd.js; *";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 GameChooser chooser = new GameChooser();
                 chooser.ShowDialog();
                 try
                 {
-                    Scripter = new EventScripter(ofd.FileName, chooser.GameDocs);
-                    InitUI();
-                    SFUtil.Backup(ofd.FileName);
-                    if (File.Exists($"{ofd.FileName}.js"))
+                    if (ofd.FileName.EndsWith(".js"))
                     {
-                        editor.Text = File.ReadAllText($"{ofd.FileName}.js");
+                        OpenJSFile(ofd.FileName, chooser.GameDocs);
+                    }
+                    else if (File.Exists(ofd.FileName + ".js"))
+                    {
+                        OpenJSFile(ofd.FileName + ".js", chooser.GameDocs);
                     }
                     else
                     {
+                        Scripter = new EventScripter(ofd.FileName, chooser.GameDocs);
+                        InitUI();
                         editor.Text = Scripter.Unpack();
-                        EVD_Path = ofd.FileName;
+                        Text = $"DARKSCRIPT 3 - {Path.GetFileName(ofd.FileName)}";
                     }
-                    Text = $"DARKSCRIPT 3 - {Path.GetFileName(ofd.FileName)}";
                 }
                 catch (Exception ex)
                 {
@@ -87,6 +89,17 @@ namespace DarkScript3
                 }
             }
         }
+
+        private void OpenJSFile(string fileName, string gameDocs)
+        {
+            string org = Path.GetFileNameWithoutExtension(fileName);
+            SFUtil.Backup(org);
+            Scripter = new EventScripter(org, gameDocs);
+            InitUI();
+            editor.Text = File.ReadAllText(fileName);
+            Text = $"DARKSCRIPT 3 - {Path.GetFileName(org)}";
+        }
+
 
         private Bitmap MakeColorImage(Color color)
         {
