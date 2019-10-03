@@ -3342,7 +3342,7 @@
               "unk4": 0
             },
             {
-              "name": "Class",
+              "name": "Class Type",
               "type": 0,
               "enum_name": "Class Type",
               "default": 0,

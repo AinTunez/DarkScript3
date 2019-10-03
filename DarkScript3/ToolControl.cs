@@ -30,13 +30,12 @@ namespace DarkScript3
         {
             tipBox.Font = FocusControl.Font;
             tipBox.Text = s;
-            Point start = tipBox.PlaceToPoint(tipBox.Range.Start);
-            Point end = tipBox.PlaceToPoint(tipBox.Range.End);
-            int width = end.X - start.X + Padding.Horizontal + tipPanel.Padding.Horizontal;
+            int width = tipBox.TextLength * tipBox.CharWidth;
+            width += Padding.Horizontal;
+            width += tipPanel.Padding.Horizontal + 2;
             int height = tipBox.CharHeight + tipBox.LineInterval;
             height *= tipBox.LinesCount;
-            height += Padding.Vertical + tipPanel.Padding.Vertical;
-            height += 2;
+            height += Padding.Vertical + tipPanel.Padding.Vertical + 2;
             Size = new Size(width, height);
         }
 

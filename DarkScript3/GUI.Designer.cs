@@ -98,6 +98,7 @@
             this.editor.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.Editor_TextChanged);
             this.editor.SelectionChanged += new System.EventHandler(this.Editor_SelectionChanged);
             this.editor.ZoomChanged += new System.EventHandler(this.Editor_ZoomChanged);
+            this.editor.Scroll += new System.Windows.Forms.ScrollEventHandler(this.Editor_Scroll);
             this.editor.FontChanged += new System.EventHandler(this.Editor_FontChanged);
             this.editor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Editor_KeyDown);
             this.editor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Editor_KeyPress);
@@ -110,7 +111,7 @@
             this.viewToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(905, 30);
+            this.menuStrip.Size = new System.Drawing.Size(905, 28);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -121,7 +122,7 @@
             this.saveToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
@@ -153,7 +154,7 @@
             this.emevdDataToolStripMenuItem,
             this.documentationToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.viewToolStripMenuItem.Text = "View";
             // 
             // emevdDataToolStripMenuItem

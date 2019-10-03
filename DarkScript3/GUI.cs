@@ -485,6 +485,11 @@ namespace DarkScript3
                 InfoTip.Hide();
             }
         }
+
+        private void Editor_Scroll(object sender, ScrollEventArgs e)
+        {
+            InfoTip.Hide();
+        }
     }
 
 }
