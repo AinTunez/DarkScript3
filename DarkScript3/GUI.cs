@@ -31,6 +31,8 @@ namespace DarkScript3
 
         Dictionary<string, (string title, string text)> ToolTips = new Dictionary<string, (string, string)>();
 
+        public bool Changed = false;
+
         public GUI()
         {
             InitializeComponent();
@@ -49,6 +51,7 @@ namespace DarkScript3
         private void TipBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             e.ChangedRange.SetStyle(TextStyles.ToolTipKeyword, JSRegex.DataType);
+            e.ChangedRange.SetStyle(TextStyles.SlightlyDarker, new Regex(@"[<>]"));
         }
 
         
@@ -56,12 +59,14 @@ namespace DarkScript3
         {
             if (argIndex > -1)
             {
-                var args = Regex.Split(s, @"\s*,\s");
+                string[] args = Regex.Split(s, @"\s*,\s");
                 if (argIndex > args.Length - 1)
                     args[args.Length - 1] = args[args.Length - 1].Replace(" ", " *");
-                args[argIndex] = args[argIndex].Replace(" ", " *");
+                else
+                    args[argIndex] = args[argIndex].Replace(" ", " *");
                 InfoTip.SetText(string.Join(", ", args));
-            } else
+            }
+            else
             {
                 InfoTip.SetText(s);
             }
@@ -81,13 +86,16 @@ namespace DarkScript3
                 Scripter.Pack(editor.Text).Write(EVD_Path);
                 File.WriteAllText($"{EVD_Path}.js", editor.Text);
                 statusLabel.Text = "SAVE SUCCESSFUL";
+                Changed = false;
             }
             catch (Exception ex)
             {
-                var scriptException = ex as IScriptEngineException;
+                IScriptEngineException scriptException = ex as IScriptEngineException;
                 if (scriptException != null)
                 {
                     string details = scriptException.ErrorDetails;
+                    details = Regex.Replace(details, @"Script\s\[.*\]", "Script");
+                    details = Regex.Replace(details, @"->\s+", "-> ");
                     MessageBox.Show(details);
                 }
                 else
@@ -101,6 +109,18 @@ namespace DarkScript3
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             InfoTip.Hide();
+            if (Scripter != null)
+            {
+                DialogResult result = MessageBox.Show("Save changes before opening a new file?", "Unsaved Changes", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Yes)
+                {
+                    SaveToolStripMenuItem_Click(sender, e);
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    return;
+                }
+            }
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx; *.emevd.js; *";
             if (ofd.ShowDialog() == DialogResult.OK)
@@ -224,13 +244,13 @@ namespace DarkScript3
             public static TextStyle Property = MakeStyle(255, 150, 239);
             public static TextStyle EnumConstant = MakeStyle(78, 201, 176);
             public static TextStyle Number = MakeStyle(181, 206, 168);
-            public static TextStyle BoldToolTipKeyword = MakeStyle(106, 176, 234, FontStyle.Bold);
-            public static TextStyle BoldNormal = MakeStyle(220, 220, 220, FontStyle.Bold);
+            public static TextStyle SlightlyDarker = MakeStyle(180,180,180);
         }
 
         private void Editor_TextChanged(object sender, TextChangedEventArgs e)
         {
             statusLabel.Text = "";
+            if (Scripter != null) Changed = true;
             SetStyles(e);
         }
 
@@ -277,12 +297,26 @@ namespace DarkScript3
                 new Regex(
                     @"\b(true|false|break|case|catch|const|continue|default|delete|do|else|export|for|function|if|in|instanceof|new|null|return|switch|this|throw|try|var|void|while|with|typeof)\b",
                     RegexCompiledOption);
-            public static Regex DataType = new Regex(@"\b(byte|short|int|sbyte|ushort|uint|enum)\b", RegexCompiledOption);
+            public static Regex DataType = new Regex(@"\b(byte|short|int|sbyte|ushort|uint|enum|bool)\b", RegexCompiledOption);
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Close();
+            if (!Changed) Close();
+            else
+            {
+                DialogResult result = MessageBox.Show("Save changes before exiting?", "Unsaved Changes", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Yes)
+                {
+                    SaveToolStripMenuItem_Click(sender, e);
+                    Close();
+                }
+                else if (result == DialogResult.No)
+                {
+                    Close();
+                }
+            }
+
         }
 
         private void Editor_ToolTipNeeded(object sender, ToolTipNeededEventArgs e)

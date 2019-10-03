@@ -30,12 +30,13 @@ namespace DarkScript3
         {
             tipBox.Font = FocusControl.Font;
             tipBox.Text = s;
-            int width = tipBox.TextLength * tipBox.CharWidth;
-            width += Padding.Horizontal;
-            width += tipPanel.Padding.Horizontal + 2;
-            int height = tipBox.CharHeight + tipBox.LineInterval;
-            height *= tipBox.LinesCount;
+
+            int width = tipBox.Lines.Max(e => e.Length) * tipBox.CharWidth;
+            width += Padding.Horizontal + tipPanel.Padding.Horizontal + 2;
+
+            int height = (tipBox.CharHeight + tipBox.LineInterval) * tipBox.LinesCount;
             height += Padding.Vertical + tipPanel.Padding.Vertical + 2;
+
             Size = new Size(width, height);
         }
 

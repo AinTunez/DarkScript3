@@ -2914,7 +2914,7 @@
               "unk4": 0
             },
             {
-              "name": "Class",
+              "name": "Class Type",
               "type": 0,
               "enum_name": "Class Type",
               "default": 0,
@@ -9725,7 +9725,7 @@
           ]
         },
         {
-          "name": "Request Character AI Command + Event Value",
+          "name": "Request Character AI Command And Event Value",
           "index": 32,
           "args": [
             {
@@ -10660,7 +10660,7 @@
           ]
         },
         {
-          "name": "Set SpEffect + UNKNOWN 2004[55]",
+          "name": "Set SpEffect And UNKNOWN 2004[55]",
           "index": 55,
           "args": [
             {
@@ -13490,7 +13490,7 @@
       "values": {
         "0": "Event Flag",
         "1": "Event ID",
-        "2": "Event ID + Slot Number"
+        "2": "Event ID And Slot Number"
       }
     },
     {
