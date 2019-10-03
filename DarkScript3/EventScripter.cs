@@ -193,6 +193,7 @@ namespace DarkScript3
                     
                     foreach (var arg in instr.Arguments)
                     {
+                        arg.Name = CamelCaseName(arg.Name);
                         if (arg.EnumName != null)
                             arg.EnumName = Regex.Replace(arg.EnumName, @"[^\w]", "");
                     }
