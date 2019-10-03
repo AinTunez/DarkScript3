@@ -231,12 +231,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomToolTip.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CustomToolTip.Designer.cs">
-      <DependentUpon>CustomToolTip.cs</DependentUpon>
-    </Compile>
     <Compile Include="DarkToolStripRenderer.cs" />
     <Compile Include="EMEDF.cs" />
     <Compile Include="EventScripter.cs" />
@@ -261,9 +255,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.cs" />
-    <EmbeddedResource Include="CustomToolTip.resx">
-      <DependentUpon>CustomToolTip.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="ToolControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ToolControl.Designer.cs">
+      <DependentUpon>ToolControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="GameChooser.resx">
       <DependentUpon>GameChooser.cs</DependentUpon>
     </EmbeddedResource>
@@ -283,6 +280,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ToolControl.resx">
+      <DependentUpon>ToolControl.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

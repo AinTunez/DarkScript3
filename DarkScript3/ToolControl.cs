@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using FastColoredTextBoxNS;
 
 namespace DarkScript3
 {
-    public partial class CustomToolTip : Form
+    public partial class ToolControl : UserControl
     {
+
         private Control FocusControl = new Control();
 
-        public CustomToolTip()
+        public ToolControl()
         {
             InitializeComponent();
         }
 
-        public CustomToolTip(Control c)
+        public ToolControl(Control c)
         {
             InitializeComponent();
             FocusControl = c;
@@ -36,11 +36,18 @@ namespace DarkScript3
             int height = tipBox.CharHeight + tipBox.LineInterval;
             height *= tipBox.LinesCount;
             height += Padding.Vertical + tipPanel.Padding.Vertical;
+            height += 2;
             Size = new Size(width, height);
         }
 
-        private void TipBox_Click(object sender, EventArgs e) => FocusControl.Focus();
+        private void TipBox_Click(object sender, EventArgs e)
+        {
+            FocusControl.Focus();
+        }
 
-        private void TipBox_SelectionChanged(object sender, EventArgs e) => FocusControl.Focus();
+        private void TipBox_SelectionChanged(object sender, EventArgs e)
+        {
+            FocusControl.Focus();
+        }
     }
 }

@@ -23,7 +23,7 @@ namespace DarkScript3
 
         public string EVD_Path;
 
-        public CustomToolTip InfoTip = new CustomToolTip();
+        public ToolControl InfoTip = new ToolControl();
 
         public Range CurrentTipRange = null;
 
@@ -37,7 +37,9 @@ namespace DarkScript3
             InfoTip.GotFocus += (object sender, EventArgs args) => editor.Focus();
             menuStrip.Renderer = new DarkToolStripRenderer();
             statusStrip.Renderer = new DarkToolStripRenderer();
-            InfoTip = new CustomToolTip(editor);
+            InfoTip = new ToolControl(editor);
+            display.Panel2.Controls.Add(InfoTip);
+
             InfoTip.Show();
             InfoTip.Hide();
             docBox.Font = editor.Font;
@@ -64,8 +66,9 @@ namespace DarkScript3
                 InfoTip.SetText(s);
             }
             p.Offset(0, -InfoTip.Height - 5);
-            InfoTip.Location = editor.PointToScreen(p);
+            InfoTip.Location = p;
             if (!InfoTip.Visible) InfoTip.Show();
+            InfoTip.BringToFront();
             editor.Focus();
         }
         

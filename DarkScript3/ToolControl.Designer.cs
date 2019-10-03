@@ -1,13 +1,13 @@
 ﻿namespace DarkScript3
 {
-    partial class CustomToolTip
+    partial class ToolControl
     {
-        /// <summary>
+        /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -20,20 +20,31 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Component Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tipBox = new FastColoredTextBoxNS.FastColoredTextBox();
             this.tipPanel = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.tipBox)).BeginInit();
+            this.tipBox = new FastColoredTextBoxNS.FastColoredTextBox();
             this.tipPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tipBox)).BeginInit();
             this.SuspendLayout();
+            // 
+            // tipPanel
+            // 
+            this.tipPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.tipPanel.Controls.Add(this.tipBox);
+            this.tipPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tipPanel.Location = new System.Drawing.Point(0, 0);
+            this.tipPanel.Name = "tipPanel";
+            this.tipPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.tipPanel.Size = new System.Drawing.Size(148, 148);
+            this.tipPanel.TabIndex = 2;
             // 
             // tipBox
             // 
@@ -70,48 +81,31 @@
             this.tipBox.ServiceColors = null;
             this.tipBox.ShowLineNumbers = false;
             this.tipBox.ShowScrollBars = false;
-            this.tipBox.Size = new System.Drawing.Size(399, 175);
+            this.tipBox.Size = new System.Drawing.Size(138, 138);
             this.tipBox.TabIndex = 0;
             this.tipBox.Text = "customToolTip";
             this.tipBox.Zoom = 100;
             this.tipBox.SelectionChanged += new System.EventHandler(this.TipBox_SelectionChanged);
             this.tipBox.Click += new System.EventHandler(this.TipBox_Click);
             // 
-            // tipPanel
-            // 
-            this.tipPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.tipPanel.Controls.Add(this.tipBox);
-            this.tipPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tipPanel.Location = new System.Drawing.Point(1, 1);
-            this.tipPanel.Name = "tipPanel";
-            this.tipPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.tipPanel.Size = new System.Drawing.Size(409, 185);
-            this.tipPanel.TabIndex = 1;
-            // 
-            // CustomToolTip
+            // ToolControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(411, 187);
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.tipPanel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "CustomToolTip";
-            this.Padding = new System.Windows.Forms.Padding(1);
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
-            this.TopMost = true;
-            ((System.ComponentModel.ISupportInitialize)(this.tipBox)).EndInit();
+            this.Name = "ToolControl";
+            this.Size = new System.Drawing.Size(148, 148);
             this.tipPanel.ResumeLayout(false);
             this.tipPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tipBox)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        public FastColoredTextBoxNS.FastColoredTextBox tipBox;
         private System.Windows.Forms.Panel tipPanel;
+        public FastColoredTextBoxNS.FastColoredTextBox tipBox;
     }
 }
