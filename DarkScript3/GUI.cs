@@ -220,7 +220,6 @@ namespace DarkScript3
             JSRegex.GlobalConstant = new Regex($@"[^.]\b(?<range>{string.Join("|", Scripter.GlobalConstants)})\b");
         }
 
-
         private void EmevdDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Scripter == null) return;
@@ -348,7 +347,6 @@ namespace DarkScript3
             display.Panel1Collapsed = !display.Panel1Collapsed;
         }
 
-
         private void Editor_SelectionChanged(object sender, EventArgs e)
         {
             Range arguments = editor.Selection.GetFragment(@"[^)(\n]");
@@ -361,20 +359,20 @@ namespace DarkScript3
             if (arguments.CharBeforeStart == '(')
             {
                 int argIndex = 0;
-                Range arg = editor.Selection.GetFragment("[^)(\n,]");
+                Range arg = editor.Selection.GetFragment(@"[^)(\n,]");
                 while (arg.CharBeforeStart == ',')
                 {
                     argIndex++;
                     var start = arg.Start;
                     start.iChar -= 2;
-                    arg = editor.GetRange(start, start).GetFragment("[^)(\n,]");
+                    arg = editor.GetRange(start, start).GetFragment(@"[^)(\n,]");
                 }
                 string funcName = FuncName(arguments);
                 LoadDocText(funcName);
                 ShowArgToolTip(arguments, argIndex);
             } else
             {
-                Range func = editor.Selection.GetFragment("\\w");
+                Range func = editor.Selection.GetFragment(@"\w");
                 if (Scripter != null && Scripter.Functions.ContainsKey(func.Text))
                 {
                     LoadDocText(func.Text);
@@ -386,9 +384,8 @@ namespace DarkScript3
         {
             int start = arguments.Start.iChar - 2;
             int line = arguments.Start.iLine;
-
             Range pre = new Range(editor, start, line, start, line);
-            return pre.GetFragment("\\w").Text;
+            return pre.GetFragment(@"\w").Text;
         }
 
         private void ShowArgToolTip(Range arguments, int argument = -1)
@@ -436,8 +433,6 @@ namespace DarkScript3
                 }
                 if (i == index) return argStrings.Last();
             }
-
-
             return string.Join(", ", argStrings);
         }
 
@@ -501,15 +496,6 @@ namespace DarkScript3
             InfoTip.tipBox.Font = editor.Font;
             docBox.Font = editor.Font;
 
-        }
-
-        private void Editor_FontChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Editor_KeyPress(object sender, KeyPressEventArgs e)
-        {
         }
 
         private void GUI_KeyDown(object sender, KeyEventArgs e)
