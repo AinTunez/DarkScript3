@@ -99,8 +99,27 @@ namespace DarkScript3
                 {
                     string details = scriptException.ErrorDetails;
                     details = Regex.Replace(details, @"Script\s\[.*\]", "Script");
+                    details = Regex.Replace(details, @"    at Script", "    at Editor");
                     details = Regex.Replace(details, @"->\s+", "-> ");
-                    MessageBox.Show(details);
+                    if (details.StartsWith("!!! "))
+                    {
+                        string line = "";
+                        var lines = details.Split('\n');
+
+                        foreach (var str in lines)
+                        {
+                            if (str.StartsWith("    at Editor:"))
+                            {
+                                line = str.Replace("    at Editor:", "(Line ") + ")";
+                                break;
+                            }
+                        }
+                        MessageBox.Show(lines[0].Substring(4) + " " + line);
+                    }
+                    else
+                    {
+                        MessageBox.Show(details);
+                    }
                 }
                 else
                 {

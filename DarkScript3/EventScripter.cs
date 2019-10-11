@@ -205,7 +205,7 @@ namespace DarkScript3
                     foreach (var arg in args)
                     {
                         sb.AppendLine($"if ({arg} === void 0)");
-                        sb.AppendLine($@"throw 'Argument \""{arg}\"" in instruction \""{funcName}\"" not properly set.'");
+                        sb.AppendLine($@"   throw '!!! Argument \""{arg}\"" in instruction \""{funcName}\"" is undefined.'");
                     }
                     sb.AppendLine($"return _Instruction({bank.Index}, {instr.Index}, Array.from(arguments));");
                     sb.AppendLine("}");
