@@ -76,13 +76,17 @@ namespace DarkScript3
             InfoTip.BringToFront();
             editor.Focus();
         }
-        
+
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Scripter == null) return;
             InfoTip.Hide();
             try
             {
+                editor.Enabled = false;
+                docBox.Enabled = false;
+                MainMenuStrip.Enabled = false;
+                Cursor = Cursors.WaitCursor;
                 Scripter.Pack(editor.Text).Write(EVD_Path);
                 File.WriteAllText($"{EVD_Path}.js", editor.Text);
                 statusLabel.Text = "SAVE SUCCESSFUL";
@@ -104,6 +108,10 @@ namespace DarkScript3
                 }
                 statusLabel.Text = "SAVE FAILED";
             }
+            Cursor = Cursors.Default;
+            MainMenuStrip.Enabled = true;
+            editor.Enabled = true;
+            docBox.Enabled = true;
         }
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -122,7 +130,7 @@ namespace DarkScript3
                 }
             }
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx; *.emevd.js; *";
+            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx; *.emevd.js; *.emevd.dcx.js";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 GameChooser chooser = new GameChooser();
@@ -523,6 +531,36 @@ namespace DarkScript3
         private void Editor_Scroll(object sender, ScrollEventArgs e)
         {
             InfoTip.Hide();
+        }
+
+        private void CutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            editor.Cut();
+        }
+
+        private void ReplaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            editor.ShowReplaceDialog();
+        }
+
+        private void SelectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            editor.SelectAll();
+        }
+
+        private void FindToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            editor.ShowFindDialog();
+        }
+
+        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            editor.Copy();
+        }
+
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("-- Created by AinTunez\r\n-- Based on work by HotPocketRemix and TKGP\r\n-- Special thanks to Meowmaritus", "About DarkScript");
         }
     }
 
