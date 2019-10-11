@@ -233,7 +233,6 @@ namespace DarkScript3
             return MakeStyle(new SolidBrush(color), f);
         }
 
-
         private static TextStyle MakeStyle(Brush b, FontStyle f = FontStyle.Regular)
         {
             Styles.Add(new TextStyle(b, Brushes.Transparent, f));
