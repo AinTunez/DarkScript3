@@ -433,7 +433,7 @@ namespace DarkScript3
                 if (i == index) return argStrings.Last();
             }
             return string.Join(", ", argStrings);
-        }
+        } 
 
         private void LoadDocText(string func)
         {

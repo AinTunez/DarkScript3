@@ -18,7 +18,6 @@ function Event(id, restBehavior, instructions) {
 }
 
 function _GetArgs(func) {
-    // First match everything inside the function argument parens.
     var start = func.toString().indexOf("(");
     var end = func.toString().indexOf(")");
     var args = func.toString().substring(start, end).replace("(", "").replace(")", "");

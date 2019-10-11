@@ -192,16 +192,22 @@ namespace DarkScript3
                     
                     foreach (var arg in instr.Arguments)
                     {
-                        arg.Name = CamelCaseName(arg.Name);
+                        arg.Name = CamelCaseName(arg.Name.Replace("Class", "Class Name"));
                         if (arg.EnumName != null)
                             arg.EnumName = Regex.Replace(arg.EnumName, @"[^\w]", "");
                     }
 
-                    string argNames = string.Join(", ", instr.Arguments.Select(a => CamelCaseName(a.Name.Replace("Class", "Class Name"))));
+                    var args = instr.Arguments.Select(a => a.Name);
+                    string argNames = string.Join(", ", args);
 
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine($"function {funcName} ({argNames}) {{");
-                    sb.AppendLine($"    return _Instruction({bank.Index}, {instr.Index}, Array.from(arguments));");
+                    foreach (var arg in args)
+                    {
+                        sb.AppendLine($"if ({arg} === void 0)");
+                        sb.AppendLine($@"throw 'Argument \""{arg}\"" in instruction \""{funcName}\"" not properly set.'");
+                    }
+                    sb.AppendLine($"return _Instruction({bank.Index}, {instr.Index}, Array.from(arguments));");
                     sb.AppendLine("}");
 
                     v8.Execute(sb.ToString());
@@ -415,9 +421,10 @@ namespace DarkScript3
 
         public static string TitleCaseName(string s)
         {
+            Console.WriteLine(s);
             if (string.IsNullOrEmpty(s)) return s;
 
-            string[] words = Regex.Replace(s, "[^\\w\\s]","").Split(' ');
+            string[] words = Regex.Replace(s, @"[^\w\s]","").Split(' ');
             for (int i = 0; i < words.Length; i++)
             {
                 if (words[i].Length == 0) continue;
@@ -426,7 +433,7 @@ namespace DarkScript3
                     words[i] = words[i].ToUpper();
                     continue;
                 }
-
+                
                 char firstChar = char.ToUpper(words[i][0]);
                 string rest = "";
                 if (words[i].Length > 1)
@@ -435,7 +442,9 @@ namespace DarkScript3
                 }
                 words[i] = firstChar + rest;
             }
-            return Regex.Replace(string.Join("", words), "[^\\w]", "");
+            string output = Regex.Replace(string.Join("", words), @"[^\w]", "");
+            Console.WriteLine(output);
+            return output;
         }
 
         public static string CamelCaseName(string s)
