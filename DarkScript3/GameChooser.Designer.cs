@@ -31,6 +31,7 @@
             this.ds1Btn = new System.Windows.Forms.Button();
             this.bbBtn = new System.Windows.Forms.Button();
             this.ds3Btn = new System.Windows.Forms.Button();
+            this.sekiroBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ds1Btn
@@ -63,11 +64,22 @@
             this.ds3Btn.UseVisualStyleBackColor = true;
             this.ds3Btn.Click += new System.EventHandler(this.Ds3Btn_Click);
             // 
+            // sekiroBtn
+            // 
+            this.sekiroBtn.Location = new System.Drawing.Point(24, 111);
+            this.sekiroBtn.Name = "sekiroBtn";
+            this.sekiroBtn.Size = new System.Drawing.Size(97, 23);
+            this.sekiroBtn.TabIndex = 3;
+            this.sekiroBtn.Text = "Sekiro";
+            this.sekiroBtn.UseVisualStyleBackColor = true;
+            this.sekiroBtn.Click += new System.EventHandler(this.SekiroBtn_Click);
+            // 
             // GameChooser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(149, 127);
+            this.ClientSize = new System.Drawing.Size(149, 150);
+            this.Controls.Add(this.sekiroBtn);
             this.Controls.Add(this.ds3Btn);
             this.Controls.Add(this.bbBtn);
             this.Controls.Add(this.ds1Btn);
@@ -83,5 +95,6 @@
         private System.Windows.Forms.Button ds1Btn;
         private System.Windows.Forms.Button bbBtn;
         private System.Windows.Forms.Button ds3Btn;
+        private System.Windows.Forms.Button sekiroBtn;
     }
 }

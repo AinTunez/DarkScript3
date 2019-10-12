@@ -178,6 +178,7 @@ namespace DarkScript3
                         code.AppendLine($"{val}:{pair.Key},");
                     }
                     code.AppendLine("};");
+                    Console.WriteLine(code.ToString());
                     v8.Execute(code.ToString());
                 }
             }
