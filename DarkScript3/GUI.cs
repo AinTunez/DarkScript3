@@ -88,6 +88,7 @@ namespace DarkScript3
                 MainMenuStrip.Enabled = false;
                 Cursor = Cursors.WaitCursor;
                 Scripter.Pack(editor.Text).Write(EVD_Path);
+
                 File.WriteAllText($"{EVD_Path}.js", editor.Text);
                 statusLabel.Text = "SAVE SUCCESSFUL";
                 Changed = false;
@@ -212,9 +213,8 @@ namespace DarkScript3
             InstructionMenu.ToolTipDuration = 1;
             InstructionMenu.AppearInterval = 250;
 
-            Image img = MakeColorImage(Color.FromArgb(255, 255, 255));
             InstructionMenu.ImageList = new ImageList();
-            InstructionMenu.ImageList.Images.Add("instruction", img);
+            InstructionMenu.ImageList.Images.Add("instruction", MakeColorImage(Color.FromArgb(255, 255, 255)));
 
             IEnumerable<AutocompleteItem> instructions = Scripter.Functions.Keys.Select(s =>
             {
