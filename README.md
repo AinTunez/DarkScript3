@@ -1,3 +1,3 @@
 # DarkScript3
 
-![DarkScript 3 screenshot](https://i.imgur.com/aiSGaD2.png)
+![DarkScript 3 screenshot](https://i.imgur.com/mKBkZuk.png)
