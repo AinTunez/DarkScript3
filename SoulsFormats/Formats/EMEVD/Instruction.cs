@@ -240,6 +240,11 @@ namespace SoulsFormats
                 /// 32-bit floating point number.
                 /// </summary>
                 Single = 6,
+
+                /// <summary>
+                /// Unsigned 32-bit integer.
+                /// </summary>
+                StringPosition = 8
             }
 
             /// <summary>
@@ -302,6 +307,7 @@ namespace SoulsFormats
                                 br.Pad(2);
                                 result.Add(br.ReadUInt16()); break;
                             case ArgType.UInt32:
+                            case ArgType.StringPosition:
                                 br.Pad(4);
                                 result.Add(br.ReadUInt32()); break;
                             case ArgType.SByte:
@@ -315,7 +321,6 @@ namespace SoulsFormats
                             case ArgType.Single:
                                 br.Pad(4);
                                 result.Add(br.ReadSingle()); break;
-
                             default:
                                 throw new NotImplementedException($"Unimplemented argument type: {arg}");
                         }
