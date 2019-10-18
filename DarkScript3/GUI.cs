@@ -20,19 +20,13 @@ namespace DarkScript3
 {
     public partial class GUI : Form
     {
-        public EventScripter Scripter;
-
         public string EVD_Path;
-
-        public ToolControl InfoTip = new ToolControl();
-
-        public Range CurrentTipRange = null;
-
+        public EventScripter Scripter;
+        public bool CodeChanged = false;
         public AutocompleteMenu InstructionMenu;
 
         Dictionary<string, (string title, string text)> ToolTips = new Dictionary<string, (string, string)>();
 
-        public bool Changed = false;
 
         public GUI()
         {
@@ -49,45 +43,46 @@ namespace DarkScript3
             editor.Focus();
         }
 
-        private void TipBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void InitUI()
         {
-            e.ChangedRange.SetStyle(TextStyles.ToolTipKeyword, JSRegex.DataType);
-            e.ChangedRange.SetStyle(TextStyles.SlightlyDarker, new Regex(@"[<>]"));
+            InstructionMenu = new AutocompleteMenu(editor);
+            InstructionMenu.BackColor = Color.FromArgb(37, 37, 38);
+            InstructionMenu.ForeColor = Color.FromArgb(240, 240, 240);
+            InstructionMenu.SelectedColor = Color.FromArgb(0, 122, 204);
+            InstructionMenu.Items.MaximumSize = new Size(400, 300);
+            InstructionMenu.Items.Width = 250;
+            InstructionMenu.AllowTabKey = true;
+            InstructionMenu.AlwaysShowTooltip = false;
+            InstructionMenu.ToolTipDuration = 1;
+            InstructionMenu.AppearInterval = 250;
+
+            InstructionMenu.ImageList = new ImageList();
+            InstructionMenu.ImageList.Images.Add("instruction", MakeColorImage(Color.FromArgb(255, 255, 255)));
+
+            IEnumerable<AutocompleteItem> instructions = Scripter.Functions.Keys.Select(s =>
+            {
+                var instr = Scripter.Functions[s];
+                var doc = Scripter.DOC[instr.classIndex][instr.instrIndex];
+
+                string menuText = s;
+                string toolTipTitle = s;
+                string toolTipText = $"{instr.classIndex}[{instr.instrIndex}] ({ArgString(s)})";
+
+                return new AutocompleteItem(s + "(", InstructionMenu.ImageList.Images.IndexOfKey("instruction"), menuText, toolTipTitle, toolTipText);
+            });
+
+            foreach (var item in instructions)
+            {
+                ToolTips[item.MenuText] = (item.ToolTipTitle, item.ToolTipText);
+                item.ToolTipText = null;
+                item.ToolTipTitle = null;
+            }
+
+            InstructionMenu.Items.SetAutocompleteItems(instructions);
+            JSRegex.GlobalConstant = new Regex($@"[^.]\b(?<range>{string.Join("|", Scripter.GlobalConstants)})\b");
         }
 
-        
-        private void ShowTip(string s, Point p, int argIndex = -1)
-        {
-            if (argIndex > -1)
-            {
-                string[] args = Regex.Split(s, @"\s*,\s");
-                if (argIndex > args.Length - 1)
-                    args[args.Length - 1] = args[args.Length - 1].Replace(" ", " *");
-                else
-                    args[argIndex] = args[argIndex].Replace(" ", " *");
-                InfoTip.SetText(string.Join(", ", args));
-            }
-            else
-            {
-                InfoTip.SetText(s);
-            }
-            p.Offset(0, -InfoTip.Height - 5);
-            InfoTip.Location = p;
-            if (!InfoTip.Visible) InfoTip.Show();
-            InfoTip.BringToFront();
-            editor.Focus();
-        }
-
-        private void ShowArgToolTip(Range arguments, int argument = -1)
-        {
-            string funcName = FuncName(arguments);
-
-            if (Scripter != null && Scripter.Functions.ContainsKey(funcName))
-            {
-                Point point = editor.PlaceToPoint(arguments.Start);
-                ShowTip(ArgString(funcName), point, argument);
-            }
-        }
+        #region File Handling
 
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -106,10 +101,11 @@ namespace DarkScript3
                     statusLabel.Text = "SAVE SUCCESSFUL";
                 else
                     statusLabel.Text = "SAVE FAILED";
-                Changed = false;
+                CodeChanged = false;
             }
             catch (Exception ex)
             {
+                statusLabel.Text = "SAVE FAILED";
                 IScriptEngineException scriptException = ex as IScriptEngineException;
                 if (scriptException != null)
                 {
@@ -141,7 +137,6 @@ namespace DarkScript3
                 {
                     MessageBox.Show(ex.ToString());
                 }
-                statusLabel.Text = "SAVE FAILED";
             }
 
             Cursor = Cursors.Default;
@@ -216,15 +211,13 @@ namespace DarkScript3
 
         private void OpenXMLFile(string fileName)
         {
-            Console.WriteLine(fileName);
             using (StreamReader reader = new StreamReader(fileName))
             {
                 XDocument doc = XDocument.Load(reader);
                 string resource = doc.Root.Element("gameDocs").Value;
                 string data = doc.Root.Element("script").Value;
                 string org = fileName.Substring(0, fileName.Length - 4);
-                Scripter = new EventScripter(org, resource);
-                editor.Text = data;
+                OpenEMEVDFile(org, resource);
             }
         }
 
@@ -259,64 +252,9 @@ namespace DarkScript3
            
         }
 
-        private Bitmap MakeColorImage(Color color)
-        {
-            var map = new Bitmap(16, 16);
-            using (Graphics gfx = Graphics.FromImage(map))
-            using (SolidBrush brush = new SolidBrush(color))
-            {
-                gfx.FillRectangle(brush, 1, 1, 14, 14);
-            }
-            return map;
-        }
-
-        private void InitUI()
-        {
-            InstructionMenu = new AutocompleteMenu(editor);
-            InstructionMenu.BackColor = Color.FromArgb(37, 37, 38);
-            InstructionMenu.ForeColor = Color.FromArgb(240, 240, 240);
-            InstructionMenu.SelectedColor = Color.FromArgb(0, 122, 204);
-            InstructionMenu.Items.MaximumSize = new Size(400, 300);
-            InstructionMenu.Items.Width = 250;
-            InstructionMenu.AllowTabKey = true;
-            InstructionMenu.AlwaysShowTooltip = false;
-            InstructionMenu.ToolTipDuration = 1;
-            InstructionMenu.AppearInterval = 250;
-
-            InstructionMenu.ImageList = new ImageList();
-            InstructionMenu.ImageList.Images.Add("instruction", MakeColorImage(Color.FromArgb(255, 255, 255)));
-
-            IEnumerable<AutocompleteItem> instructions = Scripter.Functions.Keys.Select(s =>
-            {
-                var instr = Scripter.Functions[s];
-                var doc = Scripter.DOC[instr.classIndex][instr.instrIndex];
-
-                string menuText = s;
-                string toolTipTitle = s;
-                string toolTipText = $"{instr.classIndex}[{instr.instrIndex}] ({ArgString(s)})";
-
-                return new AutocompleteItem(s + "(", InstructionMenu.ImageList.Images.IndexOfKey("instruction"), menuText, toolTipTitle, toolTipText);
-            });
-
-            foreach (var item in instructions)
-            {
-                ToolTips[item.MenuText] = (item.ToolTipTitle, item.ToolTipText);
-                item.ToolTipText = null;
-                item.ToolTipTitle = null;
-            }
-
-            InstructionMenu.Items.SetAutocompleteItems(instructions);
-            JSRegex.GlobalConstant = new Regex($@"[^.]\b(?<range>{string.Join("|", Scripter.GlobalConstants)})\b");
-        }
-
-        private void EmevdDataToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Scripter == null) return;
-            InfoTip.Hide();
-            (new InfoViewer(Scripter)).ShowDialog();
-        }
-
-        #region syntax highlighting
+        #endregion
+       
+        #region Highlighting
 
         public static TextStyle MakeStyle(int r, int g, int b, FontStyle f = FontStyle.Regular)
         {
@@ -347,7 +285,7 @@ namespace DarkScript3
         private void Editor_TextChanged(object sender, TextChangedEventArgs e)
         {
             statusLabel.Text = "";
-            if (Scripter != null) Changed = true;
+            if (Scripter != null) CodeChanged = true;
             SetStyles(e);
         }
 
@@ -399,24 +337,10 @@ namespace DarkScript3
 
         #endregion
 
-        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!Changed) Close();
-            else
-            {
-                DialogResult result = MessageBox.Show("Save changes before exiting?", "Unsaved Changes", MessageBoxButtons.YesNoCancel);
-                if (result == DialogResult.Yes)
-                {
-                    SaveToolStripMenuItem_Click(sender, e);
-                    Close();
-                }
-                else if (result == DialogResult.No)
-                {
-                    Close();
-                }
-            }
+        #region ToolTips
 
-        }
+        public ToolControl InfoTip = new ToolControl();
+        public Range CurrentTipRange = null;
 
         private void Editor_ToolTipNeeded(object sender, ToolTipNeededEventArgs e)
         {
@@ -431,12 +355,12 @@ namespace DarkScript3
                     ShowTip(s, p);
                 }
             }
-        }   
+        }
 
-        private void DocumentationToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TipBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            InfoTip.Hide();
-            display.Panel1Collapsed = !display.Panel1Collapsed;
+            e.ChangedRange.SetStyle(TextStyles.ToolTipKeyword, JSRegex.DataType);
+            e.ChangedRange.SetStyle(TextStyles.SlightlyDarker, new Regex(@"[<>]"));
         }
 
         private void Editor_SelectionChanged(object sender, EventArgs e)
@@ -462,7 +386,8 @@ namespace DarkScript3
                 string funcName = FuncName(arguments);
                 LoadDocText(funcName);
                 ShowArgToolTip(arguments, argIndex);
-            } else
+            }
+            else
             {
                 Range func = editor.Selection.GetFragment(@"\w");
                 if (Scripter != null && Scripter.Functions.ContainsKey(func.Text))
@@ -471,6 +396,54 @@ namespace DarkScript3
                 }
             }
         }
+
+
+        private void ShowTip(string s, Point p, int argIndex = -1)
+        {
+            if (argIndex > -1)
+            {
+                string[] args = Regex.Split(s, @"\s*,\s");
+                if (argIndex > args.Length - 1)
+                    args[args.Length - 1] = args[args.Length - 1].Replace(" ", " *");
+                else
+                    args[argIndex] = args[argIndex].Replace(" ", " *");
+                InfoTip.SetText(string.Join(", ", args));
+            }
+            else
+            {
+                InfoTip.SetText(s);
+            }
+            p.Offset(0, -InfoTip.Height - 5);
+            InfoTip.Location = p;
+            if (!InfoTip.Visible) InfoTip.Show();
+            InfoTip.BringToFront();
+            editor.Focus();
+        }
+
+        private void ShowArgToolTip(Range arguments, int argument = -1)
+        {
+            string funcName = FuncName(arguments);
+
+            if (Scripter != null && Scripter.Functions.ContainsKey(funcName))
+            {
+                Point point = editor.PlaceToPoint(arguments.Start);
+                ShowTip(ArgString(funcName), point, argument);
+            }
+        }
+
+        private Bitmap MakeColorImage(Color color)
+        {
+            var map = new Bitmap(16, 16);
+            using (Graphics gfx = Graphics.FromImage(map))
+            using (SolidBrush brush = new SolidBrush(color))
+            {
+                gfx.FillRectangle(brush, 1, 1, 14, 14);
+            }
+            return map;
+        }
+        #endregion
+
+        #region Text Handling
 
         private string FuncName(Range arguments)
         {
@@ -566,6 +539,18 @@ namespace DarkScript3
             
         }
 
+        #endregion
+
+        #region Misc GUI Events
+
+        private void EmevdDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Scripter == null) return;
+            InfoTip.Hide();
+            (new InfoViewer(Scripter)).ShowDialog();
+        }
+
+
         private void Display_Resize(object sender, EventArgs e)
         {
             if (display.SplitterDistance != 350) display.SplitterDistance = 350;
@@ -596,6 +581,31 @@ namespace DarkScript3
 
         private void Editor_Scroll(object sender, ScrollEventArgs e) => InfoTip.Hide();
 
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!CodeChanged) Close();
+            else
+            {
+                DialogResult result = MessageBox.Show("Save changes before exiting?", "Unsaved Changes", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Yes)
+                {
+                    SaveToolStripMenuItem_Click(sender, e);
+                    Close();
+                }
+                else if (result == DialogResult.No)
+                {
+                    Close();
+                }
+            }
+
+        }
+
+        private void DocumentationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InfoTip.Hide();
+            display.Panel1Collapsed = !display.Panel1Collapsed;
+        }
+
         private void CutToolStripMenuItem_Click(object sender, EventArgs e) => editor.Cut();
 
         private void ReplaceToolStripMenuItem_Click(object sender, EventArgs e) => editor.ShowReplaceDialog();
@@ -610,6 +620,7 @@ namespace DarkScript3
         {
             MessageBox.Show("-- Created by AinTunez\r\n-- Based on work by HotPocketRemix and TKGP\r\n-- Special thanks to Meowmaritus", "About DarkScript");
         }
+        #endregion
     }
 
 }
