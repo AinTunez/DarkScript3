@@ -178,7 +178,6 @@ namespace DarkScript3
                         code.AppendLine($"{val}:{pair.Key},");
                     }
                     code.AppendLine("};");
-                    Console.WriteLine(code.ToString());
                     v8.Execute(code.ToString());
                 }
             }
@@ -456,7 +455,6 @@ namespace DarkScript3
 
         public static string TitleCaseName(string s)
         {
-            Console.WriteLine(s);
             if (string.IsNullOrEmpty(s)) return s;
 
             string[] words = Regex.Replace(s, @"[^\w\s]","").Split(' ');
@@ -478,7 +476,6 @@ namespace DarkScript3
                 words[i] = firstChar + rest;
             }
             string output = Regex.Replace(string.Join("", words), @"[^\w]", "");
-            Console.WriteLine(output);
             return output;
         }
 
