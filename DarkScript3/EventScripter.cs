@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using SoulsFormats;
 using Microsoft.ClearScript.V8;
-using System.IO;
 using System.Text.RegularExpressions;
 using Microsoft.ClearScript;
 using static SoulsFormats.EMEVD.Instruction;
@@ -54,6 +53,9 @@ namespace DarkScript3
             if (evd != null) EVD = evd;
         }
 
+        /// <summary>
+        /// Called by JS to add instructions to the event currently being edited.
+        /// </summary>
         public Instruction MakeInstruction(Event evt, int bank, int index, object[] args)
         {
             EMEDF.InstrDoc doc = DOC[bank][index];
@@ -115,6 +117,9 @@ namespace DarkScript3
             return ins;
         }
 
+        /// <summary>
+        /// Called by JS to add instructions to the event currently being edited.
+        /// </summary>
         public Instruction MakeInstruction(Event evt, int bank, int index, uint layer, object[] args)
         {
             Instruction ins = MakeInstruction(evt, bank, index, args);
@@ -122,7 +127,11 @@ namespace DarkScript3
             return ins;
         }
 
-        public void InitAll(string resource)
+        /// <summary>
+        /// Sets up the JavaScript environment.
+        /// </summary>
+        /// <param name="embeddedResource"></param>
+        public void InitAll(string embeddedResource)
         {
             v8.AddHostObject("$$$_host", new HostFunctions());
             v8.AddHostObject("EVD", EVD);
@@ -136,19 +145,12 @@ namespace DarkScript3
             v8.AddHostType("Console", typeof(Console));
 
             v8.Execute(Resource.Text("script.js"));
-
-            if (resource == null)
-            {
-                var chooser = new GameChooser();
-                chooser.ShowDialog();
-                DOC = InitDocsFromResource(chooser.GameDocs);
-            }
-            else
-            {
-                DOC = InitDocsFromResource(resource);
-            }
+            DOC = InitDocsFromResource(embeddedResource);
         }
 
+        /// <summary>
+        /// Sets up the EMEDF from an embedded JSON stream.
+        /// </summary>
         private EMEDF InitDocsFromResource(string streamPath)
         {
             EMEDF DOC = EMEDF.ReadStream(streamPath);
@@ -217,6 +219,9 @@ namespace DarkScript3
             return DOC;
         }
 
+        /// <summary>
+        /// Executes the selected code to generate the EMEVD.
+        /// </summary>
         public EMEVD Pack(string code)
         {
             EVD.Events.Clear();
@@ -224,6 +229,9 @@ namespace DarkScript3
             return EVD;
         }
 
+        /// <summary>
+        /// Generates JS source code from the EMEVD.
+        /// </summary>
         public string Unpack()
         {
             InitLinkedFiles();
@@ -292,6 +300,9 @@ namespace DarkScript3
             return code.ToString();
         }
 
+        /// <summary>
+        /// Sets up the list of linked files.
+        /// </summary>
         private void InitLinkedFiles()
         {
             var reader = new BinaryReaderEx(false, EVD.StringData);
@@ -302,6 +313,9 @@ namespace DarkScript3
             }
         }
 
+        /// <summary>
+        /// Returns the byte length of an ArgType.
+        /// </summary>
         private int ByteLengthFromType(long t)
         {
             if (t == 0) return 1; //u8
@@ -315,6 +329,9 @@ namespace DarkScript3
             throw new Exception("Invalid type in argument definition.");
         }
 
+        /// <summary>
+        /// Returns JS source code to set an Instruction's layer.
+        /// </summary>
         public string LayerString(uint layerValue)
         {
             List<int> bitList = new List<int>();
@@ -325,6 +342,9 @@ namespace DarkScript3
             return $"$LAYERS({string.Join(", ", bitList)})";
         }
 
+        /// <summary>
+        /// Returns a dictionary containing the textual names of an event's parameters.
+        /// </summary>
         public Dictionary<Parameter, string> ParamNames (Event evt)
         {
             Dictionary<long, List<Parameter>> paramValues = new Dictionary<long, List<Parameter>>();
@@ -351,6 +371,14 @@ namespace DarkScript3
             return paramNames;
         }
 
+        /// <summary>
+        /// Returns the textual representation of an event initializer's arguments.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="insIndex"></param>
+        /// <param name="paramNames"></param>
+        /// <param name="argStruct"></param>
+        /// <returns></returns>
         public string ArgumentStringInitializer(string[] args, int insIndex, Dictionary<Parameter, string> paramNames, IEnumerable<ArgType> argStruct)
         {
             List<uint> positions = GetArgBytePositions(argStruct, 6);
@@ -368,6 +396,9 @@ namespace DarkScript3
             return string.Join(", ", args).Trim();
         }
 
+        /// <summary>
+        /// Returns the textual representation of an event's arguments.
+        /// </summary>
         public string ArgumentString(string[] args, Instruction ins, int insIndex, Dictionary<Parameter, string> paramNames)
         {
             var insDoc = DOC[ins.Bank][ins.ID];
@@ -398,6 +429,9 @@ namespace DarkScript3
             return "";
         }
 
+        /// <summary>
+        /// Returns a list of byte positions for an ordered list of argument types.
+        /// </summary>
         public List<uint> GetArgBytePositions(IEnumerable<ArgType> argStruct, uint startPos = 0)
         {
             List<uint> positions = new List<uint>();
@@ -419,6 +453,8 @@ namespace DarkScript3
         {
             "AI","HP","SE","SP","SFX","FFX","NPC"
         };
+
+        #region Misc
 
         public static string TitleCaseName(string s)
         {
@@ -458,5 +494,7 @@ namespace DarkScript3
             else
                 return firstChar.ToString();
         }
+
+        #endregion
     }
 }

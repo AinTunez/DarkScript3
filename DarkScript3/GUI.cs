@@ -513,7 +513,6 @@ namespace DarkScript3
             InfoTip.Hide();
             InfoTip.tipBox.Font = editor.Font;
             docBox.Font = editor.Font;
-
         }
 
         private void GUI_KeyDown(object sender, KeyEventArgs e)
