@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29209.62
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoulsFormats", "SoulsFormats\SoulsFormats.csproj", "{22C664BD-877B-44DF-8ECF-2808522469A8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DarkScript3", "DarkScript3\DarkScript3.csproj", "{26132F38-F7FC-465D-8044-4D45B5F79264}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoulsFormats", "SoulsFormats\SoulsFormats\SoulsFormats.csproj", "{F6D5D5C9-9750-4978-9355-7FA451B3EE13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{22C664BD-877B-44DF-8ECF-2808522469A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{22C664BD-877B-44DF-8ECF-2808522469A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{22C664BD-877B-44DF-8ECF-2808522469A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22C664BD-877B-44DF-8ECF-2808522469A8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{26132F38-F7FC-465D-8044-4D45B5F79264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{26132F38-F7FC-465D-8044-4D45B5F79264}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26132F38-F7FC-465D-8044-4D45B5F79264}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26132F38-F7FC-465D-8044-4D45B5F79264}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6D5D5C9-9750-4978-9355-7FA451B3EE13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6D5D5C9-9750-4978-9355-7FA451B3EE13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6D5D5C9-9750-4978-9355-7FA451B3EE13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6D5D5C9-9750-4978-9355-7FA451B3EE13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

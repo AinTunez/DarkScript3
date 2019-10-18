@@ -30,6 +30,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -308,12 +309,6 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.2.9.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SoulsFormats\SoulsFormats.csproj">
-      <Project>{22c664bd-877b-44df-8ecf-2808522469a8}</Project>
-      <Name>SoulsFormats</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\bb-common.emedf.json" />
     <EmbeddedResource Include="Resources\ds1-common.emedf.json" />
     <EmbeddedResource Include="Resources\ds3-common.emedf.json" />
@@ -339,6 +334,12 @@
     <AdditionalFiles Include="Resources\oo2core_6_win64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AdditionalFiles>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SoulsFormats\SoulsFormats\SoulsFormats.csproj">
+      <Project>{f6d5d5c9-9750-4978-9355-7fa451b3ee13}</Project>
+      <Name>SoulsFormats</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.ClearScript.5.6.0\build\Microsoft.ClearScript.targets" Condition="Exists('..\packages\Microsoft.ClearScript.5.6.0\build\Microsoft.ClearScript.targets')" />
