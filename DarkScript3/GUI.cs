@@ -12,8 +12,9 @@ using System.Windows.Forms;
 using Microsoft.ClearScript;
 using Microsoft.ClearScript.V8;
 using FastColoredTextBoxNS;
+using System.Xml;
 using SoulsFormats;
-
+using System.Xml.Linq;
 
 namespace DarkScript3
 {
@@ -77,20 +78,34 @@ namespace DarkScript3
             editor.Focus();
         }
 
+        private void ShowArgToolTip(Range arguments, int argument = -1)
+        {
+            string funcName = FuncName(arguments);
+
+            if (Scripter != null && Scripter.Functions.ContainsKey(funcName))
+            {
+                Point point = editor.PlaceToPoint(arguments.Start);
+                ShowTip(ArgString(funcName), point, argument);
+            }
+        }
+
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Scripter == null) return;
             InfoTip.Hide();
+
+            editor.Enabled = false;
+            docBox.Enabled = false;
+            MainMenuStrip.Enabled = false;
+            Cursor = Cursors.WaitCursor;
+
             try
             {
-                editor.Enabled = false;
-                docBox.Enabled = false;
-                MainMenuStrip.Enabled = false;
-                Cursor = Cursors.WaitCursor;
                 Scripter.Pack(editor.Text).Write(EVD_Path);
-
-                File.WriteAllText($"{EVD_Path}.js", editor.Text);
-                statusLabel.Text = "SAVE SUCCESSFUL";
+                if (SaveXMLFile())
+                    statusLabel.Text = "SAVE SUCCESSFUL";
+                else
+                    statusLabel.Text = "SAVE FAILED";
                 Changed = false;
             }
             catch (Exception ex)
@@ -128,6 +143,7 @@ namespace DarkScript3
                 }
                 statusLabel.Text = "SAVE FAILED";
             }
+
             Cursor = Cursors.Default;
             MainMenuStrip.Enabled = true;
             editor.Enabled = true;
@@ -150,27 +166,36 @@ namespace DarkScript3
                 }
             }
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx; *.emevd.js; *.emevd.dcx.js";
+            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx; *.emevd.xml; *.emevd.dcx.xml";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 GameChooser chooser = new GameChooser();
-                chooser.ShowDialog();
-                if (ofd.FileName.EndsWith(".js"))
+                if (ofd.FileName.EndsWith(".xml"))
                 {
+                    OpenXMLFile(ofd.FileName);
+                }
+                else if (File.Exists(ofd.FileName + ".xml"))
+                {
+                    OpenXMLFile(ofd.FileName + ".xml");
+                }
+                else if (ofd.FileName.EndsWith(".js"))
+                {
+                    chooser.ShowDialog();
                     OpenJSFile(ofd.FileName, chooser.GameDocs);
                 }
                 else if (File.Exists(ofd.FileName + ".js"))
                 {
+                    chooser.ShowDialog();
                     OpenJSFile(ofd.FileName + ".js", chooser.GameDocs);
                 }
                 else
                 {
+                    chooser.ShowDialog();
                     OpenEMEVDFile(ofd.FileName, chooser.GameDocs);
                 }
             }
         }
-
-
+        
         private void OpenEMEVDFile(string fileName, string gameDocs)
         {
             Scripter = new EventScripter(fileName, gameDocs);
@@ -187,6 +212,51 @@ namespace DarkScript3
             string org = fileName.Substring(0, fileName.Length - 3);
             SFUtil.Backup(org);
             OpenEMEVDFile(org, gameDocs);
+        }
+
+        private void OpenXMLFile(string fileName)
+        {
+            Console.WriteLine(fileName);
+            using (StreamReader reader = new StreamReader(fileName))
+            {
+                XDocument doc = XDocument.Load(reader);
+                string resource = doc.Root.Element("gameDocs").Value;
+                string data = doc.Root.Element("script").Value;
+                string org = fileName.Substring(0, fileName.Length - 4);
+                Scripter = new EventScripter(org, resource);
+                editor.Text = data;
+            }
+        }
+
+        private bool SaveXMLFile()
+        {
+            if (Scripter == null) return false;
+            try
+            {
+                var settings = new XmlWriterSettings();
+                settings.Indent = true;
+                using (XmlWriter writer = XmlWriter.Create($"{EVD_Path}.xml.tmp"))
+                {
+                    writer.WriteStartElement("EMEVD");
+                    writer.WriteElementString("gameDocs", Scripter.ResourceString);
+                    writer.WriteStartElement("script");
+                    writer.WriteCData(editor.Text);
+                    writer.WriteEndElement();
+                    writer.WriteEndElement();
+                    writer.Flush();
+                    writer.Close();
+                }
+                File.Delete($"{EVD_Path}.xml");
+                File.Move($"{EVD_Path}.xml.tmp", $"{EVD_Path}.xml");
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                if (File.Exists($"{EVD_Path}.xml.tmp"))
+                    File.Delete($"{EVD_Path}.xml.tmp");
+                return false;
+            }
+            return true;
+           
         }
 
         private Bitmap MakeColorImage(Color color)
@@ -245,6 +315,8 @@ namespace DarkScript3
             InfoTip.Hide();
             (new InfoViewer(Scripter)).ShowDialog();
         }
+
+        #region syntax highlighting
 
         public static TextStyle MakeStyle(int r, int g, int b, FontStyle f = FontStyle.Regular)
         {
@@ -324,6 +396,8 @@ namespace DarkScript3
                     RegexCompiledOption);
             public static Regex DataType = new Regex(@"\b(byte|short|int|sbyte|ushort|uint|enum|bool)\b", RegexCompiledOption);
         }
+
+        #endregion
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -406,17 +480,6 @@ namespace DarkScript3
             return pre.GetFragment(@"\w").Text;
         }
 
-        private void ShowArgToolTip(Range arguments, int argument = -1)
-        {
-            string funcName = FuncName(arguments);
-
-            if (Scripter != null && Scripter.Functions.ContainsKey(funcName))
-            {
-                Point point = editor.PlaceToPoint(arguments.Start);
-                ShowTip(ArgString(funcName), point, argument);
-            }
-        }
-
         private string TypeString(long type)
         {
             if (type == 0) return "byte";
@@ -452,7 +515,7 @@ namespace DarkScript3
                 if (i == index) return argStrings.Last();
             }
             return string.Join(", ", argStrings);
-        } 
+        }
 
         private void LoadDocText(string func)
         {
@@ -531,35 +594,17 @@ namespace DarkScript3
             }
         }
 
-        private void Editor_Scroll(object sender, ScrollEventArgs e)
-        {
-            InfoTip.Hide();
-        }
+        private void Editor_Scroll(object sender, ScrollEventArgs e) => InfoTip.Hide();
 
-        private void CutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            editor.Cut();
-        }
+        private void CutToolStripMenuItem_Click(object sender, EventArgs e) => editor.Cut();
 
-        private void ReplaceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            editor.ShowReplaceDialog();
-        }
+        private void ReplaceToolStripMenuItem_Click(object sender, EventArgs e) => editor.ShowReplaceDialog();
 
-        private void SelectAllToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            editor.SelectAll();
-        }
+        private void SelectAllToolStripMenuItem_Click(object sender, EventArgs e) => editor.SelectAll();
 
-        private void FindToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            editor.ShowFindDialog();
-        }
+        private void FindToolStripMenuItem_Click(object sender, EventArgs e) => editor.ShowFindDialog();
 
-        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            editor.Copy();
-        }
+        private void CopyToolStripMenuItem_Click(object sender, EventArgs e) => editor.Copy();
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {

@@ -15,6 +15,8 @@ namespace DarkScript3
     {
         public EMEVD EVD = new EMEVD();
 
+        public string ResourceString = "";
+
         public EMEDF DOC { get; set; } = new EMEDF();
 
         private V8ScriptEngine v8 = new V8ScriptEngine();
@@ -45,12 +47,8 @@ namespace DarkScript3
         public EventScripter(string file, string resource = "ds1-common.emedf.json")
         {
             EVD = EMEVD.Read(file);
+            ResourceString = resource;
             InitAll(resource);
-        }
-
-        public EventScripter(EMEVD evd = null, string resource = "ds1-common.emedf.json")
-        {
-            if (evd != null) EVD = evd;
         }
 
         /// <summary>
