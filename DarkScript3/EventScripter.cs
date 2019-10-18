@@ -252,7 +252,8 @@ namespace DarkScript3
                     EMEDF.InstrDoc doc = DOC[ins.Bank][ins.ID];
                     string funcName = TitleCaseName(doc.Name);
 
-                    IEnumerable<ArgType> argStruct = doc.Arguments.Select(arg => (ArgType)arg.Type);
+                    IEnumerable<ArgType> argStruct = doc.Arguments.Select(arg => arg.Type == 8 ? ArgType.UInt32 : (ArgType) arg.Type);
+
                     string[] args = default;
                     string argString = "";
 
