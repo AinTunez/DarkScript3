@@ -16,7 +16,6 @@ namespace DarkScript3
         public EMEVD EVD = new EMEVD();
 
         public string ResourceString = "";
-
         public EMEDF DOC { get; set; } = new EMEDF();
 
         private V8ScriptEngine v8 = new V8ScriptEngine();

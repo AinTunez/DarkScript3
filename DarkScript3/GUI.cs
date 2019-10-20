@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.ClearScript;
-using Microsoft.ClearScript.V8;
 using FastColoredTextBoxNS;
 using System.Xml;
 using SoulsFormats;
@@ -26,7 +22,6 @@ namespace DarkScript3
         public AutocompleteMenu InstructionMenu;
 
         Dictionary<string, (string title, string text)> ToolTips = new Dictionary<string, (string, string)>();
-
 
         public GUI()
         {
