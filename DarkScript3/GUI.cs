@@ -190,7 +190,7 @@ namespace DarkScript3
         
         private void OpenEMEVDFile(string fileName, string gameDocs, string data = null)
         {
-            Scripter = new EventScripter(fileName, gameDocs);
+            Scripter = new EventScripter(fileName, gameDocs, File.Exists(fileName.Replace(".emevd",".emeld")));
             EVD_Path = fileName;
             InitUI();
             InfoTip.tipBox.TextChanged += (object sender, TextChangedEventArgs e) => TipBox_TextChanged(sender, e);
@@ -642,7 +642,6 @@ namespace DarkScript3
                     Close();
                 }
             }
-
         }
 
         private void DocumentationToolStripMenuItem_Click(object sender, EventArgs e)

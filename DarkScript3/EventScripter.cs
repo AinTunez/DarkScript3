@@ -18,6 +18,8 @@ namespace DarkScript3
         public string ResourceString = "";
         public EMEDF DOC { get; set; } = new EMEDF();
 
+        public EMELD ELD = new EMELD();
+
         private V8ScriptEngine v8 = new V8ScriptEngine();
 
         public Dictionary<string, (int classIndex, int instrIndex)> Functions = new Dictionary<string, (int classIndex, int instrIndex)>();
@@ -43,9 +45,20 @@ namespace DarkScript3
 
         private List<string> LinkedFiles = new List<string>();
 
-        public EventScripter(string file, string resource = "ds1-common.emedf.json")
+        public EventScripter(string file, string resource = "ds1-common.emedf.json", bool withEmeld = false)
         {
             EVD = EMEVD.Read(file);
+            if (withEmeld)
+            {
+                try
+                {
+                    ELD = EMELD.Read(file.Replace(".emevd", ".emeld"));
+                }
+                catch
+                {
+
+                }
+            }
             ResourceString = resource;
             InitAll(resource);
         }
@@ -215,6 +228,13 @@ namespace DarkScript3
             return DOC;
         }
 
+        public string EventName(long id)
+        {
+            var evt = ELD.Events.FirstOrDefault(e => e.ID == id);
+            if (evt != null) return evt.Name;
+            return null;
+        }
+
         /// <summary>
         /// Executes the selected code to generate the EMEVD.
         /// </summary>
@@ -243,6 +263,8 @@ namespace DarkScript3
                 IEnumerable<string> argNameList = paramNames.Values.Distinct();
                 string evtArgs = string.Join(", ", argNameList);
 
+                string eventName = EventName(evt.ID);
+                if (eventName != null) code.AppendLine($"// {eventName}");
                 code.AppendLine($"Event({id}, {restBehavior}, function({evtArgs}) {{");
 
                 for (int insIndex = 0; insIndex < evt.Instructions.Count; insIndex++)
