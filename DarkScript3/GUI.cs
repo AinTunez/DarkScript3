@@ -186,22 +186,21 @@ namespace DarkScript3
             }
         }
         
-        private void OpenEMEVDFile(string fileName, string gameDocs)
+        private void OpenEMEVDFile(string fileName, string gameDocs, string data = null)
         {
             Scripter = new EventScripter(fileName, gameDocs);
             EVD_Path = fileName;
             InitUI();
             InfoTip.tipBox.TextChanged += (object sender, TextChangedEventArgs e) => TipBox_TextChanged(sender, e);
-            editor.Text = Scripter.Unpack();
+            editor.Text = data ?? Scripter.Unpack();
             Text = $"DARKSCRIPT 3 - {Path.GetFileName(fileName)}";
         }
 
         private void OpenJSFile(string fileName, string gameDocs)
         {
-            editor.Text = File.ReadAllText(fileName);
             string org = fileName.Substring(0, fileName.Length - 3);
             SFUtil.Backup(org);
-            OpenEMEVDFile(org, gameDocs);
+            OpenEMEVDFile(org, gameDocs, File.ReadAllText(fileName));
         }
 
         private void OpenXMLFile(string fileName)
@@ -212,7 +211,7 @@ namespace DarkScript3
                 string resource = doc.Root.Element("gameDocs").Value;
                 string data = doc.Root.Element("script").Value;
                 string org = fileName.Substring(0, fileName.Length - 4);
-                OpenEMEVDFile(org, resource);
+                OpenEMEVDFile(org, resource, data);
             }
         }
 
@@ -617,19 +616,16 @@ namespace DarkScript3
         }
         #endregion
 
-        private void batchResaveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void BatchResaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var ofd = new OpenFileDialog();
             ofd.Multiselect = true;
             ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx";
-
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 var chooser = new GameChooser();
                 chooser.ShowDialog();
-
                 List<string> failed = new List<string>();
-
                 foreach (var fileName in ofd.FileNames)
                 {
                     try
@@ -646,12 +642,9 @@ namespace DarkScript3
                 }
 
                 if (failed.Count > 0)
-                {
                     MessageBox.Show("The following files failed to save:\r\n\r\n" + string.Join(Environment.NewLine, failed));
-                } else
-                {
+                else
                     MessageBox.Show("All files succesfully resaved.");
-                }
             }
         }
     }
