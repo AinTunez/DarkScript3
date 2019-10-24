@@ -11,6 +11,7 @@ using FastColoredTextBoxNS;
 using System.Xml;
 using SoulsFormats;
 using System.Xml.Linq;
+using System.Text;
 
 namespace DarkScript3
 {
@@ -92,10 +93,13 @@ namespace DarkScript3
             try
             {
                 Scripter.Pack(editor.Text).Write(EVD_Path);
-                if (SaveXMLFile())
-                    statusLabel.Text = "SAVE SUCCESSFUL";
-                else
-                    statusLabel.Text = "SAVE FAILED";
+                SaveJSFile();
+                statusLabel.Text = "SAVE SUCCESSFUL";
+
+                //if (SaveXMLFile())
+                //    statusLabel.Text = "SAVE SUCCESSFUL";
+                //else
+                //    statusLabel.Text = "SAVE FAILED";
                 CodeChanged = false;
             }
             catch (Exception ex)
@@ -156,11 +160,18 @@ namespace DarkScript3
                 }
             }
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx; *.emevd.xml; *.emevd.dcx.xml";
+            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx;";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                GameChooser chooser = new GameChooser();
-                if (ofd.FileName.EndsWith(".xml"))
+                if (ofd.FileName.EndsWith(".js"))
+                {
+                    OpenJSFile(ofd.FileName);
+                }
+                else if (File.Exists(ofd.FileName + ".js"))
+                {
+                    OpenJSFile(ofd.FileName + ".js");
+                }
+                else if (ofd.FileName.EndsWith(".xml"))
                 {
                     OpenXMLFile(ofd.FileName);
                 }
@@ -168,18 +179,9 @@ namespace DarkScript3
                 {
                     OpenXMLFile(ofd.FileName + ".xml");
                 }
-                else if (ofd.FileName.EndsWith(".js"))
-                {
-                    chooser.ShowDialog();
-                    OpenJSFile(ofd.FileName, chooser.GameDocs);
-                }
-                else if (File.Exists(ofd.FileName + ".js"))
-                {
-                    chooser.ShowDialog();
-                    OpenJSFile(ofd.FileName + ".js", chooser.GameDocs);
-                }
                 else
                 {
+                    GameChooser chooser = new GameChooser();
                     chooser.ShowDialog();
                     OpenEMEVDFile(ofd.FileName, chooser.GameDocs);
                 }
@@ -196,11 +198,39 @@ namespace DarkScript3
             Text = $"DARKSCRIPT 3 - {Path.GetFileName(fileName)}";
         }
 
-        private void OpenJSFile(string fileName, string gameDocs)
+        private string GetHeaderValue(string fileText, string fieldName)
+        {
+            var headerText = Regex.Match(fileText, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==");
+            if (headerText.Success)
+            {
+                string[] result = Regex.Split(headerText.Value, @"(\r\n|\r|\n)\s*");
+                foreach (string headerLine in result.ToArray())
+                {
+                    string line = Regex.Replace(headerLine.Trim(), @"^//\s+", "// ");
+                    string start = $"// @{fieldName} ";
+                    if (line.StartsWith(start))
+                    {
+                        return line.Substring(start.Length).Trim();
+                    }
+                }
+            }
+            return null;
+        }
+
+        private void OpenJSFile(string fileName)
         {
             string org = fileName.Substring(0, fileName.Length - 3);
             SFUtil.Backup(org);
-            OpenEMEVDFile(org, gameDocs, File.ReadAllText(fileName));
+            string text = File.ReadAllText(fileName);
+            string docs = GetHeaderValue(text, "docs");
+            text = Regex.Replace(text, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==", "");
+            if (docs == null)
+            {
+                var chooser = new GameChooser();
+                chooser.ShowDialog();
+                docs = chooser.GameDocs;
+            }
+            OpenEMEVDFile(org, docs, text.Trim());
         }
 
         private void OpenXMLFile(string fileName)
@@ -213,6 +243,27 @@ namespace DarkScript3
                 string org = fileName.Substring(0, fileName.Length - 4);
                 OpenEMEVDFile(org, resource, data);
             }
+        }
+
+        private bool SaveJSFile()
+        {
+            if (Scripter == null) return false;
+            try
+            {
+                var sb = new StringBuilder(); ;
+                sb.AppendLine("// ==EMEVD==");
+                sb.AppendLine($"// @docs    {Scripter.ResourceString}");
+                sb.AppendLine("// ==/EMEVD==");
+                sb.AppendLine("");
+                sb.AppendLine(editor.Text);
+                File.WriteAllText($"{EVD_Path}.js", sb.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return false;
+            }
+            return true;
         }
 
         private bool SaveXMLFile()
@@ -620,7 +671,7 @@ namespace DarkScript3
         {
             var ofd = new OpenFileDialog();
             ofd.Multiselect = true;
-            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx";
+            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx; *.emevd.js; *.emevd.dcx.js";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 var chooser = new GameChooser();
@@ -630,11 +681,11 @@ namespace DarkScript3
                 {
                     try
                     {
-                        if (File.Exists(fileName + ".xml"))
-                            OpenXMLFile(ofd.FileName + ".xml");
+                        if (File.Exists(fileName + ".js"))
+                            OpenJSFile(ofd.FileName + ".js");
                         else
                             OpenEMEVDFile(fileName, chooser.GameDocs);
-                        SaveXMLFile();
+                        SaveJSFile();
                     } catch
                     {
                         failed.Add(fileName);
