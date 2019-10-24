@@ -634,7 +634,10 @@ namespace DarkScript3
                 {
                     try
                     {
-                        OpenEMEVDFile(fileName, chooser.GameDocs);
+                        if (File.Exists(fileName + ".xml"))
+                            OpenXMLFile(ofd.FileName + ".xml");
+                        else
+                            OpenEMEVDFile(fileName, chooser.GameDocs);
                         SaveXMLFile();
                     } catch
                     {
