@@ -284,7 +284,7 @@ namespace DarkScript3
             SetStyles(e);
         }
 
-        public void SetStyles(TextChangedEventArgs e, bool isToolTip = false)
+        public void SetStyles(TextChangedEventArgs e, Regex highlight = null)
         {
             e.ChangedRange.ClearStyle(Styles.ToArray());
             e.ChangedRange.SetStyle(TextStyles.Comment, JSRegex.Comment1);
@@ -616,6 +616,40 @@ namespace DarkScript3
             MessageBox.Show("-- Created by AinTunez\r\n-- Based on work by HotPocketRemix and TKGP\r\n-- Special thanks to Meowmaritus", "About DarkScript");
         }
         #endregion
-    }
 
+        private void batchResaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var ofd = new OpenFileDialog();
+            ofd.Multiselect = true;
+            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                var chooser = new GameChooser();
+                chooser.ShowDialog();
+
+                List<string> failed = new List<string>();
+
+                foreach (var fileName in ofd.FileNames)
+                {
+                    try
+                    {
+                        OpenEMEVDFile(fileName, chooser.GameDocs);
+                        SaveXMLFile();
+                    } catch
+                    {
+                        failed.Add(fileName);
+                    }
+                }
+
+                if (failed.Count > 0)
+                {
+                    MessageBox.Show("The following files failed to save:\r\n\r\n" + string.Join(Environment.NewLine, failed));
+                } else
+                {
+                    MessageBox.Show("All files succesfully resaved.");
+                }
+            }
+        }
+    }
 }
