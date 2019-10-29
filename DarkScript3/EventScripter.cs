@@ -45,6 +45,13 @@ namespace DarkScript3
 
         private List<string> LinkedFiles = new List<string>();
 
+        public EventScripter(EMEVD evd, string resource = "ds1-common.emedf.json", bool dummy = false)
+        {
+            EVD = evd;
+            ResourceString = resource;
+            InitAll(resource);
+        }
+
         public EventScripter(string file, string resource = "ds1-common.emedf.json", bool withEmeld = false)
         {
             EVD = EMEVD.Read(file);

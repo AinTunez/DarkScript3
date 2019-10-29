@@ -183,14 +183,18 @@ namespace DarkScript3
                 {
                     GameChooser chooser = new GameChooser();
                     chooser.ShowDialog();
-                    OpenEMEVDFile(ofd.FileName, chooser.GameDocs);
+                    OpenEMEVDFile(ofd.FileName, null, chooser.GameDocs);
                 }
             }
         }
-        
-        private void OpenEMEVDFile(string fileName, string gameDocs, string data = null)
+
+        private void OpenEMEVDFile(string fileName, EMEVD evd, string gameDocs, string data = null)
         {
-            Scripter = new EventScripter(fileName, gameDocs, File.Exists(fileName.Replace(".emevd",".emeld")));
+            if (evd == null)
+                Scripter = new EventScripter(fileName, gameDocs, File.Exists(fileName.Replace(".emevd", ".emeld")));
+            else
+                Scripter = new EventScripter(evd, gameDocs);
+
             EVD_Path = fileName;
             InitUI();
             InfoTip.tipBox.TextChanged += (object sender, TextChangedEventArgs e) => TipBox_TextChanged(sender, e);
@@ -223,14 +227,34 @@ namespace DarkScript3
             SFUtil.Backup(org);
             string text = File.ReadAllText(fileName);
             string docs = GetHeaderValue(text, "docs");
-            text = Regex.Replace(text, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==", "");
+            string[] fields = new string[] {
+                GetHeaderValue(text, "compress"),
+                GetHeaderValue(text, "format"),
+                GetHeaderValue(text, "string"),
+                GetHeaderValue(text, "linked")
+            };
+
+            EMEVD evd = null;
+            if (!fields.Any(f => f == null))
+            {
+                evd = new EMEVD()
+                {
+                    Compression = (DCX.Type)Enum.Parse(typeof(DCX.Type), fields[0]),
+                    Format = (EMEVD.Game)Enum.Parse(typeof(EMEVD.Game), fields[1]),
+                    StringData = Encoding.Unicode.GetBytes(fields[2]),
+                    LinkedFileOffsets = Regex.Split(fields[3], @"\s*,\s*").Select(o => long.Parse(o)).ToList()
+                };
+            }
+
             if (docs == null)
             {
                 var chooser = new GameChooser();
                 chooser.ShowDialog();
                 docs = chooser.GameDocs;
             }
-            OpenEMEVDFile(org, docs, text.Trim());
+
+            text = Regex.Replace(text, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==", "");
+            OpenEMEVDFile(org, evd, docs, text.Trim());
         }
 
         private void OpenXMLFile(string fileName)
@@ -241,7 +265,7 @@ namespace DarkScript3
                 string resource = doc.Root.Element("gameDocs").Value;
                 string data = doc.Root.Element("script").Value;
                 string org = fileName.Substring(0, fileName.Length - 4);
-                OpenEMEVDFile(org, resource, data);
+                OpenEMEVDFile(org, null, resource, data);
             }
         }
 
@@ -253,6 +277,10 @@ namespace DarkScript3
                 var sb = new StringBuilder(); ;
                 sb.AppendLine("// ==EMEVD==");
                 sb.AppendLine($"// @docs    {Scripter.ResourceString}");
+                sb.AppendLine($"// @compress    {Scripter.EVD.Compression}");
+                sb.AppendLine($"// @game    {Scripter.EVD.Format}");
+                sb.AppendLine($"// @string    {Encoding.Unicode.GetString(Scripter.EVD.StringData)}");
+                sb.AppendLine($"// @linked    [{string.Join(",", Scripter.EVD.LinkedFileOffsets)}]");
                 sb.AppendLine("// ==/EMEVD==");
                 sb.AppendLine("");
                 sb.AppendLine(editor.Text);
@@ -264,37 +292,6 @@ namespace DarkScript3
                 return false;
             }
             return true;
-        }
-
-        private bool SaveXMLFile()
-        {
-            if (Scripter == null) return false;
-            try
-            {
-                var settings = new XmlWriterSettings();
-                settings.Indent = true;
-                using (XmlWriter writer = XmlWriter.Create($"{EVD_Path}.xml.tmp"))
-                {
-                    writer.WriteStartElement("EMEVD");
-                    writer.WriteElementString("gameDocs", Scripter.ResourceString);
-                    writer.WriteStartElement("script");
-                    writer.WriteCData(editor.Text);
-                    writer.WriteEndElement();
-                    writer.WriteEndElement();
-                    writer.Flush();
-                    writer.Close();
-                }
-                File.Delete($"{EVD_Path}.xml");
-                File.Move($"{EVD_Path}.xml.tmp", $"{EVD_Path}.xml");
-            } catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-                if (File.Exists($"{EVD_Path}.xml.tmp"))
-                    File.Delete($"{EVD_Path}.xml.tmp");
-                return false;
-            }
-            return true;
-           
         }
 
         #endregion
@@ -683,7 +680,7 @@ namespace DarkScript3
                         if (File.Exists(fileName + ".js"))
                             OpenJSFile(ofd.FileName + ".js");
                         else
-                            OpenEMEVDFile(fileName, chooser.GameDocs);
+                            OpenEMEVDFile(fileName, null, chooser.GameDocs);
                         SaveJSFile();
                     } catch
                     {
