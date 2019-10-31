@@ -26,6 +26,7 @@ namespace DarkScript3
 
         public GUI()
         {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             InitializeComponent();
             InfoTip.GotFocus += (object sender, EventArgs args) => editor.Focus();
             menuStrip.Renderer = new DarkToolStripRenderer();
@@ -95,11 +96,6 @@ namespace DarkScript3
                 Scripter.Pack(editor.Text).Write(EVD_Path);
                 SaveJSFile();
                 statusLabel.Text = "SAVE SUCCESSFUL";
-
-                //if (SaveXMLFile())
-                //    statusLabel.Text = "SAVE SUCCESSFUL";
-                //else
-                //    statusLabel.Text = "SAVE FAILED";
                 CodeChanged = false;
             }
             catch (Exception ex)
@@ -181,9 +177,7 @@ namespace DarkScript3
                 }
                 else
                 {
-                    GameChooser chooser = new GameChooser();
-                    chooser.ShowDialog();
-                    OpenEMEVDFile(ofd.FileName, null, chooser.GameDocs);
+                    OpenEMEVDFile(ofd.FileName, null, ChooseGame());
                 }
             }
         }
@@ -227,7 +221,8 @@ namespace DarkScript3
             SFUtil.Backup(org);
             string text = File.ReadAllText(fileName);
             string docs = GetHeaderValue(text, "docs");
-            string[] fields = new string[] {
+            string[] fields = new string[]
+            {
                 GetHeaderValue(text, "compress"),
                 GetHeaderValue(text, "format"),
                 GetHeaderValue(text, "string"),
@@ -246,15 +241,17 @@ namespace DarkScript3
                 };
             }
 
-            if (docs == null)
-            {
-                var chooser = new GameChooser();
-                chooser.ShowDialog();
-                docs = chooser.GameDocs;
-            }
+            if (docs == null) docs = ChooseGame();
 
             text = Regex.Replace(text, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==", "");
             OpenEMEVDFile(org, evd, docs, text.Trim());
+        }
+
+        private string ChooseGame()
+        {
+            GameChooser chooser = new GameChooser();
+            chooser.ShowDialog();
+            return chooser.GameDocs;
         }
 
         private void OpenXMLFile(string fileName)
@@ -393,7 +390,6 @@ namespace DarkScript3
                     (string title, string text) = ToolTips[e.HoveredWord];
                     Point p = editor.PlaceToPoint(e.Place);
                     string s = title + "\n" + text;
-                    Console.WriteLine(s);
                     ShowTip(s, p);
                 }
             }
@@ -421,7 +417,7 @@ namespace DarkScript3
                 while (arg.CharBeforeStart == ',')
                 {
                     argIndex++;
-                    var start = arg.Start;
+                    Place start = arg.Start;
                     start.iChar -= 2;
                     arg = editor.GetRange(start, start).GetFragment(@"[^)(\n,]");
                 }
@@ -465,7 +461,6 @@ namespace DarkScript3
         private void ShowArgToolTip(Range arguments, int argument = -1)
         {
             string funcName = FuncName(arguments);
-
             if (Scripter != null && Scripter.Functions.ContainsKey(funcName))
             {
                 Point point = editor.PlaceToPoint(arguments.Start);
@@ -670,8 +665,7 @@ namespace DarkScript3
             ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx; *.emevd.js; *.emevd.dcx.js";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                var chooser = new GameChooser();
-                chooser.ShowDialog();
+                string gameDocs = ChooseGame();
                 List<string> failed = new List<string>();
                 foreach (var fileName in ofd.FileNames)
                 {
@@ -680,7 +674,7 @@ namespace DarkScript3
                         if (File.Exists(fileName + ".js"))
                             OpenJSFile(ofd.FileName + ".js");
                         else
-                            OpenEMEVDFile(fileName, null, chooser.GameDocs);
+                            OpenEMEVDFile(fileName, null, gameDocs);
                         SaveJSFile();
                     } catch
                     {

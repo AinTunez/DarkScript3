@@ -160,7 +160,6 @@ namespace DarkScript3
             v8.AddHostType("PARAMETER", typeof(Parameter));
             v8.AddHostType("REST", typeof(Event.RestBehaviorType));
             v8.AddHostType("Console", typeof(Console));
-
             v8.Execute(Resource.Text("script.js"));
             DOC = InitDocsFromResource(embeddedResource);
         }
