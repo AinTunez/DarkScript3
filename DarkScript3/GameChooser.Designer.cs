@@ -36,9 +36,9 @@
             // 
             // ds1Btn
             // 
-            this.ds1Btn.Location = new System.Drawing.Point(24, 24);
+            this.ds1Btn.Location = new System.Drawing.Point(12, 24);
             this.ds1Btn.Name = "ds1Btn";
-            this.ds1Btn.Size = new System.Drawing.Size(97, 23);
+            this.ds1Btn.Size = new System.Drawing.Size(125, 23);
             this.ds1Btn.TabIndex = 0;
             this.ds1Btn.Text = "Dark Souls";
             this.ds1Btn.UseVisualStyleBackColor = true;
@@ -46,9 +46,9 @@
             // 
             // bbBtn
             // 
-            this.bbBtn.Location = new System.Drawing.Point(24, 53);
+            this.bbBtn.Location = new System.Drawing.Point(12, 53);
             this.bbBtn.Name = "bbBtn";
-            this.bbBtn.Size = new System.Drawing.Size(97, 23);
+            this.bbBtn.Size = new System.Drawing.Size(125, 23);
             this.bbBtn.TabIndex = 1;
             this.bbBtn.Text = "Bloodborne";
             this.bbBtn.UseVisualStyleBackColor = true;
@@ -56,9 +56,9 @@
             // 
             // ds3Btn
             // 
-            this.ds3Btn.Location = new System.Drawing.Point(24, 82);
+            this.ds3Btn.Location = new System.Drawing.Point(12, 82);
             this.ds3Btn.Name = "ds3Btn";
-            this.ds3Btn.Size = new System.Drawing.Size(97, 23);
+            this.ds3Btn.Size = new System.Drawing.Size(125, 23);
             this.ds3Btn.TabIndex = 2;
             this.ds3Btn.Text = "Dark Souls III";
             this.ds3Btn.UseVisualStyleBackColor = true;
@@ -66,9 +66,9 @@
             // 
             // sekiroBtn
             // 
-            this.sekiroBtn.Location = new System.Drawing.Point(24, 111);
+            this.sekiroBtn.Location = new System.Drawing.Point(12, 111);
             this.sekiroBtn.Name = "sekiroBtn";
-            this.sekiroBtn.Size = new System.Drawing.Size(97, 23);
+            this.sekiroBtn.Size = new System.Drawing.Size(125, 23);
             this.sekiroBtn.TabIndex = 3;
             this.sekiroBtn.Text = "Sekiro";
             this.sekiroBtn.UseVisualStyleBackColor = true;

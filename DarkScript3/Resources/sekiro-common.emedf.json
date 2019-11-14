@@ -3546,7 +3546,7 @@
           ]
         },
         {
-          "name": "IF Character HP Ratio",
+          "name": "IF Character HP Ratio New",
           "index": 16,
           "args": [
             {
@@ -8152,7 +8152,7 @@
               "max": 100000000.0,
               "increment": 1.0,
               "format_string": "%0.3f",
-              "unk1": 0 
+              "unk1": 0,
               "unk2": 0,
               "unk3": 0,
               "unk4": 0

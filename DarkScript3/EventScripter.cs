@@ -16,6 +16,7 @@ namespace DarkScript3
         public EMEVD EVD = new EMEVD();
 
         public string ResourceString = "";
+
         public EMEDF DOC { get; set; } = new EMEDF();
 
         public EMELD ELD = new EMELD();
@@ -85,7 +86,7 @@ namespace DarkScript3
                     args[i] = (bool) args[i] ? 1 : 0;
                 else if (args[i] is string)
                 {
-                    if (doc == DOC[2000][0])
+                    if (doc == DOC[2000][0] || doc == DOC[2000][6])
                         throw new Exception("Event initializers cannot be dependent on parameters.");
 
                     IEnumerable<int> nums = (args[i] as string).Substring(1).Split('_').Select(s => int.Parse(s));
@@ -105,7 +106,7 @@ namespace DarkScript3
             }
 
             List<object> properArgs = new List<object>();
-            if (bank == 2000 && index == 0)
+            if (doc == DOC[2000][0] || doc == DOC[2000][6])
             {
                 properArgs.Add(Convert.ToInt32(args[0]));
                 properArgs.Add(Convert.ToUInt32(args[1]));
@@ -286,7 +287,7 @@ namespace DarkScript3
 
                     try
                     {
-                        if (doc == DOC[2000][0])
+                        if (doc == DOC[2000][0] || doc == DOC[2000][6])
                         {
                             argStruct = Enumerable.Repeat(ArgType.Int32, ins.ArgData.Length / 4);
                             args = ins.UnpackArgs(argStruct).Select(a => a.ToString()).ToArray();
@@ -445,7 +446,7 @@ namespace DarkScript3
                 if (!isParam && argDoc.EnumName != null)
                 {
                     var enm = DOC.Enums.First(e => e.Name == argDoc.EnumName);
-                    string enumString = $"{enm.Name}.{enm.Values[args[argIndex]]}";
+                    string enumString = enm.Values.TryGetValue(args[argIndex], out string value) ? $"{enm.Name}.{value}" : args[argIndex];
                     if (EnumReplacements.ContainsKey(enumString)) enumString = EnumReplacements[enumString];
                     args[argIndex] = enumString;
                 }
