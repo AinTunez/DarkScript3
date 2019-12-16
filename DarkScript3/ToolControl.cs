@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FastColoredTextBoxNS;
 
 namespace DarkScript3
 {
@@ -15,15 +16,19 @@ namespace DarkScript3
 
         private Control FocusControl = new Control();
 
+        private Control BFF = new Control();
+
+
         public ToolControl()
         {
             InitializeComponent();
         }
 
-        public ToolControl(Control c)
+        public ToolControl(FastColoredTextBox c, BetterFindForm bff)
         {
             InitializeComponent();
             FocusControl = c;
+            BFF = bff;
         }
 
         public void SetText(string s)
@@ -40,14 +45,26 @@ namespace DarkScript3
             Size = new Size(width, height);
         }
 
+        private void SetFocus()
+        {
+            if (BFF.Visible)
+            {
+                BFF.Focus();
+                Hide();
+            } else
+            {
+                FocusControl.Focus();
+            }
+        }
+
         private void TipBox_Click(object sender, EventArgs e)
         {
-            FocusControl.Focus();
+            SetFocus();
         }
 
         private void TipBox_SelectionChanged(object sender, EventArgs e)
         {
-            FocusControl.Focus();
+            SetFocus();
         }
     }
 }

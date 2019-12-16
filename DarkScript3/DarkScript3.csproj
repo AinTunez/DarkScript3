@@ -236,6 +236,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BetterFindForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BetterFindForm.Designer.cs">
+      <DependentUpon>BetterFindForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DarkToolStripRenderer.cs" />
     <Compile Include="EMEDF.cs" />
     <Compile Include="EventScripter.cs" />

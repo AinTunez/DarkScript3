@@ -21,6 +21,7 @@ namespace DarkScript3
         public EventScripter Scripter;
         public bool CodeChanged = false;
         public AutocompleteMenu InstructionMenu;
+        public BetterFindForm BFF;
 
         Dictionary<string, (string title, string text)> ToolTips = new Dictionary<string, (string, string)>();
 
@@ -31,9 +32,10 @@ namespace DarkScript3
             InfoTip.GotFocus += (object sender, EventArgs args) => editor.Focus();
             menuStrip.Renderer = new DarkToolStripRenderer();
             statusStrip.Renderer = new DarkToolStripRenderer();
-            InfoTip = new ToolControl(editor);
+            BFF = new BetterFindForm(editor);
+            InfoTip = new ToolControl(editor, BFF);
+            BFF.infoTip = InfoTip;
             display.Panel2.Controls.Add(InfoTip);
-
             InfoTip.Show();
             InfoTip.Hide();
             docBox.Font = editor.Font;
@@ -180,6 +182,7 @@ namespace DarkScript3
                     OpenEMEVDFile(ofd.FileName, null, ChooseGame());
                 }
             }
+            editor.ClearUndo();
         }
 
         private void OpenEMEVDFile(string fileName, EMEVD evd, string gameDocs, string data = null)
@@ -442,9 +445,9 @@ namespace DarkScript3
             {
                 string[] args = Regex.Split(s, @"\s*,\s");
                 if (argIndex > args.Length - 1)
-                    args[args.Length - 1] = args[args.Length - 1].Replace(" ", " *");
+                    args[args.Length - 1] = "\u2b9a " + args[args.Length - 1];
                 else
-                    args[argIndex] = args[argIndex].Replace(" ", " *");
+                    args[argIndex] = "\u2b9a " + args[argIndex];
                 InfoTip.SetText(string.Join(", ", args));
             }
             else
@@ -613,7 +616,23 @@ namespace DarkScript3
             if (e.KeyCode == Keys.Escape)
             {
                 InfoTip.Hide();
+            } else if (e.KeyCode == Keys.F && e.Control)
+            {
+                ShowFindDialog(editor.Selection.Text);
+                e.Handled = true;
             }
+        }
+
+        public void ShowFindDialog(string findText)
+        {
+            if (findText != null)
+                BFF.tbFind.Text = findText;
+            else if (!editor.Selection.IsEmpty && editor.Selection.Start.iLine == editor.Selection.End.iLine)
+                BFF.tbFind.Text = editor.Selection.Text;
+
+            BFF.tbFind.SelectAll();
+            BFF.Show();
+            BFF.Focus();
         }
 
         private void Editor_Scroll(object sender, ScrollEventArgs e) => InfoTip.Hide();
@@ -676,6 +695,7 @@ namespace DarkScript3
                         else
                             OpenEMEVDFile(fileName, null, gameDocs);
                         SaveJSFile();
+                        editor.ClearUndo();
                     } catch
                     {
                         failed.Add(fileName);
