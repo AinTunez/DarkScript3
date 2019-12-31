@@ -40,6 +40,9 @@ namespace DarkScript3
             InfoTip.Hide();
             docBox.Font = editor.Font;
             editor.Focus();
+            editor.SelectionColor = Color.White;
+            docBox.SelectionColor = Color.White;
+            LoadColors();
         }
 
         private void InitUI()
@@ -140,6 +143,7 @@ namespace DarkScript3
             MainMenuStrip.Enabled = true;
             editor.Enabled = true;
             docBox.Enabled = true;
+            editor.Focus();
         }
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -295,8 +299,13 @@ namespace DarkScript3
         }
 
         #endregion
-       
+
         #region Highlighting
+
+        public static TextStyle MakeStyle(Color c, FontStyle f = FontStyle.Regular)
+        {
+            return MakeStyle(new SolidBrush(c), f);
+        }
 
         public static TextStyle MakeStyle(int r, int g, int b, FontStyle f = FontStyle.Regular)
         {
@@ -310,18 +319,109 @@ namespace DarkScript3
             return Styles.Last();
         }
 
-        private static List<TextStyle> Styles = new List<TextStyle>();
+        public static List<TextStyle> Styles = new List<TextStyle>();
 
-        private static class TextStyles
+        public static class TextStyles
         {
             public static TextStyle Comment = MakeStyle(87, 166, 74);
             public static TextStyle String = MakeStyle(214, 157, 133);
             public static TextStyle Keyword = MakeStyle(86, 156, 214);
             public static TextStyle ToolTipKeyword = MakeStyle(106, 176, 234);
-            public static TextStyle Property = MakeStyle(255, 150, 239);
+            public static TextStyle EnumProperty = MakeStyle(255, 150, 239);
             public static TextStyle EnumConstant = MakeStyle(78, 201, 176);
             public static TextStyle Number = MakeStyle(181, 206, 168);
-            public static TextStyle SlightlyDarker = MakeStyle(180,180,180);
+            public static TextStyle EnumType = MakeStyle(180,180,180);
+        }
+
+        private void customizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var colors = new StyleConfig(this);
+            if (colors.ShowDialog() == DialogResult.OK)
+            {
+
+                var start = editor.Selection.Start;
+                var end = editor.Selection.End;
+
+                editor.ClearStylesBuffer();
+                docBox.ClearStylesBuffer();
+
+                TextStyles.Comment = MakeStyle(colors.commentSetting.Color);
+                TextStyles.String = MakeStyle(colors.stringSetting.Color);
+                TextStyles.Keyword = MakeStyle(colors.keywordSetting.Color);
+                TextStyles.ToolTipKeyword = MakeStyle(colors.ttKeywordSetting.Color);
+                TextStyles.EnumProperty = MakeStyle(colors.enumPropSetting.Color);
+                TextStyles.EnumConstant = MakeStyle(colors.globalConstSetting.Color);
+                TextStyles.Number = MakeStyle(colors.numberSetting.Color);
+                TextStyles.EnumType = MakeStyle(colors.toolTipEnumType.Color);
+
+                editor.BackColor = colors.backgroundSetting.Color;
+                editor.SelectionColor = colors.highlightSetting.Color;
+                docBox.BackColor = colors.backgroundSetting.Color;
+                docBox.SelectionColor = colors.highlightSetting.Color;
+
+                SaveColors();
+
+                editor.Selection.SelectAll();
+                docBox.Selection.SelectAll();
+                Editor_TextChanged(editor, new TextChangedEventArgs(editor.Selection));
+                Editor_TextChanged(docBox, new TextChangedEventArgs(docBox.Selection));
+                editor.Selection.Start = start;
+                editor.Selection.End = end;
+            }
+        }
+
+        string HexColor(TextStyle s)
+        {
+            return (s.ForeBrush as SolidBrush).Color.ToArgb().ToString("X");
+        }
+
+        private void SaveColors()
+        {
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Comment=" + HexColor(TextStyles.Comment));
+            sb.AppendLine("String=" + HexColor(TextStyles.String));
+            sb.AppendLine("Keyword=" + HexColor(TextStyles.Keyword));
+            sb.AppendLine("ToolTipKeyword=" + HexColor(TextStyles.ToolTipKeyword));
+            sb.AppendLine("EnumProperty=" + HexColor(TextStyles.EnumProperty));
+            sb.AppendLine("EnumConstant=" + HexColor(TextStyles.EnumConstant));
+            sb.AppendLine("Number=" + HexColor(TextStyles.Number));
+            sb.AppendLine("EnumType=" + HexColor(TextStyles.EnumType));
+            sb.AppendLine("Background=" + editor.BackColor.ToArgb().ToString("X"));
+            sb.AppendLine("Highlight=" + editor.SelectionColor.ToArgb().ToString("X"));
+            File.WriteAllText("colors.cfg", sb.ToString());
+        }
+
+        private void LoadColors()
+        {
+            if (!File.Exists("colors.cfg")) return;
+
+            Dictionary<string, string> cfg = new Dictionary<string, string>();
+
+            string[] lines = File.ReadAllLines("colors.cfg");
+            foreach (string line in lines)
+            {
+                string[] split = line.Split('=');
+                string prop = split[0];
+                string val = split[1];
+                cfg[prop] = val;
+            }
+
+            Color colorFromHex(string prop) => Color.FromArgb(Convert.ToInt32(cfg[prop], 16));
+
+            TextStyles.Comment = MakeStyle(colorFromHex("Comment"));
+            TextStyles.String = MakeStyle(colorFromHex("String"));
+            TextStyles.Keyword = MakeStyle(colorFromHex("Keyword"));
+            TextStyles.ToolTipKeyword = MakeStyle(colorFromHex("ToolTipKeyword"));
+            TextStyles.EnumProperty = MakeStyle(colorFromHex("EnumProperty"));
+            TextStyles.EnumConstant = MakeStyle(colorFromHex("EnumConstant"));
+            TextStyles.Number = MakeStyle(colorFromHex("Number"));
+            TextStyles.EnumType = MakeStyle(colorFromHex("EnumType"));
+
+            editor.SelectionColor = colorFromHex("Highlight");
+            editor.BackColor = colorFromHex("Background");
+            docBox.SelectionColor = editor.SelectionColor;
+            docBox.BackColor = editor.BackColor;
         }
 
         private void Editor_TextChanged(object sender, TextChangedEventArgs e)
@@ -342,7 +442,7 @@ namespace DarkScript3
             e.ChangedRange.SetStyle(TextStyles.Keyword, JSRegex.Keyword);
             e.ChangedRange.SetStyle(TextStyles.Number, JSRegex.Number);
             e.ChangedRange.SetStyle(TextStyles.EnumConstant, JSRegex.GlobalConstant);
-            e.ChangedRange.SetStyle(TextStyles.Property, JSRegex.Property);
+            e.ChangedRange.SetStyle(TextStyles.EnumProperty, JSRegex.Property);
             e.ChangedRange.SetFoldingMarkers("{", "}");
             e.ChangedRange.SetFoldingMarkers(@"/\*", @"\*/");
         }
@@ -401,7 +501,7 @@ namespace DarkScript3
         private void TipBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             e.ChangedRange.SetStyle(TextStyles.ToolTipKeyword, JSRegex.DataType);
-            e.ChangedRange.SetStyle(TextStyles.SlightlyDarker, new Regex(@"[<>]"));
+            e.ChangedRange.SetStyle(TextStyles.EnumType, new Regex(@"[<>]"));
         }
 
         private void Editor_SelectionChanged(object sender, EventArgs e)
@@ -571,7 +671,7 @@ namespace DarkScript3
                         else
                         {
                             docBox.AppendText($"{enm.Name}.");
-                            docBox.AppendText(kv.Value, TextStyles.Property);
+                            docBox.AppendText(kv.Value, TextStyles.EnumProperty);
                         }
                     }
                 }

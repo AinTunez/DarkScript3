@@ -18,7 +18,6 @@ namespace DarkScript3
 
         private Control BFF = new Control();
 
-
         public ToolControl()
         {
             InitializeComponent();
