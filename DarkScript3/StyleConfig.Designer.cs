@@ -40,11 +40,12 @@
             this.stringSetting = new DarkScript3.StyleSetting();
             this.commentSetting = new DarkScript3.StyleSetting();
             this.highlightSetting = new DarkScript3.StyleSetting();
+            this.plainSetting = new DarkScript3.StyleSetting();
             this.SuspendLayout();
             // 
             // okBtn
             // 
-            this.okBtn.Location = new System.Drawing.Point(91, 332);
+            this.okBtn.Location = new System.Drawing.Point(90, 360);
             this.okBtn.Name = "okBtn";
             this.okBtn.Size = new System.Drawing.Size(75, 23);
             this.okBtn.TabIndex = 1;
@@ -55,7 +56,7 @@
             // cancelBtn
             // 
             this.cancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelBtn.Location = new System.Drawing.Point(172, 332);
+            this.cancelBtn.Location = new System.Drawing.Point(171, 360);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(75, 23);
             this.cancelBtn.TabIndex = 2;
@@ -153,6 +154,15 @@
             this.highlightSetting.Size = new System.Drawing.Size(259, 31);
             this.highlightSetting.TabIndex = 13;
             // 
+            // plainSetting
+            // 
+            this.plainSetting.Color = System.Drawing.SystemColors.Control;
+            this.plainSetting.Dock = System.Windows.Forms.DockStyle.Top;
+            this.plainSetting.Location = new System.Drawing.Point(0, 310);
+            this.plainSetting.Name = "plainSetting";
+            this.plainSetting.Size = new System.Drawing.Size(259, 31);
+            this.plainSetting.TabIndex = 14;
+            // 
             // StyleConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -160,7 +170,8 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.cancelBtn;
-            this.ClientSize = new System.Drawing.Size(259, 357);
+            this.ClientSize = new System.Drawing.Size(259, 412);
+            this.Controls.Add(this.plainSetting);
             this.Controls.Add(this.highlightSetting);
             this.Controls.Add(this.backgroundSetting);
             this.Controls.Add(this.numberSetting);
@@ -200,5 +211,6 @@
         public StyleSetting numberSetting;
         public StyleSetting backgroundSetting;
         public StyleSetting highlightSetting;
+        public StyleSetting plainSetting;
     }
 }

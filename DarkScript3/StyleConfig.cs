@@ -21,6 +21,7 @@ namespace DarkScript3
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
+            plainSetting.Init("Default Text", ds3.editor.ForeColor);
             commentSetting.Init("Comment", GUI.TextStyles.Comment.ForeBrush);
             stringSetting.Init("String", GUI.TextStyles.String.ForeBrush);
             keywordSetting.Init("Keyword", GUI.TextStyles.Keyword.ForeBrush);

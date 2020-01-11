@@ -356,8 +356,10 @@ namespace DarkScript3
 
                 editor.BackColor = colors.backgroundSetting.Color;
                 editor.SelectionColor = colors.highlightSetting.Color;
+                editor.ForeColor = colors.plainSetting.Color;
                 docBox.BackColor = colors.backgroundSetting.Color;
                 docBox.SelectionColor = colors.highlightSetting.Color;
+                docBox.ForeColor = colors.plainSetting.Color;
 
                 SaveColors();
 
@@ -389,6 +391,7 @@ namespace DarkScript3
             sb.AppendLine("EnumType=" + HexColor(TextStyles.EnumType));
             sb.AppendLine("Background=" + editor.BackColor.ToArgb().ToString("X"));
             sb.AppendLine("Highlight=" + editor.SelectionColor.ToArgb().ToString("X"));
+            sb.AppendLine("Default=" + editor.ForeColor.ToArgb().ToString("X"));
             File.WriteAllText("colors.cfg", sb.ToString());
         }
 
@@ -420,8 +423,11 @@ namespace DarkScript3
 
             editor.SelectionColor = colorFromHex("Highlight");
             editor.BackColor = colorFromHex("Background");
+            editor.ForeColor = colorFromHex("Default");
+
             docBox.SelectionColor = editor.SelectionColor;
             docBox.BackColor = editor.BackColor;
+            docBox.ForeColor = editor.ForeColor;
         }
 
         private void Editor_TextChanged(object sender, TextChangedEventArgs e)
