@@ -6,6 +6,7 @@ using SoulsFormats;
 using Microsoft.ClearScript.V8;
 using System.Text.RegularExpressions;
 using Microsoft.ClearScript;
+using System.IO;
 using static SoulsFormats.EMEVD.Instruction;
 using static SoulsFormats.EMEVD;
 
@@ -168,9 +169,16 @@ namespace DarkScript3
         /// <summary>
         /// Sets up the EMEDF from an embedded JSON stream.
         /// </summary>
+        
+
         private EMEDF InitDocsFromResource(string streamPath)
         {
-            EMEDF DOC = EMEDF.ReadStream(streamPath);
+            EMEDF DOC;
+            if (File.Exists(streamPath))
+                DOC = EMEDF.ReadFile(streamPath);
+            else
+                DOC = EMEDF.ReadStream(streamPath);
+
             foreach (EMEDF.EnumDoc enm in DOC.Enums)
             {
                 enm.Name = Regex.Replace(enm.Name, @"[^\w]", "");
