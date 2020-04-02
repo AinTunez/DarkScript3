@@ -32,7 +32,7 @@ namespace DarkScript3
 
         public Dictionary<string, string> EnumReplacements = new Dictionary<string, string>
         {
-            { "BOOL.TRUE", "true" }, 
+            { "BOOL.TRUE", "true" },
             { "BOOL.FALSE", "false" }
         };
 
@@ -84,7 +84,7 @@ namespace DarkScript3
             for (int i = 0; i < args.Length; i++)
             {
                 if (args[i] is bool)
-                    args[i] = (bool) args[i] ? 1 : 0;
+                    args[i] = (bool)args[i] ? 1 : 0;
                 else if (args[i] is string)
                 {
                     if (doc == DOC[2000][0] || doc == DOC[2000][6])
@@ -107,7 +107,7 @@ namespace DarkScript3
             }
 
             List<object> properArgs = new List<object>();
-            if (doc == DOC[2000][0] || doc == DOC[2000][6])
+            if (doc == DOC[2000][0] || (doc == DOC[2000][6] && EVD.Format != Game.DarkSouls1))
             {
                 properArgs.Add(Convert.ToInt32(args[0]));
                 properArgs.Add(Convert.ToUInt32(args[1]));
@@ -169,7 +169,7 @@ namespace DarkScript3
         /// <summary>
         /// Sets up the EMEDF from an embedded JSON stream.
         /// </summary>
-        
+
 
         private EMEDF InitDocsFromResource(string streamPath)
         {
@@ -194,7 +194,8 @@ namespace DarkScript3
                         if (enm.Name != "ONOFF") //handled by ON/OFF/CHANGE
                             v8.Execute(code);
                     }
-                } else
+                }
+                else
                 {
                     StringBuilder code = new StringBuilder();
                     code.AppendLine($"const {enm.Name} = {{");
@@ -216,7 +217,7 @@ namespace DarkScript3
                     string funcName = TitleCaseName(instr.Name);
                     Functions[funcName] = ((int)bank.Index, (int)instr.Index);
                     FuncBytePositions[instr] = GetArgBytePositions(instr.Arguments.Select(i => (ArgType)i.Type).ToList());
-                    
+
                     foreach (var arg in instr.Arguments)
                     {
                         arg.Name = CamelCaseName(arg.Name.Replace("Class", "Class Name"));
@@ -288,7 +289,7 @@ namespace DarkScript3
                     EMEDF.InstrDoc doc = DOC[ins.Bank][ins.ID];
                     string funcName = TitleCaseName(doc.Name);
 
-                    IEnumerable<ArgType> argStruct = doc.Arguments.Select(arg => arg.Type == 8 ? ArgType.UInt32 : (ArgType) arg.Type);
+                    IEnumerable<ArgType> argStruct = doc.Arguments.Select(arg => arg.Type == 8 ? ArgType.UInt32 : (ArgType)arg.Type);
 
                     string[] args = default;
                     string argString = "";
@@ -379,7 +380,7 @@ namespace DarkScript3
         /// <summary>
         /// Returns a dictionary containing the textual names of an event's parameters.
         /// </summary>
-        public Dictionary<Parameter, string> ParamNames (Event evt)
+        public Dictionary<Parameter, string> ParamNames(Event evt)
         {
             Dictionary<long, List<Parameter>> paramValues = new Dictionary<long, List<Parameter>>();
             for (int i = 0; i < evt.Parameters.Count; i++)
@@ -494,7 +495,7 @@ namespace DarkScript3
         {
             if (string.IsNullOrEmpty(s)) return s;
 
-            string[] words = Regex.Replace(s, @"[^\w\s]","").Split(' ');
+            string[] words = Regex.Replace(s, @"[^\w\s]", "").Split(' ');
             for (int i = 0; i < words.Length; i++)
             {
                 if (words[i].Length == 0) continue;
@@ -503,7 +504,7 @@ namespace DarkScript3
                     words[i] = words[i].ToUpper();
                     continue;
                 }
-                
+
                 char firstChar = char.ToUpper(words[i][0]);
                 string rest = "";
                 if (words[i].Length > 1)
