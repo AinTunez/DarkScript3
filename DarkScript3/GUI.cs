@@ -283,7 +283,10 @@ namespace DarkScript3
                 sb.AppendLine($"// @docs    {Scripter.ResourceString}");
                 sb.AppendLine($"// @compress    {Scripter.EVD.Compression}");
                 sb.AppendLine($"// @game    {Scripter.EVD.Format}");
-                sb.AppendLine($"// @string    {Encoding.Unicode.GetString(Scripter.EVD.StringData)}");
+                if (Scripter.ResourceString == "ds2scholar-common.emedf.json")
+                    sb.AppendLine($"// @string    {Encoding.ASCII.GetString(Scripter.EVD.StringData)}");
+                else
+                    sb.AppendLine($"// @string    {Encoding.Unicode.GetString(Scripter.EVD.StringData)}");
                 sb.AppendLine($"// @linked    [{string.Join(",", Scripter.EVD.LinkedFileOffsets)}]");
                 sb.AppendLine("// ==/EMEVD==");
                 sb.AppendLine("");

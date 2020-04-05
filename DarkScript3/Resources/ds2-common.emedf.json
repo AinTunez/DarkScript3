@@ -2074,7 +2074,7 @@
               "unk4": 0
             },
             {
-              "name": "Arguments",
+              "name": "evtArguments",
               "type": 2,
               "enum_name": null,
               "default": 0,
@@ -3276,7 +3276,7 @@
               "unk4": 0
             },
             {
-              "name": "Arguments",
+              "name": "evtArguments",
               "type": 2,
               "enum_name": null,
               "default": 0,

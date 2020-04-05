@@ -1832,7 +1832,7 @@
       "index": 100050,
       "instrs": [
         {
-          "name": "Call MustSubEvent85X",
+          "name": "Call Must Sub Event 85X",
           "index": 0,
           "args": [
             {
@@ -1904,11 +1904,11 @@
               "unk2": 0,
               "unk3": 0,
               "unk4": 0
-            }
+            }   
           ]
 		},
 		{
-          "name": "Call MustSubEvent85X + Unknown 100050[01]",
+          "name": "Call Must Sub Event 85X + Unknown 100050[01]",
           "index": 1,
           "args": [
             {
@@ -2070,7 +2070,7 @@
       "index": 100070,
       "instrs": [
         {
-          "name": "CallMustSubEvent87X",
+          "name": "Call Must Sub Event87X",
           "index": 0,
           "args": [
             {
@@ -2102,7 +2102,7 @@
               "unk4": 0
             },
             {
-              "name": "Arguments",
+              "name": "evtArguments",
               "type": 2,
               "enum_name": null,
               "default": 0,
@@ -3272,7 +3272,7 @@
           ]
 		},
 		{
-          "name": "CallMustSubEvent93X",
+          "name": "Call Must Sub Event 93X",
           "index": 1,
           "args": [
             {
@@ -3304,7 +3304,7 @@
               "unk4": 0
             },
             {
-              "name": "Arguments",
+              "name": "evtArguments",
               "type": 2,
               "enum_name": null,
               "default": 0,

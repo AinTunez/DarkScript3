@@ -72,14 +72,28 @@ namespace DarkScript3
             InitAll(resource);
         }
 
+        public bool IsVariableLength(EMEDF.InstrDoc doc)
+        {
+            if (ResourceString.StartsWith("ds2"))
+                return doc == DOC[100130][1] || doc == DOC[100070][0];
+            else if (ResourceString.StartsWith("ds1"))
+                return doc == DOC[2000][0];
+            else
+                return doc == DOC[2000][0] || doc == DOC[2000][6];
+        }
+
         /// <summary>
         /// Called by JS to add instructions to the event currently being edited.
         /// </summary>
         public Instruction MakeInstruction(Event evt, int bank, int index, object[] args)
         {
             EMEDF.InstrDoc doc = DOC[bank][index];
+            bool isVar = IsVariableLength(doc);
             if (args.Length < doc.Arguments.Length)
+            {
                 throw new Exception($"Instruction {bank}[{index}] ({doc.Name}) requires {doc.Arguments.Length} arguments.");
+            }                   
+
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -87,7 +101,7 @@ namespace DarkScript3
                     args[i] = (bool)args[i] ? 1 : 0;
                 else if (args[i] is string)
                 {
-                    if (doc == DOC[2000][0] || doc == DOC[2000][6])
+                    if (isVar)
                         throw new Exception("Event initializers cannot be dependent on parameters.");
 
                     IEnumerable<int> nums = (args[i] as string).Substring(1).Split('_').Select(s => int.Parse(s));
@@ -107,7 +121,7 @@ namespace DarkScript3
             }
 
             List<object> properArgs = new List<object>();
-            if (doc == DOC[2000][0] || (doc == DOC[2000][6] && EVD.Format != Game.DarkSouls1))
+            if (isVar)
             {
                 properArgs.Add(Convert.ToInt32(args[0]));
                 properArgs.Add(Convert.ToUInt32(args[1]));
@@ -176,6 +190,8 @@ namespace DarkScript3
             EMEDF DOC;
             if (File.Exists(streamPath))
                 DOC = EMEDF.ReadFile(streamPath);
+            else if (File.Exists(@"Resources\" + streamPath))
+                DOC = EMEDF.ReadFile(@"Resources\" + streamPath);
             else
                 DOC = EMEDF.ReadStream(streamPath);
 
@@ -232,12 +248,12 @@ namespace DarkScript3
                     sb.AppendLine($"function {funcName} ({argNames}) {{");
                     foreach (var arg in args)
                     {
-                        sb.AppendLine($"if ({arg} === void 0)");
-                        sb.AppendLine($@"   throw '!!! Argument \""{arg}\"" in instruction \""{funcName}\"" is undefined.'");
+                        sb.AppendLine($"    if ({arg} === void 0)");
+                        sb.AppendLine($@"           throw '!!! Argument \""{arg}\"" in instruction \""{funcName}\"" is undefined.';");
                     }
-                    sb.AppendLine($"return _Instruction({bank.Index}, {instr.Index}, Array.from(arguments));");
+                    sb.AppendLine($"    return _Instruction({bank.Index}, {instr.Index}, Array.from(arguments));");
                     sb.AppendLine("}");
-
+                    Console.WriteLine(sb.ToString());
                     v8.Execute(sb.ToString());
                 }
             }
@@ -296,7 +312,7 @@ namespace DarkScript3
 
                     try
                     {
-                        if (doc == DOC[2000][0] || doc == DOC[2000][6])
+                        if (IsVariableLength(doc))
                         {
                             argStruct = Enumerable.Repeat(ArgType.Int32, ins.ArgData.Length / 4);
                             args = ins.UnpackArgs(argStruct).Select(a => a.ToString()).ToArray();
@@ -341,11 +357,23 @@ namespace DarkScript3
         private void InitLinkedFiles()
         {
             var reader = new BinaryReaderEx(false, EVD.StringData);
-            foreach (long offset in EVD.LinkedFileOffsets)
+            if (ResourceString.StartsWith("ds2"))
             {
-                string linkedFile = reader.GetUTF16(offset);
-                LinkedFiles.Add(linkedFile);
+                foreach (long offset in EVD.LinkedFileOffsets)
+                {   
+                    string linkedFile = reader.GetASCII(offset);
+                    LinkedFiles.Add(linkedFile);
+                }
             }
+            else
+            {
+                foreach (long offset in EVD.LinkedFileOffsets)
+                {
+                    string linkedFile = reader.GetUTF16(offset);
+                    LinkedFiles.Add(linkedFile);
+                }
+            }
+            Console.WriteLine("Success");
         }
 
         /// <summary>

@@ -8,6 +8,8 @@ function Event(id, restBehavior, instructions) {
     var evt = new EVENT();
     evt.ID = id;
     evt.RestBehavior = restBehavior;
+    
+    Console.WriteLine("Adding Event " + id);
 
     _event = evt;
     instructions.apply(this, _GetArgs(instructions));
@@ -37,6 +39,7 @@ function _Instruction(bank, index, args) {
         }
     }
 
+    Console.WriteLine(args.length);
     var argOut = $$$_host.newArr(args.length);
     for (var i = 0; i < args.length; i++) {
         argOut[i] = args[i];
