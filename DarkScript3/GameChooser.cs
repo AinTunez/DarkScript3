@@ -44,5 +44,17 @@ namespace DarkScript3
             GameDocs = "sekiro-common.emedf.json"; 
             Close();
         }
+
+        private void ds2Btn_Click(object sender, EventArgs e)
+        {
+            GameDocs = "ds2-common.emedf.json";
+            Close();
+        }
+
+        private void ds2scholarBtn_Click(object sender, EventArgs e)
+        {
+            GameDocs = "ds2scholar-common.emedf.json";
+            Close();
+        }
     }
 }

@@ -32,11 +32,13 @@
             this.bbBtn = new System.Windows.Forms.Button();
             this.ds3Btn = new System.Windows.Forms.Button();
             this.sekiroBtn = new System.Windows.Forms.Button();
+            this.ds2Btn = new System.Windows.Forms.Button();
+            this.ds2scholarBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ds1Btn
             // 
-            this.ds1Btn.Location = new System.Drawing.Point(12, 24);
+            this.ds1Btn.Location = new System.Drawing.Point(12, 12);
             this.ds1Btn.Name = "ds1Btn";
             this.ds1Btn.Size = new System.Drawing.Size(125, 23);
             this.ds1Btn.TabIndex = 0;
@@ -46,7 +48,7 @@
             // 
             // bbBtn
             // 
-            this.bbBtn.Location = new System.Drawing.Point(12, 53);
+            this.bbBtn.Location = new System.Drawing.Point(12, 41);
             this.bbBtn.Name = "bbBtn";
             this.bbBtn.Size = new System.Drawing.Size(125, 23);
             this.bbBtn.TabIndex = 1;
@@ -56,7 +58,7 @@
             // 
             // ds3Btn
             // 
-            this.ds3Btn.Location = new System.Drawing.Point(12, 82);
+            this.ds3Btn.Location = new System.Drawing.Point(12, 127);
             this.ds3Btn.Name = "ds3Btn";
             this.ds3Btn.Size = new System.Drawing.Size(125, 23);
             this.ds3Btn.TabIndex = 2;
@@ -66,7 +68,7 @@
             // 
             // sekiroBtn
             // 
-            this.sekiroBtn.Location = new System.Drawing.Point(12, 111);
+            this.sekiroBtn.Location = new System.Drawing.Point(12, 156);
             this.sekiroBtn.Name = "sekiroBtn";
             this.sekiroBtn.Size = new System.Drawing.Size(125, 23);
             this.sekiroBtn.TabIndex = 3;
@@ -74,11 +76,33 @@
             this.sekiroBtn.UseVisualStyleBackColor = true;
             this.sekiroBtn.Click += new System.EventHandler(this.SekiroBtn_Click);
             // 
+            // ds2Btn
+            // 
+            this.ds2Btn.Location = new System.Drawing.Point(12, 70);
+            this.ds2Btn.Name = "ds2Btn";
+            this.ds2Btn.Size = new System.Drawing.Size(125, 23);
+            this.ds2Btn.TabIndex = 4;
+            this.ds2Btn.Text = "Dark Souls II";
+            this.ds2Btn.UseVisualStyleBackColor = true;
+            this.ds2Btn.Click += new System.EventHandler(this.ds2Btn_Click);
+            // 
+            // ds2scholarBtn
+            // 
+            this.ds2scholarBtn.Location = new System.Drawing.Point(12, 99);
+            this.ds2scholarBtn.Name = "ds2scholarBtn";
+            this.ds2scholarBtn.Size = new System.Drawing.Size(125, 23);
+            this.ds2scholarBtn.TabIndex = 5;
+            this.ds2scholarBtn.Text = "Dark Souls II SOTFS";
+            this.ds2scholarBtn.UseVisualStyleBackColor = true;
+            this.ds2scholarBtn.Click += new System.EventHandler(this.ds2scholarBtn_Click);
+            // 
             // GameChooser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(149, 150);
+            this.ClientSize = new System.Drawing.Size(149, 194);
+            this.Controls.Add(this.ds2scholarBtn);
+            this.Controls.Add(this.ds2Btn);
             this.Controls.Add(this.sekiroBtn);
             this.Controls.Add(this.ds3Btn);
             this.Controls.Add(this.bbBtn);
@@ -96,5 +120,7 @@
         private System.Windows.Forms.Button bbBtn;
         private System.Windows.Forms.Button ds3Btn;
         private System.Windows.Forms.Button sekiroBtn;
+        private System.Windows.Forms.Button ds2Btn;
+        private System.Windows.Forms.Button ds2scholarBtn;
     }
 }
