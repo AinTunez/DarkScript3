@@ -699,10 +699,10 @@ namespace DarkScript3
             (new InfoViewer(Scripter)).ShowDialog();
         }
 
-
         private void Display_Resize(object sender, EventArgs e)
         {
-            if (display.SplitterDistance != 350) display.SplitterDistance = 350;
+            if (WindowState == FormWindowState.Minimized && display.SplitterDistance != 350)
+                display.SplitterDistance = 350;
         }
 
         private void Editor_ZoomChanged(object sender, EventArgs e)
