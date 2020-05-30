@@ -46,6 +46,8 @@
             this.replaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
+            this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.emevdDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,8 +57,7 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.display = new System.Windows.Forms.SplitContainer();
             this.docBox = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
+            this.openAutoCompleteMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.editor)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -182,7 +183,8 @@
             this.toolStripSeparator2,
             this.selectAllToolStripMenuItem,
             this.optionsToolStripMenuItem,
-            this.customizeToolStripMenuItem});
+            this.customizeToolStripMenuItem,
+            this.openAutoCompleteMenuToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
@@ -191,7 +193,7 @@
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
             this.cutToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+X";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.CutToolStripMenuItem_Click);
             // 
@@ -199,7 +201,7 @@
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+C";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
@@ -207,19 +209,19 @@
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+V";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(274, 6);
             // 
             // findToolStripMenuItem
             // 
             this.findToolStripMenuItem.Name = "findToolStripMenuItem";
             this.findToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F";
-            this.findToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.findToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
             this.findToolStripMenuItem.Text = "Find";
             this.findToolStripMenuItem.Click += new System.EventHandler(this.FindToolStripMenuItem_Click);
             // 
@@ -227,22 +229,34 @@
             // 
             this.replaceToolStripMenuItem.Name = "replaceToolStripMenuItem";
             this.replaceToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+H";
-            this.replaceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.replaceToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
             this.replaceToolStripMenuItem.Text = "Replace";
             this.replaceToolStripMenuItem.Click += new System.EventHandler(this.ReplaceToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(274, 6);
             // 
             // selectAllToolStripMenuItem
             // 
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
             this.selectAllToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+A";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
             this.selectAllToolStripMenuItem.Text = "Select All";
             this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.SelectAllToolStripMenuItem_Click);
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(274, 6);
+            // 
+            // customizeToolStripMenuItem
+            // 
+            this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
+            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.customizeToolStripMenuItem.Text = "Customize...";
+            this.customizeToolStripMenuItem.Click += new System.EventHandler(this.customizeToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
@@ -369,17 +383,14 @@
             this.docBox.TabStop = false;
             this.docBox.Zoom = 100;
             // 
-            // customizeToolStripMenuItem
+            // openAutoCompleteMenuToolStripMenuItem
             // 
-            this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
-            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.customizeToolStripMenuItem.Text = "Customize...";
-            this.customizeToolStripMenuItem.Click += new System.EventHandler(this.customizeToolStripMenuItem_Click);
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(177, 6);
+            this.openAutoCompleteMenuToolStripMenuItem.Name = "openAutoCompleteMenuToolStripMenuItem";
+            this.openAutoCompleteMenuToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Space)));
+            this.openAutoCompleteMenuToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.openAutoCompleteMenuToolStripMenuItem.Text = "OpenAutoCompleteMenu";
+            this.openAutoCompleteMenuToolStripMenuItem.Visible = false;
+            this.openAutoCompleteMenuToolStripMenuItem.Click += new System.EventHandler(this.openAutoCompleteMenuToolStripMenuItem_Click);
             // 
             // GUI
             // 
@@ -440,6 +451,7 @@
         public FastColoredTextBoxNS.FastColoredTextBox editor;
         private System.Windows.Forms.ToolStripSeparator optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openAutoCompleteMenuToolStripMenuItem;
     }
 }
 

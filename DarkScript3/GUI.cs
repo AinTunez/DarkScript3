@@ -79,6 +79,7 @@ namespace DarkScript3
                 item.ToolTipText = null;
                 item.ToolTipTitle = null;
             }
+            instructions = instructions.OrderBy(i => i.Text);
 
             InstructionMenu.Items.SetAutocompleteItems(instructions);
             JSRegex.GlobalConstant = new Regex($@"[^.]\b(?<range>{string.Join("|", Scripter.GlobalConstants)})\b");
@@ -490,8 +491,8 @@ namespace DarkScript3
 
         #region ToolTips
 
-        public ToolControl InfoTip = new ToolControl();
-        public Range CurrentTipRange = null;
+        public ToolControl InfoTip { get; set; }  = new ToolControl();
+        public Range CurrentTipRange { get; set; }  = null;
 
         private void Editor_ToolTipNeeded(object sender, ToolTipNeededEventArgs e)
         {
@@ -535,7 +536,7 @@ namespace DarkScript3
                 }
                 string funcName = FuncName(arguments);
                 LoadDocText(funcName);
-                ShowArgToolTip(arguments, argIndex);
+                ShowArgToolTip(funcName, arguments, argIndex);
             }
             else
             {
@@ -563,16 +564,19 @@ namespace DarkScript3
             {
                 InfoTip.SetText(s);
             }
+            
             p.Offset(0, -InfoTip.Height - 5);
-            InfoTip.Location = p;
-            if (!InfoTip.Visible) InfoTip.Show();
+            if (!InfoTip.Location.Equals(p))
+                InfoTip.Location = p;
+            if (!InfoTip.Visible)
+                InfoTip.Show();
+            
             InfoTip.BringToFront();
             editor.Focus();
         }
 
-        private void ShowArgToolTip(Range arguments, int argument = -1)
+        private void ShowArgToolTip(string funcName, Range arguments, int argument = -1)
         {
-            string funcName = FuncName(arguments);
             if (Scripter != null && Scripter.Functions.ContainsKey(funcName))
             {
                 Point point = editor.PlaceToPoint(arguments.Start);
@@ -630,7 +634,8 @@ namespace DarkScript3
                 else if (arg.EnumName != null)
                 {
                     argStrings.Add($"enum<{arg.EnumName}> {arg.Name}");
-                } else
+                }
+                else
                 {
                     argStrings.Add($"{TypeString(arg.Type)} {arg.Name}");
                 }
@@ -639,15 +644,19 @@ namespace DarkScript3
             return string.Join(", ", argStrings);
         }
 
+        string currentFuncDoc = null;
+
         private void LoadDocText(string func)
         {
-            if (Scripter == null || !Scripter.Functions.ContainsKey(func)) return;
-
+            if (Scripter == null) return;
+            if (!Scripter.Functions.ContainsKey(func)) return;
+            if (currentFuncDoc == func) return;
+            currentFuncDoc = func;
             docBox.Clear();
-            docBox.AppendText(func);
 
             (int classIndex, int instrIndex) = Scripter.Functions[func];
             EMEDF.InstrDoc insDoc = Scripter.DOC[classIndex][instrIndex];
+
             for (int i = 0; i < insDoc.Arguments.Length; i++)
             {
                 docBox.AppendText(Environment.NewLine);
@@ -816,6 +825,12 @@ namespace DarkScript3
                 else
                     MessageBox.Show("All files succesfully resaved.");
             }
+        }
+
+        private void openAutoCompleteMenuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (InstructionMenu == null) return;
+            InstructionMenu.Show(true);
         }
     }
 }
