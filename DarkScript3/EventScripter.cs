@@ -312,23 +312,18 @@ namespace DarkScript3
 
                     string[] args = default;
                     string argString = "";
-
+                    bool isNeg1 = false;
                     try
                     {
                         if (IsVariableLength(doc))
                         {
-                            var temp = new ArgType[ins.ArgData.Length / 4];
-                            temp[0] = ArgType.Int32;
-                            temp[1] = ArgType.UInt32;
-                            for (int i = 2; i < temp.Count(); i++)
-                            {
-                                temp[i] = ArgType.Int32;
-                            }
-
-                            argStruct = temp.AsEnumerable();
-
+                            argStruct = Enumerable.Repeat(ArgType.Int32, ins.ArgData.Length / 4);
                             args = ins.UnpackArgs(argStruct).Select(a => a.ToString()).ToArray();
                             argString = ArgumentStringInitializer(args, insIndex, paramNames, argStruct);
+                            if (args[0] == "-1" || args[1] == "-1")
+                            {
+                                isNeg1 = true;
+                            }
                         }
                         else
                         {
@@ -353,7 +348,7 @@ namespace DarkScript3
                             argString = str;
                     }
 
-                    string lineOfCode = $"\t{TitleCaseName(doc.Name)}({argString});";
+                    string lineOfCode = $"\t{(isNeg1 ? "// " : "")}{TitleCaseName(doc.Name)}({argString});";
                     code.AppendLine(lineOfCode);
 
                 }
