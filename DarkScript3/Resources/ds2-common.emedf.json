@@ -2061,7 +2061,7 @@
             },
             {
               "name": "MustSub Event ID",
-              "type": 2,
+              "type": 5,
               "enum_name": null,
               "default": 0,
               "min": 0,
@@ -3263,7 +3263,7 @@
             },
             {
               "name": "MustSub Event ID",
-              "type": 2,
+              "type": 5,
               "enum_name": null,
               "default": 0,
               "min": 0,

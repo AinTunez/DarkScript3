@@ -2187,7 +2187,7 @@
               "unk3": 0,
               "unk4": 0
             }
-          ]  
+          ]
         },
         {
           "name": "IF Multiplayer Network Penalized",
@@ -6959,13 +6959,13 @@
               "unk3": 0,
               "unk4": 0
             }
-          ]   
+          ]
         },
         {
           "name": "GOTO IF Player Is Not In Own World (Excludes Arena)",
           "index": 12,
           "args": [
-             {
+            {
               "name": "Label",
               "type": 0,
               "enum_name": "Label",
@@ -6999,7 +6999,7 @@
           "name": "END IF Player Is Not In Own World (Excludes Arena)",
           "index": 13,
           "args": [
-             {
+            {
               "name": "Execution End Type",
               "type": 0,
               "enum_name": "Event End Type",
@@ -7501,7 +7501,7 @@
           "name": "END IF Character Has SpEffect",
           "index": 111,
           "args": [
-             {
+            {
               "name": "Execution End Type",
               "type": 0,
               "enum_name": "Event End Type",
@@ -7585,13 +7585,13 @@
               "unk3": 0,
               "unk4": 0
             }
-           ]    
+          ]
         },
         {
-           "name": "SKIP IF Character Has SpEffect",
-           "index": 112,
-           "args": [
-             {
+          "name": "SKIP IF Character Has SpEffect",
+          "index": 112,
+          "args": [
+            {
               "name": "Number Of Skipped Lines",
               "type": 0,
               "enum_name": null,
@@ -7675,7 +7675,7 @@
               "unk3": 0,
               "unk4": 0
             }
-           ]    
+          ]
         },
         {
           "name": "GOTO IF Player In/Outside Area",
@@ -7813,7 +7813,7 @@
               "unk3": 0,
               "unk4": 0
             }
-          ] 
+          ]
         },
         {
           "name": "SKIP IF Player In/Outside Area",
@@ -8296,10 +8296,10 @@
             },
             {
               "name": "Event ID",
-              "type": 2,
+              "type": 5,
               "enum_name": null,
               "default": 0,
-              "min": 0,
+              "min": -1,
               "max": 0,
               "increment": 0,
               "format_string": "%d",
@@ -8444,10 +8444,10 @@
           "args": [
             {
               "name": "Event ID",
-              "type": 2,
+              "type": 5,
               "enum_name": null,
               "default": 0,
-              "min": 0,
+              "min": -1,
               "max": 0,
               "increment": 0,
               "format_string": "%d",
@@ -9151,7 +9151,7 @@
               "unk3": 0,
               "unk4": 0
             }
-          ]   
+          ]
         },
         {
           "name": "Play Cutscene to Player and Change Current Map Ceremony",
@@ -9227,7 +9227,7 @@
               "unk3": 0,
               "unk4": 0
             }
-          ]   
+          ]
         },
         {
           "name": "Play Ongoing Cutscene and Warp Player",
@@ -11637,7 +11637,7 @@
               "unk3": 0,
               "unk4": 0
             }
-          ]  
+          ]
         },
         {
           "name": "Set Current Map Ceremony",
@@ -11889,7 +11889,7 @@
               "unk3": 0,
               "unk4": 0
             }
-          ]   
+          ]
         },
         {
           "name": "Reset Omission Mode Counts to Default",
@@ -12186,7 +12186,7 @@
           "name": "Disable Loading Screen Tips",
           "index": 76,
           "args": [
-             {
+            {
               "name": "Should Be Disabled",
               "type": 0,
               "enum_name": "BOOL",
@@ -14975,7 +14975,7 @@
               "unk3": 0,
               "unk4": 0
             }
-          ]  
+          ]
         },
         {
           "name": "Set Character Talk Range",
@@ -15385,6 +15385,26 @@
               "min": 0,
               "max": 0,
               "increment": 0,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
+        },
+        {
+          "name": "UNKNOWN 2004[68]",
+          "index": 68,
+          "args": [
+            {
+              "name": "Dummy",
+              "type": 0,
+              "enum_name": null,
+              "default": 0,
+              "min": 0,
+              "max": 1,
+              "increment": 1,
               "format_string": "%d",
               "unk1": 1,
               "unk2": 0,
@@ -16808,7 +16828,7 @@
               "unk3": 0,
               "unk4": 0
             }
-          ]   
+          ]
         },
         {
           "name": "Show Hint Box",
