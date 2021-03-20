@@ -120,14 +120,13 @@ namespace DarkScript3
                 }
             }
 
-            List<object> properArgs = new List<object>();
-            if (isVar)
+            List<object> properArgs = new List<object>()
+;           if (isVar)
             {
-                properArgs.Add(Convert.ToInt32(args[0]));
-                properArgs.Add(Convert.ToUInt32(args[1]));
-                if (args.Length > 2)
-                    for (int i = 2; i < args.Length; i++)
-                        properArgs.Add(Convert.ToInt32(args[i]));
+                foreach (object arg in args)
+                {
+                    properArgs.Add(Convert.ToInt32(arg));
+                }
             }
             else
             {
@@ -312,7 +311,6 @@ namespace DarkScript3
 
                     string[] args = default;
                     string argString = "";
-                    bool isNeg1 = false;
                     try
                     {
                         if (IsVariableLength(doc))
@@ -320,10 +318,6 @@ namespace DarkScript3
                             argStruct = Enumerable.Repeat(ArgType.Int32, ins.ArgData.Length / 4);
                             args = ins.UnpackArgs(argStruct).Select(a => a.ToString()).ToArray();
                             argString = ArgumentStringInitializer(args, insIndex, paramNames, argStruct);
-                            if (args[0] == "-1" || args[1] == "-1")
-                            {
-                                isNeg1 = true;
-                            }
                         }
                         else
                         {
@@ -348,9 +342,8 @@ namespace DarkScript3
                             argString = str;
                     }
 
-                    string lineOfCode = $"\t{(isNeg1 ? "// " : "")}{TitleCaseName(doc.Name)}({argString});";
+                    string lineOfCode = $"\t{TitleCaseName(doc.Name)}({argString});";
                     code.AppendLine(lineOfCode);
-
                 }
                 code.AppendLine("});");
                 code.AppendLine("");
