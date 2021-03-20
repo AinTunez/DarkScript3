@@ -7158,10 +7158,10 @@
             },
             {
               "name": "Event ID",
-              "type": 5,
+              "type": 2,
               "enum_name": null,
               "default": 0,
-              "min": -1,
+              "min": 0,
               "max": 0,
               "increment": 0,
               "format_string": "%d",
@@ -7172,7 +7172,7 @@
             },
             {
               "name": "Parameters",
-              "type": 5,
+              "type": 2,
               "enum_name": null,
               "default": 0,
               "min": 0,
@@ -7306,10 +7306,10 @@
           "args": [
             {
               "name": "Event ID",
-              "type": 5,
+              "type": 2,
               "enum_name": null,
               "default": 0,
-              "min": -1,
+              "min": 0,
               "max": 0,
               "increment": 0,
               "format_string": "%d",
@@ -7320,7 +7320,7 @@
             },
             {
               "name": "Parameters",
-              "type": 5,
+              "type": 2,
               "enum_name": null,
               "default": 0,
               "min": 0,

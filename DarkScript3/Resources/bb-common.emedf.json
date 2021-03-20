@@ -5589,7 +5589,7 @@
             },
             {
               "name": "Event ID",
-              "type": 5,
+              "type": 2,
               "enum_name": null,
               "default": 0,
               "min": 0,
