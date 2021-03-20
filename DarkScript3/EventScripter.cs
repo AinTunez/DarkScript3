@@ -212,11 +212,20 @@ namespace DarkScript3
                 }
                 else
                 {
+                    List<string> vals = new List<string>();
                     StringBuilder code = new StringBuilder();
                     code.AppendLine($"const {enm.Name} = {{");
                     foreach (var pair in enm.Values.ToList())
                     {
                         string val = Regex.Replace(pair.Value, @"[^\w]", "");
+                        if (vals.Contains(val))
+                        {
+                            int i = 1;
+                            while (vals.Contains(val + "_" + i.ToString()))
+                                i++;
+                            val = val + "_" + i.ToString();
+                        }
+                        vals.Add(val);
                         enm.Values[pair.Key] = val;
                         code.AppendLine($"{val}:{pair.Key},");
                     }
