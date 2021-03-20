@@ -253,11 +253,8 @@ namespace DarkScript3
                     }
                     sb.AppendLine($"    return _Instruction({bank.Index}, {instr.Index}, Array.from(arguments));");
                     sb.AppendLine("}");
+                    Console.WriteLine(sb.ToString());
                     v8.Execute(sb.ToString());
-                    if (funcName.Contains("SpEffect"))
-                    {
-                        v8.Execute($"const {funcName.Replace("SpEffect", "Speffect")} = {funcName};");
-                    }
                 }
             }
             return DOC;
@@ -317,16 +314,7 @@ namespace DarkScript3
                     {
                         if (IsVariableLength(doc))
                         {
-                            var temp = new ArgType[ins.ArgData.Length / 4];
-                            temp[0] = ArgType.Int32;
-                            temp[1] = ArgType.UInt32;
-                            for (int i = 2; i < temp.Count(); i++)
-                            {
-                                temp[i] = ArgType.Int32;
-                            }
-
-                            argStruct = temp.AsEnumerable();
-
+                            argStruct = Enumerable.Repeat(ArgType.Int32, ins.ArgData.Length / 4);
                             args = ins.UnpackArgs(argStruct).Select(a => a.ToString()).ToArray();
                             argString = ArgumentStringInitializer(args, insIndex, paramNames, argStruct);
                         }
@@ -538,20 +526,12 @@ namespace DarkScript3
             string[] words = Regex.Replace(s, @"[^\w\s]", "").Split(' ');
             for (int i = 0; i < words.Length; i++)
             {
-                if (words[i].Length == 0)
-                {
-                    continue;
-                }
+                if (words[i].Length == 0) continue;
                 else if (Acronyms.Contains(words[i].ToUpper()))
                 {
                     words[i] = words[i].ToUpper();
                     continue;
                 }
-                else if (words[i] == "SpEffect")
-                {
-                    continue;
-                }
-
 
                 char firstChar = char.ToUpper(words[i][0]);
                 string rest = "";
