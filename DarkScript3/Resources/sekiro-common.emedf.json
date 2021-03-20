@@ -15392,6 +15392,26 @@
               "unk4": 0
             }
           ]
+        },
+        {
+          "name": "UNKNOWN 2004[68]",
+          "index": 68,
+          "args": [
+            {
+              "name": "Dummy",
+              "type": 0,
+              "enum_name": null,
+              "default": 0,
+              "min": 0,
+              "max": 1,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
         }
       ]
     },
