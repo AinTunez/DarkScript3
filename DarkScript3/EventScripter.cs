@@ -317,16 +317,7 @@ namespace DarkScript3
                     {
                         if (IsVariableLength(doc))
                         {
-                            var temp = new ArgType[ins.ArgData.Length / 4];
-                            temp[0] = ArgType.Int32;
-                            temp[1] = ArgType.UInt32;
-                            for (int i = 2; i < temp.Count(); i++)
-                            {
-                                temp[i] = ArgType.Int32;
-                            }
-
-                            argStruct = temp.AsEnumerable();
-
+                            argStruct = Enumerable.Repeat(ArgType.Int32, ins.ArgData.Length / 4);
                             args = ins.UnpackArgs(argStruct).Select(a => a.ToString()).ToArray();
                             argString = ArgumentStringInitializer(args, insIndex, paramNames, argStruct);
                         }
