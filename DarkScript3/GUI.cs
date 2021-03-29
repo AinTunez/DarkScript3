@@ -482,7 +482,7 @@ namespace DarkScript3
                                            RegexCompiledOption);
             public static Regex Keyword =
                 new Regex(
-                    @"\b(true|false|break|case|catch|const|continue|default|delete|do|else|export|for|function|if|in|instanceof|new|null|return|switch|this|throw|try|var|void|while|with|typeof)\b",
+                    @"\b(true|false|break|case|catch|const|continue|default|delete|do|else|export|for|function|if|in|instanceof|let|new|null|return|switch|this|throw|try|var|void|while|with|typeof)\b",
                     RegexCompiledOption);
             public static Regex DataType = new Regex(@"\b(byte|short|int|sbyte|ushort|uint|enum|bool)\b", RegexCompiledOption);
         }
