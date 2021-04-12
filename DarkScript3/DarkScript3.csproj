@@ -266,6 +266,7 @@
       <DependentUpon>InfoViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="CommonFuncData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="StyleConfig.cs">

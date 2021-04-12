@@ -28,6 +28,8 @@ namespace DarkScript3
 
         public Dictionary<EMEDF.InstrDoc, List<uint>> FuncBytePositions = new Dictionary<EMEDF.InstrDoc, List<uint>>();
 
+        private Dictionary<long, List<ArgType>> LinkedEventData = new Dictionary<long, List<ArgType>>();
+
         public List<string> GlobalConstants = new List<string>() { "Default", "End", "Restart" };
 
         public Dictionary<string, string> EnumReplacements = new Dictionary<string, string>
@@ -72,12 +74,19 @@ namespace DarkScript3
             InitAll(resource);
         }
 
-        public bool IsVariableLength(EMEDF.InstrDoc doc)
+        public bool IsUnknownLength(EMEDF.InstrDoc doc)
         {
             if (ResourceString.StartsWith("ds2"))
                 return doc == DOC[100130][1] || doc == DOC[100070][0];
-            else if (ResourceString.StartsWith("ds1"))
+            return false;
+        }
+
+        public bool IsInitializer(EMEDF.InstrDoc doc)
+        {
+            if (ResourceString.StartsWith("ds1"))
                 return doc == DOC[2000][0];
+            else if (ResourceString.StartsWith("ds2"))
+                return false;
             else
                 return doc == DOC[2000][0] || doc == DOC[2000][6];
         }
@@ -88,12 +97,12 @@ namespace DarkScript3
         public Instruction MakeInstruction(Event evt, int bank, int index, object[] args)
         {
             EMEDF.InstrDoc doc = DOC[bank][index];
-            bool isVar = IsVariableLength(doc);
+            bool isVar = IsUnknownLength(doc);
+            bool isInit = IsInitializer(doc);
             if (args.Length < doc.Arguments.Length)
             {
                 throw new Exception($"Instruction {bank}[{index}] ({doc.Name}) requires {doc.Arguments.Length} arguments.");
-            }                   
-
+            }
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -120,8 +129,9 @@ namespace DarkScript3
                 }
             }
 
-            List<object> properArgs = new List<object>()
-;           if (isVar)
+
+            List<object> properArgs = new List<object>();
+            if (isVar)
             {
                 foreach (object arg in args)
                 {
@@ -130,18 +140,26 @@ namespace DarkScript3
             }
             else
             {
-                for (int i = 0; i < doc.Arguments.Length; i++)
+                List<ArgType> argStruct;
+                if (isInit)
                 {
-                    EMEDF.ArgDoc argDoc = doc.Arguments[i];
-                    if (argDoc.Type == 0) properArgs.Add(Convert.ToByte(args[i])); //u8
-                    else if (argDoc.Type == 1) properArgs.Add(Convert.ToUInt16(args[i])); //u16
-                    else if (argDoc.Type == 2) properArgs.Add(Convert.ToUInt32(args[i])); //u32
-                    else if (argDoc.Type == 3) properArgs.Add(Convert.ToSByte(args[i])); //s8
-                    else if (argDoc.Type == 4) properArgs.Add(Convert.ToInt16(args[i])); //s16
-                    else if (argDoc.Type == 5) properArgs.Add(Convert.ToInt32(args[i])); //s32
-                    else if (argDoc.Type == 6) properArgs.Add(Convert.ToSingle(args[i])); //f32
-                    else if (argDoc.Type == 8) properArgs.Add(Convert.ToUInt32(args[i])); //string position
-                    else throw new Exception("Invalid type in argument definition.");
+                    argStruct = LinkedEventData[Convert.ToInt32(args[1])].ToList();
+                } else
+                {
+                    argStruct = doc.Arguments.Select(a => (ArgType)a.Type).ToList();
+                }
+
+                for (int i = 0; i < argStruct.Count; i++)
+                {
+                    ArgType t = argStruct[i];
+                    if (t == ArgType.Byte) properArgs.Add(Convert.ToByte(args[i])); //u8
+                    else if (t == ArgType.UInt16) properArgs.Add(Convert.ToUInt16(args[i])); //u16
+                    else if (t == ArgType.UInt32) properArgs.Add(Convert.ToUInt32(args[i])); //u32
+                    else if (t == ArgType.SByte) properArgs.Add(Convert.ToSByte(args[i])); //s8
+                    else if (t == ArgType.Int16) properArgs.Add(Convert.ToInt16(args[i])); //s16
+                    else if (t == ArgType.Int32) properArgs.Add(Convert.ToInt32(args[i])); //s32
+                    else if (t == ArgType.Single) properArgs.Add(Convert.ToSingle(args[i])); //f32
+                    else properArgs.Add(Convert.ToUInt32(args[i])); //string position
                 }
             }
             Instruction ins = new Instruction(bank, index, properArgs);
@@ -284,8 +302,30 @@ namespace DarkScript3
         public EMEVD Pack(string code)
         {
             EVD.Events.Clear();
+            LinkedEventData = GetEventArgStructs();
             v8.Execute($"(function() {{ {code} }})();");
             return EVD;
+        }
+
+        public Dictionary<long, List<ArgType>> GetEventArgStructs()
+        {
+            Dictionary<long, List<ArgType>> linkedEventData = new Dictionary<long, List<ArgType>>();
+            GetLinkedEventData(linkedEventData);
+
+            LinkedFiles.ForEach((file) =>
+            {
+                try
+                {
+                    EventScripter scr = new EventScripter(file, ResourceString);
+                    scr.GetLinkedEventData(linkedEventData);
+                }
+                catch
+                {
+
+                }
+
+            });
+            return linkedEventData;
         }
 
         /// <summary>
@@ -294,6 +334,8 @@ namespace DarkScript3
         public string Unpack()
         {
             InitLinkedFiles();
+
+            LinkedEventData = GetEventArgStructs();
 
             StringBuilder code = new StringBuilder();
             foreach (var evt in EVD.Events)
@@ -322,11 +364,26 @@ namespace DarkScript3
                     string argString = "";
                     try
                     {
-                        if (IsVariableLength(doc))
+                        IEnumerable<ArgType> unkStruct = Enumerable.Repeat(ArgType.Int32, ins.ArgData.Length / 4);
+                        if (IsUnknownLength(doc))
                         {
-                            argStruct = Enumerable.Repeat(ArgType.Int32, ins.ArgData.Length / 4);
-                            args = ins.UnpackArgs(argStruct).Select(a => a.ToString()).ToArray();
-                            argString = ArgumentStringInitializer(args, insIndex, paramNames, argStruct);
+                            argStruct = unkStruct;
+                            argString = ArgumentStringUnk(args, insIndex, paramNames, argStruct);
+                        }
+                        else if (IsInitializer(doc))
+                        {
+                            long eventId = Convert.ToInt64(ins.UnpackArgs(unkStruct)[1]);
+                            if (LinkedEventData.ContainsKey(eventId))
+                            {
+                                argStruct = (new List<ArgType>() { ArgType.Int32, ArgType.Int32 }).Concat(LinkedEventData[eventId]);
+                                args = ins.UnpackArgs(argStruct).Select(a => a.ToString()).ToArray();
+                                argString = ArgumentString(args, ins, insIndex, paramNames);
+                            }
+                            else
+                            {
+                                args = ins.UnpackArgs(unkStruct).Select(a => a.ToString()).ToArray();
+                                argString = ArgumentStringUnk(args, insIndex, paramNames, argStruct);
+                            }
                         }
                         else
                         {
@@ -336,7 +393,7 @@ namespace DarkScript3
                     }
                     catch (Exception ex)
                     {
-                        var sb = new StringBuilder();
+                        StringBuilder sb = new StringBuilder();
                         sb.AppendLine($@"ERROR: Unable to unpack arguments for ""{funcName}""");
                         sb.AppendLine(ex.ToString());
                         throw new Exception(sb.ToString());
@@ -369,7 +426,7 @@ namespace DarkScript3
             if (ResourceString.StartsWith("ds2"))
             {
                 foreach (long offset in EVD.LinkedFileOffsets)
-                {   
+                {
                     string linkedFile = reader.GetASCII(offset);
                     LinkedFiles.Add(linkedFile);
                 }
@@ -383,6 +440,32 @@ namespace DarkScript3
                 }
             }
             Console.WriteLine("Success");
+        }
+
+        public void GetLinkedEventData(Dictionary<long, List<ArgType>> linkedEventData)
+        {
+            EVD.Events.ForEach((evt) =>
+            {
+                if (evt.Parameters.Count > 0 && !linkedEventData.ContainsKey(evt.ID))
+                {
+                    List<long> startBytes = new List<long>();
+                    List<ArgType> args = new List<ArgType>();
+
+                    evt.Parameters.ForEach(p =>
+                    {
+                        if (!startBytes.Contains(p.SourceStartByte))
+                        {
+                            startBytes.Add(p.SourceStartByte);
+                            Instruction ins = evt.Instructions[(int)p.InstructionIndex];
+                            EMEDF.InstrDoc insInfo = DOC[ins.Bank][ins.ID];
+                            List<uint> positions = FuncBytePositions[insInfo];
+                            uint argIndex = (uint)positions.IndexOf((uint)p.TargetStartByte);
+                            args.Add((ArgType)insInfo.Arguments[argIndex].Type);
+                        }
+                    });
+                    linkedEventData[evt.ID] = args;
+                }
+            });
         }
 
         /// <summary>
@@ -451,7 +534,7 @@ namespace DarkScript3
         /// <param name="paramNames"></param>
         /// <param name="argStruct"></param>
         /// <returns></returns>
-        public string ArgumentStringInitializer(string[] args, int insIndex, Dictionary<Parameter, string> paramNames, IEnumerable<ArgType> argStruct)
+        public string ArgumentStringUnk(string[] args, int insIndex, Dictionary<Parameter, string> paramNames, IEnumerable<ArgType> argStruct)
         {
             List<uint> positions = GetArgBytePositions(argStruct, 6);
             for (int argIndex = 0; argIndex < argStruct.Count(); argIndex++)
