@@ -10,7 +10,7 @@ namespace DarkScript3
 {
     public class EMEDF
     {
-        public ClassDoc this[int classIndex] => Classes.Find(c => c.Index == classIndex);
+        public ClassDoc this[int classIndex] => Classes.FirstOrDefault(c => c.Index == classIndex);
 
         [JsonProperty(PropertyName = "unknown")]
         private long UNK;

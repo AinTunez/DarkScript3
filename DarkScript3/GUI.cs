@@ -43,6 +43,8 @@ namespace DarkScript3
             editor.SelectionColor = Color.White;
             docBox.SelectionColor = Color.White;
             LoadColors();
+            InitUI();
+            InfoTip.tipBox.TextChanged += (object sender, TextChangedEventArgs e) => TipBox_TextChanged(sender, e);
         }
 
         private void InitUI()
@@ -60,29 +62,6 @@ namespace DarkScript3
 
             InstructionMenu.ImageList = new ImageList();
             InstructionMenu.ImageList.Images.Add("instruction", MakeColorImage(Color.FromArgb(255, 255, 255)));
-
-            IEnumerable<AutocompleteItem> instructions = Scripter.Functions.Keys.Select(s =>
-            {
-                var instr = Scripter.Functions[s];
-                var doc = Scripter.DOC[instr.classIndex][instr.instrIndex];
-
-                string menuText = s;
-                string toolTipTitle = s;
-                string toolTipText = $"{instr.classIndex}[{instr.instrIndex}] ({ArgString(s)})";
-
-                return new AutocompleteItem(s + "(", InstructionMenu.ImageList.Images.IndexOfKey("instruction"), menuText, toolTipTitle, toolTipText);
-            });
-
-            foreach (var item in instructions)
-            {
-                ToolTips[item.MenuText] = (item.ToolTipTitle, item.ToolTipText);
-                item.ToolTipText = null;
-                item.ToolTipTitle = null;
-            }
-            instructions = instructions.OrderBy(i => i.Text);
-
-            InstructionMenu.Items.SetAutocompleteItems(instructions);
-            JSRegex.GlobalConstant = new Regex($@"[^.]\b(?<range>{string.Join("|", Scripter.GlobalConstants)})\b");
         }
 
         #region File Handling
@@ -110,24 +89,17 @@ namespace DarkScript3
                 IScriptEngineException scriptException = ex as IScriptEngineException;
                 if (scriptException != null)
                 {
+                    
                     string details = scriptException.ErrorDetails;
                     details = Regex.Replace(details, @"Script\s\[.*\]", "Script");
                     details = Regex.Replace(details, @"    at Script", "    at Editor");
                     details = Regex.Replace(details, @"->\s+", "-> ");
-                    if (details.StartsWith("!!! "))
-                    {
-                        string line = "";
-                        var lines = details.Split('\n');
+                    var lines = details.Split('\n');
+                    var line = lines.FirstOrDefault((row) => row.Contains("at Editor"));
 
-                        foreach (var str in lines)
-                        {
-                            if (str.StartsWith("    at Editor:"))
-                            {
-                                line = str.Replace("    at Editor:", "(Line ") + ")";
-                                break;
-                            }
-                        }
-                        MessageBox.Show(lines[0].Substring(4) + " " + line);
+                    if (line != null)
+                    {
+                        MessageBox.Show(Regex.Replace(scriptException.Message, "^Error: ", "") + line.Trim());
                     }
                     else
                     {
@@ -136,7 +108,7 @@ namespace DarkScript3
                 }
                 else
                 {
-                    MessageBox.Show(ex.ToString());
+                    MessageBox.Show(ex.ToString().Trim());
                 }
             }
 
@@ -150,7 +122,7 @@ namespace DarkScript3
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             InfoTip.Hide();
-            if (Scripter != null)
+            if (Scripter != null && CodeChanged)
             {
                 DialogResult result = MessageBox.Show("Save changes before opening a new file?", "Unsaved Changes", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.Yes)
@@ -187,7 +159,30 @@ namespace DarkScript3
                     OpenEMEVDFile(ofd.FileName, null, ChooseGame());
                 }
             }
+            JSRegex.GlobalConstant = new Regex($@"[^.]\b(?<range>{string.Join("|", Scripter.GlobalConstants)})\b");
+            IEnumerable<AutocompleteItem> instructions = Scripter.Functions.Keys.Select(s =>
+            {
+                var instr = Scripter.Functions[s];
+                var doc = Scripter.DOC[instr.classIndex][instr.instrIndex];
+
+                string menuText = s;
+                string toolTipTitle = s;
+                string toolTipText = $"{instr.classIndex}[{instr.instrIndex}] ({ArgString(s)})";
+
+                return new AutocompleteItem(s + "(", InstructionMenu.ImageList.Images.IndexOfKey("instruction"), menuText, toolTipTitle, toolTipText);
+            });
+
+            foreach (var item in instructions)
+            {
+                ToolTips[item.MenuText] = (item.ToolTipTitle, item.ToolTipText);
+                item.ToolTipText = null;
+                item.ToolTipTitle = null;
+            }
+            instructions = instructions.OrderBy(i => i.Text);
+
+            InstructionMenu.Items.SetAutocompleteItems(instructions);
             editor.ClearUndo();
+            CodeChanged = false;
         }
 
         private void OpenEMEVDFile(string fileName, EMEVD evd, string gameDocs, string data = null)
@@ -197,11 +192,17 @@ namespace DarkScript3
             else
                 Scripter = new EventScripter(evd, gameDocs);
 
-            EVD_Path = fileName;
-            InitUI();
-            InfoTip.tipBox.TextChanged += (object sender, TextChangedEventArgs e) => TipBox_TextChanged(sender, e);
-            editor.Text = data ?? Scripter.Unpack();
-            Text = $"DARKSCRIPT 3 - {Path.GetFileName(fileName)}";
+            bool changed = CodeChanged;
+            try
+            {
+                editor.Text = data ?? Scripter.Unpack();
+                EVD_Path = fileName;
+                Text = $"DARKSCRIPT 3 - {Path.GetFileName(fileName)}";
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                CodeChanged = changed;
+            }
         }
 
         private string GetHeaderValue(string fileText, string fieldName)
@@ -433,7 +434,7 @@ namespace DarkScript3
             docBox.BackColor = editor.BackColor;
             docBox.ForeColor = editor.ForeColor;
         }
-
+        
         private void Editor_TextChanged(object sender, TextChangedEventArgs e)
         {
             statusLabel.Text = "";
@@ -757,7 +758,7 @@ namespace DarkScript3
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!CodeChanged) Close();
+            if (string.IsNullOrWhiteSpace(EVD_Path)|| !CodeChanged) Close();
             else
             {
                 DialogResult result = MessageBox.Show("Save changes before exiting?", "Unsaved Changes", MessageBoxButtons.YesNoCancel);

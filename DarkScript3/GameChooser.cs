@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
+using System.IO;
 
 namespace DarkScript3
 {
@@ -54,6 +55,18 @@ namespace DarkScript3
         private void ds2scholarBtn_Click(object sender, EventArgs e)
         {
             GameDocs = "ds2scholar-common.emedf.json";
+            Close();
+        }
+
+        private void customBtn_Click(object sender, EventArgs e)
+        {
+            var ofd = new OpenFileDialog();
+            ofd.InitialDirectory = "Resources";
+            ofd.Filter = "EMEDF Files|*.emedf.json";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                GameDocs = Path.GetFileName(ofd.FileName);
+            }
             Close();
         }
     }

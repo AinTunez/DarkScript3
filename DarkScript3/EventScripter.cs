@@ -36,6 +36,10 @@ namespace DarkScript3
             { "BOOL.FALSE", "false" }
         };
 
+        public int CurrentEventID = -1;
+        public int CurrentInsIndex = -1;
+        public string CurrentInsName = "";
+
         public List<string> EnumNamesForGlobalization = new List<string>
         {
             "ONOFF",
@@ -87,66 +91,83 @@ namespace DarkScript3
         /// </summary>
         public Instruction MakeInstruction(Event evt, int bank, int index, object[] args)
         {
-            EMEDF.InstrDoc doc = DOC[bank][index];
-            bool isVar = IsVariableLength(doc);
-            if (args.Length < doc.Arguments.Length)
-            {
-                throw new Exception($"Instruction {bank}[{index}] ({doc.Name}) requires {doc.Arguments.Length} arguments.");
-            }                   
+            CurrentEventID = (int)evt.ID;
+            CurrentInsIndex = evt.Instructions.Count + 1;
 
-
-            for (int i = 0; i < args.Length; i++)
+            try
             {
-                if (args[i] is bool)
-                    args[i] = (bool)args[i] ? 1 : 0;
-                else if (args[i] is string)
+                EMEDF.InstrDoc doc = DOC[bank][index];
+                bool isVar = IsVariableLength(doc);
+                if (args.Length < doc.Arguments.Length)
                 {
-                    if (isVar)
-                        throw new Exception("Event initializers cannot be dependent on parameters.");
-
-                    IEnumerable<int> nums = (args[i] as string).Substring(1).Split('_').Select(s => int.Parse(s));
-                    if (nums.Count() != 2)
-                        throw new Exception("Invalid parameter string: {" + args[i] + "}");
-
-                    int sourceStartByte = nums.ElementAt(0);
-                    int length = nums.ElementAt(1);
-                    uint targetStartByte = FuncBytePositions[doc][i];
-
-                    Parameter p = new Parameter(evt.Instructions.Count, targetStartByte, sourceStartByte, length);
-                    evt.Parameters.Add(p);
-                    evt.Parameters = evt.Parameters.OrderBy(prm => prm.SourceStartByte).ToList();
-
-                    args[i] = doc.Arguments[i].Default;
+                    throw new Exception($"Instruction {bank}[{index}] ({doc.Name}) requires {doc.Arguments.Length} arguments.");
                 }
-            }
 
-            List<object> properArgs = new List<object>()
-;           if (isVar)
-            {
-                foreach (object arg in args)
+
+                for (int i = 0; i < args.Length; i++)
                 {
-                    properArgs.Add(Convert.ToInt32(arg));
+                    if (args[i] is bool)
+                        args[i] = (bool)args[i] ? 1 : 0;
+                    else if (args[i] is string)
+                    {
+                        if (isVar)
+                            throw new Exception("Event initializers cannot be dependent on parameters.");
+
+                        IEnumerable<int> nums = (args[i] as string).Substring(1).Split('_').Select(s => int.Parse(s));
+                        if (nums.Count() != 2)
+                            throw new Exception("Invalid parameter string: {" + args[i] + "}");
+
+                        int sourceStartByte = nums.ElementAt(0);
+                        int length = nums.ElementAt(1);
+                        uint targetStartByte = FuncBytePositions[doc][i];
+
+                        Parameter p = new Parameter(evt.Instructions.Count, targetStartByte, sourceStartByte, length);
+                        evt.Parameters.Add(p);
+                        evt.Parameters = evt.Parameters.OrderBy(prm => prm.SourceStartByte).ToList();
+
+                        args[i] = doc.Arguments[i].Default;
+                    }
                 }
-            }
-            else
-            {
-                for (int i = 0; i < doc.Arguments.Length; i++)
+
+                List<object> properArgs = new List<object>();
+                if (isVar)
                 {
-                    EMEDF.ArgDoc argDoc = doc.Arguments[i];
-                    if (argDoc.Type == 0) properArgs.Add(Convert.ToByte(args[i])); //u8
-                    else if (argDoc.Type == 1) properArgs.Add(Convert.ToUInt16(args[i])); //u16
-                    else if (argDoc.Type == 2) properArgs.Add(Convert.ToUInt32(args[i])); //u32
-                    else if (argDoc.Type == 3) properArgs.Add(Convert.ToSByte(args[i])); //s8
-                    else if (argDoc.Type == 4) properArgs.Add(Convert.ToInt16(args[i])); //s16
-                    else if (argDoc.Type == 5) properArgs.Add(Convert.ToInt32(args[i])); //s32
-                    else if (argDoc.Type == 6) properArgs.Add(Convert.ToSingle(args[i])); //f32
-                    else if (argDoc.Type == 8) properArgs.Add(Convert.ToUInt32(args[i])); //string position
-                    else throw new Exception("Invalid type in argument definition.");
+                    foreach (object arg in args)
+                    {
+                        properArgs.Add(Convert.ToInt32(arg));
+                    }
                 }
+                else
+                {
+                    for (int i = 0; i < doc.Arguments.Length; i++)
+                    {
+                        EMEDF.ArgDoc argDoc = doc.Arguments[i];
+                        if (argDoc.Type == 0) properArgs.Add(Convert.ToByte(args[i])); //u8
+                        else if (argDoc.Type == 1) properArgs.Add(Convert.ToUInt16(args[i])); //u16
+                        else if (argDoc.Type == 2) properArgs.Add(Convert.ToUInt32(args[i])); //u32
+                        else if (argDoc.Type == 3) properArgs.Add(Convert.ToSByte(args[i])); //s8
+                        else if (argDoc.Type == 4) properArgs.Add(Convert.ToInt16(args[i])); //s16
+                        else if (argDoc.Type == 5) properArgs.Add(Convert.ToInt32(args[i])); //s32
+                        else if (argDoc.Type == 6) properArgs.Add(Convert.ToSingle(args[i])); //f32
+                        else if (argDoc.Type == 8) properArgs.Add(Convert.ToUInt32(args[i])); //string position
+                        else throw new Exception("Invalid type in argument definition.");
+                    }
+                }
+                Instruction ins = new Instruction(bank, index, properArgs);
+                evt.Instructions.Add(ins);
+                CurrentEventID = -1;
+                CurrentInsIndex = -1;
+                return ins;
+            } catch (Exception ex)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine($"EXCEPTION\nCould not write instruction at Event {CurrentEventID}, index {CurrentInsIndex}.\n");
+                sb.AppendLine($"INSTRUCTION\n{CurrentInsName} | {bank}[{index}]\n");
+                sb.AppendLine(ex.Message);
+                //sb.AppendLine("");
+                //sb.AppendLine(ex.StackTrace);
+                throw new Exception(sb.ToString());
             }
-            Instruction ins = new Instruction(bank, index, properArgs);
-            evt.Instructions.Add(ins);
-            return ins;
         }
 
         /// <summary>
@@ -179,10 +200,24 @@ namespace DarkScript3
             DOC = InitDocsFromResource(embeddedResource);
         }
 
+        public void Import(string filePath)
+        {
+            try
+            {
+                v8.Execute(File.ReadAllText(filePath));
+            }
+            catch (Exception ex)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine($@"Error importing {Path.GetFileName(filePath)}. Details below.\n");
+                sb.AppendLine(ex.ToString());
+                throw new Exception(sb.ToString());
+            }
+        }
+
         /// <summary>
         /// Sets up the EMEDF from an embedded JSON stream.
         /// </summary>
-
 
         private EMEDF InitDocsFromResource(string streamPath)
         {
@@ -254,12 +289,15 @@ namespace DarkScript3
 
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine($"function {funcName} ({argNames}) {{");
+                    sb.AppendLine($@"   Scripter.CurrentInsName = ""{funcName}"";");
                     foreach (var arg in args)
                     {
                         sb.AppendLine($"    if ({arg} === void 0)");
                         sb.AppendLine($@"           throw '!!! Argument \""{arg}\"" in instruction \""{funcName}\"" is undefined.';");
                     }
-                    sb.AppendLine($"    return _Instruction({bank.Index}, {instr.Index}, Array.from(arguments));");
+                    sb.AppendLine($@"  var ins = _Instruction({bank.Index}, {instr.Index}, Array.from(arguments));");
+                    sb.AppendLine("    Scripter.CurrentInsName = \"\";");
+                    sb.AppendLine("    return ins;");
                     sb.AppendLine("}");
                     v8.Execute(sb.ToString());
                     if (funcName.Contains("SpEffect"))
@@ -294,10 +332,11 @@ namespace DarkScript3
         public string Unpack()
         {
             InitLinkedFiles();
-
             StringBuilder code = new StringBuilder();
             foreach (var evt in EVD.Events)
             {
+                CurrentEventID = (int)evt.ID;
+
                 string id = evt.ID.ToString();
                 string restBehavior = evt.RestBehavior.ToString();
 
@@ -312,8 +351,16 @@ namespace DarkScript3
 
                 for (int insIndex = 0; insIndex < evt.Instructions.Count; insIndex++)
                 {
+                    CurrentInsIndex = insIndex;
                     Instruction ins = evt.Instructions[insIndex];
-                    EMEDF.InstrDoc doc = DOC[ins.Bank][ins.ID];
+                    EMEDF.InstrDoc doc = DOC[ins.Bank]?[ins.ID];
+                    if (doc == null)
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine($@"Unable to read instruction at Event {CurrentEventID}, Index {CurrentInsIndex}.");
+                        sb.AppendLine($@"Instruction {ins.Bank}[{ins.ID}] does not exist.");
+                        throw new Exception(sb.ToString());
+                    }
                     string funcName = TitleCaseName(doc.Name);
 
                     IEnumerable<ArgType> argStruct = doc.Arguments.Select(arg => arg.Type == 8 ? ArgType.UInt32 : (ArgType)arg.Type);
@@ -337,8 +384,8 @@ namespace DarkScript3
                     catch (Exception ex)
                     {
                         var sb = new StringBuilder();
-                        sb.AppendLine($@"ERROR: Unable to unpack arguments for ""{funcName}""");
-                        sb.AppendLine(ex.ToString());
+                        sb.AppendLine($@"Unable to unpack arguments for {funcName} at Event {CurrentEventID}, Index {CurrentInsIndex}." + Environment.NewLine);
+                        sb.AppendLine(ex.Message);
                         throw new Exception(sb.ToString());
                     }
 
@@ -357,6 +404,8 @@ namespace DarkScript3
                 code.AppendLine("});");
                 code.AppendLine("");
             }
+            CurrentInsIndex = -1;
+            CurrentEventID = -1;
             return code.ToString();
         }
 
