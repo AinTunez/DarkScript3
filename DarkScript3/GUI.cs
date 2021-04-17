@@ -135,8 +135,10 @@ namespace DarkScript3
             }
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx;";
-            if (ofd.ShowDialog() == DialogResult.OK)
+            if (ofd.ShowDialog() != DialogResult.OK)
+            {
                 return;
+            }
             
             if (ofd.FileName.EndsWith(".js"))
             {

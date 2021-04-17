@@ -386,6 +386,12 @@ namespace DarkScript3
                         var sb = new StringBuilder();
                         sb.AppendLine($@"Unable to unpack arguments for {funcName} at Event {CurrentEventID}, Index {CurrentInsIndex}." + Environment.NewLine);
                         sb.AppendLine(ex.Message);
+                        ExcessDataException edx = (ex as ExcessDataException);
+                        if (edx != null)
+                        {
+                            string data = BitConverter.ToString(ins.ArgData.Skip((int)edx.BytePosition).ToArray()).Replace("-", " ");
+                            sb.AppendLine($"EXCESS DATA: {{ {data} }}");
+                        }
                         throw new Exception(sb.ToString());
                     }
 
