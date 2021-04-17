@@ -393,12 +393,6 @@
     </AdditionalFiles>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SoulsFormats\SoulsFormats\SoulsFormats.csproj">
-      <Project>{f6d5d5c9-9750-4978-9355-7fa451b3ee13}</Project>
-      <Name>SoulsFormats</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.2.9.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.2.9.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
