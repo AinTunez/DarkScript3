@@ -26,11 +26,14 @@ Event(12345, Restart, function () {
 })
 ```
 
-You can also define events or functions in other JS files and import them like below. **NOTE: The path is relative to the DarkScript3.exe executable, not the event files themselves.**
+You can also define events or helper functions in other JS files and import them like below. **The path is relative to the program EXE, not the event file.** If you want to import a file from elsewhere, use the absolute path.
 
 ```js
 Scripter.Import("path/to/my/file.js");
 ```
+
+This is not a true `import` statement, so duplicate variable/cosnt/function names –– even across different files –– will cause problems. 
+
 
 ## Images
 ![DarkScript 3 screenshot](https://i.imgur.com/mKBkZuk.png)
