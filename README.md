@@ -32,7 +32,7 @@ You can also define events or helper functions in other JS files and import them
 Scripter.Import("path/to/my/file.js");
 ```
 
-This is not a true `import` statement, so duplicate variable/cosnt/function names –– even across different files –– will cause problems. Avoid this with proper scoping or fully unique naming.
+This is not a true `import` statement, so duplicate variable/const/function names –– even across different files –– will cause problems. Avoid this with proper scoping or fully unique naming.
 
 
 ## Images
