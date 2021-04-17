@@ -25,6 +25,13 @@ Event(12345, Restart, function () {
   block.Exec();
 })
 ```
+
+You can also define your own helper functions on other JS files and import them like this:
+
+```js
+Scripter.Import("path/to/my/file.js");
+```
+
 ## Images
 ![DarkScript 3 screenshot](https://i.imgur.com/mKBkZuk.png)
 
