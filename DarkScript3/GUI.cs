@@ -8,7 +8,6 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Microsoft.ClearScript;
 using FastColoredTextBoxNS;
-using System.Xml;
 using SoulsFormats;
 using System.Xml.Linq;
 using System.Text;
@@ -99,7 +98,7 @@ namespace DarkScript3
 
                     if (line != null)
                     {
-                        MessageBox.Show(Regex.Replace(scriptException.Message, "^Error: ", "") + line.Trim());
+                        MessageBox.Show(Regex.Replace(scriptException.Message, "^Error: ", "") + "\n" +  line.Trim());
                     }
                     else
                     {
