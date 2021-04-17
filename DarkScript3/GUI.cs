@@ -136,28 +136,29 @@ namespace DarkScript3
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx;";
             if (ofd.ShowDialog() == DialogResult.OK)
+                return;
+            
+            if (ofd.FileName.EndsWith(".js"))
             {
-                if (ofd.FileName.EndsWith(".js"))
-                {
-                    OpenJSFile(ofd.FileName);
-                }
-                else if (File.Exists(ofd.FileName + ".js"))
-                {
-                    OpenJSFile(ofd.FileName + ".js");
-                }
-                else if (ofd.FileName.EndsWith(".xml"))
-                {
-                    OpenXMLFile(ofd.FileName);
-                }
-                else if (File.Exists(ofd.FileName + ".xml"))
-                {
-                    OpenXMLFile(ofd.FileName + ".xml");
-                }
-                else
-                {
-                    OpenEMEVDFile(ofd.FileName, null, ChooseGame());
-                }
+                OpenJSFile(ofd.FileName);
             }
+            else if (File.Exists(ofd.FileName + ".js"))
+            {
+                OpenJSFile(ofd.FileName + ".js");
+            }
+            else if (ofd.FileName.EndsWith(".xml"))
+            {
+                OpenXMLFile(ofd.FileName);
+            }
+            else if (File.Exists(ofd.FileName + ".xml"))
+            {
+                OpenXMLFile(ofd.FileName + ".xml");
+            }
+            else
+            {
+                OpenEMEVDFile(ofd.FileName, null, ChooseGame());
+            }
+            
             JSRegex.GlobalConstant = new Regex($@"[^.]\b(?<range>{string.Join("|", Scripter.GlobalConstants)})\b");
             IEnumerable<AutocompleteItem> instructions = Scripter.Functions.Keys.Select(s =>
             {
