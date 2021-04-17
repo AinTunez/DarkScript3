@@ -26,7 +26,7 @@ Event(12345, Restart, function () {
 })
 ```
 
-You can also define your own helper functions on other JS files and import them like this:
+You can also define your own helper functions in other JS files and import them like this:
 
 ```js
 Scripter.Import("path/to/my/file.js");
