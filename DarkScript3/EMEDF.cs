@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,10 +16,10 @@ namespace DarkScript3
         private long UNK;
 
         [JsonProperty(PropertyName = "main_classes")]
-        public List<ClassDoc> Classes;
+        public List<ClassDoc> Classes { get; private set; }
 
         [JsonProperty(PropertyName = "enums")]
-        public EnumDoc[] Enums;
+        public EnumDoc[] Enums { get; private set; }
 
         public static EMEDF ReadText(string input)
         {
@@ -41,13 +41,13 @@ namespace DarkScript3
         public class ClassDoc
         {
             [JsonProperty(PropertyName = "name")]
-            public string Name { get; set; }
+            public string Name { get; private set; }
 
             [JsonProperty(PropertyName = "index")]
-            public long Index { get; set; }
+            public long Index { get; private set; }
 
             [JsonProperty(PropertyName = "instrs")]
-            public List<InstrDoc> Instructions { get; set; }
+            public List<InstrDoc> Instructions { get; private set; }
 
             public InstrDoc this[int instructionIndex] => Instructions.Find(ins => ins.Index == instructionIndex);
         }
@@ -55,13 +55,13 @@ namespace DarkScript3
         public class InstrDoc
         {
             [JsonProperty(PropertyName = "name")]
-            public string Name { get; set; }
+            public string Name { get; private set; }
 
             [JsonProperty(PropertyName = "index")]
-            public long Index { get; set; }
+            public long Index { get; private set; }
 
             [JsonProperty(PropertyName = "args")]
-            public ArgDoc[] Arguments { get; set; }
+            public ArgDoc[] Arguments { get; private set; }
 
             public ArgDoc this[uint i] => Arguments[i];
         }
@@ -69,49 +69,65 @@ namespace DarkScript3
         public class ArgDoc
         {
             [JsonProperty(PropertyName = "name")]
-            public string Name { get; set; }
+            public string Name { get; private set; }
 
             [JsonProperty(PropertyName = "type")]
-            public long Type { get; set; }
+            public long Type { get; private set; }
 
             [JsonProperty(PropertyName = "enum_name")]
-            public string EnumName { get; set; }
+            public string EnumName { get; private set; }
 
             [JsonProperty(PropertyName = "default")]
-            public long Default { get; set; }
+            public long Default { get; private set; }
 
             [JsonProperty(PropertyName = "min")]
-            public long Min { get; set; }
+            public long Min { get; private set; }
 
             [JsonProperty(PropertyName = "max")]
-            public long Max { get; set; }
+            public long Max { get; private set; }
 
             [JsonProperty(PropertyName = "increment")]
-            public long Increment { get; set; }
+            public long Increment { get; private set; }
 
             [JsonProperty(PropertyName = "format_string")]
-            public string FormatString { get; set; }
+            public string FormatString { get; private set; }
 
             [JsonProperty(PropertyName = "unk1")]
-            private long UNK1 { get; set; }
+            private long UNK1;
 
             [JsonProperty(PropertyName = "unk2")]
-            private long UNK2 { get; set; }
+            private long UNK2;
 
             [JsonProperty(PropertyName = "unk3")]
-            private long UNK3 { get; set; }
+            private long UNK3;
 
             [JsonProperty(PropertyName = "unk4")]
-            private long UNK4 { get; set; }
+            private long UNK4;
+            
+            // Calculated values
+
+            public string DisplayName { get; set; }
+
+            public EnumDoc EnumDoc { get; set; }
+
+            public string GetDisplayValue(string val) => EnumDoc == null ? val : EnumDoc.GetDisplayValue(val);
         }
 
         public class EnumDoc
         {
             [JsonProperty(PropertyName = "name")]
-            public string Name { get; set; }
+            public string Name { get; private set; }
 
             [JsonProperty(PropertyName = "values")]
-            public Dictionary<string, string> Values { get; set; }
+            public Dictionary<string, string> Values { get; private set; }
+
+            // Calculated values
+
+            public string DisplayName { get; set; }
+
+            public Dictionary<string, string> DisplayValues { get; set; }
+
+            public string GetDisplayValue(string val) => DisplayValues.TryGetValue(val, out string reval) ? reval : val;
         }
     }
 }

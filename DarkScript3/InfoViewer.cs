@@ -1,4 +1,4 @@
-﻿using SoulsFormats;
+using SoulsFormats;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

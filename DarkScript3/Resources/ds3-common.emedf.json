@@ -490,7 +490,7 @@
               "unk4": 0
             },
             {
-              "name": "Minimum Number of Targets",
+              "name": "Number of Target Characters",
               "type": 5,
               "enum_name": null,
               "default": 1,
@@ -5526,7 +5526,7 @@
               "unk4": 0
             },
             {
-              "name": "Inside",
+              "name": "Should Player Be Inside",
               "type": 0,
               "enum_name": "BOOL",
               "default": 1,
@@ -5588,7 +5588,7 @@
               "unk4": 0
             },
             {
-              "name": "Inside",
+              "name": "Should Player Be Inside",
               "type": 0,
               "enum_name": "BOOL",
               "default": 1,
@@ -6262,7 +6262,7 @@
               "unk4": 0
             },
             {
-              "name": "Inside",
+              "name": "Should Player Be Inside",
               "type": 0,
               "enum_name": "BOOL",
               "default": 1,
@@ -16860,7 +16860,7 @@
         "19": "Host",
         "20": "Co-op",
         "21": "Hostile",
-        "22": "Wandering Phantom",
+        "22": "Wandering Phantom 1",
         "23": "Enemy 1",
         "24": "Enemy 2",
         "25": "Strong Enemy 1",

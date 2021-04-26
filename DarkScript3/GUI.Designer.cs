@@ -1,4 +1,4 @@
-﻿namespace DarkScript3
+namespace DarkScript3
 {
     partial class GUI
     {
@@ -47,7 +47,10 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
+            this.decompileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openAutoCompleteMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.emevdDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,7 +60,6 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.display = new System.Windows.Forms.SplitContainer();
             this.docBox = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.openAutoCompleteMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.editor)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -145,7 +147,7 @@
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
@@ -153,21 +155,21 @@
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // batchResaveToolStripMenuItem
             // 
             this.batchResaveToolStripMenuItem.Name = "batchResaveToolStripMenuItem";
-            this.batchResaveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.batchResaveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.batchResaveToolStripMenuItem.Text = "Batch Resave";
             this.batchResaveToolStripMenuItem.Click += new System.EventHandler(this.BatchResaveToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -183,6 +185,8 @@
             this.toolStripSeparator2,
             this.selectAllToolStripMenuItem,
             this.optionsToolStripMenuItem,
+            this.decompileToolStripMenuItem,
+            this.toolStripSeparator3,
             this.customizeToolStripMenuItem,
             this.openAutoCompleteMenuToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
@@ -251,12 +255,33 @@
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(274, 6);
             // 
+            // decompileToolStripMenuItem
+            // 
+            this.decompileToolStripMenuItem.Name = "decompileToolStripMenuItem";
+            this.decompileToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.decompileToolStripMenuItem.Text = "Fancy Decompile";
+            this.decompileToolStripMenuItem.Click += new System.EventHandler(this.decompileToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(274, 6);
+            // 
             // customizeToolStripMenuItem
             // 
             this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
             this.customizeToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
             this.customizeToolStripMenuItem.Text = "Customize...";
             this.customizeToolStripMenuItem.Click += new System.EventHandler(this.customizeToolStripMenuItem_Click);
+            // 
+            // openAutoCompleteMenuToolStripMenuItem
+            // 
+            this.openAutoCompleteMenuToolStripMenuItem.Name = "openAutoCompleteMenuToolStripMenuItem";
+            this.openAutoCompleteMenuToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Space)));
+            this.openAutoCompleteMenuToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.openAutoCompleteMenuToolStripMenuItem.Text = "OpenAutoCompleteMenu";
+            this.openAutoCompleteMenuToolStripMenuItem.Visible = false;
+            this.openAutoCompleteMenuToolStripMenuItem.Click += new System.EventHandler(this.openAutoCompleteMenuToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
@@ -352,7 +377,7 @@
         '\'',
         '\''};
             this.docBox.AutoIndentCharsPatterns = "\r\n^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;]+);\r\n";
-            this.docBox.AutoScrollMinSize = new System.Drawing.Size(2, 14);
+            this.docBox.AutoScrollMinSize = new System.Drawing.Size(0, 50);
             this.docBox.BackBrush = null;
             this.docBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.docBox.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2;
@@ -370,7 +395,7 @@
             this.docBox.LineNumberColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.docBox.Location = new System.Drawing.Point(0, 0);
             this.docBox.Name = "docBox";
-            this.docBox.Paddings = new System.Windows.Forms.Padding(0);
+            this.docBox.Paddings = new System.Windows.Forms.Padding(18);
             this.docBox.ReadOnly = true;
             this.docBox.RightBracket = ')';
             this.docBox.RightBracket2 = '}';
@@ -381,16 +406,8 @@
             this.docBox.Size = new System.Drawing.Size(320, 475);
             this.docBox.TabIndex = 1;
             this.docBox.TabStop = false;
+            this.docBox.WordWrap = true;
             this.docBox.Zoom = 100;
-            // 
-            // openAutoCompleteMenuToolStripMenuItem
-            // 
-            this.openAutoCompleteMenuToolStripMenuItem.Name = "openAutoCompleteMenuToolStripMenuItem";
-            this.openAutoCompleteMenuToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Space)));
-            this.openAutoCompleteMenuToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
-            this.openAutoCompleteMenuToolStripMenuItem.Text = "OpenAutoCompleteMenu";
-            this.openAutoCompleteMenuToolStripMenuItem.Visible = false;
-            this.openAutoCompleteMenuToolStripMenuItem.Click += new System.EventHandler(this.openAutoCompleteMenuToolStripMenuItem_Click);
             // 
             // GUI
             // 
@@ -452,6 +469,8 @@
         private System.Windows.Forms.ToolStripSeparator optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openAutoCompleteMenuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem decompileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }
 

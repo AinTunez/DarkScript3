@@ -490,7 +490,7 @@
               "unk4": 0
             },
             {
-              "name": "Minimum Number of Targets",
+              "name": "Number of Target Characters",
               "type": 5,
               "enum_name": null,
               "default": 1,
@@ -5144,7 +5144,7 @@
               "unk4": 0
             },
             {
-              "name": "Number of Target Characters",
+              "name": "Number of Target Objects",
               "type": 6,
               "enum_name": null,
               "default": 1.0,
@@ -6670,7 +6670,7 @@
               "unk4": 0
             },
             {
-              "name": "Inside",
+              "name": "Should Player Be Inside",
               "type": 0,
               "enum_name": "BOOL",
               "default": 1,
@@ -6732,7 +6732,7 @@
               "unk4": 0
             },
             {
-              "name": "Inside",
+              "name": "Should Player Be Inside",
               "type": 0,
               "enum_name": "BOOL",
               "default": 1,
@@ -7406,7 +7406,7 @@
               "unk4": 0
             },
             {
-              "name": "Inside",
+              "name": "Should Player Be Inside",
               "type": 0,
               "enum_name": "BOOL",
               "default": 1,
@@ -12672,6 +12672,11 @@
         {
           "name": "Reset Dragonrot Counter",
           "index": 94,
+          "args": []
+        },
+        {
+          "name": "UNKNOWN 2003[95]",
+          "index": 95,
           "args": []
         }
       ]
@@ -19150,7 +19155,7 @@
         "19": "Host",
         "20": "Co-op",
         "21": "Hostile",
-        "22": "Wandering Phantom",
+        "22": "Wandering Phantom 1",
         "23": "Enemy 1",
         "24": "Enemy 2",
         "25": "Strong Enemy 1",
@@ -19306,9 +19311,9 @@
         "15": "Burden Dispelled",
         "16": "Sinister Burden",
         "17": "Unseen Aid",
-        "18": "Unseen Aid",
-        "19": "Test Message",
-        "20": "Test Message",
+        "18": "Unseen Aid 1",
+        "19": "Test Message 1",
+        "20": "Test Message 2",
         "21": "Dragonrot Healed"
       }
     },

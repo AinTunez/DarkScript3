@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System;
 using System.Linq;
 using System.Text;
@@ -12,56 +12,38 @@ using static SoulsFormats.EMEVD;
 
 namespace DarkScript3
 {
+    /// <summary>
+    /// Packs and unpacks EMEVD files for a given game in a simple format.
+    /// 
+    /// To pack or unpack in the fancier format (can be detected by presence of $Event), use FancyEventScripter.
+    /// </summary>
     public class EventScripter
     {
+        private InstructionDocs docs;
+
         public EMEVD EVD = new EMEVD();
-
-        public string ResourceString = "";
-
-        public EMEDF DOC { get; set; } = new EMEDF();
 
         public EMELD ELD = new EMELD();
 
         private V8ScriptEngine v8 = new V8ScriptEngine();
 
-        public Dictionary<string, (int classIndex, int instrIndex)> Functions = new Dictionary<string, (int classIndex, int instrIndex)>();
-
-        public Dictionary<EMEDF.InstrDoc, List<uint>> FuncBytePositions = new Dictionary<EMEDF.InstrDoc, List<uint>>();
-
-        public List<string> GlobalConstants = new List<string>() { "Default", "End", "Restart" };
-
-        public Dictionary<string, string> EnumReplacements = new Dictionary<string, string>
-        {
-            { "BOOL.TRUE", "true" },
-            { "BOOL.FALSE", "false" }
-        };
-
         public int CurrentEventID = -1;
         public int CurrentInsIndex = -1;
         public string CurrentInsName = "";
 
-        public List<string> EnumNamesForGlobalization = new List<string>
-        {
-            "ONOFF",
-            "ONOFFCHANGE",
-            "ConditionGroup",
-            "ConditionState",
-            "DisabledEnabled",
-        };
-
         private List<string> LinkedFiles = new List<string>();
 
-        public EventScripter(EMEVD evd, string resource = "ds1-common.emedf.json", bool dummy = false)
+        public EventScripter(EMEVD evd, InstructionDocs docs)
         {
             EVD = evd;
-            ResourceString = resource;
-            InitAll(resource);
+            this.docs = docs;
+            InitAll();
         }
 
-        public EventScripter(string file, string resource = "ds1-common.emedf.json", bool withEmeld = false)
+        public EventScripter(string file, InstructionDocs docs)
         {
             EVD = EMEVD.Read(file);
-            if (withEmeld)
+            if (File.Exists(file.Replace(".emevd", ".emeld")))
             {
                 try
                 {
@@ -72,18 +54,8 @@ namespace DarkScript3
 
                 }
             }
-            ResourceString = resource;
-            InitAll(resource);
-        }
-
-        public bool IsVariableLength(EMEDF.InstrDoc doc)
-        {
-            if (ResourceString.StartsWith("ds2"))
-                return doc == DOC[100130][1] || doc == DOC[100070][0];
-            else if (ResourceString.StartsWith("ds1"))
-                return doc == DOC[2000][0];
-            else
-                return doc == DOC[2000][0] || doc == DOC[2000][6];
+            this.docs = docs;
+            InitAll();
         }
 
         /// <summary>
@@ -96,13 +68,12 @@ namespace DarkScript3
 
             try
             {
-                EMEDF.InstrDoc doc = DOC[bank][index];
-                bool isVar = IsVariableLength(doc);
+                EMEDF.InstrDoc doc = docs.DOC[bank][index];
+                bool isVar = docs.IsVariableLength(doc);
                 if (args.Length < doc.Arguments.Length)
                 {
                     throw new Exception($"Instruction {bank}[{index}] ({doc.Name}) requires {doc.Arguments.Length} arguments.");
                 }
-
 
                 for (int i = 0; i < args.Length; i++)
                 {
@@ -119,7 +90,7 @@ namespace DarkScript3
 
                         int sourceStartByte = nums.ElementAt(0);
                         int length = nums.ElementAt(1);
-                        uint targetStartByte = FuncBytePositions[doc][i];
+                        uint targetStartByte = docs.FuncBytePositions[doc][i];
 
                         Parameter p = new Parameter(evt.Instructions.Count, targetStartByte, sourceStartByte, length);
                         evt.Parameters.Add(p);
@@ -180,26 +151,6 @@ namespace DarkScript3
             return ins;
         }
 
-        /// <summary>
-        /// Sets up the JavaScript environment.
-        /// </summary>
-        /// <param name="embeddedResource"></param>
-        public void InitAll(string embeddedResource)
-        {
-            v8.AddHostObject("$$$_host", new HostFunctions());
-            v8.AddHostObject("EVD", EVD);
-            v8.AddHostType("EMEVD", typeof(EMEVD));
-            v8.AddHostObject("Scripter", this);
-            v8.AddHostType("Object", typeof(object));
-            v8.AddHostType("EVENT", typeof(Event));
-            v8.AddHostType("INSTRUCTION", typeof(Instruction));
-            v8.AddHostType("PARAMETER", typeof(Parameter));
-            v8.AddHostType("REST", typeof(Event.RestBehaviorType));
-            v8.AddHostType("Console", typeof(Console));
-            v8.Execute(Resource.Text("script.js"));
-            DOC = InitDocsFromResource(embeddedResource);
-        }
-
         public void Import(string filePath)
         {
             try
@@ -216,75 +167,52 @@ namespace DarkScript3
         }
 
         /// <summary>
-        /// Sets up the EMEDF from an embedded JSON stream.
+        /// Sets up the JavaScript environment.
         /// </summary>
-
-        private EMEDF InitDocsFromResource(string streamPath)
+        public void InitAll()
         {
-            EMEDF DOC;
-            if (File.Exists(streamPath))
-                DOC = EMEDF.ReadFile(streamPath);
-            else if (File.Exists(@"Resources\" + streamPath))
-                DOC = EMEDF.ReadFile(@"Resources\" + streamPath);
-            else
-                DOC = EMEDF.ReadStream(streamPath);
+            v8.AddHostObject("$$$_host", new HostFunctions());
+            v8.AddHostObject("EVD", EVD);
+            v8.AddHostType("EMEVD", typeof(EMEVD));
+            v8.AddHostObject("Scripter", this);
+            v8.AddHostType("Object", typeof(object));
+            v8.AddHostType("EVENT", typeof(Event));
+            v8.AddHostType("INSTRUCTION", typeof(Instruction));
+            v8.AddHostType("PARAMETER", typeof(Parameter));
+            v8.AddHostType("REST", typeof(Event.RestBehaviorType));
+            v8.AddHostType("Console", typeof(Console));
+            v8.Execute(Resource.Text("script.js"));
 
+            foreach (KeyValuePair<string, int> pair in docs.GlobalEnumConstants)
+            {
+                v8.Execute($"const {pair.Key} = {pair.Value};");
+            }
+            EMEDF DOC = docs.DOC;
             foreach (EMEDF.EnumDoc enm in DOC.Enums)
             {
-                enm.Name = Regex.Replace(enm.Name, @"[^\w]", "");
-                if (EnumNamesForGlobalization.Contains(enm.Name))
+                if (InstructionDocs.EnumNamesForGlobalization.Contains(enm.Name)) continue;
+                if (enm.Name == "BOOL") continue;
+                HashSet<string> vals = new HashSet<string>();
+                StringBuilder code = new StringBuilder();
+                code.AppendLine($"const {enm.DisplayName} = {{");
+                foreach (var pair in enm.Values.ToList())
                 {
-                    foreach (var pair in enm.Values.ToList())
-                    {
-                        string val = Regex.Replace(pair.Value, @"[^\w]", "");
-                        enm.Values[pair.Key] = val;
-                        EnumReplacements[$"{enm.Name}.{val}"] = val;
-                        GlobalConstants.Add(val);
-                        string code = $"const {val} = {int.Parse(pair.Key)};";
-                        if (enm.Name != "ONOFF") //handled by ON/OFF/CHANGE
-                            v8.Execute(code);
-                    }
+                    string valName = Regex.Replace(pair.Value, @"[^\w]", "");
+                    if (vals.Contains(valName)) throw new Exception($"Internal error: enum {enm.DisplayName} has duplicate value names {valName}");
+                    vals.Add(valName);
+                    code.AppendLine($"{valName}: {pair.Key},");
                 }
-                else
-                {
-                    List<string> vals = new List<string>();
-                    StringBuilder code = new StringBuilder();
-                    code.AppendLine($"const {enm.Name} = {{");
-                    foreach (var pair in enm.Values.ToList())
-                    {
-                        string val = Regex.Replace(pair.Value, @"[^\w]", "");
-                        if (vals.Contains(val))
-                        {
-                            int i = 1;
-                            while (vals.Contains(val + "_" + i.ToString()))
-                                i++;
-                            val = val + "_" + i.ToString();
-                        }
-                        vals.Add(val);
-                        enm.Values[pair.Key] = val;
-                        code.AppendLine($"{val}:{pair.Key},");
-                    }
-                    code.AppendLine("};");
-                    v8.Execute(code.ToString());
-                }
+                code.AppendLine("};");
+                v8.Execute(code.ToString());
             }
 
             foreach (EMEDF.ClassDoc bank in DOC.Classes)
             {
                 foreach (EMEDF.InstrDoc instr in bank.Instructions)
                 {
-                    string funcName = TitleCaseName(instr.Name);
-                    Functions[funcName] = ((int)bank.Index, (int)instr.Index);
-                    FuncBytePositions[instr] = GetArgBytePositions(instr.Arguments.Select(i => (ArgType)i.Type).ToList());
+                    string funcName = InstructionDocs.TitleCaseName(instr.Name);
 
-                    foreach (var arg in instr.Arguments)
-                    {
-                        arg.Name = CamelCaseName(arg.Name.Replace("Class", "Class Name"));
-                        if (arg.EnumName != null)
-                            arg.EnumName = Regex.Replace(arg.EnumName, @"[^\w]", "");
-                    }
-
-                    var args = instr.Arguments.Select(a => a.Name);
+                    var args = instr.Arguments.Select(a => a.DisplayName);
                     string argNames = string.Join(", ", args);
 
                     StringBuilder sb = new StringBuilder();
@@ -299,14 +227,16 @@ namespace DarkScript3
                     sb.AppendLine("    Scripter.CurrentInsName = \"\";");
                     sb.AppendLine("    return ins;");
                     sb.AppendLine("}");
+                    // Console.WriteLine(sb.ToString());
                     v8.Execute(sb.ToString());
+
+                    // TODO: Add aliases to emedfs rather than hardcoding them here
                     if (funcName.Contains("SpEffect"))
                     {
                         v8.Execute($"const {funcName.Replace("SpEffect", "Speffect")} = {funcName};");
                     }
                 }
             }
-            return DOC;
         }
 
         public string EventName(long id)
@@ -319,10 +249,11 @@ namespace DarkScript3
         /// <summary>
         /// Executes the selected code to generate the EMEVD.
         /// </summary>
-        public EMEVD Pack(string code)
+        public EMEVD Pack(string code, string documentName = null)
         {
+            // TODO: Catch scripting exception here so FancyEventScripter can use it
             EVD.Events.Clear();
-            v8.Execute($"(function() {{ {code} }})();");
+            v8.Execute(documentName ?? "User Script", true, $"(function() {{ {code} }})();");
             return EVD;
         }
 
@@ -333,86 +264,91 @@ namespace DarkScript3
         {
             InitLinkedFiles();
             StringBuilder code = new StringBuilder();
-            foreach (var evt in EVD.Events)
+            foreach (Event evt in EVD.Events)
             {
-                CurrentEventID = (int)evt.ID;
-
-                string id = evt.ID.ToString();
-                string restBehavior = evt.RestBehavior.ToString();
-
-                //each parameter's string representation
-                Dictionary<Parameter, string> paramNames = ParamNames(evt);
-                IEnumerable<string> argNameList = paramNames.Values.Distinct();
-                string evtArgs = string.Join(", ", argNameList);
-
-                string eventName = EventName(evt.ID);
-                if (eventName != null) code.AppendLine($"// {eventName}");
-                code.AppendLine($"Event({id}, {restBehavior}, function({evtArgs}) {{");
-
-                for (int insIndex = 0; insIndex < evt.Instructions.Count; insIndex++)
-                {
-                    CurrentInsIndex = insIndex;
-                    Instruction ins = evt.Instructions[insIndex];
-                    EMEDF.InstrDoc doc = DOC[ins.Bank]?[ins.ID];
-                    if (doc == null)
-                    {
-                        StringBuilder sb = new StringBuilder();
-                        sb.AppendLine($@"Unable to read instruction at Event {CurrentEventID}, Index {CurrentInsIndex}.");
-                        sb.AppendLine($@"Instruction {ins.Bank}[{ins.ID}] does not exist.");
-                        throw new Exception(sb.ToString());
-                    }
-                    string funcName = TitleCaseName(doc.Name);
-
-                    IEnumerable<ArgType> argStruct = doc.Arguments.Select(arg => arg.Type == 8 ? ArgType.UInt32 : (ArgType)arg.Type);
-
-                    string[] args = default;
-                    string argString = "";
-                    try
-                    {
-                        if (IsVariableLength(doc))
-                        {
-                            argStruct = Enumerable.Repeat(ArgType.Int32, ins.ArgData.Length / 4);
-                            args = ins.UnpackArgs(argStruct).Select(a => a.ToString()).ToArray();
-                            argString = ArgumentStringInitializer(args, insIndex, paramNames, argStruct);
-                        }
-                        else
-                        {
-                            args = ins.UnpackArgs(argStruct).Select(a => a.ToString()).ToArray();
-                            argString = ArgumentString(args, ins, insIndex, paramNames);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        var sb = new StringBuilder();
-                        sb.AppendLine($@"Unable to unpack arguments for {funcName} at Event {CurrentEventID}, Index {CurrentInsIndex}." + Environment.NewLine);
-                        sb.AppendLine(ex.Message);
-                        ExcessDataException edx = (ex as ExcessDataException);
-                        if (edx != null)
-                        {
-                            string data = BitConverter.ToString(ins.ArgData.Skip((int)edx.BytePosition).ToArray()).Replace("-", " ");
-                            sb.AppendLine($"EXCESS DATA: {{ {data} }}");
-                        }
-                        throw new Exception(sb.ToString());
-                    }
-
-                    if (ins.Layer.HasValue)
-                    {
-                        string str = LayerString(ins.Layer.Value);
-                        if (argString.Length > 0)
-                            argString = $"{argString}, {str}";
-                        else
-                            argString = str;
-                    }
-
-                    string lineOfCode = $"\t{TitleCaseName(doc.Name)}({argString});";
-                    code.AppendLine(lineOfCode);
-                }
-                code.AppendLine("});");
-                code.AppendLine("");
+                UnpackEvent(evt, code);
             }
+            return code.ToString();
+        }
+
+        public void UnpackEvent(Event evt, StringBuilder code)
+        {
+            CurrentEventID = (int)evt.ID;
+
+            string id = evt.ID.ToString();
+            string restBehavior = evt.RestBehavior.ToString();
+
+            Dictionary<Parameter, string> paramNames = ParamNames(evt);
+            IEnumerable<string> argNameList = paramNames.Values.Distinct();
+            string evtArgs = string.Join(", ", argNameList);
+
+            string eventName = EventName(evt.ID);
+            if (eventName != null) code.AppendLine($"// {eventName}");
+            code.AppendLine($"Event({id}, {restBehavior}, function({evtArgs}) {{");
+            for (int insIndex = 0; insIndex < evt.Instructions.Count; insIndex++)
+            {
+                CurrentInsIndex = insIndex;
+                Instruction ins = evt.Instructions[insIndex];
+                EMEDF.InstrDoc doc = docs.DOC[ins.Bank]?[ins.ID];
+                if (doc == null)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine($@"Unable to read instruction at Event {CurrentEventID}, Index {CurrentInsIndex}.");
+                    sb.AppendLine($@"Instruction {ins.Bank}[{ins.ID}] does not exist.");
+                    throw new Exception(sb.ToString());
+                }
+                string funcName = InstructionDocs.TitleCaseName(doc.Name);
+
+                IEnumerable<ArgType> argStruct = doc.Arguments.Select(arg => arg.Type == 8 ? ArgType.UInt32 : (ArgType)arg.Type);
+
+                string[] args = default;
+                string argString = "";
+                try
+                {
+                    if (docs.IsVariableLength(doc))
+                    {
+                        argStruct = Enumerable.Repeat(ArgType.Int32, ins.ArgData.Length / 4);
+                        args = ins.UnpackArgs(argStruct).Select(a => a.ToString()).ToArray();
+                        argString = docs.ArgumentStringInitializer(args, insIndex, paramNames, argStruct);
+                    }
+                    else
+                    {
+                        args = ins.UnpackArgs(argStruct).Select(a => a.ToString()).ToArray();
+                        argString = docs.ArgumentString(args, ins, insIndex, paramNames);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var sb = new StringBuilder();
+                    sb.AppendLine($@"Unable to unpack arguments for {funcName} at Event {CurrentEventID}, Index {CurrentInsIndex}." + Environment.NewLine);
+                    sb.AppendLine(ex.Message);
+                    // I can't use this. unfork SoulsFormats
+                    /*ExcessDataException edx = (ex as ExcessDataException);
+                    if (edx != null)
+                    {
+                        string data = BitConverter.ToString(ins.ArgData.Skip((int)edx.BytePosition).ToArray()).Replace("-", " ");
+                        sb.AppendLine($"EXCESS DATA: {{ {data} }}");
+                    }*/
+                    throw new Exception(sb.ToString());
+                }
+
+                if (ins.Layer.HasValue)
+                {
+                    string str = InstructionDocs.LayerString(ins.Layer.Value);
+                    if (argString.Length > 0)
+                        argString = $"{argString}, {str}";
+                    else
+                        argString = str;
+                }
+
+                string lineOfCode = $"{InstructionDocs.TitleCaseName(doc.Name)}({argString});";
+                code.AppendLine("\t" + lineOfCode);
+            }
+            code.AppendLine("});");
+            code.AppendLine("");
+
             CurrentInsIndex = -1;
             CurrentEventID = -1;
-            return code.ToString();
         }
 
         /// <summary>
@@ -421,10 +357,10 @@ namespace DarkScript3
         private void InitLinkedFiles()
         {
             var reader = new BinaryReaderEx(false, EVD.StringData);
-            if (ResourceString.StartsWith("ds2"))
+            if (docs.IsASCIIStringData)
             {
                 foreach (long offset in EVD.LinkedFileOffsets)
-                {   
+                {
                     string linkedFile = reader.GetASCII(offset);
                     LinkedFiles.Add(linkedFile);
                 }
@@ -437,7 +373,6 @@ namespace DarkScript3
                     LinkedFiles.Add(linkedFile);
                 }
             }
-            Console.WriteLine("Success");
         }
 
         /// <summary>
@@ -454,19 +389,6 @@ namespace DarkScript3
             if (t == 6) return 4; //f32
             if (t == 8) return 4; //string position
             throw new Exception("Invalid type in argument definition.");
-        }
-
-        /// <summary>
-        /// Returns JS source code to set an Instruction's layer.
-        /// </summary>
-        public string LayerString(uint layerValue)
-        {
-            List<int> bitList = new List<int>();
-            for (int b = 0; b < 32; b++)
-                if ((layerValue & (1 << b)) != 0)
-                    bitList.Add(b);
-
-            return $"$LAYERS({string.Join(", ", bitList)})";
         }
 
         /// <summary>
@@ -497,137 +419,5 @@ namespace DarkScript3
             }
             return paramNames;
         }
-
-        /// <summary>
-        /// Returns the textual representation of an event initializer's arguments.
-        /// </summary>
-        /// <param name="args"></param>
-        /// <param name="insIndex"></param>
-        /// <param name="paramNames"></param>
-        /// <param name="argStruct"></param>
-        /// <returns></returns>
-        public string ArgumentStringInitializer(string[] args, int insIndex, Dictionary<Parameter, string> paramNames, IEnumerable<ArgType> argStruct)
-        {
-            List<uint> positions = GetArgBytePositions(argStruct, 6);
-            for (int argIndex = 0; argIndex < argStruct.Count(); argIndex++)
-            {
-                uint bytePos = positions[argIndex];
-                foreach (Parameter prm in paramNames.Keys)
-                {
-                    if (prm.InstructionIndex == insIndex && bytePos == prm.TargetStartByte)
-                    {
-                        args[argIndex + 2] = paramNames[prm];
-                    }
-                }
-            }
-            return string.Join(", ", args).Trim();
-        }
-
-        /// <summary>
-        /// Returns the textual representation of an event's arguments.
-        /// </summary>
-        public string ArgumentString(string[] args, Instruction ins, int insIndex, Dictionary<Parameter, string> paramNames)
-        {
-            var insDoc = DOC[ins.Bank][ins.ID];
-            for (int argIndex = 0; argIndex < args.Count(); argIndex++)
-            {
-                EMEDF.ArgDoc argDoc = insDoc.Arguments[argIndex];
-                uint bytePos = FuncBytePositions[insDoc][argIndex];
-                bool isParam = false;
-
-                foreach (Parameter prm in paramNames.Keys)
-                {
-                    if (prm.InstructionIndex == insIndex && bytePos == prm.TargetStartByte)
-                    {
-                        isParam = true;
-                        args[argIndex] = paramNames[prm];
-                    }
-                }
-
-                if (!isParam && argDoc.EnumName != null)
-                {
-                    var enm = DOC.Enums.First(e => e.Name == argDoc.EnumName);
-                    string enumString = enm.Values.TryGetValue(args[argIndex], out string value) ? $"{enm.Name}.{value}" : args[argIndex];
-                    if (EnumReplacements.ContainsKey(enumString)) enumString = EnumReplacements[enumString];
-                    args[argIndex] = enumString;
-                }
-            }
-            if (args.Length > 0) return string.Join(", ", args).Trim();
-            return "";
-        }
-
-        /// <summary>
-        /// Returns a list of byte positions for an ordered list of argument types.
-        /// </summary>
-        public List<uint> GetArgBytePositions(IEnumerable<ArgType> argStruct, uint startPos = 0)
-        {
-            List<uint> positions = new List<uint>();
-            uint bytePos = startPos;
-            for (int i = 0; i < argStruct.Count(); i++)
-            {
-                long argType = (long)argStruct.ElementAt(i);
-                uint defLength = (uint)ByteLengthFromType(argType);
-                if (bytePos % defLength > 0)
-                    bytePos += defLength - (bytePos % defLength);
-
-                positions.Add(bytePos);
-                bytePos += defLength;
-            }
-            return positions;
-        }
-
-        static List<string> Acronyms = new List<string>()
-        {
-            "AI","HP","SE","SP","SFX","FFX","NPC"
-        };
-
-        #region Misc
-
-        public static string TitleCaseName(string s)
-        {
-            if (string.IsNullOrEmpty(s)) return s;
-
-            string[] words = Regex.Replace(s, @"[^\w\s]", "").Split(' ');
-            for (int i = 0; i < words.Length; i++)
-            {
-                if (words[i].Length == 0)
-                {
-                    continue;
-                }
-                else if (Acronyms.Contains(words[i].ToUpper()))
-                {
-                    words[i] = words[i].ToUpper();
-                    continue;
-                }
-                else if (words[i] == "SpEffect")
-                {
-                    continue;
-                }
-
-
-                char firstChar = char.ToUpper(words[i][0]);
-                string rest = "";
-                if (words[i].Length > 1)
-                {
-                    rest = words[i].Substring(1).ToLower();
-                }
-                words[i] = firstChar + rest;
-            }
-            string output = Regex.Replace(string.Join("", words), @"[^\w]", "");
-            return output;
-        }
-
-        public static string CamelCaseName(string s)
-        {
-            if (string.IsNullOrEmpty(s)) return s;
-            string name = TitleCaseName(s);
-            char firstChar = char.ToLower(name[0]);
-            if (name.Length > 1)
-                return firstChar + name.Substring(1);
-            else
-                return firstChar.ToString();
-        }
-
-        #endregion
     }
 }

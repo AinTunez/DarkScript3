@@ -1,4 +1,4 @@
-﻿namespace DarkScript3
+namespace DarkScript3
 {
     partial class StyleConfig
     {

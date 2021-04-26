@@ -1,4 +1,4 @@
-﻿const Default = REST.Default;
+﻿﻿const Default = REST.Default;
 const End = REST.End;
 const Restart = REST.Restart;
 
@@ -67,7 +67,6 @@ function $LAYERS(...args) {
         layer |= 1 << args[i];
     return { layerValue: layer };
 }
-
 
 function importFile(path) {
     Scripter.import(path);

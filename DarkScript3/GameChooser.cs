@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,11 +15,24 @@ namespace DarkScript3
     public partial class GameChooser : Form
     {
         public string GameDocs = "";
+        public bool Fancy { get => fancy.Checked; }
 
-        public GameChooser()
+        public GameChooser(bool showFancy, bool fancyChecked)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
+            if (showFancy)
+            {
+                fancy.Checked = fancyChecked;
+            }
+            else
+            {
+                // Hide everything below the fold by just hiding them and roughly cutting the window height
+                Point windowLoc = PointToClient(fancy.Parent.PointToScreen(fancy.Location));
+                fancy.Hide();
+                fancyLabel.Hide();
+                Height = windowLoc.Y + 7;
+            }
         }
 
         private void Ds3Btn_Click(object sender, EventArgs e)
@@ -56,6 +69,15 @@ namespace DarkScript3
         {
             GameDocs = "ds2scholar-common.emedf.json";
             Close();
+        }
+
+        private void GameChooser_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                GameDocs = null;
+                Close();
+            }
         }
 
         private void customBtn_Click(object sender, EventArgs e)

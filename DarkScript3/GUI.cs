@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -11,6 +11,8 @@ using FastColoredTextBoxNS;
 using SoulsFormats;
 using System.Xml.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace DarkScript3
 {
@@ -18,11 +20,16 @@ namespace DarkScript3
     {
         public string EVD_Path;
         public EventScripter Scripter;
+        public InstructionDocs Docs;
         public bool CodeChanged = false;
         public AutocompleteMenu InstructionMenu;
         public BetterFindForm BFF;
+        private Action<string> loadDocTextDebounce;
 
         Dictionary<string, (string title, string text)> ToolTips = new Dictionary<string, (string, string)>();
+
+        // TODO: Use persistent properties to save this across program startup.
+        private static bool defaultDecompileNewFancy = true;
 
         public GUI()
         {
@@ -37,6 +44,8 @@ namespace DarkScript3
             display.Panel2.Controls.Add(InfoTip);
             InfoTip.Show();
             InfoTip.Hide();
+            // TODO: Have different font sizes.
+            // This can be changed with something like new Font(editor.Font.Name, newSize);
             docBox.Font = editor.Font;
             editor.Focus();
             editor.SelectionColor = Color.White;
@@ -75,9 +84,22 @@ namespace DarkScript3
             MainMenuStrip.Enabled = false;
             Cursor = Cursors.WaitCursor;
 
+            // LineMapping lineMapping = null;
+            string text = editor.Text;
             try
             {
-                Scripter.Pack(editor.Text).Write(EVD_Path);
+                string debugName = $"{Path.GetFileName(EVD_Path)}.js";
+                bool useFancy = text.Contains("$Event(");
+                EMEVD result;
+                if (useFancy && Docs.Translator != null)
+                {
+                    result = new FancyEventScripter(Scripter, Docs).Pack(text, debugName);
+                }
+                else
+                {
+                    result = Scripter.Pack(text, debugName);
+                }
+                result.Write(EVD_Path);
                 SaveJSFile();
                 statusLabel.Text = "SAVE SUCCESSFUL";
                 CodeChanged = false;
@@ -85,11 +107,12 @@ namespace DarkScript3
             catch (Exception ex)
             {
                 statusLabel.Text = "SAVE FAILED";
-                IScriptEngineException scriptException = ex as IScriptEngineException;
-                if (scriptException != null)
+                if (ex is IScriptEngineException scriptException)
                 {
-                    
+                    // TODO: Parse in EventScripter?
+                    // TODO: Add a "go to line x" button.
                     string details = scriptException.ErrorDetails;
+                    // For each line, get: base file name, line no, col no. translate to base values and show those lines instead.
                     details = Regex.Replace(details, @"Script\s\[.*\]", "Script");
                     details = Regex.Replace(details, @"    at Script", "    at Editor");
                     details = Regex.Replace(details, @"->\s+", "-> ");
@@ -104,6 +127,10 @@ namespace DarkScript3
                     {
                         MessageBox.Show(details);
                     }
+                }
+                else if (ex is FancyJSCompiler.FancyCompilerException compException)
+                {
+                    MessageBox.Show(ex.Message.Trim());
                 }
                 else
                 {
@@ -158,18 +185,26 @@ namespace DarkScript3
             }
             else
             {
-                OpenEMEVDFile(ofd.FileName, null, ChooseGame());
+                string game = ChooseGame(out bool fancy);
+                if (game == null) return;
+                OpenEMEVDFile(ofd.FileName, null, game, null, fancy);
             }
-            
-            JSRegex.GlobalConstant = new Regex($@"[^.]\b(?<range>{string.Join("|", Scripter.GlobalConstants)})\b");
-            IEnumerable<AutocompleteItem> instructions = Scripter.Functions.Keys.Select(s =>
-            {
-                var instr = Scripter.Functions[s];
-                var doc = Scripter.DOC[instr.classIndex][instr.instrIndex];
 
+            JSRegex.GlobalConstant = new Regex($@"[^.]\b(?<range>{string.Join("|", InstructionDocs.GlobalConstants.Concat(Docs.GlobalEnumConstants.Keys))})\b");
+            
+            IEnumerable<AutocompleteItem> instructions = Docs.AllArgs.Keys.Select(s =>
+            {
                 string menuText = s;
                 string toolTipTitle = s;
-                string toolTipText = $"{instr.classIndex}[{instr.instrIndex}] ({ArgString(s)})";
+                string toolTipText;
+                if (Docs.Functions.TryGetValue(s, out (int, int) indices))
+                {
+                    toolTipText = $"{indices.Item1}[{indices.Item2}] ({ArgString(s)})";
+                }
+                else
+                {
+                    toolTipText = $"({ArgString(s)})";
+                }
 
                 return new AutocompleteItem(s + "(", InstructionMenu.ImageList.Images.IndexOfKey("instruction"), menuText, toolTipTitle, toolTipText);
             });
@@ -187,17 +222,20 @@ namespace DarkScript3
             CodeChanged = false;
         }
 
-        private void OpenEMEVDFile(string fileName, EMEVD evd, string gameDocs, string data = null)
+        private void OpenEMEVDFile(string fileName, EMEVD evd, string gameDocs, string data = null, bool fancy = false)
         {
+            // TODO: Don't have to re-instantiate metadata if it's the same game
+            Docs = new InstructionDocs(gameDocs);
             if (evd == null)
-                Scripter = new EventScripter(fileName, gameDocs, File.Exists(fileName.Replace(".emevd", ".emeld")));
+                Scripter = new EventScripter(fileName, Docs);
             else
-                Scripter = new EventScripter(evd, gameDocs);
+                Scripter = new EventScripter(evd, Docs);
 
             bool changed = CodeChanged;
             try
             {
-                editor.Text = data ?? Scripter.Unpack();
+                // Use fancy scripter here if asked for
+                editor.Text = data ?? (fancy && Docs.Translator != null ? new FancyEventScripter(Scripter, Docs).Unpack() : Scripter.Unpack());
                 EVD_Path = fileName;
                 Text = $"DARKSCRIPT 3 - {Path.GetFileName(fileName)}";
             } catch (Exception ex)
@@ -229,7 +267,6 @@ namespace DarkScript3
         private void OpenJSFile(string fileName)
         {
             string org = fileName.Substring(0, fileName.Length - 3);
-            SFUtil.Backup(org);
             string text = File.ReadAllText(fileName);
             string docs = GetHeaderValue(text, "docs");
             string[] fields = new string[]
@@ -252,15 +289,28 @@ namespace DarkScript3
                 };
             }
 
-            if (docs == null) docs = ChooseGame();
+            if (docs == null)
+            {
+                docs = ChooseGame();
+                if (docs == null) return;
+            }
+
+            SFUtil.Backup(org);
 
             text = Regex.Replace(text, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==", "");
             OpenEMEVDFile(org, evd, docs, text.Trim());
         }
 
+        private string ChooseGame(out bool fancy)
+        {
+            GameChooser chooser = new GameChooser(true, defaultDecompileNewFancy);
+            chooser.ShowDialog();
+            fancy = defaultDecompileNewFancy = chooser.Fancy;
+            return chooser.GameDocs;
+        }
         private string ChooseGame()
         {
-            GameChooser chooser = new GameChooser();
+            GameChooser chooser = new GameChooser(false, false);
             chooser.ShowDialog();
             return chooser.GameDocs;
         }
@@ -284,10 +334,10 @@ namespace DarkScript3
             {
                 var sb = new StringBuilder(); ;
                 sb.AppendLine("// ==EMEVD==");
-                sb.AppendLine($"// @docs    {Scripter.ResourceString}");
+                sb.AppendLine($"// @docs    {Docs.ResourceString}");
                 sb.AppendLine($"// @compress    {Scripter.EVD.Compression}");
                 sb.AppendLine($"// @game    {Scripter.EVD.Format}");
-                if (Scripter.ResourceString == "ds2scholar-common.emedf.json")
+                if (Docs.IsASCIIStringData)
                     sb.AppendLine($"// @string    {Encoding.ASCII.GetString(Scripter.EVD.StringData)}");
                 else
                     sb.AppendLine($"// @string    {Encoding.Unicode.GetString(Scripter.EVD.StringData)}");
@@ -485,7 +535,8 @@ namespace DarkScript3
                                            RegexCompiledOption);
             public static Regex Keyword =
                 new Regex(
-                    @"\b(true|false|break|case|catch|const|continue|default|delete|do|else|export|for|function|if|in|instanceof|let|new|null|return|switch|this|throw|try|var|void|while|with|typeof)\b",
+                    @"\b(true|false|break|case|catch|const|continue|default|delete|do|else|export|\$Event"
+                        + @"|for|function|if|in|instanceof|let|new|null|return|switch|this|throw|try|var|void|while|with|typeof)\b",
                     RegexCompiledOption);
             public static Regex DataType = new Regex(@"\b(byte|short|int|sbyte|ushort|uint|enum|bool)\b", RegexCompiledOption);
         }
@@ -519,15 +570,24 @@ namespace DarkScript3
 
         private void Editor_SelectionChanged(object sender, EventArgs e)
         {
+            // Find text around cursor in the current line, up until hitting parentheses
             Range arguments = editor.Selection.GetFragment(@"[^)(\n]");
+
+            // Preemptively remove tooptip if changing the range; it may potentially get immediately added back.
+            // The tooltip may also change even within the same range.
             if (CurrentTipRange == null || !arguments.Start.Equals(CurrentTipRange.Start))
             {
                 CurrentTipRange = arguments;
                 InfoTip.Hide();
             }
 
-            if (arguments.CharBeforeStart == '(')
+            // Check if inside parens, but not nested ones.
+            // Matching IfThing(0^,1) but not WaitFor(Thi^ng(0,1))
+            string funcName;
+            if (arguments.CharBeforeStart == '(' && editor.GetRange(arguments.End, arguments.End).CharAfterStart != '(')
             {
+                // Scan leftward through arguments until no commas remain.
+                // This does not work with nested calls, like IfThing(getMyCustomConstant(), ^1)
                 int argIndex = 0;
                 Range arg = editor.Selection.GetFragment(@"[^)(\n,]");
                 while (arg.CharBeforeStart == ',')
@@ -537,18 +597,20 @@ namespace DarkScript3
                     start.iChar -= 2;
                     arg = editor.GetRange(start, start).GetFragment(@"[^)(\n,]");
                 }
-                string funcName = FuncName(arguments);
-                LoadDocText(funcName);
+                funcName = FuncName(arguments);
                 ShowArgToolTip(funcName, arguments, argIndex);
             }
             else
             {
-                Range func = editor.Selection.GetFragment(@"\w");
-                if (Scripter != null && Scripter.Functions.ContainsKey(func.Text))
-                {
-                    LoadDocText(func.Text);
-                }
+                // Get the word immediately under the cursor. No tooltip in this case.
+                Range func = editor.Selection.GetFragment(@"[\w\$]");
+                funcName = func.Text;
             }
+            if (loadDocTextDebounce == null)
+            {
+                loadDocTextDebounce = Debounce((Action<string>)LoadDocText, 50);
+            }
+            loadDocTextDebounce(funcName);
         }
 
 
@@ -580,7 +642,7 @@ namespace DarkScript3
 
         private void ShowArgToolTip(string funcName, Range arguments, int argument = -1)
         {
-            if (Scripter != null && Scripter.Functions.ContainsKey(funcName))
+            if (Docs != null && Docs.AllArgs.ContainsKey(funcName))
             {
                 Point point = editor.PlaceToPoint(arguments.Start);
                 ShowTip(ArgString(funcName), point, argument);
@@ -606,7 +668,7 @@ namespace DarkScript3
             int start = arguments.Start.iChar - 2;
             int line = arguments.Start.iLine;
             Range pre = new Range(editor, start, line, start, line);
-            return pre.GetFragment(@"\w").Text;
+            return pre.GetFragment(@"[\w\$]").Text;
         }
 
         private string TypeString(long type)
@@ -624,80 +686,166 @@ namespace DarkScript3
 
         private string ArgString(string func, int index = -1)
         {
-            (int classIndex, int instrIndex) = Scripter.Functions[func];
-            EMEDF.InstrDoc insDoc = Scripter.DOC[classIndex][instrIndex];
+            List<EMEDF.ArgDoc> args = Docs.AllArgs[func];
             List<string> argStrings = new List<string>();
-            for (int i = 0; i < insDoc.Arguments.Length; i++)
+            for (int i = 0; i < args.Count; i++)
             {
-                EMEDF.ArgDoc arg = insDoc.Arguments[i];
+                EMEDF.ArgDoc arg = args[i];
                 if (arg.EnumName == "BOOL")
                 {
-                    argStrings.Add($"bool {arg.Name}");
+                    argStrings.Add($"bool {arg.DisplayName}");
                 }
-                else if (arg.EnumName != null)
+                else if (arg.EnumDoc != null)
                 {
-                    argStrings.Add($"enum<{arg.EnumName}> {arg.Name}");
+                    argStrings.Add($"enum<{arg.EnumDoc.DisplayName}> {arg.DisplayName}");
                 }
                 else
                 {
-                    argStrings.Add($"{TypeString(arg.Type)} {arg.Name}");
+                    argStrings.Add($"{TypeString(arg.Type)} {arg.DisplayName}");
                 }
                 if (i == index) return argStrings.Last();
             }
             return string.Join(", ", argStrings);
         }
 
-        string currentFuncDoc = null;
+        private string currentFuncDoc = null;
 
         private void LoadDocText(string func)
         {
-            if (Scripter == null) return;
-            if (!Scripter.Functions.ContainsKey(func)) return;
+            if (Docs == null) return;
+            List<EMEDF.ArgDoc> args = null;
+            ScriptAst.BuiltIn builtin = null;
+            if (!Docs.AllArgs.TryGetValue(func, out args) && !ScriptAst.ReservedWords.TryGetValue(func, out builtin)) return;
+            if (builtin != null && builtin.Doc == null) return;
+
             if (currentFuncDoc == func) return;
             currentFuncDoc = func;
             docBox.Clear();
 
-            (int classIndex, int instrIndex) = Scripter.Functions[func];
-            EMEDF.InstrDoc insDoc = Scripter.DOC[classIndex][instrIndex];
+            if (builtin != null)
+            {
+                docBox.AppendText($"{func}");
+                if (builtin.Args != null)
+                {
+                    if (builtin.Args.Count == 0)
+                    {
+                        docBox.AppendText(Environment.NewLine);
+                        docBox.AppendText("  (no arguments)", TextStyles.Comment);
+                    }
+                    foreach (string arg in builtin.Args)
+                    {
+                        docBox.AppendText(Environment.NewLine);
+                        if (arg == "COND")
+                        {
+                            docBox.AppendText("  Condition ", TextStyles.Keyword);
+                            docBox.AppendText("cond");
+                        }
+                        else if (arg == "LABEL")
+                        {
+                            docBox.AppendText("  Label ", TextStyles.Keyword);
+                            docBox.AppendText("label");
+                        }
+                        else if (arg == "LAYERS")
+                        {
+                            docBox.AppendText("  uint ", TextStyles.Keyword);
+                            docBox.AppendText("layer");
+                            docBox.AppendText(" (vararg)", TextStyles.Comment);
+                        }
+                    }
+                }
+                if (builtin.Doc != null)
+                {
+                    docBox.AppendText(Environment.NewLine + Environment.NewLine + builtin.Doc);
+                }
+                return;
+            }
 
-            for (int i = 0; i < insDoc.Arguments.Length; i++)
+            int optCount = 0;
+            InstructionTranslator.FunctionDoc funcDoc = null;
+            if (Docs.Translator != null && Docs.Translator.CondDocs.TryGetValue(func, out funcDoc))
+            {
+                optCount = funcDoc.OptionalArgs;
+            }
+
+            docBox.AppendText($"{func}");
+
+            if (args.Count == 0)
             {
                 docBox.AppendText(Environment.NewLine);
-                EMEDF.ArgDoc argDoc = insDoc.Arguments[i];
+                docBox.AppendText("  (no arguments)", TextStyles.Comment);
+            }
+            for (int i = 0; i < args.Count; i++)
+            {
+                docBox.AppendText(Environment.NewLine);
+                EMEDF.ArgDoc argDoc = args[i];
+                bool optional = i >= args.Count - optCount;
 
+                // TODO: Augment ArgDoc to include at least vargarg info, maybe optional info.
                 if (argDoc.EnumName == null)
                 {
                     docBox.AppendText($"  {TypeString(argDoc.Type)} ", TextStyles.Keyword);
-                    docBox.AppendText(argDoc.Name);
+                    docBox.AppendText(argDoc.DisplayName);
+                    if (optional) docBox.AppendText(" (optional)", TextStyles.Comment);
                 }
                 else if (argDoc.EnumName == "BOOL")
                 {
                     docBox.AppendText($"  bool ", TextStyles.Keyword);
-                    docBox.AppendText(argDoc.Name);
+                    docBox.AppendText(argDoc.DisplayName);
+                    if (optional) docBox.AppendText(" (optional)", TextStyles.Comment);
                 }
                 else
                 {
                     docBox.AppendText($"  enum ", TextStyles.Keyword);
-                    docBox.AppendText(argDoc.Name);
-                    EMEDF.EnumDoc enm = Scripter.DOC.Enums.First(e => e.Name == argDoc.EnumName);
-                    foreach (var kv in enm.Values)
+                    docBox.AppendText(argDoc.DisplayName);
+                    if (optional) docBox.AppendText(" (optional)", TextStyles.Comment);
+
+                    EMEDF.EnumDoc enm = argDoc.EnumDoc;
+                    foreach (var kv in enm.DisplayValues)
                     {
                         docBox.AppendText(Environment.NewLine);
                         docBox.AppendText($"    {kv.Key.PadLeft(5)}", TextStyles.String);
                         docBox.AppendText($": ");
-                        if (Scripter.EnumNamesForGlobalization.Contains(enm.Name))
+                        string val = kv.Value;
+                        if (val.Contains("."))
                         {
-                            docBox.AppendText(kv.Value, TextStyles.EnumConstant);
+                            string[] parts = val.Split(new[] { '.' }, 2);
+                            docBox.AppendText($"{parts[0]}.");
+                            docBox.AppendText(parts[1], TextStyles.EnumProperty);
                         }
                         else
                         {
-                            docBox.AppendText($"{enm.Name}.");
-                            docBox.AppendText(kv.Value, TextStyles.EnumProperty);
+                            docBox.AppendText(val, TextStyles.EnumConstant);
                         }
                     }
                 }
             }
-            
+            List<string> altNames = Docs.GetAltFunctionNames(func);
+            if (altNames != null && altNames.Count > 0)
+            {
+                docBox.AppendText(Environment.NewLine + Environment.NewLine + $"(alt: {string.Join(", ", altNames)})");
+            }
+        }
+
+        // https://stackoverflow.com/questions/28472205/c-sharp-event-debounce
+        // Can only be called from the UI thread, and runs the given action in the UI thread.
+        private static Action<T> Debounce<T>(Action<T> func, int ms)
+        {
+            CancellationTokenSource cancelTokenSource = null;
+
+            return arg =>
+            {
+                cancelTokenSource?.Cancel();
+                cancelTokenSource = new CancellationTokenSource();
+
+                Task.Delay(ms, cancelTokenSource.Token)
+                    .ContinueWith(t =>
+                    {
+                        if (!t.IsCanceled)
+                        {
+                            func(arg);
+                        }
+                    }, TaskScheduler.FromCurrentSynchronizationContext());
+            };
         }
 
         #endregion
@@ -796,7 +944,6 @@ namespace DarkScript3
         {
             MessageBox.Show("-- Created by AinTunez\r\n-- Based on work by HotPocketRemix and TKGP\r\n-- Special thanks to Meowmaritus", "About DarkScript");
         }
-        #endregion
 
         private void BatchResaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -805,7 +952,8 @@ namespace DarkScript3
             ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx; *.emevd.js; *.emevd.dcx.js";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                string gameDocs = ChooseGame();
+                string gameDocs = ChooseGame(out bool fancy);
+                if (gameDocs == null) return;
                 List<string> failed = new List<string>();
                 foreach (var fileName in ofd.FileNames)
                 {
@@ -814,7 +962,7 @@ namespace DarkScript3
                         if (File.Exists(fileName + ".js"))
                             OpenJSFile(ofd.FileName + ".js");
                         else
-                            OpenEMEVDFile(fileName, null, gameDocs);
+                            OpenEMEVDFile(fileName, null, gameDocs, null, fancy);
                         SaveJSFile();
                         editor.ClearUndo();
                     } catch
@@ -835,5 +983,22 @@ namespace DarkScript3
             if (InstructionMenu == null) return;
             InstructionMenu.Show(true);
         }
+
+        private void decompileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Scripter == null || Docs.Translator == null) return;
+            // TODO: Share error handling with regular packing
+            try
+            {
+                string text = new FancyEventScripter(Scripter, Docs).Repack(editor.Text);
+                editor.Text = text;
+            }
+            catch (FancyJSCompiler.FancyCompilerException ex)
+            {
+                MessageBox.Show(ex.Message.Trim());
+            }
+        }
+
+        #endregion
     }
 }
