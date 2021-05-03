@@ -1,13 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Reflection;
 using System.IO;
 
 namespace DarkScript3
@@ -17,13 +10,14 @@ namespace DarkScript3
         public string GameDocs = "";
         public bool Fancy { get => fancy.Checked; }
 
-        public GameChooser(bool showFancy, bool fancyChecked)
+        public GameChooser(bool showFancy)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
             if (showFancy)
             {
-                fancy.Checked = fancyChecked;
+
+                fancy.Checked = Properties.Settings.Default.DefaultFancyDecompile;
             }
             else
             {
@@ -90,6 +84,12 @@ namespace DarkScript3
                 GameDocs = Path.GetFileName(ofd.FileName);
             }
             Close();
+        }
+
+        private void fancy_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.DefaultFancyDecompile = fancy.Checked;
+            Properties.Settings.Default.Save();
         }
     }
 }

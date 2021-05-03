@@ -22,9 +22,7 @@ namespace DarkScript3
         public EMEDF DOC { get; set; } = new EMEDF();
 
         public bool IsASCIIStringData => ResourceString.StartsWith("ds2");
-
-        // The only mutable thing here, as it's a property of the game but not a static one.
-        public bool RestrictConditionGroups { get; set; }
+        public bool AllowRestrictConditionGroups => ResourceString.StartsWith("ds1");
 
         public InstructionTranslator Translator { get; set; }
 
@@ -33,6 +31,10 @@ namespace DarkScript3
 
         // Enums by display name
         public Dictionary<string, EMEDF.EnumDoc> Enums = new Dictionary<string, EMEDF.EnumDoc>();
+
+        // Enum values by value display name for fancy compilation, for control/negate args etc. which must be read as ints.
+        // These should not be packed directly into instruction args, as most enums are not actually ints.
+        public Dictionary<string, int> EnumValues = new Dictionary<string, int>();
 
         // Callable objects by display name, both instructions and condition functions
         public Dictionary<string, List<EMEDF.ArgDoc>> AllArgs = new Dictionary<string, List<EMEDF.ArgDoc>>();
@@ -68,8 +70,6 @@ namespace DarkScript3
         {
             ResourceString = resource;
             DOC = InitDocsFromResource(resource);
-            RestrictConditionGroups = ResourceString.StartsWith("ds1");
-            // TODO, ReadStream and stuff for condition data?
             Translator = InstructionTranslator.GetTranslator(this);
 
             if (Translator != null)
@@ -117,13 +117,18 @@ namespace DarkScript3
                 Enums[enm.DisplayName] = enm;
 
                 string prefix = EnumNamesForGlobalization.Contains(enm.Name) ? "" : $"{enm.DisplayName}.";
-                enm.DisplayValues = enm.Values.ToDictionary(e => e.Key, e => {
-                    string name = prefix + Regex.Replace(e.Value, @"[^\w]", "");
-                    return EnumReplacements.TryGetValue(name, out string displayName) ? displayName : name;
-                });
+                enm.DisplayValues = new Dictionary<string, string>();
+                foreach (KeyValuePair<string, string> pair in enm.Values)
+                {
+                    string name = prefix + Regex.Replace(pair.Value, @"[^\w]", "");
+                    name = EnumReplacements.TryGetValue(name, out string displayName) ? displayName : name;
+                    enm.DisplayValues[pair.Key] = name;
+                    // As part of this, update the global dictionary
+                    EnumValues[name] = int.Parse(pair.Key);
+                }
                 if (EnumNamesForGlobalization.Contains(enm.Name))
                 {
-                    foreach (var pair in enm.DisplayValues.ToList())
+                    foreach (KeyValuePair<string, string> pair in enm.DisplayValues)
                     {
                         // This has duplicate names between ON/OFF and OFF/OFF/CHANGE, but they should map to the same respective value.
                         GlobalEnumConstants[pair.Value] = int.Parse(pair.Key);
@@ -261,7 +266,7 @@ namespace DarkScript3
 
                 if (!isParam)
                 {
-                    args[argIndex] = argDoc.GetDisplayValue(args[argIndex]);
+                    args[argIndex] = argDoc.GetDisplayValue(args[argIndex]).ToString();
                 }
             }
             if (args.Length > 0) return string.Join(", ", args).Trim();

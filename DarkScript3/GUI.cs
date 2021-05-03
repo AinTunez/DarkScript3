@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Microsoft.ClearScript;
 using FastColoredTextBoxNS;
 using SoulsFormats;
 using System.Xml.Linq;
@@ -21,15 +20,14 @@ namespace DarkScript3
         public string EVD_Path;
         public EventScripter Scripter;
         public InstructionDocs Docs;
+        public ScriptSettings Settings;
         public bool CodeChanged = false;
         public AutocompleteMenu InstructionMenu;
         public BetterFindForm BFF;
+        public PreviewCompilationForm Preview = null;
         private Action<string> loadDocTextDebounce;
 
         Dictionary<string, (string title, string text)> ToolTips = new Dictionary<string, (string, string)>();
-
-        // TODO: Use persistent properties to save this across program startup.
-        private static bool defaultDecompileNewFancy = true;
 
         public GUI()
         {
@@ -84,16 +82,15 @@ namespace DarkScript3
             MainMenuStrip.Enabled = false;
             Cursor = Cursors.WaitCursor;
 
-            // LineMapping lineMapping = null;
             string text = editor.Text;
+            bool fancyHint = text.Contains("$Event(");
             try
             {
                 string debugName = $"{Path.GetFileName(EVD_Path)}.js";
-                bool useFancy = text.Contains("$Event(");
                 EMEVD result;
-                if (useFancy && Docs.Translator != null)
+                if (fancyHint && Settings.AllowPreprocess && Docs.Translator != null)
                 {
-                    result = new FancyEventScripter(Scripter, Docs).Pack(text, debugName);
+                    result = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).Pack(text, debugName);
                 }
                 else
                 {
@@ -107,30 +104,18 @@ namespace DarkScript3
             catch (Exception ex)
             {
                 statusLabel.Text = "SAVE FAILED";
-                if (ex is IScriptEngineException scriptException)
+                if (ex is JSScriptException scriptException)
                 {
-                    // TODO: Parse in EventScripter?
-                    // TODO: Add a "go to line x" button.
-                    string details = scriptException.ErrorDetails;
-                    // For each line, get: base file name, line no, col no. translate to base values and show those lines instead.
-                    details = Regex.Replace(details, @"Script\s\[.*\]", "Script");
-                    details = Regex.Replace(details, @"    at Script", "    at Editor");
-                    details = Regex.Replace(details, @"->\s+", "-> ");
-                    var lines = details.Split('\n');
-                    var line = lines.FirstOrDefault((row) => row.Contains("at Editor"));
-
-                    if (line != null)
+                    string fancyChide = "";
+                    if (fancyHint && !Settings.AllowPreprocess)
                     {
-                        MessageBox.Show(Regex.Replace(scriptException.Message, "^Error: ", "") + "\n" +  line.Trim());
+                        fancyChide = "\n\n($Event is used but preprocessing is disabled. Enable it in compilation settings if desired.)";
                     }
-                    else
-                    {
-                        MessageBox.Show(details);
-                    }
+                    MessageBox.Show(scriptException.ToString().Trim() + fancyChide);
                 }
-                else if (ex is FancyJSCompiler.FancyCompilerException compException)
+                else if (ex is FancyJSCompiler.FancyCompilerException)
                 {
-                    MessageBox.Show(ex.Message.Trim());
+                    MessageBox.Show(ex.ToString().Trim());
                 }
                 else
                 {
@@ -187,7 +172,11 @@ namespace DarkScript3
             {
                 string game = ChooseGame(out bool fancy);
                 if (game == null) return;
-                OpenEMEVDFile(ofd.FileName, null, game, null, fancy);
+                OpenEMEVDFile(ofd.FileName, game, isFancy: fancy);
+            }
+            if (Docs == null)
+            {
+                return;
             }
 
             JSRegex.GlobalConstant = new Regex($@"[^.]\b(?<range>{string.Join("|", InstructionDocs.GlobalConstants.Concat(Docs.GlobalEnumConstants.Keys))})\b");
@@ -222,10 +211,21 @@ namespace DarkScript3
             CodeChanged = false;
         }
 
-        private void OpenEMEVDFile(string fileName, EMEVD evd, string gameDocs, string data = null, bool fancy = false)
+        private void OpenEMEVDFile(
+            string fileName,
+            string gameDocs,
+            EMEVD evd = null,
+            string jsText = null,
+            bool isFancy = false,
+            Dictionary<string, string> extraFields = null)
         {
-            // TODO: Don't have to re-instantiate metadata if it's the same game
-            Docs = new InstructionDocs(gameDocs);
+            // Can reuse docs if for the same game
+            if (Docs == null || Docs.ResourceString != gameDocs)
+            {
+                Docs = new InstructionDocs(gameDocs);
+            }
+            Settings = new ScriptSettings(Docs, extraFields);
+
             if (evd == null)
                 Scripter = new EventScripter(fileName, Docs);
             else
@@ -234,63 +234,85 @@ namespace DarkScript3
             bool changed = CodeChanged;
             try
             {
-                // Use fancy scripter here if asked for
-                editor.Text = data ?? (fancy && Docs.Translator != null ? new FancyEventScripter(Scripter, Docs).Unpack() : Scripter.Unpack());
+                if (jsText == null)
+                {
+                    if (isFancy && Docs.Translator != null)
+                    {
+                        jsText = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).Unpack();
+                    }
+                    else
+                    {
+                        jsText = Scripter.Unpack();
+                    }
+                }
+                editor.Text = jsText;
                 EVD_Path = fileName;
                 Text = $"DARKSCRIPT 3 - {Path.GetFileName(fileName)}";
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 CodeChanged = changed;
             }
         }
 
-        private string GetHeaderValue(string fileText, string fieldName)
+        private Dictionary<string, string> GetHeaderValues(string fileText)
         {
-            var headerText = Regex.Match(fileText, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==");
+            Dictionary<string, string> ret = new Dictionary<string, string>();
+            // Some example lines are:
+            // ==EMEVD==
+            // @docs    sekiro-common.emedf.json
+            // @game    Sekiro
+            // ...
+            // ==/EMEVD==
+            Match headerText = Regex.Match(fileText, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==");
             if (headerText.Success)
             {
                 string[] result = Regex.Split(headerText.Value, @"(\r\n|\r|\n)\s*");
                 foreach (string headerLine in result.ToArray())
                 {
-                    string line = Regex.Replace(headerLine.Trim(), @"^//\s+", "// ");
-                    string start = $"// @{fieldName} ";
-                    if (line.StartsWith(start))
+                    Match lineMatch = Regex.Match(headerLine, @"^//\s+@(\w+)\s+(.*)");
+                    if (lineMatch.Success)
                     {
-                        return line.Substring(start.Length).Trim();
+                        ret[lineMatch.Groups[1].Value] = lineMatch.Groups[2].Value.Trim();
                     }
                 }
             }
-            return null;
+            return ret;
         }
 
         private void OpenJSFile(string fileName)
         {
             string org = fileName.Substring(0, fileName.Length - 3);
             string text = File.ReadAllText(fileName);
-            string docs = GetHeaderValue(text, "docs");
-            string[] fields = new string[]
-            {
-                GetHeaderValue(text, "compress"),
-                GetHeaderValue(text, "format"),
-                GetHeaderValue(text, "string"),
-                GetHeaderValue(text, "linked")
-            };
+            Dictionary<string, string> headers = GetHeaderValues(text);
+            List<string> emevdFileHeaders = new List<string> { "docs", "compress", "game", "string", "linked" };
 
-            EMEVD evd = null;
-            if (!fields.Any(f => f == null))
+            EMEVD evd;
+            string docs;
+            if (emevdFileHeaders.All(name => headers.ContainsKey(name)))
             {
+                docs = headers["docs"];
+                string linked = headers["linked"].TrimStart('[').TrimEnd(']');
                 evd = new EMEVD()
                 {
-                    Compression = (DCX.Type)Enum.Parse(typeof(DCX.Type), fields[0]),
-                    Format = (EMEVD.Game)Enum.Parse(typeof(EMEVD.Game), fields[1]),
-                    StringData = Encoding.Unicode.GetBytes(fields[2]),
-                    LinkedFileOffsets = Regex.Split(fields[3], @"\s*,\s*").Select(o => long.Parse(o)).ToList()
+                    Compression = (DCX.Type)Enum.Parse(typeof(DCX.Type), headers["compress"]),
+                    Format = (EMEVD.Game)Enum.Parse(typeof(EMEVD.Game), headers["game"]),
+                    StringData = Encoding.Unicode.GetBytes(headers["string"]),
+                    LinkedFileOffsets = Regex.Split(linked, @"\s*,\s*")
+                        .Where(o => !string.IsNullOrWhiteSpace(o))
+                        .Select(o => long.Parse(o))
+                        .ToList()
                 };
             }
-
-            if (docs == null)
+            else if (!File.Exists(org))
             {
+                MessageBox.Show($"{fileName} requires either a corresponding emevd file or JS headers to open");
+                return;
+            }
+            else
+            {
+                evd = null;
                 docs = ChooseGame();
                 if (docs == null) return;
             }
@@ -298,19 +320,20 @@ namespace DarkScript3
             SFUtil.Backup(org);
 
             text = Regex.Replace(text, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==", "");
-            OpenEMEVDFile(org, evd, docs, text.Trim());
+            OpenEMEVDFile(org, docs, evd: evd, jsText: text.Trim(), extraFields: headers);
         }
 
         private string ChooseGame(out bool fancy)
         {
-            GameChooser chooser = new GameChooser(true, defaultDecompileNewFancy);
+            GameChooser chooser = new GameChooser(true);
             chooser.ShowDialog();
-            fancy = defaultDecompileNewFancy = chooser.Fancy;
+            fancy = chooser.Fancy;
             return chooser.GameDocs;
         }
+
         private string ChooseGame()
         {
-            GameChooser chooser = new GameChooser(false, false);
+            GameChooser chooser = new GameChooser(false);
             chooser.ShowDialog();
             return chooser.GameDocs;
         }
@@ -323,7 +346,7 @@ namespace DarkScript3
                 string resource = doc.Root.Element("gameDocs").Value;
                 string data = doc.Root.Element("script").Value;
                 string org = fileName.Substring(0, fileName.Length - 4);
-                OpenEMEVDFile(org, null, resource, data);
+                OpenEMEVDFile(org, resource, jsText: data);
             }
         }
 
@@ -342,6 +365,10 @@ namespace DarkScript3
                 else
                     sb.AppendLine($"// @string    {Encoding.Unicode.GetString(Scripter.EVD.StringData)}");
                 sb.AppendLine($"// @linked    [{string.Join(",", Scripter.EVD.LinkedFileOffsets)}]");
+                foreach (KeyValuePair<string, string> extra in Settings.SettingsDict)
+                {
+                    sb.AppendLine($"// @{extra.Key}    {extra.Value}");
+                }
                 sb.AppendLine("// ==/EMEVD==");
                 sb.AppendLine("");
                 sb.AppendLine(editor.Text);
@@ -395,7 +422,6 @@ namespace DarkScript3
             var colors = new StyleConfig(this);
             if (colors.ShowDialog() == DialogResult.OK)
             {
-
                 var start = editor.Selection.Start;
                 var end = editor.Selection.End;
 
@@ -436,7 +462,6 @@ namespace DarkScript3
 
         private void SaveColors()
         {
-
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Comment=" + HexColor(TextStyles.Comment));
             sb.AppendLine("String=" + HexColor(TextStyles.String));
@@ -490,7 +515,14 @@ namespace DarkScript3
         private void Editor_TextChanged(object sender, TextChangedEventArgs e)
         {
             statusLabel.Text = "";
-            if (Scripter != null) CodeChanged = true;
+            if (Scripter != null)
+            {
+                CodeChanged = true;
+            }
+            if (Preview != null)
+            {
+                Preview.DisableConversion();
+            }
             SetStyles(e);
         }
 
@@ -535,7 +567,7 @@ namespace DarkScript3
                                            RegexCompiledOption);
             public static Regex Keyword =
                 new Regex(
-                    @"\b(true|false|break|case|catch|const|continue|default|delete|do|else|export|\$Event"
+                    @"\b(true|false|break|case|catch|const|continue|default|delete|do|else|export"
                         + @"|for|function|if|in|instanceof|let|new|null|return|switch|this|throw|try|var|void|while|with|typeof)\b",
                     RegexCompiledOption);
             public static Regex DataType = new Regex(@"\b(byte|short|int|sbyte|ushort|uint|enum|bool)\b", RegexCompiledOption);
@@ -962,7 +994,7 @@ namespace DarkScript3
                         if (File.Exists(fileName + ".js"))
                             OpenJSFile(ofd.FileName + ".js");
                         else
-                            OpenEMEVDFile(fileName, null, gameDocs, null, fancy);
+                            OpenEMEVDFile(fileName, gameDocs, isFancy: fancy);
                         SaveJSFile();
                         editor.ClearUndo();
                     } catch
@@ -984,18 +1016,63 @@ namespace DarkScript3
             InstructionMenu.Show(true);
         }
 
+        private void scriptCompilationSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Settings == null) return;
+            ScriptSettingsForm form = new ScriptSettingsForm(Settings);
+            form.ShowDialog();
+        }
+
         private void decompileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Scripter == null || Docs.Translator == null) return;
-            // TODO: Share error handling with regular packing
             try
             {
-                string text = new FancyEventScripter(Scripter, Docs).Repack(editor.Text);
-                editor.Text = text;
+                FancyJSCompiler.CompileOutput output = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).RepackFull(editor.Text);
+                RefreshPreviewForm();
+                Preview.SetSegments(output.GetDiffSegments(), output.Code);
+                Preview.Show();
+                Preview.Focus();
             }
             catch (FancyJSCompiler.FancyCompilerException ex)
             {
                 MessageBox.Show(ex.Message.Trim());
+            }
+        }
+
+        private void previewCompilationOutputToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Scripter == null || Docs.Translator == null) return;
+            try
+            {
+                List<FancyJSCompiler.DiffSegment> segments = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).PreviewPack(editor.Text);
+                RefreshPreviewForm();
+                Preview.SetSegments(segments);
+                Preview.Show();
+                Preview.Focus();
+            }
+            catch (FancyJSCompiler.FancyCompilerException ex)
+            {
+                MessageBox.Show(ex.Message.Trim());
+            }
+        }
+
+        private void RefreshPreviewForm()
+        {
+            if (Preview == null || Preview.IsDisposed)
+            {
+                Preview = new PreviewCompilationForm(editor.Font);
+                Preview.FormClosed += (sender, ev) =>
+                {
+                    if (Preview.Confirmed && Preview.PendingCode != null)
+                    {
+                        editor.Text = Preview.PendingCode;
+                        if (Settings != null && !Settings.AllowPreprocess)
+                        {
+                            Settings.AllowPreprocess = true;
+                        }
+                    }
+                };
             }
         }
 

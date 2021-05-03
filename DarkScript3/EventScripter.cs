@@ -33,6 +33,9 @@ namespace DarkScript3
 
         private List<string> LinkedFiles = new List<string>();
 
+        // A switch between DS1 and DS1R for fancy compilation. This is ignored for all other games.
+        public bool IsRemastered { get; set; }
+
         public EventScripter(EMEVD evd, InstructionDocs docs)
         {
             EVD = evd;
@@ -51,7 +54,6 @@ namespace DarkScript3
                 }
                 catch
                 {
-
                 }
             }
             this.docs = docs;
@@ -129,7 +131,8 @@ namespace DarkScript3
                 CurrentEventID = -1;
                 CurrentInsIndex = -1;
                 return ins;
-            } catch (Exception ex)
+            } 
+            catch (Exception ex)
             {
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine($"EXCEPTION\nCould not write instruction at Event {CurrentEventID}, index {CurrentInsIndex}.\n");
@@ -230,7 +233,7 @@ namespace DarkScript3
                     // Console.WriteLine(sb.ToString());
                     v8.Execute(sb.ToString());
 
-                    // TODO: Add aliases to emedfs rather than hardcoding them here
+                    // Add aliases to InstrDoc? Or maybe make TitleCaseName possibly return multiple values?
                     if (funcName.Contains("SpEffect"))
                     {
                         v8.Execute($"const {funcName.Replace("SpEffect", "Speffect")} = {funcName};");
@@ -251,9 +254,15 @@ namespace DarkScript3
         /// </summary>
         public EMEVD Pack(string code, string documentName = null)
         {
-            // TODO: Catch scripting exception here so FancyEventScripter can use it
             EVD.Events.Clear();
-            v8.Execute(documentName ?? "User Script", true, $"(function() {{ {code} }})();");
+            try
+            {
+                v8.Execute(documentName ?? "User Script", $"(function() {{ {code} }})();");
+            }
+            catch (Exception ex) when (ex is IScriptEngineException scriptException)
+            {
+                throw JSScriptException.FromV8(scriptException);
+            }
             return EVD;
         }
 

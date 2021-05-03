@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using System.Text;
 using SoulsFormats;
 using static DarkScript3.ConditionData;
 using static DarkScript3.ScriptAst;
@@ -15,8 +16,10 @@ namespace DarkScript3
         public Dictionary<string, FunctionDoc> CondDocs;
         // Map from x[y] to a condition selector for rewriting into a control flow structure
         public Dictionary<string, ConditionSelector> Selectors;
-        // Map from x[y] to the doc for the instruction. Stored for compilation purposes.
+        // Map from x[y] to the doc for the instruction, for condition instructions. Stored for compilation purposes.
         private Dictionary<string, EMEDF.InstrDoc> InstrDocs;
+        // Map from x[y] to a label num.
+        private Dictionary<string, int> LabelDocs;
 
         public class FunctionDoc
         {
@@ -42,10 +45,11 @@ namespace DarkScript3
 
         public static InstructionTranslator GetTranslator(InstructionDocs docs)
         {
-            // TODO: ReadStream for resource
             ConditionData conds;
             if (File.Exists("conditions.json"))
                 conds = ReadFile("conditions.json");
+            else if (File.Exists(@"Resources\conditions.json"))
+                conds = ReadFile(@"Resources\conditions.json");
             else
                 conds = ReadStream("conditions.json");
 
@@ -116,6 +120,7 @@ namespace DarkScript3
             Dictionary<string, FunctionDoc> condDocs = new Dictionary<string, FunctionDoc>();
             // Indexed by command id
             Dictionary<string, ConditionSelector> selectors = new Dictionary<string, ConditionSelector>();
+            int asInt(object obj) => int.Parse(obj.ToString());
             void addVariants(ConditionSelector selector, ConditionDoc cond, ControlType use, string cmd, int control = -1)
             {
                 if (selector.Variants.ContainsKey(cmd)) throw new Exception($"Already added variants of {cond.Name} for {cmd}");
@@ -163,7 +168,7 @@ namespace DarkScript3
                         if (negateDoc == null) throw new ArgumentException($"Cond {cond.Name} has boolean variant {name} but no negate_field");
                         string trueVal = negateDoc.Name == "BOOL" ? "TRUE" : bv.True;
                         string trueKey = negateDoc.Values.Where(e => e.Value == trueVal).First().Key;
-                        variant.TrueOp = AsInt(trueKey);
+                        variant.TrueOp = asInt(trueKey);
                         if (bv.Required != null)
                         {
                             foreach (FieldValue req in bv.Required)
@@ -179,7 +184,7 @@ namespace DarkScript3
                                     EMEDF.EnumDoc reqDoc = emedf.Enums.Where(d => d.Name == reqEnum).FirstOrDefault();
                                     if (reqDoc == null) throw new ArgumentException($"Command {cmd} for cond {name} at arg {reqArg} uses enum which does not exist");
                                     string reqKey = reqDoc.Values.Where(e => e.Value == req.Value).First().Key;
-                                    variant.ExtraArgs[reqArg] = AsInt(reqKey);
+                                    variant.ExtraArgs[reqArg] = asInt(reqKey);
                                 }
                                 ignore.Add(reqArg);
                             }
@@ -209,7 +214,7 @@ namespace DarkScript3
                         }
                         bool matching = cond.OptFields.Select((a, i) => a == doc.Arguments[doc.Arguments.Length - cond.OptFields.Count + i].Name).All(b => b);
                         // Missing opt args can happen when "# of target character"-type arguments get added over time.
-                        // This is mostly a pretty-printing feature so it might be tedious to specify each individual change between games.
+                        // This is mostly a pretty-printing feature. so it might be tedious to specify each individual change between games.
                         if (matching)
                         {
                             int optArg = doc.Arguments.Length - cond.OptFields.Count;
@@ -301,11 +306,18 @@ namespace DarkScript3
                 // This doesn't have to be an error, but it does mean that condition group decompilation is impossible when these commands are present.
                 throw new ArgumentException($"Present in emedf but not condition config for {game}: {undocError}");
             }
+            Dictionary<string, int> labels = new Dictionary<string, int>();
+            EMEDF.ClassDoc labelClass = emedf[1014];
+            if (labelClass != null)
+            {
+                labels = labelClass.Instructions.ToDictionary(i => InstructionID(1014, i.Index), i => (int)i.Index);
+            }
             return new InstructionTranslator
             {
                 CondDocs = condDocs,
                 Selectors = selectors,
                 InstrDocs = instrs,
+                LabelDocs = labels,
             };
         }
 
@@ -321,7 +333,7 @@ namespace DarkScript3
         // But don't convert them into instructions yet, since we need to edit control things like condition group register allocation and line skipping.
         public List<Intermediate> ExpandCond(Intermediate im, Func<string> newVar)
         {
-            if (im is Instr || im is Label || im is NoOp)
+            if (im is Instr || im is Label || im is NoOp || im is JSStatement)
             {
                 return new List<Intermediate> { im };
             }
@@ -357,7 +369,7 @@ namespace DarkScript3
                     {
                         if (!functionDoc.Variants.ContainsKey(ControlType.COND))
                         {
-                            throw new FancyNotSupportedException($"Can't use {im} with this negation since it does't have a condition version. Add or remove negation so that it can be translated to emevd.");
+                            throw new FancyNotSupportedException($"Can't use {docName} in this form since it does't have a condition version. Add or remove negation so that it can be translated to emevd.", im);
                         }
                         // Console.WriteLine($"Expanding {im} because it can't be negated as {type}");
                         indirection = true;
@@ -377,7 +389,7 @@ namespace DarkScript3
                     else
                     {
                         // Also part of error: can't use compiled groups in condition group.
-                        throw new FancyNotSupportedException($"Can't use statement type {type} with {functionDoc.Name} in {im} can only use it with {string.Join(", ", functionDoc.Variants.Keys)}");
+                        throw new FancyNotSupportedException($"Can't use statement type {type} with {functionDoc.Name}; can only use it with {string.Join(", ", functionDoc.Variants.Keys)}", im);
                     }
                 }
                 if (indirection)
@@ -410,6 +422,7 @@ namespace DarkScript3
         // But don't convert them into instructions yet, since we need to edit control things like condition group register allocation and line skipping.
         public Instr CompileCond(Intermediate im)
         {
+            // Mainly NoOp and JSStatement shouldn't be passed in here
             if (im is Instr imInstr)
             {
                 // Maybe validate Instrs here? Or just do that in AST conversion
@@ -418,7 +431,6 @@ namespace DarkScript3
             else if (im is Label label)
             {
                 string cmd = InstructionID(1014, label.Num);
-                // Some hardcoding here. (can look up doc in EMEDF, but that's not included in InstrDocs for labels)
                 return new Instr { Name = $"Label{label.Num}", Cmd = cmd, Args = new List<object>() };
             }
             else if (im is CondIntermediate condIm)
@@ -444,7 +456,14 @@ namespace DarkScript3
                 if (!functionDoc.Variants.ContainsKey(type))
                 {
                     string errName = cond.Always ? $"unconditional {type}" : $"{type} {docName}";
-                    throw new FancyNotSupportedException($"Compiling {errName} is not supported. Only [{string.Join(", ", functionDoc.Variants.Keys)}] are supported.");
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append($"Compiling {errName} is not supported.");
+                    sb.Append($" Only [{string.Join(", ", functionDoc.Variants.Keys)}] are supported.");
+                    if (type == ControlType.GOTO && functionDoc.Variants.ContainsKey(ControlType.SKIP))
+                    {
+                        sb.Append($" Try using a synthetic label instead.");
+                    }
+                    throw new FancyNotSupportedException(sb.ToString(), im);
                 }
                 string cmd = functionDoc.Variants[type];
                 ConditionVariant variant = GetVariantByName(docName, cmd);
@@ -460,7 +479,7 @@ namespace DarkScript3
                 int negateVal = cond is CompareCond cmp ? (int)cmp.Type : variant.TrueOp;
                 if (cond != null && cond.Negate)
                 {
-                    if (functionDoc.NegateEnum == null) throw new FancyNotSupportedException($"No way to negate {functionDoc.Name} compiling {im} to {instr}");
+                    if (functionDoc.NegateEnum == null) throw new FancyNotSupportedException($"No way to negate {functionDoc.Name} compiling {docName} to {instr.Name}", im);
                     negateVal = OppositeOp(functionDoc.ConditionDoc, functionDoc.NegateEnum, negateVal);
                 }
                 variant.SetInstrArgs(instr, cond, controlVal, negateVal);
@@ -473,16 +492,36 @@ namespace DarkScript3
         {
             if (Selectors.TryGetValue(instr.Cmd, out ConditionSelector selector))
             {
-                if (instr.Layers != null) throw new FancyNotSupportedException($"Control flow instruction with layers is not supported in {instr}");
+                if (instr.Layers != null) throw new FancyNotSupportedException($"Control flow instruction with layers is not supported", instr);
                 ConditionVariant variant = selector.GetVariant(instr);
                 return variant.ExtractInstrArgs(instr);
             }
-            else if (instr.Inner != null && instr.Inner.Bank == 1014)
+            else if (LabelDocs.TryGetValue(instr.Cmd, out int label))
             {
-                if (instr.Layers != null) throw new FancyNotSupportedException($"Control flow instruction with layers is not supported in {instr}");
-                return new Label { Num = instr.Inner.ID };
+                if (instr.Layers != null) throw new FancyNotSupportedException($"Control flow instruction with layers is not supported", instr);
+                return new Label { Num = label };
             }
             return instr;
+        }
+
+
+        private static bool TryExtractIntArg(object arg, out int val)
+        {
+            object innerVal = arg;
+            if (innerVal is DisplayArg disp)
+            {
+                innerVal = disp.Value;
+            }
+            return int.TryParse(innerVal.ToString(), out val);
+        }
+
+        private static int ExtractIntArg(Instr instr, int index)
+        {
+            if (TryExtractIntArg(instr.Args[index], out int val))
+            {
+                return val;
+            }
+            throw new FancyNotSupportedException($"Required plain integer or enum for decompilation but found {instr.Args[index]}", instr);
         }
 
         // A specific pair of function and command.
@@ -578,7 +617,7 @@ namespace DarkScript3
                     ignore.Add(ControlArg);
                     if (instr.Args[ControlArg] is ParamArg)
                     {
-                        throw new FancyNotSupportedException($"Control arg {ControlArg} in {instr} comes from event params, cannot decompile");
+                        throw new FancyNotSupportedException($"Control arg {ControlArg} in comes from event params, cannot decompile", instr);
                     }
                 }
                 Cond retCond = cmd;
@@ -587,7 +626,7 @@ namespace DarkScript3
                     ignore.Add(NegateArg);
                     ignore.Add(CompareArg);
                     CompareCond cmp = new CompareCond();
-                    cmp.Type = (ComparisonType)AsInt(instr.Args[NegateArg]);
+                    cmp.Type = (ComparisonType)ExtractIntArg(instr, NegateArg);
                     cmp.Rhs = instr.Args[CompareArg];
                     if (CompareArg2 >= 0)
                     {
@@ -604,19 +643,17 @@ namespace DarkScript3
                 else if (NegateArg >= 0)
                 {
                     ignore.Add(NegateArg);
-                    cmd.Negate = instr.Args[NegateArg].ToString() != TrueOp.ToString();
+                    cmd.Negate = ExtractIntArg(instr, NegateArg) != TrueOp;
                 }
                 foreach (KeyValuePair<int, int> req in ExtraArgs)
                 {
                     ignore.Add(req.Key);
                 }
-                cmd.DisplayArgs = new List<object>();
                 for (int i = 0; i < instr.Args.Count; i++)
                 {
                     if (!ignore.Contains(i))
                     {
                         cmd.Args.Add(instr.Args[i]);
-                        cmd.DisplayArgs.Add(instr.DisplayArgs[i]);
                     }
                 }
                 // Hide default optional arguments here, all-or-nothing. This makes for nicer output.
@@ -628,18 +665,17 @@ namespace DarkScript3
                         int pos = Doc.Args.Count - 1 - hidable;
                         // If arg exists and is default value, it can be hidden
                         if (pos >= cmd.Args.Count) break;
-                        if (cmd.Args[pos].ToString() != Doc.Args[pos].Default.ToString()) break;
+                        if (!TryExtractIntArg(cmd.Args[pos], out int arg) || arg.ToString() != Doc.Args[pos].Default.ToString()) break;
                     }
                     if (hidable == Doc.OptionalArgs)
                     {
                         cmd.Args.RemoveRange(Doc.Args.Count - Doc.OptionalArgs, Doc.OptionalArgs);
-                        cmd.DisplayArgs.RemoveRange(Doc.Args.Count - Doc.OptionalArgs, Doc.OptionalArgs);
                     }
                 }
                 CondIntermediate ret;
                 if (Variant == ControlType.COND)
                 {
-                    int reg = AsInt(instr.Args[ControlArg]);
+                    int reg = ExtractIntArg(instr, ControlArg);
                     ret = new CondAssign
                     {
                         Cond = retCond,
@@ -652,7 +688,7 @@ namespace DarkScript3
                     ret = new Goto
                     {
                         Cond = retCond,
-                        SkipLines = AsInt(instr.Args[ControlArg])
+                        SkipLines = ExtractIntArg(instr, ControlArg)
                     };
                 }
                 else if (Variant == ControlType.END)
@@ -660,7 +696,7 @@ namespace DarkScript3
                     ret = new End
                     {
                         Cond = retCond,
-                        Type = AsInt(instr.Args[ControlArg])
+                        Type = ExtractIntArg(instr, ControlArg)
                     };
                 }
                 else if (Variant == ControlType.GOTO)
@@ -668,7 +704,7 @@ namespace DarkScript3
                     ret = new Goto
                     {
                         Cond = retCond,
-                        ToLabel = $"L{instr.Args[ControlArg]}"
+                        ToLabel = $"L{ExtractIntArg(instr, ControlArg)}"
                     };
                 }
                 else if (Variant == ControlType.WAIT)
@@ -683,8 +719,6 @@ namespace DarkScript3
                 return ret;
             }
         }
-
-        private static int AsInt(object obj) => int.Parse(obj.ToString());
 
         public static string InstructionID(long bank, long index)
         {
@@ -707,15 +741,16 @@ namespace DarkScript3
                     {
                         return variant;
                     }
-                    // Special case to not use native JS ops
-                    if (instr.Inner.Layer.HasValue && Cond.Name == "Compare") continue;
                     // If a param, this variant can't be used
-                    if (instr.Args[variant.NegateArg] is ParamArg) continue;
+                    if (!TryExtractIntArg(instr.Args[variant.NegateArg], out int negateVal)) continue;
                     // If does not match fixed enum, this variant can't be used
                     bool extraOkay = true;
                     foreach (KeyValuePair<int, int> req in variant.ExtraArgs)
                     {
-                        if (instr.Args[req.Key] is ParamArg || instr.Args[req.Key].ToString() != req.Value.ToString()) extraOkay = false;
+                        if (instr.Args[req.Key] is ParamArg || !TryExtractIntArg(instr.Args[req.Key], out int val) || val != req.Value)
+                        {
+                            extraOkay = false;
+                        }
                     }
                     if (!extraOkay) continue;
                     // Only one variant in these cases
@@ -724,7 +759,7 @@ namespace DarkScript3
                     // Otherwise, find the right one for this case
                     BoolVersion version = Cond.AllBools.Find(b => b.Name == variant.Doc.Name);
                     if (version == null) continue;
-                    string arg = NegateEnum.Values[instr.Args[variant.NegateArg].ToString()];
+                    string arg = NegateEnum.Values[negateVal.ToString()];
                     if (version.True == arg || version.False == arg) return variant;
                 }
                 throw new ArgumentException($"No acceptable condition variant found for {Cond.Name} and {instr}");
@@ -757,6 +792,8 @@ namespace DarkScript3
             throw new ArgumentException($"Opposite value of {op} not present for enum {NegateEnum.Name}");
         }
 
+        // Translation-related utilities
+
         public List<string> GetConditionCategories(Cond cond)
         {
             List<string> ret = new List<string>();
@@ -779,6 +816,22 @@ namespace DarkScript3
                 }
             });
             return ret;
+        }
+        
+        public void AddDisplayEnums(Instr instr)
+        {
+            if (InstrDocs.TryGetValue(instr.Cmd, out EMEDF.InstrDoc doc))
+            {
+                for (int i = 0; i < doc.Arguments.Length; i++)
+                {
+                    if (i >= instr.Args.Count) break;
+                    EMEDF.EnumDoc edoc = doc.Arguments[i].EnumDoc;
+                    if (edoc != null && edoc.DisplayValues.TryGetValue(instr.Args[i].ToString(), out string name))
+                    {
+                        instr.Args[i] = new DisplayArg { DisplayValue = name, Value = instr.Args[i] };
+                    }
+                }
+            }
         }
 
         public class InstructionTranslationException : Exception

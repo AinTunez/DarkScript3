@@ -19,15 +19,18 @@ namespace DarkScript3
             public bool Fancy { get; set; }
             public List<string> Params = new List<string>();
             public List<Intermediate> Body = new List<Intermediate>();
-            public List<SourceDecoration> EndComments = new List<SourceDecoration>();
+
+            public List<SourceDecoration> EndComments = null;
+            public LineMapping LineMapping { get; set; }
             public string Header { get; set; }
 
             public override string ToString() => $"{(Fancy ? "$" : "")}Event({ID}, {RestBehavior}, function({string.Join(",", Params)}) {{ {string.Join(" ", Body)} }});";
 
-            public int Print(TextWriter writer)
+            public void Print(TextWriter writer)
             {
-                int lines = 2;
                 Random r = new Random(ID);
+                LineTrackingWriter lineWriter = writer as LineTrackingWriter;
+                lineWriter?.RecordMapping(LineMapping);
                 string processDecorations(List<SourceDecoration> decs, string sp)
                 {
                     if (decs == null) return "";
@@ -37,12 +40,10 @@ namespace DarkScript3
                         if (dec.Type == SourceDecoration.DecorationType.PRE_BLANK)
                         {
                             writer.WriteLine();
-                            lines++;
                         }
                         else if (dec.Type == SourceDecoration.DecorationType.PRE_COMMENT)
                         {
                             writer.WriteLine(sp + dec.Comment);
-                            lines++;
                         }
                         else if (dec.Type == SourceDecoration.DecorationType.POST_COMMENT)
                         {
@@ -60,9 +61,9 @@ namespace DarkScript3
                         string suffix = processDecorations(im.Decorations, sp);
                         foreach (string l in im.Labels)
                         {
-                            writer.WriteLine($"{l}:{suffix}");
-                            lines++;
+                            writer.WriteLine($"{l}:");
                         }
+                        lineWriter?.RecordMapping(im.LineMapping);
                         if (im is NoOp && im.Labels.Count == 0 && !prevLabel)
                         {
                             // Don't print NoOp unless it is needed for synthetic or actual labels.
@@ -70,13 +71,11 @@ namespace DarkScript3
                         else if (im is Label)
                         {
                             writer.WriteLine(im + suffix);
-                            lines++;
                             if (im == ims[ims.Count - 1])
                             {
                                 // Slight hack to synthetically add NoOp at the end of a block, not just end of the function
                                 // This is kind of a syntactic extension to Label itself.
                                 writer.WriteLine(sp + "NoOp();");
-                                lines++;
                             }
                         }
                         else
@@ -85,6 +84,7 @@ namespace DarkScript3
                             if (fullLine.Length > columnLimit && Fancy)
                             {
                                 writer.WriteLine(sp + im.GetStringTree().Render(sp) + suffix);
+                                lineWriter?.PostMapping(im.LineMapping);
                             }
                             else
                             {
@@ -96,17 +96,14 @@ namespace DarkScript3
                                 if (ifIm.False.Count == 0)
                                 {
                                     writer.WriteLine(sp + $"}}");
-                                    lines += 2;
                                 }
                                 else
                                 {
                                     writer.WriteLine(sp + $"}} else {{");
                                     subprint(ifIm.False, indent + 1);
                                     writer.WriteLine(sp + $"}}");
-                                    lines += 3;
                                 }
                             }
-                            lines++;
                         }
                         prevLabel = im is Label;
                     }
@@ -115,68 +112,6 @@ namespace DarkScript3
                 subprint(Body, 1);
                 string funcSuffix = processDecorations(EndComments, SingleIndent);
                 writer.WriteLine($"}});{funcSuffix}");
-                return lines;
-            }
-        }
-
-        // For pretty printing recursive structures
-        public class StringTree
-        {
-            public string Start = "";
-            public List<StringTree> Children { get; set; }
-            public string Sep = "";
-            public string End = "";
-            private int _Length;
-
-            private int Length
-            {
-                get {
-                    if (_Length == 0)
-                    {
-                        _Length = (Children != null ? Children.Sum(c => c.Length) + Sep.Length * (Children.Count - 1) : 0) + Start.Length + End.Length;
-                    }
-                    return _Length;
-                }
-            }
-
-            // A simple unbreakable string
-            public static StringTree Of(object s) => new StringTree { Start = s.ToString() };
-            // A start which can appear on its own line when the rest of it is too long
-            public static StringTree IsolatedStart(string start, StringTree mid, string end) => new StringTree
-            {
-                Children = new List<StringTree> { StringTree.Of(start), mid },
-                End = end
-            };
-            // A start where the rest of it can be broken up, but it doesn't appear on its own line.
-            public static StringTree CombinedStart(string start, StringTree mid, string end) => new StringTree
-            {
-                Start = start,
-                Children = new List<StringTree> { mid },
-                End = end
-            };
-
-            private string RenderOneLine() => Start + (Children == null ? "" : string.Join(Sep, Children.Select(c => c.RenderOneLine()))) + End;
-
-            public string Render(string sp)
-            {
-                // TODO: Consider passing in a StringBuilder to use recursively for a rather minor efficiency gain.
-                if (Children == null || Children.Count == 0 || sp.Length + Length <= columnLimit)
-                {
-                    return RenderOneLine();
-                }
-                string sp2 = sp + SingleIndent;
-                if (Children.Count == 1)
-                {
-                    return Start + Children[0].Render(sp) + End;
-                }
-                StringBuilder ret = new StringBuilder();
-                ret.AppendLine(Start + Children[0].Render(sp));
-                for (int i = 1; i < Children.Count - 1; i++)
-                {
-                    ret.AppendLine(sp2 + Sep.TrimStart() + Children[i].Render(sp2));
-                }
-                ret.Append(sp2 + Sep.TrimStart() + Children[Children.Count - 1].Render(sp2) + End);
-                return ret.ToString();
             }
         }
 
@@ -235,13 +170,49 @@ namespace DarkScript3
             public string Doc { get; set; }
         }
 
+        public class LineMapping : IComparable<LineMapping>
+        {
+            // These are all 1-indexed
+            public int SourceLine { get; set; }
+            public int SourceEndLine { get; set; }
+            public int PrintedLine { get; set; }
+            public int PrintedEndLine { get; set; }
+
+            public int CompareTo(LineMapping other) => PrintedLine.CompareTo(other.PrintedLine);
+            public override string ToString() => $"LineMapping{{output={PrintedLine}, source={SourceLine}:{SourceEndLine}}}";
+            public LineMapping Clone() => (LineMapping)MemberwiseClone();
+        }
+
         public abstract class Intermediate
         {
             public int ID = -1;
 
             // Synthetic labels only
             public List<string> Labels = new List<string>();
+            // Comments and nonfunctional things in compilation
             public List<SourceDecoration> Decorations { get; set; }
+            public LineMapping LineMapping { get; set; }
+
+            public void MoveDecorationsTo(Intermediate other)
+            {
+                if (Decorations != null && other != this)
+                {
+                    if (other.Decorations == null) other.Decorations = new List<SourceDecoration>();
+                    other.Decorations.AddRange(Decorations);
+                    Decorations = null;
+                }
+                other.LineMapping = LineMapping == null ? LineMapping : LineMapping.Clone();
+            }
+
+            public void MoveDecorationsTo(EventFunction func)
+            {
+                if (Decorations != null)
+                {
+                    if (func.EndComments == null) func.EndComments = new List<SourceDecoration>();
+                    func.EndComments.AddRange(Decorations);
+                    Decorations = null;
+                }
+            }
 
             public virtual StringTree GetStringTree() => StringTree.Of(this);
         }
@@ -279,15 +250,29 @@ namespace DarkScript3
             // The command name from EMEDF.
             public string Name { get; set; }
             // The values for each of the args.
-            // In decompilation, these are the literal values from emevd.
+            // In decompilation, these are the literal values from emevd, or an EnumInt for pretty printing enums.
             // In compilation, these may be JavaScript expression but they are copied into V8 as-is.
             public List<object> Args = new List<object>();
-            // Should be set for decompilation
-            public List<object> DisplayArgs;
             // Layer
             public object Layers { get; set; }
 
-            public override string ToString() => $"{Name}({ArgString(DisplayArgs ?? Args, Layers)});";
+            public override string ToString() => $"{Name}({ArgString(Args, Layers)});";
+        }
+
+        // Can appear as an arg in a List<object> of args, like X0_4
+        public class ParamArg
+        {
+            public string Name { get; set; }
+            public override string ToString() => Name;
+        }
+
+        public class DisplayArg
+        {
+            public string DisplayValue { get; set; }
+            // Primitive type
+            public object Value { get; set; }
+
+            public override string ToString() => DisplayValue;
         }
 
         public class Label : Intermediate
@@ -295,6 +280,14 @@ namespace DarkScript3
             public int Num { get; set; }
 
             public override string ToString() => $"L{Num}:";
+        }
+
+        public class JSStatement : Intermediate
+        {
+            // Allow JS statements to be passed through compilation in some cases
+            public string Code { get; set; }
+
+            public override string ToString() => Code;
         }
 
         public enum ControlType
@@ -458,11 +451,9 @@ namespace DarkScript3
         {
             public string Name { get; set; }
             public List<object> Args = new List<object>();
-            // Should be set for decompilation
-            public List<object> DisplayArgs;
 
             public override string DocName => Name;
-            public override string ToString() => $"{Prefix}{Name}({ArgString(DisplayArgs ?? Args, null)})";
+            public override string ToString() => $"{Prefix}{Name}({ArgString(Args, null)})";
         }
 
         public class CondRef : Cond
@@ -504,13 +495,6 @@ namespace DarkScript3
             public override string ToString() => $"{Prefix}ERROR({(Message == null ? "" : $"\"{Message}\"")})";
         }
 
-        // Can appear as an arg in a List<object> of args, like X0_4
-        public class ParamArg
-        {
-            public string Name { get; set; }
-            public override string ToString() => Name;
-        }
-
         public enum ComparisonType
         {
             Equal, NotEqual, Greater, Less, GreaterOrEqual, LessOrEqual
@@ -534,9 +518,114 @@ namespace DarkScript3
             [ComparisonType.GreaterOrEqual] = ">="
         };
 
+        // Misc utilities
+
         public class FancyNotSupportedException : Exception
         {
-            public FancyNotSupportedException(string message) : base(message) { }
+            public Intermediate Im { get; set; }
+
+            public FancyNotSupportedException(string message, Intermediate im = null) : base(message)
+            {
+                Im = im;
+            }
+        }
+
+        public class LineTrackingWriter : TextWriter
+        {
+            public TextWriter Writer { get; set; }
+            private int Line = 0;
+            public List<LineMapping> Mappings = new List<LineMapping>();
+
+            public void RecordMapping(LineMapping mapping)
+            {
+                if (mapping == null) return;
+                // 1-indexed
+                mapping.PrintedLine = Line + 1;
+                Mappings.Add(mapping);
+            }
+
+            public void PostMapping(LineMapping mapping)
+            {
+                if (mapping == null) return;
+                // +1 for line indexing, but -1 for applying to the previous line.
+                mapping.PrintedEndLine = Line;
+            }
+
+            public override void Write(char value)
+            {
+                if (value == '\n')
+                {
+                    Line++;
+                }
+                Writer.Write(value);
+            }
+
+            // May need to add more methods to support whatever this is used for.
+            public override Encoding Encoding => Writer.Encoding;
+            public override string ToString() => Writer.ToString();
+        }
+
+        // For pretty printing recursive structures
+        public class StringTree
+        {
+            public string Start = "";
+            public List<StringTree> Children { get; set; }
+            public string Sep = "";
+            public string End = "";
+            private int _Length;
+
+            private int Length
+            {
+                get
+                {
+                    if (_Length == 0)
+                    {
+                        _Length = (Children != null ? Children.Sum(c => c.Length) + Sep.Length * (Children.Count - 1) : 0) + Start.Length + End.Length;
+                    }
+                    return _Length;
+                }
+            }
+
+            // A simple unbreakable string
+            public static StringTree Of(object s) => new StringTree { Start = s.ToString() };
+            // A start which can appear on its own line when the rest of it is too long
+            public static StringTree IsolatedStart(string start, StringTree mid, string end) => new StringTree
+            {
+                Children = new List<StringTree> { Of(start), mid },
+                End = end
+            };
+            // A start where the rest of it can be broken up, but it doesn't appear on its own line.
+            public static StringTree CombinedStart(string start, StringTree mid, string end) => new StringTree
+            {
+                Start = start,
+                Children = new List<StringTree> { mid },
+                End = end
+            };
+
+            private string RenderOneLine() => Start + (Children == null ? "" : string.Join(Sep, Children.Select(c => c.RenderOneLine()))) + End;
+
+            public string Render(string sp)
+            {
+                // TODO: Consider passing in a StringBuilder to use recursively for a rather minor efficiency gain.
+                // Most printed lines won't use StringTree in any case.
+                if (Children == null || Children.Count == 0 || sp.Length + Length <= columnLimit)
+                {
+                    return RenderOneLine();
+                }
+                string sp2 = sp + SingleIndent;
+                if (Children.Count == 1)
+                {
+                    return Start + Children[0].Render(sp) + End;
+                }
+                StringBuilder ret = new StringBuilder();
+                ret.AppendLine(Start + Children[0].Render(sp));
+                for (int i = 1; i < Children.Count - 1; i++)
+                {
+                    ret.AppendLine(sp2 + Sep.TrimStart() + Children[i].Render(sp2));
+                }
+                ret.Append(sp2 + Sep.TrimStart() + Children[Children.Count - 1].Render(sp2) + End);
+                return ret.ToString();
+            }
         }
     }
 }

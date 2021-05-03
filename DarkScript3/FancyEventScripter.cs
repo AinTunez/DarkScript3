@@ -13,36 +13,16 @@ namespace DarkScript3
 {
     public class FancyEventScripter
     {
-        private EventScripter scripter;
-        private InstructionDocs docs;
-        private EventCFG.CFGOptions options;
+        private readonly EventScripter scripter;
+        private readonly InstructionDocs docs;
+        private readonly EventCFG.CFGOptions options;
 
-        // Some remaining things to do.
-        // Side-by-side compilation diff viewing
-        // Dialogue box for confirming conversion
-        // Font size, and remember preference
-        // Good line reporting in CFG compilation
-        // Good line reporting in post-compilation packing, line mapping
-
-        public FancyEventScripter(EventScripter scripter, InstructionDocs docs, EventCFG.CFGOptions options = null)
+        public FancyEventScripter(EventScripter scripter, InstructionDocs docs, EventCFG.CFGOptions options)
         {
             if (docs.Translator == null) throw new ArgumentException($"Internal error: can't use fancy scripting with {docs.ResourceString}");
             this.scripter = scripter;
             this.docs = docs;
-            this.options = options ?? EventCFG.CFGOptions.DEFAULT;
-        }
-
-        private EventCFG.CFGOptions UpdateOptions()
-        {
-            options.RestrictConditionGroupCount = docs.RestrictConditionGroups;
-            return options;
-        }
-
-        public EMEVD Pack(string code, string documentName = null)
-        {
-            string output = new FancyJSCompiler(UpdateOptions()).Compile(code, docs).Code;
-            if (output == null) throw new Exception();
-            return scripter.Pack(output, documentName);
+            this.options = options;
         }
 
         public string Unpack()
@@ -52,21 +32,41 @@ namespace DarkScript3
             return writer.ToString();
         }
 
-        public string Repack(string code, string documentName = null)
+        public EMEVD Pack(string code, string documentName = null)
         {
-            FancyJSCompiler.CompileOutput output = new FancyJSCompiler(UpdateOptions()).Compile(code, docs, true);
-            if (output.Code == null) throw new Exception();
-            scripter.Pack(output.Code, documentName);
-            StringWriter writer = new StringWriter();
-            Decompile(writer, output);
-            return writer.ToString();
+            FancyJSCompiler.CompileOutput output = new FancyJSCompiler(options).Compile(code, docs);
+            try
+            {
+                return scripter.Pack(output.Code, documentName);
+            }
+            catch (JSScriptException ex)
+            {
+                output.RewriteStackFrames(ex, documentName);
+                throw ex;
+            }
         }
 
-        private void Decompile(TextWriter writer, FancyJSCompiler.CompileOutput decorations = null)
+        public string Repack(string code)
+        {
+            return RepackFull(code).Code;
+        }
+
+        public List<FancyJSCompiler.DiffSegment> PreviewPack(string code)
+        {
+            FancyJSCompiler.CompileOutput output = new FancyJSCompiler(options).Compile(code, docs, printFancyEnums: true);
+            return output.GetDiffSegments();
+        }
+
+        public FancyJSCompiler.CompileOutput RepackFull(string code)
+        {
+            FancyJSCompiler.CompileOutput output = new FancyJSCompiler(options).Compile(code, docs, true);
+            return output;
+        }
+
+        private void Decompile(TextWriter writer)
         {
             EMEDF DOC = docs.DOC;
             InstructionTranslator info = docs.Translator;
-            bool decorate = decorations != null && scripter.EVD.Events.Count == decorations.Funcs.Count;
             for (int i = 0; i < scripter.EVD.Events.Count; i++)
             {
                 Event evt = scripter.EVD.Events[i];
@@ -80,30 +80,17 @@ namespace DarkScript3
                 EventFunction func = new EventFunction { ID = (int)evt.ID, RestBehavior = evt.RestBehavior, Params = argNameList };
 
                 List<Intermediate> decorateInstrs = null;
-                if (decorate)
-                {
-                    EventFunction decoratedFunc = decorations.Funcs[i];
-                    func.EndComments = decoratedFunc.EndComments;
-                    decorateInstrs = decoratedFunc.Body;
-                    // If we are automatically translating the source into a new source file, we are copying
-                    // in parts of the old source file here, avoid mixing tabs and spaces (which the function
-                    // printer extensively uses).
-                    writer.Write(decoratedFunc.Header.Replace("\t", SingleIndent));
-                }
-                else
-                {
-                    string eventName = scripter.EventName(evt.ID);
-                    if (eventName != null) writer.WriteLine($"// {eventName}");
-                }
+
+                string eventName = scripter.EventName(evt.ID);
+                if (eventName != null) writer.WriteLine($"// {eventName}");
 
                 for (int insIndex = 0; insIndex < evt.Instructions.Count; insIndex++)
                 {
                     Instruction ins = evt.Instructions[insIndex];
-                    EMEDF.InstrDoc doc = docs.DOC[ins.Bank][ins.ID];
+                    EMEDF.InstrDoc doc = docs.DOC[ins.Bank]?[ins.ID];
                     if (doc == null)
                     {
-                        Console.WriteLine($"ZZZ: {ins.Bank}[{ins.ID}] {string.Join(" ", ins.ArgData.Select(b => $"{b:x2}"))}");
-                        continue;
+                        throw new Exception($"Unknown instruction in event {id}: {ins.Bank}[{ins.ID}] {string.Join(" ", ins.ArgData.Select(b => $"{b:x2}"))}");
                     }
                     string funcName = InstructionDocs.TitleCaseName(doc.Name);
 
@@ -137,12 +124,10 @@ namespace DarkScript3
                                     }
                                 }
                             }
-                            instr.DisplayArgs = instr.Args.ToList();
                         }
                         else
                         {
                             instr.Args = ins.UnpackArgs(argStruct);
-                            instr.DisplayArgs = new List<object>();
                             for (int argIndex = 0; argIndex < instr.Args.Count(); argIndex++)
                             {
                                 EMEDF.ArgDoc argDoc = doc.Arguments[argIndex];
@@ -155,29 +140,34 @@ namespace DarkScript3
                                         instr.Args[argIndex] = new ParamArg { Name = paramNames[prm] };
                                     }
                                 }
-                                instr.DisplayArgs.Add(argDoc.GetDisplayValue(instr.Args[argIndex].ToString()));
+                                object displayVal = argDoc.GetDisplayValue(instr.Args[argIndex]);
+                                if (displayVal is string displayStr)
+                                {
+                                    instr.Args[argIndex] = new DisplayArg { DisplayValue = displayStr, Value = instr.Args[argIndex] };
+                                }
                             }
                         }
                     }
                     catch (Exception ex)
                     {
                         var sb = new StringBuilder();
-                        sb.AppendLine($@"ERROR XXX: Unable to unpack arguments for ""{funcName}""");
+                        sb.AppendLine($@"ERROR: Unable to unpack arguments for ""{funcName}""");
                         sb.AppendLine(ex.ToString());
                         throw new Exception(sb.ToString());
                     }
                     func.Body.Add(instr);
                 }
-                EventCFG f = new EventCFG((int)evt.ID, UpdateOptions());
+                EventCFG f = new EventCFG((int)evt.ID, options);
                 try
                 {
-                    // This returns warnings. Ignored until we have a nice way to show them.
+                    // This returns warnings, many of which exist in vanilla emevd.
+                    // Ignored until we have a nice way to show them.
                     f.Decompile(func, info);
                 }
                 catch (FancyNotSupportedException)
                 {
                     // For the moment, swallow this.
-                    // Can find a way to expose the error, but these are basically intentional bail outs.
+                    // Can find a way to expose the error, but these are basically intentional bail outs, also existing in vanilla emevd.
                     StringBuilder code = new StringBuilder();
                     scripter.UnpackEvent(evt, code);
                     writer.Write(code.ToString());
@@ -185,18 +175,10 @@ namespace DarkScript3
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
-                    continue;
+                    throw ex;
                 }
                 func.Print(writer);
-                if (!decorate)
-                {
-                    writer.WriteLine();
-                }
-            }
-            if (decorate)
-            {
-                writer.WriteLine(decorations.Footer.Replace("\t", SingleIndent));
+                writer.WriteLine();
             }
         }
     }

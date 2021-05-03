@@ -110,7 +110,7 @@ namespace DarkScript3
 
             public EnumDoc EnumDoc { get; set; }
 
-            public string GetDisplayValue(string val) => EnumDoc == null ? val : EnumDoc.GetDisplayValue(val);
+            public object GetDisplayValue(object val) => EnumDoc == null ? val : EnumDoc.GetDisplayValue(val);
         }
 
         public class EnumDoc
@@ -127,7 +127,7 @@ namespace DarkScript3
 
             public Dictionary<string, string> DisplayValues { get; set; }
 
-            public string GetDisplayValue(string val) => DisplayValues.TryGetValue(val, out string reval) ? reval : val;
+            public object GetDisplayValue(object val) => DisplayValues.TryGetValue(val.ToString(), out string reval) ? reval : val;
         }
     }
 }

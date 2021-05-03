@@ -50,9 +50,11 @@ namespace DarkScript3
             this.decompileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scriptCompilationSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openAutoCompleteMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.emevdDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.previewCompilationOutputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -188,6 +190,7 @@ namespace DarkScript3
             this.decompileToolStripMenuItem,
             this.toolStripSeparator3,
             this.customizeToolStripMenuItem,
+            this.scriptCompilationSettingsToolStripMenuItem,
             this.openAutoCompleteMenuToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
@@ -259,7 +262,7 @@ namespace DarkScript3
             // 
             this.decompileToolStripMenuItem.Name = "decompileToolStripMenuItem";
             this.decompileToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
-            this.decompileToolStripMenuItem.Text = "Fancy Decompile";
+            this.decompileToolStripMenuItem.Text = "Convert to MattScript...";
             this.decompileToolStripMenuItem.Click += new System.EventHandler(this.decompileToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
@@ -271,8 +274,15 @@ namespace DarkScript3
             // 
             this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
             this.customizeToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
-            this.customizeToolStripMenuItem.Text = "Customize...";
+            this.customizeToolStripMenuItem.Text = "Customize Appearance...";
             this.customizeToolStripMenuItem.Click += new System.EventHandler(this.customizeToolStripMenuItem_Click);
+            // 
+            // scriptCompilationSettingsToolStripMenuItem
+            // 
+            this.scriptCompilationSettingsToolStripMenuItem.Name = "scriptCompilationSettingsToolStripMenuItem";
+            this.scriptCompilationSettingsToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.scriptCompilationSettingsToolStripMenuItem.Text = "Script Compilation Settings...";
+            this.scriptCompilationSettingsToolStripMenuItem.Click += new System.EventHandler(this.scriptCompilationSettingsToolStripMenuItem_Click);
             // 
             // openAutoCompleteMenuToolStripMenuItem
             // 
@@ -287,6 +297,7 @@ namespace DarkScript3
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.emevdDataToolStripMenuItem,
+            this.previewCompilationOutputToolStripMenuItem,
             this.documentationToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
@@ -296,8 +307,15 @@ namespace DarkScript3
             // 
             this.emevdDataToolStripMenuItem.Name = "emevdDataToolStripMenuItem";
             this.emevdDataToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            this.emevdDataToolStripMenuItem.Text = "EMEVD Data";
+            this.emevdDataToolStripMenuItem.Text = "EMEVD Data...";
             this.emevdDataToolStripMenuItem.Click += new System.EventHandler(this.EmevdDataToolStripMenuItem_Click);
+            // 
+            // previewCompilationOutputToolStripMenuItem
+            // 
+            this.previewCompilationOutputToolStripMenuItem.Name = "previewCompilationOutputToolStripMenuItem";
+            this.previewCompilationOutputToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.previewCompilationOutputToolStripMenuItem.Text = "Preview Compilation Output...";
+            this.previewCompilationOutputToolStripMenuItem.Click += new System.EventHandler(this.previewCompilationOutputToolStripMenuItem_Click);
             // 
             // documentationToolStripMenuItem
             // 
@@ -471,6 +489,8 @@ namespace DarkScript3
         private System.Windows.Forms.ToolStripMenuItem openAutoCompleteMenuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem decompileToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem previewCompilationOutputToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem scriptCompilationSettingsToolStripMenuItem;
     }
 }
 

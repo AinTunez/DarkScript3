@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.props" Condition="Exists('..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.props')" />
   <Import Project="..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.props" Condition="Exists('..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.props')" />
@@ -82,7 +82,7 @@
       <HintPath>..\packages\Microsoft.ClearScript.5.6.0\lib\net45\ClearScript.dll</HintPath>
     </Reference>
     <Reference Include="Esprima, Version=2.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Esprima.2.0.0-beta-1292\lib\net461\Esprima.dll</HintPath>
+      <HintPath>..\packages\Esprima.2.0.0-beta-1338\lib\net461\Esprima.dll</HintPath>
     </Reference>
     <Reference Include="FastColoredTextBox, Version=2.16.24.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL">
       <HintPath>..\packages\FCTB.2.16.24\lib\FastColoredTextBox.dll</HintPath>
@@ -296,11 +296,25 @@
       <DependentUpon>InfoViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="InstructionTranslator.cs" />
+    <Compile Include="JSScriptException.cs" />
+    <Compile Include="PreviewCompilationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreviewCompilationForm.Designer.cs">
+      <DependentUpon>PreviewCompilationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="RoundTripTool.cs" />
     <Compile Include="ScriptAst.cs" />
+    <Compile Include="ScriptSettings.cs" />
+    <Compile Include="ScriptSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScriptSettingsForm.Designer.cs">
+      <DependentUpon>ScriptSettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="StyleConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -328,6 +342,9 @@
     <EmbeddedResource Include="InfoViewer.resx">
       <DependentUpon>InfoViewer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PreviewCompilationForm.resx">
+      <DependentUpon>PreviewCompilationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -338,6 +355,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ScriptSettingsForm.resx">
+      <DependentUpon>ScriptSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StyleConfig.resx">
       <DependentUpon>StyleConfig.cs</DependentUpon>
     </EmbeddedResource>

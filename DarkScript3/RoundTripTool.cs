@@ -91,15 +91,28 @@ namespace DarkScript3
                     EventCFG.CFGOptions options = args.Contains("min") ? EventCFG.CFGOptions.MIN : EventCFG.CFGOptions.DEFAULT;
                     scripter = new EventScripter(emevdPath, docs);
                     FancyEventScripter fes = new FancyEventScripter(scripter, docs, options);
+                    if (args.Contains("unit"))
+                    {
+                        fes.Pack(TEST_CASES);
+                        Console.WriteLine(scripter.Unpack());
+                        Console.WriteLine(fes.Repack(TEST_CASES));
+                        return;
+                    }
                     string fancy1 = recordText("fancy1", name, () => fes.Unpack());
                     if (fancy1 != null)
                     {
-                        if (recordText("reg3", name + "-compile", () => fes.Pack(fancy1, name)) != null)
+                        if (args.Contains("repack"))
                         {
-                            recordText("reg3", name, () => scripter.Unpack());
+                            recordText("fancy2", name, () => fes.Repack(fancy1));
+                        }
+                        else
+                        {
+                            if (recordText("reg3", name + "-compile", () => fes.Pack(fancy1, name)) != null)
+                            {
+                                recordText("reg3", name, () => scripter.Unpack());
+                            }
                         }
                     }
-                    // fes.Pack(testcases); Console.WriteLine(scripter.Unpack()); Console.WriteLine(fes.Unpack()); break;
                 }
             }
             foreach (KeyValuePair<string, StringBuilder> entry in contents)
@@ -165,6 +178,21 @@ $Event(102, Default, function() {
     } else {
         WaitFor(c);
     }
+    Label0();
+});
+
+$Event(103, Default, function() {
+    // Comments
+    if (EventFlag(99)) {  // Wait for state change
+        WaitFor(/* negated */ !EventFlag(99));
+    } else {
+        WaitFor(EventFlag(99));
+    }  // If state change
+L0:  // Jump target
+    /* Then the event
+     * flag is set */
+S0: // End
+    NoOp();
 });
 ";
     }

@@ -31,6 +31,16 @@ namespace DarkScript3
                 return Lines[pos.Line - 1].Item1 + pos.Column;
             }
 
+            public int LineCount => Lines.Count;
+
+            public string GetLine(int index)
+            {
+                // 1-indexed, also bounds-checked because this number can come from JS
+                index--;
+                if (index < 0 || index >= Lines.Count) return null;
+                return Lines[index].Item2;
+            }
+
             public void SkipTo(Node node)
             {
                 if (PendingDecorations.Count == 0) return;
@@ -80,33 +90,46 @@ namespace DarkScript3
                 return new SourceNode { Node = node, Source = source };
             }
 
-            public string PrintErrors(List<CompileError> errors)
+            public void TransformErrors(List<CompileError> errors, string header)
             {
-                StringBuilder sb = new StringBuilder();
                 foreach (CompileError err in errors)
                 {
-                    sb.AppendLine($"ERROR{(err.Event == null ? "" : $" in {err.Event}")}: {err.Text}");
-                    if (err.Node != null && Lines.Count > 0)
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine($"{header}{(err.Event == null ? "" : $" in event {err.Event}")}: {err.Message}");
+                    if (err.Loc is Position sourceLoc && Lines.Count > 0)
                     {
-                        Position sourceLoc = err.Node.Location.Start;
                         (int _, string line) = Lines[sourceLoc.Line - 1];
-                        string prefix = $"{sourceLoc.Line}:{sourceLoc.Column}: ";
+                        int col = sourceLoc.Column;
+                        // In cases we don't have a precise column, use the actual start of the line at minimum
+                        if (col == 0)
+                        {
+                            for (int i = 0; i < line.Length; i++)
+                            {
+                                if (!Char.IsWhiteSpace(line[i]))
+                                {
+                                    col = i;
+                                    break;
+                                }
+                            }
+                        }
+                        string prefix = $"{sourceLoc.Line}:{col}:";
                         sb.AppendLine($"{prefix}{line}");
-                        sb.AppendLine($"{new string(' ', prefix.Length + sourceLoc.Column)}^");
+                        sb.AppendLine($"{new string(' ', prefix.Length + col)}^");
                     }
                     else
                     {
                         sb.AppendLine();
                     }
+                    err.Loc = null;
+                    err.Message = sb.ToString();
                 }
-                return sb.ToString();
             }
 
             // Possible feature: provide a range? Or do it before calling pack
             public static SourceContext FromText(string code, bool decorating)
             {
                 List<(int, string)> lines = new List<(int, string)>();
-                TrackingReader reader = new TrackingReader { Reader = new StringReader(code) };
+                PositionTrackingReader reader = new PositionTrackingReader { Reader = new StringReader(code) };
                 List<SourceDecoration> decorations = new List<SourceDecoration>();
                 while (true)
                 {
@@ -171,9 +194,34 @@ namespace DarkScript3
 
         public class CompileError
         {
-            public Node Node { get; set; }
-            public string Text { get; set; }
+            public Position? Loc { get; set; }
+            public int Line { get; set; }
+            public string Message { get; set; }
             public int? Event { get; set; }
+
+            public static CompileError FromNode(Node node, string message, int? ev)
+            {
+                Position? loc = node == null ? (Position?)null : node.Location.Start;
+                return new CompileError
+                {
+                    Loc = loc,
+                    Line = loc?.Line ?? 0,
+                    Message = message,
+                    Event = ev,
+                };
+            }
+
+            public static CompileError FromInstr(Intermediate im, string message, int? ev)
+            {
+                Position? loc = im?.LineMapping == null ? (Position?)null : new Position(im.LineMapping.SourceLine, 0);
+                return new CompileError
+                {
+                    Loc = loc,
+                    Line = loc?.Line ?? 0,
+                    Message = message,
+                    Event = ev,
+                };
+            }
         }
 
         public class WalkContext
@@ -181,18 +229,23 @@ namespace DarkScript3
             // Global properties
             public bool Debug { get; set; }
             public List<CompileError> Errors = new List<CompileError>();
+            public List<CompileError> Warnings = new List<CompileError>();
+
             public void Error(Node node, string text = null)
             {
                 if (Debug) Console.WriteLine($"ERROR: {text}");
-                Errors.Add(new CompileError { Node = node, Text = text, Event = Event });
+                Errors.Add(CompileError.FromNode(node, text, Event));
             }
+
             public void Error(string text)
             {
                 Error(null, text);
             }
+
             // Local properties for error reporting.
             // The preferred way to change this is with Copy, but can also be mutated in a single-thread context.
             public int? Event { get; set; }
+
             // Clone
             public WalkContext Copy(int? ev = null)
             {
@@ -240,17 +293,17 @@ namespace DarkScript3
                     }
                     else
                     {
-                        context.Error(expr, $"int expected, but found {lit.TokenType}");
+                        context.Error(expr, $"Expected int but found {lit.TokenType}");
                     }
                 }
                 else
                 {
-                    context.Error(expr, $"int expected, but found {expr.Type}");
+                    context.Error(expr, $"Expected int but found {expr.Type}");
                 }
                 return 0;
             }
 
-            // Returns null on error.
+            // Returns null on error, which caller should transform to an appropriate error object.
             private CmdCond ConvertCommandCond(CallExpression call)
             {
                 if (!(call.Callee is Identifier id))
@@ -307,6 +360,11 @@ namespace DarkScript3
                 {
                     context.Error(id, $"Using function name {id.Name} as a condition variable");
                 }
+                else if (id.Name.StartsWith("X"))
+                {
+                    // TODO: May want to check actual parameters, especially if parameter names change
+                    context.Error(id, $"Condition variable {id.Name} looks like a parameter?");
+                }
             }
 
             private Cond ConvertCondExpression(Expression expr)
@@ -347,7 +405,6 @@ namespace DarkScript3
                         }
                         else
                         {
-                            // TODO: Make sure this is either argument (identifier) or literal also
                             cmp.Lhs = source.GetSourceNode(bin.Left);
                         }
                         return cmp;
@@ -425,7 +482,7 @@ namespace DarkScript3
             }
 
             // This should be called in order of source, meaning that outer statements should be called before inner.
-            private void ProcessIntermediate(Intermediate im, Node node)
+            private void ProcessIntermediate(Intermediate im, Node decorationNode)
             {
                 if (extraLabels.Count > 0)
                 {
@@ -433,7 +490,12 @@ namespace DarkScript3
                     extraLabels = new List<string>();
                 }
                 im.ID = cmdId++;
-                im.Decorations = source.GetDecorationsForNode(node);
+                im.Decorations = source.GetDecorationsForNode(decorationNode);
+                im.LineMapping = new LineMapping
+                {
+                    SourceLine = decorationNode.Location.Start.Line,
+                    SourceEndLine = decorationNode.Location.End.Line
+                };
                 // Rewrite entire condition. Because of associativity, this can't be done while transforming the expressions directly.
                 if (im is CondIntermediate condIm && condIm.Cond != null)
                 {
@@ -475,7 +537,7 @@ namespace DarkScript3
                     if (LabelIds.TryGetValue(label, out int labelNum))
                     {
                         Intermediate toAdd = new Label { Num = labelNum };
-                        ProcessIntermediate(toAdd, statement);
+                        ProcessIntermediate(toAdd, labelStmt.Label);
                         ret.Add(toAdd);
                     }
                     else
@@ -507,11 +569,10 @@ namespace DarkScript3
                         if (call.Callee is Identifier id)
                         {
                             f = id.Name;
-                            // Blergh
-                            // TODO: Add aliases to emedfs rather than hardcoding them here
-                            if (f.Contains("SpEffect"))
+                            // Ugh
+                            if (f.Contains("Speffect"))
                             {
-                                f = f.Replace("SpEffect", "Speffect");
+                                f = f.Replace("Speffect", "SpEffect");
                             }
                         }
                         else
@@ -596,21 +657,36 @@ namespace DarkScript3
                             }
                             if (docs.IsVariableLength(instrDoc) || hasExpectedArgs(instrDoc.Arguments.Length))
                             {
+                                // Getting the int value is required when compiling things with control/negate arguments etc.
+                                object getSourceArg(Expression arg)
+                                {
+                                    SourceNode node = source.GetSourceNode(arg);
+                                    if (docs.EnumValues.TryGetValue(node.Source, out int val))
+                                    {
+                                        return new DisplayArg { DisplayValue = node.Source, Value = val };
+                                    }
+                                    return node;
+                                }
                                 // We do pretty minimal checking of arguments; further validation is saved for JS execution time.
                                 im = new Instr
                                 {
                                     Cmd = InstructionID(pos.Item1, pos.Item2),
                                     Name = f,
-                                    Args = args.Select(a => (object)source.GetSourceNode(a)).ToList(),
+                                    Args = args.Select(getSourceArg).ToList(),
                                     Layers = layers
                                 };
                             }
+                        }
+                        else if (char.IsLower(f[0]))
+                        {
+                            // Allow function calls through unmodified if they are lowercase
+                            im = new JSStatement { Code = source.GetSourceNode(statement).ToString() };
                         }
                         else
                         {
                             if (f != null)
                             {
-                                context.Error(call, $"Unknown function name {f}");
+                                context.Error(call, $"Unknown function name {f}. Use lowercase names to call regular JS functions.");
                             }
                             im = null;
                         }
@@ -627,8 +703,17 @@ namespace DarkScript3
                 }
                 else if (statement is VariableDeclaration decls)
                 {
-                    // If this were allowed, it would probably be for native JS variables which can be used by subsequent commands.
-                    context.Error(decls, "Variable declarations with var/const/let are not supported, only plain condition group assignments. (Ask for feature request)");
+                    if (decls.Kind == VariableDeclarationKind.Const)
+                    {
+                        // Allow const variable declarations through unmodified
+                        ret.Add(new JSStatement { Code = source.GetSourceNode(statement).ToString() });
+                    }
+                    else
+                    {
+                        context.Error(decls, "Variable declarations with var/let are not supported."
+                            + " Use const declarations like \"const bossEntity = 1400100;\" to declare constants"
+                            + " and plain \"myCond = EventFlag(3);\" to assign to condition groups.");
+                    }
                 }
                 else if (statement is IfStatement ifs)
                 {
@@ -636,7 +721,8 @@ namespace DarkScript3
                     {
                         Cond = ConvertCondExpression(ifs.Test),
                     };
-                    ProcessIntermediate(ifelse, statement);
+                    // The decoration node is the test expression, not the whole thing
+                    ProcessIntermediate(ifelse, ifs.Test);
                     ifelse.True = ConvertStatement(ifs.Consequent);
                     if (ifs.Alternate != null) ifelse.False = ConvertStatement(ifs.Alternate);
                     ret.Add(ifelse);
@@ -670,6 +756,7 @@ namespace DarkScript3
                     cmdId = 0;
                     ret.Body = ConvertStatement(block);
                     ret.EndComments = source.GetDecorationsForNode(func);
+                    ret.LineMapping = new LineMapping { SourceLine = func.Location.Start.Line };
                     if (extraLabels.Count > 0)
                     {
                         context.Error(func, $"Extra labels {string.Join(",", extraLabels)} at the end not assigned to any instruction");
@@ -719,70 +806,103 @@ namespace DarkScript3
             }
         }
 
-        public CompileOutput Compile(string code, InstructionDocs docs, bool forDecompile = false)
+        public CompileOutput Compile(string code, InstructionDocs docs, bool repack = false, bool printFancyEnums = true)
         {
             WalkContext context = new WalkContext();
 
-            JavaScriptParser parser = new JavaScriptParser(code, new ParserOptions { Loc = true });
+            JavaScriptParser parser = new JavaScriptParser(code, new ParserOptions { });
             Esprima.Ast.Program program = parser.ParseScript(false);
 
-            SourceContext source = SourceContext.FromText(code, decorating: forDecompile);
-            // Process top level
-            StringWriter allOutput = new StringWriter();
+            SourceContext source = SourceContext.FromText(code, decorating: repack);
+
             EventParser eventParser = new EventParser { context = context, source = source, docs = docs };
 
-            // TODO: Make a map from new line to old line, although allow blocks of contiguous lines, and then binary search it for errors
             Node lastRewrittenNode = null;
             List<EventFunction> funcs = new List<EventFunction>();
+            StringWriter stringOutput = new StringWriter();
+            LineTrackingWriter writer = new LineTrackingWriter { Writer = stringOutput };
             foreach (Statement stmt in program.Body)
             {
-                CallExpression call = EventParser.GetEventCall(stmt, allowVanilla: forDecompile);
+                CallExpression call = EventParser.GetEventCall(stmt, allowVanilla: repack);
                 if (call == null) continue;
                 string header = source.GetTextBetweenNodes(lastRewrittenNode, stmt);
-                allOutput.Write(header);
                 source.SkipTo(call);
 
                 int errorCount = context.Errors.Count;
                 EventFunction func = eventParser.ParseEventCall(call);
                 // Go to CFG compilation if there are no errors
+                // Should probably isolate contexts from eachother to make this less hacky and also enable parallelism
                 if (errorCount == context.Errors.Count)
                 {
                     EventCFG f = new EventCFG(func.ID, options);
                     EventCFG.Result res = f.Compile(func, docs.Translator);
                     if (res.Errors.Count == 0)
                     {
-                        int lines = func.Print(allOutput);
-                        if (forDecompile)
+                        if (printFancyEnums)
                         {
-                            func.Header = header;
-                            funcs.Add(func);
+                            // Do this here while everything is flat
+                            foreach (Intermediate im in func.Body)
+                            {
+                                if (!(im is Instr instr)) continue;
+                                docs.Translator.AddDisplayEnums(instr);
+                            }
                         }
+                        if (repack)
+                        {
+                            f = new EventCFG(func.ID, options);
+                            try
+                            {
+                                res = f.Decompile(func, docs.Translator);
+                            }
+                            catch (FancyNotSupportedException fancyEx)
+                            {
+                                // Fallback to existing definition. Continue top-level loop to avoid updating lastRewrittenNode
+                                context.Warnings.Add(CompileError.FromInstr(fancyEx.Im, "Decompile skipped: " + fancyEx.Message, func.ID));
+                                continue;
+                            }
+                            // res.Errors.Count should be 0, as we assume that if it's an emevd, it must be valid.
+                            // This might not necessarily be the case for repacking, it may throw an internal error, but we'll see.
+                        }
+                        if (repack)
+                        {
+                            header = header.Replace("\t", SingleIndent);
+                        }
+                        writer.Write(header);
+                        func.Print(writer);
                     }
                     else
                     {
-                        foreach (string err in res.Errors)
+                        foreach (EventCFG.ResultError err in res.Errors)
                         {
-                            context.Error(err);
+                            context.Errors.Add(CompileError.FromInstr(err.Im, err.Message, func.ID));
                         }
                     }
                 }
                 lastRewrittenNode = stmt;
             }
             string footer = source.GetTextBetweenNodes(lastRewrittenNode, null);
-            allOutput.Write(footer);
+            if (repack)
+            {
+                footer = footer.Replace("\t", SingleIndent);
+            }
+            writer.Write(footer);
+
+            source.TransformErrors(context.Errors, "ERROR");
+            source.TransformErrors(context.Warnings, "WARNING");
+            writer.Mappings.Sort();
 
             if (context.Errors.Count != 0)
             {
-                // TODO: Should have custom exception type with line info for goto-line type functionality.
-                throw new FancyCompilerException(source.PrintErrors(context.Errors));
+                throw new FancyCompilerException { Errors = context.Errors };
             }
             else
             {
                 return new CompileOutput
                 {
-                    Code = allOutput.ToString(),
-                    Funcs = funcs,
-                    Footer = footer,
+                    Code = writer.ToString(),
+                    LineMappings = writer.Mappings,
+                    Warnings = context.Warnings,
+                    SourceContext = source,
                 };
             }
         }
@@ -790,14 +910,150 @@ namespace DarkScript3
         public class CompileOutput
         {
             public string Code { get; set; }
-            public List<EventFunction> Funcs { get; set; }
-            public string Footer { get; set; }
-            // TODO: Also add basic line-mapping here, from complex elements to simple lines, for line mapping.
+            public List<LineMapping> LineMappings { get; set; }
+            public List<CompileError> Warnings { get; set; }
+            public SourceContext SourceContext { get; set; }
+
+            // Utility methods
+
+            public void RewriteStackFrames(JSScriptException ex, string fileFilter)
+            {
+                List<LineMapping> mappings = LineMappings;
+                if (mappings.Count == 0) return;
+                foreach (JSScriptException.StackFrame frame in ex.Stack)
+                {
+                    if (frame.File != fileFilter) continue;
+                    int printedLine = frame.Line;
+                    int sourceLine;
+                    int mapIndex = mappings.BinarySearch(new LineMapping { PrintedLine = printedLine });
+                    if (mapIndex >= 0)
+                    {
+                        sourceLine = mappings[mapIndex].SourceLine;
+                    }
+                    else
+                    {
+                        // No exact match. mapIndex is the complement of the next eligible mapping
+                        mapIndex = ~mapIndex;
+                        if (mapIndex == mappings.Count)
+                        {
+                            // Printed line is past the last mapping. In this case, the last one is the closest.
+                            mapIndex = mappings.Count - 1;
+                        }
+                        LineMapping closest = mappings[mapIndex];
+                        sourceLine = closest.SourceLine + (printedLine - closest.PrintedLine);
+                    }
+                    string line = SourceContext.GetLine(sourceLine);
+                    frame.Line = sourceLine;
+                    frame.Column = 0;
+                    if (line != null)
+                    {
+                        line = line.Trim();
+                        if (line != frame.Text)
+                        {
+                            frame.ActualText = frame.Text;
+                            frame.Text = line;
+                        }
+                    }
+                }
+            }
+
+            public List<DiffSegment> GetDiffSegments()
+            {
+                List<DiffSegment> diffs = new List<DiffSegment>();
+                SourceContext leftSrc = SourceContext;
+                if (LineMappings.Count == 0)
+                {
+                    diffs.Add(new DiffSegment { Left = leftSrc.Code, Right = Code });
+                    return diffs;
+                }
+                SourceContext rightSrc = SourceContext.FromText(Code, false);
+                Stack<LineMapping> mappings = new Stack<LineMapping>(
+                    LineMappings
+                        .Concat(new[] { new LineMapping { SourceLine = leftSrc.LineCount + 1, PrintedLine = rightSrc.LineCount + 1 } })
+                        .OrderByDescending(l => l.PrintedLine));
+                Stack<CompileError> warnings = new Stack<CompileError>(Warnings.OrderByDescending(w => w.Line));
+                int left = 0;
+                int right = 0;
+                StringBuilder leftPart = new StringBuilder();
+                StringBuilder rightPart = new StringBuilder();
+                void addLeft()
+                {
+                    leftPart.AppendLine(leftSrc.GetLine(left) ?? "");
+                    left++;
+                }
+                void addRight()
+                {
+                    rightPart.AppendLine(rightSrc.GetLine(right) ?? "");
+                    right++;
+                }
+                void addSegment()
+                {
+                    string leftStr = leftPart.ToString();
+                    string rightStr = rightPart.ToString();
+                    if (leftStr.Length > 0 || rightStr.Length > 0)
+                    {
+                        diffs.Add(new DiffSegment { Left = leftStr, Right = rightStr });
+                        leftPart.Clear();
+                        rightPart.Clear();
+                        if (warnings.Count > 0 && left > warnings.Peek().Line)
+                        {
+                            CompileError warning = warnings.Pop();
+                            diffs.Add(new DiffSegment { Left = warning.Message, Right = "", Warning = true });
+                        }
+                    }
+                }
+                while (mappings.Count > 0)
+                {
+                    LineMapping next = mappings.Pop();
+                    // Catch up lines
+                    if (left != next.SourceLine || right != next.PrintedLine)
+                    {
+                        while (left < next.SourceLine)
+                        {
+                            addLeft();
+                        }
+                        while (right < next.PrintedLine)
+                        {
+                            addRight();
+                        }
+                        addSegment();
+                    }
+                    // Matching lines
+                    if (mappings.Count > 0)
+                    {
+                        LineMapping target = next;
+                        while (mappings.Count > 0
+                            && (mappings.Peek().SourceLine == next.SourceLine || mappings.Peek().PrintedLine == next.PrintedLine))
+                        {
+                            target = mappings.Pop();
+                        }
+                        int endLeft = target.SourceEndLine > 0 ? target.SourceEndLine : target.SourceLine;
+                        while (left <= endLeft)
+                        {
+                            addLeft();
+                        }
+                        int endRight = target.PrintedEndLine > 0 ? target.PrintedEndLine : target.PrintedLine;
+                        while (right <= endRight)
+                        {
+                            addRight();
+                        }
+                        addSegment();
+                    }
+                }
+                return diffs;
+            }
+        }
+
+        public class DiffSegment
+        {
+            public bool Warning { get; set; }
+            public string Left { get; set; }
+            public string Right { get; set; }
         }
 
         // https://stackoverflow.com/questions/2594125/reading-text-files-line-by-line-with-exact-offset-position-reporting
         // Also used in ESDLang
-        private class TrackingReader : TextReader
+        private class PositionTrackingReader : TextReader
         {
             public TextReader Reader { get; set; }
             public int Position = 0;
@@ -807,6 +1063,7 @@ namespace DarkScript3
                 Position++;
                 return Reader.Read();
             }
+
             public override int Peek()
             {
                 return Reader.Peek();
@@ -815,7 +1072,10 @@ namespace DarkScript3
 
         public class FancyCompilerException : Exception
         {
-            public FancyCompilerException(string message) : base(message) { }
+            public List<CompileError> Errors { get; set; }
+
+            public override string Message => string.Join("", Errors.Select(e => e.Message));
+            public override string ToString() => Message;
         }
     }
 }

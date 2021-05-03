@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using static DarkScript3.ScriptAst;
@@ -267,12 +268,7 @@ namespace DarkScript3
                 if (target != null) target.JumpPred.Add(jump);
             }
             // Transfer over decorations to the current replacement. Maybe should combine blank lines, or take the min of the two?
-            if (node.Im == replacement) throw new Exception($"Internal error: can't offload removed node {node}'s decorations only itself");
-            if (node.Im.Decorations != null)
-            {
-                if (replacement.Decorations == null) replacement.Decorations = new List<SourceDecoration>();
-                replacement.Decorations.AddRange(node.Im.Decorations);
-            }
+            node.Im.MoveDecorationsTo(replacement);
             Nodes.Remove(node.ID);
         }
 
@@ -290,7 +286,7 @@ namespace DarkScript3
                 {
                     if (!labels.TryGetValue(g.ToLabel, out FlowNode targetNode))
                     {
-                        result.Warnings.Add($"{g} goes to nonexistent label (it will just end the event)");
+                        result.Warning($"Instruction goes to nonexistent label (it will just end the event)", g);
                     }
                     if (targetNode != null)
                     {
@@ -309,10 +305,29 @@ namespace DarkScript3
 
         // End common utilities
 
+        // Actual compilation and decompilation
+        // It might be good to split these up, although as-is, they are organized into relatively clean passes.
+
         public class Result
         {
-            public List<string> Errors = new List<string>();
-            public List<string> Warnings = new List<string>();
+            public List<ResultError> Errors = new List<ResultError>();
+            public List<ResultError> Warnings = new List<ResultError>();
+
+            public void Error(string message, Intermediate im = null)
+            {
+                Errors.Add(new ResultError { Message = message, Im = im });
+            }
+
+            public void Warning(string message, Intermediate im = null)
+            {
+                Warnings.Add(new ResultError { Message = message, Im = im });
+            }
+        }
+
+        public class ResultError
+        {
+            public string Message { get; set; }
+            public Intermediate Im { get; set; }
         }
 
         public Result Compile(EventFunction func, InstructionTranslator info)
@@ -322,6 +337,7 @@ namespace DarkScript3
             // Code generation
             int tempVarID = 1;
             string newVar() => $"#temp{tempVarID++}";
+            int nonTempAssigns = 0;
 
             // Pending jump sources to add before generating the targets, to link them together.
             List<FlowNode> jumpFroms = new List<FlowNode>();
@@ -378,6 +394,7 @@ namespace DarkScript3
                         {
                             useExisting = true;
                             var = existing.ToVar;
+                            nonTempAssigns++;
                         }
                     }
                     if (!useExisting)
@@ -429,13 +446,9 @@ namespace DarkScript3
             {
                 foreach (Intermediate subIm in info.ExpandCond(im, newVar))
                 {
-                    if (source != null && source.Decorations != null)
+                    if (source != null)
                     {
-                        if (subIm != source)
-                        {
-                            if (subIm.Decorations == null) subIm.Decorations = new List<SourceDecoration>();
-                            subIm.Decorations.AddRange(source.Decorations);
-                        }
+                        source.MoveDecorationsTo(subIm);
                         source = null;
                     }
                     newNode(subIm);
@@ -498,85 +511,177 @@ namespace DarkScript3
                 }
             }
 
+            // Assign condition groups to condition variables.
+            // This is mainly notable with DS1R 11210100, which can't be decompiled as PTDE.
+            int maxGroup = options.RestrictConditionGroupCount ? 7 : 15;
+
+            // Simple heuristic for reusing temp ones: if all condition groups after a WaitFor have to pass through that WaitFor, reset temp groups.
+            // Calculate this using reverse dominators. Including a node as its own reverse dominator is fine.
+            // Don't reset named ones for now, as those can be used as compiled groups. We could be smarter about this as well.
+            HashSet<FlowNode> resetPoints = new HashSet<FlowNode>();
+            if (tempVarID + nonTempAssigns >= maxGroup)
+            {
+                HashSet<FlowNode> groupReferences = new HashSet<FlowNode>();
+                foreach (FlowNode node in Enumerable.Reverse(NodeList()))
+                {
+                    if (node.Im is CondIntermediate condIm && (condIm is CondAssign || condIm.Cond is CondRef))
+                    {
+                        groupReferences.Add(node);
+                    }
+                    node.Dominators = new List<FlowNode> { node };
+                    List<FlowNode> domList = null;
+                    if (node.Succ != null && !node.AlwaysJump)
+                    {
+                        domList = node.Succ.Dominators;
+                    }
+                    if (node.JumpTo != null)
+                    {
+                        domList = domList == null ? node.JumpTo.Dominators : domList = domList.Intersect(node.JumpTo.Dominators).ToList();
+                    }
+                    if (domList != null)
+                    {
+                        node.Dominators.AddRange(domList);
+                    }
+                    if (node.Im is Wait)
+                    {
+                        // Possibility for reset if all references are reverse dominators
+                        if (node.Dominators.Count(d => groupReferences.Contains(d)) == groupReferences.Count)
+                        {
+                            resetPoints.Add(node);
+                        }
+                    }
+                }
+            }
+
+            // Actual collection of all group assignments
             Dictionary<string, List<CondAssignOp>> groupOps = new Dictionary<string, List<CondAssignOp>>();
+            List<HashSet<string>> tempGroupSets = new List<HashSet<string>> { new HashSet<string>() };
+            List<CondAssignOp> allocateGroupOp(string name)
+            {
+                if (!groupOps.TryGetValue(name, out List<CondAssignOp> ops))
+                {
+                    ops = groupOps[name] = new List<CondAssignOp>();
+                }
+                if (name.StartsWith("#"))
+                {
+                    // Put temp names into groups.
+                    // This assumes temp usage/definition is limited to basic blocks, so no accidental exclusion.
+                    tempGroupSets[tempGroupSets.Count - 1].Add(name);
+                }
+                return ops;
+            }
             foreach (FlowNode node in NodeList())
             {
                 if (!(node.Im is CondIntermediate condIm)) continue;
                 if (condIm is CondAssign assign)
                 {
                     if (assign.ToVar == null) throw new Exception($"Internal error: expected variable name in assignment {condIm}");
-                    if (!groupOps.TryGetValue(assign.ToVar, out List<CondAssignOp> ops))
-                    {
-                        ops = groupOps[assign.ToVar] = new List<CondAssignOp>();
-                    }
-                    ops.Add(assign.Op);
+                    allocateGroupOp(assign.ToVar).Add(assign.Op);
                 }
                 if (condIm.Cond is CondRef condRef)
                 {
                     if (condRef.Name == null) throw new Exception($"Internal error: expected variable name in usage {condIm}");
-                    if (!groupOps.ContainsKey(condRef.Name))
-                    {
-                        groupOps[condRef.Name] = new List<CondAssignOp>();
-                    }
+                    allocateGroupOp(condRef.Name);
+                }
+                if (resetPoints.Contains(node))
+                {
+                    tempGroupSets.Add(new HashSet<string>());
                 }
             }
 
-            // TODO: oof DS1R temporary hack, add this option to the UI.
-            int maxGroup = options.RestrictConditionGroupCount && ID != 11210100 ? 7 : 15;
-            List<int> orGroups = Enumerable.Range(1, maxGroup).ToList();
+            // Validation and assignments
+            List<int> orGroups = Enumerable.Range(1, maxGroup).Select(g => -g).ToList();
             List<int> andGroups = Enumerable.Range(1, maxGroup).ToList();
             Dictionary<string, int> groupNames = new Dictionary<string, int>();
+            void allocateGroup(bool and, string name, int target = 0)
+            {
+                List<int> source = and ? andGroups : orGroups;
+                if (target == 0)
+                {
+                    if (source.Count == 0)
+                    {
+                        StringBuilder error = new StringBuilder();
+                        error.Append($"Ran out of {(and ? "AND" : "OR")} condition groups to allocate to {name}.");
+                        if (options.RestrictConditionGroupCount)
+                        {
+                            error.Append($" If you are ONLY targeting DS1 Remastered, edit file preferences to indicate that.");
+                        }
+                        error.Append($" As a workaround, split up the event, add WaitFors that are guaranteed to clear temporary condition groups, or use condition groups manually.");
+                        result.Error(error.ToString());
+                    }
+                    else
+                    {
+                        target = source[0];
+                    }
+                }
+                groupNames[name] = target;
+                source.Remove(target);
+            }
             foreach (KeyValuePair<string, List<CondAssignOp>> entry in groupOps)
             {
                 string name = entry.Key;
                 if (name.StartsWith("and") && int.TryParse(name.Substring(3), out int group))
                 {
                     // This is an error mainly because it may have different behavior from how it might appear
-                    if (entry.Value.Contains(CondAssignOp.AssignOr)) result.Errors.Add($"Group is named {name} but is defined with |=");
-                    groupNames[name] = group;
-                    andGroups.Remove(group);
+                    if (entry.Value.Contains(CondAssignOp.AssignOr)) result.Error($"Group is named {name} but is defined with |=");
+                    allocateGroup(true, name, group);
                 }
                 if (name.StartsWith("or") && int.TryParse(name.Substring(2), out group))
                 {
-                    if (entry.Value.Contains(CondAssignOp.AssignAnd)) result.Errors.Add($"Group is named {name} but is defined with &=");
-                    groupNames[name] = -group;
-                    orGroups.Remove(group);
+                    if (entry.Value.Contains(CondAssignOp.AssignAnd)) result.Error($"Group is named {name} but is defined with &=");
+                    allocateGroup(false, name, -group);
                 }
             }
+
             foreach (KeyValuePair<string, List<CondAssignOp>> entry in groupOps)
             {
                 string name = entry.Key;
                 if (groupNames.ContainsKey(name)) continue;
                 List<CondAssignOp> ops = entry.Value;
-                if (ops.Contains(CondAssignOp.Assign) && ops.Count > 1) result.Errors.Add($"Condition group {name} can only use = if it has a single assignment. Use |= or &= instead.");
+                if (ops.Contains(CondAssignOp.Assign) && ops.Count > 1) result.Error($"Condition group {name} can only use = if it has a single assignment. Use |= or &= instead.");
                 // Plain assignment goes to AND registers, unless we've run out.
                 if (ops.Contains(CondAssignOp.AssignOr) || (ops.Contains(CondAssignOp.Assign) && andGroups.Count == 0))
                 {
-                    if (ops.Contains(CondAssignOp.AssignAnd)) result.Errors.Add($"Group {name} uses both &= and |=");
-                    if (orGroups.Count == 0)
+                    if (ops.Contains(CondAssignOp.AssignAnd)) result.Error($"Group {name} uses both &= and |=");
+                    // Temp groups are handled next time
+                    if (!name.StartsWith("#"))
                     {
-                        result.Errors.Add($"Ran out of OR condition groups to allocate to {name}. (Ask for feature request: automatically reusing groups after use)");
-                    }
-                    else
-                    {
-                        groupNames[name] = -orGroups[0];
-                        orGroups.RemoveAt(0);
+                        allocateGroup(false, name);
                     }
                 }
                 else
                 {
-                    if (andGroups.Count == 0)
+                    if (!name.StartsWith("#"))
                     {
-                        result.Errors.Add($"Ran out of AND condition groups to allocate to {name}. (Ask for feature request: automatically reusing groups after compilation)");
-                    }
-                    else
-                    {
-                        groupNames[name] = andGroups[0];
-                        andGroups.RemoveAt(0);
+                        allocateGroup(true, name);
                     }
                 }
             }
 
+            // Temp group pass
+            List<int> remainingGroups = orGroups.Concat(andGroups).ToList();
+            foreach (HashSet<string> tempGroups in tempGroupSets)
+            {
+                foreach (string name in tempGroups)
+                {
+                    if (groupNames.ContainsKey(name)) throw new Exception($"Internal error: double-allocating temp condition group {name}");
+                    List<CondAssignOp> ops = groupOps[name];
+                    // Validation was performed in previous pass
+                    if (ops.Contains(CondAssignOp.AssignOr) || (ops.Contains(CondAssignOp.Assign) && andGroups.Count == 0))
+                    {
+                        allocateGroup(false, name);
+                    }
+                    else
+                    {
+                        allocateGroup(true, name);
+                    }
+                }
+                // Reset!
+                orGroups = orGroups.Union(remainingGroups.Where(g => g < 0)).ToList();
+                andGroups = andGroups.Union(remainingGroups.Where(g => g > 0)).ToList();
+            }
+
+            // Write renames to condition groups
             foreach (FlowNode node in NodeList())
             {
                 if (!(node.Im is CondIntermediate condIm)) continue;
@@ -604,12 +709,14 @@ namespace DarkScript3
             foreach (FlowNode node in NodeList())
             {
                 lines[node] = i;
-                if (!(node.Im is NoOp))
+                if (node.Im is NoOp || node.Im is JSStatement)
                 {
                     // For NoOp nodes at the end of a block, they are equivalent to then next statement.
                     // For NoOp nodes at the very end, i doesn't matter anymore.
-                    i++;
+                    // Also assume JS statements don't produce lines. This may be incorrect.
+                    continue;
                 }
+                i++;
             }
             foreach (FlowNode node in NodeList())
             {
@@ -617,7 +724,7 @@ namespace DarkScript3
                 {
                     if (node.JumpTo == null)
                     {
-                        result.Errors.Add($"Target label not found for {g}");
+                        result.Error($"Target label not found", g);
                         continue;
                     }
                     int start = lines[node];
@@ -626,27 +733,45 @@ namespace DarkScript3
                     g.SkipLines = Math.Max(0, end - start - 1);
                     if (g.SkipLines > byte.MaxValue)
                     {
-                        result.Errors.Add($"Can't skip more than 256 lines in {g}. Add a label L0-L20 at the destination instead, if the game supports this");
+                        result.Error($"Can't skip more than 256 lines. Either edd a label L0-L20 at the destination to use that automatically or restructure the event", g);
                     }
                 }
+                node.Im.Labels.Clear();
             }
 
             List<Intermediate> instrs = new List<Intermediate>();
+            NoOp prevNoOp = null;
+            // Elimiate NoOps and leave only Instrs and JSStatements
             foreach (FlowNode node in NodeList())
             {
-                if (node.Im is NoOp) continue;
+                if (node.Im is NoOp noop)
+                {
+                    if (prevNoOp != null) prevNoOp.MoveDecorationsTo(noop);
+                    prevNoOp = noop;
+                    continue;
+                }
                 try
                 {
-                    Instr instr = info.CompileCond(node.Im);
-                    instr.Decorations = node.Im.Decorations;
+                    Intermediate instr = node.Im is JSStatement ? node.Im : info.CompileCond(node.Im);
                     instrs.Add(instr);
+                    if (prevNoOp != null)
+                    {
+                        prevNoOp.MoveDecorationsTo(instr);
+                        prevNoOp = null;
+                    }
+                    node.Im.MoveDecorationsTo(instr);
                     node.Im = instr;
                 }
                 catch (Exception ex) when (ex is FancyNotSupportedException || ex is InstructionTranslationException)
                 {
-                    // These exceptions are basically the same thing, but InstructionTranslationException means it's the user's fault.
-                    result.Errors.Add(ex.Message);
+                    // These exceptions are basically the same thing, but InstructionTranslationException means it's more
+                    // the user's fault than EMEVD's fault.
+                    result.Error(ex.Message, node.Im);
                 }
+            }
+            if (prevNoOp != null)
+            {
+                prevNoOp.MoveDecorationsTo(func);
             }
 
             if (debugPrint)
@@ -676,7 +801,7 @@ namespace DarkScript3
                 if (im is Instr instr)
                 {
                     cmds[i] = im = info.DecompileCond(instr);
-                    im.Decorations = instr.Decorations;
+                    instr.MoveDecorationsTo(im);
                 }
                 im.ID = i;
                 Nodes[i] = new FlowNode
@@ -721,7 +846,7 @@ namespace DarkScript3
                         if (target > cmds.Count)
                         {
                             target = cmds.Count;
-                            result.Warnings.Add($"Command {im} skips past the end of the event");
+                            result.Warning($"Instruction skips past the end of the event", im);
                         }
                     }
                     else if (g.ToLabel != null) continue;
@@ -753,7 +878,7 @@ namespace DarkScript3
                 }
                 else
                 {
-                    List<FlowNode> domList = preds[0].Dominators.ToList();
+                    List<FlowNode> domList = preds[0].Dominators;
                     for (int i = 1; i < preds.Count; i++)
                     {
                         domList = domList.Intersect(preds[i].Dominators).ToList();
@@ -798,6 +923,15 @@ namespace DarkScript3
 
             // Construct trees rooted at main/uncompiled/compiled condition evaluation, also with parent pointers.
             // First, rewrite condition expressions
+            int getArgGroup(FlowNode node, object arg)
+            {
+                object val = arg is DisplayArg disp ? disp.Value : arg;
+                if (int.TryParse(val.ToString(), out int intArg))
+                {
+                    return intArg;
+                }
+                throw new FancyNotSupportedException($"Unrecognized condition group {arg}", node.Im);
+            }
             foreach (FlowNode node in NodeList())
             {
                 if (node.Im is CondIntermediate condIm && condIm.Cond is CmdCond cond)
@@ -805,17 +939,15 @@ namespace DarkScript3
                     // Can support parameterized condition groups later, but it's not used in the base game, so don't do for now
                     if (cond.Name == "CompareCompiledConditionGroup" || cond.Name == "CompareConditionGroup")
                     {
-                        throw new FancyNotSupportedException($"Parameterized condition group in {node} {node.Im}");
+                        throw new FancyNotSupportedException($"Parameterized condition group", node.Im);
                     }
                     if (cond.Name == "ConditionGroup" || cond.Name == "CompareConditionGroup")
                     {
-                        int reg = int.Parse(cond.Args.Last().ToString());
-                        condIm.Cond = new CondRef { Compiled = false, Group = reg, Negate = cond.Negate };
+                        condIm.Cond = new CondRef { Compiled = false, Group = getArgGroup(node, cond.Args[0]), Negate = cond.Negate };
                     }
                     if (cond.Name == "CompiledConditionGroup" || cond.Name == "CompareCompiledConditionGroup")
                     {
-                        int reg = int.Parse(cond.Args.Last().ToString());
-                        condIm.Cond = new CondRef { Compiled = true, Group = reg, Negate = cond.Negate };
+                        condIm.Cond = new CondRef { Compiled = true, Group = getArgGroup(node, cond.Args[0]), Negate = cond.Negate };
                     }
                     // Note that reg can be MAIN here. DS3 does this. That is obviously completely bonkers, but it is handled later.
                 }
@@ -864,7 +996,7 @@ namespace DarkScript3
                         {
                             if (!context.CompiledConds.TryGetValue(reg, out ConditionDAG use))
                             {
-                                result.Warnings.Add($"Condition group {reg} used at {im} without being compiled (found [{string.Join(",", context.Conds.Keys)}])");
+                                result.Warning($"Condition group {reg} used without being compiled (found [{string.Join(",", context.Conds.Keys)}])", im);
                                 context.CompiledConds[reg] = use = new ConditionDAG
                                 {
                                     ResultGroup = reg
@@ -879,7 +1011,7 @@ namespace DarkScript3
                         {
                             if (!context.Conds.TryGetValue(reg, out ConditionDAG use))
                             {
-                                result.Warnings.Add($"Condition group {reg} used at {im} without being defined (found [{string.Join(",", context.CompiledConds.Keys)}])");
+                                result.Warning($"Condition group {reg} used without being defined (found [{string.Join(",", context.CompiledConds.Keys)}])", im);
                                 context.Conds[reg] = use = new ConditionDAG
                                 {
                                     ResultGroup = reg
@@ -1178,7 +1310,10 @@ namespace DarkScript3
                             // Don't create a useless OpCond wrapper.
                             // (This does an in-place mutation, maybe avoid that)
                             Cond inner = op.Ops[0];
-                            if (cond.Negate) inner.Negate = !inner.Negate;
+                            if (cond.Negate)
+                            {
+                                inner.Negate = !inner.Negate;
+                            }
                             return inner;
                         }
                         else
@@ -1197,11 +1332,11 @@ namespace DarkScript3
                 {
                     Intermediate im2 = new Wait
                     {
-                        Cond = assign.Cond,
-                        Decorations = assign.Decorations,
+                        Cond = assign.Cond
                     };
                     im2.Labels = assign.Labels;
                     im2.ID = assign.ID;
+                    node.Im.MoveDecorationsTo(im2);
                     node.Im = im2;
                 }
             }
@@ -1449,8 +1584,9 @@ namespace DarkScript3
                         Cond cond = ((CondIntermediate)node.Im).Cond;
                         // Should probably be making defensive copies
                         cond.Negate = !cond.Negate;
-                        IfElse im = new IfElse { Cond = cond, Decorations = node.Im.Decorations };
+                        IfElse im = new IfElse { Cond = cond };
                         im.ID = node.Im.ID;
+                        node.Im.MoveDecorationsTo(im);
                         node.Im = im;
                         if (jump == follow || follows.Contains(jump))
                         {
