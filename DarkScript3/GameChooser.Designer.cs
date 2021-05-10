@@ -105,9 +105,9 @@ namespace DarkScript3
             this.fancy.Location = new System.Drawing.Point(11, 214);
             this.fancy.Margin = new System.Windows.Forms.Padding(2);
             this.fancy.Name = "fancy";
-            this.fancy.Size = new System.Drawing.Size(126, 17);
+            this.fancy.Size = new System.Drawing.Size(139, 17);
             this.fancy.TabIndex = 6;
-            this.fancy.Text = "Convert to MattScript";
+            this.fancy.Text = "Decompile to MattScript";
             this.fancy.UseVisualStyleBackColor = true;
             this.fancy.CheckedChanged += new System.EventHandler(this.fancy_CheckedChanged);
             // 
@@ -122,7 +122,6 @@ namespace DarkScript3
             // 
             // customBtn
             // 
-            this.customBtn.Enabled = false;
             this.customBtn.Location = new System.Drawing.Point(12, 184);
             this.customBtn.Margin = new System.Windows.Forms.Padding(2);
             this.customBtn.Name = "customBtn";

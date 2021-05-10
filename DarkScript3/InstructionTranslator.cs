@@ -17,9 +17,9 @@ namespace DarkScript3
         // Map from x[y] to a condition selector for rewriting into a control flow structure
         public Dictionary<string, ConditionSelector> Selectors;
         // Map from x[y] to the doc for the instruction, for condition instructions. Stored for compilation purposes.
-        private Dictionary<string, EMEDF.InstrDoc> InstrDocs;
+        public Dictionary<string, EMEDF.InstrDoc> InstrDocs;
         // Map from x[y] to a label num.
-        private Dictionary<string, int> LabelDocs;
+        public Dictionary<string, int> LabelDocs;
 
         public class FunctionDoc
         {
@@ -54,7 +54,7 @@ namespace DarkScript3
                 conds = ReadStream("conditions.json");
 
             List<string> games = conds.Games.Select(g => g.Name).ToList();
-            string game = games.Find(g => docs.ResourceString.StartsWith(g));
+            string game = games.Find(g => docs.ResourceString.StartsWith(g + "-common"));
             if (game == null)
             {
                 return null;
@@ -128,11 +128,11 @@ namespace DarkScript3
                 selectors[cmd] = selector;
                 EMEDF.InstrDoc doc = instrs[cmd];
                 int negateArg = -1;
-                string negateName = cond.Compare != null ? "Comparison Type" : cond.NegateField;
+                string negateName = cond.IsCompare ? "Comparison Type" : cond.NegateField;
                 EMEDF.EnumDoc negateDoc = null;
                 if (negateName != null)
                 {
-                    negateArg = expectArg(cmd, negateName, cond.Compare != null ? "Comparison Type" : null);
+                    negateArg = expectArg(cmd, negateName, cond.IsCompare ? "Comparison Type" : null);
                     string negateEnum = doc.Arguments[negateArg].EnumName;
                     // Pretend these are compatible
                     if (negateEnum == "ON/OFF") negateEnum = "ON/OFF/CHANGE";
@@ -174,18 +174,7 @@ namespace DarkScript3
                             foreach (FieldValue req in bv.Required)
                             {
                                 int reqArg = expectArg(cmd, req.Field);
-                                if (int.TryParse(req.Value, out int reqVal))
-                                {
-                                    variant.ExtraArgs[reqArg] = reqVal;
-                                }
-                                else
-                                {
-                                    string reqEnum = doc.Arguments[reqArg].EnumName;
-                                    EMEDF.EnumDoc reqDoc = emedf.Enums.Where(d => d.Name == reqEnum).FirstOrDefault();
-                                    if (reqDoc == null) throw new ArgumentException($"Command {cmd} for cond {name} at arg {reqArg} uses enum which does not exist");
-                                    string reqKey = reqDoc.Values.Where(e => e.Value == req.Value).First().Key;
-                                    variant.ExtraArgs[reqArg] = asInt(reqKey);
-                                }
+                                variant.ExtraArgs[reqArg] = req.Value;
                                 ignore.Add(reqArg);
                             }
                         }
@@ -263,9 +252,9 @@ namespace DarkScript3
                 {
                     addVariant(bv: version);
                 }
-                if (cond.Compare != null)
+                foreach (CompareVersion version in cond.AllCompares)
                 {
-                    addVariant(cv: cond.Compare);
+                    addVariant(cv: version);
                 }
                 addVariant();
             }
@@ -472,7 +461,7 @@ namespace DarkScript3
                 Instr instr = new Instr
                 {
                     Cmd = cmd,
-                    Name = InstructionDocs.TitleCaseName(instrDoc.Name),
+                    Name = instrDoc.DisplayName,
                     Args = Enumerable.Repeat((object)null, instrDoc.Arguments.Length).ToList()
                 };
                 int controlVal = condIm.ControlArg;

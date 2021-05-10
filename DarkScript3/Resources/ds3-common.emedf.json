@@ -2390,6 +2390,20 @@
               "unk2": 0,
               "unk3": 0,
               "unk4": 0
+            },
+            {
+              "name": "Unknown",
+              "type": 5,
+              "enum_name": null,
+              "default": 1,
+              "min": 0,
+              "max": 9999,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
             }
           ]
         },
@@ -6592,6 +6606,20 @@
               "unk2": 0,
               "unk3": 0,
               "unk4": 0
+            },
+            {
+              "name": "Number of Target Characters",
+              "type": 5,
+              "enum_name": null,
+              "default": 1,
+              "min": 0,
+              "max": 9999,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
             }
           ]
         },
@@ -6654,7 +6682,22 @@
               "unk2": 0,
               "unk3": 0,
               "unk4": 0
+            },
+            {
+              "name": "Number of Target Characters",
+              "type": 5,
+              "enum_name": null,
+              "default": 1,
+              "min": 0,
+              "max": 9999,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
             }
+
           ]
         },
         {
@@ -6713,6 +6756,20 @@
               "increment": 1,
               "format_string": "%08d",
               "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Number of Target Characters",
+              "type": 5,
+              "enum_name": null,
+              "default": 1,
+              "min": 0,
+              "max": 9999,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
               "unk2": 0,
               "unk3": 0,
               "unk4": 0
@@ -7182,7 +7239,8 @@
               "unk1": 0,
               "unk2": 1,
               "unk3": 4,
-              "unk4": 0
+              "unk4": 0,
+              "vararg": true
             }
           ]
         },
@@ -7330,7 +7388,8 @@
               "unk1": 0,
               "unk2": 1,
               "unk3": 4,
-              "unk4": 0
+              "unk4": 0,
+              "vararg": true
             }
           ]
         }

@@ -64,6 +64,10 @@ namespace DarkScript3
             public ArgDoc[] Arguments { get; private set; }
 
             public ArgDoc this[uint i] => Arguments[i];
+
+            // Calculated values
+
+            public string DisplayName { get; set; }
         }
 
         public class ArgDoc
@@ -103,7 +107,17 @@ namespace DarkScript3
 
             [JsonProperty(PropertyName = "unk4")]
             private long UNK4;
-            
+
+            // These fields are not present in the original EMEDF
+
+            // If an argument at the end is optional. Used for reading and writing instructions.
+            [JsonProperty(PropertyName = "optional")]
+            public bool Optional { get; private set; }
+
+            // If an argument may be repeated zero or multiple times. Only used for display/documentation for the moment.
+            [JsonProperty(PropertyName = "vararg")]
+            public bool Vararg { get; private set; }
+
             // Calculated values
 
             public string DisplayName { get; set; }

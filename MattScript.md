@@ -95,8 +95,8 @@ $Event(13705010, Restart, function() {
     WaitFor(InArea(10000, 3704310));
     EndIf(EventFlag(13700860));
     if (HPRatio(10000) < 0.7) {
-      SetSpEffect(10000, 4099);
-      WaitFixedTimeSeconds(2.5);
+        SetSpEffect(10000, 4099);
+        WaitFixedTimeSeconds(2.5);
     }
     RestartEvent();
 });
@@ -123,9 +123,42 @@ $Event(13705010, Restart, function() {
 });
 ```
 
+One useful trick for dealing with boolean logic is De Morgan's law, which is a
+way to rewrite conditions without changing behavior. In general,
+`!(a && b && c)` (not all of them true) can be rewritten as
+`!a || !b || !c` (at least one of them false), and
+`!(a || b || c)` (none of them true) can be rewritten as
+`!a && !b && !c` (all of them false).
+Basically, switch the inner/outer `!`s and switch the operator. This applies
+to events like this:
+
+```js
+$Event(9182, Default, function() {
+    EndIf(!CharacterType(10000, TargetType.Alive));
+    SetEventFlag(9184, OFF);
+    WaitFor(HasMultiplayerState(MultiplayerState.ConnectingtoMultiplayer) && !HasMultiplayerState(MultiplayerState.Multiplayer));
+    SetEventFlag(9184, ON);
+    WaitFor(!HasMultiplayerState(MultiplayerState.ConnectingtoMultiplayer) || HasMultiplayerState(MultiplayerState.Multiplayer));
+    RestartEvent();
+});
+```
+
+Which is equivalent to the following:
+
+```js
+$Event(9182, Default, function() {
+    EndIf(!CharacterType(10000, TargetType.Alive));
+    SetEventFlag(9184, OFF);
+    WaitFor(HasMultiplayerState(MultiplayerState.ConnectingtoMultiplayer) && !HasMultiplayerState(MultiplayerState.Multiplayer));
+    SetEventFlag(9184, ON);
+    WaitFor(!(HasMultiplayerState(MultiplayerState.ConnectingtoMultiplayer) && !HasMultiplayerState(MultiplayerState.Multiplayer)));
+    RestartEvent();
+});
+```
+
 ## Condition variables
 
-An even more fromsoft-ian way of structuring the above example might be as
+An even more fromsoft-ian way of structuring the 70% HP example might be as
 follows, which brings us to condition variables:
 
 ```js
@@ -174,8 +207,8 @@ $Event(13705011, Restart, function() {
 
 A summary of their rules:
 
-1. Every assignment to a condition groups/variable adds another thing to check
-   for when evaluating them.
+1. Every assignment to a condition group/variable adds another thing to check
+   for when evaluating it.
 1. Regular condition groups/variables come in two types, AND groups and OR
    groups. Adding a condition to an AND group adds another thing that must be
    true. Adding a condition to an OR group adds an alternative way for it to be
@@ -205,7 +238,7 @@ tl;dr: Do not reuse condition variables after a `WaitFor` to reuse their logic!!
 The most you can do is either redeclare their logic or check `myCond.Passed`
 retroactively.
 
-Note: condition groups named `and01`/`or02`/etc. will directly use that
+Note: condition variables named `and01`/`or02`/etc. will directly use that
 condition group number, but it is preferable to use more descriptive names where
 possible.
 
@@ -255,8 +288,7 @@ slightly more condition groups behind the scenes.
 
 ```js
 $Event(11105130, Restart, function() {
-    if ((!EventFlag(8302) && EventFlag(11100301))
-        || (EventFlag(8302) && EventFlag(11100480))) {
+    if ((!EventFlag(8302) && EventFlag(11100301)) || (EventFlag(8302) && EventFlag(11100480))) {
         SetEventFlag(11100130, ON);
     } else {
         SetEventFlag(11100130, OFF);
@@ -391,3 +423,6 @@ with a lowercase character. **Big warning: if/goto statements ignore these
 statements when determining how many lines to skip**, so do not use function
 calls unless you double-check the compilation preview to make sure skip offsets
 do not get messed up.
+
+These are hacks for now, so try not to rely on them too heavily, as proper less
+hacky features may take their place.

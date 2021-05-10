@@ -8320,7 +8320,8 @@
               "unk1": 0,
               "unk2": 1,
               "unk3": 4,
-              "unk4": 0
+              "unk4": 0,
+              "vararg": true
             }
           ]
         },
@@ -8468,7 +8469,8 @@
               "unk1": 0,
               "unk2": 1,
               "unk3": 4,
-              "unk4": 0
+              "unk4": 0,
+              "vararg": true
             }
           ]
         }
@@ -16788,7 +16790,7 @@
           ]
         },
         {
-          "name": "Display Hollow Arena PvP Message",
+          "name": "Display Generic Dialog Globally and Set Event Flags",
           "index": 12,
           "args": [
             {
@@ -16806,9 +16808,9 @@
               "unk4": 0
             },
             {
-              "name": "Unknown",
+              "name": "Dialog Type",
               "type": 4,
-              "enum_name": null,
+              "enum_name": "Prompt Type",
               "default": 0,
               "min": 0,
               "max": 0,
@@ -16820,10 +16822,10 @@
               "unk4": 0
             },
             {
-              "name": "Pad State",
-              "type": 0,
-              "enum_name": "Disabled/Enabled",
-              "default": 0,
+              "name": "Number of Options",
+              "type": 4,
+              "enum_name": "Number of Options",
+              "default": 6,
               "min": 0,
               "max": 0,
               "increment": 0,
@@ -16832,8 +16834,50 @@
               "unk2": 0,
               "unk3": 0,
               "unk4": 0
+            },
+            {
+              "name": "Left Response Event Flag ID",
+              "type": 5,
+              "enum_name": null,
+              "default": 0,
+              "min": 0,
+              "max": 1000000000,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Right Response Event Flag ID",
+              "type": 5,
+              "enum_name": null,
+              "default": 0,
+              "min": 0,
+              "max": 1000000000,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Cancel Response Event Flag ID",
+              "type": 5,
+              "enum_name": null,
+              "default": 0,
+              "min": 0,
+              "max": 1000000000,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
             }
-          ]   
+          ]
         },
         {
           "name": "Show Hint Box",

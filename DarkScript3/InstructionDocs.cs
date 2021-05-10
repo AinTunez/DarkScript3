@@ -1,12 +1,8 @@
 using System.Collections.Generic;
 using System;
 using System.Linq;
-using System.Text;
-using SoulsFormats;
-using Microsoft.ClearScript.V8;
-using System.Text.RegularExpressions;
-using Microsoft.ClearScript;
 using System.IO;
+using System.Text.RegularExpressions;
 using static SoulsFormats.EMEVD.Instruction;
 using static SoulsFormats.EMEVD;
 
@@ -39,8 +35,8 @@ namespace DarkScript3
         // Callable objects by display name, both instructions and condition functions
         public Dictionary<string, List<EMEDF.ArgDoc>> AllArgs = new Dictionary<string, List<EMEDF.ArgDoc>>();
 
-        // Byte offsets based on argument types. Used in decompilation.
-        public Dictionary<EMEDF.InstrDoc, List<uint>> FuncBytePositions = new Dictionary<EMEDF.InstrDoc, List<uint>>();
+        // Byte offsets based on argument types. Used in decompilation and in building instructions.
+        public Dictionary<EMEDF.InstrDoc, List<int>> FuncBytePositions = new Dictionary<EMEDF.InstrDoc, List<int>>();
 
         // Used for syntax highlighting.
         // These are hardcoded in unpack output as well as exported manually to JS, in order to set them on the Event class from JS.
@@ -68,8 +64,7 @@ namespace DarkScript3
 
         public InstructionDocs(string resource = "ds1-common.emedf.json")
         {
-            ResourceString = resource;
-            DOC = InitDocsFromResource(resource);
+            InitDocsFromResource(resource);
             Translator = InstructionTranslator.GetTranslator(this);
 
             if (Translator != null)
@@ -101,15 +96,16 @@ namespace DarkScript3
                 return doc == DOC[2000][0] || doc == DOC[2000][6];
         }
 
-        private EMEDF InitDocsFromResource(string streamPath)
+        private void InitDocsFromResource(string streamPath)
         {
-            EMEDF DOC;
             if (File.Exists(streamPath))
                 DOC = EMEDF.ReadFile(streamPath);
             else if (File.Exists(@"Resources\" + streamPath))
                 DOC = EMEDF.ReadFile(@"Resources\" + streamPath);
             else
                 DOC = EMEDF.ReadStream(streamPath);
+
+            ResourceString = Path.GetFileName(streamPath);
 
             foreach (EMEDF.EnumDoc enm in DOC.Enums)
             {
@@ -139,11 +135,11 @@ namespace DarkScript3
             {
                 foreach (EMEDF.InstrDoc instr in bank.Instructions)
                 {
-                    string funcName = TitleCaseName(instr.Name);
-                    Functions[funcName] = ((int)bank.Index, (int)instr.Index);
+                    instr.DisplayName = TitleCaseName(instr.Name);
+                    Functions[instr.DisplayName] = ((int)bank.Index, (int)instr.Index);
                     FuncBytePositions[instr] = GetArgBytePositions(instr.Arguments.Select(i => (ArgType)i.Type).ToList());
                     // Also filled in from conditions
-                    AllArgs[funcName] = instr.Arguments.ToList();
+                    AllArgs[instr.DisplayName] = instr.Arguments.ToList();
 
                     foreach (var arg in instr.Arguments)
                     {
@@ -156,14 +152,12 @@ namespace DarkScript3
                     }
                 }
             }
-
-            return DOC;
         }
 
         /// <summary>
         /// Returns the byte length of an ArgType.
         /// </summary>
-        private int ByteLengthFromType(long t)
+        private static int ByteLengthFromType(long t)
         {
             if (t == 0) return 1; //u8
             if (t == 1) return 2; //u16
@@ -177,6 +171,31 @@ namespace DarkScript3
         }
 
         /// <summary>
+        /// Returns a list of byte positions for an ordered list of argument types, plus a final entry for the overall length.
+        /// </summary>
+        private static List<int> GetArgBytePositions(IEnumerable<ArgType> argStruct, int startPos = 0)
+        {
+            List<int> positions = new List<int>();
+            int bytePos = startPos;
+            for (int i = 0; i < argStruct.Count(); i++)
+            {
+                long argType = (long)argStruct.ElementAt(i);
+                int defLength = ByteLengthFromType(argType);
+                if (bytePos % defLength > 0)
+                    bytePos += defLength - (bytePos % defLength);
+
+                positions.Add(bytePos);
+                bytePos += defLength;
+            }
+            // Final int padding
+            if (bytePos % 4 > 0)
+                bytePos += 4 - (bytePos % 4);
+            positions.Add(bytePos);
+
+            return positions;
+        }
+
+        /// <summary>
         /// Returns JS source code to set an Instruction's layer.
         /// </summary>
         public static string LayerString(uint layerValue)
@@ -187,6 +206,34 @@ namespace DarkScript3
                     bitList.Add(b);
 
             return $"$LAYERS({string.Join(", ", bitList)})";
+        }
+
+        public static string InstrDebugString(Instruction ins)
+        {
+            return $"{ins.Bank}[{ins.ID}] {string.Join(" ", ins.ArgData.Select(b => $"{b:x2}"))}";
+        }
+
+        public static string InstrDocDebugString(EMEDF.InstrDoc doc)
+        {
+            string showType(EMEDF.ArgDoc argDoc)
+            {
+                string extra = argDoc.Vararg ? "*" : (argDoc.Optional ? "?" : "");
+                return $"{((ArgType)argDoc.Type).ToString().ToLowerInvariant()}{extra}";
+            }
+            return string.Join(", ", doc.Arguments.Select(argDoc => $"{showType(argDoc)} {argDoc.DisplayName}"));
+        }
+
+        public static string TypeString(long type)
+        {
+            if (type == 0) return "byte";
+            if (type == 1) return "ushort";
+            if (type == 2) return "uint";
+            if (type == 3) return "sbyte";
+            if (type == 4) return "short";
+            if (type == 5) return "int";
+            if (type == 6) return "float";
+            if (type == 8) return "uint";
+            throw new Exception("Invalid type in argument definition.");
         }
 
         /// <summary>
@@ -219,78 +266,79 @@ namespace DarkScript3
         }
 
         /// <summary>
-        /// Returns the textual representation of an event initializer's arguments.
+        /// Creates an argument list for an instruction, with parameters and formatting as well.
         /// </summary>
-        /// <param name="args"></param>
-        /// <param name="insIndex"></param>
-        /// <param name="paramNames"></param>
-        /// <param name="argStruct"></param>
-        /// <returns></returns>
-        public string ArgumentStringInitializer(string[] args, int insIndex, Dictionary<Parameter, string> paramNames, IEnumerable<ArgType> argStruct)
+        public List<object> UnpackArgsWithParams<T>(
+            Instruction ins,
+            int insIndex,
+            EMEDF.InstrDoc doc,
+            Dictionary<Parameter, T> paramNames,
+            Func<EMEDF.ArgDoc, object, object> formatArgFunc)
         {
-            List<uint> positions = GetArgBytePositions(argStruct, 6);
-            for (int argIndex = 0; argIndex < argStruct.Count(); argIndex++)
+            List<object> args;
+            if (IsVariableLength(doc))
             {
-                uint bytePos = positions[argIndex];
-                foreach (Parameter prm in paramNames.Keys)
+                IEnumerable<ArgType> argStruct = Enumerable.Repeat(ArgType.Int32, ins.ArgData.Length / 4);
+                args = ins.UnpackArgs(argStruct);
+                // Note: this offsetting of params is likely not the case for variable-length DS2 commands.
+                List<int> positions = GetArgBytePositions(argStruct, 6);
+                for (int argIndex = 0; argIndex < argStruct.Count(); argIndex++)
                 {
-                    if (prm.InstructionIndex == insIndex && bytePos == prm.TargetStartByte)
+                    int bytePos = positions[argIndex];
+                    foreach (Parameter prm in paramNames.Keys)
                     {
-                        args[argIndex + 2] = paramNames[prm];
+                        if (prm.InstructionIndex == insIndex && bytePos == prm.TargetStartByte)
+                        {
+                            args[argIndex + 2] = paramNames[prm];
+                        }
                     }
                 }
             }
-            return string.Join(", ", args).Trim();
-        }
-
-        /// <summary>
-        /// Returns the textual representation of an event's arguments.
-        /// </summary>
-        public string ArgumentString(string[] args, Instruction ins, int insIndex, Dictionary<Parameter, string> paramNames)
-        {
-            var insDoc = DOC[ins.Bank][ins.ID];
-            for (int argIndex = 0; argIndex < args.Count(); argIndex++)
+            else
             {
-                EMEDF.ArgDoc argDoc = insDoc.Arguments[argIndex];
-                uint bytePos = FuncBytePositions[insDoc][argIndex];
-                bool isParam = false;
-
-                foreach (Parameter prm in paramNames.Keys)
+                List<int> positions = FuncBytePositions[doc];
+                List<ArgType> argStruct = doc.Arguments.Select(arg => arg.Type == 8 ? ArgType.UInt32 : (ArgType)arg.Type).ToList();
+                args = null;
+                while (args == null)
                 {
-                    if (prm.InstructionIndex == insIndex && bytePos == prm.TargetStartByte)
+                    // Allow errors if the last argument is optional, i.e. shows up inconsistently in vanilla emevd.
+                    // This is currently not used.
+                    bool errorPermissible = argStruct.Count > 0 && doc.Arguments[argStruct.Count - 1].Optional;
+                    try
                     {
-                        isParam = true;
-                        args[argIndex] = paramNames[prm];
+                        args = ins.UnpackArgs(argStruct);
+                        // position at last arg + 1 is the ending position in all cases where this check would apply
+                        int expectedLength = positions[argStruct.Count];
+                        if (ins.ArgData.Length > expectedLength)
+                        {
+                            throw new ArgumentException($"{ins.ArgData.Length - expectedLength} excess bytes of arg data at position {expectedLength}");
+                        }
+                    }
+                    catch when (errorPermissible)
+                    {
+                        argStruct.RemoveAt(argStruct.Count - 1);
                     }
                 }
-
-                if (!isParam)
+                for (int argIndex = 0; argIndex < args.Count(); argIndex++)
                 {
-                    args[argIndex] = argDoc.GetDisplayValue(args[argIndex]).ToString();
+                    EMEDF.ArgDoc argDoc = doc.Arguments[argIndex];
+                    int bytePos = positions[argIndex];
+                    bool isParam = false;
+                    foreach (Parameter prm in paramNames.Keys)
+                    {
+                        if (prm.InstructionIndex == insIndex && bytePos == prm.TargetStartByte)
+                        {
+                            isParam = true;
+                            args[argIndex] = paramNames[prm];
+                        }
+                    }
+                    if (!isParam)
+                    {
+                        args[argIndex] = formatArgFunc(argDoc, args[argIndex]);
+                    }
                 }
             }
-            if (args.Length > 0) return string.Join(", ", args).Trim();
-            return "";
-        }
-
-        /// <summary>
-        /// Returns a list of byte positions for an ordered list of argument types.
-        /// </summary>
-        public List<uint> GetArgBytePositions(IEnumerable<ArgType> argStruct, uint startPos = 0)
-        {
-            List<uint> positions = new List<uint>();
-            uint bytePos = startPos;
-            for (int i = 0; i < argStruct.Count(); i++)
-            {
-                long argType = (long)argStruct.ElementAt(i);
-                uint defLength = (uint)ByteLengthFromType(argType);
-                if (bytePos % defLength > 0)
-                    bytePos += defLength - (bytePos % defLength);
-
-                positions.Add(bytePos);
-                bytePos += defLength;
-            }
-            return positions;
+            return args;
         }
 
         public List<string> GetAltFunctionNames(string func)
@@ -317,9 +365,9 @@ namespace DarkScript3
             {
                 names.Add(b.Name);
             }
-            if (doc.Compare != null)
+            foreach (ConditionData.CompareVersion c in doc.AllCompares)
             {
-                names.Add(doc.Compare.Name);
+                names.Add(c.Name);
             }
             names.Remove(func);
             return names;

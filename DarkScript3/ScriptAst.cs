@@ -47,7 +47,7 @@ namespace DarkScript3
                         }
                         else if (dec.Type == SourceDecoration.DecorationType.POST_COMMENT)
                         {
-                            suffix += "  " + dec.Comment;
+                            suffix += " " + dec.Comment;
                         }
                     }
                     return suffix;

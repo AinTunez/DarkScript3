@@ -69,13 +69,15 @@ namespace DarkScript3
                 {
                     sb.AppendLine($"/* ------------------- {name} ------------------- */");
                     sb.AppendLine($"/* {e} */");
-                    Console.WriteLine(name + ": " + e);
+                    Console.WriteLine(name + ": " + e + "\n");
                     return null;
                 }
             }
             foreach (string emevdPath in emevdPaths)
             {
                 string name = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(emevdPath));
+                if (game == "ds3" && name.StartsWith("m2")) continue;
+                Console.WriteLine("--------------------------" + name);
                 EventScripter scripter = new EventScripter(emevdPath, docs);
                 string reg1 = recordText("reg1", name, () => scripter.Unpack());
                 if (reg1 == null) continue;

@@ -75,11 +75,9 @@ namespace DarkScript3
 
                 Dictionary<Parameter, string> paramNames = docs.ParamNames(evt);
                 List<string> argNameList = paramNames.Values.Distinct().ToList();
-                string evtArgs = string.Join(", ", argNameList);
+                Dictionary<Parameter, ParamArg> paramArgs = paramNames.ToDictionary(e => e.Key, e => new ParamArg { Name = e.Value });
 
                 EventFunction func = new EventFunction { ID = (int)evt.ID, RestBehavior = evt.RestBehavior, Params = argNameList };
-
-                List<Intermediate> decorateInstrs = null;
 
                 string eventName = scripter.EventName(evt.ID);
                 if (eventName != null) writer.WriteLine($"// {eventName}");
@@ -92,67 +90,30 @@ namespace DarkScript3
                     {
                         throw new Exception($"Unknown instruction in event {id}: {ins.Bank}[{ins.ID}] {string.Join(" ", ins.ArgData.Select(b => $"{b:x2}"))}");
                     }
-                    string funcName = InstructionDocs.TitleCaseName(doc.Name);
+                    string funcName = doc.DisplayName;
 
                     IEnumerable<ArgType> argStruct = doc.Arguments.Select(arg => arg.Type == 8 ? ArgType.UInt32 : (ArgType)arg.Type);
 
                     Layers layers = ins.Layer is uint l ? new Layers { Mask = l } : null;
                     Instr instr = new Instr { Inner = ins, Cmd = InstructionID(ins.Bank, ins.ID), Name = funcName, Layers = layers };
-                    if (decorateInstrs != null)
-                    {
-                        instr.Decorations = decorateInstrs[insIndex].Decorations;
-                    }
 
                     try
                     {
-                        // TODO: Should deduplicate this more with InstructionDocs ArgumentString/ArgumentStringInitializer.
-                        // Also EventScripter, which has good error checking.
-                        if (docs.IsVariableLength(doc))
+                        instr.Args = docs.UnpackArgsWithParams(ins, insIndex, doc, paramArgs, (argDoc, val) =>
                         {
-                            argStruct = Enumerable.Repeat(ArgType.Int32, ins.ArgData.Length / 4);
-                            instr.Args = ins.UnpackArgs(argStruct);
-
-                            List<uint> positions = docs.GetArgBytePositions(argStruct, 6);
-                            for (int argIndex = 0; argIndex < instr.Args.Count(); argIndex++)
+                            if (argDoc.GetDisplayValue(val) is string displayStr)
                             {
-                                uint bytePos = positions[argIndex];
-                                foreach (Parameter prm in paramNames.Keys)
-                                {
-                                    if (prm.InstructionIndex == insIndex && bytePos == prm.TargetStartByte)
-                                    {
-                                        instr.Args[argIndex + 2] = new ParamArg { Name = paramNames[prm] };
-                                    }
-                                }
+                                return new DisplayArg { DisplayValue = displayStr, Value = val };
                             }
-                        }
-                        else
-                        {
-                            instr.Args = ins.UnpackArgs(argStruct);
-                            for (int argIndex = 0; argIndex < instr.Args.Count(); argIndex++)
-                            {
-                                EMEDF.ArgDoc argDoc = doc.Arguments[argIndex];
-                                uint bytePos = docs.FuncBytePositions[doc][argIndex];
-
-                                foreach (Parameter prm in paramNames.Keys)
-                                {
-                                    if (prm.InstructionIndex == insIndex && bytePos == prm.TargetStartByte)
-                                    {
-                                        instr.Args[argIndex] = new ParamArg { Name = paramNames[prm] };
-                                    }
-                                }
-                                object displayVal = argDoc.GetDisplayValue(instr.Args[argIndex]);
-                                if (displayVal is string displayStr)
-                                {
-                                    instr.Args[argIndex] = new DisplayArg { DisplayValue = displayStr, Value = instr.Args[argIndex] };
-                                }
-                            }
-                        }
+                            return val;
+                        });
                     }
                     catch (Exception ex)
                     {
                         var sb = new StringBuilder();
-                        sb.AppendLine($@"ERROR: Unable to unpack arguments for ""{funcName}""");
-                        sb.AppendLine(ex.ToString());
+                        sb.AppendLine($@"Unable to unpack arguments for {funcName} at Event {evt.ID}[{insIndex}]");
+                        sb.AppendLine($@"Instruction arg data: {InstructionDocs.InstrDebugString(ins)}");
+                        sb.AppendLine(ex.Message);
                         throw new Exception(sb.ToString());
                     }
                     func.Body.Add(instr);
@@ -175,7 +136,10 @@ namespace DarkScript3
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    var sb = new StringBuilder();
+                    sb.AppendLine($@"Error decompiling Event {evt.ID}");
+                    sb.AppendLine(ex.ToString());
+                    throw new Exception(sb.ToString());
                 }
                 func.Print(writer);
                 writer.WriteLine();

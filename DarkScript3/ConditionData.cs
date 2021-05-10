@@ -137,24 +137,38 @@ namespace DarkScript3
             /// An alternate name to use, to use the condition like a boolean.
             /// </summary>
             [JsonProperty(PropertyName = "as_bool")]
-            public BoolVersion Bool { get; private set; }
+            private BoolVersion Bool;
 
             /// <summary>
             /// Multiple alternate names to use, instead of as_bool, if multiple can apply.
             /// </summary>
             [JsonProperty(PropertyName = "as_bools")]
-            public List<BoolVersion> Bools { get; private set; }
+            private List<BoolVersion> Bools;
 
             /// <summary>
             /// All ways to use the condition like a boolean, collected from as_bool or as_bools.
+            /// 
+            /// This is ignored if as_compare is set.
             /// </summary>
-            public List<BoolVersion> AllBools => Bool != null ? new List<BoolVersion> { Bool } : (Bools != null ? Bools : new List<BoolVersion>());
+            public List<BoolVersion> AllBools => (Bool == null && Bools == null) || Compare != null
+                ? new List<BoolVersion>()
+                : (Bool == null ? Bools : new List<BoolVersion> { Bool });
 
             /// <summary>
             /// An alternate name to use, to use the condition in an integer comparison.
             /// </summary>
             [JsonProperty(PropertyName = "as_compare")]
-            public CompareVersion Compare { get; private set; }
+            private CompareVersion Compare;
+
+            /// <summary>
+            /// All ways to use the condition like a comparison, collected from as_compare.
+            /// </summary>
+            public List<CompareVersion> AllCompares => Compare == null ? new List<CompareVersion>() : new List<CompareVersion> { Compare };
+
+            /// <summary>
+            /// If the variants for this condition are comparison ones.
+            /// </summary>
+            public bool IsCompare => Compare != null;
 
             /// <summary>
             /// Whether source code is allowed to contain this constant.
@@ -239,10 +253,10 @@ namespace DarkScript3
             public string Field { get; private set; }
 
             /// <summary>
-            /// The enum value.
+            /// The field value.
             /// </summary>
             [JsonProperty(PropertyName = "value")]
-            public string Value { get; private set; }
+            public int Value { get; private set; }
         }
     }
 }

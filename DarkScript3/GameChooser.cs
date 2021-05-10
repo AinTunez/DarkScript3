@@ -81,9 +81,9 @@ namespace DarkScript3
             ofd.Filter = "EMEDF Files|*.emedf.json";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                GameDocs = Path.GetFileName(ofd.FileName);
+                GameDocs = ofd.FileName;
+                Close();
             }
-            Close();
         }
 
         private void fancy_CheckedChanged(object sender, EventArgs e)

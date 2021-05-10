@@ -72,9 +72,13 @@ namespace DarkScript3
             {
                 EMEDF.InstrDoc doc = docs.DOC[bank][index];
                 bool isVar = docs.IsVariableLength(doc);
-                if (args.Length < doc.Arguments.Length)
+                if (args.Length < doc.Arguments.Length && doc.Arguments.Skip(args.Length).Any(argDoc => !argDoc.Optional))
                 {
-                    throw new Exception($"Instruction {bank}[{index}] ({doc.Name}) requires {doc.Arguments.Length} arguments.");
+                    throw new Exception($"Instruction {bank}[{index}] ({doc.Name}) requires {doc.Arguments.Length} arguments, given {args.Length}.");
+                }
+                if (!isVar && args.Length > doc.Arguments.Length)
+                {
+                    throw new Exception($"Instruction {bank}[{index}] ({doc.Name}) given {doc.Arguments.Length} arguments, only permits {args.Length}.");
                 }
 
                 for (int i = 0; i < args.Length; i++)
@@ -92,7 +96,7 @@ namespace DarkScript3
 
                         int sourceStartByte = nums.ElementAt(0);
                         int length = nums.ElementAt(1);
-                        uint targetStartByte = docs.FuncBytePositions[doc][i];
+                        int targetStartByte = docs.FuncBytePositions[doc][i];
 
                         Parameter p = new Parameter(evt.Instructions.Count, targetStartByte, sourceStartByte, length);
                         evt.Parameters.Add(p);
@@ -115,6 +119,7 @@ namespace DarkScript3
                     for (int i = 0; i < doc.Arguments.Length; i++)
                     {
                         EMEDF.ArgDoc argDoc = doc.Arguments[i];
+                        if (i >= args.Length && argDoc.Optional) break;
                         if (argDoc.Type == 0) properArgs.Add(Convert.ToByte(args[i])); //u8
                         else if (argDoc.Type == 1) properArgs.Add(Convert.ToUInt16(args[i])); //u16
                         else if (argDoc.Type == 2) properArgs.Add(Convert.ToUInt32(args[i])); //u32
@@ -213,7 +218,7 @@ namespace DarkScript3
             {
                 foreach (EMEDF.InstrDoc instr in bank.Instructions)
                 {
-                    string funcName = InstructionDocs.TitleCaseName(instr.Name);
+                    string funcName = instr.DisplayName;
 
                     var args = instr.Arguments.Select(a => a.DisplayName);
                     string argNames = string.Join(", ", args);
@@ -303,54 +308,31 @@ namespace DarkScript3
                 {
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine($@"Unable to read instruction at Event {CurrentEventID}, Index {CurrentInsIndex}.");
-                    sb.AppendLine($@"Instruction {ins.Bank}[{ins.ID}] does not exist.");
+                    sb.AppendLine($@"Unknown instruction id: {InstructionDocs.InstrDebugString(ins)}");
                     throw new Exception(sb.ToString());
                 }
-                string funcName = InstructionDocs.TitleCaseName(doc.Name);
+                string funcName = doc.DisplayName;
 
-                IEnumerable<ArgType> argStruct = doc.Arguments.Select(arg => arg.Type == 8 ? ArgType.UInt32 : (ArgType)arg.Type);
-
-                string[] args = default;
-                string argString = "";
+                List<object> args;
                 try
                 {
-                    if (docs.IsVariableLength(doc))
-                    {
-                        argStruct = Enumerable.Repeat(ArgType.Int32, ins.ArgData.Length / 4);
-                        args = ins.UnpackArgs(argStruct).Select(a => a.ToString()).ToArray();
-                        argString = docs.ArgumentStringInitializer(args, insIndex, paramNames, argStruct);
-                    }
-                    else
-                    {
-                        args = ins.UnpackArgs(argStruct).Select(a => a.ToString()).ToArray();
-                        argString = docs.ArgumentString(args, ins, insIndex, paramNames);
-                    }
+                    args = docs.UnpackArgsWithParams(ins, insIndex, doc, paramNames, (argDoc, val) => argDoc.GetDisplayValue(val));
                 }
                 catch (Exception ex)
                 {
                     var sb = new StringBuilder();
-                    sb.AppendLine($@"Unable to unpack arguments for {funcName} at Event {CurrentEventID}, Index {CurrentInsIndex}." + Environment.NewLine);
+                    sb.AppendLine($@"Unable to unpack arguments for {funcName}({InstructionDocs.InstrDocDebugString(doc)}) at Event {CurrentEventID}, Index {CurrentInsIndex}.");
+                    sb.AppendLine($@"Instruction arg data: {InstructionDocs.InstrDebugString(ins)}");
                     sb.AppendLine(ex.Message);
-                    // I can't use this. unfork SoulsFormats
-                    /*ExcessDataException edx = (ex as ExcessDataException);
-                    if (edx != null)
-                    {
-                        string data = BitConverter.ToString(ins.ArgData.Skip((int)edx.BytePosition).ToArray()).Replace("-", " ");
-                        sb.AppendLine($"EXCESS DATA: {{ {data} }}");
-                    }*/
                     throw new Exception(sb.ToString());
                 }
 
                 if (ins.Layer.HasValue)
                 {
-                    string str = InstructionDocs.LayerString(ins.Layer.Value);
-                    if (argString.Length > 0)
-                        argString = $"{argString}, {str}";
-                    else
-                        argString = str;
+                    args.Add(InstructionDocs.LayerString(ins.Layer.Value));
                 }
 
-                string lineOfCode = $"{InstructionDocs.TitleCaseName(doc.Name)}({argString});";
+                string lineOfCode = $"{doc.DisplayName}({string.Join(", ", args)});";
                 code.AppendLine("\t" + lineOfCode);
             }
             code.AppendLine("});");
@@ -416,7 +398,6 @@ namespace DarkScript3
             }
 
             Dictionary<Parameter, string> paramNames = new Dictionary<Parameter, string>();
-
             int ind = 0;
             foreach (var kv in paramValues)
             {

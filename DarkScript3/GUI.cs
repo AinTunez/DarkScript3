@@ -104,23 +104,18 @@ namespace DarkScript3
             catch (Exception ex)
             {
                 statusLabel.Text = "SAVE FAILED";
-                if (ex is JSScriptException scriptException)
+                // Mainly these will be JSScriptException, from V8, and FancyCompilerException, from JS parsing/compilation.
+                string message = ex.ToString().Trim();
+                if (ex is JSScriptException && fancyHint && !Settings.AllowPreprocess)
                 {
-                    string fancyChide = "";
-                    if (fancyHint && !Settings.AllowPreprocess)
-                    {
-                        fancyChide = "\n\n($Event is used but preprocessing is disabled. Enable it in compilation settings if desired.)";
-                    }
-                    MessageBox.Show(scriptException.ToString().Trim() + fancyChide);
+                    message += "\n\n($Event is used but preprocessing is disabled. Enable it in compilation settings if desired.)";
                 }
-                else if (ex is FancyJSCompiler.FancyCompilerException)
+                if (Docs.Functions.ContainsKey("DisplayGenericDialogGloballyAndSetEventFlag") && message.Contains("DisplayHollowArenaPvpMessage"))
                 {
-                    MessageBox.Show(ex.ToString().Trim());
+                    message += "\n\n(A previous version of DarkScript3 incorrectly decompiled DisplayHollowArenaPvpMessage's args." +
+                        " Replace it with DisplayGenericDialogGloballyAndSetEventFlag from a vanilla emevd.)";
                 }
-                else
-                {
-                    MessageBox.Show(ex.ToString().Trim());
-                }
+                MessageBox.Show(message);
             }
 
             Cursor = Cursors.Default;
@@ -703,19 +698,6 @@ namespace DarkScript3
             return pre.GetFragment(@"[\w\$]").Text;
         }
 
-        private string TypeString(long type)
-        {
-            if (type == 0) return "byte";
-            if (type == 1) return "ushort";
-            if (type == 2) return "uint";
-            if (type == 3) return "sbyte";
-            if (type == 4) return "short";
-            if (type == 5) return "int";
-            if (type == 6) return "float";
-            if (type == 8) return "uint";
-            throw new Exception("Invalid type in argument definition.");
-        }
-
         private string ArgString(string func, int index = -1)
         {
             List<EMEDF.ArgDoc> args = Docs.AllArgs[func];
@@ -733,7 +715,7 @@ namespace DarkScript3
                 }
                 else
                 {
-                    argStrings.Add($"{TypeString(arg.Type)} {arg.DisplayName}");
+                    argStrings.Add($"{InstructionDocs.TypeString(arg.Type)} {arg.DisplayName}");
                 }
                 if (i == index) return argStrings.Last();
             }
@@ -742,6 +724,7 @@ namespace DarkScript3
 
         private string currentFuncDoc = null;
 
+        // TODO: Potentially try to convert all emedf to HTML docs with similar info as this.
         private void LoadDocText(string func)
         {
             if (Docs == null) return;
@@ -792,14 +775,14 @@ namespace DarkScript3
                 return;
             }
 
+            docBox.AppendText($"{func}");
+
+            // TODO: Make ArgDoc include optional info instead of counting arguments? This requires making a shallow copy for cond functions.
             int optCount = 0;
-            InstructionTranslator.FunctionDoc funcDoc = null;
-            if (Docs.Translator != null && Docs.Translator.CondDocs.TryGetValue(func, out funcDoc))
+            if (Docs.Translator != null && Docs.Translator.CondDocs.TryGetValue(func, out InstructionTranslator.FunctionDoc funcDoc))
             {
                 optCount = funcDoc.OptionalArgs;
             }
-
-            docBox.AppendText($"{func}");
 
             if (args.Count == 0)
             {
@@ -812,25 +795,27 @@ namespace DarkScript3
                 EMEDF.ArgDoc argDoc = args[i];
                 bool optional = i >= args.Count - optCount;
 
-                // TODO: Augment ArgDoc to include at least vargarg info, maybe optional info.
+                bool displayEnum = false;
                 if (argDoc.EnumName == null)
                 {
-                    docBox.AppendText($"  {TypeString(argDoc.Type)} ", TextStyles.Keyword);
-                    docBox.AppendText(argDoc.DisplayName);
-                    if (optional) docBox.AppendText(" (optional)", TextStyles.Comment);
+                    docBox.AppendText($"  {InstructionDocs.TypeString(argDoc.Type)} ", TextStyles.Keyword);
                 }
                 else if (argDoc.EnumName == "BOOL")
                 {
                     docBox.AppendText($"  bool ", TextStyles.Keyword);
-                    docBox.AppendText(argDoc.DisplayName);
-                    if (optional) docBox.AppendText(" (optional)", TextStyles.Comment);
                 }
-                else
+                else if (argDoc.EnumDoc != null)
                 {
                     docBox.AppendText($"  enum ", TextStyles.Keyword);
-                    docBox.AppendText(argDoc.DisplayName);
-                    if (optional) docBox.AppendText(" (optional)", TextStyles.Comment);
+                    displayEnum = true;
+                }
 
+                docBox.AppendText(argDoc.DisplayName);
+                if (optional) docBox.AppendText(" (optional)", TextStyles.Comment);
+                if (argDoc.Vararg) docBox.AppendText(" (vararg)", TextStyles.Comment);
+
+                if (displayEnum)
+                {
                     EMEDF.EnumDoc enm = argDoc.EnumDoc;
                     foreach (var kv in enm.DisplayValues)
                     {
@@ -974,7 +959,8 @@ namespace DarkScript3
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("-- Created by AinTunez\r\n-- Based on work by HotPocketRemix and TKGP\r\n-- Special thanks to Meowmaritus", "About DarkScript");
+            MessageBox.Show("-- Created by AinTunez\r\n-- MattScript and other features by thefifthmatt"
+                + "\r\n-- Based on work by HotPocketRemix and TKGP\r\n-- Special thanks to Meowmaritus", "About DarkScript");
         }
 
         private void BatchResaveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1077,5 +1063,33 @@ namespace DarkScript3
         }
 
         #endregion
+
+        private void viewEMEDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Docs == null)
+            {
+                MessageBox.Show("Open a file to view the EMEDF for that game");
+                return;
+            }
+            string inferredName = Docs.ResourceString.Split('-')[0];
+            string path = $"{inferredName}-emedf.html";
+            if (File.Exists(path))
+                System.Diagnostics.Process.Start(path);
+            else if (File.Exists($@"Resources\{path}"))
+                System.Diagnostics.Process.Start($@"Resources\{path}");
+            else
+                MessageBox.Show($"No EMEDF documentation found for {inferredName}");
+        }
+
+        private void viewEMEVDTutorialToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://soulsmodding.wikidot.com/tutorial:learning-how-to-use-emevd");
+        }
+
+        private void viewFancyDocumentationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            System.Diagnostics.Process.Start("http://soulsmodding.wikidot.com/tutorial:mattscript-documentation");
+        }
     }
 }

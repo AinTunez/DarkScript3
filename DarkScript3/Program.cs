@@ -29,6 +29,10 @@ namespace DarkScript3
                 {
                     new CondTestingTool().RunTests();
                 }
+                else if (args.Contains("html"))
+                {
+                    EMEDF2HTML.Generate(args);
+                }
                 else
                 {
                     RoundTripTool.Run(args);

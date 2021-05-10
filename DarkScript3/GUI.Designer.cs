@@ -57,6 +57,10 @@ namespace DarkScript3
             this.previewCompilationOutputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewEMEDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewEMEVDTutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewFancyDocumentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
@@ -329,16 +333,46 @@ namespace DarkScript3
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewEMEDFToolStripMenuItem,
+            this.viewEMEVDTutorialToolStripMenuItem,
+            this.viewFancyDocumentationToolStripMenuItem,
+            this.toolStripMenuItem1,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
+            // viewEMEDFToolStripMenuItem
+            // 
+            this.viewEMEDFToolStripMenuItem.Name = "viewEMEDFToolStripMenuItem";
+            this.viewEMEDFToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.viewEMEDFToolStripMenuItem.Text = "View EMEDF (List of Instructions)";
+            this.viewEMEDFToolStripMenuItem.Click += new System.EventHandler(this.viewEMEDFToolStripMenuItem_Click);
+            // 
+            // viewEMEVDTutorialToolStripMenuItem
+            // 
+            this.viewEMEVDTutorialToolStripMenuItem.Name = "viewEMEVDTutorialToolStripMenuItem";
+            this.viewEMEVDTutorialToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.viewEMEVDTutorialToolStripMenuItem.Text = "View EMEVD Tutorial";
+            this.viewEMEVDTutorialToolStripMenuItem.Click += new System.EventHandler(this.viewEMEVDTutorialToolStripMenuItem_Click);
+            // 
+            // viewFancyDocumentationToolStripMenuItem
+            // 
+            this.viewFancyDocumentationToolStripMenuItem.Name = "viewFancyDocumentationToolStripMenuItem";
+            this.viewFancyDocumentationToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.viewFancyDocumentationToolStripMenuItem.Text = "View MattScript Documentation";
+            this.viewFancyDocumentationToolStripMenuItem.Click += new System.EventHandler(this.viewFancyDocumentationToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(244, 6);
+            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.aboutToolStripMenuItem.Text = "About DarkScript3";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // statusLabel
@@ -491,6 +525,10 @@ namespace DarkScript3
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem previewCompilationOutputToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scriptCompilationSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewEMEDFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewEMEVDTutorialToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewFancyDocumentationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
     }
 }
 

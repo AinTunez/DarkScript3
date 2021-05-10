@@ -50,9 +50,9 @@ namespace DarkScript3
             this.preprocess.AutoSize = true;
             this.preprocess.Location = new System.Drawing.Point(13, 37);
             this.preprocess.Name = "preprocess";
-            this.preprocess.Size = new System.Drawing.Size(327, 17);
+            this.preprocess.Size = new System.Drawing.Size(298, 17);
             this.preprocess.TabIndex = 1;
-            this.preprocess.Text = "Allow JS preprocessing, including fancy compilation with $Event";
+            this.preprocess.Text = "Allow JS preprocessing, including compilation with $Event";
             this.preprocess.UseVisualStyleBackColor = true;
             this.preprocess.CheckedChanged += new System.EventHandler(this.preprocess_CheckedChanged);
             // 

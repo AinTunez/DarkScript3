@@ -108,7 +108,7 @@
         "false": "OFF",
         "required": [{
           "field": "Target Event Flag Type",
-          "value": "Event Flag"
+          "value": 0
         }]
       },
       {
@@ -117,10 +117,10 @@
         "false": "OFF",
         "required": [{
           "field": "Target Event Flag Type",
-          "value": "Event ID"
+          "value": 1
         }, {
           "field": "Target Event Flag ID",
-          "value": "0"
+          "value": 0
         }]
       },
       {
@@ -129,11 +129,10 @@
         "false": "OFF",
         "required": [{
           "field": "Target Event Flag Type",
-          // Event ID + Slot Number, has different name in different games ("and" instead of "+")
-          "value": "2"
+          "value": 2
         }, {
           "field": "Target Event Flag ID",
-          "value": "0"
+          "value": 0
         }]
       }]
     },
