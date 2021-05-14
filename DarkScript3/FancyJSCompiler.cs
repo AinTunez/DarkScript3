@@ -105,7 +105,7 @@ namespace DarkScript3
                         {
                             for (int i = 0; i < line.Length; i++)
                             {
-                                if (!Char.IsWhiteSpace(line[i]))
+                                if (!char.IsWhiteSpace(line[i]))
                                 {
                                     col = i;
                                     break;
@@ -562,6 +562,7 @@ namespace DarkScript3
                 }
                 else if (statement is ExpressionStatement exprStmt)
                 {
+                    // TODO: Check for This expressions
                     if (exprStmt.Expression is CallExpression call)
                     {
                         // Built-in commands and plain emevd instructions.
@@ -577,7 +578,7 @@ namespace DarkScript3
                         }
                         else
                         {
-                            context.Error(call, "Expected a function call with a named function");
+                            context.Error(call, $"Expected a function call with a simple named function, not a {call.Callee.Type}");
                         }
                         List<Expression> args = call.Arguments.ToList();
                         bool hasExpectedArgs(int expected)
@@ -646,7 +647,7 @@ namespace DarkScript3
                                 im = new Wait { Cond = ConvertCondExpression(args[0]) };
                             }
                         }
-                        else if (docs.Functions.TryGetValue(f, out (int, int) pos))
+                        else if (f != null && docs.Functions.TryGetValue(f, out (int, int) pos))
                         {
                             EMEDF.InstrDoc instrDoc = docs.DOC[pos.Item1][pos.Item2];
                             object layers = null;
@@ -677,7 +678,7 @@ namespace DarkScript3
                                 };
                             }
                         }
-                        else if (char.IsLower(f[0]))
+                        else if (f != null && char.IsLower(f[0]))
                         {
                             // Allow function calls through unmodified if they are lowercase
                             im = new JSStatement { Code = source.GetSourceNode(statement).ToString() };

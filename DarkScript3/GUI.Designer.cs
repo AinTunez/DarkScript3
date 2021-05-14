@@ -35,6 +35,7 @@ namespace DarkScript3
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.batchDumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.batchResaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -143,6 +144,7 @@ namespace DarkScript3
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem,
+            this.batchDumpToolStripMenuItem,
             this.batchResaveToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -153,29 +155,36 @@ namespace DarkScript3
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.openToolStripMenuItem.Text = "Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
+            // 
+            // batchDumpToolStripMenuItem
+            // 
+            this.batchDumpToolStripMenuItem.Name = "batchDumpToolStripMenuItem";
+            this.batchDumpToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.batchDumpToolStripMenuItem.Text = "Batch Dump (EMEVD→JS)...";
+            this.batchDumpToolStripMenuItem.Click += new System.EventHandler(this.batchDumpToolStripMenuItem_Click);
             // 
             // batchResaveToolStripMenuItem
             // 
             this.batchResaveToolStripMenuItem.Name = "batchResaveToolStripMenuItem";
-            this.batchResaveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.batchResaveToolStripMenuItem.Text = "Batch Resave";
-            this.batchResaveToolStripMenuItem.Click += new System.EventHandler(this.BatchResaveToolStripMenuItem_Click);
+            this.batchResaveToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.batchResaveToolStripMenuItem.Text = "Batch Resave (JS→EMEVD)...";
+            this.batchResaveToolStripMenuItem.Click += new System.EventHandler(this.batchResaveToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -516,7 +525,7 @@ namespace DarkScript3
         private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem batchResaveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem batchDumpToolStripMenuItem;
         public FastColoredTextBoxNS.FastColoredTextBox editor;
         private System.Windows.Forms.ToolStripSeparator optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
@@ -529,6 +538,7 @@ namespace DarkScript3
         private System.Windows.Forms.ToolStripMenuItem viewEMEVDTutorialToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewFancyDocumentationToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem batchResaveToolStripMenuItem;
     }
 }
 

@@ -158,7 +158,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectAbnormalState, SpEffectActiveItem, SpEffectArmor, SpEffectEnemy, SpEffectRing, SpEffectSpell, SpEffectWeapon, SpEffectWideUse</p>
 <pre>ModifyStatAdditively(
-    enum<<a href="#AdditiveStatType">AdditiveStatType</a>> statType, 
+    enum&lt;<a href="#AdditiveStatType">AdditiveStatType</a>&gt; statType, 
     float duration, 
     byte amount)</pre></div></section>
 <section class="instr">
@@ -166,7 +166,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectAbnormalState, SpEffectActiveItem, SpEffectArmor, SpEffectEnemy, SpEffectRing, SpEffectSpell, SpEffectWeapon, SpEffectWideUse</p>
 <pre>ModifyStatMultiplicatively(
-    enum<<a href="#MultiplicativeStatType">MultiplicativeStatType</a>> statType, 
+    enum&lt;<a href="#MultiplicativeStatType">MultiplicativeStatType</a>&gt; statType, 
     float duration, 
     float amount)</pre></div></section>
 <section class="instr">
@@ -182,7 +182,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectActiveItem, SpEffectArmor, SpEffectEnemy, SpEffectRing, SpEffectSpell, SpEffectWeapon, SpEffectWideUse</p>
 <pre>SetStateInfo(
-    enum<<a href="#StateInfoType">StateInfoType</a>> stateInfo, 
+    enum&lt;<a href="#StateInfoType">StateInfoType</a>&gt; stateInfo, 
     float duration)</pre></div></section>
 <section class="instr">
 <h3 id="ModifyJump"><a href="#ModifyJump" class="selfref"><code>ModifyJump</code></a> <span class="sectioninfo">Instruction 1000[04]</span></h3>
@@ -211,7 +211,7 @@ section {
 <p class="sectionusage usageinfo">Used in SpEffectArmor, SpEffectRing, SpEffectWeapon</p>
 <pre>ModifyBowProperties(
     short unknown1, 
-    enum<<a href="#BowType">BowType</a>> bowType, 
+    enum&lt;<a href="#BowType">BowType</a>&gt; bowType, 
     float unknown3, 
     float unknown4, 
     float unknown5, 
@@ -240,7 +240,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectAbnormalState, SpEffectActiveItem, SpEffectArmor, SpEffectEnemy, SpEffectRing, SpEffectSpell, SpEffectWeapon, SpEffectWideUse</p>
 <pre>ModifyProperty(
-    enum<<a href="#PlayerPropertyType">PlayerPropertyType</a>> playerProperty, 
+    enum&lt;<a href="#PlayerPropertyType">PlayerPropertyType</a>&gt; playerProperty, 
     float duration, 
     int amount)</pre></div></section>
 <section class="instr">
@@ -295,7 +295,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectWeapon</p>
 <pre>ApplySpecialScalingToWeapon(
-    enum<<a href="#SpecialScalingType">SpecialScalingType</a>> specialScalingType, 
+    enum&lt;<a href="#SpecialScalingType">SpecialScalingType</a>&gt; specialScalingType, 
     short specialStatMax, 
     float scalingAtStatZero, 
     float scalingAtStatMax, 
@@ -336,7 +336,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectArmor, SpEffectRing, SpEffectWeapon</p>
 <pre>ModifyAttributeBasedOnCurrentValue(
-    enum<<a href="#AttributeType">AttributeType</a>> attribute, 
+    enum&lt;<a href="#AttributeType">AttributeType</a>&gt; attribute, 
     byte attributeMin, 
     byte attributeMax, 
     sbyte attributeAddedAtMin, 
@@ -361,7 +361,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectActiveItem, SpEffectRing</p>
 <pre>ModifyEstusUsage(
-    enum<<a href="#EstusModificationType">EstusModificationType</a>> modificationType, 
+    enum&lt;<a href="#EstusModificationType">EstusModificationType</a>&gt; modificationType, 
     float duration)</pre></div></section>
 <h2 id="100040_Spells_and_SpEffects"><a href="#100040_Spells_and_SpEffects" class="selfref">100040 - Spells and SpEffects</a></h2>
 <section class="instr">
@@ -369,8 +369,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectEnemy, SpEffectSpell</p>
 <pre>ScaleSpEffectByAttribute(
-    enum<<a href="#SpEffectScaleType">SpEffectScaleType</a>> scaleType, 
-    enum<<a href="#AttributeType">AttributeType</a>> attribute, 
+    enum&lt;<a href="#SpEffectScaleType">SpEffectScaleType</a>&gt; scaleType, 
+    enum&lt;<a href="#AttributeType">AttributeType</a>&gt; attribute, 
     short minAttribute, 
     short maxAttribute, 
     float multiplierAtMinAttribute, 
@@ -493,7 +493,7 @@ section {
 <p class="sectionusage usageinfo">Used in SpEffectActiveItem, SpEffectArmor, SpEffectCondition, SpEffectSpell, SpEffectWeapon</p>
 <pre>IncreaseDamageMultiplicatively(
     float duration, 
-    enum<<a href="#BuffType">BuffType</a>> buffType, 
+    enum&lt;<a href="#BuffType">BuffType</a>&gt; buffType, 
     float addedMultiplier)</pre></div></section>
 <h2 id="100090_Character_Combat_Properties_II"><a href="#100090_Character_Combat_Properties_II" class="selfref">100090 - Character Combat Properties II</a></h2>
 <section class="instr">
@@ -509,7 +509,7 @@ section {
 <p class="sectionusage usageinfo">Used in SpEffectActiveItem, SpEffectArmor, SpEffectRing, SpEffectSpell, SpEffectWeapon</p>
 <pre>ModifyDamageFlatToBaseAr(
     float duration, 
-    enum<<a href="#BuffType">BuffType</a>> buffType, 
+    enum&lt;<a href="#BuffType">BuffType</a>&gt; buffType, 
     ushort amount)</pre></div></section>
 <section class="instr">
 <h3 id="BuffDefense"><a href="#BuffDefense" class="selfref"><code>BuffDefense</code></a> <span class="sectioninfo">Instruction 100090[04]</span></h3>
@@ -517,7 +517,7 @@ section {
 <p class="sectionusage usageinfo">Used in SpEffectAbnormalState, SpEffectActiveItem, SpEffectEnemy, SpEffectRing, SpEffectSpell, SpEffectWeapon, SpEffectWideUse</p>
 <pre>BuffDefense(
     float duration, 
-    enum<<a href="#BuffType">BuffType</a>> buffType, 
+    enum&lt;<a href="#BuffType">BuffType</a>&gt; buffType, 
     ushort amount)</pre></div></section>
 <section class="instr">
 <h3 id="NerfDefense"><a href="#NerfDefense" class="selfref"><code>NerfDefense</code></a> <span class="sectioninfo">Instruction 100090[05]</span></h3>
@@ -525,7 +525,7 @@ section {
 <p class="sectionusage usageinfo">Used in SpEffectAbnormalState, SpEffectRing, SpEffectSpell, SpEffectWeapon</p>
 <pre>NerfDefense(
     float duration, 
-    enum<<a href="#BuffType">BuffType</a>> buffType, 
+    enum&lt;<a href="#BuffType">BuffType</a>&gt; buffType, 
     ushort amount)</pre></div></section>
 <section class="instr">
 <h3 id="UnknownCommand10009006"><a href="#UnknownCommand10009006" class="selfref"><code>UnknownCommand10009006</code></a> <span class="sectioninfo">Instruction 100090[06]</span></h3>
@@ -554,7 +554,7 @@ section {
 <p class="sectionusage usageinfo">Used in SpEffectActiveItem, SpEffectEnemy, SpEffectSpell</p>
 <pre>BuffDamageUnknown(
     float duration, 
-    enum<<a href="#BuffType">BuffType</a>> buffType, 
+    enum&lt;<a href="#BuffType">BuffType</a>&gt; buffType, 
     ushort amount)</pre></div></section>
 <h2 id="100110_Character_Items"><a href="#100110_Character_Items" class="selfref">100110 - Character Items</a></h2>
 <section class="instr">
@@ -650,7 +650,7 @@ section {
 <pre>CreateBulletBasedOnAttribute(
     int bulletId, 
     int damageparamId, 
-    enum<<a href="#AttributeType">AttributeType</a>> attribute, 
+    enum&lt;<a href="#AttributeType">AttributeType</a>&gt; attribute, 
     short breakpoint1, 
     short breakpoint2, 
     short breakpoint3, 
@@ -762,19 +762,19 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectActiveItem, SpEffectCondition</p>
 <pre>InitiateClientmediatedMultiplayerItem(
-    enum<<a href="#ClientItemType">ClientItemType</a>> clientItemType)</pre></div></section>
+    enum&lt;<a href="#ClientItemType">ClientItemType</a>&gt; clientItemType)</pre></div></section>
 <section class="instr">
 <h3 id="InitiateServermediatedMultiplayerItem"><a href="#InitiateServermediatedMultiplayerItem" class="selfref"><code>InitiateServermediatedMultiplayerItem</code></a> <span class="sectioninfo">Instruction 100180[01]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectActiveItem, SpEffectCondition</p>
 <pre>InitiateServermediatedMultiplayerItem(
-    enum<<a href="#ServerItemType">ServerItemType</a>> serverItemType)</pre></div></section>
+    enum&lt;<a href="#ServerItemType">ServerItemType</a>&gt; serverItemType)</pre></div></section>
 <section class="instr">
 <h3 id="InitiatePassiveServermediatedMultiplayerItem"><a href="#InitiatePassiveServermediatedMultiplayerItem" class="selfref"><code>InitiatePassiveServermediatedMultiplayerItem</code></a> <span class="sectioninfo">Instruction 100180[02]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectRing</p>
 <pre>InitiatePassiveServermediatedMultiplayerItem(
-    enum<<a href="#PassiveServerItemType">PassiveServerItemType</a>> passiveServerItemType)</pre></div></section>
+    enum&lt;<a href="#PassiveServerItemType">PassiveServerItemType</a>&gt; passiveServerItemType)</pre></div></section>
 <section class="instr">
 <h3 id="RequestMultiplayerSeparation"><a href="#RequestMultiplayerSeparation" class="selfref"><code>RequestMultiplayerSeparation</code></a> <span class="sectioninfo">Instruction 100180[03]</span></h3>
 <div class="sectioncontents">
@@ -844,20 +844,20 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectCondition, SpEffectMustSub</p>
 <pre>PreventStatusEffect(
-    enum<<a href="#StatusEffectType">StatusEffectType</a>> statusEffect, 
+    enum&lt;<a href="#StatusEffectType">StatusEffectType</a>&gt; statusEffect, 
     float duration)</pre></div></section>
 <section class="instr">
 <h3 id="ClearStatusEffect"><a href="#ClearStatusEffect" class="selfref"><code>ClearStatusEffect</code></a> <span class="sectioninfo">Instruction 101070[01]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectMustSub</p>
 <pre>ClearStatusEffect(
-    enum<<a href="#StatusEffectType">StatusEffectType</a>> statusEffect)</pre></div></section>
+    enum&lt;<a href="#StatusEffectType">StatusEffectType</a>&gt; statusEffect)</pre></div></section>
 <section class="instr">
 <h3 id="ApplyStatusEffect"><a href="#ApplyStatusEffect" class="selfref"><code>ApplyStatusEffect</code></a> <span class="sectioninfo">Instruction 101070[02]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectCondition, SpEffectMustSub</p>
 <pre>ApplyStatusEffect(
-    enum<<a href="#StatusEffectType">StatusEffectType</a>> statusEffect, 
+    enum&lt;<a href="#StatusEffectType">StatusEffectType</a>&gt; statusEffect, 
     float duration, 
     int attackparamId, 
     int attackFrequency, 

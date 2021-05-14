@@ -67,10 +67,10 @@ namespace DarkScript3
             ["0[00]"] = "WaitFor",
             ["1000[00]"] = "WaitFor",
             ["1000[01]"] = "GotoIf",
-            ["1000[02]"] = "EndIf",
+            ["1000[02]"] = "EndIf or RestartIf",
             ["1000[101]"] = "GotoIf",
             ["1000[07]"] = "GotoIf(cond.Passed)",
-            ["1000[08]"] = "EndIf(cond.Passed)",
+            ["1000[08]"] = "EndIf(cond.Passed) or RestartIf(cond.Passed)",
             ["1000[107]"] = "GotoIf(cond.Passed)",
         };
         private readonly HashSet<string> noDetailsEnums = new HashSet<string>
@@ -495,9 +495,9 @@ namespace DarkScript3
             {
                 EMEDF.ArgDoc argDoc = args[i];
                 bool optional = i >= args.Count - optCount;
-                if (optional && !multiLine && i == args.Count - optCount)
+                if (optional && i == args.Count - optCount)
                 {
-                    sb.Append("<span class=\"optarg\">[");
+                    sb.Append("<span class=\"optarg\">");
                 }
                 if (i > 0)
                 {
@@ -506,10 +506,6 @@ namespace DarkScript3
                 if (multiLine)
                 {
                     sb.Append(Environment.NewLine + "    ");
-                }
-                if (optional && multiLine && i == args.Count - optCount)
-                {
-                    sb.Append("<span class=\"optarg\">");
                 }
                 string typeMod = argDoc.Vararg ? "..." : "";
                 if (argDoc.EnumName == null)
@@ -530,9 +526,9 @@ namespace DarkScript3
                 }
                 else if (argDoc.EnumDoc != null)
                 {
-                    sb.Append($"enum<");
+                    sb.Append($"enum{Escape("<")}");
                     Link(argDoc.EnumDoc.DisplayName, argDoc.EnumDoc.DisplayName);
-                    sb.Append($">{typeMod} {Escape(argDoc.DisplayName)}");
+                    sb.Append($"{Escape(">")}{typeMod} {Escape(argDoc.DisplayName)}");
                     if (optional && multiLine)
                     {
                         sb.Append($" = {argDoc.GetDisplayValue(argDoc.Default)}");
@@ -540,10 +536,6 @@ namespace DarkScript3
                 }
                 if (optional && i == args.Count - 1)
                 {
-                    if (!multiLine)
-                    {
-                        sb.Append("]");
-                    }
                     sb.Append("</span>");
                 }
             }

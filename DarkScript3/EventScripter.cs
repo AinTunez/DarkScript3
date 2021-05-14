@@ -20,6 +20,7 @@ namespace DarkScript3
     public class EventScripter
     {
         private InstructionDocs docs;
+        private string emevdPath;
 
         public EMEVD EVD = new EMEVD();
 
@@ -30,22 +31,15 @@ namespace DarkScript3
         public int CurrentEventID = -1;
         public int CurrentInsIndex = -1;
         public string CurrentInsName = "";
+        public bool BeforeProcessingEvents = true;
 
         private List<string> LinkedFiles = new List<string>();
 
-        // A switch between DS1 and DS1R for fancy compilation. This is ignored for all other games.
-        public bool IsRemastered { get; set; }
-
-        public EventScripter(EMEVD evd, InstructionDocs docs)
+        public EventScripter(string file, InstructionDocs docs, EMEVD evd = null)
         {
-            EVD = evd;
+            emevdPath = file;
             this.docs = docs;
-            InitAll();
-        }
-
-        public EventScripter(string file, InstructionDocs docs)
-        {
-            EVD = EMEVD.Read(file);
+            EVD = evd ?? EMEVD.Read(file);
             if (File.Exists(file.Replace(".emevd", ".emeld")))
             {
                 try
@@ -56,7 +50,6 @@ namespace DarkScript3
                 {
                 }
             }
-            this.docs = docs;
             InitAll();
         }
 
@@ -72,7 +65,7 @@ namespace DarkScript3
             {
                 EMEDF.InstrDoc doc = docs.DOC[bank][index];
                 bool isVar = docs.IsVariableLength(doc);
-                if (args.Length < doc.Arguments.Length && doc.Arguments.Skip(args.Length).Any(argDoc => !argDoc.Optional))
+                if (args.Length < doc.Arguments.Length)
                 {
                     throw new Exception($"Instruction {bank}[{index}] ({doc.Name}) requires {doc.Arguments.Length} arguments, given {args.Length}.");
                 }
@@ -119,7 +112,6 @@ namespace DarkScript3
                     for (int i = 0; i < doc.Arguments.Length; i++)
                     {
                         EMEDF.ArgDoc argDoc = doc.Arguments[i];
-                        if (i >= args.Length && argDoc.Optional) break;
                         if (argDoc.Type == 0) properArgs.Add(Convert.ToByte(args[i])); //u8
                         else if (argDoc.Type == 1) properArgs.Add(Convert.ToUInt16(args[i])); //u16
                         else if (argDoc.Type == 2) properArgs.Add(Convert.ToUInt32(args[i])); //u32
@@ -161,14 +153,22 @@ namespace DarkScript3
 
         public void Import(string filePath)
         {
+            if (!BeforeProcessingEvents)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine($"Attempting to import {filePath} in the middle of an event or after one.");
+                sb.AppendLine("Move your import statement to the very top of the file, and avoid declaring events in imported files.");
+                throw new Exception(sb.ToString());
+            }
+            string resolvedFile = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(emevdPath), filePath));
             try
             {
-                v8.Execute(File.ReadAllText(filePath));
+                v8.Execute(Path.GetFileName(resolvedFile), File.ReadAllText(resolvedFile));
             }
             catch (Exception ex)
             {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine($@"Error importing {Path.GetFileName(filePath)}. Details below.\n");
+                sb.AppendLine($"Error importing {filePath}");
                 sb.AppendLine(ex.ToString());
                 throw new Exception(sb.ToString());
             }
@@ -177,7 +177,7 @@ namespace DarkScript3
         /// <summary>
         /// Sets up the JavaScript environment.
         /// </summary>
-        public void InitAll()
+        private void InitAll()
         {
             v8.AddHostObject("$$$_host", new HostFunctions());
             v8.AddHostObject("EVD", EVD);
@@ -256,13 +256,16 @@ namespace DarkScript3
 
         /// <summary>
         /// Executes the selected code to generate the EMEVD.
+        /// 
+        /// documentName should preferably be the simple name of a .js file, for reporting purposes.
         /// </summary>
-        public EMEVD Pack(string code, string documentName = null)
+        public EMEVD Pack(string code, string documentName)
         {
             EVD.Events.Clear();
+            BeforeProcessingEvents = true;
             try
             {
-                v8.Execute(documentName ?? "User Script", $"(function() {{ {code} }})();");
+                v8.Execute(documentName, $"(function() {{ {code} }})();");
             }
             catch (Exception ex) when (ex is IScriptEngineException scriptException)
             {
@@ -364,22 +367,6 @@ namespace DarkScript3
                     LinkedFiles.Add(linkedFile);
                 }
             }
-        }
-
-        /// <summary>
-        /// Returns the byte length of an ArgType.
-        /// </summary>
-        private int ByteLengthFromType(long t)
-        {
-            if (t == 0) return 1; //u8
-            if (t == 1) return 2; //u16
-            if (t == 2) return 4; //u32
-            if (t == 3) return 1; //s8
-            if (t == 4) return 2; //s16
-            if (t == 5) return 4; //s32
-            if (t == 6) return 4; //f32
-            if (t == 8) return 4; //string position
-            throw new Exception("Invalid type in argument definition.");
         }
 
         /// <summary>

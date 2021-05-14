@@ -298,26 +298,11 @@ namespace DarkScript3
             {
                 List<int> positions = FuncBytePositions[doc];
                 List<ArgType> argStruct = doc.Arguments.Select(arg => arg.Type == 8 ? ArgType.UInt32 : (ArgType)arg.Type).ToList();
-                args = null;
-                while (args == null)
+                args = ins.UnpackArgs(argStruct);
+                int expectedLength = positions[argStruct.Count];
+                if (ins.ArgData.Length > expectedLength)
                 {
-                    // Allow errors if the last argument is optional, i.e. shows up inconsistently in vanilla emevd.
-                    // This is currently not used.
-                    bool errorPermissible = argStruct.Count > 0 && doc.Arguments[argStruct.Count - 1].Optional;
-                    try
-                    {
-                        args = ins.UnpackArgs(argStruct);
-                        // position at last arg + 1 is the ending position in all cases where this check would apply
-                        int expectedLength = positions[argStruct.Count];
-                        if (ins.ArgData.Length > expectedLength)
-                        {
-                            throw new ArgumentException($"{ins.ArgData.Length - expectedLength} excess bytes of arg data at position {expectedLength}");
-                        }
-                    }
-                    catch when (errorPermissible)
-                    {
-                        argStruct.RemoveAt(argStruct.Count - 1);
-                    }
+                    throw new ArgumentException($"{ins.ArgData.Length - expectedLength} excess bytes of arg data at position {expectedLength}");
                 }
                 for (int argIndex = 0; argIndex < args.Count(); argIndex++)
                 {

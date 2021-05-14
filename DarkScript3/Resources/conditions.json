@@ -148,12 +148,20 @@
         {
           "shortname": "AllBatchEventFlags",
           "true": "All ON",
-          "false": "Not All ON"
+          "false": "Not All ON",
+          "required": [{
+            "field": "Target Event Flag Type",
+            "value": 0
+          }]
         },
         {
           "shortname": "AnyBatchEventFlags",
           "true": "Not All OFF",
-          "false": "All OFF"
+          "false": "All OFF",
+          "required": [{
+            "field": "Target Event Flag Type",
+            "value": 0
+          }]
         }
       ]
     },

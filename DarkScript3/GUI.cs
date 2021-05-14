@@ -17,17 +17,17 @@ namespace DarkScript3
 {
     public partial class GUI : Form
     {
-        public string EVD_Path;
-        public EventScripter Scripter;
-        public InstructionDocs Docs;
-        public ScriptSettings Settings;
-        public bool CodeChanged = false;
-        public AutocompleteMenu InstructionMenu;
-        public BetterFindForm BFF;
-        public PreviewCompilationForm Preview = null;
+        private string EVD_Path;
+        private EventScripter Scripter;
+        private InstructionDocs Docs;
+        private ScriptSettings Settings;
+        private bool CodeChanged = false;
+        private AutocompleteMenu InstructionMenu;
+        private BetterFindForm BFF;
+        private PreviewCompilationForm Preview = null;
         private Action<string> loadDocTextDebounce;
 
-        Dictionary<string, (string title, string text)> ToolTips = new Dictionary<string, (string, string)>();
+        private Dictionary<string, (string title, string text)> ToolTips = new Dictionary<string, (string, string)>();
 
         public GUI()
         {
@@ -74,19 +74,27 @@ namespace DarkScript3
 
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Scripter == null) return;
+            SaveJSAndEMEVDFile();
+        }
+
+        private bool SaveJSAndEMEVDFile()
+        {
+            if (Scripter == null) return false;
             InfoTip.Hide();
 
+            Range originalSelect = editor.Selection.Clone();
             editor.Enabled = false;
             docBox.Enabled = false;
             MainMenuStrip.Enabled = false;
             Cursor = Cursors.WaitCursor;
 
             string text = editor.Text;
+            string debugName = $"{Path.GetFileName(EVD_Path)}.js";
             bool fancyHint = text.Contains("$Event(");
+            bool success = true;
+            Range errorSelect = null;
             try
             {
-                string debugName = $"{Path.GetFileName(EVD_Path)}.js";
                 EMEVD result;
                 if (fancyHint && Settings.AllowPreprocess && Docs.Translator != null)
                 {
@@ -105,29 +113,41 @@ namespace DarkScript3
             {
                 statusLabel.Text = "SAVE FAILED";
                 // Mainly these will be JSScriptException, from V8, and FancyCompilerException, from JS parsing/compilation.
-                string message = ex.ToString().Trim();
+                string extra = "";
                 if (ex is JSScriptException && fancyHint && !Settings.AllowPreprocess)
                 {
-                    message += "\n\n($Event is used but preprocessing is disabled. Enable it in compilation settings if desired.)";
+                    extra += "\n\n($Event is used but preprocessing is disabled. Enable it in compilation settings if desired.)";
                 }
-                if (Docs.Functions.ContainsKey("DisplayGenericDialogGloballyAndSetEventFlag") && message.Contains("DisplayHollowArenaPvpMessage"))
+                if (Docs.Functions.ContainsKey("DisplayGenericDialogGloballyAndSetEventFlag") && ex.Message.Contains("DisplayHollowArenaPvpMessage"))
                 {
-                    message += "\n\n(A previous version of DarkScript3 incorrectly decompiled DisplayHollowArenaPvpMessage's args." +
+                    extra += "\n\n(A previous version of DarkScript3 incorrectly decompiled DisplayHollowArenaPvpMessage's args." +
                         " Replace it with DisplayGenericDialogGloballyAndSetEventFlag from a vanilla emevd.)";
                 }
-                MessageBox.Show(message);
+                // MessageBox.Show(message);
+                // TODO add this >:o
+                errorSelect = ShowCompileError(debugName, ex, extra);
+                success = false;
             }
 
             Cursor = Cursors.Default;
             MainMenuStrip.Enabled = true;
             editor.Enabled = true;
-            docBox.Enabled = true;
             editor.Focus();
+            if (errorSelect == null)
+            {
+                editor.Selection = originalSelect;
+            }
+            else
+            {
+                editor.Selection = errorSelect;
+                editor.DoSelectionVisible();
+            }
+            docBox.Enabled = true;
+            return success;
         }
 
-        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        private bool CancelWithUnsavedChanges(object sender, EventArgs e)
         {
-            InfoTip.Hide();
             if (Scripter != null && CodeChanged)
             {
                 DialogResult result = MessageBox.Show("Save changes before opening a new file?", "Unsaved Changes", MessageBoxButtons.YesNoCancel);
@@ -137,9 +157,20 @@ namespace DarkScript3
                 }
                 else if (result == DialogResult.Cancel)
                 {
-                    return;
+                    return true;
                 }
             }
+            return false;
+        }
+
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InfoTip.Hide();
+            if (CancelWithUnsavedChanges(sender, e))
+            {
+                return;
+            }
+            InstructionDocs oldDocs = Docs;
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx;";
             if (ofd.ShowDialog() != DialogResult.OK)
@@ -174,7 +205,12 @@ namespace DarkScript3
                 return;
             }
 
-            JSRegex.GlobalConstant = new Regex($@"[^.]\b(?<range>{string.Join("|", InstructionDocs.GlobalConstants.Concat(Docs.GlobalEnumConstants.Keys))})\b");
+            if (oldDocs?.ResourceString != Docs.ResourceString)
+            {
+                JSRegex.GlobalConstant = new Regex($@"[^.]\b(?<range>{string.Join("|", InstructionDocs.GlobalConstants.Concat(Docs.GlobalEnumConstants.Keys))})\b");
+                Editor_TextChanged(editor, new TextChangedEventArgs(editor.Range));
+                Editor_TextChanged(docBox, new TextChangedEventArgs(docBox.Range));
+            }
             
             IEnumerable<AutocompleteItem> instructions = Docs.AllArgs.Keys.Select(s =>
             {
@@ -206,7 +242,7 @@ namespace DarkScript3
             CodeChanged = false;
         }
 
-        private void OpenEMEVDFile(
+        private bool OpenEMEVDFile(
             string fileName,
             string gameDocs,
             EMEVD evd = null,
@@ -220,11 +256,7 @@ namespace DarkScript3
                 Docs = new InstructionDocs(gameDocs);
             }
             Settings = new ScriptSettings(Docs, extraFields);
-
-            if (evd == null)
-                Scripter = new EventScripter(fileName, Docs);
-            else
-                Scripter = new EventScripter(evd, Docs);
+            Scripter = new EventScripter(fileName, Docs, evd);
 
             bool changed = CodeChanged;
             try
@@ -243,11 +275,13 @@ namespace DarkScript3
                 editor.Text = jsText;
                 EVD_Path = fileName;
                 Text = $"DARKSCRIPT 3 - {Path.GetFileName(fileName)}";
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 CodeChanged = changed;
+                return false;
             }
         }
 
@@ -276,7 +310,7 @@ namespace DarkScript3
             return ret;
         }
 
-        private void OpenJSFile(string fileName)
+        private bool OpenJSFile(string fileName)
         {
             string org = fileName.Substring(0, fileName.Length - 3);
             string text = File.ReadAllText(fileName);
@@ -303,19 +337,19 @@ namespace DarkScript3
             else if (!File.Exists(org))
             {
                 MessageBox.Show($"{fileName} requires either a corresponding emevd file or JS headers to open");
-                return;
+                return false;
             }
             else
             {
                 evd = null;
                 docs = ChooseGame();
-                if (docs == null) return;
+                if (docs == null) return false;
             }
 
             SFUtil.Backup(org);
 
             text = Regex.Replace(text, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==", "");
-            OpenEMEVDFile(org, docs, evd: evd, jsText: text.Trim(), extraFields: headers);
+            return OpenEMEVDFile(org, docs, evd: evd, jsText: text.Trim(), extraFields: headers);
         }
 
         private string ChooseGame(out bool fancy)
@@ -417,9 +451,6 @@ namespace DarkScript3
             var colors = new StyleConfig(this);
             if (colors.ShowDialog() == DialogResult.OK)
             {
-                var start = editor.Selection.Start;
-                var end = editor.Selection.End;
-
                 editor.ClearStylesBuffer();
                 docBox.ClearStylesBuffer();
 
@@ -441,12 +472,8 @@ namespace DarkScript3
 
                 SaveColors();
 
-                editor.Selection.SelectAll();
-                docBox.Selection.SelectAll();
-                Editor_TextChanged(editor, new TextChangedEventArgs(editor.Selection));
-                Editor_TextChanged(docBox, new TextChangedEventArgs(docBox.Selection));
-                editor.Selection.Start = start;
-                editor.Selection.End = end;
+                Editor_TextChanged(editor, new TextChangedEventArgs(editor.Range));
+                Editor_TextChanged(docBox, new TextChangedEventArgs(docBox.Range));
             }
         }
 
@@ -963,38 +990,105 @@ namespace DarkScript3
                 + "\r\n-- Based on work by HotPocketRemix and TKGP\r\n-- Special thanks to Meowmaritus", "About DarkScript");
         }
 
-        private void BatchResaveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void batchDumpToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (CancelWithUnsavedChanges(sender, e))
+            {
+                return;
+            }
             var ofd = new OpenFileDialog();
+            ofd.Title = "Open (note: skips existing JS files)";
             ofd.Multiselect = true;
-            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx; *.emevd.js; *.emevd.dcx.js";
+            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 string gameDocs = ChooseGame(out bool fancy);
                 if (gameDocs == null) return;
+                List<string> succeeded = new List<string>();
+                List<string> failed = new List<string>();
+                foreach (var fileName in ofd.FileNames)
+                {
+                    if (File.Exists(fileName + ".js"))
+                    {
+                        continue;
+                    }
+                    try
+                    {
+                        if (OpenEMEVDFile(fileName, gameDocs, isFancy: fancy) && SaveJSFile())
+                        {
+                            succeeded.Add(fileName);
+                            continue;
+                        }
+                    }
+                    catch
+                    {
+                    }
+                    failed.Add(fileName);
+                }
+                editor.ClearUndo();
+
+                List<string> lines = new List<string>();
+                if (failed.Count > 0)
+                {
+                    lines.Add("The following emevds failed to be dumped to JS:" + Environment.NewLine);
+                    lines.AddRange(failed);
+                    lines.Add("");
+                }
+                if (succeeded.Count > 0)
+                {
+                    lines.Add("The following emevds were dumped to JS:" + Environment.NewLine);
+                    lines.AddRange(succeeded);
+                }
+                MessageBox.Show(string.Join(Environment.NewLine, lines));
+            }
+        }
+
+        private void batchResaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (CancelWithUnsavedChanges(sender, e))
+            {
+                return;
+            }
+            var ofd = new OpenFileDialog();
+            ofd.Multiselect = true;
+            ofd.Filter = "EMEVD Files|*.emevd.js; *.emevd.dcx.js";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                List<string> succeeded = new List<string>();
                 List<string> failed = new List<string>();
                 foreach (var fileName in ofd.FileNames)
                 {
                     try
                     {
-                        if (File.Exists(fileName + ".js"))
-                            OpenJSFile(ofd.FileName + ".js");
-                        else
-                            OpenEMEVDFile(fileName, gameDocs, isFancy: fancy);
-                        SaveJSFile();
-                        editor.ClearUndo();
-                    } catch
-                    {
-                        failed.Add(fileName);
+                        if (OpenJSFile(fileName) && SaveJSAndEMEVDFile())
+                        {
+                            succeeded.Add(fileName);
+                            continue;
+                        }
                     }
+                    catch
+                    {
+                    }
+                    failed.Add(fileName);
                 }
+                editor.ClearUndo();
 
+                List<string> lines = new List<string>();
                 if (failed.Count > 0)
-                    MessageBox.Show("The following files failed to save:\r\n\r\n" + string.Join(Environment.NewLine, failed));
-                else
-                    MessageBox.Show("All files succesfully resaved.");
+                {
+                    lines.Add("The following JS files failed to be saved:" + Environment.NewLine);
+                    lines.AddRange(failed);
+                    lines.Add("");
+                }
+                if (succeeded.Count > 0)
+                {
+                    lines.Add("The following JS files were saved:" + Environment.NewLine);
+                    lines.AddRange(succeeded);
+                }
+                MessageBox.Show(string.Join(Environment.NewLine, lines));
             }
         }
+
 
         private void openAutoCompleteMenuToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1015,10 +1109,10 @@ namespace DarkScript3
             try
             {
                 FancyJSCompiler.CompileOutput output = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).RepackFull(editor.Text);
-                RefreshPreviewForm();
-                Preview.SetSegments(output.GetDiffSegments(), output.Code);
-                Preview.Show();
-                Preview.Focus();
+                PreviewCompilationForm preview = RefreshPreviewForm();
+                preview.SetSegments(output.GetDiffSegments(), output.Code);
+                preview.Show();
+                preview.Focus();
             }
             catch (FancyJSCompiler.FancyCompilerException ex)
             {
@@ -1032,10 +1126,10 @@ namespace DarkScript3
             try
             {
                 List<FancyJSCompiler.DiffSegment> segments = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).PreviewPack(editor.Text);
-                RefreshPreviewForm();
-                Preview.SetSegments(segments);
-                Preview.Show();
-                Preview.Focus();
+                PreviewCompilationForm preview = RefreshPreviewForm();
+                preview.SetSegments(segments);
+                preview.Show();
+                preview.Focus();
             }
             catch (FancyJSCompiler.FancyCompilerException ex)
             {
@@ -1043,7 +1137,7 @@ namespace DarkScript3
             }
         }
 
-        private void RefreshPreviewForm()
+        private PreviewCompilationForm RefreshPreviewForm()
         {
             if (Preview == null || Preview.IsDisposed)
             {
@@ -1060,15 +1154,35 @@ namespace DarkScript3
                     }
                 };
             }
+            return Preview;
         }
 
-        #endregion
+        private Range ShowCompileError(string file, Exception ex, string extra)
+        {
+            ErrorMessageForm error = new ErrorMessageForm(editor.Font);
+            error.SetMessage(file, ex, extra);
+            error.ShowDialog();
+            if (error.Place != Place.Empty)
+            {
+                Range select = editor.GetRange(error.Place, error.Place);
+                try
+                {
+                    // Quick validity check
+                    string text = select.Text;
+                    return select;
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                }
+            }
+            return null;
+        }
 
         private void viewEMEDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Docs == null)
             {
-                MessageBox.Show("Open a file to view the EMEDF for that game");
+                MessageBox.Show("Open a file to view the EMEDF for that game\r\nor access it in the Resources directory.");
                 return;
             }
             string inferredName = Docs.ResourceString.Split('-')[0];
@@ -1078,7 +1192,7 @@ namespace DarkScript3
             else if (File.Exists($@"Resources\{path}"))
                 System.Diagnostics.Process.Start($@"Resources\{path}");
             else
-                MessageBox.Show($"No EMEDF documentation found for {inferredName}");
+                MessageBox.Show($"No EMEDF documentation found named {path}");
         }
 
         private void viewEMEVDTutorialToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1091,5 +1205,7 @@ namespace DarkScript3
 
             System.Diagnostics.Process.Start("http://soulsmodding.wikidot.com/tutorial:mattscript-documentation");
         }
+
+        #endregion
     }
 }

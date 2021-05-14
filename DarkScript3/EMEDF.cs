@@ -110,10 +110,6 @@ namespace DarkScript3
 
             // These fields are not present in the original EMEDF
 
-            // If an argument at the end is optional. Used for reading and writing instructions.
-            [JsonProperty(PropertyName = "optional")]
-            public bool Optional { get; private set; }
-
             // If an argument may be repeated zero or multiple times. Only used for display/documentation for the moment.
             [JsonProperty(PropertyName = "vararg")]
             public bool Vararg { get; private set; }
@@ -125,6 +121,9 @@ namespace DarkScript3
             public EnumDoc EnumDoc { get; set; }
 
             public object GetDisplayValue(object val) => EnumDoc == null ? val : EnumDoc.GetDisplayValue(val);
+
+            // TODO: Populate this for condition functions. It does not apply to any real instructions.
+            public bool Optional { get; set; }
         }
 
         public class EnumDoc

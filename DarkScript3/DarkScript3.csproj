@@ -273,6 +273,12 @@
     <Compile Include="DarkToolStripRenderer.cs" />
     <Compile Include="EMEDF.cs" />
     <Compile Include="EMEDF2HTML.cs" />
+    <Compile Include="ErrorMessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ErrorMessageForm.Designer.cs">
+      <DependentUpon>ErrorMessageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EventCFG.cs" />
     <Compile Include="EventScripter.cs" />
     <Compile Include="FancyJSCompiler.cs" />
@@ -334,6 +340,9 @@
     <Compile Include="ToolControl.Designer.cs">
       <DependentUpon>ToolControl.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ErrorMessageForm.resx">
+      <DependentUpon>ErrorMessageForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GameChooser.resx">
       <DependentUpon>GameChooser.cs</DependentUpon>
     </EmbeddedResource>
