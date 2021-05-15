@@ -200,11 +200,11 @@ namespace DarkScript3
             DOC = InitDocsFromResource(embeddedResource);
         }
 
-        public void Import(string filePath)
+        public string Import(string filePath)
         {
             try
             {
-                v8.Execute(File.ReadAllText(filePath));
+                return File.ReadAllText(filePath);
             }
             catch (Exception ex)
             {
