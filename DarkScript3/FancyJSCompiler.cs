@@ -562,7 +562,6 @@ namespace DarkScript3
                 }
                 else if (statement is ExpressionStatement exprStmt)
                 {
-                    // TODO: Check for This expressions
                     if (exprStmt.Expression is CallExpression call)
                     {
                         // Built-in commands and plain emevd instructions.

@@ -123,8 +123,6 @@ namespace DarkScript3
                     extra += "\n\n(A previous version of DarkScript3 incorrectly decompiled DisplayHollowArenaPvpMessage's args." +
                         " Replace it with DisplayGenericDialogGloballyAndSetEventFlag from a vanilla emevd.)";
                 }
-                // MessageBox.Show(message);
-                // TODO add this >:o
                 errorSelect = ShowCompileError(debugName, ex, extra);
                 success = false;
             }
@@ -751,7 +749,6 @@ namespace DarkScript3
 
         private string currentFuncDoc = null;
 
-        // TODO: Potentially try to convert all emedf to HTML docs with similar info as this.
         private void LoadDocText(string func)
         {
             if (Docs == null) return;
@@ -1202,7 +1199,6 @@ namespace DarkScript3
 
         private void viewFancyDocumentationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             System.Diagnostics.Process.Start("http://soulsmodding.wikidot.com/tutorial:mattscript-documentation");
         }
 
