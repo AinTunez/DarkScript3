@@ -70,7 +70,7 @@ namespace DarkScript3
             box.Cursor = linkHover ? Cursors.Hand : Cursors.Default;
         }
 
-        private void box_MouseDown(object sender, MouseEventArgs e)
+        private void box_MouseUp(object sender, MouseEventArgs e)
         {
             Place place = box.PointToPlace(e.Location);
             bool linkHover = box.GetStylesOfChar(place).Contains(linkStyle);

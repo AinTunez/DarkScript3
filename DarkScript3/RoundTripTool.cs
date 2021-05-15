@@ -95,9 +95,10 @@ namespace DarkScript3
                     FancyEventScripter fes = new FancyEventScripter(scripter, docs, options);
                     if (args.Contains("unit"))
                     {
-                        fes.Pack(TEST_CASES);
+                        string testCases = Resource.Text("test.js");
+                        fes.Pack(testCases);
                         Console.WriteLine(scripter.Unpack());
-                        Console.WriteLine(fes.Repack(TEST_CASES));
+                        Console.WriteLine(fes.Repack(testCases));
                         return;
                     }
                     string fancy1 = recordText("fancy1", name, () => fes.Unpack());
@@ -125,77 +126,5 @@ namespace DarkScript3
                 }
             }
         }
-
-        public static readonly string TEST_CASES = @"
-// Should produce warnings but otherwise work
-$Event(1, Default, function() {
-    Goto(L0);
-L0: L1:
-    Goto(L0);
-L2: L1:
-    NoOp();
-});
-
-$Event(2, Default, function() {
-    if (badcond) {
-        SetEventFlag(1, ON);
-    }
-    worsecond = worsecond;
-    EndIf(worstcond.Passed);
-});
-
-// More cases
-$Event(100, Default, function() {
-    if (EventFlag(1)) {
-    }
-    SetEventFlag(1, ON);
-    if (InArea(10000, 15)) {
-    } else {
-        SetEventFlag(2, ON);
-    }
-    if (InArea(10000, 30)) {
-    } else {
-    }
-    SetEventFlag(3, ON);
-});
-
-$Event(101, Default, function() {
-    if (EventFlag(100)) {
-        if (!EventFlag(150)) {
-            SetEventFlag(150, ON);
-        }
-        if (EventFlag(200)) {
-            SetEventFlag(300, ON);
-        } else {
-            SetEventFlag(400, ON);
-        }
-    }
-});
-
-$Event(102, Default, function() {
-    c = EventFlag(10);
-    if (EventFlag(99)) {
-        c2 = c && EventFlag(20);
-        WaitFor(c2);
-    } else {
-        WaitFor(c);
-    }
-    Label0();
-});
-
-$Event(103, Default, function() {
-    // Comments
-    if (EventFlag(99)) {  // Wait for state change
-        WaitFor(/* negated */ !EventFlag(99));
-    } else {
-        WaitFor(EventFlag(99));
-    }  // If state change
-L0:  // Jump target
-    /* Then the event
-     * flag is set */
-S0: // End
-    NoOp();
-});
-";
     }
 }

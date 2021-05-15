@@ -76,7 +76,7 @@ namespace DarkScript3
             this.box.WordWrapAutoIndent = false;
             this.box.Zoom = 100;
             this.box.MouseMove += new System.Windows.Forms.MouseEventHandler(this.box_MouseMove);
-            this.box.MouseUp += new System.Windows.Forms.MouseEventHandler(this.box_MouseDown);
+            this.box.MouseUp += new System.Windows.Forms.MouseEventHandler(this.box_MouseUp);
             // 
             // button
             // 

@@ -311,6 +311,7 @@
       <DependentUpon>PreviewCompilationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramVersion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="RoundTripTool.cs" />
@@ -414,6 +415,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\conditions.json" />
     <EmbeddedResource Include="Resources\script.js" />
+    <EmbeddedResource Include="Resources\test.js" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

@@ -18,13 +18,14 @@ namespace DarkScript3
     public partial class GUI : Form
     {
         private string EVD_Path;
+        private string FileVersion;
         private EventScripter Scripter;
         private InstructionDocs Docs;
         private ScriptSettings Settings;
         private bool CodeChanged = false;
         private AutocompleteMenu InstructionMenu;
         private BetterFindForm BFF;
-        private PreviewCompilationForm Preview = null;
+        private PreviewCompilationForm Preview;
         private Action<string> loadDocTextDebounce;
 
         private Dictionary<string, (string title, string text)> ToolTips = new Dictionary<string, (string, string)>();
@@ -89,7 +90,6 @@ namespace DarkScript3
             Cursor = Cursors.WaitCursor;
 
             string text = editor.Text;
-            string debugName = $"{Path.GetFileName(EVD_Path)}.js";
             bool fancyHint = text.Contains("$Event(");
             bool success = true;
             Range errorSelect = null;
@@ -98,11 +98,11 @@ namespace DarkScript3
                 EMEVD result;
                 if (fancyHint && Settings.AllowPreprocess && Docs.Translator != null)
                 {
-                    result = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).Pack(text, debugName);
+                    result = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).Pack(text, Scripter.FileName);
                 }
                 else
                 {
-                    result = Scripter.Pack(text, debugName);
+                    result = Scripter.Pack(text, Scripter.FileName);
                 }
                 result.Write(EVD_Path);
                 SaveJSFile();
@@ -111,19 +111,20 @@ namespace DarkScript3
             }
             catch (Exception ex)
             {
+                // Mainly these exceptions will be JSScriptException, from V8, and FancyCompilerException, from JS parsing/compilation.
                 statusLabel.Text = "SAVE FAILED";
-                // Mainly these will be JSScriptException, from V8, and FancyCompilerException, from JS parsing/compilation.
-                string extra = "";
+                StringBuilder extra = new StringBuilder();
                 if (ex is JSScriptException && fancyHint && !Settings.AllowPreprocess)
                 {
-                    extra += "\n\n($Event is used but preprocessing is disabled. Enable it in compilation settings if desired.)";
+                    extra.AppendLine(Environment.NewLine);
+                    extra.Append("($Event is used but preprocessing is disabled. Enable it in compilation settings if desired.)");
                 }
-                if (Docs.Functions.ContainsKey("DisplayGenericDialogGloballyAndSetEventFlag") && ex.Message.Contains("DisplayHollowArenaPvpMessage"))
+                if (ProgramVersion.CompareVersions(ProgramVersion.VERSION, FileVersion) != 0)
                 {
-                    extra += "\n\n(A previous version of DarkScript3 incorrectly decompiled DisplayHollowArenaPvpMessage's args." +
-                        " Replace it with DisplayGenericDialogGloballyAndSetEventFlag from a vanilla emevd.)";
+                    extra.AppendLine(Environment.NewLine);
+                    extra.Append(ProgramVersion.GetCompatibilityMessage(Scripter.FileName, Docs.ResourceString, FileVersion));
                 }
-                errorSelect = ShowCompileError(debugName, ex, extra);
+                errorSelect = ShowCompileError(Scripter.FileName, ex, extra.ToString());
                 success = false;
             }
 
@@ -206,8 +207,8 @@ namespace DarkScript3
             if (oldDocs?.ResourceString != Docs.ResourceString)
             {
                 JSRegex.GlobalConstant = new Regex($@"[^.]\b(?<range>{string.Join("|", InstructionDocs.GlobalConstants.Concat(Docs.GlobalEnumConstants.Keys))})\b");
-                Editor_TextChanged(editor, new TextChangedEventArgs(editor.Range));
-                Editor_TextChanged(docBox, new TextChangedEventArgs(docBox.Range));
+                SetStyles(editor.Range);
+                SetStyles(docBox.Range);
             }
             
             IEnumerable<AutocompleteItem> instructions = Docs.AllArgs.Keys.Select(s =>
@@ -272,7 +273,18 @@ namespace DarkScript3
                 }
                 editor.Text = jsText;
                 EVD_Path = fileName;
-                Text = $"DARKSCRIPT 3 - {Path.GetFileName(fileName)}";
+                Text = $"DARKSCRIPT 3 - {Scripter.FileName}";
+                FileVersion = extraFields != null && extraFields.TryGetValue("version", out string version) ? version : null;
+                // Notify about possible compatibility issues
+                int versionCmp = ProgramVersion.CompareVersions(ProgramVersion.VERSION, FileVersion);
+                if (versionCmp > 0)
+                {
+                    statusLabel.Text = "Note: File was previously saved using an earlier version of DarkScript3";
+                }
+                else if (versionCmp < 0)
+                {
+                    statusLabel.Text = "Note: File was previously saved using an newer version of DarkScript3. Please update!";
+                }
                 return true;
             }
             catch (Exception ex)
@@ -396,6 +408,7 @@ namespace DarkScript3
                 {
                     sb.AppendLine($"// @{extra.Key}    {extra.Value}");
                 }
+                sb.AppendLine($"// @version    {ProgramVersion.VERSION}");
                 sb.AppendLine("// ==/EMEVD==");
                 sb.AppendLine("");
                 sb.AppendLine(editor.Text);
@@ -543,23 +556,23 @@ namespace DarkScript3
             {
                 Preview.DisableConversion();
             }
-            SetStyles(e);
+            SetStyles(e.ChangedRange);
         }
 
-        public void SetStyles(TextChangedEventArgs e, Regex highlight = null)
+        public void SetStyles(Range range, Regex highlight = null)
         {
-            e.ChangedRange.ClearStyle(Styles.ToArray());
-            e.ChangedRange.SetStyle(TextStyles.Comment, JSRegex.Comment1);
-            e.ChangedRange.SetStyle(TextStyles.Comment, JSRegex.Comment2);
-            e.ChangedRange.SetStyle(TextStyles.Comment, JSRegex.Comment1);
-            e.ChangedRange.SetStyle(TextStyles.String, JSRegex.String);
-            e.ChangedRange.SetStyle(TextStyles.String, JSRegex.StringArg);
-            e.ChangedRange.SetStyle(TextStyles.Keyword, JSRegex.Keyword);
-            e.ChangedRange.SetStyle(TextStyles.Number, JSRegex.Number);
-            e.ChangedRange.SetStyle(TextStyles.EnumConstant, JSRegex.GlobalConstant);
-            e.ChangedRange.SetStyle(TextStyles.EnumProperty, JSRegex.Property);
-            e.ChangedRange.SetFoldingMarkers("{", "}");
-            e.ChangedRange.SetFoldingMarkers(@"/\*", @"\*/");
+            range.ClearStyle(Styles.ToArray());
+            range.SetStyle(TextStyles.Comment, JSRegex.Comment1);
+            range.SetStyle(TextStyles.Comment, JSRegex.Comment2);
+            range.SetStyle(TextStyles.Comment, JSRegex.Comment1);
+            range.SetStyle(TextStyles.String, JSRegex.String);
+            range.SetStyle(TextStyles.String, JSRegex.StringArg);
+            range.SetStyle(TextStyles.Keyword, JSRegex.Keyword);
+            range.SetStyle(TextStyles.Number, JSRegex.Number);
+            range.SetStyle(TextStyles.EnumConstant, JSRegex.GlobalConstant);
+            range.SetStyle(TextStyles.EnumProperty, JSRegex.Property);
+            range.SetFoldingMarkers("{", "}");
+            range.SetFoldingMarkers(@"/\*", @"\*/");
         }
 
         public static RegexOptions RegexCompiledOption
@@ -983,7 +996,8 @@ namespace DarkScript3
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("-- Created by AinTunez\r\n-- MattScript and other features by thefifthmatt"
+            MessageBox.Show($"Version {ProgramVersion.VERSION}"
+                + "\r\n-- Created by AinTunez\r\n-- MattScript and other features by thefifthmatt"
                 + "\r\n-- Based on work by HotPocketRemix and TKGP\r\n-- Special thanks to Meowmaritus", "About DarkScript");
         }
 
