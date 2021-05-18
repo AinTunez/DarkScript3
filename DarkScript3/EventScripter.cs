@@ -33,7 +33,6 @@ namespace DarkScript3
         public int CurrentEventID = -1;
         public int CurrentInsIndex = -1;
         public string CurrentInsName = "";
-        public bool BeforeProcessingEvents = true;
 
         private List<string> LinkedFiles = new List<string>();
 
@@ -153,19 +152,13 @@ namespace DarkScript3
             return ins;
         }
 
-        public void Import(string filePath)
+        public string Import(string filePath)
         {
-            if (!BeforeProcessingEvents)
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine($"Attempting to import {filePath} in the middle of an event or after one.");
-                sb.AppendLine("Move your import statement to the very top of the file, and avoid declaring events in imported files.");
-                throw new Exception(sb.ToString());
-            }
             string resolvedFile = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(emevdPath), filePath));
             try
             {
-                v8.Execute(Path.GetFileName(resolvedFile), File.ReadAllText(resolvedFile));
+                // v8.Execute(Path.GetFileName(resolvedFile), File.ReadAllText(resolvedFile));
+                return File.ReadAllText(resolvedFile);
             }
             catch (Exception ex)
             {
@@ -264,7 +257,6 @@ namespace DarkScript3
         public EMEVD Pack(string code, string documentName)
         {
             EVD.Events.Clear();
-            BeforeProcessingEvents = true;
             try
             {
                 v8.Execute(documentName, $"(function() {{ {code} }})();");

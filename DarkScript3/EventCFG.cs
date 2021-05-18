@@ -706,14 +706,21 @@ namespace DarkScript3
             // Fill in SkipLines here
             Dictionary<FlowNode, int> lines = new Dictionary<FlowNode, int>();
             int i = 0;
+            List<FlowNode> cantJumpPast = new List<FlowNode>();
             foreach (FlowNode node in NodeList())
             {
                 lines[node] = i;
-                if (node.Im is NoOp || node.Im is JSStatement)
+                if (node.Im is NoOp)
                 {
-                    // For NoOp nodes at the end of a block, they are equivalent to then next statement.
+                    // For NoOp nodes at the end of a block, they are equivalent to the next statement.
                     // For NoOp nodes at the very end, i doesn't matter anymore.
-                    // Also assume JS statements don't produce lines. This may be incorrect.
+                    continue;
+                }
+                if (node.Im is JSStatement)
+                {
+                    // The skip count is unknown for these, so make sure we don't skip it.
+                    // Circumventing this might require a feature for setting line skips at JS runtime.
+                    cantJumpPast.Add(node);
                     continue;
                 }
                 i++;
@@ -729,6 +736,11 @@ namespace DarkScript3
                     }
                     int start = lines[node];
                     int end = lines[node.JumpTo];
+                    FlowNode jsInMiddle = cantJumpPast.Find(js => start < lines[js] && end >= lines[js]);
+                    if (jsInMiddle != null)
+                    {
+                        result.Error($"Can't place a regular JS statement in the middle of a skip/goto", jsInMiddle.Im);
+                    }
                     g.ToLabel = null;
                     g.SkipLines = Math.Max(0, end - start - 1);
                     if (g.SkipLines > byte.MaxValue)

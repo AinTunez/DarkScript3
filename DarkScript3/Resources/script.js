@@ -6,8 +6,6 @@ var _event = void 0;
 var _codeblock = void 0;
 
 function Event(id, restBehavior, instructions) {
-    Scripter.BeforeProcessingEvents = false;
-
     var evt = new EVENT();
     evt.ID = id;
     evt.RestBehavior = restBehavior;
@@ -71,7 +69,7 @@ function $LAYERS(...args) {
 }
 
 function importFile(path) {
-    Scripter.import(path);
+    eval(Scripter.Import(path))
 }
 
 class CodeBlock {

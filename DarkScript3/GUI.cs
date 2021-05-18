@@ -260,7 +260,8 @@ namespace DarkScript3
             bool changed = CodeChanged;
             try
             {
-                if (jsText == null)
+                bool decompileRequired = jsText == null;
+                if (decompileRequired)
                 {
                     if (isFancy && Docs.Translator != null)
                     {
@@ -275,15 +276,18 @@ namespace DarkScript3
                 EVD_Path = fileName;
                 Text = $"DARKSCRIPT 3 - {Scripter.FileName}";
                 FileVersion = extraFields != null && extraFields.TryGetValue("version", out string version) ? version : null;
-                // Notify about possible compatibility issues
-                int versionCmp = ProgramVersion.CompareVersions(ProgramVersion.VERSION, FileVersion);
-                if (versionCmp > 0)
+                if (!decompileRequired)
                 {
-                    statusLabel.Text = "Note: File was previously saved using an earlier version of DarkScript3";
-                }
-                else if (versionCmp < 0)
-                {
-                    statusLabel.Text = "Note: File was previously saved using an newer version of DarkScript3. Please update!";
+                    // Notify about possible compatibility issues
+                    int versionCmp = ProgramVersion.CompareVersions(ProgramVersion.VERSION, FileVersion);
+                    if (versionCmp > 0)
+                    {
+                        statusLabel.Text = "Note: File was previously saved using an earlier version of DarkScript3";
+                    }
+                    else if (versionCmp < 0)
+                    {
+                        statusLabel.Text = "Note: File was previously saved using an newer version of DarkScript3. Please update!";
+                    }
                 }
                 return true;
             }
