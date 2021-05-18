@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -6,23 +6,29 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Microsoft.ClearScript;
 using FastColoredTextBoxNS;
 using SoulsFormats;
 using System.Xml.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace DarkScript3
 {
     public partial class GUI : Form
     {
-        public string EVD_Path;
-        public EventScripter Scripter;
-        public bool CodeChanged = false;
-        public AutocompleteMenu InstructionMenu;
-        public BetterFindForm BFF;
+        private string EVD_Path;
+        private string FileVersion;
+        private EventScripter Scripter;
+        private InstructionDocs Docs;
+        private ScriptSettings Settings;
+        private bool CodeChanged = false;
+        private AutocompleteMenu InstructionMenu;
+        private BetterFindForm BFF;
+        private PreviewCompilationForm Preview;
+        private Action<string> loadDocTextDebounce;
 
-        Dictionary<string, (string title, string text)> ToolTips = new Dictionary<string, (string, string)>();
+        private Dictionary<string, (string title, string text)> ToolTips = new Dictionary<string, (string, string)>();
 
         public GUI()
         {
@@ -37,6 +43,8 @@ namespace DarkScript3
             display.Panel2.Controls.Add(InfoTip);
             InfoTip.Show();
             InfoTip.Hide();
+            // TODO: Have different font sizes.
+            // This can be changed with something like new Font(editor.Font.Name, newSize);
             docBox.Font = editor.Font;
             editor.Focus();
             editor.SelectionColor = Color.White;
@@ -67,60 +75,78 @@ namespace DarkScript3
 
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Scripter == null) return;
+            SaveJSAndEMEVDFile();
+        }
+
+        private bool SaveJSAndEMEVDFile()
+        {
+            if (Scripter == null) return false;
             InfoTip.Hide();
 
+            Range originalSelect = editor.Selection.Clone();
             editor.Enabled = false;
             docBox.Enabled = false;
             MainMenuStrip.Enabled = false;
             Cursor = Cursors.WaitCursor;
 
+            string text = editor.Text;
+            bool fancyHint = text.Contains("$Event(");
+            bool success = true;
+            Range errorSelect = null;
             try
             {
-                Scripter.Pack(editor.Text).Write(EVD_Path);
+                EMEVD result;
+                if (fancyHint && Settings.AllowPreprocess && Docs.Translator != null)
+                {
+                    result = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).Pack(text, Scripter.FileName);
+                }
+                else
+                {
+                    result = Scripter.Pack(text, Scripter.FileName);
+                }
+                result.Write(EVD_Path);
                 SaveJSFile();
                 statusLabel.Text = "SAVE SUCCESSFUL";
                 CodeChanged = false;
             }
             catch (Exception ex)
             {
+                // Mainly these exceptions will be JSScriptException, from V8, and FancyCompilerException, from JS parsing/compilation.
                 statusLabel.Text = "SAVE FAILED";
-                IScriptEngineException scriptException = ex as IScriptEngineException;
-                if (scriptException != null)
+                StringBuilder extra = new StringBuilder();
+                if (ex is JSScriptException && fancyHint && !Settings.AllowPreprocess)
                 {
-                    
-                    string details = scriptException.ErrorDetails;
-                    details = Regex.Replace(details, @"Script\s\[.*\]", "Script");
-                    details = Regex.Replace(details, @"    at Script", "    at Editor");
-                    details = Regex.Replace(details, @"->\s+", "-> ");
-                    var lines = details.Split('\n');
-                    var line = lines.FirstOrDefault((row) => row.Contains("at Editor"));
-
-                    if (line != null)
-                    {
-                        MessageBox.Show(Regex.Replace(scriptException.Message, "^Error: ", "") + "\n" +  line.Trim());
-                    }
-                    else
-                    {
-                        MessageBox.Show(details);
-                    }
+                    extra.AppendLine(Environment.NewLine);
+                    extra.Append("($Event is used but preprocessing is disabled. Enable it in compilation settings if desired.)");
                 }
-                else
+                if (ProgramVersion.CompareVersions(ProgramVersion.VERSION, FileVersion) != 0)
                 {
-                    MessageBox.Show(ex.ToString().Trim());
+                    extra.AppendLine(Environment.NewLine);
+                    extra.Append(ProgramVersion.GetCompatibilityMessage(Scripter.FileName, Docs.ResourceString, FileVersion));
                 }
+                errorSelect = ShowCompileError(Scripter.FileName, ex, extra.ToString());
+                success = false;
             }
 
             Cursor = Cursors.Default;
             MainMenuStrip.Enabled = true;
             editor.Enabled = true;
-            docBox.Enabled = true;
             editor.Focus();
+            if (errorSelect == null)
+            {
+                editor.Selection = originalSelect;
+            }
+            else
+            {
+                editor.Selection = errorSelect;
+                editor.DoSelectionVisible();
+            }
+            docBox.Enabled = true;
+            return success;
         }
 
-        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        private bool CancelWithUnsavedChanges(object sender, EventArgs e)
         {
-            InfoTip.Hide();
             if (Scripter != null && CodeChanged)
             {
                 DialogResult result = MessageBox.Show("Save changes before opening a new file?", "Unsaved Changes", MessageBoxButtons.YesNoCancel);
@@ -130,9 +156,20 @@ namespace DarkScript3
                 }
                 else if (result == DialogResult.Cancel)
                 {
-                    return;
+                    return true;
                 }
             }
+            return false;
+        }
+
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InfoTip.Hide();
+            if (CancelWithUnsavedChanges(sender, e))
+            {
+                return;
+            }
+            InstructionDocs oldDocs = Docs;
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx;";
             if (ofd.ShowDialog() != DialogResult.OK)
@@ -158,18 +195,35 @@ namespace DarkScript3
             }
             else
             {
-                OpenEMEVDFile(ofd.FileName, null, ChooseGame());
+                string game = ChooseGame(out bool fancy);
+                if (game == null) return;
+                OpenEMEVDFile(ofd.FileName, game, isFancy: fancy);
+            }
+            if (Docs == null)
+            {
+                return;
+            }
+
+            if (oldDocs?.ResourceString != Docs.ResourceString)
+            {
+                JSRegex.GlobalConstant = new Regex($@"[^.]\b(?<range>{string.Join("|", InstructionDocs.GlobalConstants.Concat(Docs.GlobalEnumConstants.Keys))})\b");
+                SetStyles(editor.Range);
+                SetStyles(docBox.Range);
             }
             
-            JSRegex.GlobalConstant = new Regex($@"[^.]\b(?<range>{string.Join("|", Scripter.GlobalConstants)})\b");
-            IEnumerable<AutocompleteItem> instructions = Scripter.Functions.Keys.Select(s =>
+            IEnumerable<AutocompleteItem> instructions = Docs.AllArgs.Keys.Select(s =>
             {
-                var instr = Scripter.Functions[s];
-                var doc = Scripter.DOC[instr.classIndex][instr.instrIndex];
-
                 string menuText = s;
                 string toolTipTitle = s;
-                string toolTipText = $"{instr.classIndex}[{instr.instrIndex}] ({ArgString(s)})";
+                string toolTipText;
+                if (Docs.Functions.TryGetValue(s, out (int, int) indices))
+                {
+                    toolTipText = $"{indices.Item1}[{indices.Item2}] ({ArgString(s)})";
+                }
+                else
+                {
+                    toolTipText = $"({ArgString(s)})";
+                }
 
                 return new AutocompleteItem(s + "(", InstructionMenu.ImageList.Images.IndexOfKey("instruction"), menuText, toolTipTitle, toolTipText);
             });
@@ -187,80 +241,142 @@ namespace DarkScript3
             CodeChanged = false;
         }
 
-        private void OpenEMEVDFile(string fileName, EMEVD evd, string gameDocs, string data = null)
+        private bool OpenEMEVDFile(
+            string fileName,
+            string gameDocs,
+            EMEVD evd = null,
+            string jsText = null,
+            bool isFancy = false,
+            Dictionary<string, string> extraFields = null)
         {
-            if (evd == null)
-                Scripter = new EventScripter(fileName, gameDocs, File.Exists(fileName.Replace(".emevd", ".emeld")));
-            else
-                Scripter = new EventScripter(evd, gameDocs);
+            // Can reuse docs if for the same game
+            if (Docs == null || Docs.ResourceString != gameDocs)
+            {
+                Docs = new InstructionDocs(gameDocs);
+            }
+            Settings = new ScriptSettings(Docs, extraFields);
+            Scripter = new EventScripter(fileName, Docs, evd);
 
             bool changed = CodeChanged;
             try
             {
-                editor.Text = data ?? Scripter.Unpack();
+                bool decompileRequired = jsText == null;
+                if (decompileRequired)
+                {
+                    if (isFancy && Docs.Translator != null)
+                    {
+                        jsText = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).Unpack();
+                    }
+                    else
+                    {
+                        jsText = Scripter.Unpack();
+                    }
+                }
+                editor.Text = jsText;
                 EVD_Path = fileName;
-                Text = $"DARKSCRIPT 3 - {Path.GetFileName(fileName)}";
-            } catch (Exception ex)
+                Text = $"DARKSCRIPT 3 - {Scripter.FileName}";
+                FileVersion = extraFields != null && extraFields.TryGetValue("version", out string version) ? version : null;
+                if (!decompileRequired)
+                {
+                    // Notify about possible compatibility issues
+                    int versionCmp = ProgramVersion.CompareVersions(ProgramVersion.VERSION, FileVersion);
+                    if (versionCmp > 0)
+                    {
+                        statusLabel.Text = "Note: File was previously saved using an earlier version of DarkScript3";
+                    }
+                    else if (versionCmp < 0)
+                    {
+                        statusLabel.Text = "Note: File was previously saved using an newer version of DarkScript3. Please update!";
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 CodeChanged = changed;
+                return false;
             }
         }
 
-        private string GetHeaderValue(string fileText, string fieldName)
+        private Dictionary<string, string> GetHeaderValues(string fileText)
         {
-            var headerText = Regex.Match(fileText, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==");
+            Dictionary<string, string> ret = new Dictionary<string, string>();
+            // Some example lines are:
+            // ==EMEVD==
+            // @docs    sekiro-common.emedf.json
+            // @game    Sekiro
+            // ...
+            // ==/EMEVD==
+            Match headerText = Regex.Match(fileText, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==");
             if (headerText.Success)
             {
                 string[] result = Regex.Split(headerText.Value, @"(\r\n|\r|\n)\s*");
                 foreach (string headerLine in result.ToArray())
                 {
-                    string line = Regex.Replace(headerLine.Trim(), @"^//\s+", "// ");
-                    string start = $"// @{fieldName} ";
-                    if (line.StartsWith(start))
+                    Match lineMatch = Regex.Match(headerLine, @"^//\s+@(\w+)\s+(.*)");
+                    if (lineMatch.Success)
                     {
-                        return line.Substring(start.Length).Trim();
+                        ret[lineMatch.Groups[1].Value] = lineMatch.Groups[2].Value.Trim();
                     }
                 }
             }
-            return null;
+            return ret;
         }
 
-        private void OpenJSFile(string fileName)
+        private bool OpenJSFile(string fileName)
         {
             string org = fileName.Substring(0, fileName.Length - 3);
-            SFUtil.Backup(org);
             string text = File.ReadAllText(fileName);
-            string docs = GetHeaderValue(text, "docs");
-            string[] fields = new string[]
-            {
-                GetHeaderValue(text, "compress"),
-                GetHeaderValue(text, "format"),
-                GetHeaderValue(text, "string"),
-                GetHeaderValue(text, "linked")
-            };
+            Dictionary<string, string> headers = GetHeaderValues(text);
+            List<string> emevdFileHeaders = new List<string> { "docs", "compress", "game", "string", "linked" };
 
-            EMEVD evd = null;
-            if (!fields.Any(f => f == null))
+            EMEVD evd;
+            string docs;
+            if (emevdFileHeaders.All(name => headers.ContainsKey(name)))
             {
+                docs = headers["docs"];
+                string linked = headers["linked"].TrimStart('[').TrimEnd(']');
                 evd = new EMEVD()
                 {
-                    Compression = (DCX.Type)Enum.Parse(typeof(DCX.Type), fields[0]),
-                    Format = (EMEVD.Game)Enum.Parse(typeof(EMEVD.Game), fields[1]),
-                    StringData = Encoding.Unicode.GetBytes(fields[2]),
-                    LinkedFileOffsets = Regex.Split(fields[3], @"\s*,\s*").Select(o => long.Parse(o)).ToList()
+                    Compression = (DCX.Type)Enum.Parse(typeof(DCX.Type), headers["compress"]),
+                    Format = (EMEVD.Game)Enum.Parse(typeof(EMEVD.Game), headers["game"]),
+                    StringData = Encoding.Unicode.GetBytes(headers["string"]),
+                    LinkedFileOffsets = Regex.Split(linked, @"\s*,\s*")
+                        .Where(o => !string.IsNullOrWhiteSpace(o))
+                        .Select(o => long.Parse(o))
+                        .ToList()
                 };
             }
+            else if (!File.Exists(org))
+            {
+                MessageBox.Show($"{fileName} requires either a corresponding emevd file or JS headers to open");
+                return false;
+            }
+            else
+            {
+                evd = null;
+                docs = ChooseGame();
+                if (docs == null) return false;
+            }
 
-            if (docs == null) docs = ChooseGame();
+            SFUtil.Backup(org);
 
             text = Regex.Replace(text, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==", "");
-            OpenEMEVDFile(org, evd, docs, text.Trim());
+            return OpenEMEVDFile(org, docs, evd: evd, jsText: text.Trim(), extraFields: headers);
+        }
+
+        private string ChooseGame(out bool fancy)
+        {
+            GameChooser chooser = new GameChooser(true);
+            chooser.ShowDialog();
+            fancy = chooser.Fancy;
+            return chooser.GameDocs;
         }
 
         private string ChooseGame()
         {
-            GameChooser chooser = new GameChooser();
+            GameChooser chooser = new GameChooser(false);
             chooser.ShowDialog();
             return chooser.GameDocs;
         }
@@ -273,7 +389,7 @@ namespace DarkScript3
                 string resource = doc.Root.Element("gameDocs").Value;
                 string data = doc.Root.Element("script").Value;
                 string org = fileName.Substring(0, fileName.Length - 4);
-                OpenEMEVDFile(org, null, resource, data);
+                OpenEMEVDFile(org, resource, jsText: data);
             }
         }
 
@@ -284,14 +400,19 @@ namespace DarkScript3
             {
                 var sb = new StringBuilder(); ;
                 sb.AppendLine("// ==EMEVD==");
-                sb.AppendLine($"// @docs    {Scripter.ResourceString}");
+                sb.AppendLine($"// @docs    {Docs.ResourceString}");
                 sb.AppendLine($"// @compress    {Scripter.EVD.Compression}");
                 sb.AppendLine($"// @game    {Scripter.EVD.Format}");
-                if (Scripter.ResourceString == "ds2scholar-common.emedf.json")
+                if (Docs.IsASCIIStringData)
                     sb.AppendLine($"// @string    {Encoding.ASCII.GetString(Scripter.EVD.StringData)}");
                 else
                     sb.AppendLine($"// @string    {Encoding.Unicode.GetString(Scripter.EVD.StringData)}");
                 sb.AppendLine($"// @linked    [{string.Join(",", Scripter.EVD.LinkedFileOffsets)}]");
+                foreach (KeyValuePair<string, string> extra in Settings.SettingsDict)
+                {
+                    sb.AppendLine($"// @{extra.Key}    {extra.Value}");
+                }
+                sb.AppendLine($"// @version    {ProgramVersion.VERSION}");
                 sb.AppendLine("// ==/EMEVD==");
                 sb.AppendLine("");
                 sb.AppendLine(editor.Text);
@@ -345,10 +466,6 @@ namespace DarkScript3
             var colors = new StyleConfig(this);
             if (colors.ShowDialog() == DialogResult.OK)
             {
-
-                var start = editor.Selection.Start;
-                var end = editor.Selection.End;
-
                 editor.ClearStylesBuffer();
                 docBox.ClearStylesBuffer();
 
@@ -370,12 +487,8 @@ namespace DarkScript3
 
                 SaveColors();
 
-                editor.Selection.SelectAll();
-                docBox.Selection.SelectAll();
-                Editor_TextChanged(editor, new TextChangedEventArgs(editor.Selection));
-                Editor_TextChanged(docBox, new TextChangedEventArgs(docBox.Selection));
-                editor.Selection.Start = start;
-                editor.Selection.End = end;
+                Editor_TextChanged(editor, new TextChangedEventArgs(editor.Range));
+                Editor_TextChanged(docBox, new TextChangedEventArgs(docBox.Range));
             }
         }
 
@@ -386,7 +499,6 @@ namespace DarkScript3
 
         private void SaveColors()
         {
-
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Comment=" + HexColor(TextStyles.Comment));
             sb.AppendLine("String=" + HexColor(TextStyles.String));
@@ -440,24 +552,31 @@ namespace DarkScript3
         private void Editor_TextChanged(object sender, TextChangedEventArgs e)
         {
             statusLabel.Text = "";
-            if (Scripter != null) CodeChanged = true;
-            SetStyles(e);
+            if (Scripter != null)
+            {
+                CodeChanged = true;
+            }
+            if (Preview != null)
+            {
+                Preview.DisableConversion();
+            }
+            SetStyles(e.ChangedRange);
         }
 
-        public void SetStyles(TextChangedEventArgs e, Regex highlight = null)
+        public void SetStyles(Range range, Regex highlight = null)
         {
-            e.ChangedRange.ClearStyle(Styles.ToArray());
-            e.ChangedRange.SetStyle(TextStyles.Comment, JSRegex.Comment1);
-            e.ChangedRange.SetStyle(TextStyles.Comment, JSRegex.Comment2);
-            e.ChangedRange.SetStyle(TextStyles.Comment, JSRegex.Comment1);
-            e.ChangedRange.SetStyle(TextStyles.String, JSRegex.String);
-            e.ChangedRange.SetStyle(TextStyles.String, JSRegex.StringArg);
-            e.ChangedRange.SetStyle(TextStyles.Keyword, JSRegex.Keyword);
-            e.ChangedRange.SetStyle(TextStyles.Number, JSRegex.Number);
-            e.ChangedRange.SetStyle(TextStyles.EnumConstant, JSRegex.GlobalConstant);
-            e.ChangedRange.SetStyle(TextStyles.EnumProperty, JSRegex.Property);
-            e.ChangedRange.SetFoldingMarkers("{", "}");
-            e.ChangedRange.SetFoldingMarkers(@"/\*", @"\*/");
+            range.ClearStyle(Styles.ToArray());
+            range.SetStyle(TextStyles.Comment, JSRegex.Comment1);
+            range.SetStyle(TextStyles.Comment, JSRegex.Comment2);
+            range.SetStyle(TextStyles.Comment, JSRegex.Comment1);
+            range.SetStyle(TextStyles.String, JSRegex.String);
+            range.SetStyle(TextStyles.String, JSRegex.StringArg);
+            range.SetStyle(TextStyles.Keyword, JSRegex.Keyword);
+            range.SetStyle(TextStyles.Number, JSRegex.Number);
+            range.SetStyle(TextStyles.EnumConstant, JSRegex.GlobalConstant);
+            range.SetStyle(TextStyles.EnumProperty, JSRegex.Property);
+            range.SetFoldingMarkers("{", "}");
+            range.SetFoldingMarkers(@"/\*", @"\*/");
         }
 
         public static RegexOptions RegexCompiledOption
@@ -485,7 +604,8 @@ namespace DarkScript3
                                            RegexCompiledOption);
             public static Regex Keyword =
                 new Regex(
-                    @"\b(true|false|break|case|catch|const|continue|default|delete|do|else|export|for|function|if|in|instanceof|let|new|null|return|switch|this|throw|try|var|void|while|with|typeof)\b",
+                    @"\b(true|false|break|case|catch|const|continue|default|delete|do|else|export"
+                        + @"|for|function|if|in|instanceof|let|new|null|return|switch|this|throw|try|var|void|while|with|typeof)\b",
                     RegexCompiledOption);
             public static Regex DataType = new Regex(@"\b(byte|short|int|sbyte|ushort|uint|enum|bool)\b", RegexCompiledOption);
         }
@@ -519,15 +639,24 @@ namespace DarkScript3
 
         private void Editor_SelectionChanged(object sender, EventArgs e)
         {
+            // Find text around cursor in the current line, up until hitting parentheses
             Range arguments = editor.Selection.GetFragment(@"[^)(\n]");
+
+            // Preemptively remove tooptip if changing the range; it may potentially get immediately added back.
+            // The tooltip may also change even within the same range.
             if (CurrentTipRange == null || !arguments.Start.Equals(CurrentTipRange.Start))
             {
                 CurrentTipRange = arguments;
                 InfoTip.Hide();
             }
 
-            if (arguments.CharBeforeStart == '(')
+            // Check if inside parens, but not nested ones.
+            // Matching IfThing(0^,1) but not WaitFor(Thi^ng(0,1))
+            string funcName;
+            if (arguments.CharBeforeStart == '(' && editor.GetRange(arguments.End, arguments.End).CharAfterStart != '(')
             {
+                // Scan leftward through arguments until no commas remain.
+                // This does not work with nested calls, like IfThing(getMyCustomConstant(), ^1)
                 int argIndex = 0;
                 Range arg = editor.Selection.GetFragment(@"[^)(\n,]");
                 while (arg.CharBeforeStart == ',')
@@ -537,18 +666,20 @@ namespace DarkScript3
                     start.iChar -= 2;
                     arg = editor.GetRange(start, start).GetFragment(@"[^)(\n,]");
                 }
-                string funcName = FuncName(arguments);
-                LoadDocText(funcName);
+                funcName = FuncName(arguments);
                 ShowArgToolTip(funcName, arguments, argIndex);
             }
             else
             {
-                Range func = editor.Selection.GetFragment(@"\w");
-                if (Scripter != null && Scripter.Functions.ContainsKey(func.Text))
-                {
-                    LoadDocText(func.Text);
-                }
+                // Get the word immediately under the cursor. No tooltip in this case.
+                Range func = editor.Selection.GetFragment(@"[\w\$]");
+                funcName = func.Text;
             }
+            if (loadDocTextDebounce == null)
+            {
+                loadDocTextDebounce = Debounce((Action<string>)LoadDocText, 50);
+            }
+            loadDocTextDebounce(funcName);
         }
 
 
@@ -580,7 +711,7 @@ namespace DarkScript3
 
         private void ShowArgToolTip(string funcName, Range arguments, int argument = -1)
         {
-            if (Scripter != null && Scripter.Functions.ContainsKey(funcName))
+            if (Docs != null && Docs.AllArgs.ContainsKey(funcName))
             {
                 Point point = editor.PlaceToPoint(arguments.Start);
                 ShowTip(ArgString(funcName), point, argument);
@@ -606,98 +737,173 @@ namespace DarkScript3
             int start = arguments.Start.iChar - 2;
             int line = arguments.Start.iLine;
             Range pre = new Range(editor, start, line, start, line);
-            return pre.GetFragment(@"\w").Text;
-        }
-
-        private string TypeString(long type)
-        {
-            if (type == 0) return "byte";
-            if (type == 1) return "ushort";
-            if (type == 2) return "uint";
-            if (type == 3) return "sbyte";
-            if (type == 4) return "short";
-            if (type == 5) return "int";
-            if (type == 6) return "float";
-            if (type == 8) return "uint";
-            throw new Exception("Invalid type in argument definition.");
+            return pre.GetFragment(@"[\w\$]").Text;
         }
 
         private string ArgString(string func, int index = -1)
         {
-            (int classIndex, int instrIndex) = Scripter.Functions[func];
-            EMEDF.InstrDoc insDoc = Scripter.DOC[classIndex][instrIndex];
+            List<EMEDF.ArgDoc> args = Docs.AllArgs[func];
             List<string> argStrings = new List<string>();
-            for (int i = 0; i < insDoc.Arguments.Length; i++)
+            for (int i = 0; i < args.Count; i++)
             {
-                EMEDF.ArgDoc arg = insDoc.Arguments[i];
+                EMEDF.ArgDoc arg = args[i];
                 if (arg.EnumName == "BOOL")
                 {
-                    argStrings.Add($"bool {arg.Name}");
+                    argStrings.Add($"bool {arg.DisplayName}");
                 }
-                else if (arg.EnumName != null)
+                else if (arg.EnumDoc != null)
                 {
-                    argStrings.Add($"enum<{arg.EnumName}> {arg.Name}");
+                    argStrings.Add($"enum<{arg.EnumDoc.DisplayName}> {arg.DisplayName}");
                 }
                 else
                 {
-                    argStrings.Add($"{TypeString(arg.Type)} {arg.Name}");
+                    argStrings.Add($"{InstructionDocs.TypeString(arg.Type)} {arg.DisplayName}");
                 }
                 if (i == index) return argStrings.Last();
             }
             return string.Join(", ", argStrings);
         }
 
-        string currentFuncDoc = null;
+        private string currentFuncDoc = null;
 
         private void LoadDocText(string func)
         {
-            if (Scripter == null) return;
-            if (!Scripter.Functions.ContainsKey(func)) return;
+            if (Docs == null) return;
+            List<EMEDF.ArgDoc> args = null;
+            ScriptAst.BuiltIn builtin = null;
+            if (!Docs.AllArgs.TryGetValue(func, out args) && !ScriptAst.ReservedWords.TryGetValue(func, out builtin)) return;
+            if (builtin != null && builtin.Doc == null) return;
+
             if (currentFuncDoc == func) return;
             currentFuncDoc = func;
             docBox.Clear();
 
-            (int classIndex, int instrIndex) = Scripter.Functions[func];
-            EMEDF.InstrDoc insDoc = Scripter.DOC[classIndex][instrIndex];
+            if (builtin != null)
+            {
+                docBox.AppendText($"{func}");
+                if (builtin.Args != null)
+                {
+                    if (builtin.Args.Count == 0)
+                    {
+                        docBox.AppendText(Environment.NewLine);
+                        docBox.AppendText("  (no arguments)", TextStyles.Comment);
+                    }
+                    foreach (string arg in builtin.Args)
+                    {
+                        docBox.AppendText(Environment.NewLine);
+                        if (arg == "COND")
+                        {
+                            docBox.AppendText("  Condition ", TextStyles.Keyword);
+                            docBox.AppendText("cond");
+                        }
+                        else if (arg == "LABEL")
+                        {
+                            docBox.AppendText("  Label ", TextStyles.Keyword);
+                            docBox.AppendText("label");
+                        }
+                        else if (arg == "LAYERS")
+                        {
+                            docBox.AppendText("  uint ", TextStyles.Keyword);
+                            docBox.AppendText("layer");
+                            docBox.AppendText(" (vararg)", TextStyles.Comment);
+                        }
+                    }
+                }
+                if (builtin.Doc != null)
+                {
+                    docBox.AppendText(Environment.NewLine + Environment.NewLine + builtin.Doc);
+                }
+                return;
+            }
 
-            for (int i = 0; i < insDoc.Arguments.Length; i++)
+            docBox.AppendText($"{func}");
+
+            // TODO: Make ArgDoc include optional info instead of counting arguments? This requires making a shallow copy for cond functions.
+            int optCount = 0;
+            if (Docs.Translator != null && Docs.Translator.CondDocs.TryGetValue(func, out InstructionTranslator.FunctionDoc funcDoc))
+            {
+                optCount = funcDoc.OptionalArgs;
+            }
+
+            if (args.Count == 0)
             {
                 docBox.AppendText(Environment.NewLine);
-                EMEDF.ArgDoc argDoc = insDoc.Arguments[i];
+                docBox.AppendText("  (no arguments)", TextStyles.Comment);
+            }
+            for (int i = 0; i < args.Count; i++)
+            {
+                docBox.AppendText(Environment.NewLine);
+                EMEDF.ArgDoc argDoc = args[i];
+                bool optional = i >= args.Count - optCount;
 
+                bool displayEnum = false;
                 if (argDoc.EnumName == null)
                 {
-                    docBox.AppendText($"  {TypeString(argDoc.Type)} ", TextStyles.Keyword);
-                    docBox.AppendText(argDoc.Name);
+                    docBox.AppendText($"  {InstructionDocs.TypeString(argDoc.Type)} ", TextStyles.Keyword);
                 }
                 else if (argDoc.EnumName == "BOOL")
                 {
                     docBox.AppendText($"  bool ", TextStyles.Keyword);
-                    docBox.AppendText(argDoc.Name);
                 }
-                else
+                else if (argDoc.EnumDoc != null)
                 {
                     docBox.AppendText($"  enum ", TextStyles.Keyword);
-                    docBox.AppendText(argDoc.Name);
-                    EMEDF.EnumDoc enm = Scripter.DOC.Enums.First(e => e.Name == argDoc.EnumName);
-                    foreach (var kv in enm.Values)
+                    displayEnum = true;
+                }
+
+                docBox.AppendText(argDoc.DisplayName);
+                if (optional) docBox.AppendText(" (optional)", TextStyles.Comment);
+                if (argDoc.Vararg) docBox.AppendText(" (vararg)", TextStyles.Comment);
+
+                if (displayEnum)
+                {
+                    EMEDF.EnumDoc enm = argDoc.EnumDoc;
+                    foreach (var kv in enm.DisplayValues)
                     {
                         docBox.AppendText(Environment.NewLine);
                         docBox.AppendText($"    {kv.Key.PadLeft(5)}", TextStyles.String);
                         docBox.AppendText($": ");
-                        if (Scripter.EnumNamesForGlobalization.Contains(enm.Name))
+                        string val = kv.Value;
+                        if (val.Contains("."))
                         {
-                            docBox.AppendText(kv.Value, TextStyles.EnumConstant);
+                            string[] parts = val.Split(new[] { '.' }, 2);
+                            docBox.AppendText($"{parts[0]}.");
+                            docBox.AppendText(parts[1], TextStyles.EnumProperty);
                         }
                         else
                         {
-                            docBox.AppendText($"{enm.Name}.");
-                            docBox.AppendText(kv.Value, TextStyles.EnumProperty);
+                            docBox.AppendText(val, TextStyles.EnumConstant);
                         }
                     }
                 }
             }
-            
+            List<string> altNames = Docs.GetAltFunctionNames(func);
+            if (altNames != null && altNames.Count > 0)
+            {
+                docBox.AppendText(Environment.NewLine + Environment.NewLine + $"(alt: {string.Join(", ", altNames)})");
+            }
+        }
+
+        // https://stackoverflow.com/questions/28472205/c-sharp-event-debounce
+        // Can only be called from the UI thread, and runs the given action in the UI thread.
+        private static Action<T> Debounce<T>(Action<T> func, int ms)
+        {
+            CancellationTokenSource cancelTokenSource = null;
+
+            return arg =>
+            {
+                cancelTokenSource?.Cancel();
+                cancelTokenSource = new CancellationTokenSource();
+
+                Task.Delay(ms, cancelTokenSource.Token)
+                    .ContinueWith(t =>
+                    {
+                        if (!t.IsCanceled)
+                        {
+                            func(arg);
+                        }
+                    }, TaskScheduler.FromCurrentSynchronizationContext());
+            };
         }
 
         #endregion
@@ -794,46 +1000,226 @@ namespace DarkScript3
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("-- Created by AinTunez\r\n-- Based on work by HotPocketRemix and TKGP\r\n-- Special thanks to Meowmaritus", "About DarkScript");
+            MessageBox.Show($"Version {ProgramVersion.VERSION}"
+                + "\r\n-- Created by AinTunez\r\n-- MattScript and other features by thefifthmatt"
+                + "\r\n-- Based on work by HotPocketRemix and TKGP\r\n-- Special thanks to Meowmaritus", "About DarkScript");
         }
-        #endregion
 
-        private void BatchResaveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void batchDumpToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (CancelWithUnsavedChanges(sender, e))
+            {
+                return;
+            }
             var ofd = new OpenFileDialog();
+            ofd.Title = "Open (note: skips existing JS files)";
             ofd.Multiselect = true;
-            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx; *.emevd.js; *.emevd.dcx.js";
+            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                string gameDocs = ChooseGame();
+                string gameDocs = ChooseGame(out bool fancy);
+                if (gameDocs == null) return;
+                List<string> succeeded = new List<string>();
+                List<string> failed = new List<string>();
+                foreach (var fileName in ofd.FileNames)
+                {
+                    if (File.Exists(fileName + ".js"))
+                    {
+                        continue;
+                    }
+                    try
+                    {
+                        if (OpenEMEVDFile(fileName, gameDocs, isFancy: fancy) && SaveJSFile())
+                        {
+                            succeeded.Add(fileName);
+                            continue;
+                        }
+                    }
+                    catch
+                    {
+                    }
+                    failed.Add(fileName);
+                }
+                editor.ClearUndo();
+
+                List<string> lines = new List<string>();
+                if (failed.Count > 0)
+                {
+                    lines.Add("The following emevds failed to be dumped to JS:" + Environment.NewLine);
+                    lines.AddRange(failed);
+                    lines.Add("");
+                }
+                if (succeeded.Count > 0)
+                {
+                    lines.Add("The following emevds were dumped to JS:" + Environment.NewLine);
+                    lines.AddRange(succeeded);
+                }
+                MessageBox.Show(string.Join(Environment.NewLine, lines));
+            }
+        }
+
+        private void batchResaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (CancelWithUnsavedChanges(sender, e))
+            {
+                return;
+            }
+            var ofd = new OpenFileDialog();
+            ofd.Multiselect = true;
+            ofd.Filter = "EMEVD Files|*.emevd.js; *.emevd.dcx.js";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                List<string> succeeded = new List<string>();
                 List<string> failed = new List<string>();
                 foreach (var fileName in ofd.FileNames)
                 {
                     try
                     {
-                        if (File.Exists(fileName + ".js"))
-                            OpenJSFile(ofd.FileName + ".js");
-                        else
-                            OpenEMEVDFile(fileName, null, gameDocs);
-                        SaveJSFile();
-                        editor.ClearUndo();
-                    } catch
-                    {
-                        failed.Add(fileName);
+                        if (OpenJSFile(fileName) && SaveJSAndEMEVDFile())
+                        {
+                            succeeded.Add(fileName);
+                            continue;
+                        }
                     }
+                    catch
+                    {
+                    }
+                    failed.Add(fileName);
                 }
+                editor.ClearUndo();
 
+                List<string> lines = new List<string>();
                 if (failed.Count > 0)
-                    MessageBox.Show("The following files failed to save:\r\n\r\n" + string.Join(Environment.NewLine, failed));
-                else
-                    MessageBox.Show("All files succesfully resaved.");
+                {
+                    lines.Add("The following JS files failed to be saved:" + Environment.NewLine);
+                    lines.AddRange(failed);
+                    lines.Add("");
+                }
+                if (succeeded.Count > 0)
+                {
+                    lines.Add("The following JS files were saved:" + Environment.NewLine);
+                    lines.AddRange(succeeded);
+                }
+                MessageBox.Show(string.Join(Environment.NewLine, lines));
             }
         }
+
 
         private void openAutoCompleteMenuToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (InstructionMenu == null) return;
             InstructionMenu.Show(true);
         }
+
+        private void scriptCompilationSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Settings == null) return;
+            ScriptSettingsForm form = new ScriptSettingsForm(Settings);
+            form.ShowDialog();
+        }
+
+        private void decompileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Scripter == null || Docs.Translator == null) return;
+            try
+            {
+                FancyJSCompiler.CompileOutput output = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).RepackFull(editor.Text);
+                PreviewCompilationForm preview = RefreshPreviewForm();
+                preview.SetSegments(output.GetDiffSegments(), output.Code);
+                preview.Show();
+                preview.Focus();
+            }
+            catch (FancyJSCompiler.FancyCompilerException ex)
+            {
+                MessageBox.Show(ex.Message.Trim());
+            }
+        }
+
+        private void previewCompilationOutputToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Scripter == null || Docs.Translator == null) return;
+            try
+            {
+                List<FancyJSCompiler.DiffSegment> segments = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).PreviewPack(editor.Text);
+                PreviewCompilationForm preview = RefreshPreviewForm();
+                preview.SetSegments(segments);
+                preview.Show();
+                preview.Focus();
+            }
+            catch (FancyJSCompiler.FancyCompilerException ex)
+            {
+                MessageBox.Show(ex.Message.Trim());
+            }
+        }
+
+        private PreviewCompilationForm RefreshPreviewForm()
+        {
+            if (Preview == null || Preview.IsDisposed)
+            {
+                Preview = new PreviewCompilationForm(editor.Font);
+                Preview.FormClosed += (sender, ev) =>
+                {
+                    if (Preview.Confirmed && Preview.PendingCode != null)
+                    {
+                        editor.Text = Preview.PendingCode;
+                        if (Settings != null && !Settings.AllowPreprocess)
+                        {
+                            Settings.AllowPreprocess = true;
+                        }
+                    }
+                };
+            }
+            return Preview;
+        }
+
+        private Range ShowCompileError(string file, Exception ex, string extra)
+        {
+            ErrorMessageForm error = new ErrorMessageForm(editor.Font);
+            error.SetMessage(file, ex, extra);
+            error.ShowDialog();
+            if (error.Place != Place.Empty)
+            {
+                Range select = editor.GetRange(error.Place, error.Place);
+                try
+                {
+                    // Quick validity check
+                    string text = select.Text;
+                    return select;
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                }
+            }
+            return null;
+        }
+
+        private void viewEMEDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Docs == null)
+            {
+                MessageBox.Show("Open a file to view the EMEDF for that game\r\nor access it in the Resources directory.");
+                return;
+            }
+            string inferredName = Docs.ResourceString.Split('-')[0];
+            string path = $"{inferredName}-emedf.html";
+            if (File.Exists(path))
+                System.Diagnostics.Process.Start(path);
+            else if (File.Exists($@"Resources\{path}"))
+                System.Diagnostics.Process.Start($@"Resources\{path}");
+            else
+                MessageBox.Show($"No EMEDF documentation found named {path}");
+        }
+
+        private void viewEMEVDTutorialToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://soulsmodding.wikidot.com/tutorial:learning-how-to-use-emevd");
+        }
+
+        private void viewFancyDocumentationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://soulsmodding.wikidot.com/tutorial:mattscript-documentation");
+        }
+
+        #endregion
     }
 }

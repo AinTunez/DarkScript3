@@ -490,7 +490,7 @@
               "unk4": 0
             },
             {
-              "name": "Minimum Number of Targets",
+              "name": "Number of Target Characters",
               "type": 5,
               "enum_name": null,
               "default": 1,
@@ -2385,6 +2385,20 @@
               "min": 0,
               "max": 0,
               "increment": 0,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Unknown",
+              "type": 5,
+              "enum_name": null,
+              "default": 1,
+              "min": 0,
+              "max": 9999,
+              "increment": 1,
               "format_string": "%d",
               "unk1": 1,
               "unk2": 0,
@@ -5526,7 +5540,7 @@
               "unk4": 0
             },
             {
-              "name": "Inside",
+              "name": "Should Player Be Inside",
               "type": 0,
               "enum_name": "BOOL",
               "default": 1,
@@ -5588,7 +5602,7 @@
               "unk4": 0
             },
             {
-              "name": "Inside",
+              "name": "Should Player Be Inside",
               "type": 0,
               "enum_name": "BOOL",
               "default": 1,
@@ -6262,7 +6276,7 @@
               "unk4": 0
             },
             {
-              "name": "Inside",
+              "name": "Should Player Be Inside",
               "type": 0,
               "enum_name": "BOOL",
               "default": 1,
@@ -6592,6 +6606,20 @@
               "unk2": 0,
               "unk3": 0,
               "unk4": 0
+            },
+            {
+              "name": "Number of Target Characters",
+              "type": 5,
+              "enum_name": null,
+              "default": 1,
+              "min": 0,
+              "max": 9999,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
             }
           ]
         },
@@ -6654,7 +6682,22 @@
               "unk2": 0,
               "unk3": 0,
               "unk4": 0
+            },
+            {
+              "name": "Number of Target Characters",
+              "type": 5,
+              "enum_name": null,
+              "default": 1,
+              "min": 0,
+              "max": 9999,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
             }
+
           ]
         },
         {
@@ -6713,6 +6756,20 @@
               "increment": 1,
               "format_string": "%08d",
               "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Number of Target Characters",
+              "type": 5,
+              "enum_name": null,
+              "default": 1,
+              "min": 0,
+              "max": 9999,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
               "unk2": 0,
               "unk3": 0,
               "unk4": 0
@@ -7182,7 +7239,8 @@
               "unk1": 0,
               "unk2": 1,
               "unk3": 4,
-              "unk4": 0
+              "unk4": 0,
+              "vararg": true
             }
           ]
         },
@@ -7330,7 +7388,8 @@
               "unk1": 0,
               "unk2": 1,
               "unk3": 4,
-              "unk4": 0
+              "unk4": 0,
+              "vararg": true
             }
           ]
         }
@@ -16860,7 +16919,7 @@
         "19": "Host",
         "20": "Co-op",
         "21": "Hostile",
-        "22": "Wandering Phantom",
+        "22": "Wandering Phantom 1",
         "23": "Enemy 1",
         "24": "Enemy 2",
         "25": "Strong Enemy 1",

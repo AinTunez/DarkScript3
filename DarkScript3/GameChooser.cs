@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Reflection;
 using System.IO;
 
 namespace DarkScript3
@@ -15,11 +8,25 @@ namespace DarkScript3
     public partial class GameChooser : Form
     {
         public string GameDocs = "";
+        public bool Fancy { get => fancy.Checked; }
 
-        public GameChooser()
+        public GameChooser(bool showFancy)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
+            if (showFancy)
+            {
+
+                fancy.Checked = Properties.Settings.Default.DefaultFancyDecompile;
+            }
+            else
+            {
+                // Hide everything below the fold by just hiding them and roughly cutting the window height
+                Point windowLoc = PointToClient(fancy.Parent.PointToScreen(fancy.Location));
+                fancy.Hide();
+                fancyLabel.Hide();
+                Height = windowLoc.Y + 7;
+            }
         }
 
         private void Ds3Btn_Click(object sender, EventArgs e)
@@ -58,6 +65,15 @@ namespace DarkScript3
             Close();
         }
 
+        private void GameChooser_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                GameDocs = null;
+                Close();
+            }
+        }
+
         private void customBtn_Click(object sender, EventArgs e)
         {
             var ofd = new OpenFileDialog();
@@ -65,9 +81,15 @@ namespace DarkScript3
             ofd.Filter = "EMEDF Files|*.emedf.json";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                GameDocs = Path.GetFileName(ofd.FileName);
+                GameDocs = ofd.FileName;
+                Close();
             }
-            Close();
+        }
+
+        private void fancy_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.DefaultFancyDecompile = fancy.Checked;
+            Properties.Settings.Default.Save();
         }
     }
 }

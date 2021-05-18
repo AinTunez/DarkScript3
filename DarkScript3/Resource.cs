@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,6 +13,10 @@ namespace DarkScript3
         {
             using (Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("DarkScript3.Resources." + s))
             {
+                if (stream == null)
+                {
+                    throw new Exception($"No resource named {s} exists");
+                }
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     string result = reader.ReadToEnd();

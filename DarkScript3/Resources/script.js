@@ -1,4 +1,4 @@
-﻿const Default = REST.Default;
+const Default = REST.Default;
 const End = REST.End;
 const Restart = REST.Restart;
 

@@ -450,6 +450,20 @@
               "unk2": 0,
               "unk3": 0,
               "unk4": 0
+            },
+            {
+              "name": "Unknown8",
+              "type": 6,
+              "enum_name": null,
+              "default": 0.0,
+              "min": 0.0,
+              "max": 9999.0,
+              "increment": 1.0,
+              "format_string": "%0.3f",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
             }
           ]
         },
@@ -927,6 +941,20 @@
               "max": 9999.0,
               "increment": 1.0,
               "format_string": "%0.3f",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Unknown2",
+              "type": 5,
+              "enum_name": null,
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 1,
+              "format_string": "%d",
               "unk1": 0,
               "unk2": 0,
               "unk3": 0,
@@ -2113,7 +2141,8 @@
               "unk1": 0,
               "unk2": 0,
               "unk3": 0,
-              "unk4": 0
+              "unk4": 0,
+              "vararg": true
             }
           ]
 		}
@@ -3315,7 +3344,8 @@
               "unk1": 0,
               "unk2": 0,
               "unk3": 0,
-              "unk4": 0
+              "unk4": 0,
+              "vararg": true
             }
           ]
 		},
@@ -4299,7 +4329,7 @@
         "2": "Attack Poise Damage",
         "3": "Fall Damage Protection Modifier",
         "4": "Current HP Ratio (??)",
-        "5": "Current HP Ratio (??)",
+        "5": "Current HP Ratio 2 (??)",
         "6": "Vigor",
         "7": "Endurance",
         "8": "Vitality",

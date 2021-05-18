@@ -1,4 +1,4 @@
-﻿namespace DarkScript3
+namespace DarkScript3
 {
     partial class GUI
     {
@@ -35,6 +35,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.batchDumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.batchResaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,17 +48,25 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
+            this.decompileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scriptCompilationSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openAutoCompleteMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.emevdDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.previewCompilationOutputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewEMEDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewEMEVDTutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewFancyDocumentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.display = new System.Windows.Forms.SplitContainer();
             this.docBox = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.openAutoCompleteMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.editor)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -135,6 +144,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem,
+            this.batchDumpToolStripMenuItem,
             this.batchResaveToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -145,29 +155,36 @@
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.openToolStripMenuItem.Text = "Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
+            // 
+            // batchDumpToolStripMenuItem
+            // 
+            this.batchDumpToolStripMenuItem.Name = "batchDumpToolStripMenuItem";
+            this.batchDumpToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.batchDumpToolStripMenuItem.Text = "Batch Dump (EMEVD→JS)...";
+            this.batchDumpToolStripMenuItem.Click += new System.EventHandler(this.batchDumpToolStripMenuItem_Click);
             // 
             // batchResaveToolStripMenuItem
             // 
             this.batchResaveToolStripMenuItem.Name = "batchResaveToolStripMenuItem";
-            this.batchResaveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.batchResaveToolStripMenuItem.Text = "Batch Resave";
-            this.batchResaveToolStripMenuItem.Click += new System.EventHandler(this.BatchResaveToolStripMenuItem_Click);
+            this.batchResaveToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.batchResaveToolStripMenuItem.Text = "Batch Resave (JS→EMEVD)...";
+            this.batchResaveToolStripMenuItem.Click += new System.EventHandler(this.batchResaveToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -183,7 +200,10 @@
             this.toolStripSeparator2,
             this.selectAllToolStripMenuItem,
             this.optionsToolStripMenuItem,
+            this.decompileToolStripMenuItem,
+            this.toolStripSeparator3,
             this.customizeToolStripMenuItem,
+            this.scriptCompilationSettingsToolStripMenuItem,
             this.openAutoCompleteMenuToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
@@ -251,17 +271,46 @@
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(274, 6);
             // 
+            // decompileToolStripMenuItem
+            // 
+            this.decompileToolStripMenuItem.Name = "decompileToolStripMenuItem";
+            this.decompileToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.decompileToolStripMenuItem.Text = "Convert to MattScript...";
+            this.decompileToolStripMenuItem.Click += new System.EventHandler(this.decompileToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(274, 6);
+            // 
             // customizeToolStripMenuItem
             // 
             this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
             this.customizeToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
-            this.customizeToolStripMenuItem.Text = "Customize...";
+            this.customizeToolStripMenuItem.Text = "Customize Appearance...";
             this.customizeToolStripMenuItem.Click += new System.EventHandler(this.customizeToolStripMenuItem_Click);
+            // 
+            // scriptCompilationSettingsToolStripMenuItem
+            // 
+            this.scriptCompilationSettingsToolStripMenuItem.Name = "scriptCompilationSettingsToolStripMenuItem";
+            this.scriptCompilationSettingsToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.scriptCompilationSettingsToolStripMenuItem.Text = "Script Compilation Settings...";
+            this.scriptCompilationSettingsToolStripMenuItem.Click += new System.EventHandler(this.scriptCompilationSettingsToolStripMenuItem_Click);
+            // 
+            // openAutoCompleteMenuToolStripMenuItem
+            // 
+            this.openAutoCompleteMenuToolStripMenuItem.Name = "openAutoCompleteMenuToolStripMenuItem";
+            this.openAutoCompleteMenuToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Space)));
+            this.openAutoCompleteMenuToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.openAutoCompleteMenuToolStripMenuItem.Text = "OpenAutoCompleteMenu";
+            this.openAutoCompleteMenuToolStripMenuItem.Visible = false;
+            this.openAutoCompleteMenuToolStripMenuItem.Click += new System.EventHandler(this.openAutoCompleteMenuToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.emevdDataToolStripMenuItem,
+            this.previewCompilationOutputToolStripMenuItem,
             this.documentationToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
@@ -271,8 +320,15 @@
             // 
             this.emevdDataToolStripMenuItem.Name = "emevdDataToolStripMenuItem";
             this.emevdDataToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            this.emevdDataToolStripMenuItem.Text = "EMEVD Data";
+            this.emevdDataToolStripMenuItem.Text = "EMEVD Data...";
             this.emevdDataToolStripMenuItem.Click += new System.EventHandler(this.EmevdDataToolStripMenuItem_Click);
+            // 
+            // previewCompilationOutputToolStripMenuItem
+            // 
+            this.previewCompilationOutputToolStripMenuItem.Name = "previewCompilationOutputToolStripMenuItem";
+            this.previewCompilationOutputToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.previewCompilationOutputToolStripMenuItem.Text = "Preview Compilation Output...";
+            this.previewCompilationOutputToolStripMenuItem.Click += new System.EventHandler(this.previewCompilationOutputToolStripMenuItem_Click);
             // 
             // documentationToolStripMenuItem
             // 
@@ -286,16 +342,46 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewEMEDFToolStripMenuItem,
+            this.viewEMEVDTutorialToolStripMenuItem,
+            this.viewFancyDocumentationToolStripMenuItem,
+            this.toolStripMenuItem1,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
+            // viewEMEDFToolStripMenuItem
+            // 
+            this.viewEMEDFToolStripMenuItem.Name = "viewEMEDFToolStripMenuItem";
+            this.viewEMEDFToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.viewEMEDFToolStripMenuItem.Text = "View EMEDF (List of Instructions)";
+            this.viewEMEDFToolStripMenuItem.Click += new System.EventHandler(this.viewEMEDFToolStripMenuItem_Click);
+            // 
+            // viewEMEVDTutorialToolStripMenuItem
+            // 
+            this.viewEMEVDTutorialToolStripMenuItem.Name = "viewEMEVDTutorialToolStripMenuItem";
+            this.viewEMEVDTutorialToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.viewEMEVDTutorialToolStripMenuItem.Text = "View EMEVD Tutorial";
+            this.viewEMEVDTutorialToolStripMenuItem.Click += new System.EventHandler(this.viewEMEVDTutorialToolStripMenuItem_Click);
+            // 
+            // viewFancyDocumentationToolStripMenuItem
+            // 
+            this.viewFancyDocumentationToolStripMenuItem.Name = "viewFancyDocumentationToolStripMenuItem";
+            this.viewFancyDocumentationToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.viewFancyDocumentationToolStripMenuItem.Text = "View MattScript Documentation";
+            this.viewFancyDocumentationToolStripMenuItem.Click += new System.EventHandler(this.viewFancyDocumentationToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(244, 6);
+            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.aboutToolStripMenuItem.Text = "About DarkScript3";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // statusLabel
@@ -352,7 +438,7 @@
         '\'',
         '\''};
             this.docBox.AutoIndentCharsPatterns = "\r\n^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;]+);\r\n";
-            this.docBox.AutoScrollMinSize = new System.Drawing.Size(2, 14);
+            this.docBox.AutoScrollMinSize = new System.Drawing.Size(0, 50);
             this.docBox.BackBrush = null;
             this.docBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.docBox.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2;
@@ -370,7 +456,7 @@
             this.docBox.LineNumberColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.docBox.Location = new System.Drawing.Point(0, 0);
             this.docBox.Name = "docBox";
-            this.docBox.Paddings = new System.Windows.Forms.Padding(0);
+            this.docBox.Paddings = new System.Windows.Forms.Padding(18);
             this.docBox.ReadOnly = true;
             this.docBox.RightBracket = ')';
             this.docBox.RightBracket2 = '}';
@@ -381,16 +467,8 @@
             this.docBox.Size = new System.Drawing.Size(320, 475);
             this.docBox.TabIndex = 1;
             this.docBox.TabStop = false;
+            this.docBox.WordWrap = true;
             this.docBox.Zoom = 100;
-            // 
-            // openAutoCompleteMenuToolStripMenuItem
-            // 
-            this.openAutoCompleteMenuToolStripMenuItem.Name = "openAutoCompleteMenuToolStripMenuItem";
-            this.openAutoCompleteMenuToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Space)));
-            this.openAutoCompleteMenuToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
-            this.openAutoCompleteMenuToolStripMenuItem.Text = "OpenAutoCompleteMenu";
-            this.openAutoCompleteMenuToolStripMenuItem.Visible = false;
-            this.openAutoCompleteMenuToolStripMenuItem.Click += new System.EventHandler(this.openAutoCompleteMenuToolStripMenuItem_Click);
             // 
             // GUI
             // 
@@ -447,11 +525,20 @@
         private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem batchResaveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem batchDumpToolStripMenuItem;
         public FastColoredTextBoxNS.FastColoredTextBox editor;
         private System.Windows.Forms.ToolStripSeparator optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openAutoCompleteMenuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem decompileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem previewCompilationOutputToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem scriptCompilationSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewEMEDFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewEMEVDTutorialToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewFancyDocumentationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem batchResaveToolStripMenuItem;
     }
 }
 
