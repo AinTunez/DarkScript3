@@ -80,6 +80,7 @@ namespace DarkScript3
             new IncompatibilityEntry("3.2", "ApplySoulScalingToWeapon requires additional arg unknown2 with default value 0", new List<string> { "ds2", "ds2scholar" }),
             new IncompatibilityEntry("3.2", "Goto/End/SkipIfPlayerInoutsideArea require additional arg numberOfTargetCharacters with default value 1", new List<string> { "ds3" }),
             new IncompatibilityEntry("3.2", "DisplayHollowArenaPvpMessage is now DisplayGenericDialogGloballyAndSetEventFlags. Get the new lines from vanilla files.", new List<string> { "sekiro" }),
+            new IncompatibilityEntry("3.2", "JavaScript is run in strict mode, so all variable assignments must be declared with let/const/var"),
         };
 
         private class IncompatibilityEntry
