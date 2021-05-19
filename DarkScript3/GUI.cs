@@ -1177,9 +1177,9 @@ namespace DarkScript3
             ErrorMessageForm error = new ErrorMessageForm(editor.Font);
             error.SetMessage(file, ex, extra);
             error.ShowDialog();
-            if (error.Place != Place.Empty)
+            if (error.Place is Place p)
             {
-                Range select = editor.GetRange(error.Place, error.Place);
+                Range select = editor.GetRange(p, p);
                 try
                 {
                     // Quick validity check

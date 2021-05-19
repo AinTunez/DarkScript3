@@ -12,7 +12,7 @@ namespace DarkScript3
         private static readonly TextStyle linkStyle = new TextStyle(Brushes.Blue, null, FontStyle.Underline);
         private static readonly Regex placePartsRe = new Regex(@"(\d+):(\d+)");
 
-        public Place Place { get; set; }
+        public Place? Place { get; set; }
 
         private readonly int textMarginHeight;
         private readonly int textMarginWidth;

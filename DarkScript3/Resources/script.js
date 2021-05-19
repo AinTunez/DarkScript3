@@ -68,10 +68,6 @@ function $LAYERS(...args) {
     return { layerValue: layer };
 }
 
-function importFile(path) {
-    eval(Scripter.Import(path))
-}
-
 class CodeBlock {
     instructions = [];
 
