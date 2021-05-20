@@ -58,7 +58,7 @@ Note that functions like this don't act like events and still have to be called 
 so common_func is usually preferable in games where it is available. See
 [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
 and [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
-for all syntax options.
+for all syntax options, including namespaced imports.
 
 ## Images
 ![DarkScript 3 screenshot](https://i.imgur.com/mKBkZuk.png)

@@ -395,7 +395,7 @@ namespace DarkScript3
                     {
                         if (!compares.TryGetValue(bin.Operator, out ComparisonType comp))
                         {
-                            context.Error(expr, $"Operator {bin.Operator} is used when only || and && are permitted for conditions, or == != > < >= <= for comparisons");
+                            context.Error(expr, $"Operator {bin.Operator} is not permitted, only || and && for conditions, or == != > < >= <= for comparisons");
                         }
                         // RHS should be a number, but this source is copied over so it can be a variable etc.
                         CompareCond cmp = new CompareCond { Type = comp, Rhs = source.GetSourceNode(bin.Right) };
@@ -475,7 +475,7 @@ namespace DarkScript3
                 }
                 else
                 {
-                    context.Error(lhs, "Can't assign to anything other than a condition name. (Ask for feature request: using normal JS variables.)");
+                    context.Error(lhs, "Can't assign to anything other than a condition name, or a JS variable using const");
                 }
                 assign.Cond = ConvertCondExpression(rhs);
                 return assign;
@@ -577,7 +577,11 @@ namespace DarkScript3
                         }
                         else
                         {
-                            context.Error(call, $"Expected a function call with a simple named function, not a {call.Callee.Type}");
+                            // There shouldn't be anything complicated here, just simple named invocations
+                            if (call.Callee.DescendantNodesAndSelf().Any(subExpr => subExpr is IFunction))
+                            {
+                                context.Error(call, $"Expected a function call with a simple named function, not a {call.Callee.Type}");
+                            }
                         }
                         List<Expression> args = call.Arguments.ToList();
                         bool hasExpectedArgs(int expected)
