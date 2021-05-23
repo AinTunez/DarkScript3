@@ -960,6 +960,7 @@ namespace DarkScript3
             BFF.tbFind.SelectAll();
             BFF.Show();
             BFF.Focus();
+            BFF.BringToFront();
         }
 
         private void Editor_Scroll(object sender, ScrollEventArgs e) => InfoTip.Hide();
