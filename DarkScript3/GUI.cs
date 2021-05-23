@@ -347,11 +347,26 @@ namespace DarkScript3
             if (emevdFileHeaders.All(name => headers.ContainsKey(name)))
             {
                 docs = headers["docs"];
+                if (!Enum.TryParse(headers["compress"], out DCX.Type compression))
+                {
+                    if (Enum.TryParse(headers["compress"], out DCX.DefaultType defaultComp))
+                    {
+                        compression = (DCX.Type)defaultComp;
+                    }
+                    else
+                    {
+                        throw new Exception($"Unknown compression type in file header {headers["compress"]}");
+                    }
+                }
+                if (!Enum.TryParse(headers["game"], out EMEVD.Game game))
+                {
+                    throw new Exception($"Unknown game type in file header {headers["game"]}");
+                }
                 string linked = headers["linked"].TrimStart('[').TrimEnd(']');
                 evd = new EMEVD()
                 {
-                    Compression = (DCX.Type)Enum.Parse(typeof(DCX.Type), headers["compress"]),
-                    Format = (EMEVD.Game)Enum.Parse(typeof(EMEVD.Game), headers["game"]),
+                    Compression = compression,
+                    Format = game,
                     StringData = Encoding.Unicode.GetBytes(headers["string"]),
                     LinkedFileOffsets = Regex.Split(linked, @"\s*,\s*")
                         .Where(o => !string.IsNullOrWhiteSpace(o))
@@ -938,9 +953,16 @@ namespace DarkScript3
 
         private void Editor_ZoomChanged(object sender, EventArgs e)
         {
+            docBox.Font = editor.Font;
             InfoTip.Hide();
             InfoTip.tipBox.Font = editor.Font;
-            docBox.Font = editor.Font;
+        }
+
+        private void docBox_ZoomChanged(object sender, EventArgs e)
+        {
+            editor.Font = docBox.Font;
+            InfoTip.Hide();
+            InfoTip.tipBox.Font = editor.Font;
         }
 
         private void GUI_KeyDown(object sender, KeyEventArgs e)
@@ -1145,7 +1167,11 @@ namespace DarkScript3
             }
             catch (FancyJSCompiler.FancyCompilerException ex)
             {
-                MessageBox.Show(ex.Message.Trim());
+                if (ShowCompileError(Scripter.FileName, ex, "") is Range errorSelect)
+                {
+                    editor.Selection = errorSelect;
+                    editor.DoSelectionVisible();
+                }
             }
         }
 
@@ -1162,7 +1188,11 @@ namespace DarkScript3
             }
             catch (FancyJSCompiler.FancyCompilerException ex)
             {
-                MessageBox.Show(ex.Message.Trim());
+                if (ShowCompileError(Scripter.FileName, ex, "") is Range errorSelect)
+                {
+                    editor.Selection = errorSelect;
+                    editor.DoSelectionVisible();
+                }
             }
         }
 
