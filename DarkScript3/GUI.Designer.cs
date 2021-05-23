@@ -469,6 +469,7 @@ namespace DarkScript3
             this.docBox.TabStop = false;
             this.docBox.WordWrap = true;
             this.docBox.Zoom = 100;
+            this.docBox.ZoomChanged += new System.EventHandler(this.docBox_ZoomChanged);
             // 
             // GUI
             // 
