@@ -26,13 +26,39 @@ Event(12345, Restart, function () {
 })
 ```
 
-You can also define events or helper functions in other JS files and import them like below. **The path is relative to the program EXE, not the event file.** If you want to import a file from elsewhere, use the absolute path.
+You can also define events or helper functions in other JS files and import them as JavaScript modules.
 
 ```js
-importFile("path/to/my/file.js");
+import { Boss, BossFlag, checkBossFlag } from "mod.js";
 ```
 
-This is not a true `import` statement, so duplicate variable/const/function names –– even across different imported files –– will cause problems. Avoid this with proper scoping or fully unique naming. For instance, you couldn't define `const foo = "bar"` in one file and `const foo = "not_bar"` in another and import them both.
+An example mod.js, in the same directory as the emevd file, might look as follows:
+
+```js
+export const Boss = {
+    ARTORIAS: 1210820,
+    KALAMEET: 1210400,
+    SUPER_KALAMEET: 1210420,
+};
+
+export const BossFlag = {
+    ARTORIAS: 11210001,
+    KALAMEET: 11210004,
+    SUPER_KALAMEET: 11210006,
+};
+
+export function checkBossFlag(eventFlag) {
+    EndIfEventFlag(EventEndType.End, ON, TargetEventFlagType.EventFlag, eventFlag);
+}
+```
+
+This can be used in the emevd file like `checkBossFlag(BossFlag.SUPER_KALAMEET);`. This example is
+overly simplistic, and it might hurt script readability to make too many trivial helpers.
+Note that functions like this don't act like events and still have to be called from within events,
+so common_func is usually preferable in games where it is available. See
+[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+and [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
+for all syntax options, including namespaced imports.
 
 ## Images
 ![DarkScript 3 screenshot](https://i.imgur.com/mKBkZuk.png)

@@ -10,7 +10,7 @@ namespace DarkScript3
     public class ScriptAst
     {
         public static readonly string SingleIndent = "    ";
-        private static readonly int columnLimit = 140;
+        private static readonly int columnLimit = 120;
 
         public class EventFunction
         {

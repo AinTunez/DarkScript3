@@ -34,17 +34,16 @@ namespace DarkScript3
         {
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             InitializeComponent();
-            InfoTip.GotFocus += (object sender, EventArgs args) => editor.Focus();
             menuStrip.Renderer = new DarkToolStripRenderer();
             statusStrip.Renderer = new DarkToolStripRenderer();
             BFF = new BetterFindForm(editor);
             InfoTip = new ToolControl(editor, BFF);
+            InfoTip.GotFocus += (object sender, EventArgs args) => editor.Focus();
             BFF.infoTip = InfoTip;
             display.Panel2.Controls.Add(InfoTip);
             InfoTip.Show();
             InfoTip.Hide();
-            // TODO: Have different font sizes.
-            // This can be changed with something like new Font(editor.Font.Name, newSize);
+            // TODO: Have different fonts, using FontDialog, stored in config file or similar.
             docBox.Font = editor.Font;
             editor.Focus();
             editor.SelectionColor = Color.White;
@@ -68,7 +67,10 @@ namespace DarkScript3
             InstructionMenu.AppearInterval = 250;
 
             InstructionMenu.ImageList = new ImageList();
-            InstructionMenu.ImageList.Images.Add("instruction", MakeColorImage(Color.FromArgb(255, 255, 255)));
+            // Colors match the HTML emedf documentation
+            InstructionMenu.ImageList.Images.Add("instruction", MakeColorImage(Color.FromArgb(0xFF, 0xFF, 0xB3)));
+            InstructionMenu.ImageList.Images.Add("condition", MakeColorImage(Color.FromArgb(0xFF, 0xFF, 0xFF)));
+            InstructionMenu.ImageList.Images.Add("enum", MakeColorImage(Color.FromArgb(0xE0, 0xB3, 0xFF)));
         }
 
         #region File Handling
@@ -176,7 +178,7 @@ namespace DarkScript3
             {
                 return;
             }
-            
+
             if (ofd.FileName.EndsWith(".js"))
             {
                 OpenJSFile(ofd.FileName);
@@ -210,13 +212,18 @@ namespace DarkScript3
                 SetStyles(editor.Range);
                 SetStyles(docBox.Range);
             }
-            
-            IEnumerable<AutocompleteItem> instructions = Docs.AllArgs.Keys.Select(s =>
+
+            List<AutocompleteItem> instructions = new List<AutocompleteItem>();
+            List<AutocompleteItem> conditions = new List<AutocompleteItem>();
+            foreach (string s in Docs.AllArgs.Keys)
             {
                 string menuText = s;
+
+                // TODO: Tooltips appear to immediately disappear.
                 string toolTipTitle = s;
                 string toolTipText;
-                if (Docs.Functions.TryGetValue(s, out (int, int) indices))
+                bool isInstr = Docs.Functions.TryGetValue(s, out (int, int) indices);
+                if (isInstr)
                 {
                     toolTipText = $"{indices.Item1}[{indices.Item2}] ({ArgString(s)})";
                 }
@@ -224,19 +231,23 @@ namespace DarkScript3
                 {
                     toolTipText = $"({ArgString(s)})";
                 }
+                ToolTips[menuText] = (toolTipTitle, toolTipText);
 
-                return new AutocompleteItem(s + "(", InstructionMenu.ImageList.Images.IndexOfKey("instruction"), menuText, toolTipTitle, toolTipText);
-            });
-
-            foreach (var item in instructions)
-            {
-                ToolTips[item.MenuText] = (item.ToolTipTitle, item.ToolTipText);
-                item.ToolTipText = null;
-                item.ToolTipTitle = null;
+                if (isInstr)
+                {
+                    instructions.Add(new AutocompleteItem(s + "(", InstructionMenu.ImageList.Images.IndexOfKey("instruction"), menuText));
+                }
+                else
+                {
+                    conditions.Add(new AutocompleteItem(s + "(", InstructionMenu.ImageList.Images.IndexOfKey("condition"), menuText));
+                }
             }
-            instructions = instructions.OrderBy(i => i.Text);
+            IEnumerable<AutocompleteItem> enums = Docs.EnumValues.Keys.Select(s => new AutocompleteItem(s, InstructionMenu.ImageList.Images.IndexOfKey("enum"), s));
 
-            InstructionMenu.Items.SetAutocompleteItems(instructions);
+            InstructionMenu.Items.SetAutocompleteItems(
+                instructions.OrderBy(i => i.MenuText)
+                    .Concat(conditions.OrderBy(i => i.MenuText))
+                    .Concat(enums.OrderBy(i => i.MenuText)));
             editor.ClearUndo();
             CodeChanged = false;
         }
@@ -417,6 +428,7 @@ namespace DarkScript3
                 sb.AppendLine("");
                 sb.AppendLine(editor.Text);
                 File.WriteAllText($"{EVD_Path}.js", sb.ToString());
+                FileVersion = ProgramVersion.VERSION;
             }
             catch (Exception ex)
             {
@@ -458,7 +470,7 @@ namespace DarkScript3
             public static TextStyle EnumProperty = MakeStyle(255, 150, 239);
             public static TextStyle EnumConstant = MakeStyle(78, 201, 176);
             public static TextStyle Number = MakeStyle(181, 206, 168);
-            public static TextStyle EnumType = MakeStyle(180,180,180);
+            public static TextStyle EnumType = MakeStyle(180, 180, 180);
         }
 
         private void customizeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -548,7 +560,7 @@ namespace DarkScript3
             docBox.BackColor = editor.BackColor;
             docBox.ForeColor = editor.ForeColor;
         }
-        
+
         private void Editor_TextChanged(object sender, TextChangedEventArgs e)
         {
             statusLabel.Text = "";
@@ -614,8 +626,9 @@ namespace DarkScript3
 
         #region ToolTips
 
-        public ToolControl InfoTip { get; set; }  = new ToolControl();
-        public Range CurrentTipRange { get; set; }  = null;
+        // Reinitialized in the constructor
+        public ToolControl InfoTip { get; set; } = new ToolControl();
+        public Range CurrentTipRange { get; set; } = null;
 
         private void Editor_ToolTipNeeded(object sender, ToolTipNeededEventArgs e)
         {
@@ -698,13 +711,13 @@ namespace DarkScript3
             {
                 InfoTip.SetText(s);
             }
-            
+
             p.Offset(0, -InfoTip.Height - 5);
             if (!InfoTip.Location.Equals(p))
                 InfoTip.Location = p;
             if (!InfoTip.Visible)
                 InfoTip.Show();
-            
+
             InfoTip.BringToFront();
             editor.Focus();
         }
@@ -1178,9 +1191,9 @@ namespace DarkScript3
             ErrorMessageForm error = new ErrorMessageForm(editor.Font);
             error.SetMessage(file, ex, extra);
             error.ShowDialog();
-            if (error.Place != Place.Empty)
+            if (error.Place is Place p)
             {
-                Range select = editor.GetRange(error.Place, error.Place);
+                Range select = editor.GetRange(p, p);
                 try
                 {
                     // Quick validity check

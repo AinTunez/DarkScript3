@@ -28,8 +28,8 @@ namespace DarkScript3
         // Enums by display name
         public Dictionary<string, EMEDF.EnumDoc> Enums = new Dictionary<string, EMEDF.EnumDoc>();
 
-        // Enum values by value display name for fancy compilation, for control/negate args etc. which must be read as ints.
-        // These should not be packed directly into instruction args, as most enums are not actually ints.
+        // Enum values by value display name. Used for autcomplete, and also in fancy compilation
+        // where control/negate args etc. which must be read as ints.
         public Dictionary<string, int> EnumValues = new Dictionary<string, int>();
 
         // Callable objects by display name, both instructions and condition functions
@@ -344,7 +344,7 @@ namespace DarkScript3
             {
                 doc = funcDoc.ConditionDoc;
             }
-            if (doc == null) return null;
+            if (doc == null || doc.Hidden) return null;
             List<string> names = new List<string> { doc.Name };
             foreach (ConditionData.BoolVersion b in doc.AllBools)
             {

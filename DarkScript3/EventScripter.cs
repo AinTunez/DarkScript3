@@ -1,13 +1,13 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using SoulsFormats;
-using Microsoft.ClearScript.V8;
 using System.Text.RegularExpressions;
 using Microsoft.ClearScript;
-using System.IO;
-using static SoulsFormats.EMEVD.Instruction;
+using Microsoft.ClearScript.JavaScript;
+using Microsoft.ClearScript.V8;
+using SoulsFormats;
 using static SoulsFormats.EMEVD;
 
 namespace DarkScript3
@@ -152,28 +152,14 @@ namespace DarkScript3
             return ins;
         }
 
-        public string Import(string filePath)
-        {
-            string resolvedFile = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(emevdPath), filePath));
-            try
-            {
-                // v8.Execute(Path.GetFileName(resolvedFile), File.ReadAllText(resolvedFile));
-                return File.ReadAllText(resolvedFile);
-            }
-            catch (Exception ex)
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine($"Error importing {filePath}");
-                sb.AppendLine(ex.ToString());
-                throw new Exception(sb.ToString());
-            }
-        }
-
         /// <summary>
         /// Sets up the JavaScript environment.
         /// </summary>
         private void InitAll()
         {
+            v8.DocumentSettings.AccessFlags = DocumentAccessFlags.EnableFileLoading;
+            v8.DocumentSettings.SearchPath = Path.GetDirectoryName(emevdPath);
+
             v8.AddHostObject("$$$_host", new HostFunctions());
             v8.AddHostObject("EVD", EVD);
             v8.AddHostType("EMEVD", typeof(EMEVD));
@@ -186,9 +172,10 @@ namespace DarkScript3
             v8.AddHostType("Console", typeof(Console));
             v8.Execute(Resource.Text("script.js"));
 
+            StringBuilder code = new StringBuilder();
             foreach (KeyValuePair<string, int> pair in docs.GlobalEnumConstants)
             {
-                v8.Execute($"const {pair.Key} = {pair.Value};");
+                code.AppendLine($"const {pair.Key} = {pair.Value};");
             }
             EMEDF DOC = docs.DOC;
             foreach (EMEDF.EnumDoc enm in DOC.Enums)
@@ -196,7 +183,6 @@ namespace DarkScript3
                 if (InstructionDocs.EnumNamesForGlobalization.Contains(enm.Name)) continue;
                 if (enm.Name == "BOOL") continue;
                 HashSet<string> vals = new HashSet<string>();
-                StringBuilder code = new StringBuilder();
                 code.AppendLine($"const {enm.DisplayName} = {{");
                 foreach (var pair in enm.Values.ToList())
                 {
@@ -206,7 +192,6 @@ namespace DarkScript3
                     code.AppendLine($"{valName}: {pair.Key},");
                 }
                 code.AppendLine("};");
-                v8.Execute(code.ToString());
             }
 
             foreach (EMEDF.ClassDoc bank in DOC.Classes)
@@ -215,31 +200,39 @@ namespace DarkScript3
                 {
                     string funcName = instr.DisplayName;
 
-                    var args = instr.Arguments.Select(a => a.DisplayName);
+                    // TODO: Consider requiring all arg docs to be uniquely named in InstructionDocs.
+                    List<string> args = new List<string>();
+                    foreach (EMEDF.ArgDoc argDoc in instr.Arguments)
+                    {
+                        string name = argDoc.DisplayName;
+                        while (args.Contains(name))
+                        {
+                            name += "_";
+                        }
+                        args.Add(name);
+                    }
                     string argNames = string.Join(", ", args);
 
-                    StringBuilder sb = new StringBuilder();
-                    sb.AppendLine($"function {funcName} ({argNames}) {{");
-                    sb.AppendLine($@"   Scripter.CurrentInsName = ""{funcName}"";");
+                    code.AppendLine($"function {funcName} ({argNames}) {{");
+                    code.AppendLine($@"   Scripter.CurrentInsName = ""{funcName}"";");
                     foreach (var arg in args)
                     {
-                        sb.AppendLine($"    if ({arg} === void 0)");
-                        sb.AppendLine($@"           throw '!!! Argument \""{arg}\"" in instruction \""{funcName}\"" is undefined.';");
+                        code.AppendLine($"    if ({arg} === void 0)");
+                        code.AppendLine($@"           throw '!!! Argument \""{arg}\"" in instruction \""{funcName}\"" is undefined.';");
                     }
-                    sb.AppendLine($@"  var ins = _Instruction({bank.Index}, {instr.Index}, Array.from(arguments));");
-                    sb.AppendLine("    Scripter.CurrentInsName = \"\";");
-                    sb.AppendLine("    return ins;");
-                    sb.AppendLine("}");
-                    // Console.WriteLine(sb.ToString());
-                    v8.Execute(sb.ToString());
+                    code.AppendLine($@"  var ins = _Instruction({bank.Index}, {instr.Index}, Array.from(arguments));");
+                    code.AppendLine("    Scripter.CurrentInsName = \"\";");
+                    code.AppendLine("    return ins;");
+                    code.AppendLine("}");
 
                     // Add aliases to InstrDoc? Or maybe make TitleCaseName possibly return multiple values?
                     if (funcName.Contains("SpEffect"))
                     {
-                        v8.Execute($"const {funcName.Replace("SpEffect", "Speffect")} = {funcName};");
+                        code.AppendLine($"const {funcName.Replace("SpEffect", "Speffect")} = {funcName};");
                     }
                 }
             }
+            v8.Execute(code.ToString());
         }
 
         public string EventName(long id)
@@ -257,9 +250,11 @@ namespace DarkScript3
         public EMEVD Pack(string code, string documentName)
         {
             EVD.Events.Clear();
+            v8.DocumentSettings.Loader.DiscardCachedDocuments();
             try
             {
-                v8.Execute(documentName, $"(function() {{ {code} }})();");
+                DocumentInfo docInfo = new DocumentInfo(documentName) { Category = ModuleCategory.Standard };
+                v8.Execute(docInfo, code);
             }
             catch (Exception ex) when (ex is IScriptEngineException scriptException)
             {
