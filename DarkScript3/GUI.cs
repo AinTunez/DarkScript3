@@ -428,6 +428,7 @@ namespace DarkScript3
                 sb.AppendLine("");
                 sb.AppendLine(editor.Text);
                 File.WriteAllText($"{EVD_Path}.js", sb.ToString());
+                FileVersion = ProgramVersion.VERSION;
             }
             catch (Exception ex)
             {
