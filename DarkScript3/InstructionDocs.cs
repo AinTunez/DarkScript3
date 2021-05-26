@@ -273,7 +273,8 @@ namespace DarkScript3
             int insIndex,
             EMEDF.InstrDoc doc,
             Dictionary<Parameter, T> paramNames,
-            Func<EMEDF.ArgDoc, object, object> formatArgFunc)
+            Func<EMEDF.ArgDoc, object, object> formatArgFunc,
+            bool allowArgMismatch = false)
         {
             List<object> args;
             if (IsVariableLength(doc))
@@ -298,9 +299,26 @@ namespace DarkScript3
             {
                 List<int> positions = FuncBytePositions[doc];
                 List<ArgType> argStruct = doc.Arguments.Select(arg => arg.Type == 8 ? ArgType.UInt32 : (ArgType)arg.Type).ToList();
-                args = ins.UnpackArgs(argStruct);
+                try
+                {
+                    args = ins.UnpackArgs(argStruct);
+                }
+                catch when (allowArgMismatch)
+                {
+                    args = new List<object>();
+                    // Try to preserve as many valid args as possible in compatibility mode
+                    while (argStruct.Count > 1)
+                    {
+                        argStruct.RemoveAt(argStruct.Count - 1);
+                        try
+                        {
+                            args = ins.UnpackArgs(argStruct);
+                        }
+                        catch { }
+                    }
+                }
                 int expectedLength = positions[argStruct.Count];
-                if (ins.ArgData.Length > expectedLength)
+                if (ins.ArgData.Length > expectedLength && !allowArgMismatch)
                 {
                     throw new ArgumentException($"{ins.ArgData.Length - expectedLength} excess bytes of arg data at position {expectedLength}");
                 }

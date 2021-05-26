@@ -19,6 +19,8 @@ Some useful ones are:
 * Ctrl+Shift+C - comment/uncomment text
 * Ctrl+Scroll - zoom in/out
 * Ctrl+Space - open autocomplete menu
+* Ctrl+Click on number - go to event definition from anywhere, or event initialization from definition
+* Ctrl+-, Ctrl+Shift+- - backwards/forwards navigation
 
 ### Importing other files
 

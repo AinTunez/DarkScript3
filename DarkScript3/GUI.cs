@@ -12,6 +12,8 @@ using System.Xml.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 
 namespace DarkScript3
 {
@@ -19,6 +21,7 @@ namespace DarkScript3
     {
         private string EVD_Path;
         private string FileVersion;
+        private bool FromJSFile;
         private EventScripter Scripter;
         private InstructionDocs Docs;
         private ScriptSettings Settings;
@@ -26,7 +29,6 @@ namespace DarkScript3
         private AutocompleteMenu InstructionMenu;
         private BetterFindForm BFF;
         private PreviewCompilationForm Preview;
-        private Action<string> loadDocTextDebounce;
 
         private Dictionary<string, (string title, string text)> ToolTips = new Dictionary<string, (string, string)>();
 
@@ -43,7 +45,6 @@ namespace DarkScript3
             display.Panel2.Controls.Add(InfoTip);
             InfoTip.Show();
             InfoTip.Hide();
-            // TODO: Have different fonts, using FontDialog, stored in config file or similar.
             docBox.Font = editor.Font;
             editor.Focus();
             editor.SelectionColor = Color.White;
@@ -121,7 +122,7 @@ namespace DarkScript3
                     extra.AppendLine(Environment.NewLine);
                     extra.Append("($Event is used but preprocessing is disabled. Enable it in compilation settings if desired.)");
                 }
-                if (ProgramVersion.CompareVersions(ProgramVersion.VERSION, FileVersion) != 0)
+                if (FromJSFile && ProgramVersion.CompareVersions(ProgramVersion.VERSION, FileVersion) != 0)
                 {
                     extra.AppendLine(Environment.NewLine);
                     extra.Append(ProgramVersion.GetCompatibilityMessage(Scripter.FileName, Docs.ResourceString, FileVersion));
@@ -173,7 +174,7 @@ namespace DarkScript3
             }
             InstructionDocs oldDocs = Docs;
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx;";
+            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx|All files|*.*";
             if (ofd.ShowDialog() != DialogResult.OK)
             {
                 return;
@@ -209,8 +210,7 @@ namespace DarkScript3
             if (oldDocs?.ResourceString != Docs.ResourceString)
             {
                 JSRegex.GlobalConstant = new Regex($@"[^.]\b(?<range>{string.Join("|", InstructionDocs.GlobalConstants.Concat(Docs.GlobalEnumConstants.Keys))})\b");
-                SetStyles(editor.Range);
-                SetStyles(docBox.Range);
+                SetGlobalStyles();
             }
 
             List<AutocompleteItem> instructions = new List<AutocompleteItem>();
@@ -219,7 +219,6 @@ namespace DarkScript3
             {
                 string menuText = s;
 
-                // TODO: Tooltips appear to immediately disappear.
                 string toolTipTitle = s;
                 string toolTipText;
                 bool isInstr = Docs.Functions.TryGetValue(s, out (int, int) indices);
@@ -269,11 +268,12 @@ namespace DarkScript3
             Scripter = new EventScripter(fileName, Docs, evd);
 
             bool changed = CodeChanged;
-            try
+            FromJSFile = true;
+            if (jsText == null)
             {
-                bool decompileRequired = jsText == null;
-                if (decompileRequired)
+                try
                 {
+                    FromJSFile = false;
                     if (isFancy && Docs.Translator != null)
                     {
                         jsText = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).Unpack();
@@ -283,31 +283,58 @@ namespace DarkScript3
                         jsText = Scripter.Unpack();
                     }
                 }
-                editor.Text = jsText;
-                EVD_Path = fileName;
-                Text = $"DARKSCRIPT 3 - {Scripter.FileName}";
-                FileVersion = extraFields != null && extraFields.TryGetValue("version", out string version) ? version : null;
-                if (!decompileRequired)
+                catch (Exception ex)
                 {
-                    // Notify about possible compatibility issues
-                    int versionCmp = ProgramVersion.CompareVersions(ProgramVersion.VERSION, FileVersion);
-                    if (versionCmp > 0)
+                    // Also try to do it in compatibility mode, for emevd files which are no longer allowed, such as changing EMEDFs.
+                    try
                     {
-                        statusLabel.Text = "Note: File was previously saved using an earlier version of DarkScript3";
+                        jsText = Scripter.Unpack(compatibilityMode: true);
                     }
-                    else if (versionCmp < 0)
+                    catch
                     {
-                        statusLabel.Text = "Note: File was previously saved using an newer version of DarkScript3. Please update!";
+                        // If this also fails, we only care about the original exception.
+                    }
+                    if (jsText == null)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    else
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine(ex.Message);
+                        sb.AppendLine("Proceed anyway? You will have to fix instruction arguments before resaving.");
+                        DialogResult result = MessageBox.Show(sb.ToString(), "Error", MessageBoxButtons.YesNoCancel);
+                        if (result != DialogResult.Yes)
+                        {
+                            jsText = null;
+                        }
+                    }
+                    if (jsText == null)
+                    {
+                        Scripter = null;
+                        CodeChanged = changed;
+                        return false;
                     }
                 }
-                return true;
             }
-            catch (Exception ex)
+            editor.Text = jsText;
+            EVD_Path = fileName;
+            Text = $"DARKSCRIPT 3 - {Scripter.FileName}";
+            FileVersion = extraFields != null && extraFields.TryGetValue("version", out string version) ? version : null;
+            if (FromJSFile)
             {
-                MessageBox.Show(ex.Message);
-                CodeChanged = changed;
-                return false;
+                // Notify about possible compatibility issues
+                int versionCmp = ProgramVersion.CompareVersions(ProgramVersion.VERSION, FileVersion);
+                if (versionCmp > 0)
+                {
+                    statusLabel.Text = "Note: File was previously saved using an earlier version of DarkScript3";
+                }
+                else if (versionCmp < 0)
+                {
+                    statusLabel.Text = "Note: File was previously saved using an newer version of DarkScript3. Please update!";
+                }
             }
+            return true;
         }
 
         private Dictionary<string, string> GetHeaderValues(string fileText)
@@ -386,7 +413,10 @@ namespace DarkScript3
                 if (docs == null) return false;
             }
 
-            SFUtil.Backup(org);
+            if (File.Exists(org))
+            {
+                SFUtil.Backup(org);
+            }
 
             text = Regex.Replace(text, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==", "");
             return OpenEMEVDFile(org, docs, evd: evd, jsText: text.Trim(), extraFields: headers);
@@ -457,28 +487,96 @@ namespace DarkScript3
 
         #region Highlighting
 
-        public static TextStyle MakeStyle(Color c, FontStyle f = FontStyle.Regular)
-        {
-            return MakeStyle(new SolidBrush(c), f);
-        }
-
-        public static TextStyle MakeStyle(int r, int g, int b, FontStyle f = FontStyle.Regular)
+        public static TextStyle MakeStyle(int r, int g, int b, FontStyle f = FontStyle.Regular, bool renderCJK = false)
         {
             var color = Color.FromArgb(r, g, b);
-            return MakeStyle(new SolidBrush(color), f);
+            return MakeStyle(color, f, renderCJK);
         }
 
-        private static TextStyle MakeStyle(Brush b, FontStyle f = FontStyle.Regular)
+        public static TextStyle MakeStyle(Color c, FontStyle f = FontStyle.Regular, bool renderCJK = false)
         {
-            Styles.Add(new TextStyle(b, Brushes.Transparent, f));
-            return Styles.Last();
+            Brush b = new SolidBrush(c);
+            TextStyle style;
+            if (renderCJK)
+            {
+                style = new CJKCompatibleTextStyle(b, null, f);
+            }
+            else
+            {
+                style = new TextStyle(b, null, f);
+            }
+            Styles.Add(style);
+            return style;
+        }
+
+        // A hack to make CJK text display not overlap, since default char width is based on the with of M.
+        // If needed we can also set the DefaultStyle to use this, but at the moment it's only used in comments.
+        public class CJKCompatibleTextStyle : TextStyle
+        {
+            public CJKCompatibleTextStyle(Brush foreBrush, Brush backgroundBrush, FontStyle fontStyle) : base(foreBrush, backgroundBrush, fontStyle) { }
+
+            // This is taken from TextStyle but without the incredibly slow IME mode.
+            public override void Draw(Graphics gr, Point position, Range range)
+            {
+                if (BackgroundBrush != null)
+                    gr.FillRectangle(BackgroundBrush, position.X, position.Y, (range.End.iChar - range.Start.iChar) * range.tb.CharWidth, range.tb.CharHeight);
+
+                using (var f = new Font(range.tb.Font, FontStyle))
+                {
+                    Line line = range.tb[range.Start.iLine];
+                    float dx = range.tb.CharWidth;
+                    // The calculation used in TextStyle.
+                    float y = position.Y + range.tb.LineInterval / 2;
+                    float x = position.X - range.tb.CharWidth / 3;
+
+                    if (ForeBrush == null)
+                        ForeBrush = new SolidBrush(range.tb.ForeColor);
+
+                    GraphicsState savedState = null;
+                    float widthRatio = 0;
+                    for (int i = range.Start.iChar; i < range.End.iChar; i++)
+                    {
+                        char c = line[i].c;
+                        if (FastColoredTextBox.IsCJKLetter(c))
+                        {
+                            if (savedState == null)
+                            {
+                                if (widthRatio == 0)
+                                {
+                                    // To be more performant and readable, use a single width for everything.
+                                    widthRatio = range.tb.CharWidth / FastColoredTextBox.GetCharSize(f, '間').Width;
+                                }
+                                savedState = gr.Save();
+                                // Even though this is appended at the end, the x/y transform is still applied after that by DrawString.
+                                // It's compensated for below.
+                                gr.ScaleTransform(widthRatio, 1, MatrixOrder.Append);
+                            }
+                        }
+                        else
+                        {
+                            if (savedState != null)
+                            {
+                                gr.Restore(savedState);
+                                savedState = null;
+                            }
+                        }
+                        float relX = savedState == null ? x : x / widthRatio + 2;
+                        gr.DrawString(c.ToString(), f, ForeBrush, relX, y, stringFormat);
+                        x += dx;
+                    }
+                    if (savedState != null)
+                    {
+                        gr.Restore(savedState);
+                    }
+                }
+            }
         }
 
         public static List<TextStyle> Styles = new List<TextStyle>();
 
         public static class TextStyles
         {
-            public static TextStyle Comment = MakeStyle(87, 166, 74);
+            public static TextStyle Comment = MakeStyle(87, 166, 74, renderCJK: true);
             public static TextStyle String = MakeStyle(214, 157, 133);
             public static TextStyle Keyword = MakeStyle(86, 156, 214);
             public static TextStyle ToolTipKeyword = MakeStyle(106, 176, 234);
@@ -486,17 +584,33 @@ namespace DarkScript3
             public static TextStyle EnumConstant = MakeStyle(78, 201, 176);
             public static TextStyle Number = MakeStyle(181, 206, 168);
             public static TextStyle EnumType = MakeStyle(180, 180, 180);
+            public static BoxStyle HighlightToken = BoxStyle.Make(Color.FromArgb(127, 255, 255, 255));
+        }
+
+        public class BoxStyle : Style
+        {
+            public Pen BorderPen { get; set; }
+
+            public static BoxStyle Make(Color color)
+            {
+                return new BoxStyle { BorderPen = new Pen(color) };
+            }
+
+            public override void Draw(Graphics gr, Point position, Range range)
+            {
+                gr.DrawRectangle(BorderPen, position.X, position.Y, (range.End.iChar - range.Start.iChar) * range.tb.CharWidth, range.tb.CharHeight);
+            }
         }
 
         private void customizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var colors = new StyleConfig(this);
+            var colors = new StyleConfig(this, editor.Font);
             if (colors.ShowDialog() == DialogResult.OK)
             {
                 editor.ClearStylesBuffer();
                 docBox.ClearStylesBuffer();
 
-                TextStyles.Comment = MakeStyle(colors.commentSetting.Color);
+                TextStyles.Comment = MakeStyle(colors.commentSetting.Color, renderCJK: true);
                 TextStyles.String = MakeStyle(colors.stringSetting.Color);
                 TextStyles.Keyword = MakeStyle(colors.keywordSetting.Color);
                 TextStyles.ToolTipKeyword = MakeStyle(colors.ttKeywordSetting.Color);
@@ -504,24 +618,38 @@ namespace DarkScript3
                 TextStyles.EnumConstant = MakeStyle(colors.globalConstSetting.Color);
                 TextStyles.Number = MakeStyle(colors.numberSetting.Color);
                 TextStyles.EnumType = MakeStyle(colors.toolTipEnumType.Color);
+                Color box = colors.highlightBoxSetting.Color;
+                box = Color.FromArgb(127, box.R, box.G, box.B);
+                TextStyles.HighlightToken = BoxStyle.Make(box);
 
                 editor.BackColor = colors.backgroundSetting.Color;
                 editor.SelectionColor = colors.highlightSetting.Color;
                 editor.ForeColor = colors.plainSetting.Color;
+
                 docBox.BackColor = colors.backgroundSetting.Color;
                 docBox.SelectionColor = colors.highlightSetting.Color;
                 docBox.ForeColor = colors.plainSetting.Color;
 
-                SaveColors();
+                SetGlobalFont(colors.FontSetting, checkAllowed: true);
 
-                Editor_TextChanged(editor, new TextChangedEventArgs(editor.Range));
-                Editor_TextChanged(docBox, new TextChangedEventArgs(docBox.Range));
+                SaveColors();
+                SetGlobalStyles();
             }
         }
 
-        string HexColor(TextStyle s)
+        private string HexColor(TextStyle s)
         {
-            return (s.ForeBrush as SolidBrush).Color.ToArgb().ToString("X");
+            return HexColor(s.ForeBrush);
+        }
+
+        private string HexColor(Brush brush)
+        {
+            return HexColor((brush as SolidBrush).Color);
+        }
+
+        private string HexColor(Color c)
+        {
+            return c.ToArgb().ToString("X");
         }
 
         private void SaveColors()
@@ -535,9 +663,11 @@ namespace DarkScript3
             sb.AppendLine("EnumConstant=" + HexColor(TextStyles.EnumConstant));
             sb.AppendLine("Number=" + HexColor(TextStyles.Number));
             sb.AppendLine("EnumType=" + HexColor(TextStyles.EnumType));
-            sb.AppendLine("Background=" + editor.BackColor.ToArgb().ToString("X"));
-            sb.AppendLine("Highlight=" + editor.SelectionColor.ToArgb().ToString("X"));
-            sb.AppendLine("Default=" + editor.ForeColor.ToArgb().ToString("X"));
+            sb.AppendLine("Background=" + HexColor(editor.BackColor));
+            sb.AppendLine("Highlight=" + HexColor(editor.SelectionColor));
+            sb.AppendLine("HighlightBox=" + HexColor(TextStyles.HighlightToken.BorderPen.Brush));
+            sb.AppendLine("Default=" + HexColor(editor.ForeColor));
+            sb.AppendLine("Font=" + new FontConverter().ConvertToInvariantString(editor.Font));
             File.WriteAllText("colors.cfg", sb.ToString());
         }
 
@@ -550,15 +680,15 @@ namespace DarkScript3
             string[] lines = File.ReadAllLines("colors.cfg");
             foreach (string line in lines)
             {
-                string[] split = line.Split('=');
+                string[] split = line.Split(new[] { '=' }, 2);
                 string prop = split[0];
                 string val = split[1];
-                cfg[prop] = val;
+                cfg[prop] = val.Trim();
             }
 
             Color colorFromHex(string prop) => Color.FromArgb(Convert.ToInt32(cfg[prop], 16));
 
-            TextStyles.Comment = MakeStyle(colorFromHex("Comment"));
+            TextStyles.Comment = MakeStyle(colorFromHex("Comment"), renderCJK: true);
             TextStyles.String = MakeStyle(colorFromHex("String"));
             TextStyles.Keyword = MakeStyle(colorFromHex("Keyword"));
             TextStyles.ToolTipKeyword = MakeStyle(colorFromHex("ToolTipKeyword"));
@@ -574,6 +704,22 @@ namespace DarkScript3
             docBox.SelectionColor = editor.SelectionColor;
             docBox.BackColor = editor.BackColor;
             docBox.ForeColor = editor.ForeColor;
+
+            // Added in later version
+            if (cfg.ContainsKey("HighlightBox"))
+            {
+                TextStyles.HighlightToken = BoxStyle.Make(colorFromHex("HighlightBox"));
+            }
+            if (cfg.ContainsKey("Font"))
+            {
+                if (new FontConverter().ConvertFromInvariantString(cfg["Font"]) is Font font)
+                {
+                    if (new InstalledFontCollection().Families.Any(family => family.Name == font.Name))
+                    {
+                        SetGlobalFont(font, checkAllowed: true);
+                    }
+                }
+            }
         }
 
         private void Editor_TextChanged(object sender, TextChangedEventArgs e)
@@ -588,6 +734,39 @@ namespace DarkScript3
                 Preview.DisableConversion();
             }
             SetStyles(e.ChangedRange);
+            SetHighlightRange(null, null);
+            RecalculateHighlightTokenDelayed();
+        }
+
+        private void SetGlobalFont(Font font, bool checkAllowed = false)
+        {
+            if (checkAllowed)
+            {
+                // FastColoredTextBox will refuse to set a monospace font (if . and M aren't the same width), so revert in that case.
+                // Use InfoTip as a guinea pig, but any of them will work.
+                Font oldFont = editor.Font;
+                InfoTip.tipBox.Font = font;
+                if (InfoTip.tipBox.Font.Name != font.Name)
+                {
+                    FontConverter converter = new FontConverter();
+                    MessageBox.Show(
+                        $"Font \"{converter.ConvertToInvariantString(font)}\" detected as not monospace."
+                            + $" Reverting back to \"{converter.ConvertToInvariantString(oldFont)}\".");
+                    font = oldFont;
+                }
+            }
+            editor.Font = font;
+            docBox.Font = font;
+            InfoTip.tipBox.Font = font;
+        }
+
+        private List<Style> HighlightStyles;
+
+        public void SetGlobalStyles()
+        {
+            SetStyles(editor.Range);
+            SetStyles(docBox.Range);
+            HighlightStyles = new List<Style> { TextStyles.Keyword, TextStyles.Number, TextStyles.EnumConstant, TextStyles.EnumProperty };
         }
 
         public void SetStyles(Range range, Regex highlight = null)
@@ -595,7 +774,7 @@ namespace DarkScript3
             range.ClearStyle(Styles.ToArray());
             range.SetStyle(TextStyles.Comment, JSRegex.Comment1);
             range.SetStyle(TextStyles.Comment, JSRegex.Comment2);
-            range.SetStyle(TextStyles.Comment, JSRegex.Comment1);
+            range.SetStyle(TextStyles.Comment, JSRegex.Comment3);
             range.SetStyle(TextStyles.String, JSRegex.String);
             range.SetStyle(TextStyles.String, JSRegex.StringArg);
             range.SetStyle(TextStyles.Keyword, JSRegex.Keyword);
@@ -627,23 +806,37 @@ namespace DarkScript3
             public static Regex Comment2 = new Regex(@"(/\*.*?\*/)|(/\*.*)", RegexOptions.Singleline | RegexCompiledOption);
             public static Regex Comment3 = new Regex(@"(/\*.*?\*/)|(.*\*/)",
                                              RegexOptions.Singleline | RegexOptions.RightToLeft | RegexCompiledOption);
-            public static Regex Number = new Regex(@"\b\d+[\.]?\d*([eE]\-?\d+)?[lLdDfF]?\b|\b0x[a-fA-F\d]+\b",
+            // Allow negative sign here so that negative numbers can be highlighted as tokens.
+            public static Regex Number = new Regex(@"(\b|-)\d+[\.]?\d*([eE]\-?\d+)?[lLdDfF]?\b|\b0x[a-fA-F\d]+\b",
                                            RegexCompiledOption);
             public static Regex Keyword =
                 new Regex(
-                    @"\b(true|false|break|case|catch|const|continue|default|delete|do|else|export"
-                        + @"|for|function|if|in|instanceof|let|new|null|return|switch|this|throw|try|var|void|while|with|typeof)\b",
+                    @"\b("
+                        // Reserved in ECMAScript 2015
+                        + "break|case|catch|class|const|continue|debugger|default|delete|do|else|export|extends|finally|for|function"
+                        + "|if|import|in|instanceof|new|return|super|switch|this|throw|try|typeof|var|void|while|with|yield"
+                        // Reserved in strict mode/modules
+                        + "|await|implements|interface|let|package|private|protected|public|static|yield"
+                        // Custom
+                        + "|true|false"
+                    + @")\b|\$Event\b",
                     RegexCompiledOption);
             public static Regex DataType = new Regex(@"\b(byte|short|int|sbyte|ushort|uint|enum|bool)\b", RegexCompiledOption);
         }
 
         #endregion
 
-        #region ToolTips
+        #region Selection
 
         // Reinitialized in the constructor
-        public ToolControl InfoTip { get; set; } = new ToolControl();
-        public Range CurrentTipRange { get; set; } = null;
+        private ToolControl InfoTip = new ToolControl();
+        // Selection state
+        private Range CurrentTipRange;
+        private Range CurrentTokenRange;
+        private string CurrentToken;
+        private Action<string> loadDocTextDebounce;
+        private Action<int> highlightTokenDebounce;
+        private bool statusActionInfo = false;
 
         private void Editor_ToolTipNeeded(object sender, ToolTipNeededEventArgs e)
         {
@@ -670,7 +863,7 @@ namespace DarkScript3
             // Find text around cursor in the current line, up until hitting parentheses
             Range arguments = editor.Selection.GetFragment(@"[^)(\n]");
 
-            // Preemptively remove tooptip if changing the range; it may potentially get immediately added back.
+            // Preemptively remove tooltip if changing the range; it may potentially get immediately added back.
             // The tooltip may also change even within the same range.
             if (CurrentTipRange == null || !arguments.Start.Equals(CurrentTipRange.Start))
             {
@@ -678,7 +871,34 @@ namespace DarkScript3
                 InfoTip.Hide();
             }
 
-            // Check if inside parens, but not nested ones.
+            if (statusActionInfo)
+            {
+                statusLabel.Text = "";
+                statusActionInfo = false;
+            }
+
+            // Immediately remove/update token highlight range if we've stepped outside of it
+            if (CurrentTokenRange != null && !CurrentTokenRange.Contains(editor.Selection.Start))
+            {
+                Range alreadyHighlighted = editor.Selection.GetFragment(TextStyles.HighlightToken, true);
+                if (!alreadyHighlighted.IsEmpty && alreadyHighlighted.Text == CurrentToken)
+                {
+                    CurrentTokenRange = alreadyHighlighted;
+                }
+                else
+                {
+                    SetHighlightRange(null, null);
+                    RecalculateHighlightTokenDelayed();
+                }
+            }
+            // Now if there is no current highlight range, try to calculate it.
+            // With a delay, so it doesn't pop up in an annoying way, and because it requires a whole-screen update.
+            if (CurrentTokenRange == null)
+            {
+                RecalculateHighlightTokenDelayed();
+            }
+
+            // For being within function args rather than matching the exact string, check if inside parens, but not nested ones.
             // Matching IfThing(0^,1) but not WaitFor(Thi^ng(0,1))
             string funcName;
             if (arguments.CharBeforeStart == '(' && editor.GetRange(arguments.End, arguments.End).CharAfterStart != '(')
@@ -710,6 +930,136 @@ namespace DarkScript3
             loadDocTextDebounce(funcName);
         }
 
+        private void Editor_VisibleRangeChangedDelayed(object sender, EventArgs e)
+        {
+            // Can be used to optimize temporary display ranges if needed
+        }
+
+        private void Editor_MouseUp(object sender, MouseEventArgs e)
+        {
+            // Use this to implement Ctrl+Click, which tries to find an event definition or initialization.
+            if ((ModifierKeys & Keys.Control) == 0)
+            {
+                return;
+            }
+            Place place = editor.PointToPlace(e.Location);
+            Range numRange = editor.GetRange(place, place).GetFragment(TextStyles.Number, false);
+            if (!int.TryParse(numRange.Text, out int id))
+            {
+                return;
+            }
+            // This isn't a comprehensive regex and doesn't support a lot of code on the same line.
+            Regex regex = new Regex($@"^\s*\$?Event\(\s*{id}\s*,", RegexOptions.Singleline);
+            List<Range> ranges = editor.Range.GetRangesByLines(regex).ToList();
+            string searchType = "";
+            if (ranges.Any(r => r.Start.iLine == place.iLine))
+            {
+                // At the moment, only support regular event initialization. Common events would need to be cross-file.
+                regex = new Regex($@"^\s*InitializeEvent\(\s*\d+\s*,\s*{id}\b", RegexOptions.Singleline);
+                ranges = editor.Range.GetRangesByLines(regex).ToList();
+                searchType = " initialization";
+            }
+            if (ranges.Count > 0)
+            {
+                Range idRange = ranges[0].GetRanges($"{id}").LastOrDefault() ?? ranges[0];
+                editor.Selection = editor.GetRange(idRange.Start, idRange.Start);
+                // Update the last visited line; can't be done directly so call where it's done.
+                editor.OnSelectionChangedDelayed();
+                editor.DoSelectionVisible();
+                string extraText = ranges.Count == 1 ? "" : $" (1 of {ranges.Count})";
+                statusLabel.Text = $"Event {id}{searchType} found{extraText}. Use Ctrl+- to navigate back";
+            }
+            else
+            {
+                statusLabel.Text = $"Event {id}{searchType} not found";
+            }
+            statusActionInfo = true;
+        }
+
+        private void RecalculateHighlightTokenDelayed()
+        {
+            if (highlightTokenDebounce == null)
+            {
+                highlightTokenDebounce = Debounce((Action<int>)CalculateHighlightToken, 300);
+            }
+            highlightTokenDebounce(0);
+        }
+
+        private void CalculateHighlightToken(int dummy)
+        {
+            // We want to highlight floating point numbers, integers (including negative sign), and variable names.
+            // Try to avoid inside of strings and comments and exclude a few very common constants.
+            // We can do some light tokenization to achieve this, but try to rely on existing styles instead where possible.
+            HashSet<string> excludeHighlightTokens = new HashSet<string> { "0", "true", "false" };
+            List<Style> styles = editor.GetStylesOfChar(editor.Selection.Start);
+            Range range;
+            if (styles.Contains(TextStyles.Comment))
+            {
+                range = null;
+            }
+            else if (styles.Contains(TextStyles.String))
+            {
+                // Normally exclude strings, but don't exclude param args
+                range = editor.Selection.GetFragment(TextStyles.String, false);
+                char start = range.CharAfterStart;
+                if (start == '"' || start == '\'')
+                {
+                    range = null;
+                }
+            }
+            else
+            {
+                Style candidate = null;
+                if (styles.Count > 0 && HighlightStyles != null)
+                {
+                    candidate = HighlightStyles.Find(style => styles.Contains(style));
+                }
+                if (candidate == null)
+                {
+                    // Roughly match JavaScript-variable-like string
+                    range = editor.Selection.GetFragment(@"[\w\$_]");
+                    // This may be a comment, if the end of range isn't a comment because it's EOL, so specially check that.
+                    if (editor.GetStylesOfChar(range.Start).Contains(TextStyles.Comment))
+                    {
+                        range = null;
+                    }
+                }
+                else
+                {
+                    range = editor.Selection.GetFragment(candidate, false);
+                }
+            }
+            string text = range?.Text;
+            if (excludeHighlightTokens.Contains(text))
+            {
+                range = null;
+                text = null;
+            }
+            SetHighlightRange(range, text);
+        }
+
+        private void SetHighlightRange(Range range, string text)
+        {
+            if (range == null || range.IsEmpty)
+            {
+                CurrentToken = null;
+                CurrentTokenRange = null;
+                // If needed, instead of doing this, we can use editor.VisibleRange and update later on.
+                // This doesn't seem to be a bit issue so far, however.
+                editor.Range.ClearStyle(TextStyles.HighlightToken);
+            }
+            else
+            {
+                CurrentToken = text;
+                CurrentTokenRange = range;
+                // Punctuation doesn't work with \b
+                bool noPrefix = text.StartsWith("-");
+                // Regex regex = new Regex((noPrefix ? "" : @"(\b|^|\n)") + Regex.Escape(text) + @"(\b|$|\r|\n)");
+                Regex regex = new Regex((noPrefix ? "" : @"\b") + Regex.Escape(text) + @"\b");
+
+                editor.Range.SetStyle(TextStyles.HighlightToken, regex);
+            }
+        }
 
         private void ShowTip(string s, Point p, int argIndex = -1)
         {
@@ -756,6 +1106,7 @@ namespace DarkScript3
             }
             return map;
         }
+
         #endregion
 
         #region Text Handling
@@ -953,16 +1304,14 @@ namespace DarkScript3
 
         private void Editor_ZoomChanged(object sender, EventArgs e)
         {
-            docBox.Font = editor.Font;
             InfoTip.Hide();
-            InfoTip.tipBox.Font = editor.Font;
+            SetGlobalFont(editor.Font);
         }
 
         private void docBox_ZoomChanged(object sender, EventArgs e)
         {
-            editor.Font = docBox.Font;
             InfoTip.Hide();
-            InfoTip.tipBox.Font = editor.Font;
+            SetGlobalFont(docBox.Font);
         }
 
         private void GUI_KeyDown(object sender, KeyEventArgs e)
