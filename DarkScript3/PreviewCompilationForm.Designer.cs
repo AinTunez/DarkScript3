@@ -69,6 +69,7 @@ namespace DarkScript3
             this.fctb1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctb1.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctb1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctb1.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctb1.IsReplaceMode = false;
             this.fctb1.Location = new System.Drawing.Point(0, 0);
             this.fctb1.Name = "fctb1";
@@ -80,6 +81,7 @@ namespace DarkScript3
             this.fctb1.TabIndex = 26;
             this.fctb1.Zoom = 100;
             this.fctb1.VisibleRangeChanged += new System.EventHandler(this.fctb_VisibleRangeChanged);
+            this.fctb1.ZoomChanged += new System.EventHandler(this.fctb1_ZoomChanged);
             // 
             // fctb2
             // 
@@ -102,6 +104,7 @@ namespace DarkScript3
             this.fctb2.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctb2.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctb2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctb2.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctb2.IsReplaceMode = false;
             this.fctb2.Location = new System.Drawing.Point(0, 0);
             this.fctb2.Name = "fctb2";
@@ -114,6 +117,7 @@ namespace DarkScript3
             this.fctb2.TabIndex = 27;
             this.fctb2.Zoom = 100;
             this.fctb2.VisibleRangeChanged += new System.EventHandler(this.fctb_VisibleRangeChanged);
+            this.fctb2.ZoomChanged += new System.EventHandler(this.fctb2_ZoomChanged);
             // 
             // splitContainer1
             // 

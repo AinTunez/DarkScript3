@@ -45,7 +45,7 @@ namespace DarkScript3
             display.Panel2.Controls.Add(InfoTip);
             InfoTip.Show();
             InfoTip.Hide();
-            docBox.Font = editor.Font;
+            docBox.Font = (Font)editor.Font.Clone();
             editor.Focus();
             editor.SelectionColor = Color.White;
             docBox.SelectionColor = Color.White;
@@ -741,6 +741,7 @@ namespace DarkScript3
 
         private void SetGlobalFont(Font font, bool checkAllowed = false)
         {
+            font = (Font)font.Clone();
             if (checkAllowed)
             {
                 // FastColoredTextBox will refuse to set a monospace font (if . and M aren't the same width), so revert in that case.
@@ -757,8 +758,8 @@ namespace DarkScript3
                 }
             }
             editor.Font = font;
-            docBox.Font = font;
-            InfoTip.tipBox.Font = font;
+            docBox.Font = (Font)font.Clone();
+            InfoTip.tipBox.Font = (Font)font.Clone();
         }
 
         private List<Style> HighlightStyles;

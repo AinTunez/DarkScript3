@@ -30,8 +30,7 @@ namespace DarkScript3
             highlightSetting.Init("Highlight", ds3.editor.SelectionColor);
             highlightBoxSetting.Init("Highlight Box", GUI.TextStyles.HighlightToken.BorderPen.Brush);
             plainSetting.Init("Default Text", ds3.editor.ForeColor);
-            FontSetting = font;
-            selectFont.Font = font;
+            selectFont.Font = FontSetting = (Font)font.Clone();
         }
 
         private void StyleConfig_Load(object sender, EventArgs e)

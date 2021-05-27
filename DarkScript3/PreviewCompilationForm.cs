@@ -20,8 +20,8 @@ namespace DarkScript3
         public PreviewCompilationForm(Font font)
         {
             InitializeComponent();
-            fctb1.Font = font;
-            fctb2.Font = font;
+            fctb1.Font = (Font)font.Clone();
+            fctb2.Font = (Font)font.Clone();
         }
 
         public void SetSegments(List<FancyJSCompiler.DiffSegment> segments, string pendingCode = null)
@@ -107,6 +107,16 @@ namespace DarkScript3
         private void lineup_CheckedChanged(object sender, EventArgs e)
         {
             RewriteSegments();
+        }
+
+        private void fctb1_ZoomChanged(object sender, EventArgs e)
+        {
+            fctb2.Font = (Font)fctb1.Font.Clone();
+        }
+
+        private void fctb2_ZoomChanged(object sender, EventArgs e)
+        {
+            fctb1.Font = (Font)fctb2.Font.Clone();
         }
     }
 }

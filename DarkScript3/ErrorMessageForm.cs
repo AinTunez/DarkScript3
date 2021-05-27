@@ -25,7 +25,7 @@ namespace DarkScript3
             textMarginHeight = Height - box.Height;
             textMarginWidth = Width - box.Width;
             MinimumSize = new Size(Width, Height);
-            box.Font = font;
+            box.Font = (Font)font.Clone();
         }
 
         public void SetMessage(string file, Exception ex, string extra)
