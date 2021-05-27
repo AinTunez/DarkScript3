@@ -52,6 +52,7 @@ namespace DarkScript3
             LoadColors();
             InitUI();
             InfoTip.tipBox.TextChanged += (object sender, TextChangedEventArgs e) => TipBox_TextChanged(sender, e);
+            editor.HotkeysMapping.Add(Keys.Control | Keys.Enter, FCTBAction.CustomAction1);
         }
 
         private void InitUI()
@@ -943,6 +944,22 @@ namespace DarkScript3
                 return;
             }
             Place place = editor.PointToPlace(e.Location);
+            JumpToEvent(place);
+        }
+
+        private void Editor_CustomAction(object sender, CustomActionEventArgs e)
+        {
+            if (e.Action == FCTBAction.CustomAction1)
+            {
+                if (Scripter != null)
+                {
+                    JumpToEvent(editor.Selection.Start);
+                }
+            }
+        }
+
+        private void JumpToEvent(Place place)
+        {
             Range numRange = editor.GetRange(place, place).GetFragment(TextStyles.Number, false);
             if (!int.TryParse(numRange.Text, out int id))
             {
