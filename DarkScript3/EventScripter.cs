@@ -136,8 +136,6 @@ namespace DarkScript3
                 sb.AppendLine($"EXCEPTION\nCould not write instruction at Event {CurrentEventID}, index {CurrentInsIndex}.\n");
                 sb.AppendLine($"INSTRUCTION\n{CurrentInsName} | {bank}[{index}]\n");
                 sb.AppendLine(ex.Message);
-                //sb.AppendLine("");
-                //sb.AppendLine(ex.StackTrace);
                 throw new Exception(sb.ToString());
             }
         }
@@ -218,7 +216,7 @@ namespace DarkScript3
                     foreach (var arg in args)
                     {
                         code.AppendLine($"    if ({arg} === void 0)");
-                        code.AppendLine($@"           throw '!!! Argument \""{arg}\"" in instruction \""{funcName}\"" is undefined.';");
+                        code.AppendLine($@"           throw '!!! Argument \""{arg}\"" in instruction \""{funcName}\"" is undefined or missing.';");
                     }
                     code.AppendLine($@"  var ins = _Instruction({bank.Index}, {instr.Index}, Array.from(arguments));");
                     code.AppendLine("    Scripter.CurrentInsName = \"\";");
@@ -266,18 +264,18 @@ namespace DarkScript3
         /// <summary>
         /// Generates JS source code from the EMEVD.
         /// </summary>
-        public string Unpack()
+        public string Unpack(bool compatibilityMode = false)
         {
             InitLinkedFiles();
             StringBuilder code = new StringBuilder();
             foreach (Event evt in EVD.Events)
             {
-                UnpackEvent(evt, code);
+                UnpackEvent(evt, code, compatibilityMode);
             }
             return code.ToString();
         }
 
-        public void UnpackEvent(Event evt, StringBuilder code)
+        public void UnpackEvent(Event evt, StringBuilder code, bool compatibilityMode = false)
         {
             CurrentEventID = (int)evt.ID;
 
@@ -308,7 +306,7 @@ namespace DarkScript3
                 List<object> args;
                 try
                 {
-                    args = docs.UnpackArgsWithParams(ins, insIndex, doc, paramNames, (argDoc, val) => argDoc.GetDisplayValue(val));
+                    args = docs.UnpackArgsWithParams(ins, insIndex, doc, paramNames, (argDoc, val) => argDoc.GetDisplayValue(val), compatibilityMode);
                 }
                 catch (Exception ex)
                 {

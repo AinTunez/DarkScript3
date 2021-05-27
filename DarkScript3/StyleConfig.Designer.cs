@@ -30,6 +30,10 @@ namespace DarkScript3
         {
             this.okBtn = new System.Windows.Forms.Button();
             this.cancelBtn = new System.Windows.Forms.Button();
+            this.selectFont = new System.Windows.Forms.Button();
+            this.plainSetting = new DarkScript3.StyleSetting();
+            this.highlightBoxSetting = new DarkScript3.StyleSetting();
+            this.highlightSetting = new DarkScript3.StyleSetting();
             this.backgroundSetting = new DarkScript3.StyleSetting();
             this.numberSetting = new DarkScript3.StyleSetting();
             this.toolTipEnumType = new DarkScript3.StyleSetting();
@@ -39,13 +43,11 @@ namespace DarkScript3
             this.keywordSetting = new DarkScript3.StyleSetting();
             this.stringSetting = new DarkScript3.StyleSetting();
             this.commentSetting = new DarkScript3.StyleSetting();
-            this.highlightSetting = new DarkScript3.StyleSetting();
-            this.plainSetting = new DarkScript3.StyleSetting();
             this.SuspendLayout();
             // 
             // okBtn
             // 
-            this.okBtn.Location = new System.Drawing.Point(90, 360);
+            this.okBtn.Location = new System.Drawing.Point(91, 424);
             this.okBtn.Name = "okBtn";
             this.okBtn.Size = new System.Drawing.Size(75, 23);
             this.okBtn.TabIndex = 1;
@@ -56,13 +58,51 @@ namespace DarkScript3
             // cancelBtn
             // 
             this.cancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelBtn.Location = new System.Drawing.Point(171, 360);
+            this.cancelBtn.Location = new System.Drawing.Point(172, 424);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(75, 23);
             this.cancelBtn.TabIndex = 2;
             this.cancelBtn.Text = "Cancel";
             this.cancelBtn.UseVisualStyleBackColor = true;
             this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
+            // 
+            // selectFont
+            // 
+            this.selectFont.AutoSize = true;
+            this.selectFont.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.selectFont.Location = new System.Drawing.Point(12, 378);
+            this.selectFont.Name = "selectFont";
+            this.selectFont.Size = new System.Drawing.Size(77, 23);
+            this.selectFont.TabIndex = 16;
+            this.selectFont.Text = "Select font...";
+            this.selectFont.Click += new System.EventHandler(this.selectFont_Click);
+            // 
+            // plainSetting
+            // 
+            this.plainSetting.Color = System.Drawing.SystemColors.Control;
+            this.plainSetting.Dock = System.Windows.Forms.DockStyle.Top;
+            this.plainSetting.Location = new System.Drawing.Point(0, 341);
+            this.plainSetting.Name = "plainSetting";
+            this.plainSetting.Size = new System.Drawing.Size(259, 31);
+            this.plainSetting.TabIndex = 15;
+            // 
+            // highlightBoxSetting
+            // 
+            this.highlightBoxSetting.Color = System.Drawing.SystemColors.Control;
+            this.highlightBoxSetting.Dock = System.Windows.Forms.DockStyle.Top;
+            this.highlightBoxSetting.Location = new System.Drawing.Point(0, 310);
+            this.highlightBoxSetting.Name = "highlightBoxSetting";
+            this.highlightBoxSetting.Size = new System.Drawing.Size(259, 31);
+            this.highlightBoxSetting.TabIndex = 14;
+            // 
+            // highlightSetting
+            // 
+            this.highlightSetting.Color = System.Drawing.SystemColors.Control;
+            this.highlightSetting.Dock = System.Windows.Forms.DockStyle.Top;
+            this.highlightSetting.Location = new System.Drawing.Point(0, 279);
+            this.highlightSetting.Name = "highlightSetting";
+            this.highlightSetting.Size = new System.Drawing.Size(259, 31);
+            this.highlightSetting.TabIndex = 13;
             // 
             // backgroundSetting
             // 
@@ -145,24 +185,6 @@ namespace DarkScript3
             this.commentSetting.Size = new System.Drawing.Size(259, 31);
             this.commentSetting.TabIndex = 3;
             // 
-            // highlightSetting
-            // 
-            this.highlightSetting.Color = System.Drawing.SystemColors.Control;
-            this.highlightSetting.Dock = System.Windows.Forms.DockStyle.Top;
-            this.highlightSetting.Location = new System.Drawing.Point(0, 279);
-            this.highlightSetting.Name = "highlightSetting";
-            this.highlightSetting.Size = new System.Drawing.Size(259, 31);
-            this.highlightSetting.TabIndex = 13;
-            // 
-            // plainSetting
-            // 
-            this.plainSetting.Color = System.Drawing.SystemColors.Control;
-            this.plainSetting.Dock = System.Windows.Forms.DockStyle.Top;
-            this.plainSetting.Location = new System.Drawing.Point(0, 310);
-            this.plainSetting.Name = "plainSetting";
-            this.plainSetting.Size = new System.Drawing.Size(259, 31);
-            this.plainSetting.TabIndex = 14;
-            // 
             // StyleConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -170,8 +192,9 @@ namespace DarkScript3
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.cancelBtn;
-            this.ClientSize = new System.Drawing.Size(259, 412);
+            this.ClientSize = new System.Drawing.Size(259, 459);
             this.Controls.Add(this.plainSetting);
+            this.Controls.Add(this.highlightBoxSetting);
             this.Controls.Add(this.highlightSetting);
             this.Controls.Add(this.backgroundSetting);
             this.Controls.Add(this.numberSetting);
@@ -184,6 +207,7 @@ namespace DarkScript3
             this.Controls.Add(this.commentSetting);
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.okBtn);
+            this.Controls.Add(this.selectFont);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -192,9 +216,10 @@ namespace DarkScript3
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Edit Colors";
+            this.Text = "Edit Appearance";
             this.Load += new System.EventHandler(this.StyleConfig_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -211,6 +236,8 @@ namespace DarkScript3
         public StyleSetting numberSetting;
         public StyleSetting backgroundSetting;
         public StyleSetting highlightSetting;
+        public StyleSetting highlightBoxSetting;
         public StyleSetting plainSetting;
+        private System.Windows.Forms.Button selectFont;
     }
 }

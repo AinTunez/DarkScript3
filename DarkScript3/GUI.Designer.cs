@@ -90,6 +90,7 @@ namespace DarkScript3
         '\"',
         '\'',
         '\''};
+            this.editor.AutoIndentChars = false;
             this.editor.AutoIndentCharsPatterns = "\r\n^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;]+);\r\n";
             this.editor.AutoScrollMinSize = new System.Drawing.Size(23, 12);
             this.editor.BackBrush = null;
@@ -121,9 +122,12 @@ namespace DarkScript3
             this.editor.ToolTipNeeded += new System.EventHandler<FastColoredTextBoxNS.ToolTipNeededEventArgs>(this.Editor_ToolTipNeeded);
             this.editor.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.Editor_TextChanged);
             this.editor.SelectionChanged += new System.EventHandler(this.Editor_SelectionChanged);
+            this.editor.VisibleRangeChangedDelayed += new System.EventHandler(this.Editor_VisibleRangeChangedDelayed);
             this.editor.ZoomChanged += new System.EventHandler(this.Editor_ZoomChanged);
+            this.editor.CustomAction += new System.EventHandler<FastColoredTextBoxNS.CustomActionEventArgs>(this.Editor_CustomAction);
             this.editor.Scroll += new System.Windows.Forms.ScrollEventHandler(this.Editor_Scroll);
             this.editor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Editor_KeyDown);
+            this.editor.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseUp);
             // 
             // menuStrip
             // 

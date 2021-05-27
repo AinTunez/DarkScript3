@@ -12,13 +12,15 @@ User-friendly editor for FromSoftware's EMEVD format. For basic usage instructio
 Aside from the usual text file navigation, there are many hotkeys supported.
 Some useful ones are:
 
-* Ctrl+F, Ctrl+H - show find/replace dialogs
+* Ctrl+F, Ctrl+H - show find/replace dialogs (select text first to auto-fill)
 * F3 - find next
 * Ctrl+G - show goto-line dialog
 * Tab, Shift+Tab - indent/unindent text
 * Ctrl+Shift+C - comment/uncomment text
 * Ctrl+Scroll - zoom in/out
 * Ctrl+Space - open autocomplete menu
+* Ctrl+Click, Ctrl+Enter on number - go to event definition from anywhere, or event initialization from definition
+* Ctrl+-, Ctrl+Shift+- - backwards/forwards navigation
 
 ### Importing other files
 

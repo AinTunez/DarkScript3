@@ -25,7 +25,7 @@ namespace DarkScript3
             textMarginHeight = Height - box.Height;
             textMarginWidth = Width - box.Width;
             MinimumSize = new Size(Width, Height);
-            box.Font = font;
+            box.Font = (Font)font.Clone();
         }
 
         public void SetMessage(string file, Exception ex, string extra)
@@ -80,7 +80,7 @@ namespace DarkScript3
                 Match m = placePartsRe.Match(lineText);
                 if (m.Success)
                 {
-                    Place = new Place(int.Parse(m.Groups[2].Value), int.Parse(m.Groups[1].Value) - 1);
+                    Place = new Place(Math.Max(0, int.Parse(m.Groups[2].Value) - 1), Math.Max(0, int.Parse(m.Groups[1].Value) - 1));
                     Close();
                 }
             }

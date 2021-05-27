@@ -12,16 +12,12 @@ namespace DarkScript3
 {
     public partial class StyleConfig : Form
     {
-        public StyleConfig()
-        {
-            InitializeComponent();
-        }
+        public Font FontSetting { get; set; }
 
-        public StyleConfig(GUI ds3)
+        public StyleConfig(GUI ds3, Font font)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
-            plainSetting.Init("Default Text", ds3.editor.ForeColor);
             commentSetting.Init("Comment", GUI.TextStyles.Comment.ForeBrush);
             stringSetting.Init("String", GUI.TextStyles.String.ForeBrush);
             keywordSetting.Init("Keyword", GUI.TextStyles.Keyword.ForeBrush);
@@ -32,6 +28,9 @@ namespace DarkScript3
             toolTipEnumType.Init("Enum Type", GUI.TextStyles.EnumType.ForeBrush);
             backgroundSetting.Init("Background", ds3.editor.BackColor);
             highlightSetting.Init("Highlight", ds3.editor.SelectionColor);
+            highlightBoxSetting.Init("Highlight Box", GUI.TextStyles.HighlightToken.BorderPen.Brush);
+            plainSetting.Init("Default Text", ds3.editor.ForeColor);
+            selectFont.Font = FontSetting = (Font)font.Clone();
         }
 
         private void StyleConfig_Load(object sender, EventArgs e)
@@ -49,6 +48,16 @@ namespace DarkScript3
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void selectFont_Click(object sender, EventArgs e)
+        {
+            FontDialog dialog = new FontDialog();
+            dialog.Font = FontSetting;
+            dialog.FontMustExist = true;
+            dialog.ShowDialog();
+            FontSetting = dialog.Font;
+            selectFont.Font = FontSetting;
         }
     }
 }
