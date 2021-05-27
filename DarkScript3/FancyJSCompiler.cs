@@ -71,13 +71,27 @@ namespace DarkScript3
                 return ret;
             }
 
-            public string GetTextBetweenNodes(Node last, Node next)
+            public string GetTextBetweenNodes(Node last, Node next, out int startLine)
             {
+                startLine = 0;
                 if (last == null && next == null) return Code;
-                int sa = last == null ? 0 : GetOffset(last.Location.End);
-                // Hack to skip a newline, since it's not included in original Location, but always added in replacement
-                if (sa + 1 < Code.Length && Code[sa] == '\r' && Code[sa + 1] == '\n') sa += 2;
-                else if (sa < Code.Length && Code[sa] == '\n') sa += 1;
+                int sa = 0;
+                if (last != null)
+                {
+                    startLine = last.Location.End.Line;
+                    sa = GetOffset(last.Location.End);
+                    // Hack to skip a newline, since it's not included in original Location, but always added whatever replaces 'last'
+                    if (sa + 1 < Code.Length && Code[sa] == '\r' && Code[sa + 1] == '\n')
+                    {
+                        sa += 2;
+                        startLine++;
+                    }
+                    else if (sa < Code.Length && Code[sa] == '\n')
+                    {
+                        sa += 1;
+                        startLine++;
+                    }
+                }
                 int sb = next == null ? Code.Length : GetOffset(next.Location.Start);
                 return Code.Substring(sa, sb - sa);
             }
@@ -88,6 +102,19 @@ namespace DarkScript3
                 int sb = GetOffset(node.Location.End);
                 string source = Code.Substring(sa, sb - sa);
                 return new SourceNode { Node = node, Source = source };
+            }
+
+            // 0-indexed first non-whitespace character
+            public static int IndexOfNonWhiteSpace(string line)
+            {
+                for (int i = 0; i < line.Length; i++)
+                {
+                    if (!char.IsWhiteSpace(line[i]))
+                    {
+                        return i;
+                    }
+                }
+                return 0;
             }
 
             public void TransformErrors(List<CompileError> errors, string header)
@@ -103,16 +130,10 @@ namespace DarkScript3
                         // In cases we don't have a precise column, use the actual start of the line at minimum
                         if (col == 0)
                         {
-                            for (int i = 0; i < line.Length; i++)
-                            {
-                                if (!char.IsWhiteSpace(line[i]))
-                                {
-                                    col = i;
-                                    break;
-                                }
-                            }
+                            col = IndexOfNonWhiteSpace(line);
                         }
-                        string prefix = $"{sourceLoc.Line}:{col}:";
+                        // In the editor, columns are 1-indexed.
+                        string prefix = $"{sourceLoc.Line}:{col+1}:";
                         sb.AppendLine($"{prefix}{line}");
                         sb.AppendLine($"{new string(' ', prefix.Length + col)}^");
                     }
@@ -822,14 +843,14 @@ namespace DarkScript3
             EventParser eventParser = new EventParser { context = context, source = source, docs = docs };
 
             Node lastRewrittenNode = null;
-            List<EventFunction> funcs = new List<EventFunction>();
             StringWriter stringOutput = new StringWriter();
             LineTrackingWriter writer = new LineTrackingWriter { Writer = stringOutput };
+            int blockSourceLine;
             foreach (Statement stmt in program.Body)
             {
                 CallExpression call = EventParser.GetEventCall(stmt, allowVanilla: repack);
                 if (call == null) continue;
-                string header = source.GetTextBetweenNodes(lastRewrittenNode, stmt);
+                string header = source.GetTextBetweenNodes(lastRewrittenNode, stmt, out blockSourceLine);
                 source.SkipTo(call);
 
                 int errorCount = context.Errors.Count;
@@ -871,6 +892,7 @@ namespace DarkScript3
                         {
                             header = header.Replace("\t", SingleIndent);
                         }
+                        writer.RecordMapping(new LineMapping { SourceLine = blockSourceLine });
                         writer.Write(header);
                         func.Print(writer);
                     }
@@ -884,11 +906,12 @@ namespace DarkScript3
                 }
                 lastRewrittenNode = stmt;
             }
-            string footer = source.GetTextBetweenNodes(lastRewrittenNode, null);
+            string footer = source.GetTextBetweenNodes(lastRewrittenNode, null, out blockSourceLine);
             if (repack)
             {
                 footer = footer.Replace("\t", SingleIndent);
             }
+            writer.RecordMapping(new LineMapping { SourceLine = blockSourceLine });
             writer.Write(footer);
 
             source.TransformErrors(context.Errors, "ERROR");
@@ -948,9 +971,10 @@ namespace DarkScript3
                     }
                     string line = SourceContext.GetLine(sourceLine);
                     frame.Line = sourceLine;
-                    frame.Column = 0;
+                    frame.Column = 1;
                     if (line != null)
                     {
+                        frame.Column = SourceContext.IndexOfNonWhiteSpace(line) + 1;
                         line = line.Trim();
                         if (line != frame.Text)
                         {

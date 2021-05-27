@@ -90,6 +90,7 @@ namespace DarkScript3
         '\"',
         '\'',
         '\''};
+            this.editor.AutoIndentChars = false;
             this.editor.AutoIndentCharsPatterns = "\r\n^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;]+);\r\n";
             this.editor.AutoScrollMinSize = new System.Drawing.Size(23, 12);
             this.editor.BackBrush = null;

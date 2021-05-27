@@ -174,7 +174,7 @@ namespace DarkScript3
             }
             InstructionDocs oldDocs = Docs;
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx|All files|*.*";
+            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx|EMEVD JS Files|*.emevd.js; *.emevd.dcx.js|All files|*.*";
             if (ofd.ShowDialog() != DialogResult.OK)
             {
                 return;
@@ -681,9 +681,9 @@ namespace DarkScript3
             foreach (string line in lines)
             {
                 string[] split = line.Split(new[] { '=' }, 2);
-                string prop = split[0];
-                string val = split[1];
-                cfg[prop] = val.Trim();
+                string prop = split[0].Trim();
+                string val = split[1].Trim();
+                cfg[prop] = val;
             }
 
             Color colorFromHex(string prop) => Color.FromArgb(Convert.ToInt32(cfg[prop], 16));

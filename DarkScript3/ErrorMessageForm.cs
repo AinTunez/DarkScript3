@@ -80,7 +80,7 @@ namespace DarkScript3
                 Match m = placePartsRe.Match(lineText);
                 if (m.Success)
                 {
-                    Place = new Place(int.Parse(m.Groups[2].Value), int.Parse(m.Groups[1].Value) - 1);
+                    Place = new Place(Math.Max(0, int.Parse(m.Groups[2].Value) - 1), Math.Max(0, int.Parse(m.Groups[1].Value) - 1));
                     Close();
                 }
             }
