@@ -1360,6 +1360,7 @@ namespace DarkScript3
                 BFF.tbFind.Text = editor.Selection.Text;
 
             BFF.tbFind.SelectAll();
+            BFF.Owner = this;
             BFF.Show();
             BFF.Focus();
             BFF.BringToFront();

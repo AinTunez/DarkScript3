@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace DarkScript3
@@ -31,7 +32,7 @@ namespace DarkScript3
         {
             get
             {
-                EventCFG.CFGOptions opts = EventCFG.CFGOptions.DEFAULT;
+                EventCFG.CFGOptions opts = EventCFG.CFGOptions.GetDefault();
                 if (docs.AllowRestrictConditionGroups)
                 {
                     opts.RestrictConditionGroupCount = !IsRemastered;

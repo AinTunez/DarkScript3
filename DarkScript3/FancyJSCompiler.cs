@@ -218,9 +218,9 @@ namespace DarkScript3
             public Position? Loc { get; set; }
             public int Line { get; set; }
             public string Message { get; set; }
-            public int? Event { get; set; }
+            public object Event { get; set; }
 
-            public static CompileError FromNode(Node node, string message, int? ev)
+            public static CompileError FromNode(Node node, string message, object ev)
             {
                 Position? loc = node == null ? (Position?)null : node.Location.Start;
                 return new CompileError
@@ -232,7 +232,7 @@ namespace DarkScript3
                 };
             }
 
-            public static CompileError FromInstr(Intermediate im, string message, int? ev)
+            public static CompileError FromInstr(Intermediate im, string message, object ev)
             {
                 Position? loc = im?.LineMapping == null ? (Position?)null : new Position(im.LineMapping.SourceLine, 0);
                 return new CompileError
@@ -265,10 +265,10 @@ namespace DarkScript3
 
             // Local properties for error reporting.
             // The preferred way to change this is with Copy, but can also be mutated in a single-thread context.
-            public int? Event { get; set; }
+            public object Event { get; set; }
 
             // Clone
-            public WalkContext Copy(int? ev = null)
+            public WalkContext Copy(object ev = null)
             {
                 WalkContext other = (WalkContext)MemberwiseClone();
                 if (ev != null)
@@ -760,7 +760,7 @@ namespace DarkScript3
                 return ret;
             }
 
-            private EventFunction ConvertEvent(int id, Event.RestBehaviorType restBehavior, FunctionExpression func)
+            private EventFunction ConvertEvent(object id, Event.RestBehaviorType restBehavior, FunctionExpression func)
             {
                 // func.Id is currently meaningless, like making an anonymous function with function somename() {}
                 // Otherwise, should have plain params, block statement body, and no attributes like Generator/Expression/Async/Strict.
@@ -819,7 +819,11 @@ namespace DarkScript3
                     && behaviorTypes.TryGetValue(rest.Name, out Event.RestBehaviorType restBehavior)
                     && call.Arguments[2] is FunctionExpression funcExpr)
                 {
-                    int eventId = ConvertIntExpression(call.Arguments[0]);
+                    object eventId = source.GetSourceNode(call.Arguments[0]);
+                    if (int.TryParse(eventId.ToString(), out int actualId))
+                    {
+                        eventId = actualId;
+                    }
                     context.Event = eventId;
                     return ConvertEvent(eventId, restBehavior, funcExpr);
                 }
