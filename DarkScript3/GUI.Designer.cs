@@ -30,7 +30,6 @@ namespace DarkScript3
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GUI));
-            this.editor = new FastColoredTextBoxNS.FastColoredTextBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,67 +66,13 @@ namespace DarkScript3
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.display = new System.Windows.Forms.SplitContainer();
             this.docBox = new FastColoredTextBoxNS.FastColoredTextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.editor)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.display)).BeginInit();
             this.display.Panel1.SuspendLayout();
-            this.display.Panel2.SuspendLayout();
             this.display.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.docBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // editor
-            // 
-            this.editor.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.editor.AutoIndentChars = false;
-            this.editor.AutoIndentCharsPatterns = "\r\n^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;]+);\r\n";
-            this.editor.AutoScrollMinSize = new System.Drawing.Size(23, 12);
-            this.editor.BackBrush = null;
-            this.editor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.editor.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2;
-            this.editor.CaretColor = System.Drawing.Color.White;
-            this.editor.CharHeight = 12;
-            this.editor.CharWidth = 6;
-            this.editor.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.editor.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.editor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.editor.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.editor.ForeColor = System.Drawing.Color.Gainsboro;
-            this.editor.IndentBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.editor.IsReplaceMode = false;
-            this.editor.LeftBracket = '(';
-            this.editor.LeftBracket2 = '{';
-            this.editor.LineNumberColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.editor.Location = new System.Drawing.Point(0, 0);
-            this.editor.Name = "editor";
-            this.editor.Paddings = new System.Windows.Forms.Padding(0);
-            this.editor.RightBracket = ')';
-            this.editor.RightBracket2 = '}';
-            this.editor.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.editor.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("editor.ServiceColors")));
-            this.editor.Size = new System.Drawing.Size(573, 475);
-            this.editor.TabIndex = 0;
-            this.editor.Zoom = 100;
-            this.editor.ToolTipNeeded += new System.EventHandler<FastColoredTextBoxNS.ToolTipNeededEventArgs>(this.Editor_ToolTipNeeded);
-            this.editor.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.Editor_TextChanged);
-            this.editor.SelectionChanged += new System.EventHandler(this.Editor_SelectionChanged);
-            this.editor.VisibleRangeChangedDelayed += new System.EventHandler(this.Editor_VisibleRangeChangedDelayed);
-            this.editor.ZoomChanged += new System.EventHandler(this.Editor_ZoomChanged);
-            this.editor.CustomAction += new System.EventHandler<FastColoredTextBoxNS.CustomActionEventArgs>(this.Editor_CustomAction);
-            this.editor.Scroll += new System.Windows.Forms.ScrollEventHandler(this.Editor_Scroll);
-            this.editor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Editor_KeyDown);
-            this.editor.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseUp);
             // 
             // menuStrip
             // 
@@ -409,11 +354,9 @@ namespace DarkScript3
             // 
             // display
             // 
-            this.display.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.display.Dock = System.Windows.Forms.DockStyle.Fill;
             this.display.IsSplitterFixed = true;
-            this.display.Location = new System.Drawing.Point(8, 31);
+            this.display.Location = new System.Drawing.Point(0, 24);
             this.display.Name = "display";
             // 
             // display.Panel1
@@ -422,9 +365,9 @@ namespace DarkScript3
             // 
             // display.Panel2
             // 
-            this.display.Panel2.Controls.Add(this.editor);
-            this.display.Size = new System.Drawing.Size(897, 475);
-            this.display.SplitterDistance = 320;
+            this.display.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.display.Size = new System.Drawing.Size(905, 485);
+            this.display.SplitterDistance = 322;
             this.display.TabIndex = 4;
             this.display.Resize += new System.EventHandler(this.Display_Resize);
             // 
@@ -468,12 +411,11 @@ namespace DarkScript3
             this.docBox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("docBox.ServiceColors")));
             this.docBox.ShowLineNumbers = false;
             this.docBox.ShowScrollBars = false;
-            this.docBox.Size = new System.Drawing.Size(320, 475);
+            this.docBox.Size = new System.Drawing.Size(322, 485);
             this.docBox.TabIndex = 1;
             this.docBox.TabStop = false;
             this.docBox.WordWrap = true;
             this.docBox.Zoom = 100;
-            this.docBox.ZoomChanged += new System.EventHandler(this.docBox_ZoomChanged);
             // 
             // GUI
             // 
@@ -490,14 +432,13 @@ namespace DarkScript3
             this.Name = "GUI";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "DARKSCRIPT 3";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GUI_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GUI_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.editor)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.display.Panel1.ResumeLayout(false);
-            this.display.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.display)).EndInit();
             this.display.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.docBox)).EndInit();
@@ -531,7 +472,6 @@ namespace DarkScript3
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem batchDumpToolStripMenuItem;
-        public FastColoredTextBoxNS.FastColoredTextBox editor;
         private System.Windows.Forms.ToolStripSeparator optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openAutoCompleteMenuToolStripMenuItem;

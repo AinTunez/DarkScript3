@@ -13,26 +13,13 @@ namespace DarkScript3
 {
     public partial class ToolControl : UserControl
     {
-
-        private Control FocusControl = new Control();
-
-        private Control BFF = new Control();
-
         public ToolControl()
         {
             InitializeComponent();
         }
 
-        public ToolControl(FastColoredTextBox c, BetterFindForm bff)
-        {
-            InitializeComponent();
-            FocusControl = c;
-            BFF = bff;
-        }
-
         public void SetText(string s)
         {
-            tipBox.Font = FocusControl.Font;
             tipBox.Text = s;
 
             int width = tipBox.Lines.Max(e => e.Length) * tipBox.CharWidth;
@@ -46,14 +33,15 @@ namespace DarkScript3
 
         private void SetFocus()
         {
-            if (BFF.Visible)
+            // TODO: Determine if *all* interaction can be disabled for this control.
+            /*if (BFF.Visible)
             {
                 BFF.Focus();
                 Hide();
             } else
             {
                 FocusControl.Focus();
-            }
+            }*/
         }
 
         private void TipBox_Click(object sender, EventArgs e)

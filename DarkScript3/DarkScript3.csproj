@@ -271,6 +271,7 @@
     <Compile Include="ConditionData.cs" />
     <Compile Include="CondTestingTool.cs" />
     <Compile Include="DarkToolStripRenderer.cs" />
+    <Compile Include="SharedControls.cs" />
     <Compile Include="EMEDF.cs" />
     <Compile Include="EMEDF2HTML.cs" />
     <Compile Include="ErrorMessageForm.cs">
@@ -282,6 +283,12 @@
     <Compile Include="EventCFG.cs" />
     <Compile Include="EventScripter.cs" />
     <Compile Include="FancyJSCompiler.cs" />
+    <Compile Include="EditorGUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditorGUI.Designer.cs">
+      <DependentUpon>EditorGUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="InstructionDocs.cs" />
     <Compile Include="FancyEventScripter.cs" />
     <Compile Include="GameChooser.cs">
@@ -303,6 +310,7 @@
       <DependentUpon>InfoViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="InstructionTranslator.cs" />
+    <Compile Include="JSRegex.cs" />
     <Compile Include="JSScriptException.cs" />
     <Compile Include="PreviewCompilationForm.cs">
       <SubType>Form</SubType>
@@ -335,6 +343,7 @@
     <Compile Include="StyleSetting.Designer.cs">
       <DependentUpon>StyleSetting.cs</DependentUpon>
     </Compile>
+    <Compile Include="TextStyles.cs" />
     <Compile Include="ToolControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -349,6 +358,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GameChooser.resx">
       <DependentUpon>GameChooser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditorGUI.resx">
+      <DependentUpon>EditorGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI.resx">
       <DependentUpon>GUI.cs</DependentUpon>
