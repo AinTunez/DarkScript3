@@ -13,26 +13,13 @@ namespace DarkScript3
 {
     public partial class ToolControl : UserControl
     {
-
-        private Control FocusControl = new Control();
-
-        private Control BFF = new Control();
-
         public ToolControl()
         {
             InitializeComponent();
         }
 
-        public ToolControl(FastColoredTextBox c, BetterFindForm bff)
-        {
-            InitializeComponent();
-            FocusControl = c;
-            BFF = bff;
-        }
-
         public void SetText(string s)
         {
-            tipBox.Font = FocusControl.Font;
             tipBox.Text = s;
 
             int width = tipBox.Lines.Max(e => e.Length) * tipBox.CharWidth;
@@ -44,26 +31,52 @@ namespace DarkScript3
             Size = new Size(width, height);
         }
 
-        private void SetFocus()
+        public void ShowAtPosition(Control origin, Point p, int afterHeight)
         {
-            if (BFF.Visible)
+            if (Parent == null)
             {
-                BFF.Focus();
+                // This should be added to the parent before the editor uses it, but not really show-stopping if not.
                 Hide();
-            } else
-            {
-                FocusControl.Focus();
+                return;
             }
+            p = new Point(p.X, p.Y);
+
+            // Translate to parent coords via screen coords.
+            Point originLoc = origin.PointToScreen(new Point());
+            Point parentLoc = Parent.PointToScreen(new Point());
+            p.Offset(originLoc.X - parentLoc.X, originLoc.Y - parentLoc.Y);
+
+            // By default, try to show below with enough space
+            if (p.Y + afterHeight + 2 + Height < Parent.Height)
+            {
+                p.Offset(0, afterHeight + 2);
+            }
+            else
+            {
+                p.Offset(0, -Height - 5);
+            }
+
+            // Move leftward if not enough screen space
+            int leftPos = Math.Max(0, Parent.Width - Width - 15);
+            if (p.X > leftPos)
+            {
+                p.Offset(leftPos - p.X, 0);
+            }
+
+            if (!Location.Equals(p))
+            {
+                Location = p;
+            }
+            if (!Visible)
+            {
+                Show();
+            }
+            BringToFront();
         }
 
-        private void TipBox_Click(object sender, EventArgs e)
+        private void TipBox_Hide(object sender, EventArgs e)
         {
-            SetFocus();
-        }
-
-        private void TipBox_SelectionChanged(object sender, EventArgs e)
-        {
-            SetFocus();
+            Hide();
         }
     }
 }

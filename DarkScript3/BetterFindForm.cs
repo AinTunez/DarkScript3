@@ -10,9 +10,8 @@ namespace DarkScript3
     {
         bool firstSearch = true;
         Place startPlace;
-        FastColoredTextBox tb;
+        public FastColoredTextBox tb;
         public ToolControl infoTip = new ToolControl();
-
 
         public BetterFindForm(FastColoredTextBox tb)
         {
@@ -34,6 +33,10 @@ namespace DarkScript3
 
         public virtual void FindNext(string pattern)
         {
+            if (tb == null)
+            {
+                return;
+            }
             try
             {
                 RegexOptions opt = cbMatchCase.Checked ? RegexOptions.None : RegexOptions.IgnoreCase;
@@ -102,11 +105,15 @@ namespace DarkScript3
                 e.Cancel = true;
                 Hide();
             }
-            this.tb.Focus();
+            if (tb != null)
+            {
+                tb.Focus();
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            // TODO: Should this be allowed? Can it be reopened in this case...?
             if (keyData == Keys.Escape)
             {
                 this.Close();

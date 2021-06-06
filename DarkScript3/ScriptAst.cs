@@ -14,7 +14,8 @@ namespace DarkScript3
 
         public class EventFunction
         {
-            public int ID { get; set; }
+            // Normally an int, but may be a SourceNode :fatcat:
+            public object ID { get; set; }
             public Event.RestBehaviorType RestBehavior { get; set; }
             public bool Fancy { get; set; }
             public List<string> Params = new List<string>();
@@ -28,7 +29,6 @@ namespace DarkScript3
 
             public void Print(TextWriter writer)
             {
-                Random r = new Random(ID);
                 LineTrackingWriter lineWriter = writer as LineTrackingWriter;
                 lineWriter?.RecordMapping(LineMapping);
                 string processDecorations(List<SourceDecoration> decs, string sp)

@@ -90,7 +90,7 @@ namespace DarkScript3
                 }
                 if (args.Contains("fancy"))
                 {
-                    EventCFG.CFGOptions options = args.Contains("min") ? EventCFG.CFGOptions.MIN : EventCFG.CFGOptions.DEFAULT;
+                    EventCFG.CFGOptions options = args.Contains("min") ? EventCFG.CFGOptions.GetMin() : EventCFG.CFGOptions.GetDefault();
                     scripter = new EventScripter(emevdPath, docs);
                     FancyEventScripter fes = new FancyEventScripter(scripter, docs, options);
                     if (args.Contains("unit"))

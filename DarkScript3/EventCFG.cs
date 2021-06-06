@@ -9,7 +9,8 @@ namespace DarkScript3
 {
     public class EventCFG
     {
-        public int ID { get; set; }
+        // This is usually an int, but can be a SourceNode in source-to-source transformations.
+        public object ID { get; set; }
 
         private bool debugPrint = false;
         private int NextID = 0;
@@ -17,10 +18,10 @@ namespace DarkScript3
         private Dictionary<int, FlowNode> Nodes = new Dictionary<int, FlowNode>();
         private CFGOptions options;
 
-        public EventCFG(int id, CFGOptions options = null)
+        public EventCFG(object id, CFGOptions options = null)
         {
             ID = id;
-            this.options = options ?? CFGOptions.DEFAULT;
+            this.options = options ?? CFGOptions.GetDefault();
         }
 
         public class CFGOptions
@@ -46,9 +47,9 @@ namespace DarkScript3
             public bool RestrictConditionGroupCount = false;
 
             // Combines and inlines conditions without changing underlying behavior.
-            public static readonly CFGOptions DEFAULT = new CFGOptions();
+            public static CFGOptions GetDefault() => new CFGOptions();
             // Matches the original nearly line-for-line but with additional control flow structures.
-            public static readonly CFGOptions MIN = new CFGOptions
+            public static CFGOptions GetMin() => new CFGOptions
             {
                 CombineDefinitions = false,
                 InlineDefinitions = false,

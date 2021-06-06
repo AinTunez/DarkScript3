@@ -217,7 +217,6 @@ namespace DarkScript3
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Appearance";
-            this.Load += new System.EventHandler(this.StyleConfig_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

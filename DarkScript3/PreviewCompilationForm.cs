@@ -14,6 +14,7 @@ namespace DarkScript3
     public partial class PreviewCompilationForm : Form
     {
         public bool Confirmed { get; private set; }
+        public string StartingCode { get; private set; }
         public string PendingCode { get; private set; }
         public List<FancyJSCompiler.DiffSegment> Segments { get; set; }
 
@@ -24,13 +25,14 @@ namespace DarkScript3
             fctb2.Font = (Font)font.Clone();
         }
 
-        public void SetSegments(List<FancyJSCompiler.DiffSegment> segments, string pendingCode = null)
+        public void SetSegments(List<FancyJSCompiler.DiffSegment> segments, string startingCode = null, string pendingCode = null)
         {
             Segments = segments;
             RewriteSegments();
             action.Visible = pendingCode != null;
             action.Enabled = true;
             Confirmed = false;
+            StartingCode = startingCode;
             PendingCode = pendingCode;
         }
 

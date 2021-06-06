@@ -20,9 +20,9 @@ namespace DarkScript3
     public class EventScripter
     {
         private InstructionDocs docs;
-        private string emevdPath;
 
-        public string FileName => $"{Path.GetFileName(emevdPath)}.js";
+        public readonly string EMEVDPath;
+        public string FileName => $"{Path.GetFileName(EMEVDPath)}.js";
 
         public EMEVD EVD = new EMEVD();
 
@@ -38,7 +38,7 @@ namespace DarkScript3
 
         public EventScripter(string file, InstructionDocs docs, EMEVD evd = null)
         {
-            emevdPath = file;
+            EMEVDPath = file;
             this.docs = docs;
             EVD = evd ?? EMEVD.Read(file);
             if (File.Exists(file.Replace(".emevd", ".emeld")))
@@ -156,7 +156,7 @@ namespace DarkScript3
         private void InitAll()
         {
             v8.DocumentSettings.AccessFlags = DocumentAccessFlags.EnableFileLoading;
-            v8.DocumentSettings.SearchPath = Path.GetDirectoryName(emevdPath);
+            v8.DocumentSettings.SearchPath = Path.GetDirectoryName(EMEVDPath);
 
             v8.AddHostObject("$$$_host", new HostFunctions());
             v8.AddHostObject("EVD", EVD);
