@@ -127,6 +127,7 @@ namespace DarkScript3
             }
             else
             {
+                PreventHoverMousePosition = MousePosition;
                 editor.Selection = errorSelect;
                 editor.DoSelectionVisible();
             }
@@ -183,7 +184,7 @@ namespace DarkScript3
         {
             if (Scripter != null && CodeChanged)
             {
-                DialogResult result = MessageBox.Show("Save changes before opening a new file?", "Unsaved Changes", MessageBoxButtons.YesNoCancel);
+                DialogResult result = MessageBox.Show($"Save {Scripter.FileName}?", "Unsaved Changes", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.Yes)
                 {
                     SaveJSAndEMEVDFile();
@@ -278,22 +279,67 @@ namespace DarkScript3
         #region Selection
 
         // Selection state
-        private Range CurrentTipRange;
+        private Range CursorTipRange;
+        private Range HoverTipRange;
+        private Point? PreventHoverMousePosition;
         private Range CurrentTokenRange;
         private string CurrentToken;
         public string CurrentDoc { get; private set; }
 
+        private Action<Point> moveOutOfBounds;
+        private void Editor_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (moveOutOfBounds == null)
+            {
+                moveOutOfBounds = SharedControls.Debounce((Action<Point>)OnOutOfBoundsToolTip, editor.ToolTipDelay + 10);
+            }
+            moveOutOfBounds(e.Location);
+        }
+
+        private void OnOutOfBoundsToolTip(Point p)
+        {
+            // For some reason, FCTB does not cancel a tooltip when hovering past the end of a line, so do it ourselves.
+            Place place = editor.PointToPlace(p);
+            if (place.iChar == editor.GetLineLength(place.iLine))
+            {
+                Editor_ToolTipNeeded(editor, new ToolTipNeededEventArgs(place, ""));
+            }
+        }
+
         private void Editor_ToolTipNeeded(object sender, ToolTipNeededEventArgs e)
         {
-            if (!string.IsNullOrEmpty(e.HoveredWord))
+            if (PreventHoverMousePosition != null)
             {
-                if (ToolTips.ContainsKey(e.HoveredWord))
+                if (MousePosition.Equals(PreventHoverMousePosition))
                 {
-                    (string title, string text) = ToolTips[e.HoveredWord];
-                    Point p = editor.PlaceToPoint(e.Place);
-                    string s = title + "\n" + text;
-                    ShowTip(s, p);
+                    return;
                 }
+                PreventHoverMousePosition = null;
+            }
+            if (!string.IsNullOrEmpty(e.HoveredWord) && ToolTips.ContainsKey(e.HoveredWord))
+            {
+                // Don't reposition if it's the same range. Use the same logic FCTB does for generating HoveredWord.
+                Range tipRange = editor.GetRange(e.Place, e.Place).GetFragment("[a-zA-Z]");
+                if (HoverTipRange != null && HoverTipRange.Start.Equals(tipRange.Start))
+                {
+                    return;
+                }
+                (string title, string text) = ToolTips[e.HoveredWord];
+                Point p = editor.PlaceToPoint(e.Place);
+                // Translate a bit rightward to make vertical mouse movement change hover.
+                p.Offset(2, 0);
+                string s = title + "\n" + text;
+                ShowTip(s, p);
+                HoverTipRange = tipRange;
+            }
+            else
+            {
+                if (SharedControls.InfoTip.Visible && CursorTipRange != null && CursorTipRange.Contains(e.Place))
+                {
+                    return;
+                }
+                SharedControls.HideTip();
+                HoverTipRange = null;
             }
         }
 
@@ -310,10 +356,10 @@ namespace DarkScript3
 
             // Preemptively remove tooltip if changing the range; it may potentially get immediately added back.
             // The tooltip may also change even within the same range.
-            if (CurrentTipRange == null || !arguments.Start.Equals(CurrentTipRange.Start))
+            if (CursorTipRange == null || !arguments.Start.Equals(CursorTipRange.Start))
             {
-                CurrentTipRange = arguments;
-                SharedControls.InfoTip.Hide();
+                CursorTipRange = arguments;
+                SharedControls.HideTip();
             }
 
             SharedControls.ResetStatus(false);
@@ -415,6 +461,7 @@ namespace DarkScript3
             if (ranges.Count > 0)
             {
                 Range idRange = ranges[0].GetRanges($"{id}").LastOrDefault() ?? ranges[0];
+                PreventHoverMousePosition = MousePosition;
                 editor.Selection = editor.GetRange(idRange.Start, idRange.Start);
                 // Update the last visited line; can't be done directly so call where it's done.
                 editor.OnSelectionChangedDelayed();
@@ -531,13 +578,7 @@ namespace DarkScript3
                 InfoTip.SetText(s);
             }
 
-            p.Offset(0, -InfoTip.Height - 5);
-            if (!InfoTip.Location.Equals(p))
-                InfoTip.Location = p;
-            if (!InfoTip.Visible)
-                InfoTip.Show();
-
-            InfoTip.BringToFront();
+            InfoTip.ShowAtPosition(editor, p, editor.CharHeight);
             editor.Focus();
         }
 
@@ -596,8 +637,6 @@ namespace DarkScript3
             }
             return string.Join(", ", argStrings);
         }
-
-        private string currentFuncDoc = null;
 
         #endregion
 
@@ -665,6 +704,7 @@ namespace DarkScript3
             {
                 if (ShowCompileError(Scripter.FileName, ex, "") is Range errorSelect)
                 {
+                    PreventHoverMousePosition = MousePosition;
                     editor.Selection = errorSelect;
                     editor.DoSelectionVisible();
                 }
@@ -686,6 +726,7 @@ namespace DarkScript3
             {
                 if (ShowCompileError(Scripter.FileName, ex, "") is Range errorSelect)
                 {
+                    PreventHoverMousePosition = MousePosition;
                     editor.Selection = errorSelect;
                     editor.DoSelectionVisible();
                 }
@@ -714,7 +755,7 @@ namespace DarkScript3
             if (e.KeyCode == Keys.Escape)
             {
                 // Is this necessary?
-                SharedControls.InfoTip.Hide();
+                SharedControls.HideTip();
             }
             else if (e.KeyCode == Keys.F && e.Control)
             {
@@ -724,7 +765,7 @@ namespace DarkScript3
             }
         }
 
-        private void Editor_Scroll(object sender, ScrollEventArgs e) => SharedControls.InfoTip.Hide();
+        private void Editor_Scroll(object sender, ScrollEventArgs e) => SharedControls.HideTip();
 
         private Range ShowCompileError(string file, Exception ex, string extra)
         {

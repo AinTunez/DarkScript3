@@ -75,6 +75,7 @@ namespace DarkScript3
             this.editor.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("editor.ServiceColors")));
             this.editor.Size = new System.Drawing.Size(150, 150);
             this.editor.TabIndex = 0;
+            this.editor.ToolTipDelay = 100;
             this.editor.Zoom = 100;
             this.editor.ToolTipNeeded += new System.EventHandler<FastColoredTextBoxNS.ToolTipNeededEventArgs>(this.Editor_ToolTipNeeded);
             this.editor.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.Editor_TextChanged);
@@ -83,6 +84,7 @@ namespace DarkScript3
             this.editor.CustomAction += new System.EventHandler<FastColoredTextBoxNS.CustomActionEventArgs>(this.Editor_CustomAction);
             this.editor.Scroll += new System.Windows.Forms.ScrollEventHandler(this.Editor_Scroll);
             this.editor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Editor_KeyDown);
+            this.editor.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseMove);
             this.editor.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseUp);
             // 
             // EditorGUI

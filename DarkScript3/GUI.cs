@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using SoulsFormats;
 using System.Xml.Linq;
 using System.Text;
+using System.Drawing;
 
 namespace DarkScript3
 {
@@ -282,6 +283,24 @@ namespace DarkScript3
 
         #endregion
 
+        #region Misc GUI events
+
+        private void Display_Resize(object sender, EventArgs e)
+        {
+            if (WindowState != FormWindowState.Minimized && display.SplitterDistance != 350)
+                display.SplitterDistance = 350;
+        }
+
+        private void GUI_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                SharedControls.HideTip();
+            }
+        }
+
+        #endregion
+
         #region Menus
 
         private void EmevdDataToolStripMenuItem_Click(object sender, EventArgs e)
@@ -295,20 +314,6 @@ namespace DarkScript3
             if (TextStyles.ShowStyleEditor())
             {
                 SharedControls.RefreshGlobalStyles();
-            }
-        }
-
-        private void Display_Resize(object sender, EventArgs e)
-        {
-            if (WindowState != FormWindowState.Minimized && display.SplitterDistance != 350)
-                display.SplitterDistance = 350;
-        }
-
-        private void GUI_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                SharedControls.HideTip();
             }
         }
 
