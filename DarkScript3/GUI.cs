@@ -15,8 +15,12 @@ namespace DarkScript3
     public partial class GUI : Form
     {
         private readonly SharedControls SharedControls;
-        private readonly Dictionary<string, InstructionDocs> AllDocs;
-        private EditorGUI Editor;
+        private readonly Dictionary<string, InstructionDocs> AllDocs = new Dictionary<string, InstructionDocs>();
+        private readonly Dictionary<string, EditorGUI> AllEditors = new Dictionary<string, EditorGUI>();
+        private readonly Dictionary<string, FileMetadata> DirectoryMetadata = new Dictionary<string, FileMetadata>();
+        private readonly FileSystemWatcher Watcher;
+        private EditorGUI CurrentEditor;
+        private string CurrentDirectory;
 
         public GUI()
         {
@@ -26,84 +30,118 @@ namespace DarkScript3
             statusStrip.Renderer = new DarkToolStripRenderer();
             TextStyles.LoadColors();
             SharedControls = new SharedControls(this, statusLabel, docBox);
-            SharedControls.RefreshGlobalStyles();
             SharedControls.ResetStatus(true);
             SharedControls.BFF.Owner = this;
-            // Prevent fuzzy line from showing up. Tab is handled by the textbox in any case.
+            // Prevent fuzzy line from showing up. Tab key is handled by the textbox in any case.
             display.TabStop = false;
+            display2.TabStop = false;
             Controls.Add(SharedControls.InfoTip);
-            AllDocs = new Dictionary<string, InstructionDocs>();
+            tabControl.Visible = false;
+            Watcher = new FileSystemWatcher();
+            Watcher.Created += OnDirectoryContentsChanged;
+            Watcher.Deleted += OnDirectoryContentsChanged;
+            Watcher.Renamed += OnDirectoryContentsChanged;
+            Watcher.EnableRaisingEvents = false;
+            Watcher.SynchronizingObject = this;
+            RefreshGlobalStyles();
         }
 
         #region File Handling
 
-        private void SaveToolStripMenuItem_Click(object sender, EventArgs e) => Editor?.SaveJSAndEMEVDFile();
-
-        private bool CancelWithUnsavedChanges()
-        {
-            return Editor?.CancelWithUnsavedChanges() ?? false;
-        }
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.SaveJSAndEMEVDFile();
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SharedControls.HideTip();
-            if (CancelWithUnsavedChanges())
-            {
-                return;
-            }
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx|EMEVD JS Files|*.emevd.js; *.emevd.dcx.js|All files|*.*";
+            ofd.Multiselect = true;
+            if (CurrentEditor != null)
+            {
+                string currentDir = Path.GetDirectoryName(CurrentEditor.EMEVDPath);
+                if (Directory.Exists(currentDir))
+                {
+                    ofd.InitialDirectory = currentDir;
+                }
+            }
             if (ofd.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
+            FileMetadata metadata = null;
+            foreach (string fileName in ofd.FileNames)
+            {
+                metadata = OpenFile(fileName, metadata);
+            }
+        }
 
-            if (ofd.FileName.EndsWith(".js"))
+        private FileMetadata OpenFile(string fileName, FileMetadata metadata = null)
+        {
+            if (fileName.EndsWith(".js"))
             {
-                OpenJSFile(ofd.FileName);
+                OpenJSFile(fileName);
             }
-            else if (File.Exists(ofd.FileName + ".js"))
+            else if (File.Exists(fileName + ".js"))
             {
-                OpenJSFile(ofd.FileName + ".js");
+                OpenJSFile(fileName + ".js");
             }
-            else if (ofd.FileName.EndsWith(".xml"))
+            else if (fileName.EndsWith(".xml"))
             {
-                OpenXMLFile(ofd.FileName);
+                OpenXMLFile(fileName);
             }
-            else if (File.Exists(ofd.FileName + ".xml"))
+            else if (File.Exists(fileName + ".xml"))
             {
-                OpenXMLFile(ofd.FileName + ".xml");
+                OpenXMLFile(fileName + ".xml");
             }
             else
             {
-                string game = ChooseGame(out bool fancy);
-                if (game == null) return;
-                OpenEMEVDFile(ofd.FileName, game, isFancy: fancy);
+                metadata = metadata ?? ChooseGame(true);
+                if (metadata == null)
+                {
+                    return null;
+                }
+                OpenEMEVDFile(fileName, metadata);
             }
+            return metadata;
         }
 
         private bool OpenEMEVDFile(
             string fileName,
-            string gameDocs,
+            FileMetadata metadata,
             EMEVD evd = null,
             string jsText = null,
-            bool isFancy = false,
             Dictionary<string, string> extraFields = null)
         {
-            // Can reuse docs if for the same game
-            if (!AllDocs.TryGetValue(gameDocs, out InstructionDocs docs))
+            if (AllEditors.ContainsKey(fileName))
             {
-                docs = AllDocs[gameDocs] = new InstructionDocs(gameDocs);
+                ShowFile(fileName);
+                return true;
+            }
+            // Can reuse docs if for the same game
+            if (!AllDocs.TryGetValue(metadata.GameDocs, out InstructionDocs docs))
+            {
+                docs = AllDocs[metadata.GameDocs] = new InstructionDocs(metadata.GameDocs);
             }
             ScriptSettings settings = new ScriptSettings(docs, extraFields);
-            EventScripter scripter = new EventScripter(fileName, docs, evd);
+            EventScripter scripter;
+            try
+            {
+                scripter = new EventScripter(fileName, docs, evd);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return false;
+            }
 
             string fileVersion = ProgramVersion.VERSION;
+            bool decompiled = false;
             if (jsText == null)
             {
+                decompiled = true;
                 try
                 {
-                    if (isFancy && docs.Translator != null)
+                    if (metadata.Fancy && docs.Translator != null)
                     {
                         jsText = new FancyEventScripter(scripter, docs, settings.CFGOptions).Unpack();
                     }
@@ -148,18 +186,12 @@ namespace DarkScript3
             {
                 fileVersion = extraFields != null && extraFields.TryGetValue("version", out string version) ? version : null;
             }
-            if (Editor != null)
+            // If properly decompiled, the metadata is reused by the directory sidebar
+            if (decompiled)
             {
-                display.Panel2.Controls.Clear();
-                SharedControls.RemoveEditor(Editor);
-                Editor.Dispose();
+                DirectoryMetadata[Path.GetDirectoryName(fileName)] = metadata;
             }
-            Editor = new EditorGUI(SharedControls, scripter, docs, settings, fileVersion, jsText);
-            SharedControls.AddEditor(Editor);
-            SharedControls.RefreshGlobalStyles();
-            display.Panel2.Controls.Add(Editor);
-            // PerformLayout();
-            Text = $"DARKSCRIPT 3 - {scripter.FileName}";
+            AddAndShowFile(new EditorGUI(SharedControls, scripter, docs, settings, fileVersion, jsText));
             // Notify about possible compatibility issues
             int versionCmp = ProgramVersion.CompareVersions(ProgramVersion.VERSION, fileVersion);
             if (versionCmp > 0)
@@ -206,16 +238,24 @@ namespace DarkScript3
             List<string> emevdFileHeaders = new List<string> { "docs", "compress", "game", "string", "linked" };
 
             EMEVD evd;
-            string docs;
+            FileMetadata metadata;
             if (emevdFileHeaders.All(name => headers.ContainsKey(name)))
             {
-                docs = headers["docs"];
-                if (!Enum.TryParse(headers["compress"], out DCX.Type compression))
+                metadata = new FileMetadata { GameDocs = headers["docs"] };
+                string dcx = headers["compress"];
+                if (!Enum.TryParse(dcx, out DCX.Type compression))
                 {
-                    // TODO look at SekiroDFLT
-                    if (Enum.TryParse(headers["compress"], out DCX.DefaultType defaultComp))
+                    // We also have to account for historical DCX.Type names, which mostly correspond
+                    // to DCX.DefaultType.
+                    if (Enum.TryParse(dcx, out DCX.DefaultType defaultComp))
                     {
                         compression = (DCX.Type)defaultComp;
+                    }
+                    else if (dcx == "SekiroKRAK" || dcx == "SekiroDFLT")
+                    {
+                        // This is turned into SekiroDFLT when it's actually written out. Store it as KRAK in the header
+                        // just in case it's supported one day.
+                        compression = (DCX.Type)DCX.DefaultType.Sekiro;
                     }
                     else
                     {
@@ -246,27 +286,15 @@ namespace DarkScript3
             else
             {
                 evd = null;
-                docs = ChooseGame();
-                if (docs == null) return false;
+                metadata = ChooseGame(false);
+                if (metadata == null)
+                {
+                    return false;
+                }
             }
 
             text = Regex.Replace(text, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==", "");
-            return OpenEMEVDFile(org, docs, evd: evd, jsText: text.Trim(), extraFields: headers);
-        }
-
-        private string ChooseGame(out bool fancy)
-        {
-            GameChooser chooser = new GameChooser(true);
-            chooser.ShowDialog();
-            fancy = chooser.Fancy;
-            return chooser.GameDocs;
-        }
-
-        private string ChooseGame()
-        {
-            GameChooser chooser = new GameChooser(false);
-            chooser.ShowDialog();
-            return chooser.GameDocs;
+            return OpenEMEVDFile(org, metadata, evd: evd, jsText: text.Trim(), extraFields: headers);
         }
 
         private void OpenXMLFile(string fileName)
@@ -277,13 +305,289 @@ namespace DarkScript3
                 string resource = doc.Root.Element("gameDocs").Value;
                 string data = doc.Root.Element("script").Value;
                 string org = fileName.Substring(0, fileName.Length - 4);
-                OpenEMEVDFile(org, resource, jsText: data);
+                OpenEMEVDFile(org, new FileMetadata { GameDocs = resource }, jsText: data);
             }
+        }
+
+        private FileMetadata ChooseGame(bool showFancy)
+        {
+            GameChooser chooser = new GameChooser(showFancy);
+            chooser.ShowDialog();
+            if (chooser.GameDocs == null)
+            {
+                return null;
+            }
+            return new FileMetadata
+            {
+                GameDocs = chooser.GameDocs,
+                Fancy = chooser.Fancy,
+            };
+        }
+
+        private class FileMetadata
+        {
+            public string GameDocs { get; set; }
+            public bool Fancy { get; set; }
+        }
+
+        internal void LockEditor()
+        {
+            // Locks everything which isn't registered with SharedControls (called there)
+            MainMenuStrip.Enabled = false;
+            Cursor = Cursors.WaitCursor;
+        }
+
+        internal void UnlockEditor()
+        {
+            MainMenuStrip.Enabled = true;
+            Cursor = Cursors.Default;
         }
 
         #endregion
 
-        #region Misc GUI events
+        #region Tabs
+
+        // Basic tab management using what we can do with TabControl, which isn't much.
+        // TODO: add tab drag and drop (reordering) and close buttons.
+
+        private void closeTabToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tabControl.TabCount > 0)
+            {
+                RemoveFile(tabControl.SelectedTab.Name);
+            }
+        }
+
+        private void nextTabToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tabControl.TabCount > 0)
+            {
+                ShowFile(tabControl.TabPages[(tabControl.SelectedIndex + 1) % tabControl.TabCount].Name);
+            }
+        }
+
+        private void previousTabToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tabControl.TabCount > 0)
+            {
+                ShowFile(tabControl.TabPages[(tabControl.SelectedIndex - 1 + tabControl.TabCount) % tabControl.TabCount].Name);
+            }
+        }
+
+        bool concurrentTabChange = false;
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl.TabCount > 0 && !concurrentTabChange)
+            {
+                ShowFile(tabControl.SelectedTab.Name);
+            }
+        }
+
+        private bool CancelWithCloseAll()
+        {
+            while (CurrentEditor != null)
+            {
+                if (!RemoveFile(CurrentEditor.EMEVDPath))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void AddAndShowFile(EditorGUI newEditor)
+        {
+            string filePath = newEditor.EMEVDPath;
+            if (!AllEditors.ContainsKey(filePath))
+            {
+                AllEditors[filePath] = newEditor;
+                SharedControls.AddEditor(newEditor);
+                newEditor.TitleChanged += EditorGUI_TitleChanged;
+            }
+            ShowFile(filePath);
+        }
+
+        private bool RemoveFile(string filePath)
+        {
+            if (!AllEditors.TryGetValue(filePath, out EditorGUI editor))
+            {
+                return true;
+            }
+            if (editor.CancelWithUnsavedChanges())
+            {
+                return false;
+            }
+            int pageIndex = tabControl.TabPages.IndexOfKey(filePath);
+            if (tabControl.SelectedIndex == pageIndex)
+            {
+                display.Panel2.Controls.Clear();
+                CurrentEditor = null;
+            }
+            SharedControls.RemoveEditor(editor);
+            AllEditors.Remove(filePath);
+            editor.Dispose();
+
+            concurrentTabChange = true;
+            tabControl.TabPages.RemoveByKey(filePath);
+            concurrentTabChange = false;
+            if (tabControl.TabCount == 0)
+            {
+                tabControl.Visible = false;
+                RefreshTitle();
+                SharedControls.ResetStatus(true);
+                UpdateDirectoryListing();
+                display2.BackColor = Color.Transparent;
+                display2.IsSplitterFixed = true;
+            }
+            else
+            {
+                int victim = Math.Min(pageIndex, tabControl.TabCount - 1);
+                ShowFile(tabControl.TabPages[victim].Name);
+            }
+            return true;
+        }
+
+        private void ShowFile(string filePath)
+        {
+            if (!AllEditors.TryGetValue(filePath, out EditorGUI editor))
+            {
+                return;
+            }
+            if (CurrentEditor?.EMEVDPath == filePath)
+            {
+                return;
+            }
+            display.Panel2.Controls.Clear();
+            CurrentEditor = editor;
+            SharedControls.SwitchEditor(CurrentEditor);
+            display.Panel2.Controls.Add(CurrentEditor);
+            // Do tab stuff, including creating one if needed.
+            int pageIndex = tabControl.TabPages.IndexOfKey(filePath);
+            TabPage page;
+            if (pageIndex == -1)
+            {
+                page = new TabPage
+                {
+                    Name = filePath,
+                    Text = CurrentEditor.DisplayTitle
+                };
+                tabControl.TabPages.Add(page);
+            }
+            else
+            {
+                page = tabControl.TabPages[pageIndex];
+            }
+            concurrentTabChange = true;
+            tabControl.SelectTab(page);
+            concurrentTabChange = false;
+            tabControl.Visible = true;
+            RefreshTitle();
+            SharedControls.ResetStatus(true);
+            UpdateDirectoryListing(requireDirectoryChange: true);
+            display2.BackColor = Color.FromArgb(45, 45, 48);
+            display2.IsSplitterFixed = false;
+        }
+
+        private void RefreshTitle()
+        {
+            Text = CurrentEditor == null ? "DARKSCRIPT 3" : $"DARKSCRIPT 3 - {CurrentEditor.DisplayTitle}";
+        }
+
+        private void EditorGUI_TitleChanged(object sender, EventArgs e)
+        {
+            if (sender is EditorGUI editor)
+            {
+                int pageIndex = tabControl.TabPages.IndexOfKey(editor.EMEVDPath);
+                if (pageIndex != -1)
+                {
+                    tabControl.TabPages[pageIndex].Text = editor.DisplayTitle;
+                }
+            }
+            RefreshTitle();
+        }
+
+        private void UpdateDirectoryListing(bool requireDirectoryChange = false)
+        {
+            string directory = null;
+            if (CurrentEditor != null)
+            {
+                directory = Path.GetDirectoryName(CurrentEditor.EMEVDPath);
+                if (!Directory.Exists(directory))
+                {
+                    directory = null;
+                }
+            }
+            if (requireDirectoryChange && directory == CurrentDirectory)
+            {
+                return;
+            }
+            SortedSet<string> allFiles = new SortedSet<string>();
+            HashSet<string> jsFiles = new HashSet<string>();
+            string[] dirFiles = directory == null ? new string[] { } : Directory.GetFiles(directory);
+            foreach (string path in dirFiles)
+            {
+                string name = Path.GetFileName(path);
+                if (name.EndsWith(".emevd") || name.EndsWith(".emevd.dcx"))
+                {
+                    allFiles.Add(name);
+                }
+                else if (name.EndsWith(".emevd.js") || name.EndsWith(".emevd.dcx.js"))
+                {
+                    name = name.Substring(0, name.Length - 3);
+                    allFiles.Add(name);
+                    jsFiles.Add(name);
+                }
+            }
+            fileView.BeginUpdate();
+            fileView.Nodes.Clear();
+            fileView.BackColor = TextStyles.BackColor;
+            fileView.ForeColor = TextStyles.ForeColor;
+            foreach (string file in allFiles)
+            {
+                TreeNode node = new TreeNode(file);
+                node.ForeColor = jsFiles.Contains(file) ? TextStyles.ForeColor : (TextStyles.Comment.ForeBrush as SolidBrush).Color;
+                fileView.Nodes.Add(node);
+            }
+            fileView.Sort();
+            fileView.EndUpdate();
+            if (directory == null)
+            {
+                Watcher.EnableRaisingEvents = false;
+            }
+            else
+            {
+                Watcher.Path = directory;
+                Watcher.EnableRaisingEvents = true;
+            }
+            CurrentDirectory = directory;
+        }
+
+        private void OnDirectoryContentsChanged(object sender, FileSystemEventArgs e)
+        {
+            string file = e.FullPath;
+            if (file.EndsWith(".emevd") || file.EndsWith(".emevd.dcx") || file.EndsWith(".emevd.js") || file.EndsWith(".emevd.dcx.js"))
+            {
+                UpdateDirectoryListing();
+            }
+        }
+
+        private void fileView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (CurrentDirectory == null)
+            {
+                return;
+            }
+            string emevdPath = Path.Combine(CurrentDirectory, e.Node.Text);
+            if (File.Exists(emevdPath))
+            {
+                DirectoryMetadata.TryGetValue(CurrentDirectory, out FileMetadata metadata);
+                OpenFile(emevdPath, metadata);
+            }
+            else
+            {
+                UpdateDirectoryListing();
+            }
+        }
 
         private void Display_Resize(object sender, EventArgs e)
         {
@@ -306,20 +610,28 @@ namespace DarkScript3
         private void EmevdDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SharedControls.HideTip();
-            Editor?.ShowEmevdData();
+            CurrentEditor?.ShowEMEVDData();
+        }
+
+        private void RefreshGlobalStyles()
+        {
+            SharedControls.RefreshGlobalStyles();
+            fileView.BackColor = TextStyles.BackColor;
+            // Incidentally sets directory listing styles
+            UpdateDirectoryListing();
         }
 
         private void customizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (TextStyles.ShowStyleEditor())
             {
-                SharedControls.RefreshGlobalStyles();
+                RefreshGlobalStyles();
             }
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (CancelWithUnsavedChanges())
+            if (CancelWithCloseAll())
             {
                 return;
             }
@@ -328,7 +640,7 @@ namespace DarkScript3
 
         private void GUI_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (CancelWithUnsavedChanges())
+            if (CancelWithCloseAll())
             {
                 e.Cancel = true;
             }
@@ -340,15 +652,15 @@ namespace DarkScript3
             display.Panel1Collapsed = !display.Panel1Collapsed;
         }
 
-        private void CutToolStripMenuItem_Click(object sender, EventArgs e) => Editor?.Cut();
+        private void CutToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.Cut();
 
-        private void ReplaceToolStripMenuItem_Click(object sender, EventArgs e) => Editor?.ShowReplaceDialog();
+        private void ReplaceToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.ShowReplaceDialog();
 
-        private void SelectAllToolStripMenuItem_Click(object sender, EventArgs e) => Editor?.SelectAll();
+        private void SelectAllToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.SelectAll();
 
-        private void FindToolStripMenuItem_Click(object sender, EventArgs e) => Editor?.ShowFindDialog();
+        private void FindToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.ShowFindDialog();
 
-        private void CopyToolStripMenuItem_Click(object sender, EventArgs e) => Editor?.Copy();
+        private void CopyToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.Copy();
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -359,18 +671,14 @@ namespace DarkScript3
 
         private void batchDumpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (CancelWithUnsavedChanges())
-            {
-                return;
-            }
             var ofd = new OpenFileDialog();
             ofd.Title = "Open (note: skips existing JS files)";
             ofd.Multiselect = true;
             ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                string gameDocs = ChooseGame(out bool fancy);
-                if (gameDocs == null) return;
+                FileMetadata metadata = ChooseGame(true);
+                if (metadata == null) return;
                 List<string> succeeded = new List<string>();
                 List<string> failed = new List<string>();
                 foreach (var fileName in ofd.FileNames)
@@ -381,7 +689,7 @@ namespace DarkScript3
                     }
                     try
                     {
-                        if (OpenEMEVDFile(fileName, gameDocs, isFancy: fancy) && Editor.SaveJSFile())
+                        if (OpenEMEVDFile(fileName, metadata) && CurrentEditor.SaveJSFile())
                         {
                             succeeded.Add(fileName);
                             continue;
@@ -411,10 +719,6 @@ namespace DarkScript3
 
         private void batchResaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (CancelWithUnsavedChanges())
-            {
-                return;
-            }
             var ofd = new OpenFileDialog();
             ofd.Multiselect = true;
             ofd.Filter = "EMEVD Files|*.emevd.js; *.emevd.dcx.js";
@@ -426,7 +730,7 @@ namespace DarkScript3
                 {
                     try
                     {
-                        if (OpenJSFile(fileName) && Editor.SaveJSAndEMEVDFile())
+                        if (OpenJSFile(fileName) && CurrentEditor.SaveJSAndEMEVDFile())
                         {
                             succeeded.Add(fileName);
                             continue;
@@ -454,17 +758,17 @@ namespace DarkScript3
             }
         }
 
-        private void openAutoCompleteMenuToolStripMenuItem_Click(object sender, EventArgs e) => Editor?.ShowInstructionMenu();
+        private void openAutoCompleteMenuToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.ShowInstructionMenu();
 
-        private void scriptCompilationSettingsToolStripMenuItem_Click(object sender, EventArgs e) => Editor?.ShowScriptSettings();
+        private void scriptCompilationSettingsToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.ShowScriptSettings();
 
-        private void decompileToolStripMenuItem_Click(object sender, EventArgs e) => Editor?.ShowPreviewDecompile();
+        private void decompileToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.ShowPreviewDecompile();
 
-        private void previewCompilationOutputToolStripMenuItem_Click(object sender, EventArgs e) => Editor?.ShowPreviewCompile();
+        private void previewCompilationOutputToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.ShowPreviewCompile();
 
         private void viewEMEDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string name = Editor?.GetDocName();
+            string name = CurrentEditor?.GetDocName();
             if (name == null)
             {
                 MessageBox.Show("Open a file to view the EMEDF for that game\r\nor access it in the Resources directory.");

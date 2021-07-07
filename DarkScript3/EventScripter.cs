@@ -22,7 +22,8 @@ namespace DarkScript3
         private InstructionDocs docs;
 
         public readonly string EMEVDPath;
-        public string FileName => $"{Path.GetFileName(EMEVDPath)}.js";
+        public string JsFileName => $"{Path.GetFileName(EMEVDPath)}.js";
+        public string EmevdFileName => $"{Path.GetFileName(EMEVDPath)}";
 
         public EMEVD EVD = new EMEVD();
 

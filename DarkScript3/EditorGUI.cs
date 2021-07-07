@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using FastColoredTextBoxNS;
 using SoulsFormats;
 using System.Text;
+using System.ComponentModel;
 
 namespace DarkScript3
 {
@@ -18,11 +19,14 @@ namespace DarkScript3
         private EventScripter Scripter;
         private InstructionDocs Docs;
         private ScriptSettings Settings;
-        private bool CodeChanged = false;
+        private bool codeChanged;
+        private bool savedAfterChanges;
+        private List<FancyJSCompiler.CompileError> LatestWarnings;
 
         private SharedControls SharedControls;
-        public AutocompleteMenu InstructionMenu;
+        private AutocompleteMenu InstructionMenu;
         private Regex globalConstantRegex;
+        private JSAutoIndenter autoIndenter; 
 
         private Dictionary<string, (string title, string text)> ToolTips = new Dictionary<string, (string, string)>();
 
@@ -34,12 +38,14 @@ namespace DarkScript3
             Settings = settings;
             FileVersion = fileVersion;
             globalConstantRegex = JSRegex.GetGlobalConstantRegex(InstructionDocs.GlobalConstants.Concat(Docs.GlobalEnumConstants.Keys));
+            autoIndenter = new JSAutoIndenter(editor);
             Dock = DockStyle.Fill;
             BackColor = TextStyles.BackColor;
             InitializeComponent();
             editor.Focus();
             editor.SelectionColor = Color.White;
             editor.HotkeysMapping.Add(Keys.Control | Keys.Enter, FCTBAction.CustomAction1);
+            editor.HotkeysMapping.Add(Keys.Control | Keys.J, FCTBAction.CustomAction2);
             editor.Text = text;
             editor.ClearUndo();
             CodeChanged = false;
@@ -102,11 +108,31 @@ namespace DarkScript3
                     .Concat(enums.OrderBy(i => i.MenuText)));
         }
 
+        public string DisplayTitle => Scripter.EmevdFileName + (CodeChanged ? "*" : "");
+
+        public string EMEVDPath => Scripter.EMEVDPath;
+
+        private bool CodeChanged
+        {
+            get => codeChanged;
+            set
+            {
+                bool changeChanged = codeChanged != value;
+                codeChanged = value;
+                if (changeChanged)
+                {
+                    TitleChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        [Description("Occurs when the tab's title has changed due to unsaved changes")]
+        public event EventHandler TitleChanged;
+
         #region File Handling
 
         public bool SaveJSAndEMEVDFile()
         {
-            if (Scripter == null) return false;
             Range originalSelect = editor.Selection.Clone();
             Range errorSelect = null;
             bool success = false;
@@ -142,13 +168,14 @@ namespace DarkScript3
             try
             {
                 EMEVD result;
+                FancyJSCompiler.CompileOutput output = null;
                 if (fancyHint && Settings.AllowPreprocess && Docs.Translator != null)
                 {
-                    result = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).Pack(text, Scripter.FileName);
+                    result = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).Pack(text, Scripter.JsFileName, out output);
                 }
                 else
                 {
-                    result = Scripter.Pack(text, Scripter.FileName);
+                    result = Scripter.Pack(text, Scripter.JsFileName);
                 }
                 if (File.Exists(Scripter.EMEVDPath))
                 {
@@ -156,7 +183,17 @@ namespace DarkScript3
                 }
                 result.Write(Scripter.EMEVDPath);
                 SaveJSFile();
-                SharedControls.SetStatus("SAVE SUCCESSFUL");
+                string saveInfo = "";
+                if (output != null && output.Warnings != null && output.Warnings.Count > 0)
+                {
+                    LatestWarnings = output.Warnings;
+                    saveInfo += ". Use Ctrl+J to view warnings";
+                }
+                SharedControls.SetStatus("SAVE SUCCESSFUL" + saveInfo);
+                if (editor.UndoEnabled)
+                {
+                    savedAfterChanges = true;
+                }
                 CodeChanged = false;
                 return true;
             }
@@ -173,18 +210,18 @@ namespace DarkScript3
                 if (ProgramVersion.CompareVersions(ProgramVersion.VERSION, FileVersion) != 0)
                 {
                     extra.AppendLine(Environment.NewLine);
-                    extra.Append(ProgramVersion.GetCompatibilityMessage(Scripter.FileName, Docs.ResourceString, FileVersion));
+                    extra.Append(ProgramVersion.GetCompatibilityMessage(Scripter.JsFileName, Docs.ResourceString, FileVersion));
                 }
-                errorSelect = ShowCompileError(Scripter.FileName, ex, extra.ToString());
+                errorSelect = ShowCompileError(Scripter.JsFileName, ex, extra.ToString());
                 return false;
             }
         }
 
         public bool CancelWithUnsavedChanges()
         {
-            if (Scripter != null && CodeChanged)
+            if (CodeChanged)
             {
-                DialogResult result = MessageBox.Show($"Save {Scripter.FileName}?", "Unsaved Changes", MessageBoxButtons.YesNoCancel);
+                DialogResult result = MessageBox.Show($"Save {Scripter.EmevdFileName}?", "Unsaved Changes", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.Yes)
                 {
                     SaveJSAndEMEVDFile();
@@ -199,7 +236,6 @@ namespace DarkScript3
 
         public bool SaveJSFile()
         {
-            if (Scripter == null) return false;
             try
             {
                 var sb = new StringBuilder(); ;
@@ -238,10 +274,8 @@ namespace DarkScript3
         private void Editor_TextChanged(object sender, TextChangedEventArgs e)
         {
             SharedControls.ResetStatus(true);
-            if (Scripter != null)
-            {
-                CodeChanged = true;
-            }
+            CodeChanged = true;
+            LatestWarnings = null;
             if (SharedControls.Preview != null)
             {
                 SharedControls.Preview.DisableConversion();
@@ -251,10 +285,24 @@ namespace DarkScript3
             RecalculateHighlightTokenDelayed();
         }
 
+        private void Editor_UndoRedoStateChanged(object sender, EventArgs e)
+        {
+            // We can allow exit without confirmation if the undo stack is empty and there's been no save since then.
+            // The undo stack is internal to the editor so it's not possible to see if any arbitrary position is the last-saved state.
+            if (!editor.UndoEnabled && !savedAfterChanges)
+            {
+                CodeChanged = false;
+            }
+        }
+
         public void RefreshGlobalStyles(FastColoredTextBox tb = null)
         {
             tb = tb ?? editor;
             tb.ClearStylesBuffer();
+            tb.Font = TextStyles.Font;
+            tb.SelectionColor = TextStyles.SelectionColor;
+            tb.BackColor = TextStyles.BackColor;
+            tb.ForeColor = TextStyles.ForeColor;
             SetStyles(tb.Range);
         }
 
@@ -282,6 +330,7 @@ namespace DarkScript3
         private Range CursorTipRange;
         private Range HoverTipRange;
         private Point? PreventHoverMousePosition;
+        private Point CheckMouseMovedPosition;
         private Range CurrentTokenRange;
         private string CurrentToken;
         public string CurrentDoc { get; private set; }
@@ -289,6 +338,13 @@ namespace DarkScript3
         private Action<Point> moveOutOfBounds;
         private void Editor_MouseMove(object sender, MouseEventArgs e)
         {
+            if (e.Location == CheckMouseMovedPosition)
+            {
+                // For some reason, MouseMove events unnecessarily activate while typing,
+                // so ignore these to avoid unnecessarily dismissing the tooltip.
+                return;
+            }
+            CheckMouseMovedPosition = e.Location;
             if (moveOutOfBounds == null)
             {
                 moveOutOfBounds = SharedControls.Debounce((Action<Point>)OnOutOfBoundsToolTip, editor.ToolTipDelay + 10);
@@ -429,19 +485,9 @@ namespace DarkScript3
             JumpToEvent(place);
         }
 
-        private void Editor_CustomAction(object sender, CustomActionEventArgs e)
-        {
-            if (e.Action == FCTBAction.CustomAction1)
-            {
-                if (Scripter != null)
-                {
-                    JumpToEvent(editor.Selection.Start);
-                }
-            }
-        }
-
         private void JumpToEvent(Place place)
         {
+            // TODO: Add common func event jumping. This requires communicating with other tabs which should be done very carefully to avoid circular dependencies.
             Range numRange = editor.GetRange(place, place).GetFragment(TextStyles.Number, false);
             if (!int.TryParse(numRange.Text, out int id))
             {
@@ -584,7 +630,7 @@ namespace DarkScript3
 
         private void ShowArgToolTip(string funcName, Range arguments, int argument = -1)
         {
-            if (Docs != null && Docs.AllArgs.ContainsKey(funcName))
+            if (Docs.AllArgs.ContainsKey(funcName))
             {
                 Point point = editor.PlaceToPoint(arguments.Start);
                 ShowTip(ArgString(funcName), point, argument);
@@ -605,6 +651,24 @@ namespace DarkScript3
         #endregion
 
         #region Text Handling
+
+        private void editor_AutoIndentNeeded(object sender, AutoIndentEventArgs args)
+        {
+            autoIndenter.IndentJavaScript(sender, args);
+        }
+
+        // FastColoredTextBox couples together syntax highlighting and auto-indent logic,
+        // but we only need the latter, which is available in a protected method in SyntaxHighlighter.
+        // Hackily make it accessible.
+        private class JSAutoIndenter : SyntaxHighlighter
+        {
+            public JSAutoIndenter(FastColoredTextBox tb) : base(tb) { }
+
+            public void IndentJavaScript(object sender, AutoIndentEventArgs args)
+            {
+                CSharpAutoIndentNeeded(sender, args);
+            }
+        }
 
         private string FuncName(Range arguments)
         {
@@ -642,10 +706,21 @@ namespace DarkScript3
 
         #region Misc GUI Events
 
-        public void ShowEmevdData()
+        private void Editor_CustomAction(object sender, CustomActionEventArgs e)
         {
-            if (Scripter == null) return;
-            (new InfoViewer(Scripter)).ShowDialog();
+            if (e.Action == FCTBAction.CustomAction1)
+            {
+                JumpToEvent(editor.Selection.Start);
+            }
+            else if (e.Action == FCTBAction.CustomAction2)
+            {
+                ShowCompileWarnings();
+            }
+        }
+
+        public string GetDocName()
+        {
+            return Docs.ResourceString.Split('-')[0];
         }
 
         public void Cut() => editor.Cut();
@@ -654,6 +729,8 @@ namespace DarkScript3
 
         public void SelectAll() => editor.SelectAll();
 
+        // TODO: There are a few improvements we can make here, like: multi-file search form,
+        // highlighting search terms, non-dialog search (Google Chrome style Ctrl+F).
         public void ShowFindDialog()
         {
             string text = null;
@@ -665,6 +742,11 @@ namespace DarkScript3
         }
 
         public void Copy() => editor.Copy();
+
+        public void ShowEMEVDData()
+        {
+            new InfoViewer(Scripter).ShowDialog();
+        }
 
         public void ShowInstructionMenu()
         {
@@ -679,22 +761,27 @@ namespace DarkScript3
             form.ShowDialog();
         }
 
-        public string GetDocName()
+        public void ShowCompileWarnings()
         {
-            if (Docs == null)
+            if (LatestWarnings == null)
             {
-                return null;
+                return;
             }
-            return Docs.ResourceString.Split('-')[0];
+            if (ShowCompileError(Scripter.JsFileName, new FancyJSCompiler.FancyCompilerException { Errors = LatestWarnings, Warning = true }, "") is Range errorSelect)
+            {
+                PreventHoverMousePosition = MousePosition;
+                editor.Selection = errorSelect;
+                editor.DoSelectionVisible();
+            }
         }
 
         public void ShowPreviewDecompile()
         {
-            if (Scripter == null || Docs.Translator == null) return;
+            if (Docs.Translator == null) return;
             try
             {
                 string text = editor.Text;
-                FancyJSCompiler.CompileOutput output = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).RepackFull(text);
+                new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).Repack(text, out FancyJSCompiler.CompileOutput output);
                 PreviewCompilationForm preview = RefreshPreviewCompilationForm();
                 preview.SetSegments(output.GetDiffSegments(), text, output.Code);
                 preview.Show();
@@ -702,7 +789,7 @@ namespace DarkScript3
             }
             catch (FancyJSCompiler.FancyCompilerException ex)
             {
-                if (ShowCompileError(Scripter.FileName, ex, "") is Range errorSelect)
+                if (ShowCompileError(Scripter.JsFileName, ex, "") is Range errorSelect)
                 {
                     PreventHoverMousePosition = MousePosition;
                     editor.Selection = errorSelect;
@@ -713,7 +800,7 @@ namespace DarkScript3
 
         public void ShowPreviewCompile()
         {
-            if (Scripter == null || Docs.Translator == null) return;
+            if (Docs.Translator == null) return;
             try
             {
                 List<FancyJSCompiler.DiffSegment> segments = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).PreviewPack(editor.Text);
@@ -724,7 +811,7 @@ namespace DarkScript3
             }
             catch (FancyJSCompiler.FancyCompilerException ex)
             {
-                if (ShowCompileError(Scripter.FileName, ex, "") is Range errorSelect)
+                if (ShowCompileError(Scripter.JsFileName, ex, "") is Range errorSelect)
                 {
                     PreventHoverMousePosition = MousePosition;
                     editor.Selection = errorSelect;

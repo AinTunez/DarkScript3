@@ -285,11 +285,8 @@ namespace DarkScript3
                 }
                 else if (node.Im is Goto g && g.ToLabel != null)
                 {
-                    if (!labels.TryGetValue(g.ToLabel, out FlowNode targetNode))
-                    {
-                        result.Warning($"Instruction goes to nonexistent label (it will just end the event)", g);
-                    }
-                    if (targetNode != null)
+                    // If the label does not exist after this point, it will just end the event.
+                    if (labels.TryGetValue(g.ToLabel, out FlowNode targetNode))
                     {
                         node.JumpTo = targetNode;
                         g.ToNode = targetNode.ID;
@@ -339,6 +336,7 @@ namespace DarkScript3
             int tempVarID = 1;
             string newVar() => $"#temp{tempVarID++}";
             int nonTempAssigns = 0;
+            bool fancyFeaturesUsed = false;
 
             // Pending jump sources to add before generating the targets, to link them together.
             List<FlowNode> jumpFroms = new List<FlowNode>();
@@ -382,6 +380,7 @@ namespace DarkScript3
             }
             Cond genSimpleCond(Cond cond, CondAssign existing, Intermediate source)
             {
+                fancyFeaturesUsed = true;
                 if (cond is OpCond op)
                 {
                     string var = null;
@@ -510,6 +509,22 @@ namespace DarkScript3
                 {
                     g.ToLabel = $"L{label.Num}";
                 }
+                // Also, because this should be a pretty lightweight pass, a quick warning for mixing
+                // regular condition instructions and condition functions when they may conflict.
+                if (fancyFeaturesUsed && node.Im is Instr instr)
+                {
+                    if (info.GetInstrType(instr) is ControlType instrType)
+                    {
+                        if (instrType == ControlType.COND)
+                        {
+                            result.Warning("Low-level condition instruction used in an $Event. Use a condition function instead to make sure condition groups don't conflict.", instr);
+                        }
+                        else if (instrType == ControlType.SKIP)
+                        {
+                            result.Warning("Low-level skip used in an $Event. Use a goto or if statement instead to make sure line counts don't conflict.", instr);
+                        }
+                    }
+                }
             }
 
             // Assign condition groups to condition variables.
@@ -518,7 +533,7 @@ namespace DarkScript3
 
             // Simple heuristic for reusing temp ones: if all condition groups after a WaitFor have to pass through that WaitFor, reset temp groups.
             // Calculate this using reverse dominators. Including a node as its own reverse dominator is fine.
-            // Don't reset named ones for now, as those can be used as compiled groups. We could be smarter about this as well.
+            // Don't reset named condition variables for now, as those can be used in compiled checks. We could alternatively specifically check for this.
             HashSet<FlowNode> resetPoints = new HashSet<FlowNode>();
             if (tempVarID + nonTempAssigns >= maxGroup)
             {
@@ -737,10 +752,10 @@ namespace DarkScript3
                     }
                     int start = lines[node];
                     int end = lines[node.JumpTo];
-                    FlowNode jsInMiddle = cantJumpPast.Find(js => start < lines[js] && end >= lines[js]);
+                    FlowNode jsInMiddle = cantJumpPast.Find(js => lines[js] >= start && lines[js] < end);
                     if (jsInMiddle != null)
                     {
-                        result.Error($"Can't place a regular JS statement in the middle of a skip/goto", jsInMiddle.Im);
+                        result.Error($"Can't place a regular JS statement in the middle of a skip/goto: {node.Im} -> {node.JumpTo.Im}", jsInMiddle.Im);
                     }
                     g.ToLabel = null;
                     g.SkipLines = Math.Max(0, end - start - 1);
@@ -755,6 +770,7 @@ namespace DarkScript3
             List<Intermediate> instrs = new List<Intermediate>();
             NoOp prevNoOp = null;
             // Elimiate NoOps and leave only Instrs and JSStatements
+            // Some extra tracking must be done for preserving decorations.
             foreach (FlowNode node in NodeList())
             {
                 if (node.Im is NoOp noop)
@@ -778,7 +794,7 @@ namespace DarkScript3
                 catch (Exception ex) when (ex is FancyNotSupportedException || ex is InstructionTranslationException)
                 {
                     // These exceptions are basically the same thing, but InstructionTranslationException means it's more
-                    // the user's fault than EMEVD's fault.
+                    // the user's fault than EMEVD format's fault.
                     result.Error(ex.Message, node.Im);
                 }
             }
@@ -863,7 +879,7 @@ namespace DarkScript3
                         }
                     }
                     else if (g.ToLabel != null) continue;
-                    else throw new ArgumentException($"Unrecognized skip {im}");
+                    else throw new ArgumentException($"Internal error: unrecognized skip {im}");
 
                     FlowNode targetNode = Nodes[target];
                     node.JumpTo = targetNode;

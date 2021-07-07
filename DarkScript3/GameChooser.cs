@@ -7,13 +7,15 @@ namespace DarkScript3
 {
     public partial class GameChooser : Form
     {
-        public string GameDocs = "";
-        public bool Fancy { get => fancy.Checked; }
+        private bool showFancy;
+        public string GameDocs { get; private set; }
+        public bool Fancy { get; set; }
 
         public GameChooser(bool showFancy)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
+            this.showFancy = showFancy;
             if (showFancy)
             {
 
@@ -29,39 +31,45 @@ namespace DarkScript3
             }
         }
 
+        private void SetResult(string docs)
+        {
+            GameDocs = docs;
+            Fancy = showFancy && fancy.Checked;
+        }
+
         private void Ds3Btn_Click(object sender, EventArgs e)
         {
-            GameDocs = "ds3-common.emedf.json";
+            SetResult("ds3-common.emedf.json");
             Close();
         }
 
         private void BbBtn_Click(object sender, EventArgs e)
         {
-            GameDocs = "bb-common.emedf.json";
+            SetResult("bb-common.emedf.json");
             Close();
         }
 
         private void Ds1Btn_Click(object sender, EventArgs e)
         {
-            GameDocs = "ds1-common.emedf.json";
+            SetResult("ds1-common.emedf.json");
             Close();
         }
 
         private void SekiroBtn_Click(object sender, EventArgs e)
         {
-            GameDocs = "sekiro-common.emedf.json"; 
+            SetResult("sekiro-common.emedf.json");
             Close();
         }
 
         private void ds2Btn_Click(object sender, EventArgs e)
         {
-            GameDocs = "ds2-common.emedf.json";
+            SetResult("ds2-common.emedf.json");
             Close();
         }
 
         private void ds2scholarBtn_Click(object sender, EventArgs e)
         {
-            GameDocs = "ds2scholar-common.emedf.json";
+            SetResult("ds2scholar-common.emedf.json");
             Close();
         }
 
@@ -69,7 +77,6 @@ namespace DarkScript3
         {
             if (e.KeyCode == Keys.Escape)
             {
-                GameDocs = null;
                 Close();
             }
         }
@@ -81,7 +88,7 @@ namespace DarkScript3
             ofd.Filter = "EMEDF Files|*.emedf.json";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                GameDocs = ofd.FileName;
+                SetResult(ofd.FileName);
                 Close();
             }
         }

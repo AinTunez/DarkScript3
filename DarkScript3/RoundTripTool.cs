@@ -96,11 +96,16 @@ namespace DarkScript3
                     if (args.Contains("unit"))
                     {
                         string testCases = Resource.Text("test.js");
-                        fes.Pack(testCases);
+                        fes.Pack(testCases, "test.js");
                         Console.WriteLine(scripter.Unpack());
                         Console.WriteLine(fes.Repack(testCases));
                         return;
                     }
+                    if (args.Contains("repackreg"))
+                    {
+                        recordText("fancy3", name, () => fes.Repack(reg1));
+                    }
+                    if (!args.Contains("repack") && !args.Contains("pack")) continue;
                     string fancy1 = recordText("fancy1", name, () => fes.Unpack());
                     if (fancy1 != null)
                     {
@@ -108,7 +113,7 @@ namespace DarkScript3
                         {
                             recordText("fancy2", name, () => fes.Repack(fancy1));
                         }
-                        else
+                        if (args.Contains("pack"))
                         {
                             if (recordText("reg3", name + "-compile", () => fes.Pack(fancy1, name)) != null)
                             {
