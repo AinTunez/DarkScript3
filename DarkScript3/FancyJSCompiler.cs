@@ -839,8 +839,33 @@ namespace DarkScript3
         {
             WalkContext context = new WalkContext();
 
-            JavaScriptParser parser = new JavaScriptParser(code, new ParserOptions { });
-            Esprima.Ast.Program program = parser.ParseScript(false);
+            Esprima.Ast.Program program;
+            try
+            {
+                JavaScriptParser parser = new JavaScriptParser(code, new ParserOptions { });
+                program = parser.ParseScript(false);
+                // "ERROR: <message>\n{line}:{col}: line"
+            }
+            catch (ParserException ex)
+            {
+                if (ex.Error is ParseError err)
+                {
+                    Position? pos = null;
+                    if (err.IsPositionDefined)
+                    {
+                        // These columns appear to be mostly 1-indexed, so change them to 0-indexed to match Node positions.
+                        pos = new Position(err.Position.Line, Math.Max(0, err.Position.Column - 1));
+                    }
+                    context.Errors.Add(new CompileError { Line = err.LineNumber, Loc = pos, Message = err.Description });
+                    SourceContext tempSource = SourceContext.FromText(code, decorating: false);
+                    tempSource.TransformErrors(context.Errors, "ERROR");
+                }
+                else
+                {
+                    context.Errors.Add(new CompileError { Message = "ERROR: " + ex.ToString() });
+                }
+                throw new FancyCompilerException { Errors = context.Errors };
+            }
 
             SourceContext source = SourceContext.FromText(code, decorating: repack);
 
@@ -867,6 +892,10 @@ namespace DarkScript3
                     EventCFG.Result res = f.Compile(func, docs.Translator);
                     if (res.Errors.Count == 0)
                     {
+                        foreach (EventCFG.ResultError err in res.Warnings)
+                        {
+                            context.Warnings.Add(CompileError.FromInstr(err.Im, err.Message, func.ID));
+                        }
                         if (printFancyEnums)
                         {
                             // Do this here while everything is flat
@@ -1105,6 +1134,7 @@ namespace DarkScript3
         public class FancyCompilerException : Exception
         {
             public List<CompileError> Errors { get; set; }
+            public bool Warning { get; set; }
 
             public override string Message => string.Join("", Errors.Select(e => e.Message));
             public override string ToString() => Message;

@@ -7,7 +7,7 @@ namespace DarkScript3
 {
     public class ProgramVersion
     {
-        public static readonly string VERSION = "3.2.1";
+        public static readonly string VERSION = "3.2.2";
 
         public static string GetCompatibilityMessage(string fileName, string resourceString, string fileVer)
         {
@@ -81,6 +81,7 @@ namespace DarkScript3
             new IncompatibilityEntry("3.2", "Goto/End/SkipIfPlayerInoutsideArea require additional arg numberOfTargetCharacters with default value 1", new List<string> { "ds3" }),
             new IncompatibilityEntry("3.2", "DisplayHollowArenaPvpMessage is now DisplayGenericDialogGloballyAndSetEventFlags. Get the new lines from vanilla files.", new List<string> { "sekiro" }),
             new IncompatibilityEntry("3.2", "JavaScript is run in strict mode, so all variable assignments must be declared with let/const/var"),
+            new IncompatibilityEntry("3.2.2", "EndIfPlayerInoutsideArea requires additional arg numberOfTargetCharacters with default value 1", new List<string> { "sekiro" }),
         };
 
         private class IncompatibilityEntry

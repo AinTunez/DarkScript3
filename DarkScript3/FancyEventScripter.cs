@@ -32,9 +32,9 @@ namespace DarkScript3
             return writer.ToString();
         }
 
-        public EMEVD Pack(string code, string documentName = null)
+        public EMEVD Pack(string code, string documentName, out FancyJSCompiler.CompileOutput output)
         {
-            FancyJSCompiler.CompileOutput output = new FancyJSCompiler(options).Compile(code, docs);
+            output = new FancyJSCompiler(options).Compile(code, docs);
             try
             {
                 return scripter.Pack(output.Code, documentName);
@@ -46,21 +46,26 @@ namespace DarkScript3
             }
         }
 
+        public EMEVD Pack(string code, string documentName)
+        {
+            return Pack(code, documentName, out FancyJSCompiler.CompileOutput _);
+        }
+
+        public string Repack(string code, out FancyJSCompiler.CompileOutput output)
+        {
+            output = new FancyJSCompiler(options).Compile(code, docs, true);
+            return output.Code;
+        }
+
         public string Repack(string code)
         {
-            return RepackFull(code).Code;
+            return Repack(code, out FancyJSCompiler.CompileOutput _);
         }
 
         public List<FancyJSCompiler.DiffSegment> PreviewPack(string code)
         {
             FancyJSCompiler.CompileOutput output = new FancyJSCompiler(options).Compile(code, docs, printFancyEnums: true);
             return output.GetDiffSegments();
-        }
-
-        public FancyJSCompiler.CompileOutput RepackFull(string code)
-        {
-            FancyJSCompiler.CompileOutput output = new FancyJSCompiler(options).Compile(code, docs, true);
-            return output;
         }
 
         private void Decompile(TextWriter writer)

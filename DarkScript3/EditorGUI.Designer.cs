@@ -81,6 +81,8 @@ namespace DarkScript3
             this.editor.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.Editor_TextChanged);
             this.editor.SelectionChanged += new System.EventHandler(this.Editor_SelectionChanged);
             this.editor.VisibleRangeChangedDelayed += new System.EventHandler(this.Editor_VisibleRangeChangedDelayed);
+            this.editor.AutoIndentNeeded += new System.EventHandler<FastColoredTextBoxNS.AutoIndentEventArgs>(this.editor_AutoIndentNeeded);
+            this.editor.UndoRedoStateChanged += new System.EventHandler<System.EventArgs>(this.Editor_UndoRedoStateChanged);
             this.editor.CustomAction += new System.EventHandler<FastColoredTextBoxNS.CustomActionEventArgs>(this.Editor_CustomAction);
             this.editor.Scroll += new System.Windows.Forms.ScrollEventHandler(this.Editor_Scroll);
             this.editor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Editor_KeyDown);

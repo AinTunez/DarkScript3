@@ -30,23 +30,25 @@ namespace DarkScript3
 
         public void SetMessage(string file, Exception ex, string extra)
         {
-            Text = $"Error saving {file}";
             string errorText = ex.ToString() + extra;
             SetTextAndResize(errorText.Trim());
             placeRe = null;
+            bool isWarning = false;
             if (ex is JSScriptException)
             {
                 // Limit it to open file for the moment, as only one file open at a time
                 placeRe = new Regex($@"(?<={Regex.Escape(file)}:)\d+:\d+");
             }
-            else if (ex is FancyJSCompiler.FancyCompilerException)
+            else if (ex is FancyJSCompiler.FancyCompilerException compEx)
             {
                 placeRe = new Regex(@"(?<=\n)\d+:\d+(?=:)");
+                isWarning = compEx.Warning;
             }
             if (placeRe != null)
             {
                 box.Range.SetStyle(linkStyle, placeRe);
             }
+            Text = $"{(isWarning ? "Warning" : "Error")} saving {file}";
         }
 
         private void SetTextAndResize(string text)

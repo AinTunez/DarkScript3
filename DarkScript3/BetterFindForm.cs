@@ -31,12 +31,13 @@ namespace DarkScript3
             if (infoTip.Visible) infoTip.Hide();
         }
 
-        public virtual void FindNext(string pattern)
+        public virtual void FindNext(string pattern, Range initialSelection = null)
         {
             if (tb == null)
             {
                 return;
             }
+            initialSelection = initialSelection ?? tb.Selection.Clone();
             try
             {
                 RegexOptions opt = cbMatchCase.Checked ? RegexOptions.None : RegexOptions.IgnoreCase;
@@ -71,7 +72,7 @@ namespace DarkScript3
                 if (range.Start >= startPlace && startPlace > Place.Empty)
                 {
                     tb.Selection.Start = new Place(0, 0);
-                    FindNext(pattern);
+                    FindNext(pattern, initialSelection);
                     return;
                 }
                 MessageBox.Show("Not found");
@@ -80,6 +81,7 @@ namespace DarkScript3
             {
                 MessageBox.Show(ex.Message);
             }
+            tb.Selection = initialSelection;
         }
 
         private void tbFind_KeyPress(object sender, KeyPressEventArgs e)
@@ -113,7 +115,6 @@ namespace DarkScript3
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            // TODO: Should this be allowed? Can it be reopened in this case...?
             if (keyData == Keys.Escape)
             {
                 this.Close();

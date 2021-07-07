@@ -55,8 +55,7 @@ namespace DarkScript3
             {
                 tb.Enabled = false;
             }
-            gui.MainMenuStrip.Enabled = false;
-            gui.Cursor = Cursors.WaitCursor;
+            gui.LockEditor();
         }
 
         public void UnlockEditor()
@@ -65,21 +64,22 @@ namespace DarkScript3
             {
                 tb.Enabled = true;
             }
-            gui.MainMenuStrip.Enabled = true;
-            gui.Cursor = Cursors.Default;
+            gui.UnlockEditor();
         }
 
         public void AddEditor(EditorGUI editor)
         {
             SwitchEditor(editor);
+            editor.RefreshGlobalStyles();
             editor.editor.ZoomChanged += (sender, e) => { HideTip(); SetGlobalFont(((FastColoredTextBox)sender).Font); };
-            BFF.tb = editor.editor;
         }
 
         public void RemoveEditor(EditorGUI editor)
         {
+            HideTip();
             Editors.Remove(editor);
             docBox.Clear();
+            currentFuncDoc = null;
         }
 
         public void SwitchEditor(EditorGUI editor)
@@ -87,6 +87,7 @@ namespace DarkScript3
             HideTip();
             BFF.tb = editor.editor;
             docBox.Clear();
+            currentFuncDoc = null;
             editor.RefreshGlobalStyles(docBox);
             // Add last as a hint for which global styles to use
             Editors.Remove(editor);
@@ -123,24 +124,20 @@ namespace DarkScript3
 
         public void RefreshGlobalStyles()
         {
-            foreach (FastColoredTextBox tb in AllTextBoxes)
-            {
-                tb.Font = TextStyles.Font;
-                tb.SelectionColor = TextStyles.SelectionColor;
-                tb.BackColor = TextStyles.BackColor;
-                tb.ForeColor = TextStyles.ForeColor;
-            }
             foreach (EditorGUI editor in Editors)
             {
                 editor.RefreshGlobalStyles();
             }
             if (Editors.Count == 0)
             {
+                docBox.BackColor = TextStyles.BackColor;
                 docBox.ClearStylesBuffer();
+                InfoTip.tipBox.ClearStylesBuffer();
             }
             else
             {
                 Editors.Last().RefreshGlobalStyles(docBox);
+                Editors.Last().RefreshGlobalStyles(InfoTip.tipBox);
             }
         }
 
@@ -312,7 +309,7 @@ namespace DarkScript3
             List<string> altNames = Docs.GetAltFunctionNames(func);
             if (altNames != null && altNames.Count > 0)
             {
-                docBox.AppendText(Environment.NewLine + Environment.NewLine + $"(alt: {string.Join(", ", altNames)})");
+                docBox.AppendText(Environment.NewLine + Environment.NewLine + $"(func{(altNames.Count == 1 ? "" : "s")}: {string.Join(", ", altNames)})");
             }
         }
 

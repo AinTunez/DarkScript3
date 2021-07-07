@@ -493,6 +493,14 @@ namespace DarkScript3
             return instr;
         }
 
+        public ControlType? GetInstrType(Instr instr)
+        {
+            if (Selectors.TryGetValue(instr.Cmd, out ConditionSelector selector))
+            {
+                return selector.GetBasicType(instr);
+            }
+            return null;
+        }
 
         private static bool TryExtractIntArg(object arg, out int val)
         {
@@ -721,10 +729,22 @@ namespace DarkScript3
             public ConditionDoc Cond { get; set; }
             public EMEDF.EnumDoc NegateEnum { get; set; }
 
+            public ControlType GetBasicType(Instr instr)
+            {
+                if (!Variants.TryGetValue(instr.Cmd, out List<ConditionVariant> variants))
+                {
+                    throw new ArgumentException($"Can't use selector for {Cond.Name} to handle {instr}");
+                }
+                return variants[0].Variant;
+            }
+
             public ConditionVariant GetVariant(Instr instr)
             {
-                if (!Variants.ContainsKey(instr.Cmd)) throw new ArgumentException($"Can't use selector for {Cond.Name} to handle {instr}");
-                foreach (ConditionVariant variant in Variants[instr.Cmd])
+                if (!Variants.TryGetValue(instr.Cmd, out List<ConditionVariant> variants))
+                {
+                    throw new ArgumentException($"Can't use selector for {Cond.Name} to handle {instr}");
+                }
+                foreach (ConditionVariant variant in variants)
                 {
                     if (variant.NegateArg == -1)
                     {

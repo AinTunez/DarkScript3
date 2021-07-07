@@ -7812,6 +7812,20 @@
               "unk2": 0,
               "unk3": 0,
               "unk4": 0
+            },
+            {
+              "name": "Number of Target Characters",
+              "type": 5,
+              "enum_name": null,
+              "default": 1,
+              "min": 0,
+              "max": 9999,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
             }
           ] 
         },

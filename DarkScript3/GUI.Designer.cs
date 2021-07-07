@@ -33,10 +33,13 @@ namespace DarkScript3
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.batchDumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.batchResaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nextTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.previousTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,12 +68,19 @@ namespace DarkScript3
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.display = new System.Windows.Forms.SplitContainer();
+            this.display2 = new System.Windows.Forms.SplitContainer();
             this.docBox = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.fileView = new System.Windows.Forms.TreeView();
+            this.tabControl = new System.Windows.Forms.TabControl();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.display)).BeginInit();
             this.display.Panel1.SuspendLayout();
             this.display.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.display2)).BeginInit();
+            this.display2.Panel1.SuspendLayout();
+            this.display2.Panel2.SuspendLayout();
+            this.display2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.docBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,10 +102,13 @@ namespace DarkScript3
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
+            this.closeTabToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.batchDumpToolStripMenuItem,
             this.batchResaveToolStripMenuItem,
-            this.exitToolStripMenuItem});
+            this.exitToolStripMenuItem,
+            this.nextTabToolStripMenuItem,
+            this.previousTabToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -104,38 +117,65 @@ namespace DarkScript3
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
             this.openToolStripMenuItem.Text = "Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
+            // 
+            // closeTabToolStripMenuItem
+            // 
+            this.closeTabToolStripMenuItem.Name = "closeTabToolStripMenuItem";
+            this.closeTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+            this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.closeTabToolStripMenuItem.Text = "Close Tab";
+            this.closeTabToolStripMenuItem.Click += new System.EventHandler(this.closeTabToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // batchDumpToolStripMenuItem
             // 
             this.batchDumpToolStripMenuItem.Name = "batchDumpToolStripMenuItem";
-            this.batchDumpToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.batchDumpToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
             this.batchDumpToolStripMenuItem.Text = "Batch Dump (EMEVD→JS)...";
             this.batchDumpToolStripMenuItem.Click += new System.EventHandler(this.batchDumpToolStripMenuItem_Click);
             // 
             // batchResaveToolStripMenuItem
             // 
             this.batchResaveToolStripMenuItem.Name = "batchResaveToolStripMenuItem";
-            this.batchResaveToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.batchResaveToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
             this.batchResaveToolStripMenuItem.Text = "Batch Resave (JS→EMEVD)...";
             this.batchResaveToolStripMenuItem.Click += new System.EventHandler(this.batchResaveToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
+            // 
+            // nextTabToolStripMenuItem
+            // 
+            this.nextTabToolStripMenuItem.Name = "nextTabToolStripMenuItem";
+            this.nextTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Tab)));
+            this.nextTabToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.nextTabToolStripMenuItem.Text = "NextTabHidden";
+            this.nextTabToolStripMenuItem.Visible = false;
+            this.nextTabToolStripMenuItem.Click += new System.EventHandler(this.nextTabToolStripMenuItem_Click);
+            // 
+            // previousTabToolStripMenuItem
+            // 
+            this.previousTabToolStripMenuItem.Name = "previousTabToolStripMenuItem";
+            this.previousTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Tab)));
+            this.previousTabToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.previousTabToolStripMenuItem.Text = "PreviousTabHidden";
+            this.previousTabToolStripMenuItem.Visible = false;
+            this.previousTabToolStripMenuItem.Click += new System.EventHandler(this.previousTabToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -268,14 +308,14 @@ namespace DarkScript3
             // emevdDataToolStripMenuItem
             // 
             this.emevdDataToolStripMenuItem.Name = "emevdDataToolStripMenuItem";
-            this.emevdDataToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.emevdDataToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
             this.emevdDataToolStripMenuItem.Text = "EMEVD Data...";
             this.emevdDataToolStripMenuItem.Click += new System.EventHandler(this.EmevdDataToolStripMenuItem_Click);
             // 
             // previewCompilationOutputToolStripMenuItem
             // 
             this.previewCompilationOutputToolStripMenuItem.Name = "previewCompilationOutputToolStripMenuItem";
-            this.previewCompilationOutputToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.previewCompilationOutputToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
             this.previewCompilationOutputToolStripMenuItem.Text = "Preview Compilation Output...";
             this.previewCompilationOutputToolStripMenuItem.Click += new System.EventHandler(this.previewCompilationOutputToolStripMenuItem_Click);
             // 
@@ -284,8 +324,8 @@ namespace DarkScript3
             this.documentationToolStripMenuItem.Name = "documentationToolStripMenuItem";
             this.documentationToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.D)));
-            this.documentationToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            this.documentationToolStripMenuItem.Text = "Toggle Doc Panel";
+            this.documentationToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.documentationToolStripMenuItem.Text = "Toggle Panel";
             this.documentationToolStripMenuItem.Click += new System.EventHandler(this.DocumentationToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
@@ -345,7 +385,7 @@ namespace DarkScript3
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 509);
+            this.statusStrip.Location = new System.Drawing.Point(0, 535);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(905, 22);
             this.statusStrip.SizingGrip = false;
@@ -356,20 +396,40 @@ namespace DarkScript3
             // 
             this.display.Dock = System.Windows.Forms.DockStyle.Fill;
             this.display.IsSplitterFixed = true;
-            this.display.Location = new System.Drawing.Point(0, 24);
+            this.display.Location = new System.Drawing.Point(0, 47);
             this.display.Name = "display";
             // 
             // display.Panel1
             // 
-            this.display.Panel1.Controls.Add(this.docBox);
+            this.display.Panel1.Controls.Add(this.display2);
             // 
             // display.Panel2
             // 
             this.display.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.display.Size = new System.Drawing.Size(905, 485);
+            this.display.Size = new System.Drawing.Size(905, 488);
             this.display.SplitterDistance = 322;
             this.display.TabIndex = 4;
             this.display.Resize += new System.EventHandler(this.Display_Resize);
+            // 
+            // display2
+            // 
+            this.display2.BackColor = System.Drawing.Color.Transparent;
+            this.display2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.display2.IsSplitterFixed = true;
+            this.display2.Location = new System.Drawing.Point(0, 0);
+            this.display2.Name = "display2";
+            this.display2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // display2.Panel1
+            // 
+            this.display2.Panel1.Controls.Add(this.docBox);
+            // 
+            // display2.Panel2
+            // 
+            this.display2.Panel2.Controls.Add(this.fileView);
+            this.display2.Size = new System.Drawing.Size(322, 488);
+            this.display2.SplitterDistance = 241;
+            this.display2.TabIndex = 0;
             // 
             // docBox
             // 
@@ -410,20 +470,44 @@ namespace DarkScript3
             this.docBox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.docBox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("docBox.ServiceColors")));
             this.docBox.ShowLineNumbers = false;
-            this.docBox.ShowScrollBars = false;
-            this.docBox.Size = new System.Drawing.Size(322, 485);
+            this.docBox.Size = new System.Drawing.Size(322, 241);
             this.docBox.TabIndex = 1;
             this.docBox.TabStop = false;
             this.docBox.WordWrap = true;
             this.docBox.Zoom = 100;
             // 
+            // fileView
+            // 
+            this.fileView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.fileView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.fileView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileView.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.fileView.Location = new System.Drawing.Point(0, 0);
+            this.fileView.Name = "fileView";
+            this.fileView.Size = new System.Drawing.Size(322, 243);
+            this.fileView.TabIndex = 0;
+            this.fileView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.fileView_NodeMouseDoubleClick);
+            // 
+            // tabControl
+            // 
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl.Location = new System.Drawing.Point(0, 24);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(905, 23);
+            this.tabControl.TabIndex = 5;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
+            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(905, 531);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.ClientSize = new System.Drawing.Size(905, 557);
             this.Controls.Add(this.display);
+            this.Controls.Add(this.tabControl);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
             this.Font = new System.Drawing.Font("Consolas", 8.25F);
@@ -441,6 +525,10 @@ namespace DarkScript3
             this.display.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.display)).EndInit();
             this.display.ResumeLayout(false);
+            this.display2.Panel1.ResumeLayout(false);
+            this.display2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.display2)).EndInit();
+            this.display2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.docBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -459,6 +547,7 @@ namespace DarkScript3
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.SplitContainer display;
+        private System.Windows.Forms.SplitContainer display2;
         private FastColoredTextBoxNS.FastColoredTextBox docBox;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
@@ -484,6 +573,11 @@ namespace DarkScript3
         private System.Windows.Forms.ToolStripMenuItem viewFancyDocumentationToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem batchResaveToolStripMenuItem;
+        private System.Windows.Forms.TreeView fileView;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.ToolStripMenuItem closeTabToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nextTabToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem previousTabToolStripMenuItem;
     }
 }
 
