@@ -120,6 +120,7 @@ namespace DarkScript3
             {
                 tb.Font = (Font)font.Clone();
             }
+            TextStyles.Font = font;
         }
 
         public void RefreshGlobalStyles()
