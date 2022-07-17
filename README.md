@@ -1,9 +1,22 @@
 # DarkScript3
 
-User-friendly editor for FromSoftware's EMEVD format. For basic usage instructions, visit the [tutorial](http://soulsmodding.wikidot.com/tutorial:learning-how-to-use-emevd).
+User-friendly editor for FromSoftware's EMEVD format with high-level language and project features. For basic usage instructions, visit the [general tutorial](http://soulsmodding.wikidot.com/tutorial:learning-how-to-use-emevd) or [Elden Ring-specific tutorial](http://soulsmodding.wikidot.com/tutorial:intro-to-elden-ring-emevd).
+
+DarkScript3 also includes MattScript, a way of formatting scripts (except in DS2, which has no control flow) which adds even more high-level language features, making scripts easier to understand and edit. See [MattScript documentation](http://soulsmodding.wikidot.com/tutorial:mattscript-documentation).
+
+## Supported games
+
+* Dark Souls ([instruction list](https://soulsmods.github.io/emedf/ds1-emedf.html))
+* Bloodborne ([instruction list](https://soulsmods.github.io/emedf/bb-emedf.html))
+* Dark Souls II ([instruction list](https://soulsmods.github.io/emedf/ds2-emedf.html))
+* Dark Souls II: SOTFS ([instruction list](https://soulsmods.github.io/emedf/ds2scholar-emedf.html))
+* Dark Souls III ([instruction list](https://soulsmods.github.io/emedf/ds3-emedf.html))
+* Sekiro ([instruction list](https://soulsmods.github.io/emedf/sekiro-emedf.html))
+* Elden Ring ([instruction list](https://soulsmods.github.io/emedf/er-emedf.html))
+* Aside from these, you can bring your own EMEDF JSON file
 
 ## Images
-![DarkScript 3 screenshot](https://i.imgur.com/mKBkZuk.png)
+![DarkScript 3 screenshot](https://i.imgur.com/wXufTwa.png)
 
 ## Tips
 
@@ -18,9 +31,10 @@ Some useful ones are:
 * Ctrl+Shift+C - comment/uncomment text
 * Ctrl+Scroll - zoom in/out
 * Ctrl+Space - open autocomplete menu
-* Ctrl+Click, Ctrl+Enter on number - go to event definition from anywhere, or event initialization from definition
 * Ctrl+-, Ctrl+Shift+- - backwards/forwards line navigation
 * Ctrl+Tab, Ctrl+Shift+Tab - forwards/backwards tab
+* Ctrl+Click, Ctrl+Enter on number - go to event definition from anywhere, or event initialization from definition
+* Ctrl+1 on number - show byte-equivalent float for an integer
 
 ### Importing other files
 

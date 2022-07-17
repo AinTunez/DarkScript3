@@ -163,16 +163,16 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>IfConditionGroup(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; targetConditionGroup)</pre><p><code>WaitFor</code> in MattScript</p></div></section>
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    byte&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; targetConditionGroup)</pre><p><code>WaitFor</code> in MattScript</p></div></section>
 <section class="instr condinstr">
 <h3 id="IfParameterComparison"><a href="#IfParameterComparison" class="selfref"><code>IfParameterComparison</code></a> <span class="sectioninfo">Instruction 0[01]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m29</p>
 <pre>IfParameterComparison(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     int lefthandSide, 
     int righthandSide)</pre><p>Condition function: <code><a href="#Compare">Compare</a></code></p>
 </div></section>
@@ -182,7 +182,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>IfElapsedSeconds(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     float targetNumberOfSeconds)</pre><p>Condition function: <code><a href="#ElapsedSeconds">ElapsedSeconds</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -190,7 +190,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m21_00_00_00, m24_01_00_00, m27_00_00_00, m28_00_00_00, m29, m34_00_00_00, m35_00_00_00</p>
 <pre>IfElapsedFrames(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetNumberOfFrames)</pre><p>Condition function: <code><a href="#ElapsedFrames">ElapsedFrames</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -198,7 +198,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m24_01_00_00, m26_00_00_00, m29, m32_00_00_00, m33_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>IfRandomElapsedSeconds(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     float targetSecondsMin, 
     float targetSecondsMax)</pre><p>Condition function: <code><a href="#RandomElapsedSeconds">RandomElapsedSeconds</a></code></p>
 </div></section>
@@ -207,7 +207,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m24_01_00_00</p>
 <pre>IfRandomElapsedFrames(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetFramesMin, 
     int targetFramesMax)</pre><p>Condition function: <code><a href="#RandomElapsedFrames">RandomElapsedFrames</a></code></p>
 </div></section>
@@ -217,9 +217,9 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>IfEventFlag(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#ONOFFCHANGE">ONOFFCHANGE</a>&gt; desiredFlagState, 
-    enum&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    byte&lt;<a href="#ONOFFCHANGE">ONOFFCHANGE</a>&gt; desiredFlagState, 
+    byte&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
     int targetEventFlagId)</pre><p>Condition function: <code><a href="#EventFlag">EventFlag</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -227,9 +227,9 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m21_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m25_00_00_00, m29, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>IfBatchEventFlags(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#LogicalOperationType">LogicalOperationType</a>&gt; desiredFlagState, 
-    enum&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    byte&lt;<a href="#LogicalOperationType">LogicalOperationType</a>&gt; desiredFlagState, 
+    byte&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
     int startingTargetEventFlagId, 
     int endingTargetEventFlagId)</pre><p>Condition function: <code><a href="#AllBatchEventFlags">AllBatchEventFlags</a></code></p>
 </div></section>
@@ -238,8 +238,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>IfInoutsideArea(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#InsideOutsideState">InsideOutsideState</a>&gt; desiredState, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    byte&lt;<a href="#InsideOutsideState">InsideOutsideState</a>&gt; desiredState, 
     int targetEntityId, 
     int areaEntityId)</pre><p>Condition function: <code><a href="#InArea">InArea</a></code></p>
 </div></section>
@@ -248,8 +248,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but common</p>
 <pre>IfEntityInoutsideRadiusOfEntity(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#InsideOutsideState">InsideOutsideState</a>&gt; desiredState, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    byte&lt;<a href="#InsideOutsideState">InsideOutsideState</a>&gt; desiredState, 
     int targetEntityAId, 
     int targetEntityBId, 
     float targetDistance)</pre><p>Condition function: <code><a href="#EntityInRadiusOfEntity">EntityInRadiusOfEntity</a></code></p>
@@ -259,24 +259,24 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m21_00_00_00, m22_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m25_00_00_00, m27_00_00_00, m28_00_00_00, m29, m32_00_00_00, m34_00_00_00, m35_00_00_00</p>
 <pre>IfPlayerHasdoesntHaveItem(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    byte&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
     int itemId, 
-    enum&lt;<a href="#OwnershipState">OwnershipState</a>&gt; desiredPossessionState)</pre><p>Condition function: <code><a href="#PlayerHasItem">PlayerHasItem</a></code></p>
+    byte&lt;<a href="#OwnershipState">OwnershipState</a>&gt; desiredPossessionState)</pre><p>Condition function: <code><a href="#PlayerHasItem">PlayerHasItem</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
 <h3 id="IfActionButton"><a href="#IfActionButton" class="selfref"><code>IfActionButton</code></a> <span class="sectioninfo">Instruction 3[05]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>IfActionButton(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; targetEntityType, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; targetEntityType, 
     int targetEntityId, 
     float reactionAngleDeg, 
     short dummypolyId, 
     float reactionDistance, 
     int helpMessageId, 
-    enum&lt;<a href="#ReactionType">ReactionType</a>&gt; reactionType, 
+    byte&lt;<a href="#ReactionType">ReactionType</a>&gt; reactionType, 
     int padId)</pre><p>Condition function: <code><a href="#ActionButton">ActionButton</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -284,16 +284,16 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m26_00_00_00, m27_00_00_00, m28_00_00_00, m29, m32_00_00_00, m34_00_00_00, m35_00_00_00</p>
 <pre>IfMultiplayerState(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#MultiplayerState">MultiplayerState</a>&gt; desiredMultiplayerState)</pre><p>Condition function: <code><a href="#HasMultiplayerState">HasMultiplayerState</a></code></p>
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#MultiplayerState">MultiplayerState</a>&gt; desiredMultiplayerState)</pre><p>Condition function: <code><a href="#HasMultiplayerState">HasMultiplayerState</a></code></p>
 </div></section>
 <section class="instr condinstr">
 <h3 id="IfAllPlayersInoutsideArea"><a href="#IfAllPlayersInoutsideArea" class="selfref"><code>IfAllPlayersInoutsideArea</code></a> <span class="sectioninfo">Instruction 3[07]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m22_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m26_00_00_00, m27_00_00_00, m28_00_00_00, m29, m33_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>IfAllPlayersInoutsideArea(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#InsideOutsideState">InsideOutsideState</a>&gt; desiredState, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    byte&lt;<a href="#InsideOutsideState">InsideOutsideState</a>&gt; desiredState, 
     int areaEntityId)</pre><p>Condition function: <code><a href="#AllPlayersInArea">AllPlayersInArea</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -301,7 +301,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m23_00_00_00, m24_02_00_00, m25_00_00_00, m28_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>IfPlayerInoutMap(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     bool shouldPlayerBeInside, 
     byte areaId, 
     byte blockId)</pre><p>Condition function: <code><a href="#PlayerInMap">PlayerInMap</a></code></p>
@@ -311,7 +311,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>IfMultiplayerEvent(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     uint multiplayerEventId)</pre><p>Condition function: <code><a href="#MultiplayerEvent">MultiplayerEvent</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
@@ -319,11 +319,11 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>IfCountEventFlags(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    byte&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
     int startingTargetEventFlagId, 
     int endingTargetEventFlagId, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     int countThreshold)</pre><p>Condition function: <code><a href="#CountEventFlags">CountEventFlags</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
@@ -331,9 +331,9 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>IfWorldTendency(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#TendencyType">TendencyType</a>&gt; tendencyType, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    byte&lt;<a href="#TendencyType">TendencyType</a>&gt; tendencyType, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     byte tendencyThreshold)</pre><p>Condition function: <code><a href="#WorldTendency">WorldTendency</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -341,10 +341,10 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m21_00_00_00, m22_00_00_00, m24_00_00_00, m24_01_00_00, m25_00_00_00, m28_00_00_00, m29, m34_00_00_00, m35_00_00_00</p>
 <pre>IfEventValue(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int baseEventFlagId, 
     byte numberOfUsedFlagBits, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     uint thresholdValue)</pre><p>Condition function: <code><a href="#EventValue">EventValue</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
@@ -352,14 +352,14 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>IfActionButtonBossFog(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; targetEntityType, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; targetEntityType, 
     int targetEntityId, 
     float reactionAngleDeg, 
     short dummypolyId, 
     float reactionDistance, 
     int helpMessageId, 
-    enum&lt;<a href="#ReactionType">ReactionType</a>&gt; reactionType, 
+    byte&lt;<a href="#ReactionType">ReactionType</a>&gt; reactionType, 
     int padId)</pre><p>Condition function: <code><a href="#ActionButtonBossFog">ActionButtonBossFog</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
@@ -367,7 +367,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>IfDroppedItemsInArea(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int areaEntityId)</pre><p>Condition function: <code><a href="#DroppedItemsInArea">DroppedItemsInArea</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
@@ -375,8 +375,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>IfDroppedItem(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    int&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
     int itemId)</pre><p>Condition function: <code><a href="#DroppedItem">DroppedItem</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -384,18 +384,18 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m21_00_00_00</p>
 <pre>IfPlayerHasdoesntHaveItemIncludingBbox(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    byte&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
     int itemId, 
-    enum&lt;<a href="#OwnershipState">OwnershipState</a>&gt; desiredPossessionState)</pre><p>Condition function: <code><a href="#PlayerHasItemIncludingBBox">PlayerHasItemIncludingBBox</a></code></p>
+    byte&lt;<a href="#OwnershipState">OwnershipState</a>&gt; desiredPossessionState)</pre><p>Condition function: <code><a href="#PlayerHasItemIncludingBBox">PlayerHasItemIncludingBBox</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
 <h3 id="IfGameCycle"><a href="#IfGameCycle" class="selfref"><code>IfGameCycle</code></a> <span class="sectioninfo">Instruction 3[17]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>IfGameCycle(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     byte completedGameCyclesThreshold)</pre><p>Condition function: <code><a href="#GameCycle">GameCycle</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
@@ -403,14 +403,14 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>IfActionButtonLineSegment(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; targetEntityType, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; targetEntityType, 
     int targetEntityId, 
     float reactionAngleDeg, 
     short dummypolyId, 
     float reactionDistance, 
     int helpMessageId, 
-    enum&lt;<a href="#ReactionType">ReactionType</a>&gt; reactionType, 
+    byte&lt;<a href="#ReactionType">ReactionType</a>&gt; reactionType, 
     int padId, 
     int lineSegmentDefinedByEntityId)</pre><p>Condition function: <code><a href="#ActionButtonLineSegment">ActionButtonLineSegment</a></code></p>
 </div></section>
@@ -419,14 +419,14 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>IfActionButtonLineSegmentBossRoom(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; targetEntityType, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; targetEntityType, 
     int targetEntityId, 
     float reactionAngleDeg, 
     short dummypolyId, 
     float reactionDistance, 
     int helpMessageId, 
-    enum&lt;<a href="#ReactionType">ReactionType</a>&gt; reactionType, 
+    byte&lt;<a href="#ReactionType">ReactionType</a>&gt; reactionType, 
     int padId, 
     int lineSegmentDefinedByEntityId)</pre><p>Condition function: <code><a href="#ActionButtonLineSegmentBossRoom">ActionButtonLineSegmentBossRoom</a></code></p>
 </div></section>
@@ -435,10 +435,10 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>IfCompareEventValues(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int leftsideBaseEventFlagId, 
     byte leftsideNumberOfUsedFlagBits, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     int rightsideBaseEventFlagId, 
     byte rightsideNumberOfUsedFlagBits)</pre><p>Condition function: <code><a href="#CompareEventValues">CompareEventValues</a></code></p>
 </div></section>
@@ -447,7 +447,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>IfOwnsDlc(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     bool ownsDlc)</pre><p>Condition function: <code><a href="#OwnsDLC">OwnsDLC</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -455,7 +455,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m26_00_00_00, m29, m33_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>IfOnlineMode(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     bool onlineMode)</pre><p>Condition function: <code><a href="#IsOnline">IsOnline</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -463,17 +463,17 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but common</p>
 <pre>IfDamageType(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetEntityId, 
     int attackerEntityId, 
-    enum&lt;<a href="#DamageType">DamageType</a>&gt; damageType)</pre><p>Condition function: <code><a href="#HasDamageType">HasDamageType</a></code></p>
+    byte&lt;<a href="#DamageType">DamageType</a>&gt; damageType)</pre><p>Condition function: <code><a href="#HasDamageType">HasDamageType</a></code></p>
 </div></section>
 <section class="instr condinstr">
 <h3 id="IfActionButtonInArea"><a href="#IfActionButtonInArea" class="selfref"><code>IfActionButtonInArea</code></a> <span class="sectioninfo">Instruction 3[24]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but common</p>
 <pre>IfActionButtonInArea(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int actionButtonParameterId, 
     int startingPointAreaEntityId)</pre><p>Condition function: <code><a href="#ActionButtonInArea">ActionButtonInArea</a></code></p>
 </div></section>
@@ -482,8 +482,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m25_00_00_00</p>
 <pre>IfPlayerArmorType(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#ArmorType">ArmorType</a>&gt; armorType, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    byte&lt;<a href="#ArmorType">ArmorType</a>&gt; armorType, 
     int targetArmorIdStart, 
     int targetArmorIdEnd)</pre><p>Condition function: <code><a href="#PlayerArmorType">PlayerArmorType</a></code></p>
 </div></section>
@@ -492,34 +492,34 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m21_00_00_00, m22_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m25_00_00_00, m26_00_00_00, m28_00_00_00, m29</p>
 <pre>IfPlayerInsightAmount(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     byte targetInsightAmount, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType)</pre><p>Condition function: <code><a href="#PlayerInsightAmount">PlayerInsightAmount</a></code></p>
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType)</pre><p>Condition function: <code><a href="#PlayerInsightAmount">PlayerInsightAmount</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
 <h3 id="IfGenericDialogChoice"><a href="#IfGenericDialogChoice" class="selfref"><code>IfGenericDialogChoice</code></a> <span class="sectioninfo">Instruction 3[27]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>IfGenericDialogChoice(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#GenericDialogResult">GenericDialogResult</a>&gt; genericDialogResult)</pre><p>Condition function: <code><a href="#GenericDialogChoice">GenericDialogChoice</a></code></p>
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#GenericDialogResult">GenericDialogResult</a>&gt; genericDialogResult)</pre><p>Condition function: <code><a href="#GenericDialogChoice">GenericDialogChoice</a></code></p>
 </div></section>
 <section class="instr condinstr">
 <h3 id="IfPlaygoState"><a href="#IfPlaygoState" class="selfref"><code>IfPlaygoState</code></a> <span class="sectioninfo">Instruction 3[28]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m24_01_00_00</p>
 <pre>IfPlaygoState(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#PlayGoState">PlayGoState</a>&gt; playgoState)</pre><p>Condition function: <code><a href="#HasPlayGoState">HasPlayGoState</a></code></p>
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#PlayGoState">PlayGoState</a>&gt; playgoState)</pre><p>Condition function: <code><a href="#HasPlayGoState">HasPlayGoState</a></code></p>
 </div></section>
 <section class="instr condinstr">
 <h3 id="IfNumberOfClientsOfType"><a href="#IfNumberOfClientsOfType" class="selfref"><code>IfNumberOfClientsOfType</code></a> <span class="sectioninfo">Instruction 3[29]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m26_00_00_00, m27_00_00_00, m28_00_00_00, m29, m32_00_00_00, m33_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>IfNumberOfClientsOfType(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#ClientType">ClientType</a>&gt; clientType, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    byte&lt;<a href="#ClientType">ClientType</a>&gt; clientType, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     byte targetNumberOfClients)</pre><p>Condition function: <code><a href="#NumberOfClientsOfType">NumberOfClientsOfType</a></code></p>
 </div></section>
 <h2 id="4_Condition_Character"><a href="#4_Condition_Character" class="selfref">4 - Condition - Character</a></h2>
@@ -528,16 +528,16 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>IfCharacterDeadalive(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetEntityId, 
-    enum&lt;<a href="#DeathState">DeathState</a>&gt; desiredLifeState)</pre><p>Condition function: <code><a href="#CharacterDead">CharacterDead</a></code></p>
+    byte&lt;<a href="#DeathState">DeathState</a>&gt; desiredLifeState)</pre><p>Condition function: <code><a href="#CharacterDead">CharacterDead</a></code></p>
 </div></section>
 <section class="instr condinstr">
 <h3 id="IfCharacterDamagedBy"><a href="#IfCharacterDamagedBy" class="selfref"><code>IfCharacterDamagedBy</code></a> <span class="sectioninfo">Instruction 4[01]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m22_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m25_00_00_00, m26_00_00_00, m27_00_00_00, m29, m32_00_00_00</p>
 <pre>IfCharacterDamagedBy(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetEntityId, 
     int attackerEntityId)</pre><p>Condition function: <code><a href="#CharacterDamagedBy">CharacterDamagedBy</a></code></p>
 </div></section>
@@ -546,9 +546,9 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>IfHPRatio(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetEntityId, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     float targetHPRatio)</pre><p>Condition function: <code><a href="#HPRatio">HPRatio</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -556,16 +556,16 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>IfCharacterType(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetEntityId, 
-    enum&lt;<a href="#TargetType">TargetType</a>&gt; targetType)</pre><p>Condition function: <code><a href="#CharacterType">CharacterType</a></code></p>
+    sbyte&lt;<a href="#TargetType">TargetType</a>&gt; targetType)</pre><p>Condition function: <code><a href="#CharacterType">CharacterType</a></code></p>
 </div></section>
 <section class="instr condinstr">
 <h3 id="IfCharacterTargetedBy"><a href="#IfCharacterTargetedBy" class="selfref"><code>IfCharacterTargetedBy</code></a> <span class="sectioninfo">Instruction 4[04]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m24_00_00_00, m26_00_00_00, m28_00_00_00, m29, m35_00_00_00</p>
 <pre>IfCharacterTargetedBy(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int aggressorEntityId, 
     int targetEntityId, 
     bool shouldHave)</pre><p>Condition function: <code><a href="#CharacterTargetedBy">CharacterTargetedBy</a></code></p>
@@ -575,7 +575,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but m22_00_00_00</p>
 <pre>IfCharacterHasSpEffect(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetEntityId, 
     int spEffectId, 
     bool shouldHave)</pre><p>Condition function: <code><a href="#CharacterHasSpEffect">CharacterHasSpEffect</a></code></p>
@@ -585,18 +585,18 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m21_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m27_00_00_00, m28_00_00_00, m29, m32_00_00_00, m33_00_00_00, m34_00_00_00</p>
 <pre>IfNPCPartHP(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetEntityId, 
-    int nPCPartId, 
-    int hPThreshold, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType)</pre><p>Condition function: <code><a href="#NPCPartHP">NPCPartHP</a></code></p>
+    int npcPartId, 
+    int hpThreshold, 
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType)</pre><p>Condition function: <code><a href="#NPCPartHP">NPCPartHP</a></code></p>
 </div></section>
 <section class="instr condinstr">
 <h3 id="IfCharacterBackreadStatus"><a href="#IfCharacterBackreadStatus" class="selfref"><code>IfCharacterBackreadStatus</code></a> <span class="sectioninfo">Instruction 4[07]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>IfCharacterBackreadStatus(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetEntityId, 
     bool isBackread)</pre><p>Condition function: <code><a href="#CharacterBackreadStatus">CharacterBackreadStatus</a></code></p>
 </div></section>
@@ -605,7 +605,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but common</p>
 <pre>IfCharacterHasEventMessage(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetEntityId, 
     int targetEventMessageId, 
     bool shouldHave)</pre><p>Condition function: <code><a href="#CharacterHasEventMessage">CharacterHasEventMessage</a></code></p>
@@ -615,16 +615,16 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but common and m21_00_00_00</p>
 <pre>IfCharacterAIState(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetEntityId, 
-    enum&lt;<a href="#AIStateType">AIStateType</a>&gt; aIState)</pre><p>Condition function: <code><a href="#CharacterAIState">CharacterAIState</a></code></p>
+    byte&lt;<a href="#AIStateType">AIStateType</a>&gt; aiState)</pre><p>Condition function: <code><a href="#CharacterAIState">CharacterAIState</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
 <h3 id="IfPlayerUsingSkullLantern"><a href="#IfPlayerUsingSkullLantern" class="selfref"><code>IfPlayerUsingSkullLantern</code></a> <span class="sectioninfo">Instruction 4[10]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>IfPlayerUsingSkullLantern(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     bool usingSkullLantern)</pre><p>Condition function: <code><a href="#PlayerUsingSkullLantern">PlayerUsingSkullLantern</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
@@ -632,15 +632,15 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>IfPlayersClass(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#ClassType">ClassType</a>&gt; classNameType)</pre><p>Condition function: <code><a href="#PlayersClass">PlayersClass</a></code></p>
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    byte&lt;<a href="#ClassType">ClassType</a>&gt; classNameType)</pre><p>Condition function: <code><a href="#PlayersClass">PlayersClass</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
 <h3 id="IfPlayersCovenant"><a href="#IfPlayersCovenant" class="selfref"><code>IfPlayersCovenant</code></a> <span class="sectioninfo">Instruction 4[12]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>IfPlayersCovenant(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     byte covenantIndex)</pre><p>Condition function: <code><a href="#PlayersCovenant">PlayersCovenant</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -648,8 +648,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m26_00_00_00, m29, m33_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>IfPlayersSoulLevel(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     uint targetSoulLevel)</pre><p>Condition function: <code><a href="#PlayersSoulLevel">PlayersSoulLevel</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -657,9 +657,9 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m22_00_00_00, m24_01_00_00, m24_02_00_00, m27_00_00_00, m29</p>
 <pre>IfCharacterHPValue(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetEntityId, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     int targetHP)</pre><p>Condition function: <code><a href="#CharacterHPValue">CharacterHPValue</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -667,7 +667,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m29</p>
 <pre>IfCharacterDrawgroupState(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetCharacterEntityId, 
     bool insideDrawgroup)</pre><p>Condition function: <code><a href="#CharacterInsideDrawGroup">CharacterInsideDrawGroup</a></code></p>
 </div></section>
@@ -677,8 +677,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m22_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m29, m34_00_00_00, m35_00_00_00</p>
 <pre>IfObjectDestroyed(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    enum&lt;<a href="#DestructionState">DestructionState</a>&gt; damageState, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    byte&lt;<a href="#DestructionState">DestructionState</a>&gt; damageState, 
     int targetObjectEntityId)</pre><p>Condition function: <code><a href="#ObjectDestroyed">ObjectDestroyed</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -686,7 +686,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m29</p>
 <pre>IfObjectHitBy(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetEntityId, 
     int attackerEntityId)</pre><p>Condition function: <code><a href="#ObjectHitBy">ObjectHitBy</a></code></p>
 </div></section>
@@ -695,7 +695,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but common and m33_00_00_00</p>
 <pre>IfObjactEventFlag(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int objactEventFlag)</pre><p>Condition function: <code><a href="#ObjActEventFlag">ObjActEventFlag</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -703,10 +703,10 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m22_00_00_00, m23_00_00_00, m29, m34_00_00_00, m36_00_00_00</p>
 <pre>IfObjectHP(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetEntityId, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
-    int hPThreshold)</pre><p>Condition function: <code><a href="#ObjectHP">ObjectHP</a></code></p>
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    int hpThreshold)</pre><p>Condition function: <code><a href="#ObjectHP">ObjectHP</a></code></p>
 </div></section>
 <h2 id="11_Condition_Hit"><a href="#11_Condition_Hit" class="selfref">11 - Condition - Hit</a></h2>
 <section class="instr condinstr">
@@ -714,7 +714,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m29, m36_00_00_00</p>
 <pre>IfPlayerMovingOnHit(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int hitboxEntityId)</pre><p>Condition function: <code><a href="#PlayerMovingOnHit">PlayerMovingOnHit</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
@@ -722,7 +722,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>IfPlayerAttackingOnHit(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int hitboxEntityId)</pre><p>Condition function: <code><a href="#PlayerAttackingOnHit">PlayerAttackingOnHit</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -730,7 +730,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but common and m29</p>
 <pre>IfPlayerStandingOnHit(
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int hitboxEntityId)</pre><p>Condition function: <code><a href="#PlayerStandingOnHit">PlayerStandingOnHit</a></code></p>
 </div></section>
 <h2 id="1000_Control_Flow_System"><a href="#1000_Control_Flow_System" class="selfref">1000 - Control Flow - System</a></h2>
@@ -739,24 +739,24 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m29</p>
 <pre>WaitForConditionGroupState(
-    enum&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; targetConditionGroup)</pre><p><code>WaitFor</code> in MattScript</p></div></section>
+    byte&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; targetConditionGroup)</pre><p><code>WaitFor</code> in MattScript</p></div></section>
 <section class="instr condinstr">
 <h3 id="SkipIfConditionGroupStateUncompiled"><a href="#SkipIfConditionGroupStateUncompiled" class="selfref"><code>SkipIfConditionGroupStateUncompiled</code></a> <span class="sectioninfo">Instruction 1000[01]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>SkipIfConditionGroupStateUncompiled(
     byte numberOfSkippedLines, 
-    enum&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; targetConditionGroup)</pre><p><code>GotoIf</code> in MattScript</p></div></section>
+    byte&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; targetConditionGroup)</pre><p><code>GotoIf</code> in MattScript</p></div></section>
 <section class="instr condinstr">
 <h3 id="EndIfConditionGroupStateUncompiled"><a href="#EndIfConditionGroupStateUncompiled" class="selfref"><code>EndIfConditionGroupStateUncompiled</code></a> <span class="sectioninfo">Instruction 1000[02]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>EndIfConditionGroupStateUncompiled(
-    enum&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
-    enum&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; targetConditionGroup)</pre><p><code>EndIf or RestartIf</code> in MattScript</p></div></section>
+    byte&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
+    byte&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; targetConditionGroup)</pre><p><code>EndIf or RestartIf</code> in MattScript</p></div></section>
 <section class="instr condinstr">
 <h3 id="SkipUnconditionally"><a href="#SkipUnconditionally" class="selfref"><code>SkipUnconditionally</code></a> <span class="sectioninfo">Instruction 1000[03]</span></h3>
 <div class="sectioncontents">
@@ -768,14 +768,14 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>EndUnconditionally(
-    enum&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType)</pre><p><code>EndEvent or RestartEvent</code> in MattScript</p></div></section>
+    byte&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType)</pre><p><code>EndEvent or RestartEvent</code> in MattScript</p></div></section>
 <section class="instr condinstr">
 <h3 id="SkipIfComparison"><a href="#SkipIfComparison" class="selfref"><code>SkipIfComparison</code></a> <span class="sectioninfo">Instruction 1000[05]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m21_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m25_00_00_00, m26_00_00_00, m27_00_00_00, m28_00_00_00, m29, m32_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>SkipIfComparison(
     byte numberOfSkippedLines, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     int lefthandSide, 
     int righthandSide)</pre><p>Condition function: <code><a href="#Compare">Compare</a></code></p>
 </div></section>
@@ -784,8 +784,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m24_01_00_00</p>
 <pre>EndIfComparison(
-    enum&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     int lefthandSide, 
     int righthandSide)</pre><p>Condition function: <code><a href="#Compare">Compare</a></code></p>
 </div></section>
@@ -795,16 +795,16 @@ section {
 <p class="sectionusage usageinfo">Used in all but common</p>
 <pre>SkipIfConditionGroupStateCompiled(
     byte numberOfSkippedLines, 
-    enum&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; targetConditionGroup)</pre><p><code>GotoIf(cond.Passed)</code> in MattScript</p></div></section>
+    byte&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; targetConditionGroup)</pre><p><code>GotoIf(cond.Passed)</code> in MattScript</p></div></section>
 <section class="instr condinstr">
 <h3 id="EndIfConditionGroupStateCompiled"><a href="#EndIfConditionGroupStateCompiled" class="selfref"><code>EndIfConditionGroupStateCompiled</code></a> <span class="sectioninfo">Instruction 1000[08]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>EndIfConditionGroupStateCompiled(
-    enum&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
-    enum&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; targetConditionGroup)</pre><p><code>EndIf(cond.Passed) or RestartIf(cond.Passed)</code> in MattScript</p></div></section>
+    byte&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
+    byte&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; targetConditionGroup)</pre><p><code>EndIf(cond.Passed) or RestartIf(cond.Passed)</code> in MattScript</p></div></section>
 <section class="instr unused">
 <h3 id="WaitForNetworkApproval"><a href="#WaitForNetworkApproval" class="selfref"><code>WaitForNetworkApproval</code></a> <span class="sectioninfo">Instruction 1000[09]</span></h3>
 <div class="sectioncontents">
@@ -816,22 +816,22 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>GotoIfConditionGroupStateUncompiled(
-    enum&lt;<a href="#Label">Label</a>&gt; label, 
-    enum&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; targetConditionGroup)</pre><p><code>GotoIf</code> in MattScript</p></div></section>
+    byte&lt;<a href="#Label">Label</a>&gt; label, 
+    byte&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; targetConditionGroup)</pre><p><code>GotoIf</code> in MattScript</p></div></section>
 <section class="instr condinstr">
 <h3 id="GotoUnconditionally"><a href="#GotoUnconditionally" class="selfref"><code>GotoUnconditionally</code></a> <span class="sectioninfo">Instruction 1000[103]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but common</p>
 <pre>GotoUnconditionally(
-    enum&lt;<a href="#Label">Label</a>&gt; label)</pre><p><code>Goto</code> in MattScript</p></div></section>
+    byte&lt;<a href="#Label">Label</a>&gt; label)</pre><p><code>Goto</code> in MattScript</p></div></section>
 <section class="instr condinstr">
 <h3 id="GotoIfComparison"><a href="#GotoIfComparison" class="selfref"><code>GotoIfComparison</code></a> <span class="sectioninfo">Instruction 1000[105]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m26_00_00_00, m28_00_00_00, m29</p>
 <pre>GotoIfComparison(
-    enum&lt;<a href="#Label">Label</a>&gt; label, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#Label">Label</a>&gt; label, 
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     int lefthandSide, 
     int righthandSide)</pre><p>Condition function: <code><a href="#Compare">Compare</a></code></p>
 </div></section>
@@ -840,9 +840,9 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but m24_02_00_00 and m25_00_00_00</p>
 <pre>GotoIfConditionGroupStateCompiled(
-    enum&lt;<a href="#Label">Label</a>&gt; label, 
-    enum&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
-    enum&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; targetConditionGroup)</pre><p><code>GotoIf(cond.Passed)</code> in MattScript</p></div></section>
+    byte&lt;<a href="#Label">Label</a>&gt; label, 
+    byte&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; targetConditionGroup)</pre><p><code>GotoIf(cond.Passed)</code> in MattScript</p></div></section>
 <h2 id="1001_Control_Flow_Timer"><a href="#1001_Control_Flow_Timer" class="selfref">1001 - Control Flow - Timer</a></h2>
 <section class="instr">
 <h3 id="WaitFixedTimeSeconds"><a href="#WaitFixedTimeSeconds" class="selfref"><code>WaitFixedTimeSeconds</code></a> <span class="sectioninfo">Instruction 1001[00]</span></h3>
@@ -876,8 +876,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m29</p>
 <pre>WaitForEventFlag(
-    enum&lt;<a href="#ONOFFCHANGE">ONOFFCHANGE</a>&gt; desiredFlagState, 
-    enum&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
+    byte&lt;<a href="#ONOFFCHANGE">ONOFFCHANGE</a>&gt; desiredFlagState, 
+    byte&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
     int targetEventFlagId)</pre></div></section>
 <section class="instr condinstr">
 <h3 id="SkipIfEventFlag"><a href="#SkipIfEventFlag" class="selfref"><code>SkipIfEventFlag</code></a> <span class="sectioninfo">Instruction 1003[01]</span></h3>
@@ -885,8 +885,8 @@ section {
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>SkipIfEventFlag(
     byte numberOfSkippedLines, 
-    enum&lt;<a href="#ONOFF">ONOFF</a>&gt; desiredFlagState, 
-    enum&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
+    byte&lt;<a href="#ONOFF">ONOFF</a>&gt; desiredFlagState, 
+    byte&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
     int targetEventFlagId)</pre><p>Condition function: <code><a href="#EventFlag">EventFlag</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -894,9 +894,9 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>EndIfEventFlag(
-    enum&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
-    enum&lt;<a href="#ONOFF">ONOFF</a>&gt; desiredFlagState, 
-    enum&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
+    byte&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
+    byte&lt;<a href="#ONOFF">ONOFF</a>&gt; desiredFlagState, 
+    byte&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
     int targetEventFlagId)</pre><p>Condition function: <code><a href="#EventFlag">EventFlag</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -905,8 +905,8 @@ section {
 <p class="sectionusage usageinfo">Used in common, m24_00_00_00, m24_01_00_00, m25_00_00_00, m26_00_00_00, m29</p>
 <pre>SkipIfBatchEventFlags(
     byte numberOfSkippedLines, 
-    enum&lt;<a href="#LogicalOperationType">LogicalOperationType</a>&gt; desiredFlagState, 
-    enum&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
+    byte&lt;<a href="#LogicalOperationType">LogicalOperationType</a>&gt; desiredFlagState, 
+    byte&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
     int startingTargetEventFlagId, 
     int endingTargetEventFlagId)</pre><p>Condition function: <code><a href="#AllBatchEventFlags">AllBatchEventFlags</a></code></p>
 </div></section>
@@ -915,9 +915,9 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m23_00_00_00, m25_00_00_00, m27_00_00_00, m29, m32_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>EndIfBatchEventFlags(
-    enum&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
-    enum&lt;<a href="#LogicalOperationType">LogicalOperationType</a>&gt; desiredFlagState, 
-    enum&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
+    byte&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
+    byte&lt;<a href="#LogicalOperationType">LogicalOperationType</a>&gt; desiredFlagState, 
+    byte&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
     int startingTargetEventFlagId, 
     int endingTargetEventFlagId)</pre><p>Condition function: <code><a href="#AllBatchEventFlags">AllBatchEventFlags</a></code></p>
 </div></section>
@@ -927,15 +927,15 @@ section {
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>SkipIfMultiplayerState(
     byte numberOfSkippedLines, 
-    enum&lt;<a href="#MultiplayerState">MultiplayerState</a>&gt; desiredMultiplayerState)</pre><p>Condition function: <code><a href="#HasMultiplayerState">HasMultiplayerState</a></code></p>
+    sbyte&lt;<a href="#MultiplayerState">MultiplayerState</a>&gt; desiredMultiplayerState)</pre><p>Condition function: <code><a href="#HasMultiplayerState">HasMultiplayerState</a></code></p>
 </div></section>
 <section class="instr condinstr">
 <h3 id="EndIfMultiplayerState"><a href="#EndIfMultiplayerState" class="selfref"><code>EndIfMultiplayerState</code></a> <span class="sectioninfo">Instruction 1003[06]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>EndIfMultiplayerState(
-    enum&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
-    enum&lt;<a href="#MultiplayerState">MultiplayerState</a>&gt; desiredMultiplayerState)</pre><p>Condition function: <code><a href="#HasMultiplayerState">HasMultiplayerState</a></code></p>
+    byte&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
+    sbyte&lt;<a href="#MultiplayerState">MultiplayerState</a>&gt; desiredMultiplayerState)</pre><p>Condition function: <code><a href="#HasMultiplayerState">HasMultiplayerState</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
 <h3 id="SkipIfPlayerInoutMap"><a href="#SkipIfPlayerInoutMap" class="selfref"><code>SkipIfPlayerInoutMap</code></a> <span class="sectioninfo">Instruction 1003[07]</span></h3>
@@ -952,7 +952,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m24_01_00_00</p>
 <pre>EndIfPlayerInoutMap(
-    enum&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
+    byte&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
     bool shouldPlayerBeInside, 
     byte areaId, 
     byte blockId)</pre><p>Condition function: <code><a href="#PlayerInMap">PlayerInMap</a></code></p>
@@ -963,7 +963,7 @@ section {
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>SkipIfNumberOfCoopClients(
     byte numberOfSkippedLines, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     byte targetNumberOfClients)</pre><p>Condition function: <code><a href="#NumberOfCoopClients">NumberOfCoopClients</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
@@ -971,8 +971,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>EndIfNumberOfCoopClients(
-    enum&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     byte targetNumberOfClients)</pre><p>Condition function: <code><a href="#NumberOfCoopClients">NumberOfCoopClients</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -981,23 +981,23 @@ section {
 <p class="sectionusage usageinfo">Used in m24_01_00_00, m28_00_00_00, m33_00_00_00</p>
 <pre>SkipIfPlayersGender(
     byte numberOfSkippedLines, 
-    enum&lt;<a href="#Gender">Gender</a>&gt; gender)</pre><p>Condition function: <code><a href="#PlayerGender">PlayerGender</a></code></p>
+    byte&lt;<a href="#Gender">Gender</a>&gt; gender)</pre><p>Condition function: <code><a href="#PlayerGender">PlayerGender</a></code></p>
 </div></section>
 <section class="instr condinstr">
 <h3 id="GotoIfPlayersGender"><a href="#GotoIfPlayersGender" class="selfref"><code>GotoIfPlayersGender</code></a> <span class="sectioninfo">Instruction 1003[12]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m21_00_00_00</p>
 <pre>GotoIfPlayersGender(
-    enum&lt;<a href="#Label">Label</a>&gt; label, 
-    enum&lt;<a href="#Gender">Gender</a>&gt; gender)</pre><p>Condition function: <code><a href="#PlayerGender">PlayerGender</a></code></p>
+    byte&lt;<a href="#Label">Label</a>&gt; label, 
+    byte&lt;<a href="#Gender">Gender</a>&gt; gender)</pre><p>Condition function: <code><a href="#PlayerGender">PlayerGender</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
 <h3 id="EndIfPlayersGender"><a href="#EndIfPlayersGender" class="selfref"><code>EndIfPlayersGender</code></a> <span class="sectioninfo">Instruction 1003[13]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>EndIfPlayersGender(
-    enum&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
-    enum&lt;<a href="#Gender">Gender</a>&gt; gender)</pre><p>Condition function: <code><a href="#PlayerGender">PlayerGender</a></code></p>
+    byte&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
+    byte&lt;<a href="#Gender">Gender</a>&gt; gender)</pre><p>Condition function: <code><a href="#PlayerGender">PlayerGender</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
 <h3 id="SkipIfNumberOfClientsOfType"><a href="#SkipIfNumberOfClientsOfType" class="selfref"><code>SkipIfNumberOfClientsOfType</code></a> <span class="sectioninfo">Instruction 1003[14]</span></h3>
@@ -1005,8 +1005,8 @@ section {
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>SkipIfNumberOfClientsOfType(
     byte numberOfSkippedLines, 
-    enum&lt;<a href="#ClientType">ClientType</a>&gt; clientType, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#ClientType">ClientType</a>&gt; clientType, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     byte targetNumberOfClients)</pre><p>Condition function: <code><a href="#NumberOfClientsOfType">NumberOfClientsOfType</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
@@ -1014,9 +1014,9 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>GotoIfNumberOfClientsOfType(
-    enum&lt;<a href="#Label">Label</a>&gt; label, 
-    enum&lt;<a href="#ClientType">ClientType</a>&gt; clientType, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#Label">Label</a>&gt; label, 
+    byte&lt;<a href="#ClientType">ClientType</a>&gt; clientType, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     byte targetNumberOfClients)</pre><p>Condition function: <code><a href="#NumberOfClientsOfType">NumberOfClientsOfType</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
@@ -1024,9 +1024,9 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>EndIfNumberOfClientsOfType(
-    enum&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
-    enum&lt;<a href="#ClientType">ClientType</a>&gt; clientType, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
+    byte&lt;<a href="#ClientType">ClientType</a>&gt; clientType, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     byte targetNumberOfClients)</pre><p>Condition function: <code><a href="#NumberOfClientsOfType">NumberOfClientsOfType</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -1034,9 +1034,9 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>GotoIfEventFlag(
-    enum&lt;<a href="#Label">Label</a>&gt; label, 
-    enum&lt;<a href="#ONOFF">ONOFF</a>&gt; desiredFlagState, 
-    enum&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
+    byte&lt;<a href="#Label">Label</a>&gt; label, 
+    byte&lt;<a href="#ONOFF">ONOFF</a>&gt; desiredFlagState, 
+    byte&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
     int targetEventFlagId)</pre><p>Condition function: <code><a href="#EventFlag">EventFlag</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -1044,9 +1044,9 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m23_00_00_00, m24_00_00_00, m24_01_00_00, m27_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>GotoIfBatchEventFlags(
-    enum&lt;<a href="#Label">Label</a>&gt; label, 
-    enum&lt;<a href="#LogicalOperationType">LogicalOperationType</a>&gt; desiredFlagState, 
-    enum&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
+    byte&lt;<a href="#Label">Label</a>&gt; label, 
+    byte&lt;<a href="#LogicalOperationType">LogicalOperationType</a>&gt; desiredFlagState, 
+    byte&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
     int startingTargetEventFlagId, 
     int endingTargetEventFlagId)</pre><p>Condition function: <code><a href="#AllBatchEventFlags">AllBatchEventFlags</a></code></p>
 </div></section>
@@ -1055,15 +1055,15 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>GotoIfMultiplayerState(
-    enum&lt;<a href="#Label">Label</a>&gt; label, 
-    enum&lt;<a href="#MultiplayerState">MultiplayerState</a>&gt; desiredMultiplayerState)</pre><p>Condition function: <code><a href="#HasMultiplayerState">HasMultiplayerState</a></code></p>
+    byte&lt;<a href="#Label">Label</a>&gt; label, 
+    sbyte&lt;<a href="#MultiplayerState">MultiplayerState</a>&gt; desiredMultiplayerState)</pre><p>Condition function: <code><a href="#HasMultiplayerState">HasMultiplayerState</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
 <h3 id="GotoIfPlayerInoutMap"><a href="#GotoIfPlayerInoutMap" class="selfref"><code>GotoIfPlayerInoutMap</code></a> <span class="sectioninfo">Instruction 1003[107]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>GotoIfPlayerInoutMap(
-    enum&lt;<a href="#Label">Label</a>&gt; label, 
+    byte&lt;<a href="#Label">Label</a>&gt; label, 
     bool shouldPlayerBeInside, 
     byte areaId, 
     byte blockId)</pre><p>Condition function: <code><a href="#PlayerInMap">PlayerInMap</a></code></p>
@@ -1073,8 +1073,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but common</p>
 <pre>GotoIfNumberOfCoopClients(
-    enum&lt;<a href="#Label">Label</a>&gt; label, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#Label">Label</a>&gt; label, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     byte targetNumberOfClients)</pre><p>Condition function: <code><a href="#NumberOfCoopClients">NumberOfCoopClients</a></code></p>
 </div></section>
 <h2 id="1005_Control_Flow_Object"><a href="#1005_Control_Flow_Object" class="selfref">1005 - Control Flow - Object</a></h2>
@@ -1083,7 +1083,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>WaitForObjectDestroyed(
-    enum&lt;<a href="#DestructionState">DestructionState</a>&gt; damageState, 
+    byte&lt;<a href="#DestructionState">DestructionState</a>&gt; damageState, 
     int targetObjectEntityId)</pre></div></section>
 <section class="instr condinstr">
 <h3 id="SkipIfObjectDestroyed"><a href="#SkipIfObjectDestroyed" class="selfref"><code>SkipIfObjectDestroyed</code></a> <span class="sectioninfo">Instruction 1005[01]</span></h3>
@@ -1091,7 +1091,7 @@ section {
 <p class="sectionusage usageinfo">Used in m29</p>
 <pre>SkipIfObjectDestroyed(
     byte numberOfSkippedLines, 
-    enum&lt;<a href="#DestructionState">DestructionState</a>&gt; damageState, 
+    byte&lt;<a href="#DestructionState">DestructionState</a>&gt; damageState, 
     int targetObjectEntityId)</pre><p>Condition function: <code><a href="#ObjectDestroyed">ObjectDestroyed</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -1099,8 +1099,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m29</p>
 <pre>EndIfObjectDestroyed(
-    enum&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
-    enum&lt;<a href="#DestructionState">DestructionState</a>&gt; damageState, 
+    byte&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
+    byte&lt;<a href="#DestructionState">DestructionState</a>&gt; damageState, 
     int targetObjectEntityId)</pre><p>Condition function: <code><a href="#ObjectDestroyed">ObjectDestroyed</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
@@ -1108,8 +1108,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>GotoIfObjectDestroyed(
-    enum&lt;<a href="#Label">Label</a>&gt; label, 
-    enum&lt;<a href="#DestructionState">DestructionState</a>&gt; damageState, 
+    byte&lt;<a href="#Label">Label</a>&gt; label, 
+    byte&lt;<a href="#DestructionState">DestructionState</a>&gt; damageState, 
     int targetObjectEntityId)</pre><p>Condition function: <code><a href="#ObjectDestroyed">ObjectDestroyed</a></code></p>
 </div></section>
 <h2 id="1014_Control_Flow_Label"><a href="#1014_Control_Flow_Label" class="selfref">1014 - Control Flow - Label</a></h2>
@@ -1164,7 +1164,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>SetNetworkSyncState(
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledenabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
 <section class="instr unused">
 <h3 id="ClearCompiledConditionGroupState"><a href="#ClearCompiledConditionGroupState" class="selfref"><code>ClearCompiledConditionGroupState</code></a> <span class="sectioninfo">Instruction 2000[03]</span></h3>
 <div class="sectioncontents">
@@ -1191,14 +1191,14 @@ section {
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>PlayCutsceneToAll(
     int cutsceneId, 
-    enum&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod)</pre></div></section>
+    uint&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod)</pre></div></section>
 <section class="instr unused">
 <h3 id="PlayCutsceneAndWarpAllPlayers"><a href="#PlayCutsceneAndWarpAllPlayers" class="selfref"><code>PlayCutsceneAndWarpAllPlayers</code></a> <span class="sectioninfo">Instruction 2002[02]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>PlayCutsceneAndWarpAllPlayers(
     int cutsceneId, 
-    enum&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
+    uint&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
     int pointEntityId, 
     byte areaId, 
     byte blockId)</pre></div></section>
@@ -1208,7 +1208,7 @@ section {
 <p class="sectionusage usageinfo">Used in common, m21_00_00_00, m22_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m25_00_00_00, m26_00_00_00, m28_00_00_00, m33_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>PlayCutsceneToPlayer(
     int cutsceneId, 
-    enum&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
+    uint&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
     int playerEntityId)</pre></div></section>
 <section class="instr">
 <h3 id="PlayCutsceneAndWarpPlayer"><a href="#PlayCutsceneAndWarpPlayer" class="selfref"><code>PlayCutsceneAndWarpPlayer</code></a> <span class="sectioninfo">Instruction 2002[04]</span></h3>
@@ -1216,7 +1216,7 @@ section {
 <p class="sectionusage usageinfo">Used in m21_00_00_00, m33_00_00_00, m34_00_00_00, m35_00_00_00</p>
 <pre>PlayCutsceneAndWarpPlayer(
     int cutsceneId, 
-    enum&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
+    uint&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
     int pointEntityId, 
     byte areaId, 
     byte blockId, 
@@ -1227,7 +1227,7 @@ section {
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>PlayCutsceneAndRotatePlayerAroundVerticalAxis(
     int cutsceneId, 
-    enum&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
+    uint&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
     float yaxisXCoordM, 
     float yaxisZCoordM, 
     int rotationDeg, 
@@ -1239,7 +1239,7 @@ section {
 <p class="sectionusage usageinfo">Used in m24_00_00_00</p>
 <pre>PlayCutsceneChangeTimePeriodAndWarpPlayer(
     int cutsceneId, 
-    enum&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
+    uint&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
     int pointEntityId, 
     byte areaId, 
     byte blockId, 
@@ -1251,7 +1251,7 @@ section {
 <p class="sectionusage usageinfo">Used in m32_00_00_00</p>
 <pre>PlayCutsceneAndChangeTimePeriod(
     int cutsceneId, 
-    enum&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
+    uint&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
     int playerEntityId, 
     byte timePeriodId)</pre></div></section>
 <section class="instr">
@@ -1278,14 +1278,14 @@ section {
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>SetEventFlag(
     int eventFlagId, 
-    enum&lt;<a href="#ONOFF">ONOFF</a>&gt; flagState)</pre></div></section>
+    byte&lt;<a href="#ONOFF">ONOFF</a>&gt; flagState)</pre></div></section>
 <section class="instr">
 <h3 id="DeactivateGenerator"><a href="#DeactivateGenerator" class="selfref"><code>DeactivateGenerator</code></a> <span class="sectioninfo">Instruction 2003[03]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m22_00_00_00, m24_02_00_00, m27_00_00_00, m28_00_00_00, m29, m35_00_00_00</p>
 <pre>DeactivateGenerator(
     int entityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledenabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
 <section class="instr">
 <h3 id="AwardItemLot"><a href="#AwardItemLot" class="selfref"><code>AwardItemLot</code></a> <span class="sectioninfo">Instruction 2003[04]</span></h3>
 <div class="sectioncontents">
@@ -1310,14 +1310,14 @@ section {
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>DeactivateMapHit(
     int entityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledenabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
 <section class="instr unused">
 <h3 id="SetMapVisibility"><a href="#SetMapVisibility" class="selfref"><code>SetMapVisibility</code></a> <span class="sectioninfo">Instruction 2003[07]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>SetMapVisibility(
     int entityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledenabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
 <section class="instr">
 <h3 id="SetEventState"><a href="#SetEventState" class="selfref"><code>SetEventState</code></a> <span class="sectioninfo">Instruction 2003[08]</span></h3>
 <div class="sectioncontents">
@@ -1325,7 +1325,7 @@ section {
 <pre>SetEventState(
     int eventId, 
     int eventSlotId, 
-    enum&lt;<a href="#EventEndType">EventEndType</a>&gt; eventState)</pre></div></section>
+    byte&lt;<a href="#EventEndType">EventEndType</a>&gt; eventState)</pre></div></section>
 <section class="instr unused">
 <h3 id="InvertEventFlag"><a href="#InvertEventFlag" class="selfref"><code>InvertEventFlag</code></a> <span class="sectioninfo">Instruction 2003[09]</span></h3>
 <div class="sectioncontents">
@@ -1337,13 +1337,13 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>SetEventNavimesh(
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledenabled)</pre></div></section>
+    short&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
 <section class="instr">
 <h3 id="DisplayBossHealthBar"><a href="#DisplayBossHealthBar" class="selfref"><code>DisplayBossHealthBar</code></a> <span class="sectioninfo">Instruction 2003[11]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but common</p>
 <pre>DisplayBossHealthBar(
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledenabled, 
+    sbyte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled, 
     int entityId, 
     short slotNumber, 
     int nameId)</pre></div></section>
@@ -1359,8 +1359,8 @@ section {
 <p class="sectionusage usageinfo">Used in m23_00_00_00, m24_00_00_00, m24_01_00_00, m27_00_00_00, m29</p>
 <pre>ModifyNavimeshConnectionBitflag(
     int entityId, 
-    enum&lt;<a href="#NavimeshType">NavimeshType</a>&gt; navimeshType, 
-    enum&lt;<a href="#BitopType">BitopType</a>&gt; typeBitOperation)</pre></div></section>
+    uint&lt;<a href="#NavimeshType">NavimeshType</a>&gt; navimeshType, 
+    byte&lt;<a href="#BitopType">BitopType</a>&gt; typeBitOperation)</pre></div></section>
 <section class="instr unused">
 <h3 id="WarpPlayer"><a href="#WarpPlayer" class="selfref"><code>WarpPlayer</code></a> <span class="sectioninfo">Instruction 2003[14]</span></h3>
 <div class="sectioncontents">
@@ -1388,7 +1388,7 @@ section {
 <pre>RandomlySetEventFlagInRange(
     uint eventFlagIdMin, 
     uint eventFlagIdMax, 
-    enum&lt;<a href="#ONOFF">ONOFF</a>&gt; flagState)</pre></div></section>
+    byte&lt;<a href="#ONOFF">ONOFF</a>&gt; flagState)</pre></div></section>
 <section class="instr">
 <h3 id="ForceAnimationPlayback"><a href="#ForceAnimationPlayback" class="selfref"><code>ForceAnimationPlayback</code></a> <span class="sectioninfo">Instruction 2003[18]</span></h3>
 <div class="sectioncontents">
@@ -1425,7 +1425,7 @@ section {
 <pre>BatchSetEventFlags(
     int eventFlagIdStart, 
     int eventFlagIdEnd, 
-    enum&lt;<a href="#ONOFF">ONOFF</a>&gt; flagState)</pre></div></section>
+    byte&lt;<a href="#ONOFF">ONOFF</a>&gt; flagState)</pre></div></section>
 <section class="instr">
 <h3 id="SetPlayerRespawnPoint"><a href="#SetPlayerRespawnPoint" class="selfref"><code>SetPlayerRespawnPoint</code></a> <span class="sectioninfo">Instruction 2003[23]</span></h3>
 <div class="sectioncontents">
@@ -1437,7 +1437,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m21_00_00_00, m24_02_00_00, m29</p>
 <pre>RemoveItemFromPlayer(
-    enum&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
+    int&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
     int itemId, 
     int number)</pre></div></section>
 <section class="instr unused">
@@ -1445,7 +1445,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>PlaceNPCSummonSign(
-    enum&lt;<a href="#SummonSignType">SummonSignType</a>&gt; signType, 
+    int&lt;<a href="#SummonSignType">SummonSignType</a>&gt; signType, 
     int summonedNPCEntityId, 
     int spawnPointEntityId, 
     int summonEventFlagId, 
@@ -1456,7 +1456,7 @@ section {
 <p class="sectionusage usageinfo">Used in m21_00_00_00, m23_00_00_00, m24_01_00_00, m33_00_00_00</p>
 <pre>SetVisibilityOfMessage(
     int messageEntityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledenabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
 <section class="instr">
 <h3 id="Missing"><a href="#Missing" class="selfref"><code>Missing</code></a> <span class="sectioninfo">Instruction 2003[27]</span></h3>
 <div class="sectioncontents">
@@ -1474,7 +1474,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>ChangeWorldTendency(
-    enum&lt;<a href="#TendencyType">TendencyType</a>&gt; tendencyType, 
+    byte&lt;<a href="#TendencyType">TendencyType</a>&gt; tendencyType, 
     sbyte changeValue)</pre></div></section>
 <section class="instr unused">
 <h3 id="DisableVagrantSpawning"><a href="#DisableVagrantSpawning" class="selfref"><code>DisableVagrantSpawning</code></a> <span class="sectioninfo">Instruction 2003[30]</span></h3>
@@ -1555,13 +1555,13 @@ section {
     int operand, 
     int baseEventFlagIdOperand, 
     uint numberOfUsedEventFlagBitsOperand, 
-    enum&lt;<a href="#CalculationType">CalculationType</a>&gt; calculationType)</pre></div></section>
+    sbyte&lt;<a href="#CalculationType">CalculationType</a>&gt; calculationType)</pre></div></section>
 <section class="instr">
 <h3 id="StoreItemAmountHeldInEventValue"><a href="#StoreItemAmountHeldInEventValue" class="selfref"><code>StoreItemAmountHeldInEventValue</code></a> <span class="sectioninfo">Instruction 2003[42]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m21_00_00_00</p>
 <pre>StoreItemAmountHeldInEventValue(
-    enum&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
+    int&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
     int itemId, 
     int baseEventFlagId, 
     uint numberOfUsedFlagBits)</pre></div></section>
@@ -1570,7 +1570,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m21_00_00_00</p>
 <pre>DirectlyGivePlayerItem(
-    enum&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
+    int&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
     int itemId, 
     int baseEventFlagId, 
     uint numberOfUsedFlagBits)</pre></div></section>
@@ -1579,7 +1579,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>ToggleDirectionDisplay(
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledenabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
 <section class="instr unused">
 <h3 id="SetMapHitgridCorrespondence"><a href="#SetMapHitgridCorrespondence" class="selfref"><code>SetMapHitgridCorrespondence</code></a> <span class="sectioninfo">Instruction 2003[45]</span></h3>
 <div class="sectioncontents">
@@ -1589,14 +1589,14 @@ section {
     short level, 
     short gridCoordX, 
     short gridCoordY, 
-    enum&lt;<a href="#AddDelete">AddDelete</a>&gt; process)</pre></div></section>
+    byte&lt;<a href="#AddDelete">AddDelete</a>&gt; process)</pre></div></section>
 <section class="instr unused">
 <h3 id="SetMapContentImageDisplay"><a href="#SetMapContentImageDisplay" class="selfref"><code>SetMapContentImageDisplay</code></a> <span class="sectioninfo">Instruction 2003[46]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>SetMapContentImageDisplay(
     short contentImagePartId, 
-    enum&lt;<a href="#DisplayState">DisplayState</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisplayState">DisplayState</a>&gt; state)</pre></div></section>
 <section class="instr unused">
 <h3 id="SetMapBoundariesDisplay"><a href="#SetMapBoundariesDisplay" class="selfref"><code>SetMapBoundariesDisplay</code></a> <span class="sectioninfo">Instruction 2003[47]</span></h3>
 <div class="sectioncontents">
@@ -1605,14 +1605,14 @@ section {
     short hierarchy, 
     short gridCoordX, 
     short gridCoordY, 
-    enum&lt;<a href="#DisplayState">DisplayState</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisplayState">DisplayState</a>&gt; state)</pre></div></section>
 <section class="instr unused">
 <h3 id="SetAreaWind"><a href="#SetAreaWind" class="selfref"><code>SetAreaWind</code></a> <span class="sectioninfo">Instruction 2003[48]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>SetAreaWind(
     int areaEntityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledenabled, 
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled, 
     float changeTimeS, 
     int windParameterId)</pre></div></section>
 <section class="instr">
@@ -1632,7 +1632,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m27_00_00_00, m28_00_00_00, m29, m32_00_00_00, m34_00_00_00, m35_00_00_00</p>
 <pre>SummonNPC(
-    enum&lt;<a href="#SingleplayerSummonSignType">SingleplayerSummonSignType</a>&gt; signType, 
+    int&lt;<a href="#SingleplayerSummonSignType">SingleplayerSummonSignType</a>&gt; signType, 
     int summonedNPCEntityId, 
     int spawnPointEntityId, 
     int summonEventFlagId, 
@@ -1649,7 +1649,7 @@ section {
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>HandleBossDefeatAndDisplayBanner(
     int entityId, 
-    enum&lt;<a href="#TextBannerType">TextBannerType</a>&gt; bannerType)</pre></div></section>
+    byte&lt;<a href="#TextBannerType">TextBannerType</a>&gt; bannerType)</pre></div></section>
 <section class="instr">
 <h3 id="SendNPCSummonHome"><a href="#SendNPCSummonHome" class="selfref"><code>SendNPCSummonHome</code></a> <span class="sectioninfo">Instruction 2003[54]</span></h3>
 <div class="sectioncontents">
@@ -1663,21 +1663,21 @@ section {
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>SetCharacterAIState(
     int entityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledenabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
 <section class="instr">
 <h3 id="SetCharacterTeamType"><a href="#SetCharacterTeamType" class="selfref"><code>SetCharacterTeamType</code></a> <span class="sectioninfo">Instruction 2004[02]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m23_00_00_00, m24_00_00_00, m24_01_00_00, m25_00_00_00, m26_00_00_00, m27_00_00_00, m28_00_00_00, m29, m32_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>SetCharacterTeamType(
     int entityId, 
-    enum&lt;<a href="#TeamType">TeamType</a>&gt; teamType)</pre></div></section>
+    byte&lt;<a href="#TeamType">TeamType</a>&gt; teamType)</pre></div></section>
 <section class="instr">
 <h3 id="CharacterWarpRequest"><a href="#CharacterWarpRequest" class="selfref"><code>CharacterWarpRequest</code></a> <span class="sectioninfo">Instruction 2004[03]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m24_00_00_00, m24_01_00_00, m34_00_00_00</p>
 <pre>CharacterWarpRequest(
     int entityId, 
-    enum&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; warpType, 
+    byte&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; warpType, 
     int warpDestinationEntityId, 
     int dummypolyId)</pre></div></section>
 <section class="instr">
@@ -1693,7 +1693,7 @@ section {
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>ChangeCharacterEnableState(
     int entityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledenabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
 <section class="instr">
 <h3 id="EzstateInstructionRequest"><a href="#EzstateInstructionRequest" class="selfref"><code>EzstateInstructionRequest</code></a> <span class="sectioninfo">Instruction 2004[06]</span></h3>
 <div class="sectioncontents">
@@ -1733,7 +1733,7 @@ section {
 <p class="sectionusage usageinfo">Used in all but common</p>
 <pre>SetCharacterGravity(
     int entityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledenabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
 <section class="instr">
 <h3 id="SetCharacterEventTarget"><a href="#SetCharacterEventTarget" class="selfref"><code>SetCharacterEventTarget</code></a> <span class="sectioninfo">Instruction 2004[11]</span></h3>
 <div class="sectioncontents">
@@ -1747,7 +1747,7 @@ section {
 <p class="sectionusage usageinfo">Used in m21_00_00_00, m22_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m25_00_00_00, m26_00_00_00, m28_00_00_00, m29, m32_00_00_00, m33_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>SetCharacterImmortality(
     int entityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledenabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
 <section class="instr">
 <h3 id="SetCharacterHome"><a href="#SetCharacterHome" class="selfref"><code>SetCharacterHome</code></a> <span class="sectioninfo">Instruction 2004[13]</span></h3>
 <div class="sectioncontents">
@@ -1770,7 +1770,7 @@ section {
 <p class="sectionusage usageinfo">Used in m21_00_00_00, m22_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m26_00_00_00, m27_00_00_00, m29, m32_00_00_00, m33_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>SetCharacterInvincibility(
     int entityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledenabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
 <section class="instr">
 <h3 id="ClearCharactersAITarget"><a href="#ClearCharactersAITarget" class="selfref"><code>ClearCharactersAITarget</code></a> <span class="sectioninfo">Instruction 2004[16]</span></h3>
 <div class="sectioncontents">
@@ -1799,7 +1799,7 @@ section {
 <p class="sectionusage usageinfo">Used in m22_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m25_00_00_00, m27_00_00_00, m28_00_00_00, m29, m33_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>SetCharacterAIId(
     int entityId, 
-    int aIId)</pre></div></section>
+    int aiId)</pre></div></section>
 <section class="instr">
 <h3 id="RequestCharacterAIReplan"><a href="#RequestCharacterAIReplan" class="selfref"><code>RequestCharacterAIReplan</code></a> <span class="sectioninfo">Instruction 2004[20]</span></h3>
 <div class="sectioncontents">
@@ -1819,9 +1819,9 @@ section {
 <p class="sectionusage usageinfo">Used in m21_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m27_00_00_00, m28_00_00_00, m29, m32_00_00_00, m33_00_00_00, m34_00_00_00</p>
 <pre>CreateNPCPart(
     int entityId, 
-    short nPCPartId, 
-    enum&lt;<a href="#NPCPartType">NPCPartType</a>&gt; nPCPartGroupIdx, 
-    int nPCPartHP, 
+    short npcPartId, 
+    short&lt;<a href="#NPCPartType">NPCPartType</a>&gt; npcPartGroupIdx, 
+    int npcPartHP, 
     float damageCorrection, 
     float bodyDamageCompensation, 
     bool isInvincible, 
@@ -1832,7 +1832,7 @@ section {
 <p class="sectionusage usageinfo">Used in m21_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m27_00_00_00, m28_00_00_00, m29, m32_00_00_00, m33_00_00_00, m34_00_00_00</p>
 <pre>SetNPCPartHP(
     int entityId, 
-    int nPCPartId, 
+    int npcPartId, 
     int desiredHP, 
     bool shouldAllowHPAboveMaxHP)</pre></div></section>
 <section class="instr">
@@ -1841,7 +1841,7 @@ section {
 <p class="sectionusage usageinfo">Used in m21_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m27_00_00_00, m28_00_00_00, m29, m32_00_00_00, m33_00_00_00, m34_00_00_00</p>
 <pre>SetNPCPartSEAndSFX(
     int entityId, 
-    int nPCPartId, 
+    int npcPartId, 
     int defenseMaterialSEId, 
     int defenseMaterialSFXId)</pre></div></section>
 <section class="instr unused">
@@ -1850,7 +1850,7 @@ section {
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>SetNPCPartBulletDamageMultiplier(
     int entityId, 
-    int nPCPartId, 
+    int npcPartId, 
     float bulletDamageMultiplier)</pre></div></section>
 <section class="instr">
 <h3 id="ChangeCharacterDispmask"><a href="#ChangeCharacterDispmask" class="selfref"><code>ChangeCharacterDispmask</code></a> <span class="sectioninfo">Instruction 2004[26]</span></h3>
@@ -1859,7 +1859,7 @@ section {
 <pre>ChangeCharacterDispmask(
     int entityId, 
     byte bitNumber, 
-    enum&lt;<a href="#ONOFFCHANGE">ONOFFCHANGE</a>&gt; switchType)</pre></div></section>
+    byte&lt;<a href="#ONOFFCHANGE">ONOFFCHANGE</a>&gt; switchType)</pre></div></section>
 <section class="instr">
 <h3 id="ChangeCharacterHitmask"><a href="#ChangeCharacterHitmask" class="selfref"><code>ChangeCharacterHitmask</code></a> <span class="sectioninfo">Instruction 2004[27]</span></h3>
 <div class="sectioncontents">
@@ -1867,14 +1867,14 @@ section {
 <pre>ChangeCharacterHitmask(
     int entityId, 
     byte bitNumber, 
-    enum&lt;<a href="#ONOFFCHANGE">ONOFFCHANGE</a>&gt; switchType)</pre></div></section>
+    byte&lt;<a href="#ONOFFCHANGE">ONOFFCHANGE</a>&gt; switchType)</pre></div></section>
 <section class="instr">
 <h3 id="SetNetworkUpdateAuthority"><a href="#SetNetworkUpdateAuthority" class="selfref"><code>SetNetworkUpdateAuthority</code></a> <span class="sectioninfo">Instruction 2004[28]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but common</p>
 <pre>SetNetworkUpdateAuthority(
     int entityId, 
-    enum&lt;<a href="#AuthorityLevel">AuthorityLevel</a>&gt; authorityLevel)</pre></div></section>
+    int&lt;<a href="#AuthorityLevel">AuthorityLevel</a>&gt; authorityLevel)</pre></div></section>
 <section class="instr">
 <h3 id="SetCharacterBackreadState"><a href="#SetCharacterBackreadState" class="selfref"><code>SetCharacterBackreadState</code></a> <span class="sectioninfo">Instruction 2004[29]</span></h3>
 <div class="sectioncontents">
@@ -1888,7 +1888,7 @@ section {
 <p class="sectionusage usageinfo">Used in all but common</p>
 <pre>SetCharacterHPBarDisplay(
     int entityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledenabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
 <section class="instr">
 <h3 id="SetCharacterMaphits"><a href="#SetCharacterMaphits" class="selfref"><code>SetCharacterMaphits</code></a> <span class="sectioninfo">Instruction 2004[31]</span></h3>
 <div class="sectioncontents">
@@ -1920,14 +1920,14 @@ section {
 <pre>SetNetworkUpdateRate(
     int entityId, 
     bool useFixedFrequency, 
-    enum&lt;<a href="#CharacterUpdateFrequency">CharacterUpdateFrequency</a>&gt; updateFrequency)</pre></div></section>
+    sbyte&lt;<a href="#CharacterUpdateFrequency">CharacterUpdateFrequency</a>&gt; updateFrequency)</pre></div></section>
 <section class="instr">
 <h3 id="SetCharacterDefaultBackreadState"><a href="#SetCharacterDefaultBackreadState" class="selfref"><code>SetCharacterDefaultBackreadState</code></a> <span class="sectioninfo">Instruction 2004[35]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m23_00_00_00, m24_01_00_00, m26_00_00_00, m28_00_00_00, m29, m32_00_00_00, m35_00_00_00</p>
 <pre>SetCharacterDefaultBackreadState(
     int entityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledenabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
 <section class="instr unused">
 <h3 id="HellkiteBreathControl"><a href="#HellkiteBreathControl" class="selfref"><code>HellkiteBreathControl</code></a> <span class="sectioninfo">Instruction 2004[36]</span></h3>
 <div class="sectioncontents">
@@ -1954,14 +1954,14 @@ section {
 <p class="sectionusage usageinfo">Used in all but common</p>
 <pre>SetCharacterAnimationState(
     int entityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledenabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
 <section class="instr">
 <h3 id="WarpCharacterAndSetFloor"><a href="#WarpCharacterAndSetFloor" class="selfref"><code>WarpCharacterAndSetFloor</code></a> <span class="sectioninfo">Instruction 2004[40]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m22_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m26_00_00_00, m27_00_00_00, m28_00_00_00, m29, m33_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>WarpCharacterAndSetFloor(
     int entityId, 
-    enum&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; warpType, 
+    byte&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; warpType, 
     int warpDestinationEntityId, 
     int dummypolyId, 
     int warpDestinationHitboxEntityId)</pre></div></section>
@@ -1971,7 +1971,7 @@ section {
 <p class="sectionusage usageinfo">Used in m21_00_00_00, m22_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m25_00_00_00, m26_00_00_00, m27_00_00_00, m28_00_00_00, m29, m32_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>IssueShortWarpRequest(
     int entityId, 
-    enum&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; warpType, 
+    byte&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; warpType, 
     int warpDestinationEntityId, 
     int dummypolyId)</pre></div></section>
 <section class="instr">
@@ -1980,7 +1980,7 @@ section {
 <p class="sectionusage usageinfo">Used in m24_01_00_00, m24_02_00_00, m25_00_00_00, m26_00_00_00, m27_00_00_00, m29, m32_00_00_00, m33_00_00_00, m34_00_00_00, m36_00_00_00</p>
 <pre>WarpCharacterAndCopyFloor(
     int entityId, 
-    enum&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; warpType, 
+    byte&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; warpType, 
     int warpDestinationEntityId, 
     int dummypolyId, 
     int entityIdToCopyFloorFrom)</pre></div></section>
@@ -1990,20 +1990,20 @@ section {
 <p class="sectionusage usageinfo">Used in all but common and m36_00_00_00</p>
 <pre>RequestCharacterAnimationReset(
     int entityId, 
-    enum&lt;<a href="#Interpolation">Interpolation</a>&gt; interpolationMethod)</pre></div></section>
+    byte&lt;<a href="#Interpolation">Interpolation</a>&gt; interpolationMethod)</pre></div></section>
 <section class="instr unused">
 <h3 id="ChangeCharacterTeamTypeAndForceExitSpecialAnimations"><a href="#ChangeCharacterTeamTypeAndForceExitSpecialAnimations" class="selfref"><code>ChangeCharacterTeamTypeAndForceExitSpecialAnimations</code></a> <span class="sectioninfo">Instruction 2004[44]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>ChangeCharacterTeamTypeAndForceExitSpecialAnimations(
     int entityId, 
-    enum&lt;<a href="#TeamType">TeamType</a>&gt; teamType)</pre></div></section>
+    byte&lt;<a href="#TeamType">TeamType</a>&gt; teamType)</pre></div></section>
 <section class="instr unused">
 <h3 id="RegisterNPCHumanityEventValue"><a href="#RegisterNPCHumanityEventValue" class="selfref"><code>RegisterNPCHumanityEventValue</code></a> <span class="sectioninfo">Instruction 2004[45]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>RegisterNPCHumanityEventValue(
-    int nPCEntityId, 
+    int npcEntityId, 
     int humanityEventValueBaseEventFlagId)</pre></div></section>
 <section class="instr unused">
 <h3 id="IncrementPlayerPvpSin"><a href="#IncrementPlayerPvpSin" class="selfref"><code>IncrementPlayerPvpSin</code></a> <span class="sectioninfo">Instruction 2004[46]</span></h3>
@@ -2067,7 +2067,7 @@ section {
 <p class="sectionusage usageinfo">Used in m22_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m25_00_00_00, m26_00_00_00, m27_00_00_00, m28_00_00_00, m32_00_00_00, m33_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>SetCharacterGravityMaphitStateExcludingOwnWorld(
     int entityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledenabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
 <section class="instr">
 <h3 id="SetSpEffectAndUnknown200455"><a href="#SetSpEffectAndUnknown200455" class="selfref"><code>SetSpEffectAndUnknown200455</code></a> <span class="sectioninfo">Instruction 2004[55]</span></h3>
 <div class="sectioncontents">
@@ -2096,14 +2096,14 @@ section {
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>DeactivateObject(
     int targetObjectEntityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
 <section class="instr">
 <h3 id="SetObjectTreasureState"><a href="#SetObjectTreasureState" class="selfref"><code>SetObjectTreasureState</code></a> <span class="sectioninfo">Instruction 2005[04]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but common</p>
 <pre>SetObjectTreasureState(
     int targetObjectEntityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
 <section class="instr unused">
 <h3 id="InitializeObjact"><a href="#InitializeObjact" class="selfref"><code>InitializeObjact</code></a> <span class="sectioninfo">Instruction 2005[05]</span></h3>
 <div class="sectioncontents">
@@ -2119,7 +2119,7 @@ section {
 <pre>SetObjactState(
     int entityId, 
     int objectParameterId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
 <section class="instr">
 <h3 id="ReproduceObjectAnimation"><a href="#ReproduceObjectAnimation" class="selfref"><code>ReproduceObjectAnimation</code></a> <span class="sectioninfo">Instruction 2005[07]</span></h3>
 <div class="sectioncontents">
@@ -2143,7 +2143,7 @@ section {
     int entityId, 
     int dummypolyId, 
     int behaviorId, 
-    enum&lt;<a href="#DamageTargetType">DamageTargetType</a>&gt; target, 
+    int&lt;<a href="#DamageTargetType">DamageTargetType</a>&gt; target, 
     float radius, 
     float lifespan, 
     float repetitionTimeS)</pre></div></section>
@@ -2155,7 +2155,7 @@ section {
     int entityId, 
     byte areaId, 
     byte blockId, 
-    enum&lt;<a href="#StatueType">StatueType</a>&gt; statueType)</pre></div></section>
+    byte&lt;<a href="#StatueType">StatueType</a>&gt; statueType)</pre></div></section>
 <section class="instr">
 <h3 id="WarpObjectToCharacter"><a href="#WarpObjectToCharacter" class="selfref"><code>WarpObjectToCharacter</code></a> <span class="sectioninfo">Instruction 2005[11]</span></h3>
 <div class="sectioncontents">
@@ -2176,7 +2176,7 @@ section {
 <p class="sectionusage usageinfo">Used in m24_00_00_00, m26_00_00_00, m27_00_00_00, m29, m35_00_00_00</p>
 <pre>SetObjectInvulnerability(
     int targetObjectEntityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
 <section class="instr unused">
 <h3 id="DeactivateObjactAssignIdx"><a href="#DeactivateObjactAssignIdx" class="selfref"><code>DeactivateObjactAssignIdx</code></a> <span class="sectioninfo">Instruction 2005[14]</span></h3>
 <div class="sectioncontents">
@@ -2185,7 +2185,7 @@ section {
     int entityId, 
     int objectParameterId, 
     int relativeTargetIdx, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
 <section class="instr unused">
 <h3 id="RerollObjectTreasure"><a href="#RerollObjectTreasure" class="selfref"><code>RerollObjectTreasure</code></a> <span class="sectioninfo">Instruction 2005[15]</span></h3>
 <div class="sectioncontents">
@@ -2207,7 +2207,7 @@ section {
 <p class="sectionusage usageinfo">Used in m24_01_00_00</p>
 <pre>DamageShielding(
     int objectEntityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
 <h2 id="2006_SFX"><a href="#2006_SFX" class="selfref">2006 - SFX</a></h2>
 <section class="instr">
 <h3 id="DeleteMapSFX"><a href="#DeleteMapSFX" class="selfref"><code>DeleteMapSFX</code></a> <span class="sectioninfo">Instruction 2006[01]</span></h3>
@@ -2227,10 +2227,10 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m21_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m25_00_00_00, m26_00_00_00, m29, m32_00_00_00, m34_00_00_00</p>
 <pre>SpawnOneshotSFX(
-    enum&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; type, 
+    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; type, 
     int entityId, 
     int dummypolyId, 
-    int sFXId)</pre></div></section>
+    int sfxId)</pre></div></section>
 <section class="instr">
 <h3 id="CreateObjectfollowingSFX"><a href="#CreateObjectfollowingSFX" class="selfref"><code>CreateObjectfollowingSFX</code></a> <span class="sectioninfo">Instruction 2006[04]</span></h3>
 <div class="sectioncontents">
@@ -2238,7 +2238,7 @@ section {
 <pre>CreateObjectfollowingSFX(
     int objectEntityId, 
     int dummypolyId, 
-    int sFXId)</pre></div></section>
+    int sfxId)</pre></div></section>
 <section class="instr">
 <h3 id="DeleteObjectfollowingSFX"><a href="#DeleteObjectfollowingSFX" class="selfref"><code>DeleteObjectfollowingSFX</code></a> <span class="sectioninfo">Instruction 2006[05]</span></h3>
 <div class="sectioncontents">
@@ -2253,8 +2253,8 @@ section {
 <p class="sectionusage usageinfo">Used in all but common and m33_00_00_00</p>
 <pre>DisplayGenericDialog(
     int messageId, 
-    enum&lt;<a href="#PromptType">PromptType</a>&gt; dialogType, 
-    enum&lt;<a href="#NumberofOptions">NumberofOptions</a>&gt; numberOfOptions, 
+    short&lt;<a href="#PromptType">PromptType</a>&gt; dialogType, 
+    short&lt;<a href="#NumberofOptions">NumberofOptions</a>&gt; numberOfOptions, 
     int entityId, 
     float displayDistance)</pre></div></section>
 <section class="instr">
@@ -2262,14 +2262,14 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but common</p>
 <pre>DisplayBanner(
-    enum&lt;<a href="#TextBannerType">TextBannerType</a>&gt; bannerType)</pre></div></section>
+    byte&lt;<a href="#TextBannerType">TextBannerType</a>&gt; bannerType)</pre></div></section>
 <section class="instr unused">
 <h3 id="DisplayStatusMessage"><a href="#DisplayStatusMessage" class="selfref"><code>DisplayStatusMessage</code></a> <span class="sectioninfo">Instruction 2007[03]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>DisplayStatusMessage(
     int messageId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; padState)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; padState)</pre></div></section>
 <section class="instr">
 <h3 id="DisplayMessage"><a href="#DisplayMessage" class="selfref"><code>DisplayMessage</code></a> <span class="sectioninfo">Instruction 2007[04]</span></h3>
 <div class="sectioncontents">
@@ -2321,7 +2321,7 @@ section {
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>SetCameraVibration(
     int vibrationId, 
-    enum&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; type, 
+    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; type, 
     int entityId, 
     int dummypolyId, 
     float decayStartDistance, 
@@ -2394,14 +2394,14 @@ section {
     byte dummy)</pre></div></section>
 <h2 id="2010_Sound"><a href="#2010_Sound" class="selfref">2010 - Sound</a></h2>
 <section class="instr unused">
-<h3 id="PlayBgm"><a href="#PlayBgm" class="selfref"><code>PlayBgm</code></a> <span class="sectioninfo">Instruction 2010[01]</span></h3>
+<h3 id="PlayBGM"><a href="#PlayBGM" class="selfref"><code>PlayBGM</code></a> <span class="sectioninfo">Instruction 2010[01]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
-<pre>PlayBgm(
-    enum&lt;<a href="#ONOFF">ONOFF</a>&gt; shouldPlay, 
+<pre>PlayBGM(
+    byte&lt;<a href="#ONOFF">ONOFF</a>&gt; shouldPlay, 
     ushort slotNumber, 
     int entityId, 
-    enum&lt;<a href="#SoundType">SoundType</a>&gt; soundType, 
+    int&lt;<a href="#SoundType">SoundType</a>&gt; soundType, 
     int soundId)</pre></div></section>
 <section class="instr">
 <h3 id="PlaySE"><a href="#PlaySE" class="selfref"><code>PlaySE</code></a> <span class="sectioninfo">Instruction 2010[02]</span></h3>
@@ -2409,7 +2409,7 @@ section {
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>PlaySE(
     int entityId, 
-    enum&lt;<a href="#SoundType">SoundType</a>&gt; soundType, 
+    int&lt;<a href="#SoundType">SoundType</a>&gt; soundType, 
     int soundId)</pre></div></section>
 <section class="instr">
 <h3 id="SetMapSoundState"><a href="#SetMapSoundState" class="selfref"><code>SetMapSoundState</code></a> <span class="sectioninfo">Instruction 2010[03]</span></h3>
@@ -2417,21 +2417,21 @@ section {
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>SetMapSoundState(
     int entityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; enabledisable)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; enableDisable)</pre></div></section>
 <section class="instr">
 <h3 id="EnableBossMapSound"><a href="#EnableBossMapSound" class="selfref"><code>EnableBossMapSound</code></a> <span class="sectioninfo">Instruction 2010[04]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but common</p>
 <pre>EnableBossMapSound(
     int entityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; enabledisable)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; enableDisable)</pre></div></section>
 <section class="instr">
 <h3 id="NotifySoundDampeningOfDoorEvent"><a href="#NotifySoundDampeningOfDoorEvent" class="selfref"><code>NotifySoundDampeningOfDoorEvent</code></a> <span class="sectioninfo">Instruction 2010[05]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m22_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m25_00_00_00, m26_00_00_00, m27_00_00_00, m28_00_00_00, m32_00_00_00, m34_00_00_00, m35_00_00_00</p>
 <pre>NotifySoundDampeningOfDoorEvent(
     int entityId, 
-    enum&lt;<a href="#DoorState">DoorState</a>&gt; doorState)</pre></div></section>
+    int&lt;<a href="#DoorState">DoorState</a>&gt; doorState)</pre></div></section>
 <h2 id="2011_Hit"><a href="#2011_Hit" class="selfref">2011 - Hit</a></h2>
 <section class="instr">
 <h3 id="ActivateHit"><a href="#ActivateHit" class="selfref"><code>ActivateHit</code></a> <span class="sectioninfo">Instruction 2011[01]</span></h3>
@@ -2439,21 +2439,21 @@ section {
 <p class="sectionusage usageinfo">Used in m24_00_00_00, m24_01_00_00, m25_00_00_00, m29, m32_00_00_00, m34_00_00_00, m35_00_00_00</p>
 <pre>ActivateHit(
     int hitEntityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
 <section class="instr">
 <h3 id="ActivateHitBackreadMask"><a href="#ActivateHitBackreadMask" class="selfref"><code>ActivateHitBackreadMask</code></a> <span class="sectioninfo">Instruction 2011[02]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m24_01_00_00</p>
 <pre>ActivateHitBackreadMask(
     int hitEntityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
 <section class="instr">
 <h3 id="ActivateHitres"><a href="#ActivateHitres" class="selfref"><code>ActivateHitres</code></a> <span class="sectioninfo">Instruction 2011[03]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m35_00_00_00</p>
 <pre>ActivateHitres(
     int hitEntityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
 <h2 id="2012_Map"><a href="#2012_Map" class="selfref">2012 - Map</a></h2>
 <section class="instr">
 <h3 id="ActivateMapPart"><a href="#ActivateMapPart" class="selfref"><code>ActivateMapPart</code></a> <span class="sectioninfo">Instruction 2012[01]</span></h3>
@@ -2461,7 +2461,7 @@ section {
 <p class="sectionusage usageinfo">Used in m22_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m25_00_00_00, m28_00_00_00, m29, m34_00_00_00, m35_00_00_00</p>
 <pre>ActivateMapPart(
     int mapPartEntityId, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
 <h2 id="2013_PlayLog"><a href="#2013_PlayLog" class="selfref">2013 - PlayLog</a></h2>
 <section class="instr">
 <h3 id="CreatePlaylog"><a href="#CreatePlaylog" class="selfref"><code>CreatePlaylog</code></a> <span class="sectioninfo">Instruction 2013[01]</span></h3>
@@ -2476,7 +2476,7 @@ section {
 <pre>StartTimeMeasurement(
     uint measurementId, 
     uint playlogName, 
-    enum&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; overwrite)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; overwrite)</pre></div></section>
 <section class="instr">
 <h3 id="EndTimeMeasurement"><a href="#EndTimeMeasurement" class="selfref"><code>EndTimeMeasurement</code></a> <span class="sectioninfo">Instruction 2013[03]</span></h3>
 <div class="sectioncontents">
@@ -2488,16 +2488,16 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but common</p>
 <pre>ParameterOutput(
-    enum&lt;<a href="#PlayerPlayLogParameter">PlayerPlayLogParameter</a>&gt; category, 
+    byte&lt;<a href="#PlayerPlayLogParameter">PlayerPlayLogParameter</a>&gt; category, 
     uint playlogName, 
-    enum&lt;<a href="#PlayLogMultiplayerType">PlayLogMultiplayerType</a>&gt; outputMultiplayerStatus)</pre></div></section>
+    byte&lt;<a href="#PlayLogMultiplayerType">PlayLogMultiplayerType</a>&gt; outputMultiplayerStatus)</pre></div></section>
 </div><div class="bigsection condition_functions"><h1 id="Condition_Functions"><a href="#Condition_Functions" class="selfref">Condition Functions</a></h1>
 <section class="cond">
 <h3 id="Compare"><a href="#Compare" class="selfref"><code>Compare</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m21_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m25_00_00_00, m26_00_00_00, m27_00_00_00, m28_00_00_00, m29, m32_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>Compare(
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     int lefthandSide, 
     int righthandSide)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
 <li><code>== != &gt; &lt; &gt;= &lt;=</code>
@@ -2535,8 +2535,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>EventFlagState(
-    enum&lt;<a href="#ONOFFCHANGE">ONOFFCHANGE</a>&gt; desiredFlagState, 
-    enum&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
+    byte&lt;<a href="#ONOFFCHANGE">ONOFFCHANGE</a>&gt; desiredFlagState, 
+    byte&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
     int targetEventFlagId)</pre><p class="liststart">Simpler versions:</p><ul class="condlist">
 <li><code>EventFlag(int targetEventFlagId)</code>
 <br/><span class="conddetails">Where <code><code>targetEventFlagType = TargetEventFlagType.EventFlag</code> and <code>desiredFlagState = ON or OFF</code></code></span></li>
@@ -2551,8 +2551,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m21_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m25_00_00_00, m26_00_00_00, m27_00_00_00, m29, m32_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>BatchEventFlagsState(
-    enum&lt;<a href="#LogicalOperationType">LogicalOperationType</a>&gt; desiredFlagState, 
-    enum&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
+    byte&lt;<a href="#LogicalOperationType">LogicalOperationType</a>&gt; desiredFlagState, 
+    byte&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
     int startingTargetEventFlagId, 
     int endingTargetEventFlagId)</pre><p class="liststart">Simpler versions:</p><ul class="condlist">
 <li><code>AllBatchEventFlags(int startingTargetEventFlagId, int endingTargetEventFlagId)</code>
@@ -2566,7 +2566,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>InOutsideArea(
-    enum&lt;<a href="#InsideOutsideState">InsideOutsideState</a>&gt; desiredState, 
+    byte&lt;<a href="#InsideOutsideState">InsideOutsideState</a>&gt; desiredState, 
     int targetEntityId, 
     int areaEntityId)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
 <li><code>InArea(int targetEntityId, int areaEntityId)</code>
@@ -2578,7 +2578,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but common</p>
 <pre>EntityInOutsideRadiusOfEntity(
-    enum&lt;<a href="#InsideOutsideState">InsideOutsideState</a>&gt; desiredState, 
+    byte&lt;<a href="#InsideOutsideState">InsideOutsideState</a>&gt; desiredState, 
     int targetEntityAId, 
     int targetEntityBId, 
     float targetDistance)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
@@ -2591,10 +2591,10 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m21_00_00_00, m22_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m25_00_00_00, m27_00_00_00, m28_00_00_00, m29, m32_00_00_00, m34_00_00_00, m35_00_00_00</p>
 <pre>PlayerHasDoesntHaveItem(
-    enum&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
+    byte&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
     int itemId, 
-    enum&lt;<a href="#OwnershipState">OwnershipState</a>&gt; desiredPossessionState)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
-<li><code>PlayerHasItem(enum&lt;<a href="#ItemType">ItemType</a>&gt; itemType, int itemId)</code>
+    byte&lt;<a href="#OwnershipState">OwnershipState</a>&gt; desiredPossessionState)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
+<li><code>PlayerHasItem(byte&lt;<a href="#ItemType">ItemType</a>&gt; itemType, int itemId)</code>
 <br/><span class="conddetails">Where <code><code>desiredPossessionState = OwnershipState.Owns or OwnershipState.DoesntOwn</code></code></span></li>
 </ul>
 </div></section>
@@ -2603,26 +2603,26 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>ActionButton(
-    enum&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; targetEntityType, 
+    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; targetEntityType, 
     int targetEntityId, 
     float reactionAngleDeg, 
     short dummypolyId, 
     float reactionDistance, 
     int helpMessageId, 
-    enum&lt;<a href="#ReactionType">ReactionType</a>&gt; reactionType, 
+    byte&lt;<a href="#ReactionType">ReactionType</a>&gt; reactionType, 
     int padId)</pre></div></section>
 <section class="cond">
 <h3 id="HasMultiplayerState"><a href="#HasMultiplayerState" class="selfref"><code>HasMultiplayerState</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>HasMultiplayerState(
-    enum&lt;<a href="#MultiplayerState">MultiplayerState</a>&gt; desiredMultiplayerState)</pre></div></section>
+    sbyte&lt;<a href="#MultiplayerState">MultiplayerState</a>&gt; desiredMultiplayerState)</pre></div></section>
 <section class="cond">
 <h3 id="AllPlayersInArea"><a href="#AllPlayersInArea" class="selfref"><code>AllPlayersInArea</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m22_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m26_00_00_00, m27_00_00_00, m28_00_00_00, m29, m33_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>AllPlayersInOutsideArea(
-    enum&lt;<a href="#InsideOutsideState">InsideOutsideState</a>&gt; desiredState, 
+    byte&lt;<a href="#InsideOutsideState">InsideOutsideState</a>&gt; desiredState, 
     int areaEntityId)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
 <li><code>AllPlayersInArea(int areaEntityId)</code>
 <br/><span class="conddetails">Where <code><code>desiredState = InsideOutsideState.Inside or InsideOutsideState.Outside</code></code></span></li>
@@ -2645,7 +2645,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but common</p>
 <pre>CompareNumberOfCoopClients(
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     byte targetNumberOfClients)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
 <li><code>NumberOfCoopClients() <span class="condcomp">== value</span></code>
 <br/><span class="conddetails">Comparing <code>targetNumberOfClients</code> (<code>== != &gt; &lt; &gt;= &lt;=</code>)</span></li>
@@ -2656,10 +2656,10 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m26_00_00_00, m27_00_00_00, m28_00_00_00, m29, m32_00_00_00, m33_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>CompareNumberOfClientsOfType(
-    enum&lt;<a href="#ClientType">ClientType</a>&gt; clientType, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#ClientType">ClientType</a>&gt; clientType, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     byte targetNumberOfClients)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
-<li><code>NumberOfClientsOfType(enum&lt;<a href="#ClientType">ClientType</a>&gt; clientType) <span class="condcomp">== value</span></code>
+<li><code>NumberOfClientsOfType(byte&lt;<a href="#ClientType">ClientType</a>&gt; clientType) <span class="condcomp">== value</span></code>
 <br/><span class="conddetails">Comparing <code>targetNumberOfClients</code> (<code>== != &gt; &lt; &gt;= &lt;=</code>)</span></li>
 </ul>
 </div></section>
@@ -2674,12 +2674,12 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>CompareCountEventFlags(
-    enum&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
+    byte&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
     int startingTargetEventFlagId, 
     int endingTargetEventFlagId, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     int countThreshold)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
-<li><code>CountEventFlags(enum&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, int startingTargetEventFlagId, int endingTargetEventFlagId) <span class="condcomp">== value</span></code>
+<li><code>CountEventFlags(byte&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, int startingTargetEventFlagId, int endingTargetEventFlagId) <span class="condcomp">== value</span></code>
 <br/><span class="conddetails">Comparing <code>countThreshold</code> (<code>== != &gt; &lt; &gt;= &lt;=</code>)</span></li>
 </ul>
 </div></section>
@@ -2688,10 +2688,10 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>CompareWorldTendency(
-    enum&lt;<a href="#TendencyType">TendencyType</a>&gt; tendencyType, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#TendencyType">TendencyType</a>&gt; tendencyType, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     byte tendencyThreshold)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
-<li><code>WorldTendency(enum&lt;<a href="#TendencyType">TendencyType</a>&gt; tendencyType) <span class="condcomp">== value</span></code>
+<li><code>WorldTendency(byte&lt;<a href="#TendencyType">TendencyType</a>&gt; tendencyType) <span class="condcomp">== value</span></code>
 <br/><span class="conddetails">Comparing <code>tendencyThreshold</code> (<code>== != &gt; &lt; &gt;= &lt;=</code>)</span></li>
 </ul>
 </div></section>
@@ -2702,7 +2702,7 @@ section {
 <pre>CompareEventValue(
     int baseEventFlagId, 
     byte numberOfUsedFlagBits, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     uint thresholdValue)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
 <li><code>EventValue(int baseEventFlagId, byte numberOfUsedFlagBits) <span class="condcomp">== value</span></code>
 <br/><span class="conddetails">Comparing <code>thresholdValue</code> (<code>== != &gt; &lt; &gt;= &lt;=</code>)</span></li>
@@ -2713,13 +2713,13 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>ActionButtonBossFog(
-    enum&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; targetEntityType, 
+    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; targetEntityType, 
     int targetEntityId, 
     float reactionAngleDeg, 
     short dummypolyId, 
     float reactionDistance, 
     int helpMessageId, 
-    enum&lt;<a href="#ReactionType">ReactionType</a>&gt; reactionType, 
+    byte&lt;<a href="#ReactionType">ReactionType</a>&gt; reactionType, 
     int padId)</pre></div></section>
 <section class="cond unused">
 <h3 id="DroppedItemsInArea"><a href="#DroppedItemsInArea" class="selfref"><code>DroppedItemsInArea</code></a> <span class="sectioninfo">Condition function</span></h3>
@@ -2732,17 +2732,17 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>DroppedItem(
-    enum&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
+    int&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
     int itemId)</pre></div></section>
 <section class="cond">
 <h3 id="PlayerHasItemIncludingBBox"><a href="#PlayerHasItemIncludingBBox" class="selfref"><code>PlayerHasItemIncludingBBox</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m21_00_00_00</p>
 <pre>PlayerHasDoesntHaveItemIncludingBBox(
-    enum&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
+    byte&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
     int itemId, 
-    enum&lt;<a href="#OwnershipState">OwnershipState</a>&gt; desiredPossessionState)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
-<li><code>PlayerHasItemIncludingBBox(enum&lt;<a href="#ItemType">ItemType</a>&gt; itemType, int itemId)</code>
+    byte&lt;<a href="#OwnershipState">OwnershipState</a>&gt; desiredPossessionState)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
+<li><code>PlayerHasItemIncludingBBox(byte&lt;<a href="#ItemType">ItemType</a>&gt; itemType, int itemId)</code>
 <br/><span class="conddetails">Where <code><code>desiredPossessionState = OwnershipState.Owns or OwnershipState.DoesntOwn</code></code></span></li>
 </ul>
 </div></section>
@@ -2751,7 +2751,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>CompareGameCycle(
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     byte completedGameCyclesThreshold)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
 <li><code>GameCycle() <span class="condcomp">== value</span></code>
 <br/><span class="conddetails">Comparing <code>completedGameCyclesThreshold</code> (<code>== != &gt; &lt; &gt;= &lt;=</code>)</span></li>
@@ -2762,13 +2762,13 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>ActionButtonLineSegment(
-    enum&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; targetEntityType, 
+    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; targetEntityType, 
     int targetEntityId, 
     float reactionAngleDeg, 
     short dummypolyId, 
     float reactionDistance, 
     int helpMessageId, 
-    enum&lt;<a href="#ReactionType">ReactionType</a>&gt; reactionType, 
+    byte&lt;<a href="#ReactionType">ReactionType</a>&gt; reactionType, 
     int padId, 
     int lineSegmentDefinedByEntityId)</pre></div></section>
 <section class="cond unused">
@@ -2776,13 +2776,13 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>ActionButtonLineSegmentBossRoom(
-    enum&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; targetEntityType, 
+    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; targetEntityType, 
     int targetEntityId, 
     float reactionAngleDeg, 
     short dummypolyId, 
     float reactionDistance, 
     int helpMessageId, 
-    enum&lt;<a href="#ReactionType">ReactionType</a>&gt; reactionType, 
+    byte&lt;<a href="#ReactionType">ReactionType</a>&gt; reactionType, 
     int padId, 
     int lineSegmentDefinedByEntityId)</pre></div></section>
 <section class="cond unused">
@@ -2792,7 +2792,7 @@ section {
 <pre>CompareEventValues(
     int leftsideBaseEventFlagId, 
     byte leftsideNumberOfUsedFlagBits, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     int rightsideBaseEventFlagId, 
     byte rightsideNumberOfUsedFlagBits)</pre></div></section>
 <section class="cond unused">
@@ -2822,7 +2822,7 @@ section {
 <pre>HasDamageType(
     int targetEntityId, 
     int attackerEntityId, 
-    enum&lt;<a href="#DamageType">DamageType</a>&gt; damageType)</pre></div></section>
+    byte&lt;<a href="#DamageType">DamageType</a>&gt; damageType)</pre></div></section>
 <section class="cond">
 <h3 id="ActionButtonInArea"><a href="#ActionButtonInArea" class="selfref"><code>ActionButtonInArea</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
@@ -2835,7 +2835,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m25_00_00_00</p>
 <pre>PlayerArmorType(
-    enum&lt;<a href="#ArmorType">ArmorType</a>&gt; armorType, 
+    byte&lt;<a href="#ArmorType">ArmorType</a>&gt; armorType, 
     int targetArmorIdStart, 
     int targetArmorIdEnd)</pre></div></section>
 <section class="cond">
@@ -2844,7 +2844,7 @@ section {
 <p class="sectionusage usageinfo">Used in common, m21_00_00_00, m22_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m25_00_00_00, m26_00_00_00, m28_00_00_00, m29</p>
 <pre>ComparePlayerInsightAmount(
     byte targetInsightAmount, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
 <li><code>PlayerInsightAmount() <span class="condcomp">== value</span></code>
 <br/><span class="conddetails">Comparing <code>targetInsightAmount</code> (<code>== != &gt; &lt; &gt;= &lt;=</code>)</span></li>
 </ul>
@@ -2854,26 +2854,26 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>GenericDialogChoice(
-    enum&lt;<a href="#GenericDialogResult">GenericDialogResult</a>&gt; genericDialogResult)</pre></div></section>
+    sbyte&lt;<a href="#GenericDialogResult">GenericDialogResult</a>&gt; genericDialogResult)</pre></div></section>
 <section class="cond">
 <h3 id="HasPlayGoState"><a href="#HasPlayGoState" class="selfref"><code>HasPlayGoState</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m24_01_00_00</p>
 <pre>HasPlayGoState(
-    enum&lt;<a href="#PlayGoState">PlayGoState</a>&gt; playgoState)</pre></div></section>
+    sbyte&lt;<a href="#PlayGoState">PlayGoState</a>&gt; playgoState)</pre></div></section>
 <section class="cond">
 <h3 id="PlayerGender"><a href="#PlayerGender" class="selfref"><code>PlayerGender</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m21_00_00_00, m24_01_00_00, m28_00_00_00, m33_00_00_00</p>
 <pre>PlayerGender(
-    enum&lt;<a href="#Gender">Gender</a>&gt; gender)</pre></div></section>
+    byte&lt;<a href="#Gender">Gender</a>&gt; gender)</pre></div></section>
 <section class="cond">
 <h3 id="CharacterDead"><a href="#CharacterDead" class="selfref"><code>CharacterDead</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>CharacterDeadAlive(
     int targetEntityId, 
-    enum&lt;<a href="#DeathState">DeathState</a>&gt; desiredLifeState)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
+    byte&lt;<a href="#DeathState">DeathState</a>&gt; desiredLifeState)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
 <li><code>CharacterDead(int targetEntityId)</code>
 <br/><span class="conddetails">Where <code><code>desiredLifeState = DeathState.Dead or DeathState.Alive</code></code></span></li>
 </ul>
@@ -2891,7 +2891,7 @@ section {
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>CompareHPRatio(
     int targetEntityId, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     float targetHPRatio)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
 <li><code>HPRatio(int targetEntityId) <span class="condcomp">== value</span></code>
 <br/><span class="conddetails">Comparing <code>targetHPRatio</code> (<code>== != &gt; &lt; &gt;= &lt;=</code>)</span></li>
@@ -2903,7 +2903,7 @@ section {
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>CharacterType(
     int targetEntityId, 
-    enum&lt;<a href="#TargetType">TargetType</a>&gt; targetType)</pre></div></section>
+    sbyte&lt;<a href="#TargetType">TargetType</a>&gt; targetType)</pre></div></section>
 <section class="cond">
 <h3 id="CharacterTargetedBy"><a href="#CharacterTargetedBy" class="selfref"><code>CharacterTargetedBy</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
@@ -2934,11 +2934,11 @@ section {
 <p class="sectionusage usageinfo">Used in m21_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m27_00_00_00, m28_00_00_00, m29, m32_00_00_00, m33_00_00_00, m34_00_00_00</p>
 <pre>CompareNPCPartHP(
     int targetEntityId, 
-    int nPCPartId, 
-    int hPThreshold, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
-<li><code>NPCPartHP(int targetEntityId, int nPCPartId) <span class="condcomp">== value</span></code>
-<br/><span class="conddetails">Comparing <code>hPThreshold</code> (<code>== != &gt; &lt; &gt;= &lt;=</code>)</span></li>
+    int npcPartId, 
+    int hpThreshold, 
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
+<li><code>NPCPartHP(int targetEntityId, int npcPartId) <span class="condcomp">== value</span></code>
+<br/><span class="conddetails">Comparing <code>hpThreshold</code> (<code>== != &gt; &lt; &gt;= &lt;=</code>)</span></li>
 </ul>
 </div></section>
 <section class="cond">
@@ -2970,7 +2970,7 @@ section {
 <p class="sectionusage usageinfo">Used in all but common and m21_00_00_00</p>
 <pre>CharacterAIState(
     int targetEntityId, 
-    enum&lt;<a href="#AIStateType">AIStateType</a>&gt; aIState)</pre></div></section>
+    byte&lt;<a href="#AIStateType">AIStateType</a>&gt; aiState)</pre></div></section>
 <section class="cond unused">
 <h3 id="PlayerUsingSkullLantern"><a href="#PlayerUsingSkullLantern" class="selfref"><code>PlayerUsingSkullLantern</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
@@ -2986,7 +2986,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>PlayersClass(
-    enum&lt;<a href="#ClassType">ClassType</a>&gt; classNameType)</pre></div></section>
+    byte&lt;<a href="#ClassType">ClassType</a>&gt; classNameType)</pre></div></section>
 <section class="cond unused">
 <h3 id="PlayersCovenant"><a href="#PlayersCovenant" class="selfref"><code>PlayersCovenant</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
@@ -2998,7 +2998,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m26_00_00_00, m29, m33_00_00_00, m34_00_00_00, m35_00_00_00, m36_00_00_00</p>
 <pre>ComparePlayersSoulLevel(
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     uint targetSoulLevel)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
 <li><code>PlayersSoulLevel() <span class="condcomp">== value</span></code>
 <br/><span class="conddetails">Comparing <code>targetSoulLevel</code> (<code>== != &gt; &lt; &gt;= &lt;=</code>)</span></li>
@@ -3010,7 +3010,7 @@ section {
 <p class="sectionusage usageinfo">Used in m22_00_00_00, m24_01_00_00, m24_02_00_00, m27_00_00_00, m29</p>
 <pre>CompareCharacterHPValue(
     int targetEntityId, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     int targetHP)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
 <li><code>CharacterHPValue(int targetEntityId) <span class="condcomp">== value</span></code>
 <br/><span class="conddetails">Comparing <code>targetHP</code> (<code>== != &gt; &lt; &gt;= &lt;=</code>)</span></li>
@@ -3032,7 +3032,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m22_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m29, m34_00_00_00, m35_00_00_00</p>
 <pre>ObjectDestroyedState(
-    enum&lt;<a href="#DestructionState">DestructionState</a>&gt; damageState, 
+    byte&lt;<a href="#DestructionState">DestructionState</a>&gt; damageState, 
     int targetObjectEntityId)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
 <li><code>ObjectDestroyed(int targetObjectEntityId)</code>
 <br/><span class="conddetails">Where <code><code>damageState = DestructionState.Destroyed or DestructionState.Undestroyed</code></code></span></li>
@@ -3057,10 +3057,10 @@ section {
 <p class="sectionusage usageinfo">Used in m22_00_00_00, m23_00_00_00, m29, m34_00_00_00, m36_00_00_00</p>
 <pre>CompareObjectHP(
     int targetEntityId, 
-    enum&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
-    int hPThreshold)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
+    int hpThreshold)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
 <li><code>ObjectHP(int targetEntityId) <span class="condcomp">== value</span></code>
-<br/><span class="conddetails">Comparing <code>hPThreshold</code> (<code>== != &gt; &lt; &gt;= &lt;=</code>)</span></li>
+<br/><span class="conddetails">Comparing <code>hpThreshold</code> (<code>== != &gt; &lt; &gt;= &lt;=</code>)</span></li>
 </ul>
 </div></section>
 <section class="cond">
@@ -3096,9 +3096,9 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <ul class="enumlist">
-<li><code>OFF = 0</code> <span class="enumusage usageinfo">Used in all</span></li>
-<li><code>ON = 1</code> <span class="enumusage usageinfo">Used in all</span></li>
-<li><code>CHANGE = 2</code> <span class="enumusage usageinfo">Used in common, m22_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m28_00_00_00, m35_00_00_00, m36_00_00_00</span></li>
+<li><code>OFF = 0</code></li>
+<li><code>ON = 1</code></li>
+<li><code>CHANGE = 2</code></li>
 </ul>
 </div></section>
 <section class="enum">
@@ -3106,9 +3106,9 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <ul class="enumlist">
-<li><code>TargetEventFlagType.EventFlag = 0</code> <span class="enumusage usageinfo">Used in all</span></li>
-<li><code>TargetEventFlagType.EventID = 1</code> <span class="enumusage usageinfo">Used in all but m29</span></li>
-<li><code>TargetEventFlagType.EventIDAndSlotNumber = 2</code> <span class="enumusage usageinfo">Used in all</span></li>
+<li><code>TargetEventFlagType.EventFlag = 0</code></li>
+<li><code>TargetEventFlagType.EventID = 1</code></li>
+<li><code>TargetEventFlagType.EventIDAndSlotNumber = 2</code></li>
 </ul>
 </div></section>
 <section class="enum">
@@ -3220,8 +3220,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <ul class="enumlist">
-<li><code>InsideOutsideState.Outside = 0</code> <span class="enumusage usageinfo">Used in all but common</span></li>
-<li><code>InsideOutsideState.Inside = 1</code> <span class="enumusage usageinfo">Used in all</span></li>
+<li><code>InsideOutsideState.Outside = 0</code></li>
+<li><code>InsideOutsideState.Inside = 1</code></li>
 </ul>
 </div></section>
 <section class="enum">
@@ -3238,8 +3238,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <ul class="enumlist">
-<li><code>DeathState.Alive = 0</code> <span class="enumusage usageinfo">Used in common, m22_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m25_00_00_00, m26_00_00_00, m27_00_00_00, m28_00_00_00, m29, m34_00_00_00, m35_00_00_00, m36_00_00_00</span></li>
-<li><code>DeathState.Dead = 1</code> <span class="enumusage usageinfo">Used in all</span></li>
+<li><code>DeathState.Alive = 0</code></li>
+<li><code>DeathState.Dead = 1</code></li>
 </ul>
 </div></section>
 <section class="enum">
@@ -3247,8 +3247,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m21_00_00_00, m22_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m25_00_00_00, m27_00_00_00, m28_00_00_00, m29, m32_00_00_00, m34_00_00_00, m35_00_00_00</p>
 <ul class="enumlist">
-<li><code>OwnershipState.DoesntOwn = 0</code> <span class="enumusage usageinfo">Used in m21_00_00_00, m24_00_00_00, m24_01_00_00, m25_00_00_00, m35_00_00_00</span></li>
-<li><code>OwnershipState.Owns = 1</code> <span class="enumusage usageinfo">Used in common, m21_00_00_00, m22_00_00_00, m23_00_00_00, m24_00_00_00, m24_01_00_00, m24_02_00_00, m27_00_00_00, m28_00_00_00, m29, m32_00_00_00, m34_00_00_00, m35_00_00_00</span></li>
+<li><code>OwnershipState.DoesntOwn = 0</code></li>
+<li><code>OwnershipState.Owns = 1</code></li>
 </ul>
 </div></section>
 <section class="enum">

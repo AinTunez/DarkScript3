@@ -45,6 +45,12 @@ namespace DarkScript3
         public List<ConditionDoc> Conditions { get; private set; }
 
         /// <summary>
+        /// Aliases, mapping from old names to new names.
+        /// </summary>
+        [JsonProperty(PropertyName = "aliases")]
+        public Dictionary<string, string> Aliases { get; set; }
+
+        /// <summary>
         /// Registers a game as valid to use with condition data, also basic info if needed.
         /// </summary>
         public class ConditionGame

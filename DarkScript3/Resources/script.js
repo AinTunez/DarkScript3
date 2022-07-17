@@ -4,6 +4,7 @@ const Restart = REST.Restart;
 
 var _event = void 0;
 var _codeblock = void 0;
+var _skips = void 0;
 
 function Event(id, restBehavior, instructions) {
     var evt = new EVENT();
@@ -11,9 +12,14 @@ function Event(id, restBehavior, instructions) {
     evt.RestBehavior = restBehavior;
 
     _labels = {};
+    _skips = {};
     _event = evt;
     instructions.apply(this, _GetArgs(instructions));
+    if (_skips.length > 0) {
+        throw new Error(`Reserved skips in Event ${id} have not been filled. Unfilled skips: ${JSON.stringify(_skips)}`);
+    }
     _event = void 0;
+    _skips = void 0;
     _labels = void 0;
 
     EVD.Events.Add(evt);
@@ -51,6 +57,18 @@ function _Instruction(bank, index, args) {
             return Scripter.MakeInstruction(_event, bank, index, hostArray(args));
         }
     }
+}
+
+function _ReserveSkip(id) {
+    _skips[id] = _event.Instructions.Count;
+    // Arbitrary, but checked later as a loose failsafe
+    return 99;
+}
+
+function _FillSkip(id) {
+    var index = id in _skips ? _skips[id] : -1;
+    delete _skips[id];
+    Scripter.FillSkipPlaceholder(_event, index);
 }
 
 function hostArray(args) {

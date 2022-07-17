@@ -46,6 +46,7 @@ namespace DarkScript3
             editor.SelectionColor = Color.White;
             editor.HotkeysMapping.Add(Keys.Control | Keys.Enter, FCTBAction.CustomAction1);
             editor.HotkeysMapping.Add(Keys.Control | Keys.J, FCTBAction.CustomAction2);
+            editor.HotkeysMapping.Add(Keys.Control | Keys.D1, FCTBAction.CustomAction3);
             editor.Text = text;
             editor.ClearUndo();
             CodeChanged = false;
@@ -74,22 +75,31 @@ namespace DarkScript3
 
             List<AutocompleteItem> instructions = new List<AutocompleteItem>();
             List<AutocompleteItem> conditions = new List<AutocompleteItem>();
+            Dictionary<string, List<string>> instrAliases = Docs.AllAliases
+                .GroupBy(e => e.Value)
+                .ToDictionary(g => g.Key, g => g.Select(e => e.Key).ToList());
             foreach (string s in Docs.AllArgs.Keys)
             {
                 string menuText = s;
-
                 string toolTipTitle = s;
                 string toolTipText;
                 bool isInstr = Docs.Functions.TryGetValue(s, out (int, int) indices);
                 if (isInstr)
                 {
-                    toolTipText = $"{indices.Item1}[{indices.Item2}] ({ArgString(s)})";
+                    toolTipText = $"{indices.Item1}[{indices.Item2:d2}] ({ArgString(s)})";
                 }
                 else
                 {
                     toolTipText = $"({ArgString(s)})";
                 }
                 ToolTips[menuText] = (toolTipTitle, toolTipText);
+                if (instrAliases.TryGetValue(menuText, out List<string> aliases))
+                {
+                    foreach (string alias in aliases)
+                    {
+                        ToolTips[alias] = ToolTips[menuText];
+                    }
+                }
 
                 if (isInstr)
                 {
@@ -108,9 +118,10 @@ namespace DarkScript3
                     .Concat(enums.OrderBy(i => i.MenuText)));
         }
 
+        // Info for GUI
         public string DisplayTitle => Scripter.EmevdFileName + (CodeChanged ? "*" : "");
-
         public string EMEVDPath => Scripter.EMEVDPath;
+        public string ResourceString => Docs.ResourceString;
 
         private bool CodeChanged
         {
@@ -133,6 +144,8 @@ namespace DarkScript3
 
         public bool SaveJSAndEMEVDFile()
         {
+            // Before anything else, make sure Oodle exists. This is also done when opening new files.
+            SharedControls.CheckOodle(Docs.ResourceString);
             Range originalSelect = editor.Selection.Clone();
             Range errorSelect = null;
             bool success = false;
@@ -160,7 +173,7 @@ namespace DarkScript3
             return success;
         }
 
-        public bool SaveJSAndEMEVDFileOperation(out Range errorSelect)
+        private bool SaveJSAndEMEVDFileOperation(out Range errorSelect)
         {
             string text = editor.Text;
             bool fancyHint = text.Contains("$Event(");
@@ -234,37 +247,28 @@ namespace DarkScript3
             return false;
         }
 
-        public bool SaveJSFile()
+        public void SaveJSFile()
         {
-            try
+            var sb = new StringBuilder();
+            sb.AppendLine("// ==EMEVD==");
+            sb.AppendLine($"// @docs    {Docs.ResourceString}");
+            sb.AppendLine($"// @compress    {Scripter.EVD.Compression}");
+            sb.AppendLine($"// @game    {Scripter.EVD.Format}");
+            if (Docs.IsASCIIStringData)
+                sb.AppendLine($"// @string    {Encoding.ASCII.GetString(Scripter.EVD.StringData)}");
+            else
+                sb.AppendLine($"// @string    {Encoding.Unicode.GetString(Scripter.EVD.StringData)}");
+            sb.AppendLine($"// @linked    [{string.Join(",", Scripter.EVD.LinkedFileOffsets)}]");
+            foreach (KeyValuePair<string, string> extra in Settings.SettingsDict)
             {
-                var sb = new StringBuilder(); ;
-                sb.AppendLine("// ==EMEVD==");
-                sb.AppendLine($"// @docs    {Docs.ResourceString}");
-                sb.AppendLine($"// @compress    {Scripter.EVD.Compression}");
-                sb.AppendLine($"// @game    {Scripter.EVD.Format}");
-                if (Docs.IsASCIIStringData)
-                    sb.AppendLine($"// @string    {Encoding.ASCII.GetString(Scripter.EVD.StringData)}");
-                else
-                    sb.AppendLine($"// @string    {Encoding.Unicode.GetString(Scripter.EVD.StringData)}");
-                sb.AppendLine($"// @linked    [{string.Join(",", Scripter.EVD.LinkedFileOffsets)}]");
-                foreach (KeyValuePair<string, string> extra in Settings.SettingsDict)
-                {
-                    sb.AppendLine($"// @{extra.Key}    {extra.Value}");
-                }
-                sb.AppendLine($"// @version    {ProgramVersion.VERSION}");
-                sb.AppendLine("// ==/EMEVD==");
-                sb.AppendLine("");
-                sb.AppendLine(editor.Text);
-                File.WriteAllText($"{Scripter.EMEVDPath}.js", sb.ToString());
-                FileVersion = ProgramVersion.VERSION;
+                sb.AppendLine($"// @{extra.Key}    {extra.Value}");
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-                return false;
-            }
-            return true;
+            sb.AppendLine($"// @version    {ProgramVersion.VERSION}");
+            sb.AppendLine("// ==/EMEVD==");
+            sb.AppendLine("");
+            sb.AppendLine(editor.Text);
+            File.WriteAllText($"{Scripter.EMEVDPath}.js", sb.ToString());
+            FileVersion = ProgramVersion.VERSION;
         }
 
         #endregion
@@ -333,7 +337,6 @@ namespace DarkScript3
         private Point CheckMouseMovedPosition;
         private Range CurrentTokenRange;
         private string CurrentToken;
-        public string CurrentDoc { get; private set; }
 
         private Action<Point> moveOutOfBounds;
         private void Editor_MouseMove(object sender, MouseEventArgs e)
@@ -485,9 +488,51 @@ namespace DarkScript3
             JumpToEvent(place);
         }
 
+        public void ReplaceFloat()
+        {
+            Place place = editor.Selection.Start;
+            Range numRange = editor.GetRange(place, place).GetFragment(TextStyles.Number, false);
+            string text = numRange.Text;
+            int val;
+            if (int.TryParse(text, out int id))
+            {
+                val = id;
+            }
+            else if (uint.TryParse(text, out uint uid))
+            {
+                val = (int)uid;
+            }
+            else
+            {
+                MessageBox.Show($"Integer value not found at text cursor (found \"{text}\")", "Parse float failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            float f = BitConverter.ToSingle(BitConverter.GetBytes(val), 0);
+            if (true)
+            {
+                string ret = f.ToString("R");
+                ScrollDialog.Show(ParentForm, $"Integer {text} is equivalent to float {ret}", "Parse float result");
+            }
+            else
+            {
+                // Temporarily disable this until it's actually supported in initializations
+                string ret = f.ToString("R");
+                DialogResult res = ScrollDialog.Show(ParentForm, $"Replace \"{text}\" with \"{ret}\"?", "Confirm replacement");
+                if (res == DialogResult.OK)
+                {
+                    editor.Selection = numRange;
+                    editor.InsertText(ret);
+                }
+            }
+        }
+
+        public void JumpToEvent()
+        {
+            JumpToEvent(editor.Selection.Start);
+        }
+
         private void JumpToEvent(Place place)
         {
-            // TODO: Add common func event jumping. This requires communicating with other tabs which should be done very carefully to avoid circular dependencies.
             Range numRange = editor.GetRange(place, place).GetFragment(TextStyles.Number, false);
             if (!int.TryParse(numRange.Text, out int id))
             {
@@ -517,8 +562,95 @@ namespace DarkScript3
             }
             else
             {
-                SharedControls.SetStatus($"Event {id}{searchType} not found", false);
+                // Fallback to common_func, if it's open and in the same directory.
+                // This requires communicating with other tabs which should be done carefully to avoid circular dependencies.
+                string commonSuggest = "";
+                if (searchType == "")
+                {
+                    if (SharedControls.JumpToCommonFunc(id, this))
+                    {
+                        return;
+                    }
+                    if (Docs != null && Docs.LooksLikeCommonFunc(id))
+                    {
+                        commonSuggest = ". Open common_func in another tab to enable searching there";
+                    }
+                }
+                SharedControls.SetStatus($"Event {id}{searchType} not found{commonSuggest}", false);
             }
+        }
+
+        public void JumpToTextNearLine(string lineText, int lineChar, int lineHint)
+        {
+            Regex regex = new Regex($"^{Regex.Escape(lineText)}$", RegexOptions.Singleline);
+            List<Range> ranges = editor.Range.GetRangesByLines(regex).ToList();
+            Range target = null;
+            if (ranges.Count > 0)
+            {
+                int closest = -1;
+                foreach (Range range in ranges)
+                {
+                    int dist = Math.Abs(range.FromLine - lineHint);
+                    if (closest == -1 || dist < closest)
+                    {
+                        Range lineRange = range;
+                        Place linePlace = range.Start;
+                        int lineLen = editor.GetLineLength(linePlace.iLine);
+                        if (lineChar < lineLen)
+                        {
+                            linePlace = new Place(lineChar, linePlace.iLine);
+                            lineRange = editor.GetRange(linePlace, linePlace);
+                        }
+                        target = lineRange;
+                        closest = dist;
+                    }
+                }
+            }
+            if (target == null)
+            {
+                try
+                {
+                    target = editor.GetLine(lineHint);
+                }
+                catch (ArgumentException) { }
+            }
+            if (target == null)
+            {
+                target = editor.GetLine(0);
+            }
+            PreventHoverMousePosition = MousePosition;
+            editor.Selection = editor.GetRange(target.End, target.End);
+            editor.OnSelectionChangedDelayed();
+            editor.DoSelectionVisible();
+        }
+
+        public Action GetJumpToEventAction(int id)
+        {
+            // Used for common_func only. Some stuff copied from the above. The Action should be run in a UI thread.
+            Regex regex = new Regex($@"^\s*\$?Event\(\s*{id}\s*,", RegexOptions.Singleline);
+            List<Range> ranges = editor.Range.GetRangesByLines(regex).ToList();
+            if (ranges.Count > 0)
+            {
+                Range idRange = ranges[0].GetRanges($"{id}").LastOrDefault() ?? ranges[0];
+                return () =>
+                {
+                    try
+                    {
+                        // Quick validity check
+                        string text = idRange.Text;
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        return;
+                    }
+                    PreventHoverMousePosition = MousePosition;
+                    editor.Selection = editor.GetRange(idRange.Start, idRange.Start);
+                    editor.OnSelectionChangedDelayed();
+                    editor.DoSelectionVisible();
+                    SharedControls.SetStatus($"Event {id} found", false);
+                };
+            }
+            return null;
         }
 
         private Action<int> highlightTokenDebounce;
@@ -630,6 +762,10 @@ namespace DarkScript3
 
         private void ShowArgToolTip(string funcName, Range arguments, int argument = -1)
         {
+            if (Docs.AllAliases.TryGetValue(funcName, out string realName))
+            {
+                funcName = realName;
+            }
             if (Docs.AllArgs.ContainsKey(funcName))
             {
                 Point point = editor.PlaceToPoint(arguments.Start);
@@ -710,11 +846,15 @@ namespace DarkScript3
         {
             if (e.Action == FCTBAction.CustomAction1)
             {
-                JumpToEvent(editor.Selection.Start);
+                JumpToEvent();
             }
             else if (e.Action == FCTBAction.CustomAction2)
             {
                 ShowCompileWarnings();
+            }
+            else if (e.Action == FCTBAction.CustomAction3)
+            {
+                ReplaceFloat();
             }
         }
 
@@ -731,14 +871,21 @@ namespace DarkScript3
 
         // TODO: There are a few improvements we can make here, like: multi-file search form,
         // highlighting search terms, non-dialog search (Google Chrome style Ctrl+F).
-        public void ShowFindDialog()
+        public void ShowFindDialog(bool complex = false)
         {
             string text = null;
             if (!editor.Selection.IsEmpty && editor.Selection.Start.iLine == editor.Selection.End.iLine)
             {
                 text = editor.Selection.Text;
             }
-            SharedControls.ShowFindDialog(text);
+            if (complex)
+            {
+                SharedControls.ShowComplexFindDialog(text);
+            }
+            else
+            {
+                SharedControls.ShowFindDialog(text);
+            }
         }
 
         public void Copy() => editor.Copy();

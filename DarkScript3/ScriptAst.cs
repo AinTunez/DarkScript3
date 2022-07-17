@@ -10,7 +10,7 @@ namespace DarkScript3
     public class ScriptAst
     {
         public static readonly string SingleIndent = "    ";
-        private static readonly int columnLimit = 120;
+        private static readonly int columnLimit = 100;
 
         public class EventFunction
         {
@@ -52,6 +52,27 @@ namespace DarkScript3
                     }
                     return suffix;
                 }
+                // For some reason, in particular scoped cases, V8 cries bloody murder about label redeclaration
+                // (label_redeclaration in parser.cc). But ECMAScript spec doesn't seem to require it? V8 just
+                // does want it wants with no clear pattern.
+                // Disambiguation can be done before printing if desired, but it is a syntax thing, not a semantic one.
+                // It mainly seems to arise when two label commands are literally next to each other, and when declared
+                // in a parent scope right before a child scope which also includes it.
+                // Well, for now, hardcode the only vanilla event which causes this. Fix me :fatcat:
+                bool disambiguateLabels = 11052860.Equals(ID);
+                List<string> usedLabels = new List<string>();
+                string getLabelWithSuffix(string label)
+                {
+                    if (!disambiguateLabels) return label;
+                    // To avoid complication, all trailing underscores are stripped on parsing labels,
+                    // though not label references.
+                    while (usedLabels.Contains(label))
+                    {
+                        label += "_";
+                    }
+                    usedLabels.Add(label);
+                    return label;
+                }
                 void subprint(List<Intermediate> ims, int indent)
                 {
                     string sp = string.Join("", Enumerable.Repeat(SingleIndent, indent));
@@ -61,16 +82,16 @@ namespace DarkScript3
                         string suffix = processDecorations(im.Decorations, sp);
                         foreach (string l in im.Labels)
                         {
-                            writer.WriteLine($"{l}:");
+                            writer.WriteLine(getLabelWithSuffix(l) + ":");
                         }
                         lineWriter?.RecordMapping(im.LineMapping);
                         if (im is NoOp && im.Labels.Count == 0 && !prevLabel)
                         {
                             // Don't print NoOp unless it is needed for synthetic or actual labels.
                         }
-                        else if (im is Label)
+                        else if (im is Label label)
                         {
-                            writer.WriteLine(im + suffix);
+                            writer.WriteLine(getLabelWithSuffix($"L{label.Num}") + ":" + suffix);
                             if (im == ims[ims.Count - 1])
                             {
                                 // Slight hack to synthetically add NoOp at the end of a block, not just end of the function
@@ -120,36 +141,48 @@ namespace DarkScript3
         // The list is otherwise used in compilation so people don't define or use condition variables with these names.
         public static readonly Dictionary<string, BuiltIn> ReservedWords = new Dictionary<string, BuiltIn>
         {
-            ["EndEvent"] = new BuiltIn { Doc = "Stops execution in the event and turns its flag on." },
-            ["RestartEvent"] = new BuiltIn { Doc = "Stops execution in the event, turns its flags on, and continues from the top on the next frame." },
-            ["EndIf"] = new BuiltIn {
+            ["EndEvent"] = new BuiltIn
+            {
+                Doc = "Stops execution in the event and turns its flag on.",
+            },
+            ["RestartEvent"] = new BuiltIn
+            {
+                Doc = "Stops execution in the event, turns its flags on, and continues from the top on the next frame.",
+            },
+            ["EndIf"] = new BuiltIn
+            {
                 Args = new List<object> { "COND" },
-                Doc = "If the condition is true, stops execution in the event and turns its flag on."
+                Doc = "If the condition is true, stops execution in the event and turns its flag on.",
+                Highlight = true,
             },
             ["RestartIf"] = new BuiltIn
             {
                 Args = new List<object> { "COND" },
-                Doc = "If the condition is true, stops execution in the event, turns its flags on, and continues from the top on the next frame."
+                Doc = "If the condition is true, stops execution in the event, turns its flags on, and continues from the top on the next frame.",
+                Highlight = true,
             },
             ["Goto"] = new BuiltIn
             {
                 Args = new List<object> { "LABEL" },
-                Doc = "Unconditionally goes to the next instance of the given label."
+                Doc = "Unconditionally goes to the next instance of the given label.",
+                Highlight = true,
             },
             ["GotoIf"] = new BuiltIn
             {
                 Args = new List<object> { "LABEL", "COND" },
-                Doc = "Goes to the next instance of the given label if the condition is true."
+                Doc = "Goes to the next instance of the given label if the condition is true.",
+                Highlight = true,
             },
             ["WaitFor"] = new BuiltIn
             {
                 Args = new List<object> { "COND" },
-                Doc = "Waits for the condition to become true. After this, all condition variables are reset."
+                Doc = "Waits for the condition to become true. After this, all condition variables are reset.",
+                Highlight = true,
             },
             ["NoOp"] = new BuiltIn
             {
                 Args = new List<object> { },
-                Doc = "Does nothing. Not an instruction. Exists only as a target for labels."
+                Doc = "Does nothing. Not an instruction. Exists only as a target for labels.",
             },
             ["Event"] = new BuiltIn
             {
@@ -168,6 +201,7 @@ namespace DarkScript3
         {
             public List<object> Args { get; set; }
             public string Doc { get; set; }
+            public bool Highlight { get; set; }
         }
 
         public class LineMapping : IComparable<LineMapping>
@@ -290,6 +324,14 @@ namespace DarkScript3
             public override string ToString() => Code;
         }
 
+        public class SkipTarget : Intermediate
+        {
+            // Label should start with # per convention, and match a single earlier ReverseSkip
+            public string Label { get; set; }
+
+            public override string ToString() => $"_FillSkip(\"{Label}\");";
+        }
+
         public enum ControlType
         {
             COND, SKIP, END, GOTO, WAIT
@@ -311,7 +353,7 @@ namespace DarkScript3
             // public string Cmd { get; set; }
 
             public abstract ControlType ControlType { get; }
-            public abstract int ControlArg { get; }
+            public abstract object ControlArg { get; }
         }
 
         public class End : CondIntermediate
@@ -319,7 +361,7 @@ namespace DarkScript3
             public int Type { get; set; }
 
             public override ControlType ControlType => ControlType.END;
-            public override int ControlArg => Type;
+            public override object ControlArg => Type;
             private string EndName => Cond.Always ? (Type == 0 ? "EndEvent" : "RestartEvent") : (Type == 0 ? "EndIf" : "RestartIf");
             public override string ToString() => $"{EndName}({(Cond.Always ? "" : PlainCond)});";
             public override StringTree GetStringTree() => Cond.Always
@@ -334,7 +376,7 @@ namespace DarkScript3
             public CondAssignOp Op { get; set; }
 
             public override ControlType ControlType => ControlType.COND;
-            public override int ControlArg => ToCond;
+            public override object ControlArg => ToCond;
             public override string ToString() => $"{ToVar ?? $"cond[{ToCond}]"} {StrAssign[Op]} {PlainCond};";
             public override StringTree GetStringTree() => StringTree.CombinedStart($"{ToVar} {StrAssign[Op]} ", Cond.GetStringTree(true), ";");
         }
@@ -351,6 +393,13 @@ namespace DarkScript3
         }
 
         public static readonly Dictionary<string, int> LabelIds = Enumerable.Range(0, 21).ToDictionary(l => $"L{l}", l => l);
+        public class ReserveSkip
+        {
+            // Argument to be replaced at runtime with a skip offset.
+            // Must be the first argument of the instruction.
+            public string Target { get; set; }
+            public override string ToString() => $"_ReserveSkip(\"{Target}\")";
+        }
 
         public class Goto : CondIntermediate
         {
@@ -359,8 +408,27 @@ namespace DarkScript3
             public int ToNode = -1;
             public string ToLabel { get; set; }
 
-            public override ControlType ControlType => ToLabel == null ? ControlType.SKIP : ControlType.GOTO;
-            public override int ControlArg => ToLabel == null ? SkipLines : (LabelIds.TryGetValue(ToLabel, out int id) ? id : throw new Exception(ToLabel));
+            public override ControlType ControlType => ToLabel == null || ToLabel.StartsWith("#") ? ControlType.SKIP : ControlType.GOTO;
+            public override object ControlArg
+            {
+                get
+                {
+                    if (ToLabel == null)
+                    {
+                        return SkipLines;
+                    }
+                    if (LabelIds.TryGetValue(ToLabel, out int id))
+                    {
+                        return id;
+                    }
+                    if (ToLabel.StartsWith("#"))
+                    {
+                        // Syntax for constructed jumps
+                        return new ReserveSkip { Target = ToLabel };
+                    }
+                    throw new Exception($"Internal error: Unresolved label {ToLabel}");
+                }
+            }
 
             // Of these, only Goto and GotoIf should be present in the final script.
             public override string ToString() => Cond.Always
@@ -379,7 +447,7 @@ namespace DarkScript3
             public override StringTree GetStringTree() => StringTree.CombinedStart("if (", Cond.GetStringTree(true), ") {");
 
             // This is functionally a goto, but can't be compiled
-            public override int ControlArg => throw new Exception();
+            public override object ControlArg => throw new Exception();
             public override ControlType ControlType => throw new Exception();
         }
 
@@ -393,7 +461,7 @@ namespace DarkScript3
 
             // In terms of compiler output, this is used to mean main group evaluation
             public override ControlType ControlType => ControlType.COND;
-            public override int ControlArg => 0;
+            public override object ControlArg => 0;
             // Cond should always be a specific condition and not Always.
             public override string ToString() => $"WaitFor({PlainCond});";
             public override StringTree GetStringTree() => StringTree.IsolatedStart("WaitFor(", Cond.GetStringTree(true), ");");

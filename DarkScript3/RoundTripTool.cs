@@ -18,7 +18,8 @@ namespace DarkScript3
             ["ds1"] = @"C:\Program Files (x86)\Steam\steamapps\common\Dark Souls Prepare to Die Edition\DATA\event",
             ["ds1r"] = @"C:\Program Files (x86)\Steam\steamapps\common\DARK SOULS REMASTERED\event",
             ["ds3"] = @"C:\Program Files (x86)\Steam\steamapps\common\DARK SOULS III\Game\event",
-            ["sekiro"] = @"C:\Program Files (x86)\Steam\steamapps\common\Sekiro\event"
+            ["sekiro"] = @"C:\Program Files (x86)\Steam\steamapps\common\Sekiro\event",
+            ["er"] = @"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING\Game\event",
         };
         private static readonly Dictionary<string, EMEVD.Game> gameTypes = new Dictionary<string, Game>
         {
@@ -27,7 +28,7 @@ namespace DarkScript3
             ["ds2"] = Game.Bloodborne,
             ["ds2scholar"] = Game.Bloodborne,
             ["ds3"] = Game.DarkSouls3,
-            ["sekiro"] = Game.Sekiro,
+            ["er"] = Game.Sekiro,
         };
 
         public static void Run(string[] args)
@@ -96,6 +97,10 @@ namespace DarkScript3
                     if (args.Contains("unit"))
                     {
                         string testCases = Resource.Text("test.js");
+                        if (args.Contains("local"))
+                        {
+                            testCases = File.ReadAllText("test.js");
+                        }
                         fes.Pack(testCases, "test.js");
                         Console.WriteLine(scripter.Unpack());
                         Console.WriteLine(fes.Repack(testCases));
@@ -105,7 +110,7 @@ namespace DarkScript3
                     {
                         recordText("fancy3", name, () => fes.Repack(reg1));
                     }
-                    if (!args.Contains("repack") && !args.Contains("pack")) continue;
+                    if (!args.Contains("repack") && !args.Contains("pack") && !args.Contains("fancy")) continue;
                     string fancy1 = recordText("fancy1", name, () => fes.Unpack());
                     if (fancy1 != null)
                     {

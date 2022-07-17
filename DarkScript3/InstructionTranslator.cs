@@ -20,6 +20,8 @@ namespace DarkScript3
         public Dictionary<string, EMEDF.InstrDoc> InstrDocs;
         // Map from x[y] to a label num.
         public Dictionary<string, int> LabelDocs;
+        // Map from alias name to function name
+        public Dictionary<string, string> DisplayAliases;
 
         public class FunctionDoc
         {
@@ -54,7 +56,10 @@ namespace DarkScript3
                 conds = ReadStream("conditions.json");
 
             List<string> games = conds.Games.Select(g => g.Name).ToList();
-            string game = games.Find(g => docs.ResourceString.StartsWith(g + "-common"));
+            string searchString = docs.ResourceString;
+            // Temp hack for Elden Ring
+            searchString = searchString.Replace("new-", "");
+            string game = games.Find(g => searchString.StartsWith(g + "-common"));
             if (game == null)
             {
                 return null;
@@ -65,7 +70,7 @@ namespace DarkScript3
             // This is the shorthand used by the config.
             Dictionary<string, EMEDF.InstrDoc> instrs = emedf.Classes
                 .Where(c => c.Index < 2000 && c.Index != 1014)
-                .SelectMany(c => c.Instructions.Select(i => (InstructionID(c.Index, i.Index), i)))
+                .SelectMany(c => c.Instructions.Select(i => (InstructionDocs.FormatInstructionID(c.Index, i.Index), i)))
                 .ToDictionary(e => e.Item1, e => e.Item2);
 
             // Account for a command. Each condition/control flow statement should have a unique treatment.
@@ -167,7 +172,8 @@ namespace DarkScript3
                         name = bv.Name;
                         if (negateDoc == null) throw new ArgumentException($"Cond {cond.Name} has boolean variant {name} but no negate_field");
                         string trueVal = negateDoc.Name == "BOOL" ? "TRUE" : bv.True;
-                        string trueKey = negateDoc.Values.Where(e => e.Value == trueVal).First().Key;
+                        string trueKey = negateDoc.Values.Where(e => e.Value == trueVal).FirstOrDefault().Key;
+                        if (trueKey == null) throw new Exception($"Cond {cond.Name} has no given true value for {name} {negateDoc.Name}");
                         variant.TrueOp = asInt(trueKey);
                         if (bv.Required != null)
                         {
@@ -270,7 +276,7 @@ namespace DarkScript3
                 }
                 if (processInfo($"Skip {cond.Name}", cond.Skip))
                 {
-                    expectArg(cond.Skip, "Number Of Skipped Lines", EMEVD.Instruction.ArgType.Byte, 0);
+                    expectArg(cond.Skip, "Number Of Skipped Lines", ArgType.Byte, 0);
                     addVariants(selector, cond, ControlType.SKIP, cond.Skip, 0);
                 }
                 if (processInfo($"End  {cond.Name}", cond.End))
@@ -288,6 +294,39 @@ namespace DarkScript3
                     // Implicit main arg
                     addVariants(selector, cond, ControlType.WAIT, cond.Wait);
                 }
+#if DEBUG
+                if (game == "er")
+                {
+                    // Some extra consistency checking here, mainly for development sanity purposes.
+                    // It's not actually necessary for parsing the config.
+                    Dictionary<string, string> namePrefixes = new Dictionary<string, string>
+                    {
+                        [""] = cond.Cond,
+                        ["SKIP "] = cond.Skip,
+                        ["END "] = cond.End,
+                        ["GOTO "] = cond.Goto,
+                    };
+                    string baseName = null;
+                    foreach (KeyValuePair<string, string> check in namePrefixes)
+                    {
+                        string cmd = check.Value;
+                        if (cmd == null || !instrs.TryGetValue(cmd, out EMEDF.InstrDoc doc)) continue;
+                        string name = doc.Name;
+                        if (name == "IF Condition Group" || name.Contains("Parameter Comparison")) continue;
+                        string pref = check.Key;
+                        if (!name.StartsWith(pref)) throw new Exception($"Expected prefix [{pref}] for {cmd} {name}");
+                        string norm = name.Substring(pref.Length);
+                        if (baseName == null)
+                        {
+                            baseName = norm;
+                        }
+                        else if (baseName != norm)
+                        {
+                            throw new Exception($"Name {cmd} {name} mismatches equivalent condition name {baseName} ({string.Join(" ", namePrefixes)})");
+                        }
+                    }
+                }
+#endif
             }
             string undocError = string.Join(", ", instrs.Where(e => !visited.Contains(e.Key)).Select(e => $"{e.Key}:{e.Value.Name}"));
             if (undocError.Length > 0)
@@ -299,7 +338,18 @@ namespace DarkScript3
             EMEDF.ClassDoc labelClass = emedf[1014];
             if (labelClass != null)
             {
-                labels = labelClass.Instructions.ToDictionary(i => InstructionID(1014, i.Index), i => (int)i.Index);
+                labels = labelClass.Instructions.ToDictionary(i => InstructionDocs.FormatInstructionID(1014, i.Index), i => (int)i.Index);
+            }
+            Dictionary<string, string> aliases = new Dictionary<string, string>();
+            if (conds.Aliases != null)
+            {
+                List<string> noReal = conds.Aliases.Keys.Intersect(condDocs.Keys).ToList();
+                if (noReal.Count > 0)
+                {
+                    throw new Exception($"Condition aliases match actual condition names: {string.Join(", ", noReal)}");
+                }
+                // Not all targets may exist in all games
+                aliases = conds.Aliases.Where(e => condDocs.ContainsKey(e.Value)).ToDictionary(e => e.Key, e => e.Value);
             }
             return new InstructionTranslator
             {
@@ -307,6 +357,7 @@ namespace DarkScript3
                 Selectors = selectors,
                 InstrDocs = instrs,
                 LabelDocs = labels,
+                DisplayAliases = aliases,
             };
         }
 
@@ -419,7 +470,7 @@ namespace DarkScript3
             }
             else if (im is Label label)
             {
-                string cmd = InstructionID(1014, label.Num);
+                string cmd = InstructionDocs.FormatInstructionID(1014, label.Num);
                 return new Instr { Name = $"Label{label.Num}", Cmd = cmd, Args = new List<object>() };
             }
             else if (im is CondIntermediate condIm)
@@ -462,9 +513,10 @@ namespace DarkScript3
                 {
                     Cmd = cmd,
                     Name = instrDoc.DisplayName,
-                    Args = Enumerable.Repeat((object)null, instrDoc.Arguments.Length).ToList()
+                    Args = Enumerable.Repeat((object)null, instrDoc.Arguments.Length).ToList(),
                 };
-                int controlVal = condIm.ControlArg;
+                // Re-expose error (such as Goto in bad state) alongside instruction
+                object controlVal = condIm.ControlArg;
                 int negateVal = cond is CompareCond cmp ? (int)cmp.Type : variant.TrueOp;
                 if (cond != null && cond.Negate)
                 {
@@ -541,7 +593,7 @@ namespace DarkScript3
             // Any additional args which have an assumed value. Should be checked in ConditionSelector.
             public Dictionary<int, int> ExtraArgs = new Dictionary<int, int>();
 
-            public void SetInstrArgs(Instr instr, Cond cond, int controlVal, int negateVal)
+            public void SetInstrArgs(Instr instr, Cond cond, object controlVal, int negateVal)
             {
                 List<object> extraArgs = new List<object>();
                 if (cond is CondRef condRef)
@@ -715,11 +767,6 @@ namespace DarkScript3
                 else throw new ArgumentException($"Unrecognized variant style {Variant}");
                 return ret;
             }
-        }
-
-        public static string InstructionID(long bank, long index)
-        {
-            return $"{bank}[{index.ToString().PadLeft(2, '0')}]";
         }
 
         public class ConditionSelector

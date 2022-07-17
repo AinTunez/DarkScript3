@@ -100,7 +100,7 @@ namespace DarkScript3
                     IEnumerable<ArgType> argStruct = doc.Arguments.Select(arg => arg.Type == 8 ? ArgType.UInt32 : (ArgType)arg.Type);
 
                     Layers layers = ins.Layer is uint l ? new Layers { Mask = l } : null;
-                    Instr instr = new Instr { Inner = ins, Cmd = InstructionID(ins.Bank, ins.ID), Name = funcName, Layers = layers };
+                    Instr instr = new Instr { Inner = ins, Cmd = InstructionDocs.FormatInstructionID(ins.Bank, ins.ID), Name = funcName, Layers = layers };
 
                     try
                     {
