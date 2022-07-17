@@ -19,7 +19,7 @@ namespace DarkScript3
             if (showFancy)
             {
 
-                fancy.Checked = Properties.Settings.Default.DefaultFancyDecompile;
+                fancy.Checked = Properties.Settings.Default.DefaultFancy;
             }
             else
             {
@@ -73,6 +73,12 @@ namespace DarkScript3
             Close();
         }
 
+        private void eldenBtn_Click(object sender, EventArgs e)
+        {
+            SetResult("er-common.emedf.json");
+            Close();
+        }
+
         private void GameChooser_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -95,7 +101,7 @@ namespace DarkScript3
 
         private void fancy_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.DefaultFancyDecompile = fancy.Checked;
+            Properties.Settings.Default.DefaultFancy = fancy.Checked;
             Properties.Settings.Default.Save();
         }
     }

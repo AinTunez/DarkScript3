@@ -31,6 +31,8 @@ namespace DarkScript3
 
         private V8ScriptEngine v8 = new V8ScriptEngine();
 
+        // These are accessed from JS, in code below.
+        // Also used for automatic skip amount calculation
         public int CurrentEventID = -1;
         public int CurrentInsIndex = -1;
         public string CurrentInsName = "";
@@ -61,6 +63,7 @@ namespace DarkScript3
         public Instruction MakeInstruction(Event evt, int bank, int index, object[] args)
         {
             CurrentEventID = (int)evt.ID;
+            // TODO: Why is this done at the start? Nothing seems to use it, at least.
             CurrentInsIndex = evt.Instructions.Count + 1;
 
             try
@@ -134,11 +137,35 @@ namespace DarkScript3
             catch (Exception ex)
             {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine($"EXCEPTION\nCould not write instruction at Event {CurrentEventID}, index {CurrentInsIndex}.\n");
+                sb.AppendLine($"EXCEPTION\nCould not write instruction at Event {CurrentEventID} at index {CurrentInsIndex}.\n");
                 sb.AppendLine($"INSTRUCTION\n{CurrentInsName} | {bank}[{index}]\n");
                 sb.AppendLine(ex.Message);
                 throw new Exception(sb.ToString());
             }
+        }
+
+        public void FillSkipPlaceholder(Event evt, int fillIndex)
+        {
+            int skipTarget = evt.Instructions.Count;
+            if (evt == null || fillIndex < 0 || fillIndex >= skipTarget)
+            {
+                throw new Exception($"Invalid or unspecified skip placeholder index in Event {CurrentEventID} ({evt?.ID}) at index {CurrentInsIndex}");
+            }
+            // This is a bit fragile, we can't do much checking without maintaining more state.
+            Instruction ins = evt.Instructions[fillIndex];
+            // 99 as fill-in value in script.js. It is checked afterwards that all of these are filled.
+            if (ins.ArgData.Length == 0 || ins.ArgData[0] != 99)
+            {
+                throw new Exception($"Unexpected instruction {InstructionDocs.InstrDebugString(ins)} in skip placeholder in Event {CurrentEventID}, from indices {fillIndex}->{skipTarget}");
+            }
+            // 0-line skip is from e.g. fillIndex = 5, to skipTarget = 6
+            // 4-line skip (the entire event *after* the first instruction) is from fillIndex = 0 to skipTarget = 5
+            int skipCount = skipTarget - fillIndex - 1;
+            if (skipCount < 0 || skipCount > byte.MaxValue)
+            {
+                throw new Exception($"Skip too long in Event {CurrentEventID} from indices {fillIndex}->{skipTarget}, must be <256 lines. Use labels or split up the event.");
+            }
+            ins.ArgData[0] = (byte)skipCount;
         }
 
         /// <summary>
@@ -179,16 +206,23 @@ namespace DarkScript3
             EMEDF DOC = docs.DOC;
             foreach (EMEDF.EnumDoc enm in DOC.Enums)
             {
-                if (InstructionDocs.EnumNamesForGlobalization.Contains(enm.Name)) continue;
+                if (docs.EnumNamesForGlobalization.Contains(enm.Name)) continue;
                 if (enm.Name == "BOOL") continue;
                 HashSet<string> vals = new HashSet<string>();
                 code.AppendLine($"const {enm.DisplayName} = {{");
-                foreach (var pair in enm.Values.ToList())
+                foreach (KeyValuePair<string, string> pair in enm.Values)
                 {
                     string valName = Regex.Replace(pair.Value, @"[^\w]", "");
                     if (vals.Contains(valName)) throw new Exception($"Internal error: enum {enm.DisplayName} has duplicate value names {valName}");
                     vals.Add(valName);
                     code.AppendLine($"{valName}: {pair.Key},");
+                }
+                if (enm.ExtraValues != null)
+                {
+                    foreach (KeyValuePair<string, int> pair in enm.ExtraValues)
+                    {
+                        code.AppendLine($"{pair.Key}: {pair.Value},");
+                    }
                 }
                 code.AppendLine("};");
             }
@@ -223,15 +257,20 @@ namespace DarkScript3
                     code.AppendLine("    Scripter.CurrentInsName = \"\";");
                     code.AppendLine("    return ins;");
                     code.AppendLine("}");
-
-                    // Add aliases to InstrDoc? Or maybe make TitleCaseName possibly return multiple values?
-                    if (funcName.Contains("SpEffect"))
-                    {
-                        code.AppendLine($"const {funcName.Replace("SpEffect", "Speffect")} = {funcName};");
-                    }
                 }
             }
-            v8.Execute(code.ToString());
+            foreach (KeyValuePair<string, string> alias in docs.DisplayAliases)
+            {
+                code.AppendLine($"const {alias.Key} = {alias.Value};");
+            }
+            try
+            {
+                v8.Execute(code.ToString());
+            }
+            catch (Exception ex) when (ex is IScriptEngineException scriptException)
+            {
+                throw new Exception($"Error processing {docs.ResourceString}: {scriptException.ErrorDetails}");
+            }
         }
 
         public string EventName(long id)
@@ -297,8 +336,15 @@ namespace DarkScript3
                 EMEDF.InstrDoc doc = docs.DOC[ins.Bank]?[ins.ID];
                 if (doc == null)
                 {
+#if DEBUG
+                    // Partial mode
+                    {
+                        code.AppendLine(ScriptAst.SingleIndent + InstructionDocs.InstrDebugStringFull(ins));
+                        continue;
+                    }
+#endif
                     StringBuilder sb = new StringBuilder();
-                    sb.AppendLine($@"Unable to read instruction at Event {CurrentEventID}, Index {CurrentInsIndex}.");
+                    sb.AppendLine($@"Unable to read instruction at Event {CurrentEventID} at index {CurrentInsIndex}.");
                     sb.AppendLine($@"Unknown instruction id: {InstructionDocs.InstrDebugString(ins)}");
                     throw new Exception(sb.ToString());
                 }
@@ -312,7 +358,7 @@ namespace DarkScript3
                 catch (Exception ex)
                 {
                     var sb = new StringBuilder();
-                    sb.AppendLine($@"Unable to unpack arguments for {funcName}({InstructionDocs.InstrDocDebugString(doc)}) at Event {CurrentEventID}, Index {CurrentInsIndex}.");
+                    sb.AppendLine($@"Unable to unpack arguments for {funcName}({InstructionDocs.InstrDocDebugString(doc)}) at Event {CurrentEventID} at index {CurrentInsIndex}.");
                     sb.AppendLine($@"Instruction arg data: {InstructionDocs.InstrDebugString(ins)}");
                     sb.AppendLine(ex.Message);
                     throw new Exception(sb.ToString());
@@ -324,7 +370,7 @@ namespace DarkScript3
                 }
 
                 string lineOfCode = $"{doc.DisplayName}({string.Join(", ", args)});";
-                code.AppendLine("\t" + lineOfCode);
+                code.AppendLine(ScriptAst.SingleIndent + lineOfCode);
             }
             code.AppendLine("});");
             code.AppendLine("");

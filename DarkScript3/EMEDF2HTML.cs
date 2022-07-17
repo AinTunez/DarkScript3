@@ -21,6 +21,7 @@ namespace DarkScript3
     {
         public static void Generate(string[] args)
         {
+            args = args.Except(new[] { "/cmd" }).ToArray();
             string game = args[1];
             string outDir = args[2];
             string emevdDir = args.Length > 3 ? string.Join(" ", args.Skip(3)) : null;
@@ -45,6 +46,7 @@ namespace DarkScript3
             ["ds2scholar"] = "Dark Souls II Scholar",
             ["ds3"] = "Dark Souls III",
             ["sekiro"] = "Sekiro",
+            ["er"] = "Elden Ring",
         };
         private readonly Dictionary<string, Regex> interestingEmevds = new Dictionary<string, Regex>()
         {
@@ -58,6 +60,10 @@ namespace DarkScript3
             ["bb"] = new Regex(@"^m21_01"),
             ["ds3"] = new Regex(@"^m4[67]"),
             ["sekiro"] = new Regex(@"^m.._.._[1-9]"),
+        };
+        private readonly Dictionary<string, Regex> elidedEmevd = new Dictionary<string, Regex>()
+        {
+            ["er"] = new Regex(@"^(m60|m3[0-2])"),
         };
         private readonly Dictionary<string, string> specialCommands = new Dictionary<string, string>
         {
@@ -75,7 +81,10 @@ namespace DarkScript3
         };
         private readonly HashSet<string> noDetailsEnums = new HashSet<string>
         {
-            "ConditionGroup", "Label", "ComparisonType"
+            "ConditionGroup", "Label", "ComparisonType",
+            // In Elden Ring
+            "ONOFF", "ONOFFCHANGE", "TargetEventFlagType", "InsideOutsideState", "ConditionState", "DeathState",
+            "OwnershipState", "EventEndType", "DisabledEnabled"
         };
 
         private readonly StringBuilder sb;
@@ -112,6 +121,13 @@ namespace DarkScript3
                     }
                 }
             }
+            Dictionary<string, string> extras = new Dictionary<string, string>();
+            if (game == null)
+            {
+                // Extra info for easily comparing with other games/versions/etc
+                AddExtraAnnotations(docs, extras, "ds3");
+                AddExtraAnnotations(docs, extras, "er");
+            }
 
             PageHeader(gameName + " EMEDF for DarkScript3", docs.Translator != null);
 
@@ -137,7 +153,7 @@ namespace DarkScript3
                 SubHeader(className, className);
                 foreach (EMEDF.InstrDoc instrDoc in classDoc.Instructions)
                 {
-                    string id = InstructionTranslator.InstructionID(classDoc.Index, instrDoc.Index);
+                    string id = InstructionDocs.FormatInstructionID(classDoc.Index, instrDoc.Index);
                     string name = instrDoc.DisplayName;
 
                     InstructionTranslator.ConditionSelector condSelect = null;
@@ -154,6 +170,10 @@ namespace DarkScript3
                         {
                             symbolUsages.TryGetValue(name, out Usages usages);
                             SectionUsageDetails(usages);
+                        }
+                        if (extras.TryGetValue(name, out string extra))
+                        {
+                            SectionExtra(extra);
                         }
                         FunctionSignature(name, instrDoc.Arguments.ToList(), 0);
                         if (condSelect != null)
@@ -281,15 +301,16 @@ namespace DarkScript3
         {
             Dictionary<string, HashSet<string>> symbolsByFile = new Dictionary<string, HashSet<string>>();
             HashSet<string> allSymbols = new HashSet<string>();
+            game = game ?? "";
 
             interestingEmevds.TryGetValue(game, out Regex mainRegex);
-            List<string> files = new List<string>();
+            List<string> allFiles = new List<string>();
             Console.WriteLine($"------ Usages from [{emevdDir}]");
             foreach (string emevdPath in Directory.GetFiles(emevdDir))
             {
                 if (mainRegex != null && !mainRegex.Match(Path.GetFileName(emevdPath)).Success) continue;
                 string name = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(emevdPath));
-                files.Add(name);
+                allFiles.Add(name);
                 Console.WriteLine($"--- {name}");
                 HashSet<string> symbols = symbolsByFile[name] = new HashSet<string>();
                 EMEVD emevd = EMEVD.Read(emevdPath);
@@ -333,33 +354,58 @@ namespace DarkScript3
 
             Dictionary<string, Usages> symbolUsages = new Dictionary<string, Usages>();
             List<string> primaryFiles = null;
+            List<string> elidedFiles = new List<string>();
             if (secondaryEmevd.TryGetValue(game, out Regex secondaryRegex))
             {
-                primaryFiles = files.Where(f => !secondaryRegex.Match(f).Success).ToList();
+                primaryFiles = allFiles.Where(f => !secondaryRegex.Match(f).Success).ToList();
+            }
+            if (elidedEmevd.TryGetValue(game, out Regex elidedRegex))
+            {
+                elidedFiles = allFiles.Where(f => elidedRegex.Match(f).Success).ToList();
             }
             foreach (string symbol in allSymbols)
             {
-                List<string> matchFiles = files.Where(f => symbolsByFile[f].Contains(symbol)).ToList();
-                List<string> target = files;
+                List<string> matchFiles = allFiles.Where(f => symbolsByFile[f].Contains(symbol)).ToList();
+                List<string> totalFiles = allFiles;
                 if (primaryFiles != null)
                 {
                     List<string> primaryMatchFiles = matchFiles.Intersect(primaryFiles).ToList();
                     if (primaryMatchFiles.Count > 0)
                     {
                         matchFiles = primaryMatchFiles;
-                        target = primaryFiles;
+                        totalFiles = primaryFiles;
                     }
                 }
                 // Combining PTDE and DS1R is done after.
-                symbolUsages[symbol] = new Usages { Files = matchFiles, AllFiles = target };
+                symbolUsages[symbol] = new Usages { Files = matchFiles, AllFiles = totalFiles, ElidedFiles = elidedFiles };
             }
             return symbolUsages;
+        }
+
+        public void AddExtraAnnotations(InstructionDocs newDocs, Dictionary<string, string> ret, string game)
+        {
+            // Cross-game comparisons for possible reversing purposes
+            InstructionDocs oldDocs = new InstructionDocs($"{game}-common.emedf.json");
+            foreach (EMEDF.ClassDoc classDoc in newDocs.DOC.Classes)
+            {
+                foreach (EMEDF.InstrDoc instrDoc in classDoc.Instructions)
+                {
+                    EMEDF.InstrDoc oldDoc = oldDocs.DOC[(int)classDoc.Index]?[(int)instrDoc.Index];
+                    if (oldDoc != null)
+                    {
+                        string content = $"{oldDoc.DisplayName} in {game.ToUpper()}";
+                        string prefix = ret.TryGetValue(instrDoc.DisplayName, out string s) ? $"{s}, " : "";
+                        ret[instrDoc.DisplayName] = prefix + content;
+                    }
+                }
+            }
         }
 
         private class Usages
         {
             public List<string> Files { get; set; }
             public List<string> AllFiles { get; set; }
+            public List<string> ElidedFiles { get; set; }
             public string Restriction { get; set; }
 
             public static Usages Reconcile(Usages a, string asuf, Usages b, string bsuf)
@@ -379,6 +425,7 @@ namespace DarkScript3
                     return a;
                 }
                 if (!a.AllFiles.SequenceEqual(b.AllFiles)) throw new Exception("Incompatible set of all files");
+                if (a.ElidedFiles.Count > 0) throw new Exception("No support for elided files and usage reconciliation");
                 SortedSet<string> files = new SortedSet<string>(a.Files.Intersect(b.Files));
                 foreach (string afile in a.Files.Except(b.Files))
                 {
@@ -401,6 +448,7 @@ namespace DarkScript3
                 {
                     Files = a.Files.Union(b.Files).OrderBy(f => f).ToList(),
                     AllFiles = a.AllFiles.Equals(b.AllFiles) || a.AllFiles.SequenceEqual(b.AllFiles) ? a.AllFiles : new List<string>(),
+                    ElidedFiles = a.ElidedFiles,
                 };
             }
 
@@ -430,7 +478,7 @@ namespace DarkScript3
             public override string ToString()
             {
                 string restr = Restriction == null ? "" : $" ({Restriction} only)";
-                if (AllFiles.Count > 0)
+                if (AllFiles != null && AllFiles.Count > 0)
                 {
                     if (AllFiles.Count == Files.Count)
                     {
@@ -439,6 +487,15 @@ namespace DarkScript3
                     if (AllFiles.Count - Files.Count <= 2)
                     {
                         return "all but " + string.Join(" and ", AllFiles.Except(Files)) + restr;
+                    }
+                }
+                if (ElidedFiles != null && ElidedFiles.Count > 0)
+                {
+                    List<string> alwaysReport = Files.Except(ElidedFiles).ToList();
+                    int elidedCount = Files.Count - alwaysReport.Count;
+                    if (elidedCount > 10)
+                    {
+                        return string.Join(", ", alwaysReport) + $", and {elidedCount} others" + restr;
                     }
                 }
                 return string.Join(", ", Files) + restr;
@@ -468,6 +525,11 @@ namespace DarkScript3
                 sb.Append($"</div>");
             }
             sb.AppendLine($"</section>");
+        }
+
+        private void SectionExtra(string extra)
+        {
+            sb.AppendLine($"<p class=\"sectionusage\">{Escape(extra)}</p>");
         }
 
         private void SectionUsageDetails(Usages usages)
@@ -526,7 +588,8 @@ namespace DarkScript3
                 }
                 else if (argDoc.EnumDoc != null)
                 {
-                    sb.Append($"enum{Escape("<")}");
+                    // sb.Append($"enum{Escape("<")}");
+                    sb.Append($"{Escape(InstructionDocs.TypeString(argDoc.Type))}{Escape("<")}");
                     Link(argDoc.EnumDoc.DisplayName, argDoc.EnumDoc.DisplayName);
                     sb.Append($"{Escape(">")}{typeMod} {Escape(argDoc.DisplayName)}");
                     if (optional && multiLine)

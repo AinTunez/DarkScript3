@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.props" Condition="Exists('..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.props')" />
   <Import Project="..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.props" Condition="Exists('..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.props')" />
@@ -270,6 +270,12 @@
     </Compile>
     <Compile Include="ConditionData.cs" />
     <Compile Include="CondTestingTool.cs" />
+    <Compile Include="ComplexFindForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComplexFindForm.Designer.cs">
+      <DependentUpon>ComplexFindForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DarkToolStripRenderer.cs" />
     <Compile Include="SharedControls.cs" />
     <Compile Include="EMEDF.cs" />
@@ -331,6 +337,12 @@
     <Compile Include="ScriptSettingsForm.Designer.cs">
       <DependentUpon>ScriptSettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ScrollDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScrollDialog.Designer.cs">
+      <DependentUpon>ScrollDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="StyleConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -352,6 +364,9 @@
     </Compile>
     <EmbeddedResource Include="BetterFindForm.resx">
       <DependentUpon>BetterFindForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComplexFindForm.resx">
+      <DependentUpon>ComplexFindForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ErrorMessageForm.resx">
       <DependentUpon>ErrorMessageForm.cs</DependentUpon>
@@ -384,6 +399,9 @@
     <EmbeddedResource Include="ScriptSettingsForm.resx">
       <DependentUpon>ScriptSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ScrollDialog.resx">
+      <DependentUpon>ScrollDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StyleConfig.resx">
       <DependentUpon>StyleConfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -403,13 +421,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Resources\sekiro-common.emedf.json">
+    <EmbeddedResource Include="Resources\*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ds2-common.emedf.json">
+    <EmbeddedResource Include="Resources\*.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ds2scholar-common.emedf.json">
+    <EmbeddedResource Include="Resources\*.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
@@ -417,20 +435,6 @@
     <None Include="App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bb-common.emedf.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ds1-common.emedf.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ds3-common.emedf.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\conditions.json" />
-    <EmbeddedResource Include="Resources\script.js" />
-    <EmbeddedResource Include="Resources\test.js" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
@@ -451,9 +455,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="darkscriptico1.ico" />
-    <AdditionalFiles Include="Resources\oo2core_6_win64.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </AdditionalFiles>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SoulsFormats\SoulsFormats\SoulsFormats.csproj">

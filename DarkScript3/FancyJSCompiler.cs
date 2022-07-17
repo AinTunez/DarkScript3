@@ -332,16 +332,21 @@ namespace DarkScript3
                     context.Error(call, "Expected a function call with a regular function name");
                     return null;
                 }
-                if (!docs.Translator.CondDocs.TryGetValue(id.Name, out FunctionDoc doc) || doc.ConditionDoc.Hidden)
+                string f = id.Name;
+                if (docs.Translator.DisplayAliases.TryGetValue(f, out string realName))
                 {
-                    context.Error(call, $"Unknown condition function {id.Name}");
+                    f = realName;
+                }
+                if (!docs.Translator.CondDocs.TryGetValue(f, out FunctionDoc doc) || doc.ConditionDoc.Hidden)
+                {
+                    context.Error(call, $"Unknown condition function {f}");
                     return null;
                 }
                 if (doc.OptionalArgs == 0)
                 {
                     if (call.Arguments.Count != doc.Args.Count)
                     {
-                        context.Error(call, $"Expected {Plural(doc.Args.Count)} for {id.Name} but {call.Arguments.Count} given");
+                        context.Error(call, $"Expected {Plural(doc.Args.Count)} for {f} but {call.Arguments.Count} given");
                         return null;
                     }
                 }
@@ -350,11 +355,11 @@ namespace DarkScript3
                     int min = doc.Args.Count - doc.OptionalArgs;
                     if (call.Arguments.Count < min || call.Arguments.Count > doc.Args.Count)
                     {
-                        context.Error(call, $"Expected {min} to {Plural(doc.Args.Count)} for {id.Name} but {call.Arguments.Count} given");
+                        context.Error(call, $"Expected {min} to {Plural(doc.Args.Count)} for {f} but {call.Arguments.Count} given");
                         return null;
                     }
                 }
-                return new CmdCond { Name = id.Name, Args = call.Arguments.Select(a => (object)source.GetSourceNode(a)).ToList() };
+                return new CmdCond { Name = f, Args = call.Arguments.Select(a => (object)source.GetSourceNode(a)).ToList() };
             }
 
             private static readonly Dictionary<BinaryOperator, ComparisonType> compares = new Dictionary<BinaryOperator, ComparisonType>
@@ -377,7 +382,7 @@ namespace DarkScript3
                 {
                     context.Error(id, $"Using enum name {id.Name} as a condition variable");
                 }
-                else if (docs.Functions.ContainsKey(id.Name))
+                else if (docs.Functions.ContainsKey(id.Name) || docs.DisplayAliases.ContainsKey(id.Name))
                 {
                     context.Error(id, $"Using function name {id.Name} as a condition variable");
                 }
@@ -555,6 +560,8 @@ namespace DarkScript3
                 while (statement is LabeledStatement labelStmt)
                 {
                     string label = labelStmt.Label.Name;
+                    // New addition for Elden Ring because of V8 error with label redeclaration
+                    label = label.TrimEnd('_');
                     if (LabelIds.TryGetValue(label, out int labelNum))
                     {
                         Intermediate toAdd = new Label { Num = labelNum };
@@ -590,10 +597,9 @@ namespace DarkScript3
                         if (call.Callee is Identifier id)
                         {
                             f = id.Name;
-                            // Ugh
-                            if (f.Contains("Speffect"))
+                            if (docs.DisplayAliases.TryGetValue(f, out string realName))
                             {
-                                f = f.Replace("Speffect", "SpEffect");
+                                f = realName;
                             }
                         }
                         else
@@ -695,7 +701,7 @@ namespace DarkScript3
                                 // We do pretty minimal checking of arguments; further validation is saved for JS execution time.
                                 im = new Instr
                                 {
-                                    Cmd = InstructionID(pos.Item1, pos.Item2),
+                                    Cmd = InstructionDocs.FormatInstructionID(pos.Item1, pos.Item2),
                                     Name = f,
                                     Args = args.Select(getSourceArg).ToList(),
                                     Layers = layers

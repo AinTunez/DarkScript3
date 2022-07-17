@@ -11,6 +11,9 @@
     },
     {
       "name": "sekiro"
+    },
+    {
+      "name":  "er"
     }
   ],
   "no_control_flow": [
@@ -22,6 +25,8 @@
     "1001[02]",
     "1001[03]",
     "1001[04]",
+    "1001[05]",
+    "1001[06]",
     "1003[00]",
     "1005[00]"
   ],
@@ -65,6 +70,7 @@
     {
       "name": "Compare",
       "category": "cmp",
+      "games": ["ds1", "bb", "ds3", "sekiro"],
       "cond": "0[01]",
       "skip": "1000[05]",
       "end": "1000[06]",
@@ -75,23 +81,66 @@
         "rhs": "Right-hand Side"
       }
     },
+    {
+      "name": "Compare",
+      "category": "cmp",
+      "games": ["er"],
+      "cond": "0[02]",
+      "skip": "1000[10]",
+      "end": "1000[11]",
+      "goto": "1000[108]",
+      "as_compare": {
+        "shortname": "Op",
+        "lhs": "Left-hand Side",
+        "rhs": "Right-hand Side"
+      }
+    },
+    {
+      "name": "CompareSigned",
+      "category": "cmp",
+      "games": ["er"],
+      "cond": "0[01]",
+      "skip": "1000[05]",
+      "end": "1000[06]",
+      "goto": "1000[105]",
+      "as_compare": {
+        "shortname": "Signed",
+        // "lhs": "Left-hand Side",
+        "rhs": "Right-hand Side"
+      }
+    },
     // Timer
     {
       "name": "ElapsedSeconds",
-      // No categories for these as they're usually not part of the logic, more just timeouts.
+      "category": "time",
       "cond": "1[00]"
     },
     {
       "name": "ElapsedFrames",
+      "category": "time",
       "cond": "1[01]"
     },
     {
       "name": "RandomElapsedSeconds",
+      "category": "time",
       "cond": "1[02]"
     },
     {
       "name": "RandomElapsedFrames",
+      "category": "time",
       "cond": "1[03]"
+    },
+    {
+      "name": "TimeOfDay",
+      "games": ["er"],
+      "category": "time",
+      "cond": "1[04]"
+    },
+    {
+      "name": "TimeOfDayInRange",
+      "games": ["er"],
+      "category": "time",
+      "cond": "1[05]"
     },
     // Event
     {
@@ -201,6 +250,7 @@
     },
     {
       "name": "ActionButton",
+      "games": ["ds1", "bb", "ds3", "sekiro"],
       "category": "act",
       "cond": "3[05]"
     },
@@ -225,6 +275,7 @@
     {
       "name": "PlayerInOutMap",
       "category": "map",
+      "games": ["ds1", "bb", "ds3", "sekiro", "er"],
       "cond": "3[08]",
       "skip": "1003[07]",
       "end": "1003[08]",
@@ -376,13 +427,13 @@
     {
       "name": "HasDamageType",
       "category": "dmg",
-      "games": ["bb", "ds3", "sekiro"],
+      "games": ["bb", "ds3", "sekiro", "er"],
       "cond": "3[23]"
     },
     {
       "name": "ActionButtonInArea",
       "category": "act",
-      "games": ["bb", "ds3", "sekiro"],
+      "games": ["bb", "ds3", "sekiro", "er"],
       "cond": "3[24]"
     },
     {
@@ -406,6 +457,20 @@
       "negate_field": "Is Not In",
       "as_bool": {
         "shortname": "PlayerIsNotInOwnWorld"
+      }
+    },
+    {
+      "name": "PlayerIsInWorldType",
+      "category": "online",
+      "games": ["er"],
+      "cond": "3[26]",
+      "skip": "1003[12]",
+      "goto": "1003[13]",
+      "end": "1003[14]",
+      "negate_field": "World Type",
+      "as_bool": {
+        "shortname": "PlayerIsInOwnWorld",
+        "true": "Own World"
       }
     },
     {
@@ -471,9 +536,33 @@
       "negate_field": "Gender"
     },
     {
+      "name": "MapLoaded",
+      "games": ["er"],
+      "cond": "3[30]"
+    },
+    {
       "name": "OngoingCutsceneFinished",
+      "games": ["ds3", "sekiro"],
       "category": "act",
       "cond": "3[31]"
+    },
+    {
+      "name": "WeatherActive",
+      "games": ["er"],
+      "cond": "3[31]"
+    },
+    {
+      "name": "MapHasPermissionToUpdateState",
+      "games": ["er"],
+      "category": "map",
+      "cond": "3[32]",
+      "skip": "1003[203]",
+      "goto": "1003[204]",
+      "end": "1003[205]",
+      "negate_field": "Has Permission",
+      "as_bool": {
+        "shortname": "MapHasPermissionToUpdate"
+      }
     },
     {
       "name": "HollowArenaMatchReadyState",
@@ -492,6 +581,15 @@
       "cond": "3[33]"
     },
     {
+      "name": "FieldBattleBGMActiveState",
+      "games": ["er"],
+      "cond": "3[33]",
+      "negate_field": "Is Active",
+      "as_bool": {
+        "shortname": "FieldBattleBGMActive"
+      }
+    },
+    {
       "name": "CompareHollowArenaSoloScore",
       "category": "online",
       "games": ["ds3"],
@@ -502,10 +600,27 @@
       }
     },
     {
+      "name": "PlayerHasArmorEquipped",
+      "games": ["er"],
+      "cond": "3[34]"
+    },
+    {
       "name": "HollowArenaTeamResults",
       "category": "online",
       "games": ["ds3"],
       "cond": "3[35]"
+    },
+    {
+      "name": "CeremonyActiveState",
+      "games": ["er"],
+      "cond": "3[35]",
+      "skip": "1003[206]",
+      "goto": "1003[207]",
+      "end": "1003[208]",
+      "negate_field": "Is Active",
+      "as_bool": {
+        "shortname": "CeremonyActive"
+      }
     },
     {
       "name": "HasHollowArenaMatchType",
@@ -523,13 +638,30 @@
       }
     },
     {
+      "name": "WeatherLotActiveState",
+      "games": ["er"],
+      "cond": "3[37]",
+      "negate_field": "Is Active",
+      "as_bool": {
+        "shortname": "WeatherLotActive"
+      }
+    },
+    {
       "name": "SteamDisconnectedState",
+      "games": ["ds3", "sekiro"],
       "category": "online",
       "cond": "3[38]",
       "negate_field": "Disconnected",
       "as_bool": {
         "shortname": "SteamDisconnected"
       }
+    },
+    {
+      "name": "PlayerGender",
+      "category": "chr",
+      "games": ["er"],
+      "cond": "3[38]",
+      "negate_field": "Gender"
     },
     {
       "name": "CompareFriendlyPhantomCount",
@@ -591,6 +723,20 @@
       "goto": "1003[11]",
       "end": "1003[111]",
       "skip": "1003[112]",
+      "negate_field": "Should Have",
+      "opt_fields": ["Comparison Type", "Number of Target Characters"],
+      "as_bool": {
+        "shortname": "CharacterHasSpEffect"
+      }
+    },
+    {
+      "name": "CharacterHasSpEffectState",
+      "category": "sp",
+      "games": ["er"],
+      "cond": "4[05]",
+      "skip": "1004[00]",
+      "goto": "1004[01]",
+      "end": "1004[02]",
       "negate_field": "Should Have",
       "opt_fields": ["Comparison Type", "Number of Target Characters"],
       "as_bool": {
@@ -695,6 +841,18 @@
       }
     },
     {
+      "name": "CharacterRatioDeadAlive",
+      "category": "chr",
+      "games": ["er"],
+      "cond": "4[15]",
+      "negate_field": "Desired Life State",
+      "opt_fields": ["Comparison Type", "Target Ratio"],
+      "as_bool": {
+        "shortname": "CharacterRatioDead",
+        "true": "Dead"
+      }
+    },
+    {
       "name": "CompareHPRatioNew",
       "category": "hp",
       "games": ["sekiro"],
@@ -722,7 +880,19 @@
       "cond": "4[17]"
     },
     {
+      "name": "CharacterRatioHasSpEffectState",
+      "games": ["er"],
+      "category": "sp",
+      "cond": "4[19]",
+      "negate_field": "Should Have",
+      "opt_fields": ["Comparison Type", "Target Ratio"],
+      "as_bool": {
+        "shortname": "CharacterRatioHasSpEffect"
+      }
+    },
+    {
       "name": "CharacterHasEventMessageStateNew",
+      "games": ["sekiro"],
       "category": "chr",
       "cond": "4[21]",
       "negate_field": "Should Have",
@@ -733,6 +903,7 @@
     },
     {
       "name": "CharacterAIStateNew",
+      "games": ["sekiro"],
       "category": "chr",
       "cond": "4[22]",
       "opt_fields": ["Comparison Type", "Number of Target Characters"]
@@ -749,7 +920,21 @@
     {
       "name": "CharacterInvadeType",
       "category": "online",
+      "games": ["ds1", "bb", "ds3", "sekiro"],  // Narrow this down
       "cond": "4[27]",
+      "opt_fields": ["Comparison Type", "Number of Target Characters"]
+    },
+    {
+      "name": "PlayerTargeted",
+      "category": "chr",
+      "games": ["er"],
+      "cond": "4[28]"
+    },
+    {
+      "name": "CharacterInvadeType",
+      "category": "online",
+      "games": ["er"],
+      "cond": "4[31]",
       "opt_fields": ["Comparison Type", "Number of Target Characters"]
     },
     {
@@ -773,17 +958,60 @@
       }
     },
     {
+      "name": "NPCPartAttributeDamage",
+      "games": ["er"],
+      "category": "chr",
+      "cond": "4[30]"
+    },
+    {
+      "name": "CharacterRidingMountState",
+      "games": ["er"],
+      "category": "chr",
+      "cond": "4[32]",
+      "negate_field": "Is Mounted",
+      "as_bool": {
+        "shortname": "CharacterRidingMount"
+      }
+    },
+    {
       "name": "PlayerSwimState",
       "category": "chr",
+      "games": ["sekiro"],
       "cond": "4[34]"
+    },
+    {
+      "name": "CharacterHasStateInfoState",
+      "category": "chr",
+      "games": ["er"],
+      "cond": "4[34]",
+      "opt_fields": ["Comparison Type", "Number of Target Characters"],
+      "negate_field": "Should Have",
+      "as_bool": {
+        "shortname": "CharacterHasStateInfo"
+      }
     },
     {
       "name": "ActionBitState",
       "category": "chr",
+      "games": ["sekiro"],
       "cond": "4[35]",
       "negate_field": "Bit Set",
       "as_bool": {
         "shortname": "ActionBit"
+      }
+    },
+    {
+      "name": "SpecialStandbyEndedFlagState",
+      "games": ["er"],
+      "cond": "4[35]",
+      "skip": "1004[03]",
+      "goto": "1004[04]",
+      "end": "1004[05]",
+      "negate_field": "Desired Flag State",
+      "as_bool": {
+        "shortname": "SpecialStandbyEndedFlag",
+        "true": "ON",
+        "false": "OFF"
       }
     },
     {
@@ -858,6 +1086,7 @@
     // Object
     {
       "name": "ObjectDestroyedState",
+      "games": ["ds1", "bb", "ds3", "sekiro"],
       "category": "obj",
       "cond": "5[00]",
       "skip": "1005[01]",
@@ -871,8 +1100,30 @@
       }
     },
     {
+      "name": "AssetDestroyedState",
+      "games": ["er"],
+      "category": "asset",
+      "cond": "5[00]",
+      "skip": "1005[01]",
+      "end": "1005[02]",
+      "goto": "1005[101]",
+      "negate_field": "Damage State",
+      "opt_fields": ["Comparison Type", "Number of Target Objects"],
+      "as_bool": {
+        "shortname": "AssetDestroyed",
+        "true": "Destroyed"
+      }
+    },
+    {
       "name": "ObjectHitBy",
+      "games": ["ds1", "bb", "ds3", "sekiro"],
       "category": "obj",
+      "cond": "5[01]"
+    },
+    {
+      "name": "AssetHitBy",
+      "games": ["er"],
+      "category": "asset",
       "cond": "5[01]"
     },
     {
@@ -882,6 +1133,7 @@
     },
     {
       "name": "CompareObjectHP",
+      "games": ["ds1", "bb", "ds3", "sekiro"],
       "category": "obj",
       "cond": "5[03]",
       "opt_fields": ["Comparison Type", "Number of Target Objects"],
@@ -891,7 +1143,29 @@
       }
     },
     {
+      "name": "CompareAssetHP",
+      "games": ["er"],
+      "category": "asset",
+      "cond": "5[03]",
+      "opt_fields": ["Comparison Type", "Number of Target Objects"],
+      "as_compare": {
+        "shortname": "AssetHP",
+        "rhs": "HP Threshold"
+      }
+    },
+    {
+      "name": "AssetRatioDestroyedState",
+      "games": ["er"],
+      "category": "obj",
+      "cond": "5[06]",
+      "as_compare": {
+        "shortname": "AssetRatioDestroyed",
+        "rhs": "Target Ratio"
+      }
+    },
+    {
       "name": "CompareObjectBurnState",
+      "games": ["ds1", "bb", "ds3", "sekiro"],
       "category": "obj",
       "cond": "5[09]",
       "opt_fields": ["Comparison Type", "Number of Target Objects"],
@@ -901,7 +1175,19 @@
       }
     },
     {
+      "name": "CompareAssetBurnState",
+      "games": ["er"],
+      "category": "asset",
+      "cond": "5[09]",
+      "opt_fields": ["Comparison Type", "Number of Target Objects"],
+      "as_compare": {
+        "shortname": "AssetBurnState",
+        "rhs": "Burn State (Unknown)"
+      }
+    },
+    {
       "name": "ObjectBackreadState",
+      "games": ["ds1", "bb", "ds3", "sekiro"],
       "category": "obj",
       "cond": "5[10]",
       "negate_field": "Is Backread",
@@ -911,7 +1197,19 @@
       }
     },
     {
+      "name": "AssetBackreadState",
+      "games": ["er"],
+      "category": "asset",
+      "cond": "5[10]",
+      "negate_field": "Is Backread",
+      "opt_fields": ["Comparison Type", "Number of Target Objects"],
+      "as_bool": {
+        "shortname": "AssetBackread"
+      }
+    },
+    {
       "name": "ObjectBackreadStateOther",
+      "games": ["ds3", "sekiro"],
       "category": "obj",
       "cond": "5[11]",
       "negate_field": "Is Backread",
@@ -921,7 +1219,19 @@
       }
     },
     {
+      "name": "AssetRatioBackreadState",
+      "games": ["er"],
+      "category": "obj",
+      "cond": "5[11]",
+      "negate_field": "Is Backread",
+      "opt_fields": ["Comparison Type", "Target Ratio"],
+      "as_bool": {
+        "shortname": "AssetRatioBackread"
+      }
+    },
+    {
       "name": "ObjectAnimationEnded",
+      "games": ["sekiro"],
       "category": "obj",
       "cond": "5[12]",
       "opt_fields": ["Comparison Type", "Number of Target Objects"]

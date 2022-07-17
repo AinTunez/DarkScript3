@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using SoulsFormats;
 using static SoulsFormats.EMEVD.Instruction;
 
@@ -16,7 +18,7 @@ namespace DarkScript3
         // Static data
         private EMEDF doc;
         private Dictionary<string, (int, int)> docByName;
-        private SortedDictionary<int, string> testItemLots;
+        private IDictionary<int, string> testItemLots;
         private List<int> testItemLotOrder;
 
         // Added in tests
@@ -27,6 +29,637 @@ namespace DarkScript3
         private int trueFlag = 11305406;
         private int flagBase = 11305410;
         private List<int> addEvents = new List<int>();
+
+        public void Run(string[] args)
+        {
+            // This file ended up being more than just cond testing, but hack pile of one-time
+            // scripts still basically applies to these as well.
+            if (args.Contains("gen"))
+            {
+                DumpEldenNew(args);
+            }
+            else if (args.Contains("validate"))
+            {
+                ValidateEmedf(args);
+            }
+            else
+            {
+                RunEldenTests(args);
+            }
+        }
+
+        public void DumpEldenUnknown()
+        {
+            InstructionDocs docs = new InstructionDocs("er-common.emedf.json");
+            foreach (EMEDF.ClassDoc bank in docs.DOC.Classes.OrderBy(i => i.Index))
+            {
+                foreach (EMEDF.InstrDoc instr in bank.Instructions.OrderBy(i => i.Index))
+                {
+                    string id = InstructionDocs.FormatInstructionID(bank.Index, instr.Index);
+                    string name = instr.Name;
+                    if (name.ToLowerInvariant().Contains("unknown") || id == "4[15]")
+                    {
+                        // ID, Name, Notes, Removal, Args
+                        if (name.Contains('"')) throw new Exception(name);
+                        List<string> cells = new List<string> { id, name };
+                        cells.AddRange(instr.Arguments.Select(a =>
+                            (a.EnumName != null ? $"{a.EnumName} " : "") + $"{InstructionDocs.TypeString(a.Type)} {a.Name}"));
+                        Console.WriteLine(string.Join(",", cells.Select(c => $"\"{c}\"")));
+                        Console.WriteLine();
+                        Console.WriteLine();
+                    }
+                }
+            }
+        }
+
+        public void DumpEldenNew(ICollection<string> opt)
+        {
+            doc = EMEDF.ReadFile($"DarkScript3/Resources/er-common.emedf.json");
+            Dictionary<string, int> types = new Dictionary<string, int>()
+            {
+                ["byte"] = 0,
+                ["ushort"] = 1,
+                ["uint"] = 2,
+                ["sbyte"] = 3,
+                ["short"] = 4,
+                ["int"] = 5,
+                ["float"] = 6,
+                // ["uint"] = 8,
+            };
+            Dictionary<int, string> revTypes = types.ToDictionary(e => e.Value, e => e.Key);
+            string getType(string prefix)
+            {
+                foreach (KeyValuePair<string, int> type in types)
+                {
+                    if (prefix.StartsWith(type.Key + " ")) return type.Key;
+                }
+                return null;
+            }
+            EMEDF.EnumDoc getEnum(string prefix)
+            {
+                foreach (EMEDF.EnumDoc enumDoc in doc.Enums)
+                {
+                    if (prefix.StartsWith(enumDoc.Name + " ")) return enumDoc;
+                }
+                return null;
+            }
+            string getArgKey(EMEDF.ArgDoc argDoc)
+            {
+                List<string> parts = new List<string>();
+                if (argDoc.EnumName != null) parts.Add(argDoc.EnumName);
+                if (!revTypes.TryGetValue((int)argDoc.Type, out string typeName)) throw new Exception($"Unknown type in {argDoc.Name}: {argDoc.Type}");
+                parts.Add(typeName);
+                parts.Add(argDoc.Name);
+                return string.Join(" ", parts);
+            }
+            EMEDF.ArgDoc makeDefaults(int min, int max, int inc, int def)
+            {
+                return new EMEDF.ArgDoc
+                {
+                    Min = min,
+                    Max = max,
+                    Increment = inc,
+                    Default = def,
+                };
+            }
+            string getMinorDetailDesc(EMEDF.ArgDoc argDoc)
+            {
+                return $"min {argDoc.Min} max {argDoc.Max} inc {argDoc.Increment} default {argDoc.Default}";
+            }
+            Dictionary<string, EMEDF.ArgDoc> exampleDocs = new Dictionary<string, EMEDF.ArgDoc>
+            {
+                ["int Ceremony ID"] = makeDefaults(0, 99, 1, 0),
+                ["byte Region ID"] = makeDefaults(0, 99, 1, 0),
+                ["byte Index ID"] = makeDefaults(0, 99, 1, 0),
+                ["uint NPC Threat Level"] = makeDefaults(0, 99, 1, 0),
+                ["uint Min NPC Threat Level"] = makeDefaults(0, 99, 1, 0),
+                ["uint Max NPC Threat Level"] = makeDefaults(0, 99, 1, 0),
+                ["sbyte Pool Type"] = makeDefaults(0, 1, 1, 0),
+                ["int Activity ID"] = makeDefaults(0, 99, 1, 0),
+                ["byte Hour"] = makeDefaults(0, 1, 23, 0),
+                ["byte Minute"] = makeDefaults(0, 1, 59, 0),
+                ["byte Second"] = makeDefaults(0, 1, 59, 0),
+            };
+            foreach (EMEDF.ClassDoc classDoc in doc.Classes)
+            {
+                foreach (EMEDF.InstrDoc instrDoc in classDoc.Instructions)
+                {
+                    foreach (EMEDF.ArgDoc argDoc in instrDoc.Arguments)
+                    {
+                        string key = getArgKey(argDoc);
+                        if (exampleDocs.TryGetValue(key, out EMEDF.ArgDoc old))
+                        {
+                            string oldDesc = getMinorDetailDesc(old);
+                            string newDesc = getMinorDetailDesc(argDoc);
+                            if (oldDesc != newDesc)
+                            {
+                                if (opt.Contains("defaults")) Console.WriteLine($"Different values for {key}: [{oldDesc}] old vs [{newDesc}] new");
+                            }
+                        }
+                        else
+                        {
+                            exampleDocs[key] = argDoc;
+                        }
+                    }
+                }
+            }
+            EMEDF.ArgDoc getArg(string text, string debugInfo = "")
+            {
+                string desc = text.Split('=')[0].Trim();
+                EMEDF.EnumDoc enumDoc = null;
+                string type = getType(desc);
+                if (type == null)
+                {
+                    enumDoc = getEnum(desc);
+                    if (enumDoc == null) throw new Exception($"Can't parse {text}");
+                    desc = desc.Substring(enumDoc.Name.Length).Trim();
+                    type = getType(desc);
+                    if (type == null) throw new Exception($"Can't parse type in {text}");
+                }
+                desc = desc.Substring(type.Length).Trim();
+                EMEDF.ArgDoc argDoc = new EMEDF.ArgDoc
+                {
+                    Name = desc,
+                    Type = types[type],
+                    EnumName = enumDoc?.Name,
+                    // TODO: Definitely make this non-zero when required
+                    Default = desc == "Number of Target Characters" ? 1 : 0,
+                    // TODO: Fill these in
+                    Min = 0,
+                    Max = 0,
+                    Increment = 0,
+                    FormatString = type == "float" ? "%0.3f" : "%d",
+                };
+                // It seems enums don't get default values etc.
+                if (argDoc.EnumName == null)
+                {
+                    string argKey = getArgKey(argDoc);
+                    EMEDF.ArgDoc old = null;
+                    if (!desc.StartsWith("Unknown"))
+                    {
+                        exampleDocs.TryGetValue(argKey, out old);
+                        if (old == null && type == "uint" && desc.EndsWith("Entity ID"))
+                        {
+                            exampleDocs.TryGetValue("uint Target Entity ID", out old);
+                        }
+                    }
+                    if (old == null)
+                    {
+                        if (opt.Contains("defaults")) Console.WriteLine($"Unknown arg {argKey}{debugInfo}");
+                        argDoc.Max = 10000000007;
+                    }
+                    else
+                    {
+                        if (opt.Contains("known")) Console.WriteLine($"Known arg {argKey}: {getMinorDetailDesc(old)}");
+                        argDoc.Min = old.Min;
+                        argDoc.Max = old.Max;
+                        argDoc.Increment = old.Increment;
+                        argDoc.Default = old.Default;
+                    }
+                }
+                return argDoc;
+            }
+            foreach (string line in File.ReadAllLines("unknown.tsv"))
+            {
+                string[] cells = line.Split('\t');
+                string cmd = cells[0];
+                int bank, id;
+                try
+                {
+                    (bank, id) = InstructionDocs.ParseInstructionID(cmd);
+                }
+                catch (FormatException)
+                {
+                    continue;
+                }
+                string name = cells[1].Trim(new[] { '?', ' ' });
+                List<EMEDF.ArgDoc> args = cells.Skip(2)
+                    .Where(c => !string.IsNullOrWhiteSpace(c))
+                    .Select(c => getArg(c, $" in {name}"))
+                    .ToList();
+                EMEDF.InstrDoc instrDoc = doc[bank][id];
+                if (instrDoc == null)
+                {
+                    instrDoc = new EMEDF.InstrDoc
+                    {
+                        Name = name,
+                        Index = id,
+                        Arguments = args.ToArray(),
+                    };
+                    doc[bank].Instructions.Add(instrDoc);
+                }
+                else
+                {
+                    if (opt.Contains("changes") && instrDoc.Name != name) Console.WriteLine($"{instrDoc.Name} -> {name}");
+                    instrDoc.Name = name;
+                    if (instrDoc.Arguments.Length != args.Count)
+                    {
+                        string err = $"Mismatched arg count for {cmd}: {instrDoc.Arguments.Length} -> {args.Count}";
+                        if (opt.Contains("changes"))
+                        {
+                            Console.WriteLine(err);
+                        }
+                        if (instrDoc.Arguments.Length < args.Count)
+                        {
+                            instrDoc.Arguments = instrDoc.Arguments.Concat(args.Skip(instrDoc.Arguments.Length)).ToArray();
+                        }
+                        else throw new Exception(err);
+                    }
+                    for (int i = 0; i < args.Count; i++)
+                    {
+                        EMEDF.ArgDoc from = args[i];
+                        EMEDF.ArgDoc to = instrDoc.Arguments[i];
+                        to.Name = from.Name;
+                        to.Type = from.Type;
+                        to.EnumName = from.EnumName;
+                    }
+                }
+            }
+            foreach (EMEDF.ClassDoc classDoc in doc.Classes)
+            {
+                classDoc.Instructions = classDoc.Instructions.OrderBy(x => x.Index).ToList();
+            }
+            if (opt.Contains("dryrun")) return;
+            string output = JsonConvert.SerializeObject(doc, Formatting.Indented).Replace("\r\n", "\n");
+            File.WriteAllText("new-er-common.emedf.json", output);
+        }
+
+        private static readonly DCX.Type quickDcx = DCX.Type.DCX_DFLT_11000_44_9;
+        public void RunEldenTests(IList<string> args)
+        {
+            evBase = 3777000;
+            trueFlag = 19002900;
+            falseFlag = 19002901;
+            flagBase = 19002905;
+            InstructionDocs docs = new InstructionDocs("er-common.emedf.json");
+            doc = docs.DOC;
+            docByName = doc.Classes.SelectMany(c => c.Instructions.Select(i => (i, (int)c.Index))).ToDictionary(i => i.Item1.Name, i => (i.Item2, (int)i.Item1.Index));
+            if (args.Contains("remove"))
+            {
+                RunEldenRemoveTest(args);
+            }
+            else
+            {
+                RunEldenCommonTests(args);
+            }
+        }
+
+        public void ValidateEmedf(ICollection<string> opt)
+        {
+            InstructionDocs docs = new InstructionDocs("er-common.emedf.json");
+            doc = docs.DOC;
+            Dictionary<string, List<List<object>>> allArgs = new Dictionary<string, List<List<object>>>();
+            string dir = @"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING\Game\event";
+            foreach (string path in Directory.GetFiles(dir, "*.emevd.dcx"))
+            {
+                string fileName = Path.GetFileName(path);
+                emevd = EMEVD.Read(path);
+                foreach (EMEVD.Event e in emevd.Events)
+                {
+                    Dictionary<EMEVD.Parameter, string> pn = e.Parameters.ToDictionary(p => p, p => $"X{p.SourceStartByte}_{p.ByteCount}");
+                    for (int i = 0; i < e.Instructions.Count; i++)
+                    {
+                        EMEVD.Instruction ins = e.Instructions[i];
+                        EMEDF.InstrDoc instrDoc = doc[ins.Bank][ins.ID];
+                        List<object> args = docs.UnpackArgsWithParams(
+                            ins, i, instrDoc, pn, (argDoc, val) => argDoc.GetDisplayValue(val));
+                        string name = instrDoc.DisplayName;
+                        if (!allArgs.ContainsKey(name)) allArgs[name] = new List<List<object>>();
+                        allArgs[name].Add(args);
+                    }
+                }
+            }
+            foreach (KeyValuePair<string, List<List<object>>> entry in allArgs)
+            {
+                string name = entry.Key;
+                int maxArg = entry.Value.Select(x => x.Count).Min();
+                (int bank, int id) = docs.Functions[name];
+                EMEDF.InstrDoc instrDoc = doc[bank][id];
+                List<int> positions = docs.FuncBytePositions[instrDoc];
+                for (int i = 0; i < maxArg; i++)
+                {
+                    EMEDF.ArgDoc argDoc = instrDoc.Arguments[i];
+                    string argDesc = $"{name}[{argDoc.DisplayName}]";
+                    HashSet<object> vals = new HashSet<object>();
+                    foreach (List<object> args in entry.Value)
+                    {
+                        object val = args[i];
+                        if (!(val is string)) vals.Add(val);
+                    }
+                    if (vals.Count == 1 && positions[i] % 4 != 0)
+                    {
+                        // Try to detect spare byte arguments
+                        Console.WriteLine($"{argDesc} = {vals.First()}");
+                    }
+                    // EMEDF arg checking
+                    // Check all defaults fit int types
+                    List<object> checks = new List<object> { argDoc.Default, argDoc.Min, argDoc.Max, argDoc.Increment };
+                    foreach (object checkVal in checks)
+                    {
+                        string check = checkVal.ToString();
+                        try
+                        {
+                            if (argDoc.Type == 0) Convert.ToByte(check); //u8
+                            else if (argDoc.Type == 1) Convert.ToUInt16(check); //u16
+                            else if (argDoc.Type == 2) Convert.ToUInt32(check); //u32
+                            else if (argDoc.Type == 3) Convert.ToSByte(check); //s8
+                            else if (argDoc.Type == 4) Convert.ToInt16(check); //s16
+                            else if (argDoc.Type == 5) Convert.ToInt32(check); //s32
+                            else if (argDoc.Type == 6) Convert.ToSingle(check); //f32
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine($"! Bad meta value {argDesc} = {check}");
+                        }
+                    }
+                }
+            }
+        }
+
+        public void RunEldenCommonTests(ICollection<string> args)
+        {
+            string dir = @"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING\Game\event";
+            // Specific installation location
+            string outDir = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                @"Downloads\Mods\ModEngine-2.0.0-preview3-win64\condtest\event");
+            testItemLots = new Dictionary<int, string>
+            {
+                [997200] = "Rowa",
+                [996500] = "Poisonbloom",
+                [996540] = "Grave Violet",
+                [996800] = "Erdleaf Flower",
+                [996830] = "Golden Sunflower",
+                [997220] = "Rimed Rowa",
+                [997230] = "Bloodrose",
+                [998400] = "Cave Moss",
+                [997600] = "Mushroom",
+                [997950] = "Sanctuary Stone",
+                // [997210] = "Golden Rowa",
+                // [998410] = "Budding Cave Moss",
+                // [998420] = "Crystal Cave Moss",
+            };
+            testItemLotOrder = testItemLots.Keys.ToList();
+
+            // Just delete previous tests
+            foreach (string path in Directory.GetFiles(dir, "*.emevd.dcx"))
+            {
+                string fileName = Path.GetFileName(path);
+                string outFile = Path.Combine(outDir, fileName);
+                if (File.Exists(outFile)) File.Delete(outFile);
+            }
+            string name = "common";
+            // name = "m11_00_00_00";
+            // name = "common_func";
+            emevd = EMEVD.Read($@"{dir}\{name}.emevd.dcx");
+            string otherName = null;
+            // otherName = "m11_00_00_00";
+            EMEVD other = otherName == null ? null : EMEVD.Read($@"{dir}\{otherName}.emevd.dcx");
+            EMEVD.Event createEvent(EMEVD initPlace = null)
+            {
+                EMEVD.Event ev = new EMEVD.Event(evBase++);
+                emevd.Events.Add(ev);
+                initPlace = initPlace ?? emevd;
+                initPlace.Events[0].Instructions.Add(new EMEVD.Instruction(
+                    2000, name == "common_func" ? 6 : 0, new List<object> { 0, (uint)ev.ID, 0 }));
+                return ev;
+            }
+            EMEVD.Event runner = createEvent();
+            if (args.Contains("onoff"))
+            {
+                // Use register 5. Just detect when condition on/off, with a delay just in case
+                // 1[04] - ? 1[04] (5,1)
+                // 3[30] IfMapLoaded - 3[30] (5,11,5,0,0)
+                // 3[37] WeatherLot - 3[37] (5,2000,0)
+                // 3[38] Gender? - 3[38] (5,1)
+                // 4[28] LocalPcTargetState - 4[28] (5,2,31,3)
+                // 3[31] IfWeatherActive - 3[31] (5,3,0,0)
+                // 3[32] IfPlayerInOwnerMap - 3[32] (5,0,0)
+                // 4[15] DeadAliveAlt
+                // 5[06] IfObjectDestroyed - 10001600 first bird barrel
+                EMEVD.Event ev = createEvent(other);
+                EMEVD.Instruction test = ParseAdd("3[32] (5,1,1)");
+                ev.Instructions.Add(test);
+                ev.Instructions.Add(ParseAdd("IF Condition Group (0,1,5)"));
+                ev.Instructions.Add(ParseAdd($"Award Item Lot ({testItemLotOrder[0]})"));
+                ev.Instructions.Add(ParseAdd($"WAIT Fixed Time (Frames) (15)"));
+                ev.Instructions.Add(test);
+                ev.Instructions.Add(ParseAdd("IF Condition Group (0,0,5)"));
+                ev.Instructions.Add(ParseAdd($"Award Item Lot ({testItemLotOrder[1]})"));
+                ev.Instructions.Add(ParseAdd($"WAIT Fixed Time (Frames) (15)"));
+                ev.Instructions.Add(ParseAdd("END Unconditionally (1)"));
+            }
+            if (args.Contains("sip"))
+            {
+                runner.Instructions.Add(ParseAdd($"Set Event Flag (0,{falseFlag},0)"));
+                runner.Instructions.Add(ParseAdd($"Set Event Flag (0,{trueFlag},1)"));
+                // runner.Instructions.Add(ParseAdd($"IF Character Has SpEffect (0,10000,501000,1,0,1)"));
+                runner.Instructions.Add(ParseAdd($"IF Character Has State Info (0,10000,275,1,0,1)"));
+                if (args.Contains("clear")) TestClearGroupsElden();
+                if (args.Contains("uncompiledmain")) TestUncompiledMain();
+                if (args.Contains("stop"))
+                {
+                    runner.Instructions.Add(ParseAdd("2001[05] (1)"));
+                }
+                foreach (int id in addEvents)
+                {
+                    runner.Instructions.Add(new EMEVD.Instruction(2000, 0, new List<object> { 0, id, 0 }));
+                }
+            }
+            if (args.Contains("weather"))
+            {
+                // Freeze time just in case of weather interference
+                EMEVD.Event ev = createEvent();
+                if (args.Contains("stop")) ev.Instructions.Add(ParseAdd("2001[05] (1)"));
+                for (int i = 0; i < 24; i++)
+                {
+                    ev.Instructions.Add(ParseAdd($"IF Character Has SpEffect (0,10000,501000,1,0,1)"));
+                    ev.Instructions.Add(ParseAdd($"Award Item Lot ({testItemLotOrder[i % testItemLotOrder.Count]})"));
+                    ev.Instructions.Add(ParseAdd($"WAIT Fixed Time (Frames) (30)"));
+                    ev.Instructions.Add(ParseAdd($"2003[68] ({i},-1,1)"));
+                }
+            }
+            if (args.Contains("clearsky"))
+            {
+                // 16 is snowfield?
+                EMEVD.Event ev = createEvent();
+                ev.Instructions.Add(ParseAdd("2003[68] (5,-1,1)"));
+                ev.Instructions.Add(ParseAdd("END Unconditionally (1)"));
+                EMEVD weather = EMEVD.Read($@"{dir}\m60_54_56_00.emevd.dcx"); ;
+                weather.Events.RemoveAll(e => e.ID == 1054562815);
+                weather.Write($@"{outDir}\m60_54_56_00.emevd.dcx");
+            }
+            // 2000[03] ClearCompiledConditionGroupState (below tests) - done
+            // 2001[05] FreezeTime (basic test, also quit out) - done
+            // 2003[68] ChangeWeather (many different args) - done
+            // 1001[06] WaitFrames (remove, swap with other one, basic test)
+            // 2003[75] Telescope (args)
+            // 2003[81] RemoveGesture?
+            // 2004[27] Chariot (?)
+            // 2004[60] Character-Asset
+            // 2004[61] 9999 Graveyard Warp
+            // 2004[75] (set FaceParam)
+            // 2004[76] ItemLot - combinations of item lot and flag
+            // 2004[77] Warp bits
+            // 2004[81] ForceCharacterDeath-ish
+            // 2005[17] Asset-Dummy
+            // 2005[18] Asset-Asset
+            // 2006[06] WindSfx
+            // 2012[11] SetDarkness
+            string outPath = $@"{outDir}\{name}.emevd.dcx";
+            Console.WriteLine(outPath);
+            emevd.Write(outPath);
+            if (other != null)
+            {
+                outPath = $@"{outDir}\{otherName}.emevd.dcx";
+                Console.WriteLine(outPath);
+                other.Write(outPath);
+            }
+            // emevd.Write($@"{dir}\condtest\event\common.emevd", DCX.Type.None);
+        }
+
+        public void RunEldenRemoveTest(ICollection<string> args)
+        {
+            HashSet<(int, int)> allDeleteCommands = new HashSet<(int, int)>
+            {
+                // Any change observed at all, probably
+                (1001, 6), // Cutscene check
+                (2001, 4), // Set time
+                (2003, 71), // Gesture 1
+                (2003, 81), // Gesture 2
+                (2003, 75), // Telescope - no-op
+                (2003, 80), // Pre-limgrave Scion loss, also, Radahn/Maliketh defeat (anything?)
+                (2004, 47), // Graveyard warp. Unknown
+                (2004, 61), // Graveyard warp (9999). Unknown
+                (2004, 60), // Caravan connection/disconnection
+                (2005, 17), // Caravan asset
+                (2005, 18), // Caravan asset 2
+                (2004, 63), // Enemy range? e.g. Mausoleum, Golem, Caria Manor
+                (2004, 69), // Associated with above
+                (2004, 70), // Associated with above
+                // Makes archer/mausoleum pop in and out
+                (2005, 2), // Chair assets
+                (2005, 13), // Chair assets with enable/disable
+                // Vanilla: roll into chairs. ...yep, chair breaks
+                (2003, 78), // Enable WorldMapPointParam? (roundtable o)
+
+                (2003, 68), // Set weather?
+                // Not given
+                (2004, 84), // Greyll event
+                (2012, 11), // Darkness?
+                (2012, 12), // Darkness? disable
+                // Vanilla: Try Rennala room - check region
+
+                (1003, 203), (1003, 204), // Elevator interactions?
+                (2012, 1), // Mirage rise
+                // Vanilla: How to interact with item. ... no obvious difference
+                (2010, 11), // Fog gates...?
+                // Vanilla: Observe sound e.g. at Godrick
+                (2003, 82), // Summon sign
+                // Seems normal (but check after)... Great-Jar Knights?
+                (2004, 27), // Gelmir Grave chariot
+                // Vanilla: Try landing on it. Seems to work even without this
+                (2004, 43), // Rogier bloodstain, depending on 10009610
+                // Vanilla: what Rogier do? Removing this seems nothing also
+                (2004, 71), // Road's End Catacombs spirit summon event
+                (2008, 4), // Boss defeat, torrent cutscene, two floats
+                // Hard to see effect
+                (2009, 11), // Coffin rides, Rya warp, arg 0
+                (2003, 74), // Psuedomultiplayer
+                (2003, 77), // Psuedomultiplayer 2
+                (2003, 76), // Second phase arena of some fights
+                (2003, 79), // Coop or invader partner
+                // Seems normal?
+            };
+            HashSet<(int, int)> deleteCommands = new HashSet<(int, int)>
+            {
+                // (2004, 61),
+                // (2004, 63),
+                // (2004, 69), (2004, 70), // Distance stuff 63, alongside 69, 70. Peninsula mausoleum/Morne Golem
+            };
+            // deleteCommands = allDeleteCommands;
+            // Altered behaviors:
+            // Still nighttime after tutorial (groaning heard from graveyard)
+            // No restore to full HP after tutorial
+            // Early item pickup (didn't wait for cutscene?)
+            // Birdseye telescope no work
+            // Melina time change works
+            // Caravans do not work, as expected
+            // Ranni spawning does not change to nighttime
+            // Ranni does not go away when aggro'd by Tree Sentinel (fairly difficult to do...)
+            // Is it supposed to be raining in Stormhill...? (no)
+            // Roundtable hold in "real" position
+            // To check:
+            // Yuria just completely whooshes out of existence after cooping
+            // Fell Twins spooky effect is gone
+            string dir = @"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING\Game\event";
+            // Specific installation location
+            string outDir = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                @"Downloads\Mods\ModEngine-2.0.0-preview3-win64\condtest\event");
+            foreach (string path in Directory.GetFiles(dir, "*.emevd.dcx"))
+            {
+                string fileName = Path.GetFileName(path);
+                string outFile = Path.Combine(outDir, fileName);
+                if (File.Exists(outFile)) File.Delete(outFile);
+                emevd = EMEVD.Read(path);
+                bool modified = false;
+                foreach (EMEVD.Event e in emevd.Events)
+                {
+                    for (int i = 0; i < e.Instructions.Count; i++)
+                    {
+                        EMEVD.Instruction ins = e.Instructions[i];
+                        if (allDeleteCommands.Contains((ins.Bank, ins.ID)))
+                        {
+                            modified = true;
+                        }
+                        if (deleteCommands.Contains((ins.Bank, ins.ID)))
+                        {
+                            if (!args.Contains("vanilla"))
+                            {
+                                EMEVD.Instruction newInstr = new EMEVD.Instruction(1014, 69);
+                                e.Instructions[i] = newInstr;
+                                e.Parameters = e.Parameters.Where(p => p.InstructionIndex != i).ToList();
+                            }
+                            modified = true;
+                        }
+                    }
+                }
+                if (fileName == "common.emevd.dcx")
+                {
+                    if (args.Contains("cheatrune"))
+                    {
+                        emevd.Events[0].Instructions.Add(ParseAdd($"Award Item Lot (12070200)"));
+                    }
+                    // emevd.Events[0].Instructions.Add(ParseAdd($"Set Event Flag (0,10009610,1)"));
+                    if (args.Contains("cheathp"))
+                    {
+                        EMEVD.Event ev = new EMEVD.Event(evBase++);
+                        // ev.Instructions.AddRange(instrs.Select(t => events.ParseAdd(t)));
+                        ev.Instructions.AddRange(new List<EMEVD.Instruction>
+                        {
+                            // SetSpEffect(35000, 110)
+                            new EMEVD.Instruction(2004, 8, new List<object> { 10000, 110 }),
+                            // new EMEVD.Instruction(2004, 8, new List<object> { 35000, 110 }),
+                            // Scale damage
+                            // new EMEVD.Instruction(2004, 8, new List<object> { 10000, 7200 }),
+                            // WaitFixedTimeSeconds
+                            new EMEVD.Instruction(1001, 0, new List<object> { (float)1 }),
+                            // EndUnconditionally(EventEndType.Restart)
+                            new EMEVD.Instruction(1000, 4, new List<object> { (byte)1 }),
+                        });
+                        emevd.Events.Add(ev);
+                        emevd.Events[0].Instructions.Add(new EMEVD.Instruction(2000, 0, new List<object> { 0, (uint)ev.ID, (uint)0 }));
+                    }
+                    modified = true;
+                }
+                if (modified)
+                {
+                    Console.WriteLine($"Writing {outFile}");
+                    emevd.Write(outFile, quickDcx);
+                }
+            }
+        }
 
         public void RunTests()
         {
@@ -129,6 +762,41 @@ namespace DarkScript3
             Expected output if uncompiled default true: 7 8
             Actual output: fine snow, rice, butterfly, gyoubu
             Result: Compiled default false, uncompiled default true
+            */
+        }
+
+        private void TestUncompiledMain()
+        {
+            foreach (bool compiled in new[] { true, false })
+            {
+                foreach (bool check in new[] { true, false })
+                {
+                    foreach (bool mainused in new[] { true, false })
+                    {
+                        int reg = 0;
+                        int val = check ? 1 : 0;
+                        EMEVD.Event ev = new EMEVD.Event(evBase + i);
+                        if (mainused)
+                        {
+                            ev.Instructions.Add(ParseAdd($"IF Elapsed Seconds (0,0)"));
+                            // ev.Instructions.Add(ParseAdd($"IF Event Flag (1,1,0,{trueFlag})"));
+                        }
+                        ev.Instructions.Add(ParseAdd($"SKIP IF Condition Group State ({(compiled ? "Compiled" : "Uncompiled")}) (1,{val},{reg})"));
+                        AddItemTest(ev, $"{(compiled ? "compiled" : "uncompiled")} {check} check for MAIN (eval {mainused})");
+                    }
+                }
+            }
+            /*
+            f
+            1. If compiled True check for MAIN (eval True), then awarding Sanctuary Stone <-
+            2. If compiled True check for MAIN (eval False), then awarding Mushroom <-
+            3. If compiled False check for MAIN (eval True), then awarding Cave Moss
+            4. If compiled False check for MAIN (eval False), then awarding Bloodrose
+            5. If uncompiled True check for MAIN (eval True), then awarding Rimed Rowa
+            6. If uncompiled True check for MAIN (eval False), then awarding Golden Sunflower
+            7. If uncompiled False check for MAIN (eval True), then awarding Erdleaf Flower <-
+            8. If uncompiled False check for MAIN (eval False), then awarding Grave Violet <-
+            Conclusion: uncompiled default true, compiled default false
             */
         }
 
@@ -274,6 +942,53 @@ namespace DarkScript3
             Output: fine snow, rice, ape, genichiro, gyoubu
             Result: Clearing only resets compiled conditions, by changing them to false again
             Output with waiting for condition group state: fine snow, rice, ape, genichiro, gyoubu
+            */
+        }
+
+        private void TestClearGroupsElden()
+        {
+            // Set condition group state compiled/uncompiled to true/false
+            // Optionally clear compiled state
+            // Evaluate compiled/uncompiled condition state
+            foreach (bool clear in new[] { true, false })
+            {
+                foreach (bool compiled in new[] { true, false })
+                {
+                    foreach (bool start in new[] { true, false })
+                    {
+                        int reg = 1;
+                        int val = start ? 1 : 0;
+                        EMEVD.Event ev = new EMEVD.Event(evBase + i);
+                        ev.Instructions.Add(ParseAdd($"IF Event Flag ({reg},1,0,{(start ? trueFlag : falseFlag)})"));
+                        if (compiled)
+                        {
+                            // ev.Instructions.Add(ParseAdd($"IF Condition Group (0,{val},{reg})"));
+                            ev.Instructions.Add(ParseAdd($"WAIT For Condition Group State ({val},{reg})"));
+                        }
+                        else
+                        {
+                            ev.Instructions.Add(ParseAdd($"SKIP IF Condition Group State (Uncompiled) (1,1,{reg})"));
+                            ev.Instructions.Add(ParseAdd("Label 0 ()"));
+                        }
+                        if (clear)
+                        {
+                            ev.Instructions.Add(ParseAdd($"2000[03] (0)"));
+                        }
+                        ev.Instructions.Add(ParseAdd($"SKIP IF Condition Group State ({(compiled ? "Compiled" : "Uncompiled")}) (1,1,{reg})"));
+                        AddItemTest(ev, $"{(clear ? "cleared" : "not cleared")} {(compiled ? "compiled" : "uncompiled")} evaluation of {start} value");
+                    }
+                }
+            }
+            /*
+            1. If cleared compiled evaluation of True value, then awarding Sanctuary Stone <-
+            2. If cleared compiled evaluation of False value, then awarding Mushroom <-
+            3. If cleared uncompiled evaluation of True value, then awarding Cave Moss
+            4. If cleared uncompiled evaluation of False value, then awarding Bloodrose <-
+            5. If not cleared compiled evaluation of True value, then awarding Rimed Rowa
+            6. If not cleared compiled evaluation of False value, then awarding Golden Sunflower <-
+            7. If not cleared uncompiled evaluation of True value, then awarding Erdleaf Flower
+            8. If not cleared uncompiled evaluation of False value, then awarding Grave Violet <-
+            All false values were not skipped either way. This matches Sekiro results.
             */
         }
 
@@ -770,8 +1485,17 @@ namespace DarkScript3
         private EMEVD.Instruction ParseAdd(string add)
         {
             (string cmd, List<string> addArgs) = ParseCommandString(add);
-            if (!docByName.TryGetValue(cmd, out (int, int) docId)) throw new Exception($"Unrecognized command '{cmd}'");
+            if (!docByName.TryGetValue(cmd, out (int, int) docId))
+            {
+                if (cmd.EndsWith("]") && cmd.Contains("["))
+                {
+                    string[] parts = cmd.TrimEnd(']').Split('[');
+                    docId = (int.Parse(parts[0]), int.Parse(parts[1]));
+                }
+                else throw new Exception($"Unrecognized command '{cmd}'");
+            }
             EMEDF.InstrDoc addDoc = doc[docId.Item1][docId.Item2];
+            if (addDoc == null) Console.WriteLine($"{docId.Item1} {docId.Item2}: {string.Join(", ", doc[docId.Item1].Instructions.Select(i => i.Index))}");
             List<ArgType> argTypes = addDoc.Arguments.Select(arg => arg.Type == 8 ? ArgType.UInt32 : (ArgType)arg.Type).ToList();
             if (addArgs.Count != argTypes.Count) throw new Exception($"Expected {argTypes.Count} arguments for {cmd}, given {addArgs.Count} in {add}");
             return new EMEVD.Instruction(docId.Item1, docId.Item2, addArgs.Select((a, j) => ParseArg(a, argTypes[j])));

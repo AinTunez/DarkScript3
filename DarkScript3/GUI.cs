@@ -9,6 +9,8 @@ using SoulsFormats;
 using System.Xml.Linq;
 using System.Text;
 using System.Drawing;
+using System.Threading.Tasks;
+using DarkScript3.Properties;
 
 namespace DarkScript3
 {
@@ -18,6 +20,7 @@ namespace DarkScript3
         private readonly Dictionary<string, InstructionDocs> AllDocs = new Dictionary<string, InstructionDocs>();
         private readonly Dictionary<string, EditorGUI> AllEditors = new Dictionary<string, EditorGUI>();
         private readonly Dictionary<string, FileMetadata> DirectoryMetadata = new Dictionary<string, FileMetadata>();
+        private readonly Dictionary<string, Dictionary<string, string>> AllMapNames = new Dictionary<string, Dictionary<string, string>>();
         private readonly FileSystemWatcher Watcher;
         private EditorGUI CurrentEditor;
         private string CurrentDirectory;
@@ -130,7 +133,7 @@ namespace DarkScript3
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                ScrollDialog.Show(this, ex.ToString());
                 return false;
             }
 
@@ -163,7 +166,7 @@ namespace DarkScript3
                     }
                     if (jsText == null)
                     {
-                        MessageBox.Show(ex.Message);
+                        ScrollDialog.Show(this, ex.Message);
                     }
                     else
                     {
@@ -230,7 +233,8 @@ namespace DarkScript3
             return ret;
         }
 
-        private bool OpenJSFile(string fileName)
+        // Marked internal for Find in Files functionality. This access can be revoked or modified if necessary.
+        internal bool OpenJSFile(string fileName)
         {
             string org = fileName.Substring(0, fileName.Length - 3);
             string text = File.ReadAllText(fileName);
@@ -317,6 +321,8 @@ namespace DarkScript3
             {
                 return null;
             }
+            // Check oodle here and when saving
+            SharedControls.CheckOodle(chooser.GameDocs);
             return new FileMetadata
             {
                 GameDocs = chooser.GameDocs,
@@ -438,6 +444,7 @@ namespace DarkScript3
                 UpdateDirectoryListing();
                 display2.BackColor = Color.Transparent;
                 display2.IsSplitterFixed = true;
+                display.IsSplitterFixed = true;
             }
             else
             {
@@ -447,7 +454,7 @@ namespace DarkScript3
             return true;
         }
 
-        private void ShowFile(string filePath)
+        internal void ShowFile(string filePath)
         {
             if (!AllEditors.TryGetValue(filePath, out EditorGUI editor))
             {
@@ -486,6 +493,7 @@ namespace DarkScript3
             UpdateDirectoryListing(requireDirectoryChange: true);
             display2.BackColor = Color.FromArgb(45, 45, 48);
             display2.IsSplitterFixed = false;
+            display.IsSplitterFixed = false;
         }
 
         private void RefreshTitle()
@@ -506,9 +514,44 @@ namespace DarkScript3
             RefreshTitle();
         }
 
+        private Dictionary<string, string> LoadMapNames(string emedfName)
+        {
+            // Rough system to have named maps.
+            // Null and empty dictionaries are meant to be interchangeable here.
+            Dictionary<string, string> mapNames = null;
+            if (emedfName.EndsWith(".emedf.json"))
+            {
+                string mapFile = Regex.Replace(emedfName, @"\.emedf\.json$", ".MapName.txt");
+                AllMapNames.TryGetValue(mapFile, out mapNames);
+                if (mapNames == null)
+                {
+                    AllMapNames[mapFile] = mapNames = new Dictionary<string, string>();
+                    try
+                    {
+                        // Best-effort
+                        string mapText = Resource.Text(mapFile);
+                        foreach (string line in mapText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None))
+                        {
+                            string[] parts = line.Split(new[] { ' ' }, 2);
+                            if (parts.Length == 2)
+                            {
+                                mapNames[parts[0]] = parts[1];
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // Resource not exist, usually
+                    }
+                }
+            }
+            return mapNames;
+        }
+
         private void UpdateDirectoryListing(bool requireDirectoryChange = false)
         {
             string directory = null;
+            Dictionary<string, string> mapNames = null;
             if (CurrentEditor != null)
             {
                 directory = Path.GetDirectoryName(CurrentEditor.EMEVDPath);
@@ -516,6 +559,7 @@ namespace DarkScript3
                 {
                     directory = null;
                 }
+                mapNames = LoadMapNames(CurrentEditor.ResourceString);
             }
             if (requireDirectoryChange && directory == CurrentDirectory)
             {
@@ -544,7 +588,17 @@ namespace DarkScript3
             fileView.ForeColor = TextStyles.ForeColor;
             foreach (string file in allFiles)
             {
-                TreeNode node = new TreeNode(file);
+                string fullText = file;
+                if (mapNames != null && mapNames.Count > 0)
+                {
+                    string matchText = file.Split(new[] { '.' }, 2)[0];
+                    if (mapNames.TryGetValue(matchText, out string mapName))
+                    {
+                        fullText = $"{file} <{mapName}>";
+                    }
+                }
+                TreeNode node = new TreeNode(fullText);
+                node.Tag = file;
                 node.ForeColor = jsFiles.Contains(file) ? TextStyles.ForeColor : (TextStyles.Comment.ForeBrush as SolidBrush).Color;
                 fileView.Nodes.Add(node);
             }
@@ -577,7 +631,13 @@ namespace DarkScript3
             {
                 return;
             }
-            string emevdPath = Path.Combine(CurrentDirectory, e.Node.Text);
+            string text = e.Node.Text;
+            if (e.Node.Tag is string tagText)
+            {
+                // Tag will contain filename when present, when visual text has extra annotations
+                text = tagText;
+            }
+            string emevdPath = Path.Combine(CurrentDirectory, text);
             if (File.Exists(emevdPath))
             {
                 DirectoryMetadata.TryGetValue(CurrentDirectory, out FileMetadata metadata);
@@ -658,7 +718,9 @@ namespace DarkScript3
 
         private void SelectAllToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.SelectAll();
 
-        private void FindToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.ShowFindDialog();
+        private void FindToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.ShowFindDialog(false);
+
+        private void findInFilesToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.ShowFindDialog(true);
 
         private void CopyToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.Copy();
 
@@ -689,9 +751,15 @@ namespace DarkScript3
                     }
                     try
                     {
-                        if (OpenEMEVDFile(fileName, metadata) && CurrentEditor.SaveJSFile())
+                        bool wasOpen = AllEditors.ContainsKey(fileName);
+                        if (OpenEMEVDFile(fileName, metadata))
                         {
+                            CurrentEditor.SaveJSFile();
                             succeeded.Add(fileName);
+                            if (!wasOpen)
+                            {
+                                RemoveFile(CurrentEditor.EMEVDPath);
+                            }
                             continue;
                         }
                     }
@@ -713,7 +781,7 @@ namespace DarkScript3
                     lines.Add("The following emevds were dumped to JS:" + Environment.NewLine);
                     lines.AddRange(succeeded);
                 }
-                MessageBox.Show(string.Join(Environment.NewLine, lines));
+                ScrollDialog.Show(this, string.Join(Environment.NewLine, lines));
             }
         }
 
@@ -730,9 +798,14 @@ namespace DarkScript3
                 {
                     try
                     {
+                        bool wasOpen = AllEditors.ContainsKey(fileName);
                         if (OpenJSFile(fileName) && CurrentEditor.SaveJSAndEMEVDFile())
                         {
                             succeeded.Add(fileName);
+                            if (!wasOpen)
+                            {
+                                RemoveFile(CurrentEditor.EMEVDPath);
+                            }
                             continue;
                         }
                     }
@@ -754,7 +827,7 @@ namespace DarkScript3
                     lines.Add("The following JS files were saved:" + Environment.NewLine);
                     lines.AddRange(succeeded);
                 }
-                MessageBox.Show(string.Join(Environment.NewLine, lines));
+                ScrollDialog.Show(this, string.Join(Environment.NewLine, lines));
             }
         }
 
@@ -765,6 +838,10 @@ namespace DarkScript3
         private void decompileToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.ShowPreviewDecompile();
 
         private void previewCompilationOutputToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.ShowPreviewCompile();
+
+        private void goToEventIDUnderCursorToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.JumpToEvent();
+
+        private void replaceFloatUnderCursorToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.ReplaceFloat();
 
         private void viewEMEDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -793,6 +870,65 @@ namespace DarkScript3
             System.Diagnostics.Process.Start("http://soulsmodding.wikidot.com/tutorial:mattscript-documentation");
         }
 
+        private void viewEldenRingEMEVDTutorialToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://soulsmodding.wikidot.com/tutorial:intro-to-elden-ring-emevd");
+        }
+
+        private void checkForDarkScript3UpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/AinTunez/DarkScript3/releases");
+        }
+
         #endregion
+
+        #region Window Position
+
+        #endregion
+
+        // https://stackoverflow.com/questions/937298/restoring-window-size-position-with-multiple-monitors
+        // However, don't remember maximized states. These are difficult to adapt to changing desktop
+        // monitor configurations, and are quite easy to do manually.
+        private void GUI_Load(object sender, EventArgs e)
+        {
+            InitializeWindow();
+        }
+
+        private void GUI_Move(object sender, EventArgs e)
+        {
+            TrackWindowState();
+        }
+
+        private void GUI_Resize(object sender, EventArgs e)
+        {
+            TrackWindowState();
+        }
+
+        private bool windowInitialized = false;
+
+        private void InitializeWindow()
+        {
+            bool isVisible(Rectangle rect) => Screen.AllScreens.Any(screen => screen.WorkingArea.IntersectsWith(rect));
+            Rectangle stored = Settings.Default.WindowPosition;
+            if (stored != Rectangle.Empty && isVisible(stored))
+            {
+                StartPosition = FormStartPosition.Manual;
+                DesktopBounds = stored;
+            }
+            // Otherwise, don't try to apply the old settings.
+            // We could use the size info but it may not fit if the monitor setup was changed.
+            windowInitialized = true;
+        }
+
+        private void TrackWindowState()
+        {
+            if (!windowInitialized) { return; }
+
+            if (WindowState == FormWindowState.Normal)
+            {
+                Settings.Default.WindowPosition = DesktopBounds;
+                Settings.Default.Save();
+            }
+        }
     }
 }

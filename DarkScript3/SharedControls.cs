@@ -8,12 +8,14 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Threading.Tasks;
 using FastColoredTextBoxNS;
+using System.IO;
 
 namespace DarkScript3
 {
     public class SharedControls
     {
         public BetterFindForm BFF;
+        public ComplexFindForm CFF;
         public PreviewCompilationForm Preview;
         public ToolControl InfoTip;
 
@@ -34,6 +36,7 @@ namespace DarkScript3
             this.statusLabel = statusLabel;
             this.docBox = docBox;
             BFF = new BetterFindForm(null);
+            CFF = new ComplexFindForm(this);
             InfoTip = new ToolControl();
 
             BFF.infoTip = InfoTip;
@@ -99,6 +102,58 @@ namespace DarkScript3
             InfoTip.Hide();
         }
 
+        public void JumpToLineInFile(string path, string lineText, int lineChar, int lineHint)
+        {
+            // lineHint is 0-indexed here
+            FileInfo file = new FileInfo(path);
+            path = file.FullName;
+            if (!file.Exists || !path.EndsWith(".js")) return;
+            if (gui.OpenJSFile(file.FullName))
+            {
+                string org = path.Substring(0, path.Length - 3);
+                EditorGUI destEditor = Editors.Find(e => e.EMEVDPath == org);
+                if (destEditor != null)
+                {
+                    // Reverse dependency. Keep this limited in scope
+                    gui.ShowFile(destEditor.EMEVDPath);
+                    // gui.BringToFront();
+                    if (InfoTip.Visible) InfoTip.Hide();
+                    destEditor.editor.Focus();
+                    destEditor.JumpToTextNearLine(lineText, lineChar, lineHint);
+                }
+            }
+        }
+
+        public bool JumpToCommonFunc(int eventId, EditorGUI sourceEditor)
+        {
+            // If a common_func is open in the same directory, jump to it.
+            // This is just based on the contents of the editor - initialization types would require something more robust.
+            string path = sourceEditor.EMEVDPath;
+            string[] parts = Path.GetFileName(path).Split(new[] { '.' }, 2);
+            if (parts.Length <= 1 || parts[0] == "common_func") return false;
+            string commonFuncPath = Path.Combine(Path.GetDirectoryName(path), "common_func." + parts[1]);
+            EditorGUI destEditor = Editors.Find(e => e.EMEVDPath == commonFuncPath);
+            if (destEditor == null) return false;
+            Action gotoEvent = destEditor.GetJumpToEventAction(eventId);
+            if (gotoEvent != null)
+            {
+                // Reverse dependency. Keep this limited in scope
+                gui.ShowFile(destEditor.EMEVDPath);
+                gotoEvent();
+                return true;
+            }
+            return false;
+        }
+
+        public string GetCurrentDirectory()
+        {
+            if (Editors.Count == 0)
+            {
+                return null;
+            }
+            return Path.GetDirectoryName(Editors.Last().EMEVDPath);
+        }
+
         public void SetStatus(string status, bool sticky = true)
         {
             stickyStatusMessage = sticky;
@@ -148,11 +203,23 @@ namespace DarkScript3
             {
                 BFF.tbFind.Text = findText;
             }
-
             BFF.tbFind.SelectAll();
             BFF.Show();
             BFF.Focus();
             BFF.BringToFront();
+        }
+
+        public void ShowComplexFindDialog(string findText)
+        {
+            // Yep just copy-paste
+            if (findText != null)
+            {
+                CFF.tbFind.Text = findText;
+            }
+            CFF.tbFind.SelectAll();
+            CFF.Show();
+            CFF.Focus();
+            CFF.BringToFront();
         }
 
         public PreviewCompilationForm RefreshPreviewCompilationForm(Font font)
@@ -163,6 +230,35 @@ namespace DarkScript3
             }
             Preview = new PreviewCompilationForm(font);
             return Preview;
+        }
+
+        public void CheckOodle(string emedfPath)
+        {
+            // Heuristic detection of oodle copying, for convenience
+            string emedfName = Path.GetFileName(emedfPath);
+            if (!(emedfName.StartsWith("er-common") || emedfName.StartsWith("sekiro-common")))
+            {
+                return;
+            }
+            // Assume current working directory is exe dir
+            string dll = "oo2core_6_win64.dll";
+            if (File.Exists(dll) || File.Exists($"lib/{dll}"))
+            {
+                return;
+            }
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = $"Select {dll} from the game directory";
+            ofd.Filter = $"Oodle DLL|{dll}";
+            if (ofd.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            string selected = ofd.FileName;
+            if (Path.GetFileName(selected) != dll || File.Exists(dll) || File.Exists($"lib/{dll}"))
+            {
+                return;
+            }
+            File.Copy(selected, dll);
         }
 
         private void TipBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -199,6 +295,10 @@ namespace DarkScript3
                 return;
             }
             if (Docs == null) return;
+            if (Docs.AllAliases.TryGetValue(func, out string realName))
+            {
+                func = realName;
+            }
             List<EMEDF.ArgDoc> args = null;
             ScriptAst.BuiltIn builtin = null;
             if (!Docs.AllArgs.TryGetValue(func, out args) && !ScriptAst.ReservedWords.TryGetValue(func, out builtin)) return;

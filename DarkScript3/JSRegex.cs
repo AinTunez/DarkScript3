@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using FastColoredTextBoxNS;
 
@@ -43,7 +44,10 @@ namespace DarkScript3
                     + "|await|implements|interface|let|package|private|protected|public|static|yield"
                     // Custom
                     + "|true|false"
-                + @")\b|\$Event\b",
+                    // TODO: Make this look not awful
+                    // + string.Join("", ScriptAst.ReservedWords.Where(b => b.Value.Highlight).Select(b => $"|{b.Key}"))
+                + @")\b"
+                + @"|\$Event\b",
                 RegexCompiledOption);
         public static Regex DataType = new Regex(@"\b(byte|short|int|sbyte|ushort|uint|enum|bool)\b", RegexCompiledOption);
     }

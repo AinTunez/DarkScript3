@@ -78,3 +78,24 @@ $Event(104, Default, function() {
     EndIf(!EventFlag(exampleRange[0]));
     setFirstFlagOnly(exampleRange[1], exampleRange[1]);
 });
+
+$Event(105, Default, function () {
+    const amt = 9;
+    if (EventFlag(500)) {
+        setFirstFlagOnly(500, 500 + amt);
+    }
+    GotoIf(S0, EventFlag(600))
+    setFirstFlagOnly(600, 600 + amt);
+S0:
+    NoOp();
+});
+
+$Event(106, Default, function () {
+L0:
+    SetEventFlag(100, ON);
+    Goto(S0);
+L0_:
+    NoOp();
+S0_:
+    SetEventFlag(100, OFF);
+});

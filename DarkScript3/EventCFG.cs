@@ -647,6 +647,11 @@ namespace DarkScript3
                     if (entry.Value.Contains(CondAssignOp.AssignAnd)) result.Error($"Group is named {name} but is defined with &=");
                     allocateGroup(false, name, -group);
                 }
+                // Special case for main group being used inappropriately
+                if (name == "mainGroupAbuse")
+                {
+                    groupNames[name] = 0;
+                }
             }
 
             foreach (KeyValuePair<string, List<CondAssignOp>> entry in groupOps)
@@ -726,10 +731,11 @@ namespace DarkScript3
             foreach (FlowNode node in NodeList())
             {
                 lines[node] = i;
-                if (node.Im is NoOp)
+                if (node.Im is NoOp || node.Im is SkipTarget)
                 {
                     // For NoOp nodes at the end of a block, they are equivalent to the next statement.
                     // For NoOp nodes at the very end, i doesn't matter anymore.
+                    // SkipTarget being here is speculative (and currently not parsed by MattScript anyway)
                     continue;
                 }
                 if (node.Im is JSStatement)
@@ -741,6 +747,9 @@ namespace DarkScript3
                 }
                 i++;
             }
+            int dynamicId = 0;
+            Dictionary<int, List<string>> dynamicSkipLabels = new Dictionary<int, List<string>>();
+            bool staticSkips = true;
             foreach (FlowNode node in NodeList())
             {
                 if (node.Im is Goto g && (g.ToLabel == null || !LabelIds.ContainsKey(g.ToLabel)))
@@ -748,31 +757,55 @@ namespace DarkScript3
                     if (node.JumpTo == null)
                     {
                         result.Error($"Target label not found", g);
+                        // Remove the label (skip 0 lines) so CompileCond doesn't complain
+                        g.ToLabel = null;
                         continue;
                     }
+                    // Try to use reserve/fill for this
                     int start = lines[node];
                     int end = lines[node.JumpTo];
-                    FlowNode jsInMiddle = cantJumpPast.Find(js => lines[js] >= start && lines[js] < end);
-                    if (jsInMiddle != null)
+                    FlowNode jsInMiddle = cantJumpPast.Find(js => lines[js] > start && lines[js] <= end);
+                    // Console.WriteLine($"For {node.ID}, located {start} < {jsInMiddle} <= {end}, out {string.Join(",", cantJumpPast.Select(n => $"{n.ID}({lines[n]})"))}");
+                    if (jsInMiddle == null && staticSkips)
                     {
-                        result.Error($"Can't place a regular JS statement in the middle of a skip/goto: {node.Im} -> {node.JumpTo.Im}", jsInMiddle.Im);
+                        // Can resolve here
+                        g.ToLabel = null;
+                        g.SkipLines = Math.Max(0, end - start - 1);
+                        if (g.SkipLines > byte.MaxValue)
+                        {
+                            result.Error($"Can't skip more than {byte.MaxValue} lines. Either edd a label L0-L20 at the destination to use that automatically or restructure the event", g);
+                        }
                     }
-                    g.ToLabel = null;
-                    g.SkipLines = Math.Max(0, end - start - 1);
-                    if (g.SkipLines > byte.MaxValue)
+                    else
                     {
-                        result.Error($"Can't skip more than 256 lines. Either edd a label L0-L20 at the destination to use that automatically or restructure the event", g);
+                        // result.Error($"Can't place a regular JS statement in the middle of a skip/goto: {node.Im} -> {node.JumpTo.Im}", jsInMiddle.Im);
+                        string l = $"#{dynamicId++}";
+                        g.ToLabel = l;
+                        if (!dynamicSkipLabels.TryGetValue(node.JumpTo.ID, out List<string> labels))
+                        {
+                            dynamicSkipLabels[node.JumpTo.ID] = labels = new List<string>();
+                        }
+                        labels.Add(l);
                     }
                 }
+                // Remove non-command labels
                 node.Im.Labels.Clear();
             }
 
             List<Intermediate> instrs = new List<Intermediate>();
             NoOp prevNoOp = null;
-            // Elimiate NoOps and leave only Instrs and JSStatements
+            // Elimiate NoOps and leave only Instrs, JSStatements, and SkipTargets
             // Some extra tracking must be done for preserving decorations.
             foreach (FlowNode node in NodeList())
             {
+                if (dynamicSkipLabels.TryGetValue(node.ID, out List<string> labels))
+                {
+                    // TODO: Are decorations needed here?
+                    foreach (string label in labels)
+                    {
+                        instrs.Add(new SkipTarget { Label = label });
+                    }
+                }
                 if (node.Im is NoOp noop)
                 {
                     if (prevNoOp != null) prevNoOp.MoveDecorationsTo(noop);

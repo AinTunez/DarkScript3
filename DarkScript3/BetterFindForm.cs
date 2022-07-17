@@ -26,12 +26,19 @@ namespace DarkScript3
 
         private void btFindNext_Click(object sender, EventArgs e)
         {
-            FindNext(tbFind.Text);
+            RegexOptions opt = cbMatchCase.Checked ? RegexOptions.None : RegexOptions.IgnoreCase;
+            string pattern = tbFind.Text;
+            if (!cbRegex.Checked)
+                pattern = Regex.Escape(pattern);
+            if (cbWholeWord.Checked)
+                pattern = "\\b" + pattern + "\\b";
+            FindNext(pattern, opt);
+
             Focus();
             if (infoTip.Visible) infoTip.Hide();
         }
 
-        public virtual void FindNext(string pattern, Range initialSelection = null)
+        public virtual void FindNext(string pattern, RegexOptions opt, Range initialSelection = null)
         {
             if (tb == null)
             {
@@ -40,11 +47,6 @@ namespace DarkScript3
             initialSelection = initialSelection ?? tb.Selection.Clone();
             try
             {
-                RegexOptions opt = cbMatchCase.Checked ? RegexOptions.None : RegexOptions.IgnoreCase;
-                if (!cbRegex.Checked)
-                    pattern = Regex.Escape(pattern);
-                if (cbWholeWord.Checked)
-                    pattern = "\\b" + pattern + "\\b";
                 //
                 Range range = tb.Selection.Clone();
                 range.Normalize();
@@ -72,7 +74,7 @@ namespace DarkScript3
                 if (range.Start >= startPlace && startPlace > Place.Empty)
                 {
                     tb.Selection.Start = new Place(0, 0);
-                    FindNext(pattern, initialSelection);
+                    FindNext(pattern, opt, initialSelection);
                     return;
                 }
                 MessageBox.Show("Not found");

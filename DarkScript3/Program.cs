@@ -21,13 +21,17 @@ namespace DarkScript3
         [STAThread]
         static void Main(string[] args)
         {
-            if (args.Length > 0)
+            bool commandLine = args.Contains("/cmd");
+#if DEBUG
+            commandLine = args.Length > 0;
+#endif
+            if (commandLine)
             {
                 // Command line things for testing
                 AttachConsole(-1);
                 if (args.Contains("test"))
                 {
-                    new CondTestingTool().RunTests();
+                    new CondTestingTool().Run(args);
                 }
                 else if (args.Contains("html"))
                 {
