@@ -47,6 +47,7 @@ namespace DarkScript3
             editor.HotkeysMapping.Add(Keys.Control | Keys.Enter, FCTBAction.CustomAction1);
             editor.HotkeysMapping.Add(Keys.Control | Keys.J, FCTBAction.CustomAction2);
             editor.HotkeysMapping.Add(Keys.Control | Keys.D1, FCTBAction.CustomAction3);
+            editor.HotkeysMapping.Add(Keys.Control | Keys.D, FCTBAction.CustomAction4);
             editor.Text = text;
             editor.ClearUndo();
             CodeChanged = false;
@@ -83,10 +84,17 @@ namespace DarkScript3
                 string menuText = s;
                 string toolTipTitle = s;
                 string toolTipText;
-                bool isInstr = Docs.Functions.TryGetValue(s, out (int, int) indices);
-                if (isInstr)
+                bool isInstr = false;
+                if (Docs.Functions.TryGetValue(s, out (int, int) indices))
                 {
+                    isInstr = true;
                     toolTipText = $"{indices.Item1}[{indices.Item2:d2}] ({ArgString(s)})";
+                }
+                // TODO: It shouldn't be necessary to delve into Translator in this case
+                else if (Docs.Translator != null && Docs.Translator.ShortDocs.TryGetValue(s, out InstructionTranslator.ShortVariant sv))
+                {
+                    isInstr = true;
+                    toolTipText = $"{sv.Cmd} ({ArgString(s)})";
                 }
                 else
                 {
@@ -171,6 +179,11 @@ namespace DarkScript3
                 editor.DoSelectionVisible();
             }
             return success;
+        }
+
+        public bool MayBeFancy()
+        {
+            return editor.GetRanges(@"\$Event\(").Count() > 0 && Settings.AllowPreprocess;
         }
 
         private bool SaveJSAndEMEVDFileOperation(out Range errorSelect)
@@ -784,6 +797,32 @@ namespace DarkScript3
             return map;
         }
 
+        private void DuplicateSelection()
+        {
+            Range sel = editor.Selection.Clone();
+            string text;
+            Place insertPlace;
+            if (sel.Start == sel.End)
+            {
+                // Insert new line
+                Range fullLine = editor.GetLine(sel.Start.iLine);
+                insertPlace = fullLine.End;
+                text = Environment.NewLine + fullLine.Text;
+            }
+            else
+            {
+                // Insert after current selection
+                insertPlace = sel.Start > sel.End ? sel.Start : sel.End;
+                text = sel.Text;
+            }
+            Range replaceRange = editor.GetRange(insertPlace, insertPlace);
+            Range resultRange = editor.InsertTextAndRestoreSelection(replaceRange, text, editor.Styles[0]);
+            SetStyles(resultRange);
+            // The selection itself is doubled in the second case, which is largely against the point of this functionality
+            // So restore the original selection, even if it's not saved on undo/redo
+            editor.Selection = sel;
+        }
+
         #endregion
 
         #region Text Handling
@@ -855,6 +894,10 @@ namespace DarkScript3
             else if (e.Action == FCTBAction.CustomAction3)
             {
                 ReplaceFloat();
+            }
+            else if (e.Action == FCTBAction.CustomAction4)
+            {
+                DuplicateSelection();
             }
         }
 

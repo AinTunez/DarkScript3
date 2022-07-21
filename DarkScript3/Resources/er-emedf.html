@@ -6,6 +6,7 @@
 <title>Elden Ring EMEDF for DarkScript3</title>
 
 <script>
+let hist = {};
 function showHide(clicked, show, hide, hidec) {
     if (show) {
         show.split(' ').forEach(c => {
@@ -25,7 +26,33 @@ function showHide(clicked, show, hide, hidec) {
         button.classList.remove('showhighlight');
     });
     clicked.classList.add('showhighlight');
+    if (clicked.id) {
+        const last = parseInt(clicked.id.slice(-1));
+        if (clicked.id.indexOf('def') >= 0) {
+            delete hist[hidec];
+        } else if (!isNaN(last)) {
+            hist[hidec] = last;
+        }
+        const entries = Object.entries(hist);
+        if (entries.length == 0) {
+            window.history.replaceState(null, null, window.location.pathname);
+        } else {
+            window.history.replaceState(null, null, '?' + entries.map(([a, b]) => `${a}=${b}`).join('&'));
+        }
+    }
 }
+window.onload = function() {
+    const url = new URL(window.location.href);
+    ['hideunused', 'hideusageinfo', 'hidecond'].forEach(name => {
+        const val = url.searchParams.get(name);
+        if (val) {
+            const button = document.getElementById(name + val);
+            if (button) {
+                button.onclick();
+            }
+        }
+    });
+};
 </script>
 <style>
 body {
@@ -144,17 +171,17 @@ section {
 <p class="toc"><a href="#Instructions">Instructions</a> | <a href="#Condition_Functions">Condition Functions</a> | <a href="#Enums">Enums</a></p>
 
 <p class="showhide">
-<button class="showbutton" onclick="showHide(this, '', 'unused', 'hideunused')">Hide unused</button> |
-<button class="showbutton showhighlight" onclick="showHide(this, 'unused', '', 'hideunused')">Show unused</button>
+<button id="hideunused1" class="showbutton" onclick="showHide(this, '', 'unused', 'hideunused')">Hide unused</button> |
+<button id="hideunuseddef" class="showbutton showhighlight" onclick="showHide(this, 'unused', '', 'hideunused')">Show unused</button>
 </p>
 <p class="showhide">
-<button class="showbutton" onclick="showHide(this, '', 'usageinfo', 'hideusageinfo')">Hide usage info</button> |
-<button class="showbutton showhighlight" onclick="showHide(this, 'usageinfo', '', 'hideusageinfo')">Show usage info</button>
+<button id="hideusageinfo1" class="showbutton" onclick="showHide(this, '', 'usageinfo', 'hideusageinfo')">Hide usage info</button> |
+<button id="hideusageinfodef" class="showbutton showhighlight" onclick="showHide(this, 'usageinfo', '', 'hideusageinfo')">Show usage info</button>
 </p>
 <p class="showhide">
-<button class="showbutton" onclick="showHide(this, 'cond', 'condinstr', 'hidecond')">Hide condition instructions</button> |
-<button class="showbutton" onclick="showHide(this, 'condinstr', 'cond', 'hidecond')">Hide condition functions</button> |
-<button class="showbutton showhighlight" onclick="showHide(this, 'condinstr cond', '', 'hidecond')">Show both</button>
+<button id="hidecond1" class="showbutton" onclick="showHide(this, 'cond', 'condinstr', 'hidecond')">Hide condition instructions</button> |
+<button id="hidecond2" class="showbutton" onclick="showHide(this, 'condinstr', 'cond', 'hidecond')">Hide condition functions</button> |
+<button id="hideconddef" class="showbutton showhighlight" onclick="showHide(this, 'condinstr cond', '', 'hidecond')">Show both</button>
 </p>
 <div class="bigsection instructions"><h1 id="Instructions"><a href="#Instructions" class="selfref">Instructions</a></h1>
 <h2 id="0_Condition_System"><a href="#0_Condition_System" class="selfref">0 - Condition - System</a></h2>
@@ -769,10 +796,10 @@ section {
     uint attackerEntityId)</pre><p>Condition function: <code><a href="#AssetHitBy">AssetHitBy</a></code></p>
 </div></section>
 <section class="instr condinstr">
-<h3 id="IfObjactEventFlag"><a href="#IfObjactEventFlag" class="selfref"><code>IfObjactEventFlag</code></a> <span class="sectioninfo">Instruction 5[02]</span></h3>
+<h3 id="IfObjActEventFlag"><a href="#IfObjActEventFlag" class="selfref"><code>IfObjActEventFlag</code></a> <span class="sectioninfo">Instruction 5[02]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m11_00_00_00, m14_00_00_00, m16_00_00_00, m30_09_00_00, m30_10_00_00, m30_13_00_00, m30_19_00_00, m31_21_00_00, m34_11_00_00, m35_00_00_00, m60_42_32_00, m60_43_36_00, m60_45_51_00</p>
-<pre>IfObjactEventFlag(
+<pre>IfObjActEventFlag(
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     uint objactEventFlag)</pre><p>Condition function: <code><a href="#ObjActEventFlag">ObjActEventFlag</a></code></p>
 </div></section>
@@ -1505,19 +1532,25 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m12_05_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m34_10_00_00, m34_11_00_00, m34_14_00_00, m35_00_00_00, and 114 others</p>
 <pre>SetNetworkSyncState(
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableNetworkSync()</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Disabled</code></code></span></li>
+<li><code>EnableNetworkSync()</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="ClearCompiledConditionGroupState"><a href="#ClearCompiledConditionGroupState" class="selfref"><code>ClearCompiledConditionGroupState</code></a> <span class="sectioninfo">Instruction 2000[03]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common</p>
-<pre>ClearCompiledConditionGroupState(
-    byte dummy)</pre></div></section>
+<pre>ClearCompiledConditionGroupState(<span class="optarg">
+    byte dummy = 0</span>)</pre></div></section>
 <section class="instr">
 <h3 id="SaveRequest"><a href="#SaveRequest" class="selfref"><code>SaveRequest</code></a> <span class="sectioninfo">Instruction 2000[05]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, common_func, m10_01_00_00, m11_00_00_00, m11_71_00_00, m12_02_00_00, m12_03_00_00, m12_08_00_00, m12_09_00_00, m14_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m34_11_00_00, m35_00_00_00, and 30 others</p>
-<pre>SaveRequest(
-    byte dummy)</pre></div></section>
+<pre>SaveRequest(<span class="optarg">
+    byte dummy = 0</span>)</pre></div></section>
 <section class="instr">
 <h3 id="InitializeCommonEvent"><a href="#InitializeCommonEvent" class="selfref"><code>InitializeCommonEvent</code></a> <span class="sectioninfo">Instruction 2000[06]</span></h3>
 <div class="sectioncontents">
@@ -1575,6 +1608,35 @@ section {
     int cutsceneId, 
     uint&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
     uint playerEntityId)</pre></div></section>
+<section class="instr unused">
+<h3 id="PlayCutsceneToPlayerUnknown200204"><a href="#PlayCutsceneToPlayerUnknown200204" class="selfref"><code>PlayCutsceneToPlayerUnknown200204</code></a> <span class="sectioninfo">Instruction 2002[04]</span></h3>
+<div class="sectioncontents">
+<p class="sectionusage usageinfo sectionunused">Unused</p>
+<pre>PlayCutsceneToPlayerUnknown200204(
+    int cutsceneId, 
+    uint&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
+    uint areaEntityId, 
+    int unknownc, 
+    uint entityId, 
+    int unknown14)</pre></div></section>
+<section class="instr unused">
+<h3 id="PlayCutsceneToPlayerUnknown200209"><a href="#PlayCutsceneToPlayerUnknown200209" class="selfref"><code>PlayCutsceneToPlayerUnknown200209</code></a> <span class="sectioninfo">Instruction 2002[09]</span></h3>
+<div class="sectioncontents">
+<p class="sectionusage usageinfo sectionunused">Unused</p>
+<pre>PlayCutsceneToPlayerUnknown200209(
+    int cutsceneId, 
+    uint&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
+    int unknown8, 
+    int unknownc, 
+    uint playerEntityId, 
+    int unknown14, 
+    byte unknown18, 
+    byte unknown19, 
+    float unknown1c, 
+    byte unknown20, 
+    byte unknown21, 
+    byte unknown22, 
+    byte unknown23)</pre></div></section>
 <section class="instr">
 <h3 id="PlayCutsceneToPlayerWithWeatherAndTime"><a href="#PlayCutsceneToPlayerWithWeatherAndTime" class="selfref"><code>PlayCutsceneToPlayerWithWeatherAndTime</code></a> <span class="sectioninfo">Instruction 2002[10]</span></h3>
 <div class="sectioncontents">
@@ -1641,7 +1703,13 @@ section {
 <p class="sectionusage usageinfo">Used in m12_01_00_00, m14_00_00_00, m15_00_00_00, m35_00_00_00, and 13 others</p>
 <pre>SetGeneratorState(
     uint entityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableGenerator(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Disabled</code></code></span></li>
+<li><code>EnableGenerator(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="AwardItemLot"><a href="#AwardItemLot" class="selfref"><code>AwardItemLot</code></a> <span class="sectioninfo">Instruction 2003[04]</span></h3>
 <div class="sectioncontents">
@@ -1666,14 +1734,26 @@ section {
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>ChangeMapHitEnableState(
     uint entityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableMapHit(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Disabled</code></code></span></li>
+<li><code>EnableMapHit(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr unused">
 <h3 id="SetMapVisibility"><a href="#SetMapVisibility" class="selfref"><code>SetMapVisibility</code></a> <span class="sectioninfo">Instruction 2003[07]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>SetMapVisibility(
     uint entityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableMapVisibility(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Disabled</code></code></span></li>
+<li><code>EnableMapVisibility(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr unused">
 <h3 id="SetEventState"><a href="#SetEventState" class="selfref"><code>SetEventState</code></a> <span class="sectioninfo">Instruction 2003[08]</span></h3>
 <div class="sectioncontents">
@@ -1752,15 +1832,15 @@ section {
     int animationId, 
     bool shouldLoop, 
     bool shouldWaitForCompletion, 
-    bool ignoreWaitForTransition, 
-    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
-    float numberOfTargetCharacters)</pre></div></section>
+    bool ignoreWaitForTransition<span class="optarg">, 
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType = Equal, 
+    float numberOfTargetCharacters = 1</span>)</pre></div></section>
 <section class="instr unused">
 <h3 id="IncrementGameCycle"><a href="#IncrementGameCycle" class="selfref"><code>IncrementGameCycle</code></a> <span class="sectioninfo">Instruction 2003[21]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
-<pre>IncrementGameCycle(
-    byte dummy)</pre></div></section>
+<pre>IncrementGameCycle(<span class="optarg">
+    byte dummy = 0</span>)</pre></div></section>
 <section class="instr">
 <h3 id="BatchSetEventFlags"><a href="#BatchSetEventFlags" class="selfref"><code>BatchSetEventFlags</code></a> <span class="sectioninfo">Instruction 2003[22]</span></h3>
 <div class="sectioncontents">
@@ -1800,7 +1880,13 @@ section {
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>SetVisibilityOfMessage(
     uint messageEntityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableMessageVisibility(uint messageEntityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Disabled</code></code></span></li>
+<li><code>EnableMessageVisibility(uint messageEntityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="AwardAchievement"><a href="#AwardAchievement" class="selfref"><code>AwardAchievement</code></a> <span class="sectioninfo">Instruction 2003[28]</span></h3>
 <div class="sectioncontents">
@@ -1926,7 +2012,15 @@ section {
 <pre>SetEventFlag(
     byte&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
     uint targetEventFlagId, 
-    byte&lt;<a href="#ONOFF">ONOFF</a>&gt; desiredFlagState)</pre></div></section>
+    byte&lt;<a href="#ONOFF">ONOFF</a>&gt; desiredFlagState)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>SetEventFlagID(uint targetEventFlagId, byte&lt;<a href="#ONOFF">ONOFF</a>&gt; desiredFlagState)</code>
+<br/><span class="conddetails">Where <code><code>targetEventFlagType = TargetEventFlagType.EventFlag</code></code></span></li>
+<li><code>SetThisEvent(byte&lt;<a href="#ONOFF">ONOFF</a>&gt; desiredFlagState)</code>
+<br/><span class="conddetails">Where <code><code>targetEventFlagType = TargetEventFlagType.EventID</code> and <code>targetEventFlagId = 0</code></code></span></li>
+<li><code>SetThisEventSlot(byte&lt;<a href="#ONOFF">ONOFF</a>&gt; desiredFlagState)</code>
+<br/><span class="conddetails">Where <code><code>targetEventFlagType = TargetEventFlagType.EventIDSlotNumber</code> and <code>targetEventFlagId = 0</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="ChangeWeather"><a href="#ChangeWeather" class="selfref"><code>ChangeWeather</code></a> <span class="sectioninfo">Instruction 2003[68]</span></h3>
 <div class="sectioncontents">
@@ -1942,13 +2036,27 @@ section {
 <pre>SetNetworkconnectedEventFlag(
     byte&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
     uint targetEventFlagId, 
-    byte&lt;<a href="#ONOFF">ONOFF</a>&gt; desiredFlagState)</pre></div></section>
+    byte&lt;<a href="#ONOFF">ONOFF</a>&gt; desiredFlagState)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>SetNetworkconnectedEventFlagID(uint targetEventFlagId, byte&lt;<a href="#ONOFF">ONOFF</a>&gt; desiredFlagState)</code>
+<br/><span class="conddetails">Where <code><code>targetEventFlagType = TargetEventFlagType.EventFlag</code></code></span></li>
+<li><code>SetNetworkconnectedThisEvent(byte&lt;<a href="#ONOFF">ONOFF</a>&gt; desiredFlagState)</code>
+<br/><span class="conddetails">Where <code><code>targetEventFlagType = TargetEventFlagType.EventID</code> and <code>targetEventFlagId = 0</code></code></span></li>
+<li><code>SetNetworkconnectedThisEventSlot(byte&lt;<a href="#ONOFF">ONOFF</a>&gt; desiredFlagState)</code>
+<br/><span class="conddetails">Where <code><code>targetEventFlagType = TargetEventFlagType.EventIDSlotNumber</code> and <code>targetEventFlagId = 0</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="SetNetworkInteractionState"><a href="#SetNetworkInteractionState" class="selfref"><code>SetNetworkInteractionState</code></a> <span class="sectioninfo">Instruction 2003[70]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common</p>
 <pre>SetNetworkInteractionState(
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableNetworkInteraction()</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Disabled</code></code></span></li>
+<li><code>EnableNetworkInteraction()</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="AwardGesture"><a href="#AwardGesture" class="selfref"><code>AwardGesture</code></a> <span class="sectioninfo">Instruction 2003[71]</span></h3>
 <div class="sectioncontents">
@@ -2022,7 +2130,13 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m10_01_00_00</p>
 <pre>ShowTextOnLoadingScreen(
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableTextOnLoadingScreen()</code>
+<br/><span class="conddetails">Where <code><code>state = Disabled</code></code></span></li>
+<li><code>EnableTextOnLoadingScreen()</code>
+<br/><span class="conddetails">Where <code><code>state = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="RemoveGesture"><a href="#RemoveGesture" class="selfref"><code>RemoveGesture</code></a> <span class="sectioninfo">Instruction 2003[81]</span></h3>
 <div class="sectioncontents">
@@ -2042,7 +2156,13 @@ section {
 <p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m12_05_00_00, m12_08_00_00, m12_09_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m34_10_00_00, m34_11_00_00, m34_12_00_00, m34_13_00_00, m34_14_00_00, m34_15_00_00, m35_00_00_00, m39_20_00_00, and 105 others</p>
 <pre>SetCharacterAIState(
     uint entityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableCharacterAI(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Disabled</code></code></span></li>
+<li><code>EnableCharacterAI(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="SetCharacterTeamType"><a href="#SetCharacterTeamType" class="selfref"><code>SetCharacterTeamType</code></a> <span class="sectioninfo">Instruction 2004[02]</span></h3>
 <div class="sectioncontents">
@@ -2063,7 +2183,13 @@ section {
 <p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m12_05_00_00, m12_07_00_00, m12_08_00_00, m12_09_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m34_10_00_00, m34_11_00_00, m34_12_00_00, m34_13_00_00, m34_14_00_00, m34_15_00_00, m35_00_00_00, m39_20_00_00, and 177 others</p>
 <pre>ChangeCharacterEnableState(
     uint entityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableCharacter(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Disabled</code></code></span></li>
+<li><code>EnableCharacter(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="EzstateInstructionRequest"><a href="#EzstateInstructionRequest" class="selfref"><code>EzstateInstructionRequest</code></a> <span class="sectioninfo">Instruction 2004[06]</span></h3>
 <div class="sectioncontents">
@@ -2091,7 +2217,13 @@ section {
 <p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m11_00_00_00, m11_05_00_00, m12_01_00_00, m12_09_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m34_12_00_00, m34_14_00_00, m35_00_00_00, m39_20_00_00, and 49 others</p>
 <pre>SetCharacterGravity(
     uint entityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableCharacterGravity(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Disabled</code></code></span></li>
+<li><code>EnableCharacterGravity(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="SetCharacterEventTarget"><a href="#SetCharacterEventTarget" class="selfref"><code>SetCharacterEventTarget</code></a> <span class="sectioninfo">Instruction 2004[11]</span></h3>
 <div class="sectioncontents">
@@ -2105,7 +2237,13 @@ section {
 <p class="sectionusage usageinfo">Used in common_func, m10_01_00_00, m11_00_00_00, m11_05_00_00, m12_01_00_00, m12_03_00_00, m13_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m34_14_00_00, and 22 others</p>
 <pre>SetCharacterImmortality(
     uint entityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableCharacterImmortality(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Disabled</code></code></span></li>
+<li><code>EnableCharacterImmortality(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="SetCharacterHome"><a href="#SetCharacterHome" class="selfref"><code>SetCharacterHome</code></a> <span class="sectioninfo">Instruction 2004[13]</span></h3>
 <div class="sectioncontents">
@@ -2128,7 +2266,13 @@ section {
 <p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m12_09_00_00, m18_00_00_00, m34_14_00_00, and 24 others</p>
 <pre>SetCharacterInvincibility(
     uint entityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableCharacterInvincibility(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Disabled</code></code></span></li>
+<li><code>EnableCharacterInvincibility(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="ClearCharactersAITarget"><a href="#ClearCharactersAITarget" class="selfref"><code>ClearCharactersAITarget</code></a> <span class="sectioninfo">Instruction 2004[16]</span></h3>
 <div class="sectioncontents">
@@ -2249,7 +2393,13 @@ section {
 <p class="sectionusage usageinfo">Used in common_func, m10_01_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m13_00_00_00, m15_00_00_00, m18_00_00_00, m19_00_00_00, m35_00_00_00, m39_20_00_00, and 34 others</p>
 <pre>SetCharacterHPBarDisplay(
     uint entityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableCharacterHPBarDisplay(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Disabled</code></code></span></li>
+<li><code>EnableCharacterHPBarDisplay(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="SetCharacterMaphit"><a href="#SetCharacterMaphit" class="selfref"><code>SetCharacterMaphit</code></a> <span class="sectioninfo">Instruction 2004[31]</span></h3>
 <div class="sectioncontents">
@@ -2278,7 +2428,13 @@ section {
 <p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_05_00_00, m12_05_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m18_00_00_00, m19_00_00_00, m34_14_00_00, and 11 others</p>
 <pre>SetCharacterDefaultBackreadState(
     uint entityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableCharacterDefaultBackread(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Disabled</code></code></span></li>
+<li><code>EnableCharacterDefaultBackread(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="ForceCharacterTreasure"><a href="#ForceCharacterTreasure" class="selfref"><code>ForceCharacterTreasure</code></a> <span class="sectioninfo">Instruction 2004[37]</span></h3>
 <div class="sectioncontents">
@@ -2289,15 +2445,21 @@ section {
 <h3 id="BetrayCharactersCurrentCovenant"><a href="#BetrayCharactersCurrentCovenant" class="selfref"><code>BetrayCharactersCurrentCovenant</code></a> <span class="sectioninfo">Instruction 2004[38]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
-<pre>BetrayCharactersCurrentCovenant(
-    byte dummy)</pre></div></section>
+<pre>BetrayCharactersCurrentCovenant(<span class="optarg">
+    byte dummy = 0</span>)</pre></div></section>
 <section class="instr">
 <h3 id="ChangeCharacterCollisionState"><a href="#ChangeCharacterCollisionState" class="selfref"><code>ChangeCharacterCollisionState</code></a> <span class="sectioninfo">Instruction 2004[39]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m12_05_00_00, m12_08_00_00, m12_09_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m34_10_00_00, m34_11_00_00, m34_12_00_00, m34_13_00_00, m34_14_00_00, m34_15_00_00, m35_00_00_00, m39_20_00_00, and 136 others</p>
 <pre>ChangeCharacterCollisionState(
     uint entityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableCharacterCollision(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Disabled</code></code></span></li>
+<li><code>EnableCharacterCollision(uint entityId)</code>
+<br/><span class="conddetails">Where <code><code>disabledEnabled = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="WarpCharacterAndSetFloor"><a href="#WarpCharacterAndSetFloor" class="selfref"><code>WarpCharacterAndSetFloor</code></a> <span class="sectioninfo">Instruction 2004[40]</span></h3>
 <div class="sectioncontents">
@@ -2361,7 +2523,13 @@ section {
 <pre>SetLockOnPoint(
     uint entityId, 
     int lockOnDummypolyId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; desiredState)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; desiredState)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableLockOnPoint(uint entityId, int lockOnDummypolyId)</code>
+<br/><span class="conddetails">Where <code><code>desiredState = Disabled</code></code></span></li>
+<li><code>EnableLockOnPoint(uint entityId, int lockOnDummypolyId)</code>
+<br/><span class="conddetails">Where <code><code>desiredState = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr unused">
 <h3 id="ChangeCharacter"><a href="#ChangeCharacter" class="selfref"><code>ChangeCharacter</code></a> <span class="sectioninfo">Instruction 2004[52]</span></h3>
 <div class="sectioncontents">
@@ -2416,14 +2584,26 @@ section {
 <p class="sectionusage usageinfo">Used in common_func, m60_34_49_00, m60_47_41_00</p>
 <pre>SetCharacterDisableOnHitUnload(
     uint characterEntityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableCharacterDisableOnHitUnload(uint characterEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Disabled</code></code></span></li>
+<li><code>EnableCharacterDisableOnHitUnload(uint characterEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="SetDistancebasedNetworkUpdateAuthority"><a href="#SetDistancebasedNetworkUpdateAuthority" class="selfref"><code>SetDistancebasedNetworkUpdateAuthority</code></a> <span class="sectioninfo">Instruction 2004[70]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common_func, m60_34_49_00, m60_35_43_00, m60_47_41_00, m60_52_38_00</p>
 <pre>SetDistancebasedNetworkUpdateAuthority(
     uint characterEntityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableDistancebasedNetworkUpdateAuthority(uint characterEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Disabled</code></code></span></li>
+<li><code>EnableDistancebasedNetworkUpdateAuthority(uint characterEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="Unknown200471"><a href="#Unknown200471" class="selfref"><code>Unknown200471</code></a> <span class="sectioninfo">Instruction 2004[71]</span></h3>
 <div class="sectioncontents">
@@ -2438,7 +2618,13 @@ section {
 <p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m12_05_00_00, m13_00_00_00, m14_00_00_00, m16_00_00_00, m19_00_00_00, m34_11_00_00, m34_14_00_00, m60_35_42_00, m60_35_43_00, m60_37_51_00, m60_41_52_00, m60_49_55_00, m60_52_38_00</p>
 <pre>SetCharacterFadeOnEnable(
     uint characterEntityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableCharacterFadeOnEnable(uint characterEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Disabled</code></code></span></li>
+<li><code>EnableCharacterFadeOnEnable(uint characterEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="WarpCharacterAndCopyFloorWithFadeout"><a href="#WarpCharacterAndCopyFloorWithFadeout" class="selfref"><code>WarpCharacterAndCopyFloorWithFadeout</code></a> <span class="sectioninfo">Instruction 2004[74]</span></h3>
 <div class="sectioncontents">
@@ -2537,30 +2723,48 @@ section {
 <p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m12_05_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m34_11_00_00, m34_14_00_00, m35_00_00_00, m39_20_00_00, and 102 others</p>
 <pre>ChangeAssetEnableState(
     uint targetAssetEntityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableAsset(uint targetAssetEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Disabled</code></code></span></li>
+<li><code>EnableAsset(uint targetAssetEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="SetAssetTreasureState"><a href="#SetAssetTreasureState" class="selfref"><code>SetAssetTreasureState</code></a> <span class="sectioninfo">Instruction 2005[04]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common_func, m12_01_00_00, m12_03_00_00, m15_00_00_00, m16_00_00_00, m31_00_00_00, m35_00_00_00, m60_33_44_00, m60_39_53_00, m60_43_36_00, m60_48_57_00</p>
 <pre>SetAssetTreasureState(
     uint targetAssetEntityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableAssetTreasure(uint targetAssetEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Disabled</code></code></span></li>
+<li><code>EnableAssetTreasure(uint targetAssetEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
-<h3 id="InitializeObjact"><a href="#InitializeObjact" class="selfref"><code>InitializeObjact</code></a> <span class="sectioninfo">Instruction 2005[05]</span></h3>
+<h3 id="InitializeObjAct"><a href="#InitializeObjAct" class="selfref"><code>InitializeObjAct</code></a> <span class="sectioninfo">Instruction 2005[05]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common_func</p>
-<pre>InitializeObjact(
+<pre>InitializeObjAct(
     uint entityId, 
     int objactparamId, 
     int relativeTargetIdx)</pre></div></section>
 <section class="instr">
-<h3 id="SetObjactState"><a href="#SetObjactState" class="selfref"><code>SetObjactState</code></a> <span class="sectioninfo">Instruction 2005[06]</span></h3>
+<h3 id="SetObjActState"><a href="#SetObjActState" class="selfref"><code>SetObjActState</code></a> <span class="sectioninfo">Instruction 2005[06]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m12_02_00_00, m14_00_00_00, m16_00_00_00, m18_00_00_00, m34_11_00_00, m35_00_00_00, and 34 others</p>
-<pre>SetObjactState(
+<pre>SetObjActState(
     uint entityId, 
     int objactparamId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableObjAct(uint entityId, int objactparamId)</code>
+<br/><span class="conddetails">Where <code><code>state = Disabled</code></code></span></li>
+<li><code>EnableObjAct(uint entityId, int objactparamId)</code>
+<br/><span class="conddetails">Where <code><code>state = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="ReproduceAssetAnimation"><a href="#ReproduceAssetAnimation" class="selfref"><code>ReproduceAssetAnimation</code></a> <span class="sectioninfo">Instruction 2005[07]</span></h3>
 <div class="sectioncontents">
@@ -2608,16 +2812,28 @@ section {
 <p class="sectionusage usageinfo">Used in common_func, m11_00_00_00, m11_05_00_00, m11_10_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, and 16 others</p>
 <pre>SetAssetInvulnerability(
     uint targetAssetEntityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableAssetInvunerability(uint targetAssetEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Disabled</code></code></span></li>
+<li><code>EnableAssetInvunerability(uint targetAssetEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
-<h3 id="SetObjactStateAssignIdx"><a href="#SetObjactStateAssignIdx" class="selfref"><code>SetObjactStateAssignIdx</code></a> <span class="sectioninfo">Instruction 2005[14]</span></h3>
+<h3 id="SetObjActStateAssignIdx"><a href="#SetObjActStateAssignIdx" class="selfref"><code>SetObjActStateAssignIdx</code></a> <span class="sectioninfo">Instruction 2005[14]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m10_01_00_00</p>
-<pre>SetObjactStateAssignIdx(
+<pre>SetObjActStateAssignIdx(
     uint entityId, 
     int objactparamId, 
     int relativeTargetIdx, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableObjActAssignIdx(uint entityId, int objactparamId, int relativeTargetIdx)</code>
+<br/><span class="conddetails">Where <code><code>state = Disabled</code></code></span></li>
+<li><code>EnableObjActAssignIdx(uint entityId, int objactparamId, int relativeTargetIdx)</code>
+<br/><span class="conddetails">Where <code><code>state = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr unused">
 <h3 id="RerollAssetTreasure"><a href="#RerollAssetTreasure" class="selfref"><code>RerollAssetTreasure</code></a> <span class="sectioninfo">Instruction 2005[15]</span></h3>
 <div class="sectioncontents">
@@ -2845,8 +3061,8 @@ section {
 <h3 id="IssueBossRoomEntryNotification"><a href="#IssueBossRoomEntryNotification" class="selfref"><code>IssueBossRoomEntryNotification</code></a> <span class="sectioninfo">Instruction 2009[06]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common_func, m12_02_00_00, m12_03_00_00, m13_00_00_00, m16_00_00_00, m30_05_00_00, m31_00_00_00, m31_10_00_00, m31_19_00_00, m31_21_00_00, m60_51_37_00</p>
-<pre>IssueBossRoomEntryNotification(
-    byte dummy)</pre></div></section>
+<pre>IssueBossRoomEntryNotification(<span class="optarg">
+    byte dummy = 0</span>)</pre></div></section>
 <section class="instr">
 <h3 id="SendInvadingPhantomsHome"><a href="#SendInvadingPhantomsHome" class="selfref"><code>SendInvadingPhantomsHome</code></a> <span class="sectioninfo">Instruction 2009[08]</span></h3>
 <div class="sectioncontents">
@@ -2857,8 +3073,8 @@ section {
 <h3 id="SendAllPhantomsHome"><a href="#SendAllPhantomsHome" class="selfref"><code>SendAllPhantomsHome</code></a> <span class="sectioninfo">Instruction 2009[11]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m12_01_00_00, m12_02_00_00, m12_03_00_00, m30_05_00_00, m31_19_00_00, m60_34_50_00, m60_38_50_00, m60_38_51_00</p>
-<pre>SendAllPhantomsHome(
-    int dummy)</pre></div></section>
+<pre>SendAllPhantomsHome(<span class="optarg">
+    int dummy = 0</span>)</pre></div></section>
 <h2 id="2010_Sound"><a href="#2010_Sound" class="selfref">2010 - Sound</a></h2>
 <section class="instr">
 <h3 id="PlaySE"><a href="#PlaySE" class="selfref"><code>PlaySE</code></a> <span class="sectioninfo">Instruction 2010[02]</span></h3>
@@ -2909,21 +3125,39 @@ section {
 <p class="sectionusage usageinfo">Used in m10_00_00_00, m11_00_00_00, m12_01_00_00, m12_02_00_00, m31_15_00_00, m34_11_00_00, m60_50_40_00</p>
 <pre>ActivateHit(
     uint hitEntityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableHit(uint hitEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Disabled</code></code></span></li>
+<li><code>EnableHit(uint hitEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="ActivateHitBackreadMask"><a href="#ActivateHitBackreadMask" class="selfref"><code>ActivateHitBackreadMask</code></a> <span class="sectioninfo">Instruction 2011[02]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m14_00_00_00</p>
 <pre>ActivateHitBackreadMask(
     uint hitEntityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableHitBackreadMask(uint hitEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Disabled</code></code></span></li>
+<li><code>EnableHitBackreadMask(uint hitEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr unused">
 <h3 id="ActivateHitres"><a href="#ActivateHitres" class="selfref"><code>ActivateHitres</code></a> <span class="sectioninfo">Instruction 2011[03]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>ActivateHitres(
     uint hitEntityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableHitres(uint hitEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Disabled</code></code></span></li>
+<li><code>EnableHitres(uint hitEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <h2 id="2012_Map"><a href="#2012_Map" class="selfref">2012 - Map</a></h2>
 <section class="instr">
 <h3 id="ActivateMapPart"><a href="#ActivateMapPart" class="selfref"><code>ActivateMapPart</code></a> <span class="sectioninfo">Instruction 2012[01]</span></h3>
@@ -2931,13 +3165,25 @@ section {
 <p class="sectionusage usageinfo">Used in m60_40_53_00</p>
 <pre>ActivateMapPart(
     uint mapPartEntityId, 
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableMapPart(uint mapPartEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Disabled</code></code></span></li>
+<li><code>EnableMapPart(uint mapPartEntityId)</code>
+<br/><span class="conddetails">Where <code><code>state = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="SetAreaWelcomeMessageState"><a href="#SetAreaWelcomeMessageState" class="selfref"><code>SetAreaWelcomeMessageState</code></a> <span class="sectioninfo">Instruction 2012[08]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m10_01_00_00</p>
 <pre>SetAreaWelcomeMessageState(
-    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre></div></section>
+    byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
+<li><code>DisableAreaWelcomeMessage()</code>
+<br/><span class="conddetails">Where <code><code>state = Disabled</code></code></span></li>
+<li><code>EnableAreaWelcomeMessage()</code>
+<br/><span class="conddetails">Where <code><code>state = Enabled</code></code></span></li>
+</ul>
+</div></section>
 <section class="instr">
 <h3 id="ActivateGparamOverride"><a href="#ActivateGparamOverride" class="selfref"><code>ActivateGparamOverride</code></a> <span class="sectioninfo">Instruction 2012[11]</span></h3>
 <div class="sectioncontents">

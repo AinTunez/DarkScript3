@@ -324,6 +324,28 @@ namespace DarkScript3
                 return 0;
             }
 
+            private bool CheckExpectedArgs(CallExpression call, IReadOnlyList<Expression> args, string f, int docArgs, int optionalArgs)
+            {
+                if (optionalArgs == 0)
+                {
+                    if (args.Count != docArgs)
+                    {
+                        context.Error(call, $"Expected {Plural(docArgs)} for {f} but {args.Count} given");
+                        return false;
+                    }
+                }
+                else
+                {
+                    int min = docArgs - optionalArgs;
+                    if (args.Count < min || args.Count > docArgs)
+                    {
+                        context.Error(call, $"Expected {min} to {Plural(docArgs)} for {f} but {args.Count} given");
+                        return false;
+                    }
+                }
+                return true;
+            }
+
             // Returns null on error, which caller should transform to an appropriate error object.
             private CmdCond ConvertCommandCond(CallExpression call)
             {
@@ -342,22 +364,9 @@ namespace DarkScript3
                     context.Error(call, $"Unknown condition function {f}");
                     return null;
                 }
-                if (doc.OptionalArgs == 0)
+                if (!CheckExpectedArgs(call, call.Arguments, f, doc.Args.Count, doc.OptionalArgs))
                 {
-                    if (call.Arguments.Count != doc.Args.Count)
-                    {
-                        context.Error(call, $"Expected {Plural(doc.Args.Count)} for {f} but {call.Arguments.Count} given");
-                        return null;
-                    }
-                }
-                else
-                {
-                    int min = doc.Args.Count - doc.OptionalArgs;
-                    if (call.Arguments.Count < min || call.Arguments.Count > doc.Args.Count)
-                    {
-                        context.Error(call, $"Expected {min} to {Plural(doc.Args.Count)} for {f} but {call.Arguments.Count} given");
-                        return null;
-                    }
+                    return null;
                 }
                 return new CmdCond { Name = f, Args = call.Arguments.Select(a => (object)source.GetSourceNode(a)).ToList() };
             }
@@ -611,15 +620,7 @@ namespace DarkScript3
                             }
                         }
                         List<Expression> args = call.Arguments.ToList();
-                        bool hasExpectedArgs(int expected)
-                        {
-                            if (args.Count != expected)
-                            {
-                                context.Error(call, $"Expected {Plural(expected)} for {f} but {args.Count} given");
-                                return false;
-                            }
-                            return true;
-                        }
+                        bool hasExpectedArgs(int expect, int opt = 0) => CheckExpectedArgs(call, args, f, expect, opt);
                         Intermediate im = null;
                         if (f == "EndEvent" || f == "RestartEvent")
                         {
@@ -677,16 +678,36 @@ namespace DarkScript3
                                 im = new Wait { Cond = ConvertCondExpression(args[0]) };
                             }
                         }
-                        else if (f != null && docs.Functions.TryGetValue(f, out (int, int) pos))
+                        else if (f != null && (docs.Functions.ContainsKey(f) || docs.Translator.ShortDocs.ContainsKey(f)))
                         {
-                            EMEDF.InstrDoc instrDoc = docs.DOC[pos.Item1][pos.Item2];
+                            bool variableLength = false;
+                            IList<EMEDF.ArgDoc> argDocs;
+                            int optionalArgs;
+                            string cmd;
+                            // Combine processing these two for the moment. This can be made less janky in the future,
+                            // like by using InstrDoc more widely for various instruction-like things.
+                            if (docs.Functions.TryGetValue(f, out (int, int) pos))
+                            {
+                                EMEDF.InstrDoc instrDoc = docs.DOC[pos.Item1][pos.Item2];
+                                argDocs = instrDoc.Arguments;
+                                optionalArgs = instrDoc.OptionalArgs;
+                                cmd = InstructionDocs.FormatInstructionID(pos.Item1, pos.Item2);
+                                variableLength = docs.IsVariableLength(instrDoc);
+                            }
+                            else
+                            {
+                                ShortVariant variant = docs.Translator.ShortDocs[f];
+                                argDocs = variant.Args;
+                                optionalArgs = variant.OptionalArgs;
+                                cmd = variant.Cmd;
+                            }
                             object layers = null;
                             if (args.Count > 0 && args[args.Count - 1] is CallExpression lcall && lcall.Callee is Identifier lid && lid.Name == "$LAYERS")
                             {
                                 layers = source.GetSourceNode(lcall);
                                 args.RemoveAt(args.Count - 1);
                             }
-                            if (docs.IsVariableLength(instrDoc) || hasExpectedArgs(instrDoc.Arguments.Length))
+                            if (variableLength || hasExpectedArgs(argDocs.Count, optionalArgs))
                             {
                                 // Getting the int value is required when compiling things with control/negate arguments etc.
                                 object getSourceArg(Expression arg)
@@ -701,7 +722,7 @@ namespace DarkScript3
                                 // We do pretty minimal checking of arguments; further validation is saved for JS execution time.
                                 im = new Instr
                                 {
-                                    Cmd = InstructionDocs.FormatInstructionID(pos.Item1, pos.Item2),
+                                    Cmd = cmd,
                                     Name = f,
                                     Args = args.Select(getSourceArg).ToList(),
                                     Layers = layers

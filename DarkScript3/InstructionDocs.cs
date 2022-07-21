@@ -50,6 +50,7 @@ namespace DarkScript3
         public static readonly List<string> GlobalConstants = new List<string>() { "Default", "End", "Restart" };
 
         // The names of enums to globalize, used in the below two, and also in documentation/tooltip display.
+        // May be overridden in EMEDF itself.
         public List<string> EnumNamesForGlobalization = new List<string>
         {
             "ON/OFF",
@@ -106,6 +107,14 @@ namespace DarkScript3
                         throw new Exception($"{alias} is both a condition alias and a command alias");
                     }
                     AllAliases[alias] = pair.Value;
+                }
+                foreach (KeyValuePair<string, InstructionTranslator.ShortVariant> pair in Translator.ShortDocs)
+                {
+                    if (AllArgs.ContainsKey(pair.Key) || AllAliases.ContainsKey(pair.Key))
+                    {
+                        throw new Exception($"{pair.Key} is both a short instruction and function/condition");
+                    }
+                    AllArgs[pair.Key] = pair.Value.Args;
                 }
             }
         }
@@ -371,7 +380,7 @@ namespace DarkScript3
         {
             string showType(EMEDF.ArgDoc argDoc)
             {
-                string extra = argDoc.Vararg ? "*" : (argDoc.Optional ? "?" : "");
+                string extra = argDoc.Vararg ? "*" : "";
                 return $"{((ArgType)argDoc.Type).ToString().ToLowerInvariant()}{extra}";
             }
             return string.Join(", ", doc.Arguments.Select(argDoc => $"{showType(argDoc)} {argDoc.DisplayName}"));
@@ -578,7 +587,7 @@ namespace DarkScript3
             if (Functions.TryGetValue(func, out (int, int) indices))
             {
                 if (Translator.Selectors.TryGetValue(
-                    InstructionDocs.FormatInstructionID(indices.Item1, indices.Item2),
+                    FormatInstructionID(indices.Item1, indices.Item2),
                     out InstructionTranslator.ConditionSelector selector))
                 {
                     doc = selector.Cond;

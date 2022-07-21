@@ -1288,5 +1288,250 @@
         "shortname": "PlayerIsLookingAtEntity"
       }
     }
+  ],
+  "shorts": [
+    // Enable/Disable variants
+    {
+      "games": ["er"],
+      "cmd": "2000[02]",
+      "enable": "NetworkSync"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2003[03]",
+      "enable": "Generator"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2003[06]",
+      "enable": "MapHit"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2003[07]",
+      "enable": "MapVisibility"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2003[26]",
+      "enable": "MessageVisibility"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2003[70]",
+      "enable": "NetworkInteraction"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2003[80]",
+      "enable": "TextOnLoadingScreen"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2004[01]",
+      "enable": "CharacterAI"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2004[05]",
+      "enable": "Character"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2004[10]",
+      "enable": "CharacterGravity"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2004[12]",
+      "enable": "CharacterImmortality"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2004[15]",
+      "enable": "CharacterInvincibility"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2004[30]",
+      "enable": "CharacterHPBarDisplay"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2004[35]",
+      "enable": "CharacterDefaultBackread"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2004[39]",
+      "enable": "CharacterCollision"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2004[50]",
+      "enable": "LockOnPoint"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2004[69]",
+      "enable": "CharacterDisableOnHitUnload"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2004[70]",
+      "enable": "DistancebasedNetworkUpdateAuthority"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2004[73]",
+      "enable": "CharacterFadeOnEnable"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2005[03]",
+      "enable": "Asset"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2005[04]",
+      "enable": "AssetTreasure"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2005[06]",
+      "enable": "ObjAct"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2005[13]",
+      "enable": "AssetInvunerability"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2005[14]",
+      "enable": "ObjActAssignIdx"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2011[01]",
+      "enable": "Hit"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2011[02]",
+      "enable": "HitBackreadMask"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2011[03]",
+      "enable": "Hitres"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2012[01]",
+      "enable": "MapPart"
+    },
+    {
+      "games": ["er"],
+      "cmd": "2012[08]",
+      "enable": "AreaWelcomeMessage"
+    },
+
+    // Optional/dummy arguments
+    {
+      "games": ["er"],
+      "cmd": "2000[03]",
+      "opt_fields": ["Dummy"]
+    },
+    {
+      "games": ["er"],
+      "cmd": "2000[05]",
+      "opt_fields": ["Dummy"]
+    },
+    {
+      "games": ["er"],
+      // ForceAnimationPlayback
+      "cmd": "2003[18]",
+      "opt_fields": ["Comparison Type", "Number of Target Characters"]
+    },
+    {
+      "games": ["er"],
+      "cmd": "2003[21]",
+      "opt_fields": ["Dummy"]
+    },
+    {
+      "games": ["er"],
+      "cmd": "2004[38]",
+      "opt_fields": ["Dummy"]
+    },
+    {
+      "games": ["er"],
+      "cmd": "2009[06]",
+      "opt_fields": ["Dummy"]
+    },
+    {
+      "games": ["er"],
+      "cmd": "2009[11]",
+      "opt_fields": ["Dummy"]
+    },
+    // Event flag boilerplate
+    {
+      "games": ["er"],
+      "cmd": "2003[66]",
+      "shorts": [{
+        "name": "SetEventFlagID",
+        "required": [{
+          "field": "Target Event Flag Type",
+          "value": 0
+        }]
+      }, {
+        "name": "SetThisEvent",
+        "required": [{
+          "field": "Target Event Flag Type",
+          "value": 1
+        }, {
+          "field": "Target Event Flag ID",
+          "value": 0
+        }]
+      }, {
+        "name": "SetThisEventSlot",
+        "required": [{
+          "field": "Target Event Flag Type",
+          "value": 2
+        }, {
+          "field": "Target Event Flag ID",
+          "value": 0
+        }]
+      }]
+    },
+    {
+      "games": ["er"],
+      "cmd": "2003[69]",
+      "shorts": [{
+        "name": "SetNetworkconnectedEventFlagID",
+        "required": [{
+          "field": "Target Event Flag Type",
+          "value": 0
+        }]
+      }, {
+        "name": "SetNetworkconnectedThisEvent",
+        "required": [{
+          "field": "Target Event Flag Type",
+          "value": 1
+        }, {
+          "field": "Target Event Flag ID",
+          "value": 0
+        }]
+      }, {
+        "name": "SetNetworkconnectedThisEventSlot",
+        "required": [{
+          "field": "Target Event Flag Type",
+          "value": 2
+        }, {
+          "field": "Target Event Flag ID",
+          "value": 0
+        }]
+      }]
+    }
   ]
 }

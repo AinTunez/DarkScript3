@@ -6,6 +6,7 @@
 <title>Sekiro EMEDF for DarkScript3</title>
 
 <script>
+let hist = {};
 function showHide(clicked, show, hide, hidec) {
     if (show) {
         show.split(' ').forEach(c => {
@@ -25,7 +26,33 @@ function showHide(clicked, show, hide, hidec) {
         button.classList.remove('showhighlight');
     });
     clicked.classList.add('showhighlight');
+    if (clicked.id) {
+        const last = parseInt(clicked.id.slice(-1));
+        if (clicked.id.indexOf('def') >= 0) {
+            delete hist[hidec];
+        } else if (!isNaN(last)) {
+            hist[hidec] = last;
+        }
+        const entries = Object.entries(hist);
+        if (entries.length == 0) {
+            window.history.replaceState(null, null, window.location.pathname);
+        } else {
+            window.history.replaceState(null, null, '?' + entries.map(([a, b]) => `${a}=${b}`).join('&'));
+        }
+    }
 }
+window.onload = function() {
+    const url = new URL(window.location.href);
+    ['hideunused', 'hideusageinfo', 'hidecond'].forEach(name => {
+        const val = url.searchParams.get(name);
+        if (val) {
+            const button = document.getElementById(name + val);
+            if (button) {
+                button.onclick();
+            }
+        }
+    });
+};
 </script>
 <style>
 body {
@@ -144,17 +171,17 @@ section {
 <p class="toc"><a href="#Instructions">Instructions</a> | <a href="#Condition_Functions">Condition Functions</a> | <a href="#Enums">Enums</a></p>
 
 <p class="showhide">
-<button class="showbutton" onclick="showHide(this, '', 'unused', 'hideunused')">Hide unused</button> |
-<button class="showbutton showhighlight" onclick="showHide(this, 'unused', '', 'hideunused')">Show unused</button>
+<button id="hideunused1" class="showbutton" onclick="showHide(this, '', 'unused', 'hideunused')">Hide unused</button> |
+<button id="hideunuseddef" class="showbutton showhighlight" onclick="showHide(this, 'unused', '', 'hideunused')">Show unused</button>
 </p>
 <p class="showhide">
-<button class="showbutton" onclick="showHide(this, '', 'usageinfo', 'hideusageinfo')">Hide usage info</button> |
-<button class="showbutton showhighlight" onclick="showHide(this, 'usageinfo', '', 'hideusageinfo')">Show usage info</button>
+<button id="hideusageinfo1" class="showbutton" onclick="showHide(this, '', 'usageinfo', 'hideusageinfo')">Hide usage info</button> |
+<button id="hideusageinfodef" class="showbutton showhighlight" onclick="showHide(this, 'usageinfo', '', 'hideusageinfo')">Show usage info</button>
 </p>
 <p class="showhide">
-<button class="showbutton" onclick="showHide(this, 'cond', 'condinstr', 'hidecond')">Hide condition instructions</button> |
-<button class="showbutton" onclick="showHide(this, 'condinstr', 'cond', 'hidecond')">Hide condition functions</button> |
-<button class="showbutton showhighlight" onclick="showHide(this, 'condinstr cond', '', 'hidecond')">Show both</button>
+<button id="hidecond1" class="showbutton" onclick="showHide(this, 'cond', 'condinstr', 'hidecond')">Hide condition instructions</button> |
+<button id="hidecond2" class="showbutton" onclick="showHide(this, 'condinstr', 'cond', 'hidecond')">Hide condition functions</button> |
+<button id="hideconddef" class="showbutton showhighlight" onclick="showHide(this, 'condinstr cond', '', 'hidecond')">Show both</button>
 </p>
 <div class="bigsection instructions"><h1 id="Instructions"><a href="#Instructions" class="selfref">Instructions</a></h1>
 <h2 id="0_Condition_System"><a href="#0_Condition_System" class="selfref">0 - Condition - System</a></h2>

@@ -348,11 +348,33 @@ namespace DarkScript3
 
             docBox.AppendText($"{func}");
 
-            // TODO: Make ArgDoc include optional info instead of counting arguments? This requires making a shallow copy for cond functions.
+            // Optional args are just the last n args, rather than per-arg, but so far this seems fine.
             int optCount = 0;
-            if (Docs.Translator != null && Docs.Translator.CondDocs.TryGetValue(func, out InstructionTranslator.FunctionDoc funcDoc))
+            string shortText = null;
+            if (Docs.Translator != null)
             {
-                optCount = funcDoc.OptionalArgs;
+                if (Docs.Translator.CondDocs.TryGetValue(func, out InstructionTranslator.FunctionDoc funcDoc))
+                {
+                    optCount = funcDoc.OptionalArgs;
+                }
+                else if (Docs.Translator.ShortDocs.TryGetValue(func, out InstructionTranslator.ShortVariant shortVariant))
+                {
+                    optCount = shortVariant.OptionalArgs;
+                    string mainName = Docs.Translator.InstrDocs[shortVariant.Cmd].DisplayName;
+                    shortText = $"simpler version of {mainName}";
+                }
+                else if (Docs.Functions.TryGetValue(func, out (int, int) pos))
+                {
+                    EMEDF.InstrDoc instrDoc = Docs.DOC[pos.Item1][pos.Item2];
+                    optCount = instrDoc.OptionalArgs;
+                    string cmdId = InstructionDocs.FormatInstructionID(pos.Item1, pos.Item2);
+                    if (Docs.Translator.ShortSelectors.TryGetValue(cmdId, out InstructionTranslator.ShortSelector selector)
+                        && selector.Variants.Count > 0)
+                    {
+                        shortText = $"simpler version{(selector.Variants.Count == 1 ? "" : "s")}: "
+                            + string.Join(", ", selector.Variants.Select(v => v.Name));
+                    }
+                }
             }
 
             if (args.Count == 0)
@@ -382,7 +404,7 @@ namespace DarkScript3
                 }
 
                 docBox.AppendText(argDoc.DisplayName);
-                if (optional) docBox.AppendText(" (optional)", TextStyles.Comment);
+                if (optional) docBox.AppendText($" (default {argDoc.GetDisplayValue(argDoc.Default)})", TextStyles.Comment);
                 if (argDoc.Vararg) docBox.AppendText(" (vararg)", TextStyles.Comment);
 
                 if (displayEnum)
@@ -410,7 +432,11 @@ namespace DarkScript3
             List<string> altNames = Docs.GetAltFunctionNames(func);
             if (altNames != null && altNames.Count > 0)
             {
-                docBox.AppendText(Environment.NewLine + Environment.NewLine + $"(func{(altNames.Count == 1 ? "" : "s")}: {string.Join(", ", altNames)})");
+                docBox.AppendText(Environment.NewLine + Environment.NewLine + $"(condition{(altNames.Count == 1 ? "" : "s")}: {string.Join(", ", altNames)})");
+            }
+            if (shortText != null)
+            {
+                docBox.AppendText(Environment.NewLine + Environment.NewLine + $"({shortText})");
             }
         }
 

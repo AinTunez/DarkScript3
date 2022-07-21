@@ -45,6 +45,12 @@ namespace DarkScript3
         public List<ConditionDoc> Conditions { get; private set; }
 
         /// <summary>
+        /// All short instructions by name.
+        /// </summary>
+        [JsonProperty(PropertyName = "shorts")]
+        public List<ShortDoc> Shorts { get; private set; }
+
+        /// <summary>
         /// Aliases, mapping from old names to new names.
         /// </summary>
         [JsonProperty(PropertyName = "aliases")]
@@ -248,6 +254,74 @@ namespace DarkScript3
         }
 
         /// <summary>
+        /// Represents a shorter version of another instruction.
+        /// </summary>
+        public class ShortDoc
+        {
+            /// <summary>
+            /// If the same commands have different meanings in different games, the games this expression applies to.
+            /// </summary>
+            [JsonProperty(PropertyName = "games")]
+            public List<string> Games { get; private set; }
+
+            /// <summary>
+            /// The command id for the command to shorten. Required.
+            /// </summary>
+            [JsonProperty(PropertyName = "cmd")]
+            public string Cmd { get; private set; }
+
+            /// <summary>
+            /// Same as ConditionDoc opt_fields, trailing optional arguments.
+            /// </summary>
+            [JsonProperty(PropertyName = "opt_fields")]
+            public List<string> OptFields { get; private set; }
+
+            /// <summary>
+            /// Populate short values for a Disabled/Enabled enum field.
+            /// 
+            /// For a value of X, the resulting short names will be EnableX and DisableX
+            /// </summary>
+            [JsonProperty(PropertyName = "enable")]
+            public string Enable { get; private set; }
+
+            /// <summary>
+            /// Alternative names to use based on present field values.
+            /// 
+            /// These should be different from the opt_fields fields.
+            /// </summary>
+            [JsonProperty(PropertyName = "shorts")]
+            public List<ShortVersion> Shorts { get; internal set; }
+        }
+
+        /// <summary>
+        /// A shorter name for a regular instruction.
+        /// </summary>
+        public class ShortVersion
+        {
+            /// <summary>
+            /// The name of the instruction. Required.
+            /// </summary>
+            [JsonProperty(PropertyName = "name")]
+            public string Name { get; private set; }
+
+            /// <summary>
+            /// Field values which should be preset for this version to be selected. Required.
+            /// </summary>
+            [JsonProperty(PropertyName = "required")]
+            public List<FieldValue> Required { get; private set; }
+
+            // For auto-generation from Enable only
+            internal static ShortVersion ForCustomField(string name, string field, int value) => new ShortVersion
+            {
+                Name = name,
+                Required = new List<FieldValue>
+                {
+                    new FieldValue { Field = field, Value = value },
+                },
+            };
+        }
+
+        /// <summary>
         /// A specific field enum value to require in selecting a name.
         /// </summary>
         public class FieldValue
@@ -256,13 +330,13 @@ namespace DarkScript3
             /// The name of the field.
             /// </summary>
             [JsonProperty(PropertyName = "field")]
-            public string Field { get; private set; }
+            public string Field { get; internal set; }
 
             /// <summary>
             /// The field value.
             /// </summary>
             [JsonProperty(PropertyName = "value")]
-            public int Value { get; private set; }
+            public int Value { get; internal set; }
         }
     }
 }

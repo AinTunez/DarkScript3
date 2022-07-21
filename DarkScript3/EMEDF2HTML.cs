@@ -33,7 +33,7 @@ namespace DarkScript3
             Console.WriteLine($"<<<<<< Out to [{outPath}]");
             using (TextWriter writer = File.CreateText(outPath))
             {
-                writer.Write(gen.ToString());
+                writer.Write(gen.ToString().Replace("\r\n", "\n"));
             }
         }
 
@@ -158,6 +158,8 @@ namespace DarkScript3
 
                     InstructionTranslator.ConditionSelector condSelect = null;
                     docs.Translator?.Selectors.TryGetValue(id, out condSelect);
+                    InstructionTranslator.ShortSelector shortSelect = null;
+                    docs.Translator?.ShortSelectors.TryGetValue(id, out shortSelect);
 
                     List<string> tags = new List<string> { "instr" };
                     if (condSelect != null || (docs.Translator?.LabelDocs.ContainsKey(id) ?? false)) tags.Add("condinstr");
@@ -175,7 +177,7 @@ namespace DarkScript3
                         {
                             SectionExtra(extra);
                         }
-                        FunctionSignature(name, instrDoc.Arguments.ToList(), 0);
+                        FunctionSignature(name, instrDoc.Arguments.ToList(), instrDoc.OptionalArgs);
                         if (condSelect != null)
                         {
                             if (!condSelect.Cond.Hidden)
@@ -190,6 +192,16 @@ namespace DarkScript3
                                 sb.Append($"<p><code>{Escape(alt)}</code> in MattScript</p>");
                             }
                         }
+                        if (shortSelect != null && shortSelect.Variants.Count > 0)
+                        {
+                            sb.AppendLine($"<p class=\"liststart cond\">Simpler version{(shortSelect.Variants.Count == 1 ? "" : "s")}:</p><ul class=\"condlist cond\">");
+                            foreach (InstructionTranslator.ShortVariant v in shortSelect.Variants)
+                            {
+                                ShortListItem(v, instrDoc);
+                            }
+                            sb.AppendLine("</ul>");
+                        }
+
                     });
                 }
             }
@@ -604,6 +616,29 @@ namespace DarkScript3
             }
         }
 
+        private void ShortListItem(InstructionTranslator.ShortVariant v, EMEDF.InstrDoc baseDoc)
+        {
+            sb.Append($"<li><code>{Escape(v.Name)}(");
+            FunctionArguments(v.Args, v.OptionalArgs, false);
+            sb.AppendLine($")</code>");
+
+            List<string> details = new List<string>();
+            // Can move this to standard location, though val2 is not used.
+            string getReq(EMEDF.ArgDoc arg, object val, object val2)
+            {
+                string showVal(object a) => Escape(arg.GetDisplayValue(a).ToString());
+                return $"<code>{Escape(arg.DisplayName)} = {showVal(val)}{(val2 == null ? "" : " or " + showVal(val2))}</code>";
+            }
+            for (int i = 0; i < baseDoc.Arguments.Length; i++)
+            {
+                if (v.ExtraArgs.TryGetValue(i, out int val))
+                {
+                    details.Add(getReq(baseDoc.Arguments[i], val, null));
+                }
+            }
+            sb.AppendLine($"<br/><span class=\"conddetails\">Where <code>{string.Join(" and ", details)}</code></span></li>");
+        }
+
         private void BoolConditionListItem(ConditionData.BoolVersion b, InstructionTranslator.FunctionDoc doc, InstructionTranslator.FunctionDoc baseDoc)
         {
             sb.Append($"<li><code>{Escape(doc.Name)}(");
@@ -743,6 +778,7 @@ namespace DarkScript3
 ");
             sb.Append(@"
 <script>
+let hist = {};
 function showHide(clicked, show, hide, hidec) {
     if (show) {
         show.split(' ').forEach(c => {
@@ -762,7 +798,33 @@ function showHide(clicked, show, hide, hidec) {
         button.classList.remove('showhighlight');
     });
     clicked.classList.add('showhighlight');
+    if (clicked.id) {
+        const last = parseInt(clicked.id.slice(-1));
+        if (clicked.id.indexOf('def') >= 0) {
+            delete hist[hidec];
+        } else if (!isNaN(last)) {
+            hist[hidec] = last;
+        }
+        const entries = Object.entries(hist);
+        if (entries.length == 0) {
+            window.history.replaceState(null, null, window.location.pathname);
+        } else {
+            window.history.replaceState(null, null, '?' + entries.map(([a, b]) => `${a}=${b}`).join('&'));
+        }
+    }
 }
+window.onload = function() {
+    const url = new URL(window.location.href);
+    ['hideunused', 'hideusageinfo', 'hidecond'].forEach(name => {
+        const val = url.searchParams.get(name);
+        if (val) {
+            const button = document.getElementById(name + val);
+            if (button) {
+                button.onclick();
+            }
+        }
+    });
+};
 </script>
 <style>
 body {
@@ -892,8 +954,8 @@ section {
 
             sb.Append(@"
 <p class=""showhide"">
-<button class=""showbutton"" onclick=""showHide(this, '', 'unused', 'hideunused')"">Hide unused</button> |
-<button class=""showbutton showhighlight"" onclick=""showHide(this, 'unused', '', 'hideunused')"">Show unused</button>");
+<button id=""hideunused1"" class=""showbutton"" onclick=""showHide(this, '', 'unused', 'hideunused')"">Hide unused</button> |
+<button id=""hideunuseddef"" class=""showbutton showhighlight"" onclick=""showHide(this, 'unused', '', 'hideunused')"">Show unused</button>");
             if (title.Contains("Bloodborne"))
             {
                 sb.Append(" <span style=\"font-size: 80%;\">(analysis excludes Chalice Dungeons)</span>");
@@ -901,16 +963,16 @@ section {
             sb.Append(@"
 </p>
 <p class=""showhide"">
-<button class=""showbutton"" onclick=""showHide(this, '', 'usageinfo', 'hideusageinfo')"">Hide usage info</button> |
-<button class=""showbutton showhighlight"" onclick=""showHide(this, 'usageinfo', '', 'hideusageinfo')"">Show usage info</button>
+<button id=""hideusageinfo1"" class=""showbutton"" onclick=""showHide(this, '', 'usageinfo', 'hideusageinfo')"">Hide usage info</button> |
+<button id=""hideusageinfodef"" class=""showbutton showhighlight"" onclick=""showHide(this, 'usageinfo', '', 'hideusageinfo')"">Show usage info</button>
 </p>");
             if (hasConditionFunctions)
             {
                 sb.Append(@"
 <p class=""showhide"">
-<button class=""showbutton"" onclick=""showHide(this, 'cond', 'condinstr', 'hidecond')"">Hide condition instructions</button> |
-<button class=""showbutton"" onclick=""showHide(this, 'condinstr', 'cond', 'hidecond')"">Hide condition functions</button> |
-<button class=""showbutton showhighlight"" onclick=""showHide(this, 'condinstr cond', '', 'hidecond')"">Show both</button>
+<button id=""hidecond1"" class=""showbutton"" onclick=""showHide(this, 'cond', 'condinstr', 'hidecond')"">Hide condition instructions</button> |
+<button id=""hidecond2"" class=""showbutton"" onclick=""showHide(this, 'condinstr', 'cond', 'hidecond')"">Hide condition functions</button> |
+<button id=""hideconddef"" class=""showbutton showhighlight"" onclick=""showHide(this, 'condinstr cond', '', 'hidecond')"">Show both</button>
 </p>");
             }
             sb.AppendLine();
