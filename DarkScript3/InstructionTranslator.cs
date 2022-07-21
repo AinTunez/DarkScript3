@@ -16,7 +16,11 @@ namespace DarkScript3
         public Dictionary<string, FunctionDoc> CondDocs;
         // Map from x[y] to a condition selector for rewriting into a control flow structure
         public Dictionary<string, ConditionSelector> Selectors;
-        // Map from x[y] to the doc for the instruction, for condition instructions. Stored for compilation purposes.
+        // Map from short instruction name to doc
+        public Dictionary<string, ShortVariant> ShortDocs;
+        // Map from x[y] to short instruction selector.
+        public Dictionary<string, ShortSelector> ShortSelectors;
+        // Map from x[y] to the doc for the instruction. Stored for compilation purposes.
         public Dictionary<string, EMEDF.InstrDoc> InstrDocs;
         // Map from x[y] to a label num.
         public Dictionary<string, int> LabelDocs;
@@ -69,9 +73,11 @@ namespace DarkScript3
             // Mapping from instruction id, like 3[03] or 1003[11], to EMEDF doc
             // This is the shorthand used by the config.
             Dictionary<string, EMEDF.InstrDoc> instrs = emedf.Classes
-                .Where(c => c.Index < 2000 && c.Index != 1014)
                 .SelectMany(c => c.Instructions.Select(i => (InstructionDocs.FormatInstructionID(c.Index, i.Index), i)))
                 .ToDictionary(e => e.Item1, e => e.Item2);
+            HashSet<string> condInstrs = new HashSet<string>(emedf.Classes
+                .Where(c => c.Index < 2000 && c.Index != 1014)
+                .SelectMany(c => c.Instructions.Select(i => InstructionDocs.FormatInstructionID(c.Index, i.Index))));
 
             // Account for a command. Each condition/control flow statement should have a unique treatment.
             HashSet<string> visited = new HashSet<string>();
@@ -121,11 +127,44 @@ namespace DarkScript3
                 else if (requiredType != null) throw new Exception(requiredType.ToString());
                 return arg;
             }
-            // Indexed by condition function name
+            // Indexed by function name
             Dictionary<string, FunctionDoc> condDocs = new Dictionary<string, FunctionDoc>();
+            Dictionary<string, ShortVariant> shortDocs = new Dictionary<string, ShortVariant>();
             // Indexed by command id
             Dictionary<string, ConditionSelector> selectors = new Dictionary<string, ConditionSelector>();
+            Dictionary<string, ShortSelector> shortSelectors = new Dictionary<string, ShortSelector>();
             int asInt(object obj) => int.Parse(obj.ToString());
+            void addShortVariant(ShortSelector selector, ShortDoc shortDoc, ShortVersion v)
+            {
+                string cmd = shortDoc.Cmd;
+                EMEDF.InstrDoc doc = instrs[cmd];
+                ShortVariant variant = new ShortVariant
+                {
+                    Cmd = shortDoc.Cmd,
+                    Name = v.Name,
+                };
+                List<int> ignore = new List<int>();
+                foreach (FieldValue req in v.Required)
+                {
+                    int reqArg = expectArg(cmd, req.Field);
+                    variant.ExtraArgs[reqArg] = req.Value;
+                    ignore.Add(reqArg);
+                }
+                variant.Args = doc.Arguments.Where((a, i) => !ignore.Contains(i)).ToList();
+                // There is not an optional relationship between args and optional args, like there is with condition functions
+                // (TODO maybe we can remove that now), so just do it at the end.
+                if (shortDoc.OptFields != null)
+                {
+                    int optStart = variant.Args.Count - shortDoc.OptFields.Count;
+                    bool matching = shortDoc.OptFields.Select((a, i) => a == variant.Args[optStart + i].Name).All(b => b);
+                    if (matching)
+                    {
+                        variant.OptionalArgs = shortDoc.OptFields.Count;
+                    }
+                }
+                selector.Variants.Add(variant);
+                shortDocs[variant.Name] = variant;
+            }
             void addVariants(ConditionSelector selector, ConditionDoc cond, ControlType use, string cmd, int control = -1)
             {
                 if (selector.Variants.ContainsKey(cmd)) throw new Exception($"Already added variants of {cond.Name} for {cmd}");
@@ -203,10 +242,6 @@ namespace DarkScript3
                     // In all cases, they can be established from the COND variant.
                     if (use == ControlType.COND && cond.OptFields != null)
                     {
-                        for (int i = 0; i < cond.OptFields.Count; i++)
-                        {
-                            if (doc.Arguments[doc.Arguments.Length - cond.OptFields.Count + i].Name != cond.OptFields[i]) break;
-                        }
                         bool matching = cond.OptFields.Select((a, i) => a == doc.Arguments[doc.Arguments.Length - cond.OptFields.Count + i].Name).All(b => b);
                         // Missing opt args can happen when "# of target character"-type arguments get added over time.
                         // This is mostly a pretty-printing feature. so it might be tedious to specify each individual change between games.
@@ -263,6 +298,37 @@ namespace DarkScript3
                     addVariant(cv: version);
                 }
                 addVariant();
+            }
+            foreach (ShortDoc shortDoc in conds.Shorts ?? new List<ShortDoc>())
+            {
+                if (shortDoc.Games != null && !shortDoc.Games.Contains(game)) continue;
+                if (!processInfo("Short", shortDoc.Cmd)) continue;
+                EMEDF.InstrDoc doc = instrs[shortDoc.Cmd];
+                ShortSelector selector = new ShortSelector { Cmd = shortDoc.Cmd };
+                shortSelectors[shortDoc.Cmd] = selector;
+                if (shortDoc.OptFields != null)
+                {
+                    // Unlike condition docs, this length is always fixed.
+                    int optStart = doc.Arguments.Length - shortDoc.OptFields.Count;
+                    bool matching = shortDoc.OptFields.Select((a, i) => a == doc.Arguments[optStart + i].Name).All(b => b);
+                    if (matching)
+                    {
+                        doc.OptionalArgs = shortDoc.OptFields.Count;
+                    }
+                }
+                if (shortDoc.Enable != null)
+                {
+                    EMEDF.ArgDoc enableDoc = doc.Arguments.Where(a => a.EnumName == "Disabled/Enabled").FirstOrDefault();
+                    if (enableDoc == null) throw new Exception($"No Disabled/Enabled field found to make short version for {shortDoc.Cmd} {doc.Name}");
+                    if (shortDoc.Shorts == null) shortDoc.Shorts = new List<ShortVersion>();
+                    shortDoc.Shorts.Add(ShortVersion.ForCustomField($"Disable{shortDoc.Enable}", enableDoc.Name, 0));
+                    shortDoc.Shorts.Add(ShortVersion.ForCustomField($"Enable{shortDoc.Enable}", enableDoc.Name, 1));
+                }
+                if (shortDoc.Shorts == null) continue;
+                foreach (ShortVersion version in shortDoc.Shorts)
+                {
+                    addShortVariant(selector, shortDoc, version);
+                }
             }
             foreach (ConditionDoc cond in conds.Conditions)
             {
@@ -328,7 +394,7 @@ namespace DarkScript3
                 }
 #endif
             }
-            string undocError = string.Join(", ", instrs.Where(e => !visited.Contains(e.Key)).Select(e => $"{e.Key}:{e.Value.Name}"));
+            string undocError = string.Join(", ", condInstrs.Where(i => !visited.Contains(i)).Select(i => $"{i}:{instrs[i].Name}"));
             if (undocError.Length > 0)
             {
                 // This doesn't have to be an error, but it does mean that condition group decompilation is impossible when these commands are present.
@@ -355,6 +421,8 @@ namespace DarkScript3
             {
                 CondDocs = condDocs,
                 Selectors = selectors,
+                ShortDocs = shortDocs,
+                ShortSelectors = shortSelectors,
                 InstrDocs = instrs,
                 LabelDocs = labels,
                 DisplayAliases = aliases,
@@ -465,7 +533,35 @@ namespace DarkScript3
             // Mainly NoOp and JSStatement shouldn't be passed in here
             if (im is Instr imInstr)
             {
-                // Maybe validate Instrs here? Or just do that in AST conversion
+                // Can do more Instr validation here, though it's mainly just required here for short variants.
+                // If short variants are defined in JS, they strictly speaking don't need any transformation at all... that may be preferable.
+                if (ShortDocs.TryGetValue(imInstr.Name, out ShortVariant variant))
+                {
+                    string cmd = variant.Cmd;
+                    EMEDF.InstrDoc instrDoc = InstrDocs[cmd];
+                    Instr instr = new Instr
+                    {
+                        Cmd = cmd,
+                        Name = instrDoc.DisplayName,
+                        Args = Enumerable.Repeat((object)null, instrDoc.Arguments.Length).ToList(),
+                        Layers = imInstr.Layers,
+                    };
+                    variant.SetInstrArgs(instr, imInstr);
+                    return instr;
+                }
+                else if (InstrDocs.TryGetValue(imInstr.Cmd, out EMEDF.InstrDoc optDoc)
+                    && optDoc.OptionalArgs > 0 && imInstr.Args.Count < optDoc.Arguments.Length)
+                {
+                    // Make a defensive copy (should use clone?)
+                    int missingArgs = optDoc.Arguments.Length - imInstr.Args.Count;
+                    return new Instr
+                    {
+                        Cmd = imInstr.Cmd,
+                        Name = imInstr.Name,
+                        Args = imInstr.Args.Concat(PadOptionalDefaultArgs(optDoc.Arguments, missingArgs, optDoc.OptionalArgs)).ToList(),
+                        Layers = imInstr.Layers,
+                    };
+                }
                 return imInstr;
             }
             else if (im is Label label)
@@ -542,6 +638,18 @@ namespace DarkScript3
                 if (instr.Layers != null) throw new FancyNotSupportedException($"Control flow instruction with layers is not supported", instr);
                 return new Label { Num = label };
             }
+            else if (ShortSelectors.TryGetValue(instr.Cmd, out ShortSelector shortSelector))
+            {
+                ShortVariant variant = shortSelector.GetVariant(instr);
+                if (variant != null)
+                {
+                    return variant.ExtractInstrArgs(instr);
+                }
+            }
+            if (InstrDocs.TryGetValue(instr.Cmd, out EMEDF.InstrDoc instrDoc) && instrDoc.OptionalArgs > 0)
+            {
+                HideOptionalDefaultArgs(instr.Args, instrDoc.Arguments, instrDoc.OptionalArgs);
+            }
             return instr;
         }
 
@@ -573,6 +681,35 @@ namespace DarkScript3
             throw new FancyNotSupportedException($"Required plain integer or enum for decompilation but found {instr.Args[index]}", instr);
         }
 
+        private static void HideOptionalDefaultArgs(List<object> cmdArgs, IList<EMEDF.ArgDoc> docArgs, int optionalArgs)
+        {
+            // Hide default optional arguments here, all-or-nothing. This makes for nicer output.
+            if (optionalArgs > 0)
+            {
+                int hidable;
+                for (hidable = 0; hidable < optionalArgs; hidable++)
+                {
+                    int pos = docArgs.Count - 1 - hidable;
+                    // If arg exists and is default value, it can be hidden
+                    if (pos >= cmdArgs.Count) break;
+                    if (!TryExtractIntArg(cmdArgs[pos], out int arg) || arg.ToString() != docArgs[pos].Default.ToString()) break;
+                }
+                if (hidable == optionalArgs)
+                {
+                    cmdArgs.RemoveRange(docArgs.Count - optionalArgs, optionalArgs);
+                }
+            }
+        }
+
+        private static IEnumerable<object> PadOptionalDefaultArgs(IList<EMEDF.ArgDoc> docArgs, int missingArgs, int optionalArgs)
+        {
+            if (missingArgs > 0 && missingArgs <= optionalArgs && missingArgs <= docArgs.Count)
+            {
+                return Enumerable.Range(docArgs.Count - missingArgs, missingArgs).Select(i => (object)docArgs[i].Default);
+            }
+            return new object[] { };
+        }
+
         // A specific pair of function and command.
         public class ConditionVariant
         {
@@ -595,6 +732,7 @@ namespace DarkScript3
 
             public void SetInstrArgs(Instr instr, Cond cond, object controlVal, int negateVal)
             {
+                // Some args are filled in as we go, others are added into extraArgs to be zipped with missing spots at the end.
                 List<object> extraArgs = new List<object>();
                 if (cond is CondRef condRef)
                 {
@@ -638,16 +776,19 @@ namespace DarkScript3
                 {
                     instr.Args[req.Key] = req.Value;
                 }
+                // All control/fixed args have been filled by now, now just to fill in user-specified ones (extraArgs).
+                // These should match one-for-one with missing instr.Args, except in the case of optional args, which can pad extraArgs.
                 List<int> emptyArgIndices = instr.Args.Select((a, i) => (a, i)).Where(e => e.Item1 == null).Select(e => e.Item2).ToList();
                 if (emptyArgIndices.Count != extraArgs.Count)
                 {
-                    // If there are optional args, add default extra args
+                    // If there are optional args, add defaults to extra args
                     int missingArgs = emptyArgIndices.Count - extraArgs.Count;
                     if (missingArgs > 0 && missingArgs <= Doc.OptionalArgs)
                     {
-                        extraArgs.AddRange(Doc.Args.GetRange(Doc.Args.Count - missingArgs, missingArgs).Select(argDoc => (object)argDoc.Default));
+                        extraArgs.AddRange(PadOptionalDefaultArgs(Doc.Args, missingArgs, Doc.OptionalArgs));
+                        // Doc.Args.GetRange(Doc.Args.Count - missingArgs, missingArgs).Select(argDoc => (object)argDoc.Default));
                     }
-                    // This should be accounted for in JS compiler check.
+                    // This should be accounted for in JS compiler check, before getting to here.
                     else throw new Exception($"Have ({string.Join(", ", extraArgs)}) from {cond} to fit into {instr} but mismatch in count");
                 }
                 for (int i = 0; i < emptyArgIndices.Count; i++)
@@ -705,22 +846,7 @@ namespace DarkScript3
                         cmd.Args.Add(instr.Args[i]);
                     }
                 }
-                // Hide default optional arguments here, all-or-nothing. This makes for nicer output.
-                if (Doc.OptionalArgs > 0)
-                {
-                    int hidable = 0;
-                    for (hidable = 0; hidable < Doc.OptionalArgs; hidable++)
-                    {
-                        int pos = Doc.Args.Count - 1 - hidable;
-                        // If arg exists and is default value, it can be hidden
-                        if (pos >= cmd.Args.Count) break;
-                        if (!TryExtractIntArg(cmd.Args[pos], out int arg) || arg.ToString() != Doc.Args[pos].Default.ToString()) break;
-                    }
-                    if (hidable == Doc.OptionalArgs)
-                    {
-                        cmd.Args.RemoveRange(Doc.Args.Count - Doc.OptionalArgs, Doc.OptionalArgs);
-                    }
-                }
+                HideOptionalDefaultArgs(cmd.Args, Doc.Args, Doc.OptionalArgs);
                 CondIntermediate ret;
                 if (Variant == ControlType.COND)
                 {
@@ -819,6 +945,97 @@ namespace DarkScript3
                     if (version.True == arg || version.False == arg) return variant;
                 }
                 throw new ArgumentException($"No acceptable condition variant found for {Cond.Name} and {instr}");
+            }
+        }
+
+        // A pair of instruction and short instruction.
+        // This has all the combined data, rather than using something like FunctionDoc.
+        public class ShortVariant
+        {
+            // Short name
+            public string Name { get; set; }
+            // Command id (may have multiple names)
+            public string Cmd { get; set; }
+            // Args for this condition function when it appears decompiled or in source.
+            public List<EMEDF.ArgDoc> Args { get; set; }
+            // Args which have an assumed value.
+            public Dictionary<int, int> ExtraArgs = new Dictionary<int, int>();
+            // The number of args at the end which are optional and may take on default values.
+            public int OptionalArgs { get; set; }
+
+            public Instr ExtractInstrArgs(Instr instr)
+            {
+                Instr ret = new Instr
+                {
+                    Name = Name,
+                    Cmd = Cmd,
+                };
+                for (int i = 0; i < instr.Args.Count; i++)
+                {
+                    if (!ExtraArgs.ContainsKey(i))
+                    {
+                        ret.Args.Add(instr.Args[i]);
+                    }
+                }
+                HideOptionalDefaultArgs(ret.Args, Args, OptionalArgs);
+                return ret;
+            }
+
+            public void SetInstrArgs(Instr instr, Instr shortInstr)
+            {
+                // The approach here is similar to ConditionVariant, since there's the same distinction between fixed and user-given args.
+                List<object> extraArgs = shortInstr.Args.ToList();
+                foreach (KeyValuePair<int, int> req in ExtraArgs)
+                {
+                    instr.Args[req.Key] = req.Value;
+                }
+                List<int> emptyArgIndices = instr.Args.Select((a, i) => (a, i)).Where(e => e.Item1 == null).Select(e => e.Item2).ToList();
+                if (emptyArgIndices.Count != extraArgs.Count)
+                {
+                    int missingArgs = emptyArgIndices.Count - extraArgs.Count;
+                    if (missingArgs > 0 && missingArgs <= OptionalArgs)
+                    {
+                        extraArgs.AddRange(PadOptionalDefaultArgs(Args, missingArgs, OptionalArgs));
+                    }
+                    // This should be accounted for in JS compiler check, before getting to here.
+                    else throw new Exception($"Have ({string.Join(", ", extraArgs)}) from {Name} to fit into {instr} but mismatch in count");
+                }
+                for (int i = 0; i < emptyArgIndices.Count; i++)
+                {
+                    instr.Args[emptyArgIndices[i]] = extraArgs[i];
+                }
+            }
+        }
+
+        public class ShortSelector
+        {
+            // Command id (may have multiple short versions)
+            public string Cmd { get; set; }
+            // The different short versions which may apply
+            public List<ShortVariant> Variants = new List<ShortVariant>();
+
+            public ShortVariant GetVariant(Instr instr)
+            {
+                if (Cmd != instr.Cmd)
+                {
+                    throw new ArgumentException($"Can't use selector for {Cmd} to handle {instr}");
+                }
+                foreach (ShortVariant variant in Variants)
+                {
+                    // If does not match fixed enum, this variant can't be used
+                    bool extraOkay = true;
+                    foreach (KeyValuePair<int, int> req in variant.ExtraArgs)
+                    {
+                        if (instr.Args[req.Key] is ParamArg || !TryExtractIntArg(instr.Args[req.Key], out int val) || val != req.Value)
+                        {
+                            extraOkay = false;
+                        }
+                    }
+                    if (!extraOkay) continue;
+                    return variant;
+                }
+                // It is definitely okay to not find a variant for instructions
+                return null;
             }
         }
 

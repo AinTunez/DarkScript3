@@ -73,6 +73,11 @@ namespace DarkScript3
 
             [JsonIgnore]
             public string DisplayName { get; set; }
+
+            // Number of optional args at the end.
+            // Currently only implemented in MattScript.
+            [JsonIgnore]
+            public int OptionalArgs { get; set; }
         }
 
         public class ArgDoc
@@ -126,10 +131,6 @@ namespace DarkScript3
 
             [JsonIgnore]
             public EnumDoc EnumDoc { get; set; }
-
-            // TODO: Populate this for condition functions. It does not apply to any real instructions.
-            [JsonIgnore]
-            public bool Optional { get; set; }
 
             public object GetDisplayValue(object val) => EnumDoc == null ? val : EnumDoc.GetDisplayValue(val);
         }

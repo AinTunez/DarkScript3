@@ -852,10 +852,15 @@ namespace DarkScript3
                 return;
             }
             string path = $"{name}-emedf.html";
+            string suffix = "";
+            if (CurrentEditor != null && CurrentEditor.MayBeFancy())
+            {
+                suffix = "?hidecond=1";
+            }
             if (File.Exists(path))
-                System.Diagnostics.Process.Start(path);
+                System.Diagnostics.Process.Start(path + suffix);
             else if (File.Exists($@"Resources\{path}"))
-                System.Diagnostics.Process.Start($@"Resources\{path}");
+                System.Diagnostics.Process.Start($@"Resources\{path}" + suffix);
             else
                 MessageBox.Show($"No EMEDF documentation found named {path}");
         }

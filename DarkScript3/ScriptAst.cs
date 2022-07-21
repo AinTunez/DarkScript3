@@ -278,6 +278,7 @@ namespace DarkScript3
         public class Instr : Intermediate
         {
             // The actual instruction from the source. Only used in decompilation (compilation uses V8).
+            // TODO: Is this actually used anywhere?
             public Instruction Inner { get; set; }
             // The command id, like 3[00], from the source.
             public string Cmd { get; set; }
