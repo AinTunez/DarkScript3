@@ -26,7 +26,6 @@ namespace DarkScript3
         private SharedControls SharedControls;
         private AutocompleteMenu InstructionMenu;
         private Regex globalConstantRegex;
-        private JSAutoIndenter autoIndenter; 
 
         private Dictionary<string, (string title, string text)> ToolTips = new Dictionary<string, (string, string)>();
 
@@ -38,7 +37,6 @@ namespace DarkScript3
             Settings = settings;
             FileVersion = fileVersion;
             globalConstantRegex = JSRegex.GetGlobalConstantRegex(InstructionDocs.GlobalConstants.Concat(Docs.GlobalEnumConstants.Keys));
-            autoIndenter = new JSAutoIndenter(editor);
             Dock = DockStyle.Fill;
             BackColor = TextStyles.BackColor;
             InitializeComponent();
@@ -48,6 +46,8 @@ namespace DarkScript3
             editor.HotkeysMapping.Add(Keys.Control | Keys.J, FCTBAction.CustomAction2);
             editor.HotkeysMapping.Add(Keys.Control | Keys.D1, FCTBAction.CustomAction3);
             editor.HotkeysMapping.Add(Keys.Control | Keys.D, FCTBAction.CustomAction4);
+            editor.HotkeysMapping.Add(Keys.Control | Keys.Y, FCTBAction.Redo);
+            editor.HotkeysMapping.Add(Keys.Control | Keys.Shift | Keys.Z, FCTBAction.Redo);
             editor.Text = text;
             editor.ClearUndo();
             CodeChanged = false;
@@ -460,11 +460,12 @@ namespace DarkScript3
             // For being within function args rather than matching the exact string, check if inside parens, but not nested ones.
             // Matching IfThing(0^,1) but not WaitFor(Thi^ng(0,1))
             string funcName;
+            int argIndex = -1;
             if (arguments.CharBeforeStart == '(' && editor.GetRange(arguments.End, arguments.End).CharAfterStart != '(')
             {
                 // Scan leftward through arguments until no commas remain.
                 // This does not work with nested calls, like IfThing(getMyCustomConstant(), ^1)
-                int argIndex = 0;
+                argIndex = 0;
                 Range arg = editor.Selection.GetFragment(@"[^)(\n,]");
                 while (arg.CharBeforeStart == ',')
                 {
@@ -482,7 +483,45 @@ namespace DarkScript3
                 Range func = editor.Selection.GetFragment(@"[\w\$]");
                 funcName = func.Text;
             }
-            SharedControls.LoadDocText(funcName, Docs, false);
+            SharedControls.LoadDocText(funcName, argIndex, Docs, false);
+        }
+
+        private void ShowTip(string s, Point p, int argIndex = -1)
+        {
+            ToolControl InfoTip = SharedControls.InfoTip;
+            if (argIndex > -1)
+            {
+                string[] args = Regex.Split(s, @"\s*,\s");
+                if (argIndex > args.Length - 1)
+                    args[args.Length - 1] = "\u2b9a " + args[args.Length - 1];
+                else
+                    args[argIndex] = "\u2b9a " + args[argIndex];
+                InfoTip.SetText(string.Join(", ", args));
+            }
+            else
+            {
+                InfoTip.SetText(s);
+            }
+
+            InfoTip.ShowAtPosition(editor, p, editor.CharHeight);
+            editor.Focus();
+        }
+
+        private void ShowArgToolTip(string funcName, Range arguments, int argument = -1)
+        {
+            if (!Properties.Settings.Default.ArgTooltip)
+            {
+                return;
+            }
+            if (Docs.AllAliases.TryGetValue(funcName, out string realName))
+            {
+                funcName = realName;
+            }
+            if (Docs.AllArgs.ContainsKey(funcName))
+            {
+                Point point = editor.PlaceToPoint(arguments.Start);
+                ShowTip(ArgString(funcName), point, argument);
+            }
         }
 
         private void Editor_VisibleRangeChangedDelayed(object sender, EventArgs e)
@@ -497,8 +536,20 @@ namespace DarkScript3
             {
                 return;
             }
+            // Require Ctrl to be pressed when mouse down started, otherwise Ctrl+Mousedown+Select+Mouseup+C, to copy text, will jump
+            // If this gets complicated enough, probably just copy Visual Studio
+            if (!ctrlMouseDown)
+            {
+                return;
+            }
             Place place = editor.PointToPlace(e.Location);
             JumpToEvent(place);
+        }
+
+        private bool ctrlMouseDown;
+        private void editor_MouseDown(object sender, MouseEventArgs e)
+        {
+            ctrlMouseDown = (ModifierKeys & Keys.Control) != 0;
         }
 
         public void ReplaceFloat()
@@ -521,21 +572,19 @@ namespace DarkScript3
                 return;
             }
             float f = BitConverter.ToSingle(BitConverter.GetBytes(val), 0);
-            if (true)
+            // Temporarily disable this until it's actually supported in initializations
+            string fval = f.ToString("R");
+            int val2 = BitConverter.ToInt32(BitConverter.GetBytes(float.Parse(fval)), 0);
+            if (val != val2)
             {
-                string ret = f.ToString("R");
-                ScrollDialog.Show(ParentForm, $"Integer {text} is equivalent to float {ret}", "Parse float result");
+                MessageBox.Show($"Integer value {text} does not correspond to a unique float ({fval} loses precision)", "Parse float failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else
+            DialogResult res = ScrollDialog.Show(ParentForm, $"Integer {text} is equivalent to float {fval}\n\nReplace it for event initialization? (Don't do this unless you're sure it's a float. Typed initializations are coming in a future version.)", "Confirm replacement");
+            if (res == DialogResult.OK)
             {
-                // Temporarily disable this until it's actually supported in initializations
-                string ret = f.ToString("R");
-                DialogResult res = ScrollDialog.Show(ParentForm, $"Replace \"{text}\" with \"{ret}\"?", "Confirm replacement");
-                if (res == DialogResult.OK)
-                {
-                    editor.Selection = numRange;
-                    editor.InsertText(ret);
-                }
+                editor.Selection = numRange;
+                editor.InsertText($"floatArg({fval})");
             }
         }
 
@@ -751,41 +800,6 @@ namespace DarkScript3
                 editor.Range.SetStyle(TextStyles.HighlightToken, regex);
             }
         }
-
-        private void ShowTip(string s, Point p, int argIndex = -1)
-        {
-            ToolControl InfoTip = SharedControls.InfoTip;
-            if (argIndex > -1)
-            {
-                string[] args = Regex.Split(s, @"\s*,\s");
-                if (argIndex > args.Length - 1)
-                    args[args.Length - 1] = "\u2b9a " + args[args.Length - 1];
-                else
-                    args[argIndex] = "\u2b9a " + args[argIndex];
-                InfoTip.SetText(string.Join(", ", args));
-            }
-            else
-            {
-                InfoTip.SetText(s);
-            }
-
-            InfoTip.ShowAtPosition(editor, p, editor.CharHeight);
-            editor.Focus();
-        }
-
-        private void ShowArgToolTip(string funcName, Range arguments, int argument = -1)
-        {
-            if (Docs.AllAliases.TryGetValue(funcName, out string realName))
-            {
-                funcName = realName;
-            }
-            if (Docs.AllArgs.ContainsKey(funcName))
-            {
-                Point point = editor.PlaceToPoint(arguments.Start);
-                ShowTip(ArgString(funcName), point, argument);
-            }
-        }
-
         private Bitmap MakeColorImage(Color color)
         {
             var map = new Bitmap(16, 16);
@@ -829,19 +843,60 @@ namespace DarkScript3
 
         private void editor_AutoIndentNeeded(object sender, AutoIndentEventArgs args)
         {
-            autoIndenter.IndentJavaScript(sender, args);
+            JSAutoIndentNeeded(args);
         }
 
-        // FastColoredTextBox couples together syntax highlighting and auto-indent logic,
-        // but we only need the latter, which is available in a protected method in SyntaxHighlighter.
-        // Hackily make it accessible.
-        private class JSAutoIndenter : SyntaxHighlighter
+        private void JSAutoIndentNeeded(AutoIndentEventArgs args)
         {
-            public JSAutoIndenter(FastColoredTextBox tb) : base(tb) { }
-
-            public void IndentJavaScript(object sender, AutoIndentEventArgs args)
+            // From https://github.com/PavelTorgashov/FastColoredTextBox/blob/master/FastColoredTextBox/SyntaxHighlighter.cs
+            // CSharpAutoIndentNeeded as of Oct 2021.
+            // block {}
+            if (Regex.IsMatch(args.LineText, @"^[^""']*\{.*\}[^""']*$"))
             {
-                CSharpAutoIndentNeeded(sender, args);
+                return;
+            }
+            // start of block {}
+            bool startBlock = Regex.IsMatch(args.LineText, @"^[^""']*\{");
+            // end of block {}
+            bool endBlock = Regex.IsMatch(args.LineText, @"}[^""']*$");
+            if (startBlock && endBlock)
+            {
+                // Unlike C#, JS can have both on one line, like "} else {"
+                args.Shift = -args.TabLength;
+                return;
+            }
+            if (startBlock)
+            {
+                args.ShiftNextLines = args.TabLength;
+                return;
+            }
+            if (endBlock)
+            {
+                args.Shift = -args.TabLength;
+                args.ShiftNextLines = -args.TabLength;
+                return;
+            }
+            // label
+            if (Regex.IsMatch(args.LineText, @"^\s*\w+\s*:\s*($|//)") &&
+                !Regex.IsMatch(args.LineText, @"^\s*default\s*:"))
+            {
+                args.Shift = -args.AbsoluteIndentation; // -args.TabLength;
+                return;
+            }
+            // some statements: case, default
+            if (Regex.IsMatch(args.LineText, @"^\s*(case|default)\b.*:\s*($|//)"))
+            {
+                args.Shift = -args.TabLength / 2;
+                return;
+            }
+            // is unclosed operator in previous line ?
+            if (Regex.IsMatch(args.PrevLineText, @"^\s*(if|for|foreach|while|[\}\s]*else)\b[^{]*$"))
+            {
+                if (!Regex.IsMatch(args.PrevLineText, @"(;\s*$)|(;\s*//)")) //operator is unclosed
+                {
+                    args.Shift = args.TabLength;
+                    return;
+                }
             }
         }
 
@@ -908,6 +963,10 @@ namespace DarkScript3
 
         public void Cut() => editor.Cut();
 
+        public void Copy() => editor.Copy();
+
+        public void Paste() => editor.Paste();
+
         public void ShowReplaceDialog() => editor.ShowReplaceDialog();
 
         public void SelectAll() => editor.SelectAll();
@@ -930,8 +989,6 @@ namespace DarkScript3
                 SharedControls.ShowFindDialog(text);
             }
         }
-
-        public void Copy() => editor.Copy();
 
         public void ShowEMEVDData()
         {

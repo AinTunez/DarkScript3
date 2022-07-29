@@ -82,7 +82,7 @@ namespace DarkScript3
             HideTip();
             Editors.Remove(editor);
             docBox.Clear();
-            currentFuncDoc = null;
+            currentDoc = (null, -1);
         }
 
         public void SwitchEditor(EditorGUI editor)
@@ -90,7 +90,7 @@ namespace DarkScript3
             HideTip();
             BFF.tb = editor.editor;
             docBox.Clear();
-            currentFuncDoc = null;
+            currentDoc = (null, -1);
             editor.RefreshGlobalStyles(docBox);
             // Add last as a hint for which global styles to use
             Editors.Remove(editor);
@@ -173,7 +173,17 @@ namespace DarkScript3
         {
             foreach (FastColoredTextBox tb in AllTextBoxes)
             {
-                tb.Font = (Font)font.Clone();
+                // Font sharing leads to post-disposal access, avoid it at all costs
+                Font f = (Font)font.Clone();
+                if (tb == InfoTip.tipBox)
+                {
+                    // Heuristic for less intrusive tips: above 8pt, show at 80% of size
+                    if (f.SizeInPoints > 8)
+                    {
+                        f = new Font(f.Name, Math.Max(8f, f.SizeInPoints * 0.8f));
+                    }
+                }
+                tb.Font = f;
             }
             TextStyles.Font = font;
         }
@@ -267,28 +277,38 @@ namespace DarkScript3
             e.ChangedRange.SetStyle(TextStyles.EnumType, new Regex(@"[<>]"));
         }
 
-        private Action<(string, InstructionDocs)> loadDocTextDebounce;
-        public void LoadDocText(string func, InstructionDocs docs, bool immediate)
+        private Action<(string, int, InstructionDocs)> loadDocTextDebounce;
+        // Should probably make Debounce more idempotency-aware, but this is a cheap way to avoid cancelling unnecessarily
+        private (string, int) callingDoc;
+        public void LoadDocText(string func, int argIndex, InstructionDocs docs, bool immediate)
         {
+            if (!Properties.Settings.Default.ArgDocbox)
+            {
+                argIndex = -1;
+            }
             if (immediate)
             {
-                LoadDocTextInternal((func, docs));
+                LoadDocTextInternal((func, argIndex, docs));
             }
             else
             {
                 if (loadDocTextDebounce == null)
                 {
-                    loadDocTextDebounce = Debounce((Action<(string, InstructionDocs)>)LoadDocTextInternal, 50);
+                    loadDocTextDebounce = Debounce((Action<(string, int, InstructionDocs)>)LoadDocTextInternal, 50);
                 }
-                loadDocTextDebounce((func, docs));
+                (string, int) call = (func, argIndex);
+                if (call != callingDoc)
+                {
+                    loadDocTextDebounce((func, argIndex, docs));
+                    callingDoc = call;
+                }
             }
         }
 
-        private string currentFuncDoc;
-        private void LoadDocTextInternal((string, InstructionDocs) input)
+        private (string, int) currentDoc;
+        private void LoadDocTextInternal((string, int, InstructionDocs) input)
         {
-            string func = input.Item1;
-            InstructionDocs Docs = input.Item2;
+            (string func, int argIndex, InstructionDocs Docs) = input;
             if (func == null)
             {
                 docBox.Clear();
@@ -304,8 +324,9 @@ namespace DarkScript3
             if (!Docs.AllArgs.TryGetValue(func, out args) && !ScriptAst.ReservedWords.TryGetValue(func, out builtin)) return;
             if (builtin != null && builtin.Doc == null) return;
 
-            if (currentFuncDoc == func) return;
-            currentFuncDoc = func;
+            (string, int) newDoc = (func, argIndex);
+            if (currentDoc == newDoc) return;
+            currentDoc = newDoc;
             docBox.Clear();
 
             if (builtin != null)
@@ -347,6 +368,7 @@ namespace DarkScript3
             }
 
             docBox.AppendText($"{func}");
+            Place? argPlace = null;
 
             // Optional args are just the last n args, rather than per-arg, but so far this seems fine.
             int optCount = 0;
@@ -361,18 +383,21 @@ namespace DarkScript3
                 {
                     optCount = shortVariant.OptionalArgs;
                     string mainName = Docs.Translator.InstrDocs[shortVariant.Cmd].DisplayName;
-                    shortText = $"simpler version of {mainName}";
+                    shortText = $"{(shortVariant.Hidden ? "deprecated" : "simpler")} version of {mainName}";
                 }
                 else if (Docs.Functions.TryGetValue(func, out (int, int) pos))
                 {
                     EMEDF.InstrDoc instrDoc = Docs.DOC[pos.Item1][pos.Item2];
                     optCount = instrDoc.OptionalArgs;
                     string cmdId = InstructionDocs.FormatInstructionID(pos.Item1, pos.Item2);
-                    if (Docs.Translator.ShortSelectors.TryGetValue(cmdId, out InstructionTranslator.ShortSelector selector)
-                        && selector.Variants.Count > 0)
+                    if (Docs.Translator.ShortSelectors.TryGetValue(cmdId, out InstructionTranslator.ShortSelector selector))
                     {
-                        shortText = $"simpler version{(selector.Variants.Count == 1 ? "" : "s")}: "
-                            + string.Join(", ", selector.Variants.Select(v => v.Name));
+                        List<InstructionTranslator.ShortVariant> shorts = selector.Variants.Where(v => !v.Hidden).ToList();
+                        if (shorts.Count > 0)
+                        {
+                            shortText = $"simpler version{(shorts.Count == 1 ? "" : "s")}: "
+                                + string.Join(", ", shorts.Select(v => v.Name));
+                        }
                     }
                 }
             }
@@ -387,25 +412,36 @@ namespace DarkScript3
                 docBox.AppendText(Environment.NewLine);
                 EMEDF.ArgDoc argDoc = args[i];
                 bool optional = i >= args.Count - optCount;
+                bool selectedArg = false;
+                if (argIndex >= 0)
+                {
+                    selectedArg = argIndex == i || (i == args.Count - 1 && argIndex > i);
+                }
+                string prefix = selectedArg ? "\u2b9a " : "  ";
 
                 bool displayEnum = false;
                 if (argDoc.EnumName == null)
                 {
-                    docBox.AppendText($"  {InstructionDocs.TypeString(argDoc.Type)} ", TextStyles.Keyword);
+                    docBox.AppendText($"{prefix}{InstructionDocs.TypeString(argDoc.Type)} ", TextStyles.Keyword);
                 }
                 else if (argDoc.EnumName == "BOOL")
                 {
-                    docBox.AppendText($"  bool ", TextStyles.Keyword);
+                    docBox.AppendText($"{prefix}bool ", TextStyles.Keyword);
                 }
                 else if (argDoc.EnumDoc != null)
                 {
-                    docBox.AppendText($"  enum ", TextStyles.Keyword);
+                    docBox.AppendText($"{prefix}enum ", TextStyles.Keyword);
                     displayEnum = true;
                 }
 
                 docBox.AppendText(argDoc.DisplayName);
                 if (optional) docBox.AppendText($" (default {argDoc.GetDisplayValue(argDoc.Default)})", TextStyles.Comment);
                 if (argDoc.Vararg) docBox.AppendText(" (vararg)", TextStyles.Comment);
+
+                if (selectedArg)
+                {
+                    argPlace = new Place(0, docBox.Range.End.iLine);
+                }
 
                 if (displayEnum)
                 {
@@ -438,6 +474,9 @@ namespace DarkScript3
             {
                 docBox.AppendText(Environment.NewLine + Environment.NewLine + $"({shortText})");
             }
+            Place jumpPlace = argPlace ?? docBox.Range.Start;
+            docBox.Selection = docBox.GetRange(jumpPlace, jumpPlace);
+            docBox.DoSelectionVisible();
         }
 
         // https://stackoverflow.com/questions/28472205/c-sharp-event-debounce

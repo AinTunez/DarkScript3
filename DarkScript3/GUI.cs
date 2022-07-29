@@ -32,6 +32,9 @@ namespace DarkScript3
             menuStrip.Renderer = new DarkToolStripRenderer();
             statusStrip.Renderer = new DarkToolStripRenderer();
             TextStyles.LoadColors();
+            // Ad-hoc way of doing settings, as tool menus (TODO: find something more permanent?)
+            showArgumentsInTooltipToolStripMenuItem.Checked = Settings.Default.ArgTooltip;
+            showArgumentsInPanelToolStripMenuItem.Checked = Settings.Default.ArgDocbox;
             SharedControls = new SharedControls(this, statusLabel, docBox);
             SharedControls.ResetStatus(true);
             SharedControls.BFF.Owner = this;
@@ -714,6 +717,10 @@ namespace DarkScript3
 
         private void CutToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.Cut();
 
+        private void CopyToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.Copy();
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.Paste();
+
         private void ReplaceToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.ShowReplaceDialog();
 
         private void SelectAllToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.SelectAll();
@@ -721,8 +728,6 @@ namespace DarkScript3
         private void FindToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.ShowFindDialog(false);
 
         private void findInFilesToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.ShowFindDialog(true);
-
-        private void CopyToolStripMenuItem_Click(object sender, EventArgs e) => CurrentEditor?.Copy();
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -853,14 +858,17 @@ namespace DarkScript3
             }
             string path = $"{name}-emedf.html";
             string suffix = "";
-            if (CurrentEditor != null && CurrentEditor.MayBeFancy())
+            // Unfortunately this doesn't work with Process.Start
+            // if (CurrentEditor != null && CurrentEditor.MayBeFancy()) suffix = "?hidecond=1";
+            string getFullPath(string p)
             {
-                suffix = "?hidecond=1";
+                // return "file://" + Path.GetFullPath(p) + suffix;
+                return p + suffix;
             }
             if (File.Exists(path))
-                System.Diagnostics.Process.Start(path + suffix);
+                System.Diagnostics.Process.Start(getFullPath(path));
             else if (File.Exists($@"Resources\{path}"))
-                System.Diagnostics.Process.Start($@"Resources\{path}" + suffix);
+                System.Diagnostics.Process.Start(getFullPath($@"Resources\{path}"));
             else
                 MessageBox.Show($"No EMEDF documentation found named {path}");
         }
@@ -885,6 +893,18 @@ namespace DarkScript3
             System.Diagnostics.Process.Start("https://github.com/AinTunez/DarkScript3/releases");
         }
 
+        private void showArgumentTooltipsToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ArgTooltip = showArgumentsInTooltipToolStripMenuItem.Checked;
+            Settings.Default.Save();
+        }
+
+        private void showArgumentsInPanelToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ArgDocbox = showArgumentsInPanelToolStripMenuItem.Checked;
+            Settings.Default.Save();
+        }
+
         #endregion
 
         #region Window Position
@@ -897,6 +917,8 @@ namespace DarkScript3
         private void GUI_Load(object sender, EventArgs e)
         {
             InitializeWindow();
+            // Also, normalize all fonts at this point
+            SharedControls.SetGlobalFont(TextStyles.Font);
         }
 
         private void GUI_Move(object sender, EventArgs e)

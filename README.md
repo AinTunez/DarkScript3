@@ -27,13 +27,14 @@ Some useful ones are:
 
 * Ctrl+F, Ctrl+H - show find/replace dialogs (select text first to auto-fill them)
 * Ctrl+G - show goto-line dialog
++ Ctrl+Z, Ctrl+Shift+Z or Ctrl+Y - undo/redo
 * Tab, Shift+Tab - indent/unindent text
 * Ctrl+Shift+C - comment/uncomment text
 * Ctrl+Scroll - zoom in/out
 * Ctrl+Space - open autocomplete menu
 * Ctrl+-, Ctrl+Shift+- - backwards/forwards line navigation
 * Ctrl+Tab, Ctrl+Shift+Tab - forwards/backwards tab
-* Ctrl+Click, Ctrl+Enter on number - go to event definition from anywhere, or event initialization from definition
+* Ctrl+Click or Ctrl+Enter on number - go to event definition from anywhere, or event initialization from definition
 * Ctrl+1 on number - show byte-equivalent float for an integer
 
 ### Importing other files
@@ -99,3 +100,12 @@ Event(12345, Restart, function () {
   block.Exec();
 })
 ```
+
+## Contributors
+
+AinTunez - creator of DarkScript3 and main scripting format
+thefifthmatt (gracenotes) - feature development and MattScript
+HotPocketRemix - EMEDFs and reversing help
+Meowmaritus - dark menu and SoulsFormats contributions
+TKGP - further SoulsFormats contributions
+Pav, Grimrukh, others - additional reversing help

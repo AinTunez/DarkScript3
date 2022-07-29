@@ -7,7 +7,7 @@ namespace DarkScript3
 {
     public class ProgramVersion
     {
-        public static readonly string VERSION = "3.3.1";
+        public static readonly string VERSION = "3.3.2";
 
         public static string GetCompatibilityMessage(string fileName, string resourceString, string fileVer)
         {

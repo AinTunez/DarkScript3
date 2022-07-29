@@ -86,6 +86,11 @@ function $LAYERS(...args) {
     return { layerValue: layer };
 }
 
+// Utility function
+function floatArg(num) {
+    return Scripter.ConvertFloatToIntBytes(num);
+}
+
 class CodeBlock {
     instructions = [];
 
