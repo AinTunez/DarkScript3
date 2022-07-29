@@ -305,6 +305,12 @@ namespace DarkScript3
             public string Name { get; private set; }
 
             /// <summary>
+            /// Whether this alternative is documented and used in code decompilation.
+            /// </summary>
+            [JsonProperty(PropertyName = "hidden")]
+            public bool Hidden { get; private set; }
+
+            /// <summary>
             /// Field values which should be preset for this version to be selected. Required.
             /// </summary>
             [JsonProperty(PropertyName = "required")]

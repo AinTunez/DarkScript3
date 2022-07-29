@@ -192,14 +192,18 @@ namespace DarkScript3
                                 sb.Append($"<p><code>{Escape(alt)}</code> in MattScript</p>");
                             }
                         }
-                        if (shortSelect != null && shortSelect.Variants.Count > 0)
+                        if (shortSelect != null)
                         {
-                            sb.AppendLine($"<p class=\"liststart cond\">Simpler version{(shortSelect.Variants.Count == 1 ? "" : "s")}:</p><ul class=\"condlist cond\">");
-                            foreach (InstructionTranslator.ShortVariant v in shortSelect.Variants)
+                            List<InstructionTranslator.ShortVariant> shorts = shortSelect.Variants.Where(v => !v.Hidden).ToList();
+                            if (shorts.Count > 0)
                             {
-                                ShortListItem(v, instrDoc);
+                                sb.AppendLine($"<p class=\"liststart cond\">Simpler version{(shorts.Count == 1 ? "" : "s")}:</p><ul class=\"condlist cond\">");
+                                foreach (InstructionTranslator.ShortVariant v in shorts)
+                                {
+                                    ShortListItem(v, instrDoc);
+                                }
+                                sb.AppendLine("</ul>");
                             }
-                            sb.AppendLine("</ul>");
                         }
 
                     });

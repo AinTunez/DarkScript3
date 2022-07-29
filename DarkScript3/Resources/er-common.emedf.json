@@ -11044,13 +11044,13 @@
           ]
         },
         {
-          "name": "Set Network Interaction State",
+          "name": "Trigger Area Reload",
           "index": 70,
           "args": [
             {
-              "name": "Disabled/Enabled",
+              "name": "Ignore Is My World Check",
               "type": 0,
-              "enum_name": "Disabled/Enabled",
+              "enum_name": "BOOL",
               "default": 0,
               "min": 0,
               "max": 0,
@@ -17046,7 +17046,8 @@
       "IfObjactEventFlag": "5[02]",
       "InitializeObjact": "2005[05]",
       "SetObjactState": "2005[06]",
-      "SetObjactStateAssignIdx": "2005[14]"
+      "SetObjactStateAssignIdx": "2005[14]",
+      "SetNetworkInteractionState": "2003[70]"
     },
     "enum_aliases": null,
     "replacements": {

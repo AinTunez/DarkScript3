@@ -21,9 +21,12 @@ namespace DarkScript3
             public List<string> Params = new List<string>();
             public List<Intermediate> Body = new List<Intermediate>();
 
+            // Cosmetics
             public List<SourceDecoration> EndComments = null;
             public LineMapping LineMapping { get; set; }
             public string Header { get; set; }
+            // Repack coherency
+            public Dictionary<int, string> CondHints = null;
 
             public override string ToString() => $"{(Fancy ? "$" : "")}Event({ID}, {RestBehavior}, function({string.Join(",", Params)}) {{ {string.Join(" ", Body)} }});";
 
@@ -73,7 +76,7 @@ namespace DarkScript3
                     usedLabels.Add(label);
                     return label;
                 }
-                void subprint(List<Intermediate> ims, int indent)
+                void subprint(List<Intermediate> ims, int indent, string prefix = "")
                 {
                     string sp = string.Join("", Enumerable.Repeat(SingleIndent, indent));
                     bool prevLabel = false;
@@ -101,10 +104,10 @@ namespace DarkScript3
                         }
                         else
                         {
-                            string fullLine = sp + im + suffix;
+                            string fullLine = sp + prefix + im + suffix;
                             if (fullLine.Length > columnLimit && Fancy)
                             {
-                                writer.WriteLine(sp + im.GetStringTree().Render(sp) + suffix);
+                                writer.WriteLine(sp + prefix + im.GetStringTree().Render(sp) + suffix);
                                 lineWriter?.PostMapping(im.LineMapping);
                             }
                             else
@@ -118,6 +121,12 @@ namespace DarkScript3
                                 {
                                     writer.WriteLine(sp + $"}}");
                                 }
+                                else if (ifIm.False.Count == 1 && ifIm.False[0] is IfElse)
+                                {
+                                    // Use recursion for this, to avoid duplicating StringTree etc call sites
+                                    // Iteration could be possible if this becomes a performance problem, or if prefix is unsustainable
+                                    subprint(ifIm.False, indent, $"}} else ");
+                                }
                                 else
                                 {
                                     writer.WriteLine(sp + $"}} else {{");
@@ -125,8 +134,14 @@ namespace DarkScript3
                                     writer.WriteLine(sp + $"}}");
                                 }
                             }
+                            else if (im is LoopStatement loopIm)
+                            {
+                                subprint(loopIm.Body, indent + 1);
+                                writer.WriteLine(sp + $"}}");
+                            }
                         }
                         prevLabel = im is Label;
+                        prefix = "";
                     }
                 }
                 writer.WriteLine($"{(Fancy ? "$" : "")}Event({ID}, {RestBehavior}, function({string.Join(", ", Params)}) {{");
@@ -226,6 +241,7 @@ namespace DarkScript3
             // Comments and nonfunctional things in compilation
             public List<SourceDecoration> Decorations { get; set; }
             public LineMapping LineMapping { get; set; }
+            public string ToLabelHint { get; set; }
 
             public void MoveDecorationsTo(Intermediate other)
             {
@@ -236,6 +252,7 @@ namespace DarkScript3
                     Decorations = null;
                 }
                 other.LineMapping = LineMapping == null ? LineMapping : LineMapping.Clone();
+                other.ToLabelHint = ToLabelHint;
             }
 
             public void MoveDecorationsTo(EventFunction func)
@@ -249,6 +266,7 @@ namespace DarkScript3
             }
 
             public virtual StringTree GetStringTree() => StringTree.Of(this);
+            public virtual bool IsMeta => false;
         }
 
         public class SourceDecoration
@@ -323,9 +341,35 @@ namespace DarkScript3
             public string Code { get; set; }
 
             public override string ToString() => Code;
+            public override bool IsMeta => true;
         }
 
-        public class SkipTarget : Intermediate
+        public class LoopStatement : Intermediate
+        {
+            // Header statement like: for (let i = 0; i < 10; i++)
+            public string Code { get; set; }
+            public List<Intermediate> Body = new List<Intermediate>();
+
+            public override string ToString() => $"{Code} {{";
+        }
+
+        public class LoopHeader : Intermediate
+        {
+            public string Code { get; set; }
+            public int ToNode = -1;
+
+            public override string ToString() => $"{Code} {{";
+            public override bool IsMeta => true;
+        }
+
+        // NoOp but for jump-to-header loop ends
+        public class LoopFooter : Intermediate
+        {
+            public override string ToString() => "}";
+            public override bool IsMeta => true;
+        }
+
+        public class FillSkip : Intermediate
         {
             // Label should start with # per convention, and match a single earlier ReverseSkip
             public string Label { get; set; }

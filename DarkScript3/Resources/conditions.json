@@ -1318,11 +1318,6 @@
     },
     {
       "games": ["er"],
-      "cmd": "2003[70]",
-      "enable": "NetworkInteraction"
-    },
-    {
-      "games": ["er"],
       "cmd": "2003[80]",
       "enable": "TextOnLoadingScreen"
     },
@@ -1473,6 +1468,26 @@
       "games": ["er"],
       "cmd": "2009[11]",
       "opt_fields": ["Dummy"]
+    },
+    {
+      // Legacy name, mistakenly imported from DS3
+      "games": ["er"],
+      "cmd": "2003[70]",
+      "shorts": [{
+        "name": "EnableNetworkInteraction",
+        "hidden": true,
+        "required": [{
+          "field": "Ignore Is My World Check",
+          "value": 1
+        }]
+      }, {
+        "name": "DisableNetworkInteraction",
+        "hidden": true,
+        "required": [{
+          "field": "Ignore Is My World Check",
+          "value": 0
+        }]
+      }]
     },
     // Event flag boilerplate
     {

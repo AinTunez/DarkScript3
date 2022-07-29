@@ -63,12 +63,16 @@ namespace DarkScript3
             this.emevdDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.previewCompilationOutputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showArgumentsInTooltipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showArgumentsInPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewEMEDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewEMEVDTutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewEldenRingEMEVDTutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewFancyDocumentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkForDarkScript3UpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.display = new System.Windows.Forms.SplitContainer();
@@ -76,8 +80,7 @@ namespace DarkScript3
             this.docBox = new FastColoredTextBoxNS.FastColoredTextBox();
             this.fileView = new System.Windows.Forms.TreeView();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.checkForDarkScript3UpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewEldenRingEMEVDTutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.display)).BeginInit();
@@ -230,6 +233,7 @@ namespace DarkScript3
             this.pasteToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+V";
             this.pasteToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -284,7 +288,7 @@ namespace DarkScript3
             this.goToEventIDUnderCursorToolStripMenuItem.Name = "goToEventIDUnderCursorToolStripMenuItem";
             this.goToEventIDUnderCursorToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Enter";
             this.goToEventIDUnderCursorToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
-            this.goToEventIDUnderCursorToolStripMenuItem.Text = "Go to Event ID at Cursor";
+            this.goToEventIDUnderCursorToolStripMenuItem.Text = "Go to Event ID";
             this.goToEventIDUnderCursorToolStripMenuItem.Click += new System.EventHandler(this.goToEventIDUnderCursorToolStripMenuItem_Click);
             // 
             // replaceFloatUnderCursorToolStripMenuItem
@@ -292,7 +296,7 @@ namespace DarkScript3
             this.replaceFloatUnderCursorToolStripMenuItem.Name = "replaceFloatUnderCursorToolStripMenuItem";
             this.replaceFloatUnderCursorToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+1";
             this.replaceFloatUnderCursorToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
-            this.replaceFloatUnderCursorToolStripMenuItem.Text = "Parse Float at Cursor";
+            this.replaceFloatUnderCursorToolStripMenuItem.Text = "Replace Float";
             this.replaceFloatUnderCursorToolStripMenuItem.Click += new System.EventHandler(this.replaceFloatUnderCursorToolStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
@@ -340,7 +344,10 @@ namespace DarkScript3
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.emevdDataToolStripMenuItem,
             this.previewCompilationOutputToolStripMenuItem,
-            this.documentationToolStripMenuItem});
+            this.documentationToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.showArgumentsInTooltipToolStripMenuItem,
+            this.showArgumentsInPanelToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
@@ -367,6 +374,22 @@ namespace DarkScript3
             this.documentationToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
             this.documentationToolStripMenuItem.Text = "Toggle Panel";
             this.documentationToolStripMenuItem.Click += new System.EventHandler(this.DocumentationToolStripMenuItem_Click);
+            // 
+            // showArgumentsInTooltipToolStripMenuItem
+            // 
+            this.showArgumentsInTooltipToolStripMenuItem.CheckOnClick = true;
+            this.showArgumentsInTooltipToolStripMenuItem.Name = "showArgumentsInTooltipToolStripMenuItem";
+            this.showArgumentsInTooltipToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.showArgumentsInTooltipToolStripMenuItem.Text = "Show Arguments in Tooltip";
+            this.showArgumentsInTooltipToolStripMenuItem.CheckedChanged += new System.EventHandler(this.showArgumentTooltipsToolStripMenuItem_CheckedChanged);
+            // 
+            // showArgumentsInPanelToolStripMenuItem
+            // 
+            this.showArgumentsInPanelToolStripMenuItem.CheckOnClick = true;
+            this.showArgumentsInPanelToolStripMenuItem.Name = "showArgumentsInPanelToolStripMenuItem";
+            this.showArgumentsInPanelToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.showArgumentsInPanelToolStripMenuItem.Text = "Show Arguments in Panel";
+            this.showArgumentsInPanelToolStripMenuItem.CheckedChanged += new System.EventHandler(this.showArgumentsInPanelToolStripMenuItem_CheckedChanged);
             // 
             // helpToolStripMenuItem
             // 
@@ -396,6 +419,13 @@ namespace DarkScript3
             this.viewEMEVDTutorialToolStripMenuItem.Text = "View EMEVD Tutorial";
             this.viewEMEVDTutorialToolStripMenuItem.Click += new System.EventHandler(this.viewEMEVDTutorialToolStripMenuItem_Click);
             // 
+            // viewEldenRingEMEVDTutorialToolStripMenuItem
+            // 
+            this.viewEldenRingEMEVDTutorialToolStripMenuItem.Name = "viewEldenRingEMEVDTutorialToolStripMenuItem";
+            this.viewEldenRingEMEVDTutorialToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.viewEldenRingEMEVDTutorialToolStripMenuItem.Text = "View Elden Ring EMEVD Tutorial";
+            this.viewEldenRingEMEVDTutorialToolStripMenuItem.Click += new System.EventHandler(this.viewEldenRingEMEVDTutorialToolStripMenuItem_Click);
+            // 
             // viewFancyDocumentationToolStripMenuItem
             // 
             this.viewFancyDocumentationToolStripMenuItem.Name = "viewFancyDocumentationToolStripMenuItem";
@@ -414,6 +444,13 @@ namespace DarkScript3
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
             this.aboutToolStripMenuItem.Text = "About DarkScript3";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
+            // 
+            // checkForDarkScript3UpdatesToolStripMenuItem
+            // 
+            this.checkForDarkScript3UpdatesToolStripMenuItem.Name = "checkForDarkScript3UpdatesToolStripMenuItem";
+            this.checkForDarkScript3UpdatesToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.checkForDarkScript3UpdatesToolStripMenuItem.Text = "Check for DarkScript3 Updates";
+            this.checkForDarkScript3UpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForDarkScript3UpdatesToolStripMenuItem_Click);
             // 
             // statusLabel
             // 
@@ -542,19 +579,10 @@ namespace DarkScript3
             this.tabControl.TabIndex = 5;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
-            // checkForDarkScript3UpdatesToolStripMenuItem
+            // toolStripSeparator5
             // 
-            this.checkForDarkScript3UpdatesToolStripMenuItem.Name = "checkForDarkScript3UpdatesToolStripMenuItem";
-            this.checkForDarkScript3UpdatesToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
-            this.checkForDarkScript3UpdatesToolStripMenuItem.Text = "Check for DarkScript3 Updates";
-            this.checkForDarkScript3UpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForDarkScript3UpdatesToolStripMenuItem_Click);
-            // 
-            // viewEldenRingEMEVDTutorialToolStripMenuItem
-            // 
-            this.viewEldenRingEMEVDTutorialToolStripMenuItem.Name = "viewEldenRingEMEVDTutorialToolStripMenuItem";
-            this.viewEldenRingEMEVDTutorialToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
-            this.viewEldenRingEMEVDTutorialToolStripMenuItem.Text = "View Elden Ring EMEVD Tutorial";
-            this.viewEldenRingEMEVDTutorialToolStripMenuItem.Click += new System.EventHandler(this.viewEldenRingEMEVDTutorialToolStripMenuItem_Click);
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(231, 6);
             // 
             // GUI
             // 
@@ -643,6 +671,9 @@ namespace DarkScript3
         private System.Windows.Forms.ToolStripMenuItem replaceFloatUnderCursorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewEldenRingEMEVDTutorialToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkForDarkScript3UpdatesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showArgumentsInTooltipToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showArgumentsInPanelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     }
 }
 

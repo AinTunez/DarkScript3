@@ -47,6 +47,8 @@ namespace DarkScript3
             // These should be consistent for every function with this ConditionDoc.
             // The other way, figuring out a condition function from a command, is the job of ConditionSelector.
             public Dictionary<ControlType, string> Variants = new Dictionary<ControlType, string>();
+            // Extra bit for goto variant without cond/skip, to avoid transforming into if statement
+            public bool GotoOnly { get; set; }
         }
 
         public static InstructionTranslator GetTranslator(InstructionDocs docs)
@@ -142,6 +144,7 @@ namespace DarkScript3
                 {
                     Cmd = shortDoc.Cmd,
                     Name = v.Name,
+                    Hidden = v.Hidden,
                 };
                 List<int> ignore = new List<int>();
                 foreach (FieldValue req in v.Required)
@@ -417,6 +420,12 @@ namespace DarkScript3
                 // Not all targets may exist in all games
                 aliases = conds.Aliases.Where(e => condDocs.ContainsKey(e.Value)).ToDictionary(e => e.Key, e => e.Value);
             }
+            foreach (FunctionDoc condDoc in condDocs.Values)
+            {
+                condDoc.GotoOnly = condDoc.Variants.ContainsKey(ControlType.GOTO)
+                    && !condDoc.Variants.ContainsKey(ControlType.COND)
+                    && !condDoc.Variants.ContainsKey(ControlType.SKIP);
+            }
             return new InstructionTranslator
             {
                 CondDocs = condDocs,
@@ -441,7 +450,7 @@ namespace DarkScript3
         // But don't convert them into instructions yet, since we need to edit control things like condition group register allocation and line skipping.
         public List<Intermediate> ExpandCond(Intermediate im, Func<string> newVar)
         {
-            if (im is Instr || im is Label || im is NoOp || im is JSStatement)
+            if (im is Instr || im is Label || im is NoOp || im.IsMeta)
             {
                 return new List<Intermediate> { im };
             }
@@ -860,11 +869,23 @@ namespace DarkScript3
                 }
                 else if (Variant == ControlType.SKIP)
                 {
-                    ret = new Goto
+                    // For now, ReserveSkips are only constructed in-memory during repacking
+                    if (instr.Args[ControlArg] is ReserveSkip reserve)
                     {
-                        Cond = retCond,
-                        SkipLines = ExtractIntArg(instr, ControlArg)
-                    };
+                        ret = new Goto
+                        {
+                            Cond = retCond,
+                            ToLabel = reserve.Target,
+                        };
+                    }
+                    else
+                    {
+                        ret = new Goto
+                        {
+                            Cond = retCond,
+                            SkipLines = ExtractIntArg(instr, ControlArg)
+                        };
+                    }
                 }
                 else if (Variant == ControlType.END)
                 {
@@ -962,6 +983,8 @@ namespace DarkScript3
             public Dictionary<int, int> ExtraArgs = new Dictionary<int, int>();
             // The number of args at the end which are optional and may take on default values.
             public int OptionalArgs { get; set; }
+            // Whether this function is automatically used in decompilation, should be documented, etc.
+            public bool Hidden { get; set; }
 
             public Instr ExtractInstrArgs(Instr instr)
             {
@@ -1022,6 +1045,7 @@ namespace DarkScript3
                 }
                 foreach (ShortVariant variant in Variants)
                 {
+                    if (variant.Hidden) continue;
                     // If does not match fixed enum, this variant can't be used
                     bool extraOkay = true;
                     foreach (KeyValuePair<int, int> req in variant.ExtraArgs)

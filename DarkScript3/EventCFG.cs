@@ -1,7 +1,8 @@
 using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using static DarkScript3.ScriptAst;
 using static DarkScript3.InstructionTranslator;
 
@@ -30,10 +31,13 @@ namespace DarkScript3
             // Combine definitions of the same condition group in the same basic block.
             public bool CombineDefinitions = true;
             // Only combine adjacent definitions, so order is preserved with other condition groups.
+            // (TODO: this is ignored? Accomplished another way?)
             public bool CombineNonAdjacentDefinitions = false;
             // When definitions are always used in a certain evaluation and nowhere else, inline them into the usage.
             public bool InlineDefinitions = true;
-            // Only inline definitions when condition group order won't change.
+            // Only inline definitions when condition order won't change.
+            // Turning this on may change script behaviors!!
+            // (Also this breaks for loops on repacking, though that can be separate out if really desired)
             public bool InlineDefinitionsOutOfOrder = false;
             // Name condition groups based on what they're calculating rather than based on the register number.
             // (Avoid doing this if a condition group is redefined after main group usage, indicating possible use for other purposes.)
@@ -45,6 +49,8 @@ namespace DarkScript3
             // This is a hacky way to pass this in, but it is effectively a change-able input to how the compiler is called.
             // It should be set for DS1 PTDE only, not DS1R.
             public bool RestrictConditionGroupCount = false;
+            // Don't silently swallow warnings
+            public bool FailWarnings = false;
 
             // Combines and inlines conditions without changing underlying behavior.
             public static CFGOptions GetDefault() => new CFGOptions();
@@ -80,8 +86,14 @@ namespace DarkScript3
             public bool AlwaysJump => Im is CondIntermediate condIm && condIm.Cond.Always;
             // For cleaner control flow analysis, treat returns as normal statements.
             public bool AlwaysEnd => Im is End condIm && condIm.Cond.Always;
-            // Set if part of a sequence of gotos, meaning if/else should be avoided
-            public bool MultiGoto { get; set; }
+            // Heuristic cases for avoiding turning spaghetti goto into if/else.
+            // Whether if/else is to be avoided in some cases
+            public bool AvoidIf { get; set; }
+            // Node reference checked when AvoidIf.
+            // If null, it is banned from if/else.
+            // Otherwise, it can become if/else only if the referenced node becomes if/else.
+            // Currently, this is unused - results in some issues during structuring, and over-if-ing of things.
+            public FlowNode IfAllowedCondition { get; set; }
 
             // Graph evaluation stuff. Valid until nodes get deleted or rewritten.
             // TODO: See if this can be made more efficient and cleaner.
@@ -240,7 +252,8 @@ namespace DarkScript3
             {
                 string label = null;
                 if (labels) label = string.Join("", n.Im.Labels.Select(l => $"{l}: "));
-                Console.WriteLine($"{sp}{n.ID} [{n.BlockID}]: {label}{n.Im}");
+                string hint = n.Im?.ToLabelHint == null ? null : $" // {n.Im.ToLabelHint}";
+                Console.WriteLine($"{sp}{n.ID} [{n.BlockID}]: {label}{n.Im}{hint}");
             }
         }
 
@@ -259,22 +272,30 @@ namespace DarkScript3
             foreach (FlowNode jump in node.JumpPred)
             {
                 Intermediate im = jump.Im;
-                if (!(im is Goto go))
-                {
-                    throw new Exception($"Internal exception: {node} jump pred {jump} not a goto apparently");
-                }
                 FlowNode target = node.Succ;
                 jump.JumpTo = target;
-                go.ToNode = target == null ? -1 : target.ID;
+                int targetId = target == null ? -1 : target.ID;
+                if (im is Goto go)
+                {
+                    go.ToNode = targetId;
+                }
+                else if (im is LoopHeader loop)
+                {
+                    loop.ToNode = targetId;
+                }
+                else throw new Exception($"Internal exception: {node} jump pred {jump} not a goto or loop apparently");
                 if (target != null) target.JumpPred.Add(jump);
             }
             // Transfer over decorations to the current replacement. Maybe should combine blank lines, or take the min of the two?
-            node.Im.MoveDecorationsTo(replacement);
+            if (replacement != null)
+            {
+                node.Im.MoveDecorationsTo(replacement);
+            }
             Nodes.Remove(node.ID);
         }
 
         // Used by both compilation and decompilation. Replaces goto line/node commands with labels when they exist.
-        public void AddLabelsToCfgPass(Result result)
+        public void AddLabelsToCfgPass(bool clearLabels = false)
         {
             Dictionary<string, FlowNode> labels = new Dictionary<string, FlowNode>();
             foreach (FlowNode node in Enumerable.Reverse(NodeList()))
@@ -291,12 +312,23 @@ namespace DarkScript3
                         node.JumpTo = targetNode;
                         g.ToNode = targetNode.ID;
                         targetNode.JumpPred.Add(node);
+                        if (clearLabels && !(targetNode.Im is Label))
+                        {
+                            g.ToLabel = null;
+                        }
                     }
                 }
-                // Add for previous line to use. Labels can't jump to themselves.
-                foreach (string l in node.Im.Labels)
+                // Add for previous lines to use. Labels can't jump to themselves.
+                if (node.Im.Labels.Count > 0)
                 {
-                    labels[l] = node;
+                    foreach (string l in node.Im.Labels)
+                    {
+                        labels[l] = node;
+                    }
+                    if (clearLabels)
+                    {
+                        node.Im.Labels.Clear();
+                    }
                 }
             }
         }
@@ -337,6 +369,7 @@ namespace DarkScript3
             string newVar() => $"#temp{tempVarID++}";
             int nonTempAssigns = 0;
             bool fancyFeaturesUsed = false;
+            bool loopUsed = false;
 
             // Pending jump sources to add before generating the targets, to link them together.
             List<FlowNode> jumpFroms = new List<FlowNode>();
@@ -358,6 +391,10 @@ namespace DarkScript3
                 if (im is IfElse ifelse)
                 {
                     genIf(ifelse);
+                }
+                else if (im is LoopStatement loop)
+                {
+                    genLoop(loop);
                 }
                 else if (im is CondAssign assign)
                 {
@@ -414,6 +451,19 @@ namespace DarkScript3
                     return cond;
                 }
             }
+            void genLoop(LoopStatement loop)
+            {
+                loopUsed = true;
+                LoopHeader im = new LoopHeader { Code = loop.Code };
+                newIntermediate(im, loop);
+                FlowNode node = current;
+                genBlock(loop.Body);
+                // This is for the case of a loop ending in an if statement, it actually "ends" at a jump to the loop header
+                // Otherwise, ReserveSkip won't be able to position itself correctly
+                // THis should be undone during repacking
+                newIntermediate(new LoopFooter(), null);
+                jumpFroms.Add(node);
+            }
             void genIf(IfElse ifelse)
             {
                 Cond cond = ifelse.Cond;
@@ -424,13 +474,13 @@ namespace DarkScript3
                 // a label or not (it would require lookahead), and a different # of instructions may be
                 // emitted in case a given condition group has a COND/GOTO variant but not a SKIP one.
                 // This happens a bunch with GotoIfPlayerIsNotInOwnWorldExcludesArena.
+                // Also, commands with GOTO but no SKIP/COND (GotoIfHollowArenaMatchType) should not be structured in decomp.
                 newIntermediate(im, ifelse);
                 FlowNode node = current;
                 genBlock(ifelse.True);
                 if (ifelse.False.Count == 0)
                 {
                     jumpFroms.Add(node);
-                    genBlock(ifelse.False);
                 }
                 else
                 {
@@ -481,11 +531,15 @@ namespace DarkScript3
                     foreach (FlowNode jumpFrom in jumpFroms)
                     {
                         jumpFrom.JumpTo = node;
-                        if (!(jumpFrom.Im is Goto g))
+                        if (jumpFrom.Im is Goto g)
                         {
-                            throw new Exception($"Internal error: added {jumpFrom} {jumpFrom.Im} as jump origin but it's not a Goto");
+                            g.ToNode = node.ID;
                         }
-                        g.ToNode = node.ID;
+                        else if (jumpFrom.Im is LoopHeader l)
+                        {
+                            l.ToNode = node.ID;
+                        }
+                        else throw new Exception($"Internal error: added {jumpFrom} {jumpFrom.Im} as jump origin but it's not a Goto or LoopHeader");
                         node.JumpPred.Add(jumpFrom);
                     }
                     jumpFroms.Clear();
@@ -500,7 +554,43 @@ namespace DarkScript3
                 newNode(new NoOp());
             }
 
-            AddLabelsToCfgPass(result);
+            AddLabelsToCfgPass();
+
+            // Some validation is needed for loops, to prevent unintuitive behaviors
+            // Also collect assignments within loops, to validate that later
+            HashSet<string> loopAssigns = new HashSet<string>();
+            if (loopUsed)
+            {
+                // Just one error, since multiple inner CondAssigns may correspond to one top-level statement
+                bool loopError = false;
+                List<int> loopEnds = new List<int>();
+                foreach (FlowNode node in NodeList())
+                {
+                    if (node.Im is LoopHeader loop)
+                    {
+                        loopEnds.Add(loop.ToNode);
+                    }
+                    loopEnds.Remove(node.ID);
+                    if (loopEnds.Count > 0 && node.Im is CondAssign assign)
+                    {
+                        if (assign.ToVar.StartsWith("#"))
+                        {
+                            if (!loopError)
+                            {
+                                result.Error(
+                                    "Automatic condition group expansion is not allowed inside of loops, because of possible interference"
+                                    + " between loop iterations. Use explicit condition variables, clearing them if necessary using"
+                                    + " dummy statements like WaitFor(ElapsedSeconds(0)) at the end of the loop", node.Im);
+                                loopError = true;
+                            }
+                        }
+                        else
+                        {
+                            loopAssigns.Add(assign.ToVar);
+                        }
+                    }
+                }
+            }
 
             // Additional processing for labels: if calculated targets of jumps are proper labels, add the label to the jump
             foreach (FlowNode node in NodeList())
@@ -632,6 +722,10 @@ namespace DarkScript3
                 }
                 groupNames[name] = target;
                 source.Remove(target);
+                if (func.CondHints != null && !name.StartsWith("#"))
+                {
+                    func.CondHints[target] = name;
+                }
             }
             foreach (KeyValuePair<string, List<CondAssignOp>> entry in groupOps)
             {
@@ -659,7 +753,17 @@ namespace DarkScript3
                 string name = entry.Key;
                 if (groupNames.ContainsKey(name)) continue;
                 List<CondAssignOp> ops = entry.Value;
-                if (ops.Contains(CondAssignOp.Assign) && ops.Count > 1) result.Error($"Condition group {name} can only use = if it has a single assignment. Use |= or &= instead.");
+                if (ops.Contains(CondAssignOp.Assign))
+                {
+                    if (ops.Count > 1)
+                    {
+                        result.Error($"Condition variable {name} can only use = if it has a single assignment. Use |= or &= instead.");
+                    }
+                    else if (loopAssigns.Contains(name))
+                    {
+                        result.Error($"Condition variable {name} should explicitly use |= or &= if it's defined within a loop, in case there are interactions across iterations");
+                    }
+                }
                 // Plain assignment goes to AND registers, unless we've run out.
                 if (ops.Contains(CondAssignOp.AssignOr) || (ops.Contains(CondAssignOp.Assign) && andGroups.Count == 0))
                 {
@@ -731,14 +835,14 @@ namespace DarkScript3
             foreach (FlowNode node in NodeList())
             {
                 lines[node] = i;
-                if (node.Im is NoOp || node.Im is SkipTarget)
+                if (node.Im is NoOp || node.Im is FillSkip)
                 {
                     // For NoOp nodes at the end of a block, they are equivalent to the next statement.
                     // For NoOp nodes at the very end, i doesn't matter anymore.
-                    // SkipTarget being here is speculative (and currently not parsed by MattScript anyway)
+                    // FillSkip being here is speculative (and currently not parsed by fancy compiler anyway)
                     continue;
                 }
-                if (node.Im is JSStatement)
+                if (node.Im.IsMeta)
                 {
                     // The skip count is unknown for these, so make sure we don't skip it.
                     // Circumventing this might require a feature for setting line skips at JS runtime.
@@ -769,6 +873,7 @@ namespace DarkScript3
                     if (jsInMiddle == null && staticSkips)
                     {
                         // Can resolve here
+                        g.ToLabelHint = g.ToLabel;
                         g.ToLabel = null;
                         g.SkipLines = Math.Max(0, end - start - 1);
                         if (g.SkipLines > byte.MaxValue)
@@ -780,6 +885,7 @@ namespace DarkScript3
                     {
                         // result.Error($"Can't place a regular JS statement in the middle of a skip/goto: {node.Im} -> {node.JumpTo.Im}", jsInMiddle.Im);
                         string l = $"#{dynamicId++}";
+                        g.ToLabelHint = g.ToLabel;
                         g.ToLabel = l;
                         if (!dynamicSkipLabels.TryGetValue(node.JumpTo.ID, out List<string> labels))
                         {
@@ -794,16 +900,17 @@ namespace DarkScript3
 
             List<Intermediate> instrs = new List<Intermediate>();
             NoOp prevNoOp = null;
-            // Elimiate NoOps and leave only Instrs, JSStatements, and SkipTargets
+            // Elimiate NoOps and leave only Instrs and valid meta instructions
             // Some extra tracking must be done for preserving decorations.
             foreach (FlowNode node in NodeList())
             {
                 if (dynamicSkipLabels.TryGetValue(node.ID, out List<string> labels))
                 {
                     // TODO: Are decorations needed here?
-                    foreach (string label in labels)
+                    // If two jumps go to the same place, try to make them theoretically nestable in decomp (reverse order)
+                    foreach (string label in Enumerable.Reverse(labels))
                     {
-                        instrs.Add(new SkipTarget { Label = label });
+                        instrs.Add(new FillSkip { Label = label });
                     }
                 }
                 if (node.Im is NoOp noop)
@@ -814,7 +921,7 @@ namespace DarkScript3
                 }
                 try
                 {
-                    Intermediate instr = node.Im is JSStatement ? node.Im : info.CompileCond(node.Im);
+                    Intermediate instr = node.Im.IsMeta ? node.Im : info.CompileCond(node.Im);
                     instrs.Add(instr);
                     if (prevNoOp != null)
                     {
@@ -835,6 +942,10 @@ namespace DarkScript3
             {
                 prevNoOp.MoveDecorationsTo(func);
             }
+
+            // Don't try to restructure loops at this point - mainly for saving work in the repacking case,
+            // as the output of this function is a list of flat instructions, as the input to decompilation.
+            // Additional restructuring/destructuring is possible with just the flat list, however.
 
             if (debugPrint)
             {
@@ -857,6 +968,38 @@ namespace DarkScript3
 
             // Rewrite control flow operators and initialize CFG
             List<Intermediate> cmds = func.Body;
+
+            // First undo FillSkips, which are their own instructions in repack (although they could just be Im labels)
+            // This may result in original label order not getting preserved, if they came from a label
+            if (cmds.Any(c => c is FillSkip))
+            {
+                List<string> fillLabels = new List<string>();
+                List<Intermediate> altCmds = new List<Intermediate>();
+                for (int i = 0; i <= cmds.Count; i++)
+                {
+                    Intermediate im = i == cmds.Count ? new NoOp() : cmds[i];
+                    if (im is FillSkip fill)
+                    {
+                        fillLabels.Add(fill.Label);
+                        continue;
+                    }
+                    if (fillLabels.Count > 0)
+                    {
+                        // Add labels to instructions to set up references. These are deleted shortly.
+                        im.Labels.AddRange(fillLabels);
+                        fillLabels.Clear();
+                    }
+                    altCmds.Add(im);
+                }
+                cmds = altCmds;
+            }
+            else
+            {
+                // Add a synthetic end node this way, otherwise
+                // This modifies the input but it's probably not necessary to make a defensive copy?
+                cmds.Add(new NoOp());
+            }
+
             for (int i = 0; i < cmds.Count; i++)
             {
                 Intermediate im = cmds[i];
@@ -864,6 +1007,8 @@ namespace DarkScript3
                 {
                     cmds[i] = im = info.DecompileCond(instr);
                     instr.MoveDecorationsTo(im);
+                    // Labels may already exist from FillSkip above
+                    im.Labels = instr.Labels;
                 }
                 im.ID = i;
                 Nodes[i] = new FlowNode
@@ -873,20 +1018,13 @@ namespace DarkScript3
                 };
                 NextID++;
             }
-            // Also add a synthetic end node
-            FlowNode END = new FlowNode
-            {
-                ID = cmds.Count,
-                Im = new NoOp(),
-            };
-            Nodes[cmds.Count] = END;
-            for (int i = 0; i <= cmds.Count; i++)
+            for (int i = 0; i < cmds.Count; i++)
             {
                 if (i > 0)
                 {
                     Nodes[i].Pred = Nodes[i - 1];
                 }
-                if (i < cmds.Count)
+                if (i < cmds.Count - 1)
                 {
                     Nodes[i].Succ = Nodes[i + 1];
                 }
@@ -905,9 +1043,9 @@ namespace DarkScript3
                     if (g.SkipLines >= 0)
                     {
                         target = i + 1 + g.SkipLines;
-                        if (target > cmds.Count)
+                        if (target > cmds.Count - 1)
                         {
-                            target = cmds.Count;
+                            target = cmds.Count - 1;
                             result.Warning($"Instruction skips past the end of the event", im);
                         }
                     }
@@ -917,14 +1055,57 @@ namespace DarkScript3
                     FlowNode targetNode = Nodes[target];
                     node.JumpTo = targetNode;
                     g.ToNode = targetNode.ID;
-                    targetNode.JumpPred.Add(Nodes[im.ID]);
+                    targetNode.JumpPred.Add(node);
                 }
             }
 
-            AddLabelsToCfgPass(result);
+            // Finally, a pass for kind of restructuring LoopHeader/LoopFooter, for repacking.
+            // Just line these up manually, in reverse postorder, and add jumps appropriately
+            List<FlowNode> loopStack = new List<FlowNode>();
+            for (int i = cmds.Count - 1; i >= 0; i--)
+            {
+                FlowNode node = Nodes[i];
+                Intermediate im = cmds[i];
+                if (im is LoopFooter)
+                {
+                    loopStack.Add(node);
+                }
+                else if (im is LoopHeader loop)
+                {
+                    if (loopStack.Count == 0)
+                    {
+                        result.Error($"Loop top without bottom", im);
+                        continue;
+                    }
+                    FlowNode targetNode = loopStack[loopStack.Count - 1];
+                    loopStack.RemoveAt(loopStack.Count - 1);
+                    node.JumpTo = targetNode;
+                    loop.ToNode = targetNode.ID;
+                    targetNode.JumpPred.Add(node);
+                }
+            }
+            if (loopStack.Count > 0)
+            {
+                // Internal error, at the moment, since loops can't be decompiled
+                result.Error($"Loop bottom without top", loopStack.Last().Im);
+            }
+
+            AddLabelsToCfgPass(true);
 
             // From this point on, do everything in the CFG
             cmds = null;
+
+            // Remove LoopFooters, as loops are treated like glorified if statements from this point on
+            // (Alternatively, could do above pass slightly differently, but it's cleaner to wait for the CFG
+            // representation to start removing things - or do it with altCmds.)
+            foreach (FlowNode node in NodeList())
+            {
+                if (node.Im is LoopFooter)
+                {
+                    // LoopFooters should not have any decorations, hopefully?
+                    RemoveNode(node, null);
+                }
+            }
 
             int blockId = 0;
             foreach (FlowNode node in NodeList())
@@ -1183,10 +1364,25 @@ namespace DarkScript3
                         }
                     }
                 }
+                // After all of that, override with CondHints if we have any
+                if (func.CondHints != null)
+                {
+                    foreach (KeyValuePair<int, string> hint in func.CondHints)
+                    {
+                        if (hint.Value.StartsWith("and") || hint.Value.StartsWith("or"))
+                        {
+                            // Heuristic to ignore specifically named registers, especially if those mismatch the register used
+                            continue;
+                        }
+                        // Otherwise, we don't want to distinguish suffix indices, as those are relied on later on for numbering.
+                        fancyCondNames[hint.Key] = Regex.Replace(hint.Value, "[0-9]*$", "");
+                    }
+                }
             }
 
             // Collapse condition definitions where possible, within the same basic block.
             // This can be optionally be further limited to consecutive definitions.
+            // This is probably fine to do for conditions in loops, since at least one assign still remains.
             foreach (FlowNode node in NodeList())
             {
                 if (!options.CombineDefinitions)
@@ -1210,7 +1406,7 @@ namespace DarkScript3
 
                     foreach (List<FlowNode> assigns in defineGroups)
                     {
-                        if (assigns.Count < 2) continue;
+                        if (assigns.Count <= 1) continue;
                         OpCond op = new OpCond { And = dag.ResultGroup > 0 };
                         FlowNode dest = assigns.Max();
                         CondAssign destIm = (CondAssign)dest.Im;
@@ -1250,12 +1446,25 @@ namespace DarkScript3
             }
 
             // Only inline condition groups if there is an unconditional direct relationship between defines and use.
+            // Also, limited inlining within loops (this may already be covered by dominator logic for conditions built inside loops).
+            List<int> loopEnds = new List<int>();
+            HashSet<int> loopGroups = new HashSet<int>();
             foreach (FlowNode node in NodeList())
             {
+                if (node.Im is LoopHeader loop)
+                {
+                    loopEnds.Add(loop.ToNode);
+                }
+                loopEnds.Remove(node.ID);
                 if (node.Im is CondIntermediate condIm)
                 {
                     foreach (ConditionDAG use in node.Uses)
                     {
+                        // Loop uses
+                        if (loopEnds.Count > 0)
+                        {
+                            loopGroups.Add(use.ResultGroup);
+                        }
                         // Condition groups cannot be inlined if they have more than one use, including any compiled uses
                         if (use.Uses.Count != 1 || use.CompiledUses.Count > 0)
                         {
@@ -1271,6 +1480,11 @@ namespace DarkScript3
                                 noInlineGroups.Add(use.ResultGroup);
                             }
                         }
+                    }
+                    // Loop defines
+                    if (node.Define != null && loopEnds.Count > 0)
+                    {
+                        loopGroups.Add(node.Define.ResultGroup);
                     }
                 }
             }
@@ -1307,9 +1521,9 @@ namespace DarkScript3
                         }
 
                         // Ignore this group if its definition(s) can't be inlined.
-                        if (noInlineGroups.Contains(use.ResultGroup))
+                        if (noInlineGroups.Contains(use.ResultGroup) || loopGroups.Contains(use.ResultGroup))
                         {
-                            if (!options.InlineDefinitionsOutOfOrder)
+                            if (!options.InlineDefinitionsOutOfOrder || loopGroups.Contains(use.ResultGroup))
                             {
                                 stopRewrite = true;
                             }
@@ -1423,7 +1637,7 @@ namespace DarkScript3
                         {
                             if (cond.Group == 0)
                             {
-                                // This is basically malformed emevd. However, DS3 does it as a hacky way
+                                // This is basically malformed emevd. However, DS3/Elden Ring do it as a hacky way
                                 // of commenting out an uncompiled condition group use case. It's called
                                 // mainGroupAbuse below. It doesn't preserve it, but same behavior in the end.
                             }
@@ -1470,7 +1684,12 @@ namespace DarkScript3
                     {
                         // This is a little ad hoc, and mainly because singletons look better in output code.
                         // Singletons are AND by default so this may lead to running out of those.
-                        if (singletons.Contains(assign.ToCond)) assign.Op = CondAssignOp.Assign;
+                        // Also use explicit ops in loops. It could be permissible if it's possible to inline within the for loop
+                        // (if assign.ToCond is not in noInlineGroups), but this requires more advanced resetPoints logic during compilation.
+                        if (singletons.Contains(assign.ToCond) && !loopGroups.Contains(assign.ToCond))
+                        {
+                            assign.Op = CondAssignOp.Assign;
+                        }
                         assign.ToVar = getName(assign.ToCond);
                     }
                     condIm.Cond = condIm.Cond.RewriteCond(c =>
@@ -1486,15 +1705,116 @@ namespace DarkScript3
             }
 
             // Mark subsequent gotos, which can't be rewritten into if-else without backtracking in n-1 of them, so disallow all n
+            // In some cases.
             FlowNode prevNode = null;
-            foreach (FlowNode node in NodeList())
+            // Do this in reverse order. We want to do it regardless of jump order if many appear in a row,
+            // to avoid cases like 108 in test.js or Elden Ring 950
+            int multiCount = 0;
+            List<FlowNode> multigroup = new List<FlowNode>();
+            void processMultiGroup()
             {
-                if (prevNode != null && prevNode.JumpTo != null && node.JumpTo != null && prevNode.JumpTo.ID <= node.JumpTo.ID)
+                // A holistic approach which only tries to use MultiGoto if out-of-order jumps in a sequence of gotos
+                if (multigroup.Count <= 1) return;
+                List<bool> conflictWithNext = Enumerable.Range(0, multigroup.Count - 1).Select(i =>
                 {
-                    prevNode.MultiGoto = true;
-                    node.MultiGoto = true;
+                    FlowNode node = multigroup[i];
+                    FlowNode next = multigroup[i + 1];
+                    // bool labelSame = node.Im is Goto g && next.Im is Goto g2 && g.ToLabel == g2.ToLabel;
+                    return node.JumpTo.ID < next.JumpTo.ID;
+                }).ToList();
+                bool conflictEncountered = false;
+                if (conflictWithNext.All(c => !c) && multigroup.Count >= 3)
+                {
+                    // All gotos here are fully nested, but it's still possible that they might not be convertible into if statements
+                    // if they follow a switch/case statement pattern, aka there is a clean break between each branch.
+                    // Manually check for this as cheaply (?) as possible.
+                    int getPreLabel(FlowNode node)
+                    {
+                        FlowNode preJump = node.JumpTo.Pred;
+                        return preJump?.JumpTo != null && preJump.AlwaysJump ? preJump.JumpTo.ID : -1;
+                    }
+                    // Require all pre-label unconditional jump targets to match, in a strictly decreasing total order
+                    int preLabel = getPreLabel(multigroup[0]);
+                    int jumpOrder = multigroup[0].JumpTo.ID;
+                    for (int i = 1; i < multigroup.Count; i++)
+                    {
+                        if (preLabel == -1) break;
+                        int thisLabel = getPreLabel(multigroup[i]);
+                        int thisOrder = multigroup[i].JumpTo.ID;
+                        if (thisLabel != preLabel || thisOrder == jumpOrder)
+                        {
+                            preLabel = -1;
+                        }
+                        jumpOrder = thisOrder;
+                    }
+                    if (preLabel != -1)
+                    {
+                        conflictEncountered = true;
+                    }
                 }
-                prevNode = node;
+                // Go in reverse order, as inner cases can be fully if-enclosed
+                for (int i = conflictWithNext.Count - 1; i >= 0; i--)
+                {
+                    if (conflictWithNext[i])
+                    {
+                        conflictEncountered = true;
+                    }
+                    if (conflictEncountered)
+                    {
+                        multigroup[i].AvoidIf = true;
+                        multigroup[i + 1].AvoidIf = true;
+                    }
+                }
+            }
+            foreach (FlowNode nextNode in NodeList())
+            {
+                if (nextNode.Im is CondIntermediate im && (im.Cond is CmdCond || im.Cond is CompareCond)
+                    && info.CondDocs.TryGetValue(im.Cond.DocName, out FunctionDoc cmdDoc) && cmdDoc.GotoOnly)
+                {
+                    // We can't do if statements if it's a skip
+                    nextNode.AvoidIf = true;
+                }
+                if (true)
+                {
+                    // Experimental new approach
+                    // Other approach relies on ToLabel, which can change during repacking (if statements have no inherent label)
+                    if (nextNode.JumpTo != null && nextNode.Im is CondIntermediate)
+                    {
+                        multigroup.Add(nextNode);
+                    }
+                    else if (multigroup.Count > 0)
+                    {
+                        processMultiGroup();
+                        multigroup.Clear();
+                    }
+                }
+                else
+                {
+                    // This used to be just <=, but it's fine for two jumps to land in the same place. That can be resolved below with frontiers.
+                    // Elden Ring 1043362510 is pretty awful though, so watch out doing it for identical labels
+                    // Elden Ring 3559 (setting flag 1035429210) is a case of repack differences
+                    if (prevNode != null
+                        && prevNode.JumpTo != null && nextNode.JumpTo != null
+                        && prevNode.Im is CondIntermediate prevIm && nextNode.Im is CondIntermediate nextIm
+                        && ((prevIm is Goto g && nextIm is Goto g2 && g.ToLabel == g2.ToLabel
+                            ? prevNode.JumpTo.ID <= nextNode.JumpTo.ID
+                            : prevNode.JumpTo.ID < nextNode.JumpTo.ID) || multiCount > 0))
+                    {
+                        prevNode.AvoidIf = true;
+                        nextNode.AvoidIf = true;
+                        multiCount++;
+                    }
+                    else
+                    {
+                        multiCount = 0;
+                    }
+                    // nextNode = prevNode;
+                    prevNode = nextNode;
+                }
+            }
+            if (multigroup.Count > 0)
+            {
+                processMultiGroup();
             }
 
             // Fully update dominators before if/else structuring.
@@ -1533,7 +1853,15 @@ namespace DarkScript3
                     dominanceFrontier[predDom].Add(node);
                 }
                 string displayDom(FlowNode d) => $"{d.ID}{(node.ImmedDominators.Contains(d) ? "*" : "")}";
-                if (debugPrint) Console.WriteLine($"node {node.ID} dominators: {string.Join(" ", node.Dominators.Select(displayDom))} {string.Join(",", frontiered)}");
+                if (debugPrint)
+                {
+                    List<string> ds = new List<string>();
+                    ds.Add(string.Join(" ", node.Dominators.Select(displayDom)));
+                    if (node.AvoidIf) ds.Add($"ifif{node.IfAllowedCondition}");
+                    if (node.JumpPred.Count > 0) ds.Add($"pred {node.JumpPred.Count}");
+                    if (frontiered.Count > 0) ds.Add("frontier " + string.Join(",", frontiered));
+                    Console.WriteLine($"node {node.ID} dominators: {string.Join(", ", ds)}");
+                }
             }
 
             // Branching points which may have a higher-level node using their follow, to delay to using that higher-level node.
@@ -1546,13 +1874,30 @@ namespace DarkScript3
             ifPostorder.Reverse();
             foreach (FlowNode node in ifPostorder)
             {
-                if (node.Succ == null || node.AlwaysJump || node.JumpTo == null || !(node.Im is CondIntermediate)) continue;
-                if (node.MultiGoto) continue;
+                // First add all loops, they always take priority
+                if (node.Im is LoopHeader)
+                {
+                    ifFollow[node] = node.JumpTo;
+                }
+            }
+            foreach (FlowNode node in ifPostorder)
+            {
+                // Console.WriteLine($"{node}: {!node.MultiGoto} {node.Succ != null} jump {!node.AlwaysJump} jumpto {node.JumpTo != null} im {node.Im is CondIntermediate}");
+                if (node.Succ == null || node.AlwaysJump || node.JumpTo == null || !(node.Im is CondIntermediate || node.Im is LoopHeader)) continue;
+                if (node.AvoidIf)
+                {
+                    if (node.IfAllowedCondition == null || !ifFollow.ContainsKey(node.IfAllowedCondition))
+                    {
+                        continue;
+                    }
+                }
                 List<FlowNode> immeds = ifPostorder.Where(d => d.ImmedDominators.Contains(node)).ToList();
 
                 // A few events which could be possibly improved:
                 // Missing a nested if in Sekiro 11105720
                 // Many GotoIfs in a row in DS1 840, maybe specialized syntax
+                // (done) Elden Ring 14003885 handling last branch of an if/else
+                // (done) Elden Ring 1030, why cond? Because uncompiled->compiled evaluation
 
                 // Follows need to have something jumping to them
                 List<FlowNode> multiImmeds = immeds.Where(im => im.JumpPred.Count > 0).ToList();
@@ -1580,7 +1925,14 @@ namespace DarkScript3
                     }
                     if (riskyFollow) follow = null;
                 }
-                if (debugPrint) Console.WriteLine($"For node {node.ID} with {string.Join(",", immeds)}, they merge back into {string.Join(",", multiImmeds)}, chosen {follow}");
+                ifFollow.TryGetValue(node, out FlowNode forFollow);
+                if (debugPrint) Console.WriteLine($"For node {node.ID} with {string.Join(",", immeds)}, they merge back into {string.Join(",", multiImmeds)}, chosen {follow} {forFollow}");
+                if (forFollow != null)
+                {
+                    // For loop takes priority over everything else (there is no goto for it)
+                    // It still needs to use dominance frontier logic, however
+                    follow = forFollow;
+                }
                 if (follow == null)
                 {
                     // Resolve this at a higher scope. Unless it dominates nothing.
@@ -1618,8 +1970,11 @@ namespace DarkScript3
                 }
             }
 
+            // Any Gotos remaining after structuring
             HashSet<Goto> explicitGotos = new HashSet<Goto>();
+            // Map from node to jump target when implied by structuring
             SortedDictionary<int, int> implicitGotos = new SortedDictionary<int, int>();
+            // Tracking for structuring mistakes
             HashSet<int> placedNodes = new HashSet<int>();
             List<Intermediate> structure(FlowNode node, List<FlowNode> follows, List<FlowNode> elses, int depth = 0)
             {
@@ -1636,6 +1991,22 @@ namespace DarkScript3
                         if (debugPrint) Console.WriteLine($"Follow chain: {node} -> {follow}");
                         // This shouldn't happen.
                         if (node == follow) throw new Exception($"Internal error: bad self-follow {node}");
+                        // Special case for loops. Some duplication here and higher cyclomatic complexity,
+                        // but combining the cases would be somewhat hard to read as well.
+                        if (node.Im is LoopHeader loop)
+                        {
+                            LoopStatement stmt = new LoopStatement { Code = loop.Code };
+                            stmt.ID = node.Im.ID;
+                            node.Im.MoveDecorationsTo(stmt);
+                            node.Im = stmt;
+                            stmt.Body = structure(
+                                node.Succ,
+                                follows.Concat(new[] { follow }).ToList(),
+                                elses, depth + 1);
+                            ims.Add(stmt);
+                            node = follow;
+                            continue;
+                        }
                         // Should be checked already
                         if (node.Succ == null || node.AlwaysJump || node.JumpTo == null || !(node.Im is CondIntermediate))
                         {
@@ -1731,8 +2102,33 @@ namespace DarkScript3
             }
 
             // Add synthetic labels to any skips not rewritten
-            SortedSet<int> labelTargets = new SortedSet<int>(explicitGotos.Where(g => !implicitGotos.ContainsKey(g.ToNode)).Select(g => g.ToNode));
-            Dictionary<int, string> gotoNames = labelTargets.Select((n, i) => (n, i)).ToDictionary(e => e.Item1, e => $"S{e.Item2}");
+            // Map from node id to label name
+            Dictionary<int, string> gotoNames = new Dictionary<int, string>();
+            // First repack heuristics: just check all gotos for hints, pick first one found
+            HashSet<string> manualLabelNames = new HashSet<string>();
+            bool isSynthetic(string l) => l.StartsWith("S") && int.TryParse(l.Substring(1), out _);
+            foreach (Goto g in explicitGotos)
+            {
+                if (g.ToLabelHint != null && !isSynthetic(g.ToLabelHint)
+                    && !gotoNames.ContainsKey(g.ToNode) && manualLabelNames.Add(g.ToLabelHint))
+                {
+                    gotoNames[g.ToNode] = g.ToLabelHint;
+                }
+            }
+            // Fill in remaining labels, which should be done in node order
+            int syntheticIndex = 0;
+            foreach (Goto g in explicitGotos.OrderBy(g => g.ToNode))
+            {
+                // if (node.ID == 305 && node.JumpTo != null && node.JumpTo.ID == 308) Console.WriteLine($"!!! {follows.Contains(node)} {elses.Contains(node)} {ifFollow.ContainsKey(node)}");
+                // Replicate below logic (but we're doing it in ToNode order, more-or-less)
+                int target = g.ToNode;
+                if (implicitGotos.TryGetValue(target, out int ultimateTarget))
+                {
+                    target = ultimateTarget;
+                }
+                if (gotoNames.ContainsKey(target)) continue;
+                gotoNames[target] = $"S{syntheticIndex++}";
+            }
 
             // We can still use CFG traversal here, but can't add/remove/swap intermediates anymore, and some nodes may be gone.
             foreach (FlowNode node in NodeList())
@@ -1748,6 +2144,7 @@ namespace DarkScript3
                     // In theory, this could be a regular label, but we'd have to be confident that it's referring to
                     // the next instance of said label, since label commands can be repeated an arbitrary number of times.
                     int target = g.ToNode;
+                    // This calculation used to follow implicitGotos
                     if (implicitGotos.TryGetValue(target, out int ultimateTarget))
                     {
                         target = ultimateTarget;
@@ -1763,7 +2160,7 @@ namespace DarkScript3
                 }
             }
 
-            if (debugPrint)
+            if (debugPrint && false)
             {
                 func.Print(Console.Out);
                 Console.WriteLine();

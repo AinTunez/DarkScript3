@@ -7,4 +7,4 @@ DarkScript3/bin/Debug/DarkScript3.exe ds1 ds1r diff fancy pack
 DarkScript3/bin/Debug/DarkScript3.exe ds3 ds3 diff fancy pack
 DarkScript3/bin/Debug/DarkScript3.exe er "alt/ernt" diff fancy pack
 DarkScript3/bin/Debug/DarkScript3.exe er er diff fancy pack
-DarkScript3/bin/Debug/DarkScript3.exe ds3 ds3 diff fancy unit
+DarkScript3/bin/Debug/DarkScript3.exe ds3 ds3 diff fancy unit validate

@@ -92,6 +92,7 @@ namespace DarkScript3
                 if (args.Contains("fancy"))
                 {
                     EventCFG.CFGOptions options = args.Contains("min") ? EventCFG.CFGOptions.GetMin() : EventCFG.CFGOptions.GetDefault();
+                    options.FailWarnings = true;
                     scripter = new EventScripter(emevdPath, docs);
                     FancyEventScripter fes = new FancyEventScripter(scripter, docs, options);
                     if (args.Contains("unit"))
@@ -102,8 +103,21 @@ namespace DarkScript3
                             testCases = File.ReadAllText("test.js");
                         }
                         fes.Pack(testCases, "test.js");
-                        Console.WriteLine(scripter.Unpack());
-                        Console.WriteLine(fes.Repack(testCases));
+                        string packUnit = scripter.Unpack();
+                        Console.WriteLine(packUnit);
+                        string repackUnit = fes.Repack(testCases);
+                        if (!args.Contains("silent"))
+                        {
+                            Console.WriteLine(repackUnit);
+                        }
+                        if (args.Contains("validate"))
+                        {
+                            fes.Pack(repackUnit, "test_repack.js");
+                            string packUnit2 = scripter.Unpack();
+                            Console.WriteLine($"Repack matched: {packUnit == packUnit2}");
+                            File.WriteAllText($@"{outDir}\test_reg3.js", packUnit);
+                            File.WriteAllText($@"{outDir}\test_reg4.js", packUnit2);
+                        }
                         return;
                     }
                     if (args.Contains("repackreg"))

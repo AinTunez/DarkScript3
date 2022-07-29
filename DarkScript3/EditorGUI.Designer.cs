@@ -86,6 +86,7 @@ namespace DarkScript3
             this.editor.CustomAction += new System.EventHandler<FastColoredTextBoxNS.CustomActionEventArgs>(this.Editor_CustomAction);
             this.editor.Scroll += new System.Windows.Forms.ScrollEventHandler(this.Editor_Scroll);
             this.editor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Editor_KeyDown);
+            this.editor.MouseDown += new System.Windows.Forms.MouseEventHandler(this.editor_MouseDown);
             this.editor.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseMove);
             this.editor.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseUp);
             // 

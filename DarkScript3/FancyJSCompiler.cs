@@ -662,7 +662,7 @@ namespace DarkScript3
                                 {
                                     context.Error(args[0], $"Expected a label name like L0, received {args[0].Type}");
                                 }
-                            }                            
+                            }
                         }
                         else if (f == "NoOp")
                         {
@@ -778,6 +778,44 @@ namespace DarkScript3
                     ifelse.True = ConvertStatement(ifs.Consequent);
                     if (ifs.Alternate != null) ifelse.False = ConvertStatement(ifs.Alternate);
                     ret.Add(ifelse);
+                }
+                else if (statement is ForStatement fors)
+                {
+                    if (fors.Init != null && !(fors.Init is VariableDeclaration dec && dec.Kind == VariableDeclarationKind.Let))
+                    {
+                        context.Error(fors.Init, $"For statement initialization should be of the form: let <variable> = <value>");
+                    }
+                    Node[] parts = new[] { fors.Init, fors.Test, fors.Update };
+                    string inner = string.Join("; ", parts.Select(p => p == null ? null : source.GetSourceNode(p).ToString().TrimEnd(';')));
+                    LoopStatement loop = new LoopStatement
+                    {
+                        Code = $"for ({inner})",
+                    };
+                    Node first = parts.Where(p => p != null).FirstOrDefault();
+                    if (first != null)
+                    {
+                        ProcessIntermediate(loop, first);
+                    }
+                    loop.Body = ConvertStatement(fors.Body);
+                    ret.Add(loop);
+                }
+                else if (statement is ForOfStatement forof)
+                {
+                    if (forof.Await)
+                    {
+                        context.Error(forof, $"Await-based for-of is not supported");
+                    }
+                    if (!(forof.Left is VariableDeclaration dec && dec.Kind == VariableDeclarationKind.Const))
+                    {
+                        context.Error(forof.Left, $"For-of statements should use const to assign loop variables: for (const <id> of <ids>)");
+                    }
+                    LoopStatement loop = new LoopStatement
+                    {
+                        Code = $"for ({source.GetSourceNode(forof.Left)} of {source.GetSourceNode(forof.Right)})",
+                    };
+                    ProcessIntermediate(loop, forof.Left);
+                    loop.Body = ConvertStatement(forof.Body);
+                    ret.Add(loop);
                 }
                 else
                 {
@@ -915,6 +953,11 @@ namespace DarkScript3
                 // Should probably isolate contexts from eachother to make this less hacky and also enable parallelism
                 if (errorCount == context.Errors.Count)
                 {
+                    if (repack)
+                    {
+                        // Track extra cosmetic state
+                        func.CondHints = new Dictionary<int, string>();
+                    }
                     EventCFG f = new EventCFG(func.ID, options);
                     EventCFG.Result res = f.Compile(func, docs.Translator);
                     if (res.Errors.Count == 0)
@@ -939,7 +982,7 @@ namespace DarkScript3
                             {
                                 res = f.Decompile(func, docs.Translator);
                             }
-                            catch (FancyNotSupportedException fancyEx)
+                            catch (FancyNotSupportedException fancyEx) when (!options.FailWarnings)
                             {
                                 // Fallback to existing definition. Continue top-level loop to avoid updating lastRewrittenNode
                                 context.Warnings.Add(CompileError.FromInstr(fancyEx.Im, "Decompile skipped: " + fancyEx.Message, func.ID));

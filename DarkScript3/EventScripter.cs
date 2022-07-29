@@ -144,6 +144,9 @@ namespace DarkScript3
             }
         }
 
+        /// <summary>
+        /// Called by JS to edit an earlier instruction to skip to the current instruction's index.
+        /// </summary>
         public void FillSkipPlaceholder(Event evt, int fillIndex)
         {
             int skipTarget = evt.Instructions.Count;
@@ -166,6 +169,11 @@ namespace DarkScript3
                 throw new Exception($"Skip too long in Event {CurrentEventID} from indices {fillIndex}->{skipTarget}, must be <256 lines. Use labels or split up the event.");
             }
             ins.ArgData[0] = (byte)skipCount;
+        }
+
+        public int ConvertFloatToIntBytes(float input)
+        {
+            return BitConverter.ToInt32(BitConverter.GetBytes(input), 0);
         }
 
         /// <summary>
