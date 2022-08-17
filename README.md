@@ -103,9 +103,9 @@ Event(12345, Restart, function () {
 
 ## Contributors
 
-AinTunez - creator of DarkScript3 and main scripting format
-thefifthmatt (gracenotes) - feature development and MattScript
-HotPocketRemix - EMEDFs and reversing help
-Meowmaritus - dark menu and SoulsFormats contributions
-TKGP - further SoulsFormats contributions
-Pav, Grimrukh, others - additional reversing help
+AinTunez - creator of DarkScript3 and main scripting format  
+thefifthmatt (gracenotes) - feature development and MattScript  
+HotPocketRemix - EMEDFs and reversing help  
+Meowmaritus - dark menu and SoulsFormats contributions  
+TKGP - further SoulsFormats contributions  
+Pav, Grimrukh, others - additional reversing help  

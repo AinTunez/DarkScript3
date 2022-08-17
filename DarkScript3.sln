@@ -1,9 +1,8 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29209.62
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DarkScript3", "DarkScript3\DarkScript3.csproj", "{26132F38-F7FC-465D-8044-4D45B5F79264}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DarkScript3", "DarkScript3\DarkScript3.csproj", "{26132F38-F7FC-465D-8044-4D45B5F79264}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoulsFormats", "..\SoulsFormats\SoulsFormats\SoulsFormats.csproj", "{580C3981-F179-4F17-858A-9469023BAF44}"
 EndProject

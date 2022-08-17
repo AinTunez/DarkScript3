@@ -10,6 +10,7 @@ using FastColoredTextBoxNS;
 using SoulsFormats;
 using System.Text;
 using System.ComponentModel;
+using Range = FastColoredTextBoxNS.Range;
 
 namespace DarkScript3
 {

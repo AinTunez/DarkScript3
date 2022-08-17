@@ -14,6 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using Range = FastColoredTextBoxNS.Range;
 
 namespace DarkScript3
 {

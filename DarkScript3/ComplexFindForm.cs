@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
 using System.Drawing;
+using Range = FastColoredTextBoxNS.Range;
 
 namespace DarkScript3
 {
