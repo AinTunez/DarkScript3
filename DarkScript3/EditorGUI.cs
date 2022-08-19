@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using FastColoredTextBoxNS;
 using SoulsFormats;
-using System.Text;
-using System.ComponentModel;
+using static DarkScript3.DocAutocomplete;
 using Range = FastColoredTextBoxNS.Range;
 
 namespace DarkScript3
@@ -20,6 +20,7 @@ namespace DarkScript3
         private EventScripter Scripter;
         private InstructionDocs Docs;
         private ScriptSettings Settings;
+        private AutocompleteContext AutoContext;
         private bool codeChanged;
         private bool savedAfterChanges;
         private List<FancyJSCompiler.CompileError> LatestWarnings;
@@ -36,6 +37,7 @@ namespace DarkScript3
             Scripter = scripter;
             Docs = docs;
             Settings = settings;
+            AutoContext = new AutocompleteContext();
             FileVersion = fileVersion;
             globalConstantRegex = JSRegex.GetGlobalConstantRegex(InstructionDocs.GlobalConstants.Concat(Docs.GlobalEnumConstants.Keys));
             Dock = DockStyle.Fill;
@@ -68,38 +70,67 @@ namespace DarkScript3
             InstructionMenu.AlwaysShowTooltip = false;
             InstructionMenu.ToolTipDuration = 1;
             InstructionMenu.AppearInterval = 250;
+            // Override for dynamic system, it does its own filtering
+            InstructionMenu.MinFragmentLength = 0;
+            InstructionMenu.Selected += (e, args) =>
+            {
+                if (args.Item is DocAutocompleteItem item)
+                {
+                    item.MarkSelected(AutoContext);
+                }
+            };
 
             InstructionMenu.ImageList = new ImageList();
-            // Colors match the HTML emedf documentation
+            // Colors match the HTML emedf documentation, and also indices match AutocompleteCategory enum
             InstructionMenu.ImageList.Images.Add("instruction", MakeColorImage(Color.FromArgb(0xFF, 0xFF, 0xB3)));
             InstructionMenu.ImageList.Images.Add("condition", MakeColorImage(Color.FromArgb(0xFF, 0xFF, 0xFF)));
             InstructionMenu.ImageList.Images.Add("enum", MakeColorImage(Color.FromArgb(0xE0, 0xB3, 0xFF)));
 
-            List<AutocompleteItem> instructions = new List<AutocompleteItem>();
-            List<AutocompleteItem> conditions = new List<AutocompleteItem>();
+            List<DocAutocompleteItem> items = new List<DocAutocompleteItem>();
             Dictionary<string, List<string>> instrAliases = Docs.AllAliases
                 .GroupBy(e => e.Value)
                 .ToDictionary(g => g.Key, g => g.Select(e => e.Key).ToList());
+            bool isCondInstr(string id)
+            {
+                if (Docs.Translator == null) return false;
+                return Docs.Translator.Selectors.ContainsKey(id) || Docs.Translator.LabelDocs.ContainsKey(id);
+            }
             foreach (string s in Docs.AllArgs.Keys)
             {
                 string menuText = s;
                 string toolTipTitle = s;
                 string toolTipText;
-                bool isInstr = false;
+                string instrId = null;
+                bool lowQuality = false;
+                InstructionTranslator.ShortVariant sv = null;
+                // Perhaps some of the logic here should be hidden within Translator
                 if (Docs.Functions.TryGetValue(s, out (int, int) indices))
                 {
-                    isInstr = true;
-                    toolTipText = $"{indices.Item1}[{indices.Item2:d2}] ({ArgString(s)})";
+                    instrId = $"{indices.Item1}[{indices.Item2:d2}]";
+                    toolTipText = $"{instrId} ({ArgString(s)})";
+                    if (Docs.Translator != null && Docs.Translator.ShortSelectors.ContainsKey(instrId))
+                    {
+                        // If there are short selectors, prefer them
+                        lowQuality = true;
+                    }
                 }
-                // TODO: It shouldn't be necessary to delve into Translator in this case
-                else if (Docs.Translator != null && Docs.Translator.ShortDocs.TryGetValue(s, out InstructionTranslator.ShortVariant sv))
+                else if (Docs.Translator != null && Docs.Translator.ShortDocs.TryGetValue(s, out sv))
                 {
-                    isInstr = true;
-                    toolTipText = $"{sv.Cmd} ({ArgString(s)})";
+                    instrId = sv.Cmd;
+                    toolTipText = $"{instrId} ({ArgString(s)})";
+                }
+                else if (Docs.Translator != null && Docs.Translator.CondDocs.TryGetValue(s, out InstructionTranslator.FunctionDoc funcDoc))
+                {
+                    toolTipText = $"({ArgString(s)})";
                 }
                 else
                 {
-                    toolTipText = $"({ArgString(s)})";
+#if DEBUG
+                    // This should cover all AllArgs keys, but duck out in release just in case.
+                    throw new Exception($"Unknown {s} in AllArgs");
+#else
+                    continue;
+#endif
                 }
                 ToolTips[menuText] = (toolTipTitle, toolTipText);
                 if (instrAliases.TryGetValue(menuText, out List<string> aliases))
@@ -110,21 +141,43 @@ namespace DarkScript3
                     }
                 }
 
-                if (isInstr)
+                if (instrId != null)
                 {
-                    instructions.Add(new AutocompleteItem(s + "(", InstructionMenu.ImageList.Images.IndexOfKey("instruction"), menuText));
+                    FancyContextType fancy = FancyContextType.Any;
+                    if (isCondInstr(instrId))
+                    {
+                        fancy = FancyContextType.RegularOnly;
+                    }
+                    else if (sv != null)
+                    {
+                        // Short versions currently only available with translator
+                        fancy = FancyContextType.FancyOnly;
+                    }
+                    items.Add(new DocAutocompleteItem(AutocompleteCategory.Instruction, fancy, lowQuality, s, menuText));
                 }
                 else
                 {
-                    conditions.Add(new AutocompleteItem(s + "(", InstructionMenu.ImageList.Images.IndexOfKey("condition"), menuText));
+                    // Detection if this is the main condition whilst variants exist
+                    if (Docs.Translator != null
+                        && Docs.Translator.CondDocs.TryGetValue(s, out InstructionTranslator.FunctionDoc funcDoc)
+                        && funcDoc.ConditionDoc.Name == s
+                        && funcDoc.ConditionDoc.HasVariants)
+                    {
+                        lowQuality = true;
+                    }
+                    items.Add(new DocAutocompleteItem(AutocompleteCategory.Condition, FancyContextType.FancyOnly, lowQuality, s, menuText));
                 }
             }
-            IEnumerable<AutocompleteItem> enums = Docs.EnumValues.Keys.Select(s => new AutocompleteItem(s, InstructionMenu.ImageList.Images.IndexOfKey("enum"), s));
+            items.AddRange(Docs.EnumValues.Keys.Select(s => new DocAutocompleteItem(AutocompleteCategory.Enum, FancyContextType.Any, false, s, s)));
 
-            InstructionMenu.Items.SetAutocompleteItems(
-                instructions.OrderBy(i => i.MenuText)
-                    .Concat(conditions.OrderBy(i => i.MenuText))
-                    .Concat(enums.OrderBy(i => i.MenuText)));
+            // Finally, builtins. Only fancy ones for now.
+            items.AddRange(ScriptAst.ReservedWords
+                .Where(e => e.Value.ControlStatement)
+                .Select(e => new DocAutocompleteItem(AutocompleteCategory.Instruction, FancyContextType.FancyOnly, false, e.Key, e.Key)));
+
+            // Default sort for speedier future OrderBy sort
+            items.Sort((a, b) => a.GetSortKey().CompareTo(b.GetSortKey()));
+            InstructionMenu.Items.SetAutocompleteItems(new DocAutocompleteItemList(items, editor, Docs, AutoContext));
         }
 
         // Info for GUI
@@ -485,6 +538,8 @@ namespace DarkScript3
                 funcName = func.Text;
             }
             SharedControls.LoadDocText(funcName, argIndex, Docs, false);
+            AutoContext.FuncName = funcName;
+            AutoContext.FuncArg = argIndex;
         }
 
         private void ShowTip(string s, Point p, int argIndex = -1)
@@ -601,7 +656,8 @@ namespace DarkScript3
             {
                 return;
             }
-            // This isn't a comprehensive regex and doesn't support a lot of code on the same line.
+            // This isn't a comprehensive regex and doesn't support code on very different lines.
+            // Singleline is needed for ^ to work. But GetRangesByLines may be unnecessarily expensive vs GetRanges.
             Regex regex = new Regex($@"^\s*\$?Event\(\s*{id}\s*,", RegexOptions.Singleline);
             List<Range> ranges = editor.Range.GetRangesByLines(regex).ToList();
             string searchType = "";

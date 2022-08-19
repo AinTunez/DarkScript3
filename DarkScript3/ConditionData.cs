@@ -183,6 +183,11 @@ namespace DarkScript3
             public bool IsCompare => Compare != null;
 
             /// <summary>
+            /// If there are any variants at all.
+            /// </summary>
+            public bool HasVariants => Compare != null || Bool != null || (Bools != null && Bools.Count > 0);
+
+            /// <summary>
             /// Whether source code is allowed to contain this constant.
             /// </summary>
             [JsonProperty(PropertyName = "hidden")]
