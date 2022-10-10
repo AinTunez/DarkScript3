@@ -48,6 +48,54 @@ namespace DarkScript3
             }
         }
 
+        public void DumpTypes()
+        {
+            InstructionDocs docs = new InstructionDocs("er-common.emedf.json");
+            Dictionary<string, int> types = new Dictionary<string, int>()
+            {
+                ["byte"] = 0,
+                ["ushort"] = 1,
+                ["uint"] = 2,
+                ["sbyte"] = 3,
+                ["short"] = 4,
+                ["int"] = 5,
+                ["float"] = 6,
+            };
+            Dictionary<int, string> revTypes = types.ToDictionary(e => e.Value, e => e.Key);
+            SortedDictionary<(string, string), List<string>> cmdsByType = new SortedDictionary<(string, string), List<string>>();
+            foreach (EMEDF.ClassDoc bank in docs.DOC.Classes.OrderBy(i => i.Index))
+            {
+                foreach (EMEDF.InstrDoc instr in bank.Instructions.OrderBy(i => i.Index))
+                {
+                    string id = InstructionDocs.FormatInstructionID(bank.Index, instr.Index);
+                    string name = instr.DisplayName;
+                    foreach (EMEDF.ArgDoc arg in instr.Arguments)
+                    {
+                        string type = revTypes[(int)arg.Type];
+                        if (arg.EnumName == null && type != "float")
+                        {
+                            var key = (arg.Name, type);
+                            if (!cmdsByType.TryGetValue(key, out List<string> cmds))
+                            {
+                                cmdsByType[key] = cmds = new List<string>();
+                            }
+                            cmds.Add(name);
+                        }
+                    }
+                }
+            }
+            foreach (bool useId in new[] { true, false })
+            {
+                foreach (var entry in cmdsByType)
+                {
+                    (string argName, string type) = entry.Key;
+                    if (argName.Contains("ID") != useId) continue;
+                    Console.WriteLine($"{type} {argName}: {string.Join(", ", entry.Value)}");
+                }
+                Console.WriteLine();
+            }
+        }
+
         public void DumpEldenUnknown()
         {
             InstructionDocs docs = new InstructionDocs("er-common.emedf.json");

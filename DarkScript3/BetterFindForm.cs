@@ -12,12 +12,13 @@ namespace DarkScript3
         bool firstSearch = true;
         Place startPlace;
         public FastColoredTextBox tb;
-        public ToolControl infoTip = new ToolControl();
+        public ToolControl infoTip;
 
-        public BetterFindForm(FastColoredTextBox tb)
+        public BetterFindForm(FastColoredTextBox tb, ToolControl infoTip)
         {
             InitializeComponent();
             this.tb = tb;
+            this.infoTip = infoTip;
         }
 
         private void btClose_Click(object sender, EventArgs e)

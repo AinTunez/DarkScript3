@@ -21,7 +21,7 @@ namespace DarkScript3
     public class TextStyles
     {
         // After changing these, make sure to SetGlobalStyles on any textbox.
-        public static TextStyle Comment { get; private set; }  = MakeStyle(87, 166, 74, renderCJK: true);
+        public static TextStyle Comment { get; private set; } = MakeStyle(87, 166, 74, renderCJK: true);
         public static TextStyle String = MakeStyle(214, 157, 133);
         public static TextStyle Keyword = MakeStyle(86, 156, 214);
         public static TextStyle ToolTipKeyword = MakeStyle(106, 176, 234);
@@ -32,6 +32,8 @@ namespace DarkScript3
         public static BoxStyle HighlightToken = BoxStyle.Make(Alphaify(127, Color.White));
         public static Color BackColor = Color.FromArgb(30, 30, 30);
         public static Color ForeColor = Color.Gainsboro;
+        // Should be set to match ForeColor
+        public static TextStyle DefaultCJK = MakeStyle(Color.Gainsboro, renderCJK: true);
         // The default alpha value in FCTB is 60 if none is specified.
         public static Color SelectionColor = Alphaify(100, Color.White);
 
@@ -44,8 +46,25 @@ namespace DarkScript3
         private static Font InnerFont = new Font("Consolas", 8.25F);
         public static Font Font
         {
+            // Prefer to use FontFor, for auto-resize handling.
             get => (Font)InnerFont.Clone();
             set => InnerFont = (Font)value.Clone();
+        }
+
+        public static Font FontFor(FastColoredTextBox tb)
+        {
+            // This is fairly hacky. This logic is used from both SetGlobalFont (cheap size change on zoom)
+            // and RefreshGlobalStyles, used in a few circumstances.
+            Font f = Font;
+            if (tb?.Name == "tipBox")
+            {
+                // Heuristic for less intrusive tips: above 8pt, show at 80% of size
+                if (f.SizeInPoints > 8)
+                {
+                    f = new Font(f.Name, Math.Max(8f, f.SizeInPoints * 0.8f));
+                }
+            }
+            return f;
         }
 
         public static List<Style> HighlightStyles => new List<Style> { Keyword, Number, EnumConstant, EnumProperty };
@@ -187,6 +206,7 @@ namespace DarkScript3
             BackColor = colors.backgroundSetting.Color;
             SelectionColor = Alphaify(100, colors.highlightSetting.Color);
             ForeColor = colors.plainSetting.Color;
+            DefaultCJK = MakeStyle(ForeColor, renderCJK: true);
 
             SetFontIfMonospace(colors.FontSetting);
             SaveColors();
@@ -241,6 +261,7 @@ namespace DarkScript3
             SelectionColor = colorFromHex("Highlight");
             BackColor = colorFromHex("Background");
             ForeColor = colorFromHex("Default");
+            DefaultCJK = MakeStyle(ForeColor, renderCJK: true);
 
             // Added in later version
             if (cfg.ContainsKey("HighlightBox"))

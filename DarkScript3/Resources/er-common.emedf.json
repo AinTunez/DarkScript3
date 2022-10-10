@@ -366,7 +366,7 @@
               "unk4": 0
             },
             {
-              "name": "Hour",
+              "name": "Hours",
               "type": 0,
               "enum_name": null,
               "default": 0,
@@ -380,7 +380,7 @@
               "unk4": 0
             },
             {
-              "name": "Minute",
+              "name": "Minutes",
               "type": 0,
               "enum_name": null,
               "default": 0,
@@ -394,7 +394,7 @@
               "unk4": 0
             },
             {
-              "name": "Second",
+              "name": "Seconds",
               "type": 0,
               "enum_name": null,
               "default": 0,
@@ -766,7 +766,7 @@
               "unk4": 0
             },
             {
-              "name": "Target Entity A ID",
+              "name": "Target Entity ID A",
               "type": 2,
               "enum_name": null,
               "default": 0,
@@ -780,7 +780,7 @@
               "unk4": 0
             },
             {
-              "name": "Target Entity B ID",
+              "name": "Target Entity ID B",
               "type": 2,
               "enum_name": null,
               "default": 0,
@@ -2040,7 +2040,7 @@
               "unk4": 0
             },
             {
-              "name": "Item ID",
+              "name": "Armor Item ID",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -8499,7 +8499,7 @@
               "unk4": 0
             },
             {
-              "name": "Entity ID",
+              "name": "Player Entity ID",
               "type": 2,
               "enum_name": null,
               "default": 0,
@@ -8819,7 +8819,7 @@
               "unk4": 0
             },
             {
-              "name": "Hour",
+              "name": "Hours",
               "type": 0,
               "enum_name": null,
               "default": 0,
@@ -8833,7 +8833,7 @@
               "unk4": 0
             },
             {
-              "name": "Minute",
+              "name": "Minutes",
               "type": 0,
               "enum_name": null,
               "default": 0,
@@ -8847,7 +8847,7 @@
               "unk4": 0
             },
             {
-              "name": "Second",
+              "name": "Seconds",
               "type": 0,
               "enum_name": null,
               "default": 0,
@@ -8895,7 +8895,7 @@
               "unk4": 0
             },
             {
-              "name": "Point Entity ID",
+              "name": "Area Entity ID",
               "type": 2,
               "enum_name": null,
               "default": 0,
@@ -8999,7 +8999,7 @@
               "unk4": 0
             },
             {
-              "name": "Point Entity ID",
+              "name": "Area Entity ID",
               "type": 2,
               "enum_name": null,
               "default": 0,
@@ -9125,7 +9125,7 @@
               "unk4": 0
             },
             {
-              "name": "Hour",
+              "name": "Hours",
               "type": 0,
               "enum_name": null,
               "default": 0,
@@ -9139,7 +9139,7 @@
               "unk4": 0
             },
             {
-              "name": "Minute",
+              "name": "Minutes",
               "type": 0,
               "enum_name": null,
               "default": 0,
@@ -9153,7 +9153,7 @@
               "unk4": 0
             },
             {
-              "name": "Second",
+              "name": "Seconds",
               "type": 0,
               "enum_name": null,
               "default": 0,
@@ -9201,7 +9201,7 @@
               "unk4": 0
             },
             {
-              "name": "Point Entity ID",
+              "name": "Area Entity ID",
               "type": 2,
               "enum_name": null,
               "default": 0,
@@ -9297,7 +9297,7 @@
           "index": 3,
           "args": [
             {
-              "name": "Entity ID",
+              "name": "Generator Entity ID",
               "type": 2,
               "enum_name": null,
               "default": 0,
@@ -9331,7 +9331,7 @@
           "index": 4,
           "args": [
             {
-              "name": "Map Item Lot ID",
+              "name": "Item Lot ID",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -9687,7 +9687,7 @@
           "index": 13,
           "args": [
             {
-              "name": "Entity ID",
+              "name": "Navimesh Entity ID",
               "type": 2,
               "enum_name": null,
               "default": 0,
@@ -10085,7 +10085,7 @@
           "index": 23,
           "args": [
             {
-              "name": "Respawn Point Entity ID",
+              "name": "Respawn Area Entity ID",
               "type": 2,
               "enum_name": null,
               "default": 0,
@@ -10181,7 +10181,7 @@
               "unk4": 0
             },
             {
-              "name": "Spawn Point Entity ID",
+              "name": "Spawn Area Entity ID",
               "type": 2,
               "enum_name": null,
               "default": 0,
@@ -10495,7 +10495,7 @@
           "index": 36,
           "args": [
             {
-              "name": "Map Item Lot ID",
+              "name": "Item Lot ID",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -10749,7 +10749,7 @@
           "index": 52,
           "args": [
             {
-              "name": "AISoundParam ID",
+              "name": "AI Sound Param ID",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -10763,7 +10763,7 @@
               "unk4": 0
             },
             {
-              "name": "Origin Entity ID",
+              "name": "Entity ID",
               "type": 2,
               "enum_name": null,
               "default": 0,
@@ -10777,7 +10777,7 @@
               "unk4": 0
             },
             {
-              "name": "Type",
+              "name": "Origin Entity Type",
               "type": 0,
               "enum_name": "Target Entity Type",
               "default": 0,
@@ -11424,7 +11424,7 @@
           "index": 79,
           "args": [
             {
-              "name": "Entity ID",
+              "name": "NPC Entity ID",
               "type": 2,
               "enum_name": null,
               "default": 0,
@@ -11612,7 +11612,7 @@
           "index": 5,
           "args": [
             {
-              "name": "Entity ID",
+              "name": "Character Entity ID",
               "type": 2,
               "enum_name": null,
               "default": 0,
@@ -13321,7 +13321,7 @@
           "index": 52,
           "args": [
             {
-              "name": "CharInitParam ID",
+              "name": "Character Param ID",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -14289,7 +14289,7 @@
               "unk4": 0
             },
             {
-              "name": "ObjActParam ID",
+              "name": "ObjAct Param ID",
               "type": 5,
               "enum_name": null,
               "default": -1,
@@ -14337,7 +14337,7 @@
               "unk4": 0
             },
             {
-              "name": "ObjActParam ID",
+              "name": "ObjAct Param ID",
               "type": 5,
               "enum_name": null,
               "default": -1,
@@ -14673,7 +14673,7 @@
               "unk4": 0
             },
             {
-              "name": "ObjActParam ID",
+              "name": "ObjAct Param ID",
               "type": 5,
               "enum_name": null,
               "default": -1,
@@ -15015,7 +15015,7 @@
           "index": 3,
           "args": [
             {
-              "name": "Type",
+              "name": "Target Entity Type",
               "type": 5,
               "enum_name": "Target Entity Type",
               "default": 0,
@@ -15561,7 +15561,7 @@
           "index": 15,
           "args": [
             {
-              "name": "TutorialParam ID",
+              "name": "Tutorial Param ID",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -15697,7 +15697,7 @@
               "unk4": 0
             },
             {
-              "name": "Type",
+              "name": "Target Entity Type",
               "type": 5,
               "enum_name": "Target Entity Type",
               "default": 0,
@@ -17061,6 +17061,361 @@
       "Condition State",
       "Disabled/Enabled",
       "Comparison Type"
+    ],
+    "meta_aliases": {
+      "Entity ID": [
+        "Source Entity ID",
+        "Target Entity ID",
+        "Target Entity ID A",
+        "Target Entity ID B",
+        "Entity ID 2",
+        "Bullet Producer Entity ID",
+        "Unknown Entity ID A",
+        "Unknown Entity ID B",
+        "Origin Entity ID"
+      ],
+      "Character Entity ID": [
+        "Attacker Entity ID",
+        "Aggressor Entity ID",
+        "Bullet Team Entity ID",
+        "Entity ID to Copy Floor From",
+        "Source Character Entity ID",
+        "Target Character Entity ID"
+      ],
+      "NPC Entity ID": [
+        "Summoned NPC Entity ID"
+      ],
+      "Asset Entity ID": [
+        "Target Asset Entity ID",
+        "Caravan Asset Entity ID",
+        "Child Asset Entity ID",
+        "Parent Asset Entity ID"
+      ],
+      "Area Entity ID": [
+        "Source Area Entity ID",
+        "Destination Area Entity ID",
+        "Placement Area Entity ID",
+        "Spawn Area Entity ID"
+      ],
+      "Hit Entity ID": [
+        "Warp Destination Hit Entity ID"
+      ],
+      "Camera ID": [
+        "Normal Camera ID",
+        "Locked Camera ID"
+      ],
+      "Character Param ID": [
+        "Fallback Character Param ID"
+      ],
+      "Event Flag ID": [
+        "Target Event Flag ID",
+        "Starting Target Event Flag ID",
+        "Ending Target Event Flag ID",
+        "Base Event Flag ID",
+        "Left-side Base Event Flag ID",
+        "Right-side Base Event Flag ID",
+        "Event Flag ID Min",
+        "Event Flag ID Max",
+        "Event Flag ID Start",
+        "Event Flag ID End",
+        "Summon Event Flag ID",
+        "Dismissal Event Flag ID",
+        "Base Event Flag ID (Operand)",
+        "Left Response Event Flag ID",
+        "Right Response Event Flag ID",
+        "Cancel Response Event Flag ID",
+        "Disable Top Event Flag ID",
+        "Disable Bottom Event Flag ID"
+      ],
+      "Other": [
+        "Cutscene ID",
+        "NPC Part ID",
+        "Multiplayer Event ID",
+        "Target Event Message ID",
+        "Event Slot ID",
+        "Event ID",
+        "Activity ID",
+        "Dummypoly ID",
+        "Lock On Dummypoly ID",
+        "Starting Dummypoly ID",
+        "Ending Dummypoly ID",
+        "Parent Dummypoly ID",
+        "Achievement ID",
+        "Animation ID",
+        "Play Animation ID",
+        "Soul Amount Save Slot ID",
+        "Soul Amount Load Slot ID",
+        "Command ID",
+        "State ID",
+        "Vibration ID",
+        "Defense Material SE ID",
+        "Defense Material SFX ID",
+        "Sound ID",
+        "Far-view ID",
+        "SFX ID",
+        "Wind SFX ID",
+        "Gparam Sub ID"
+      ]
+    },
+    "meta_types": [
+      {
+        "name": "Entity ID",
+        "data_type": "entity",
+        "cmds": ["3", "1003", "2003[05]", "2003[06]", "2003[07]", "2003[52]", "2007", "2010[02]"]
+      },
+      {
+        "name": "Parameters",
+        "data_type": "entity"
+      },
+      {
+        "name": "Entity ID",
+        "cmds": ["4", "1004", "2003[11]", "2003[12]", "2003[15]", "2003[73]", "2004", "2009[04]"],
+        "data_type": "entity",
+        "types": ["Enemy", "Self"]
+      },
+      {
+        "name": "Entity ID",
+        "cmds": ["5", "1005", "2005", "2009[00]", "2009[03]"],
+        "data_type": "entity",
+        "type": "Asset"
+      },
+      {
+        "name": "Entity ID",
+        "cmds": ["2003[18]"],
+        "data_type": "entity",
+        "types": ["Asset", "Enemy", "Self"]
+      },
+      {
+        "name": "Entity ID",
+        "cmds": ["2006[01]", "2006[02]"],
+        "data_type": "entity",
+        "types": ["SFX"]
+      },
+      {
+        "name": "Character Entity ID",
+        "data_type": "entity",
+        "types": ["Enemy", "Self"]
+      },
+      {
+        "name": "NPC Entity ID",
+        "data_type": "entity",
+        "types": ["Enemy", "Human"]
+      },
+      {
+        "name": "Area Entity ID",
+        "data_type": "entity",
+        "type": "Region"
+      },
+      {
+        "name": "Initial Area Entity ID",
+        "data_type": "entity",
+        "types": ["Region", "Player"]
+      },
+      {
+        "name": "Respawn Area Entity ID",
+        "data_type": "entity",
+        "type": "SpawnPoint"
+      },
+      {
+        "name": "Message Entity ID",
+        "data_type": "entity",
+        "type": "Message"
+      },
+      {
+        "name": "Asset Entity ID",
+        "data_type": "entity",
+        "type": "Asset"
+      },
+      {
+        "name": "Hit Entity ID",
+        "data_type": "entity",
+        "type": "Collision"
+      },
+      {
+        "name": "Player Entity ID",
+        "data_type": "entity",
+        "type": "Self"
+      },
+      {
+        "name": "Map Part Entity ID",
+        "data_type": "entity",
+        "type": "MapPiece"
+      },
+      {
+        "name": "Generator Entity ID",
+        "data_type": "entity",
+        "type": "Generator"
+      },
+      {
+        "name": "Navimesh Entity ID",
+        "data_type": "entity",
+        "type": "Navmesh"
+      },
+      {
+        "name": "Patrol Information Entity ID",
+        "data_type": "entity",
+        "type": "PatrolInfo"
+      },
+      {
+        "multi_names": ["Warp Type", "Warp Destination Entity ID"],
+        "data_type": "entity",
+        "override_enum": "TargetEntityType",
+        "override_types": {
+          "Asset": {"value": 0},
+          "Region": {"value": 1},
+          "Enemy": {"value": 2},
+          "Self": {"value": 2}
+        }
+      },
+      {
+        "multi_names": ["Target Entity Type", "Entity ID"],
+        "data_type": "entity",
+        "override_enum": "TargetEntityType",
+        "override_types": {
+          "Asset": {"value": 0},
+          "Region": {"value": 1},
+          "Enemy": {"value": 2},
+          "Self": {"value": 2}
+        }
+      },
+      {
+        "multi_names": ["Area ID", "Block ID", "Region ID", "Index ID"],
+        "data_type": "mapparts"
+      },
+      {
+        "name": "Map ID",
+        "data_type": "mapint"
+      },
+      {
+        "multi_names": ["Item Type", "Item ID"],
+        "data_type": "param",
+        "override_enum": "ItemType",
+        "override_types": {
+          "EquipParamWeapon": {"value": 0},
+          "EquipParamProtector": {"value": 1},
+          "EquipParamAccessory": {"value": 2},
+          "EquipParamGoods": {"value": 3}
+        }
+      },
+      {
+        "name": "AI ID",
+        "data_type": "param",
+        "type": "NpcThinkParam"
+      },
+      {
+        "name": "Armor Item ID",
+        "data_type": "param",
+        "type": "EquipParamProtector"
+      },
+      {
+        "name": "Action Button Parameter ID",
+        "data_type": "param",
+        "type": "ActionButtonParam"
+      },
+      {
+        "name": "AI Sound Param ID",
+        "data_type": "param",
+        "type": "AiSoundParam"
+      },
+      {
+        "name": "Behavior ID",
+        "data_type": "param",
+        "type": "BehaviorParam"
+      },
+      {
+        "name": "BGM Boss Conv Param ID",
+        "data_type": "param",
+        "type": "WwiseValueToStrParam_BgmBossChrIdConv"
+      },
+      {
+        "name": "Camera ID",
+        "data_type": "param",
+        "type": "LockCamParam"
+      },
+      {
+        "name": "Character Param ID",
+        "data_type": "param",
+        "type": "CharaInitParam"
+      },
+      {
+        "name": "Ceremony ID",
+        "data_type": "param",
+        // TODO: Needs map offset in Elden Ring
+        "type": "CeremonyParam"
+      },
+      {
+        "name": "Face Param ID",
+        "data_type": "param",
+        "type": "FaceParam"
+      },
+      {
+        "name": "Gesture Param ID",
+        "data_type": "param",
+        "type": "GestureParam"
+      },
+      {
+        "name": "Item Lot ID",
+        "data_type": "param",
+        "type": "ItemLotParam_map"
+      },
+      {
+        "name": "ObjAct Param ID",
+        "data_type": "param",
+        "type": "ObjActParam"
+      },
+      {
+        "name": "SpEffect ID",
+        "data_type": "param",
+        "type": "SpEffectParam"
+      },
+      {
+        "name": "Tutorial Param ID",
+        "data_type": "param",
+        "type": "TutorialParam"
+      },
+      {
+        "name": "Weather Lot Param ID",
+        "data_type": "param",
+        "type": "WeatherLotParam"
+      },
+      {
+        "name": "World Map Point Param ID",
+        "data_type": "param",
+        "type": "WorldMapPointParam"
+      },
+      {
+        "name": "Name ID",
+        "data_type": "fmg",
+        "type": "NpcName"
+      },
+      {
+        "name": "Network Message ID",
+        "data_type": "fmg",
+        "type": "NetworkMessage"
+      },
+      {
+        "name": "Message ID",
+        "data_type": "fmg",
+        "type": "EventTextForMap"
+      },
+      {
+        "name": "Message ID",
+        "cmds": ["2007[13]", "2007[14]"],
+        "data_type": "fmg",
+        "type": "PlaceName"
+      },
+      {
+        "name": "Subarea Name Popup Message ID",
+        "data_type": "fmg",
+        "type": "PlaceName"
+      },
+      {
+        "name": "Event Flag ID",
+        "data_type": "eventflag"
+      },
+      {
+        "name": "Other"
+      },
     ]
   }
 }

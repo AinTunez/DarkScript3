@@ -24,6 +24,7 @@ namespace DarkScript3
         public readonly string EMEVDPath;
         public string JsFileName => $"{Path.GetFileName(EMEVDPath)}.js";
         public string EmevdFileName => $"{Path.GetFileName(EMEVDPath)}";
+        public string EmevdFileDir => $"{Path.GetDirectoryName(EMEVDPath)}";
 
         public EMEVD EVD = new EMEVD();
 
@@ -39,16 +40,18 @@ namespace DarkScript3
 
         private List<string> LinkedFiles = new List<string>();
 
-        public EventScripter(string file, InstructionDocs docs, EMEVD evd = null)
+        public EventScripter(string file, InstructionDocs docs, EMEVD evd = null, string loadPath = null)
         {
             EMEVDPath = file;
             this.docs = docs;
-            EVD = evd ?? EMEVD.Read(file);
-            if (File.Exists(file.Replace(".emevd", ".emeld")))
+            loadPath ??= file;
+            EVD = evd ?? EMEVD.Read(loadPath);
+            string emeldPath = loadPath.Replace(".emevd", ".emeld");
+            if (File.Exists(emeldPath))
             {
                 try
                 {
-                    ELD = EMELD.Read(file.Replace(".emevd", ".emeld"));
+                    ELD = EMELD.Read(emeldPath);
                 }
                 catch
                 {

@@ -13,13 +13,20 @@ namespace DarkScript3
 {
     public partial class ToolControl : UserControl
     {
-        public ToolControl()
+        private readonly SoapstoneMetadata Metadata;
+        private string game;
+        private object data;
+
+        public ToolControl(SoapstoneMetadata Metadata)
         {
             InitializeComponent();
+            this.Metadata = Metadata;
         }
 
-        public void SetText(string s)
+        public void SetText(string s, string game = null, object data = null)
         {
+            this.game = game;
+            this.data = data;
             tipBox.Text = s;
 
             int width = tipBox.Lines.Max(e => e.Length) * tipBox.CharWidth;
@@ -33,9 +40,10 @@ namespace DarkScript3
 
         public void ShowAtPosition(Control origin, Point p, int afterHeight)
         {
-            if (Parent == null)
+            if (Parent == null || origin.IsDisposed)
             {
-                // This should be added to the parent before the editor uses it, but not really show-stopping if not.
+                // This should be added to the parent before the editor uses it,
+                // or after editor tab is closed, but not really show-stopping if not.
                 Hide();
                 return;
             }
@@ -76,6 +84,23 @@ namespace DarkScript3
 
         private void TipBox_Hide(object sender, EventArgs e)
         {
+            Hide();
+        }
+
+        private void TipBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            // For now, only allow right-click, because left-click with window switch causes accidental selection
+            if (game != null && e.Button == MouseButtons.Right)
+            {
+                if (data is SoapstoneMetadata.EntityData entity && entity.Type != "Self")
+                {
+                    _ = Metadata.OpenEntityData(game, entity);
+                }
+                else if (data is SoapstoneMetadata.EntryData entry)
+                {
+                    _ = Metadata.OpenEntryData(game, entry);
+                }
+            }
             Hide();
         }
     }

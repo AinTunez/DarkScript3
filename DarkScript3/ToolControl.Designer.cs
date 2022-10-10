@@ -41,10 +41,10 @@ namespace DarkScript3
             this.tipPanel.Controls.Add(this.tipBox);
             this.tipPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tipPanel.Location = new System.Drawing.Point(0, 0);
-            this.tipPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tipPanel.Margin = new System.Windows.Forms.Padding(2);
             this.tipPanel.Name = "tipPanel";
-            this.tipPanel.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tipPanel.Size = new System.Drawing.Size(111, 120);
+            this.tipPanel.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tipPanel.Size = new System.Drawing.Size(130, 138);
             this.tipPanel.TabIndex = 2;
             // 
             // tipBox
@@ -70,10 +70,10 @@ namespace DarkScript3
             this.tipBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.tipBox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.tipBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tipBox.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.tipBox.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tipBox.ForeColor = System.Drawing.Color.Gainsboro;
             this.tipBox.IsReplaceMode = false;
-            this.tipBox.Location = new System.Drawing.Point(4, 4);
+            this.tipBox.Location = new System.Drawing.Point(5, 5);
             this.tipBox.Margin = new System.Windows.Forms.Padding(0);
             this.tipBox.Name = "tipBox";
             this.tipBox.Paddings = new System.Windows.Forms.Padding(0);
@@ -82,25 +82,25 @@ namespace DarkScript3
             this.tipBox.ServiceColors = null;
             this.tipBox.ShowLineNumbers = false;
             this.tipBox.ShowScrollBars = false;
-            this.tipBox.Size = new System.Drawing.Size(103, 112);
+            this.tipBox.Size = new System.Drawing.Size(120, 128);
             this.tipBox.TabIndex = 0;
             this.tipBox.Text = "customToolTip";
             this.tipBox.Zoom = 100;
             this.tipBox.SelectionChanged += new System.EventHandler(this.TipBox_Hide);
-            this.tipBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TipBox_Hide);
             this.tipBox.Scroll += new System.Windows.Forms.ScrollEventHandler(this.TipBox_Hide);
+            this.tipBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TipBox_MouseDown);
             // 
             // ToolControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.tipPanel);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ToolControl";
-            this.Size = new System.Drawing.Size(111, 120);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TipBox_Hide);
+            this.Size = new System.Drawing.Size(130, 138);
             this.Scroll += new System.Windows.Forms.ScrollEventHandler(this.TipBox_Hide);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TipBox_MouseDown);
             this.tipPanel.ResumeLayout(false);
             this.tipPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tipBox)).EndInit();
