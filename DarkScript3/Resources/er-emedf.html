@@ -254,9 +254,9 @@ section {
 <p class="sectionusage usageinfo">Used in m60</p>
 <pre>IfTimeOfDay(
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    byte hour, 
-    byte minute, 
-    byte second)</pre><p>Condition function: <code><a href="#TimeOfDay">TimeOfDay</a></code></p>
+    byte hours, 
+    byte minutes, 
+    byte seconds)</pre><p>Condition function: <code><a href="#TimeOfDay">TimeOfDay</a></code></p>
 </div></section>
 <section class="instr condinstr">
 <h3 id="IfTimeOfDayInRange"><a href="#IfTimeOfDayInRange" class="selfref"><code>IfTimeOfDayInRange</code></a> <span class="sectioninfo">Instruction 1[05]</span></h3>
@@ -311,15 +311,15 @@ section {
 <pre>IfEntityInoutsideRadiusOfEntity(
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     byte&lt;<a href="#InsideOutsideState">InsideOutsideState</a>&gt; desiredState, 
-    uint targetEntityAId, 
-    uint targetEntityBId, 
+    uint targetEntityIdA, 
+    uint targetEntityIdB, 
     float targetDistance, 
     int numberOfTargetCharacters)</pre><p>Condition function: <code><a href="#EntityInRadiusOfEntity">EntityInRadiusOfEntity</a></code></p>
 </div></section>
 <section class="instr condinstr">
 <h3 id="IfPlayerHasdoesntHaveItem"><a href="#IfPlayerHasdoesntHaveItem" class="selfref"><code>IfPlayerHasdoesntHaveItem</code></a> <span class="sectioninfo">Instruction 3[04]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, m10_00_00_00, m10_01_00_00, m11_10_00_00, m15_00_00_00, m18_00_00_00, m34_11_00_00, and 24 others</p>
+<p class="sectionusage usageinfo">Used in common, m10_00_00_00, m10_01_00_00, m11_10_00_00, m15_00_00_00, m18_00_00_00, m34_11_00_00, and 25 others</p>
 <pre>IfPlayerHasdoesntHaveItem(
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     byte&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
@@ -329,7 +329,7 @@ section {
 <section class="instr condinstr">
 <h3 id="IfMultiplayerState"><a href="#IfMultiplayerState" class="selfref"><code>IfMultiplayerState</code></a> <span class="sectioninfo">Instruction 3[06]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_10_00_00, m12_02_00_00, m12_03_00_00, m12_08_00_00, m12_09_00_00, m14_00_00_00, m16_00_00_00, m18_00_00_00, and 50 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_10_00_00, m12_02_00_00, m12_03_00_00, m12_08_00_00, m12_09_00_00, m14_00_00_00, m16_00_00_00, m18_00_00_00, and 51 others</p>
 <pre>IfMultiplayerState(
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     sbyte&lt;<a href="#MultiplayerState">MultiplayerState</a>&gt; desiredMultiplayerState)</pre><p>Condition function: <code><a href="#HasMultiplayerState">HasMultiplayerState</a></code></p>
@@ -519,7 +519,7 @@ section {
 <pre>IfPlayerHasArmorEquipped(
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     byte&lt;<a href="#ArmorType">ArmorType</a>&gt; armorType, 
-    int itemId, 
+    int armorItemId, 
     int unknown)</pre><p>Condition function: <code><a href="#PlayerHasArmorEquipped">PlayerHasArmorEquipped</a></code></p>
 </div></section>
 <section class="instr condinstr">
@@ -954,7 +954,7 @@ section {
 <section class="instr condinstr">
 <h3 id="EndIfConditionGroupStateCompiled"><a href="#EndIfConditionGroupStateCompiled" class="selfref"><code>EndIfConditionGroupStateCompiled</code></a> <span class="sectioninfo">Instruction 1000[08]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m12_02_00_00, m12_03_00_00, m13_00_00_00, m16_00_00_00, m30_05_00_00, m31_00_00_00, m31_10_00_00, m31_15_00_00, m31_19_00_00, m31_21_00_00, m60_42_36_00, m60_51_43_00, m60_51_56_00</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m12_02_00_00, m12_03_00_00, m13_00_00_00, m16_00_00_00, m30_05_00_00, m31_00_00_00, m31_10_00_00, m31_15_00_00, m31_19_00_00, m31_21_00_00, m60_40_53_00, m60_42_36_00, m60_51_43_00, m60_51_56_00</p>
 <pre>EndIfConditionGroupStateCompiled(
     byte&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
     byte&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
@@ -990,7 +990,7 @@ section {
 <section class="instr condinstr">
 <h3 id="GotoUnconditionally"><a href="#GotoUnconditionally" class="selfref"><code>GotoUnconditionally</code></a> <span class="sectioninfo">Instruction 1000[103]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m11_71_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m12_05_00_00, m12_09_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m34_10_00_00, m34_11_00_00, m34_12_00_00, m34_14_00_00, m35_00_00_00, m39_20_00_00, and 122 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m11_71_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m12_05_00_00, m12_09_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m34_10_00_00, m34_11_00_00, m34_12_00_00, m34_14_00_00, m35_00_00_00, m39_20_00_00, and 123 others</p>
 <pre>GotoUnconditionally(
     byte&lt;<a href="#Label">Label</a>&gt; label)</pre><p><code>Goto</code> in MattScript</p></div></section>
 <section class="instr condinstr">
@@ -1323,7 +1323,7 @@ section {
 <section class="instr condinstr">
 <h3 id="SkipIfCeremonyActive"><a href="#SkipIfCeremonyActive" class="selfref"><code>SkipIfCeremonyActive</code></a> <span class="sectioninfo">Instruction 1003[206]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in m11_00_00_00, m12_05_00_00, m14_00_00_00, m15_00_00_00, m39_20_00_00, m60_35_46_00, m60_39_53_00, m60_42_39_00, m60_50_56_00</p>
+<p class="sectionusage usageinfo">Used in m11_00_00_00, m12_05_00_00, m14_00_00_00, m15_00_00_00, m39_20_00_00, m60_35_46_00, m60_39_53_00, m60_40_53_00, m60_42_39_00, m60_50_56_00</p>
 <pre>SkipIfCeremonyActive(
     byte numberOfSkippedLines, 
     bool isActive, 
@@ -1341,7 +1341,7 @@ section {
 <section class="instr condinstr">
 <h3 id="EndIfCeremonyActive"><a href="#EndIfCeremonyActive" class="selfref"><code>EndIfCeremonyActive</code></a> <span class="sectioninfo">Instruction 1003[208]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in m11_00_00_00, m11_10_00_00, m12_05_00_00, m14_00_00_00, m15_00_00_00, m39_20_00_00, m60_35_46_00, m60_39_53_00, m60_42_39_00, m60_50_56_00</p>
+<p class="sectionusage usageinfo">Used in m11_00_00_00, m11_10_00_00, m12_05_00_00, m14_00_00_00, m15_00_00_00, m39_20_00_00, m60_35_46_00, m60_39_53_00, m60_40_53_00, m60_42_39_00, m60_50_56_00</p>
 <pre>EndIfCeremonyActive(
     byte&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
     bool isActive, 
@@ -1530,7 +1530,7 @@ section {
 <section class="instr">
 <h3 id="SetNetworkSyncState"><a href="#SetNetworkSyncState" class="selfref"><code>SetNetworkSyncState</code></a> <span class="sectioninfo">Instruction 2000[02]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m12_05_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m34_10_00_00, m34_11_00_00, m34_14_00_00, m35_00_00_00, and 114 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m12_05_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m34_10_00_00, m34_11_00_00, m34_14_00_00, m35_00_00_00, and 115 others</p>
 <pre>SetNetworkSyncState(
     byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
 <li><code>DisableNetworkSync()</code>
@@ -1617,7 +1617,7 @@ section {
     uint&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
     uint areaEntityId, 
     int unknownc, 
-    uint entityId, 
+    uint playerEntityId, 
     int unknown14)</pre></div></section>
 <section class="instr unused">
 <h3 id="PlayCutsceneToPlayerUnknown200209"><a href="#PlayCutsceneToPlayerUnknown200209" class="selfref"><code>PlayCutsceneToPlayerUnknown200209</code></a> <span class="sectioninfo">Instruction 2002[09]</span></h3>
@@ -1649,9 +1649,9 @@ section {
     sbyte&lt;<a href="#Weather">Weather</a>&gt; weather, 
     float weatherLifespanSeconds, 
     bool shouldChangeTime, 
-    byte hour, 
-    byte minute, 
-    byte second)</pre></div></section>
+    byte hours, 
+    byte minutes, 
+    byte seconds)</pre></div></section>
 <section class="instr">
 <h3 id="PlayCutsceneToPlayerAndWarp"><a href="#PlayCutsceneToPlayerAndWarp" class="selfref"><code>PlayCutsceneToPlayerAndWarp</code></a> <span class="sectioninfo">Instruction 2002[11]</span></h3>
 <div class="sectioncontents">
@@ -1659,7 +1659,7 @@ section {
 <pre>PlayCutsceneToPlayerAndWarp(
     int cutsceneId, 
     uint&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
-    uint pointEntityId, 
+    uint areaEntityId, 
     int mapId, 
     uint playerEntityId, 
     int unknown14, 
@@ -1671,7 +1671,7 @@ section {
 <pre>PlayCutsceneToPlayerAndWarpWithWeatherAndTime(
     int cutsceneId, 
     uint&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
-    uint pointEntityId, 
+    uint areaEntityId, 
     int mapId, 
     uint playerEntityId, 
     int unknown14, 
@@ -1680,9 +1680,9 @@ section {
     sbyte&lt;<a href="#Weather">Weather</a>&gt; weather, 
     float weatherLifespanSeconds, 
     bool shouldChangeTime, 
-    byte hour, 
-    byte minute, 
-    byte second)</pre></div></section>
+    byte hours, 
+    byte minutes, 
+    byte seconds)</pre></div></section>
 <section class="instr">
 <h3 id="PlayCutsceneToPlayerAndWarpWithStablePositionUpdate"><a href="#PlayCutsceneToPlayerAndWarpWithStablePositionUpdate" class="selfref"><code>PlayCutsceneToPlayerAndWarpWithStablePositionUpdate</code></a> <span class="sectioninfo">Instruction 2002[13]</span></h3>
 <div class="sectioncontents">
@@ -1690,7 +1690,7 @@ section {
 <pre>PlayCutsceneToPlayerAndWarpWithStablePositionUpdate(
     int cutsceneId, 
     uint&lt;<a href="#CutscenePlayMode">CutscenePlayMode</a>&gt; playbackMethod, 
-    uint pointEntityId, 
+    uint areaEntityId, 
     int mapId, 
     uint playerEntityId, 
     int unknown14, 
@@ -1702,11 +1702,11 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m12_01_00_00, m14_00_00_00, m15_00_00_00, m35_00_00_00, and 13 others</p>
 <pre>SetGeneratorState(
-    uint entityId, 
+    uint generatorEntityId, 
     byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
-<li><code>DisableGenerator(uint entityId)</code>
+<li><code>DisableGenerator(uint generatorEntityId)</code>
 <br/><span class="conddetails">Where <code><code>disabledEnabled = Disabled</code></code></span></li>
-<li><code>EnableGenerator(uint entityId)</code>
+<li><code>EnableGenerator(uint generatorEntityId)</code>
 <br/><span class="conddetails">Where <code><code>disabledEnabled = Enabled</code></code></span></li>
 </ul>
 </div></section>
@@ -1715,7 +1715,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m10_01_00_00, m11_00_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m30_10_00_00, m31_00_00_00, m60_37_49_00, m60_44_38_00, m60_44_38_10</p>
 <pre>AwardItemLot(
-    int mapItemLotId)</pre></div></section>
+    int itemLotId)</pre></div></section>
 <section class="instr">
 <h3 id="ShootBullet"><a href="#ShootBullet" class="selfref"><code>ShootBullet</code></a> <span class="sectioninfo">Instruction 2003[05]</span></h3>
 <div class="sectioncontents">
@@ -1789,7 +1789,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m12_04_00_00, m14_00_00_00, m32_08_00_00, m35_00_00_00, m60_39_54_00</p>
 <pre>ModifyNavimeshConnectionBitflag(
-    uint entityId, 
+    uint navimeshEntityId, 
     uint&lt;<a href="#NavimeshType">NavimeshType</a>&gt; navimeshType, 
     byte&lt;<a href="#BitopType">BitopType</a>&gt; typeBitOperation)</pre></div></section>
 <section class="instr">
@@ -1854,11 +1854,11 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, m10_01_00_00, m11_00_00_00, m11_71_00_00, m12_02_00_00, m12_03_00_00, m12_08_00_00, m12_09_00_00, m14_00_00_00, m18_00_00_00, m19_00_00_00, m60_34_50_00, m60_42_32_00, m60_43_36_00, m60_45_37_00, m60_45_37_10</p>
 <pre>SetPlayerRespawnPoint(
-    uint respawnPointEntityId)</pre></div></section>
+    uint respawnAreaEntityId)</pre></div></section>
 <section class="instr">
 <h3 id="RemoveItemFromPlayer"><a href="#RemoveItemFromPlayer" class="selfref"><code>RemoveItemFromPlayer</code></a> <span class="sectioninfo">Instruction 2003[24]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_01_00_00, m15_00_00_00, m30_00_00_00, m32_04_00_00, m34_11_00_00, m60_33_46_00, m60_33_47_00, m60_34_47_00, m60_35_42_00, m60_37_49_00</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_01_00_00, m15_00_00_00, m30_00_00_00, m32_04_00_00, m34_11_00_00, m60_33_46_00, m60_33_47_00, m60_34_47_00, m60_35_42_00, m60_37_49_00, m60_40_53_00</p>
 <pre>RemoveItemFromPlayer(
     byte&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
     int itemId, 
@@ -1870,7 +1870,7 @@ section {
 <pre>PlaceNPCSummonSign(
     int&lt;<a href="#SummonSignType">SummonSignType</a>&gt; signType, 
     uint summonedNPCEntityId, 
-    uint spawnPointEntityId, 
+    uint spawnAreaEntityId, 
     uint summonEventFlagId, 
     uint dismissalEventFlagId, 
     bool unknown)</pre></div></section>
@@ -1926,7 +1926,7 @@ section {
 <section class="instr">
 <h3 id="MoveBloodstainAndDroppedItems"><a href="#MoveBloodstainAndDroppedItems" class="selfref"><code>MoveBloodstainAndDroppedItems</code></a> <span class="sectioninfo">Instruction 2003[35]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in m14_00_00_00, m34_14_00_00, m60_39_53_00</p>
+<p class="sectionusage usageinfo">Used in m14_00_00_00, m19_00_00_00, m34_14_00_00, m60_39_53_00</p>
 <pre>MoveBloodstainAndDroppedItems(
     uint sourceAreaEntityId, 
     uint destinationAreaEntityId)</pre></div></section>
@@ -1935,7 +1935,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, common_func, m11_05_00_00, m12_09_00_00, m18_00_00_00, m34_14_00_00, m35_00_00_00, and 22 others</p>
 <pre>AwardItemsIncludingClients(
-    int mapItemLotId)</pre></div></section>
+    int itemLotId)</pre></div></section>
 <section class="instr">
 <h3 id="EventValueOperation"><a href="#EventValueOperation" class="selfref"><code>EventValueOperation</code></a> <span class="sectioninfo">Instruction 2003[41]</span></h3>
 <div class="sectioncontents">
@@ -1976,9 +1976,9 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m14_00_00_00, and 11 others</p>
 <pre>TriggerAISound(
-    int aisoundparamId, 
-    uint originEntityId, 
-    byte&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; type)</pre></div></section>
+    int aiSoundParamId, 
+    uint entityId, 
+    byte&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; originEntityType)</pre></div></section>
 <section class="instr">
 <h3 id="InvokeEnemyGenerator"><a href="#InvokeEnemyGenerator" class="selfref"><code>InvokeEnemyGenerator</code></a> <span class="sectioninfo">Instruction 2003[54]</span></h3>
 <div class="sectioncontents">
@@ -2118,7 +2118,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common_func, m13_00_00_00, m16_00_00_00, m60_43_36_00, m60_43_37_00</p>
 <pre>SendNPCSummonHome(
-    uint entityId)</pre></div></section>
+    uint npcEntityId)</pre></div></section>
 <section class="instr">
 <h3 id="ShowTextOnLoadingScreen"><a href="#ShowTextOnLoadingScreen" class="selfref"><code>ShowTextOnLoadingScreen</code></a> <span class="sectioninfo">Instruction 2003[80]</span></h3>
 <div class="sectioncontents">
@@ -2176,11 +2176,11 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m12_05_00_00, m12_07_00_00, m12_08_00_00, m12_09_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m34_10_00_00, m34_11_00_00, m34_12_00_00, m34_13_00_00, m34_14_00_00, m34_15_00_00, m35_00_00_00, m39_20_00_00, and 177 others</p>
 <pre>ChangeCharacterEnableState(
-    uint entityId, 
+    uint characterEntityId, 
     byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
-<li><code>DisableCharacter(uint entityId)</code>
+<li><code>DisableCharacter(uint characterEntityId)</code>
 <br/><span class="conddetails">Where <code><code>disabledEnabled = Disabled</code></code></span></li>
-<li><code>EnableCharacter(uint entityId)</code>
+<li><code>EnableCharacter(uint characterEntityId)</code>
 <br/><span class="conddetails">Where <code><code>disabledEnabled = Enabled</code></code></span></li>
 </ul>
 </div></section>
@@ -2201,7 +2201,7 @@ section {
 <section class="instr">
 <h3 id="SetSpEffect"><a href="#SetSpEffect" class="selfref"><code>SetSpEffect</code></a> <span class="sectioninfo">Instruction 2004[08]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_05_00_00, m12_09_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m34_11_00_00, m34_12_00_00, m34_14_00_00, m35_00_00_00, m39_20_00_00, and 135 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_05_00_00, m12_09_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m34_11_00_00, m34_12_00_00, m34_14_00_00, m35_00_00_00, m39_20_00_00, and 136 others</p>
 <pre>SetSpEffect(
     uint entityId, 
     int spEffectId)</pre></div></section>
@@ -2251,7 +2251,7 @@ section {
 <p class="sectionusage usageinfo">Used in common_func, m11_00_00_00, m11_10_00_00, m12_02_00_00, m12_03_00_00, m13_00_00_00, m16_00_00_00, and 22 others</p>
 <pre>RotateCharacter(
     uint entityId, 
-    uint entityId2, 
+    uint relativeEntityId, 
     int playAnimationId, 
     bool shouldWaitForCompletion)</pre></div></section>
 <section class="instr">
@@ -2287,7 +2287,7 @@ section {
 <p class="sectionusage usageinfo">Used in common_func, m13_00_00_00, m30_05_00_00, m31_15_00_00</p>
 <pre>SetEventPoint(
     uint entityId, 
-    uint entityId2, 
+    uint relativeEntityId, 
     float reactionDistance)</pre></div></section>
 <section class="instr">
 <h3 id="SetCharacterAIId"><a href="#SetCharacterAIId" class="selfref"><code>SetCharacterAIId</code></a> <span class="sectioninfo">Instruction 2004[19]</span></h3>
@@ -2377,7 +2377,7 @@ section {
 <section class="instr">
 <h3 id="SetCharacterBackreadState"><a href="#SetCharacterBackreadState" class="selfref"><code>SetCharacterBackreadState</code></a> <span class="sectioninfo">Instruction 2004[29]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_05_00_00, m12_07_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m34_11_00_00, m34_14_00_00, m35_00_00_00, m39_20_00_00, and 125 others</p>
+<p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_05_00_00, m12_07_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m34_11_00_00, m34_14_00_00, m35_00_00_00, m39_20_00_00, and 126 others</p>
 <pre>SetCharacterBackreadState(
     uint entityId, 
     bool removed)</pre></div></section>
@@ -2529,7 +2529,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>ChangeCharacter(
-    int charinitparamId)</pre></div></section>
+    int characterParamId)</pre></div></section>
 <section class="instr">
 <h3 id="SetCharacterTalkRange"><a href="#SetCharacterTalkRange" class="selfref"><code>SetCharacterTalkRange</code></a> <span class="sectioninfo">Instruction 2004[55]</span></h3>
 <div class="sectioncontents">
@@ -2743,7 +2743,7 @@ section {
 <p class="sectionusage usageinfo">Used in common_func</p>
 <pre>InitializeObjAct(
     uint entityId, 
-    int objactparamId, 
+    int objactParamId, 
     int relativeTargetIdx)</pre></div></section>
 <section class="instr">
 <h3 id="SetObjActState"><a href="#SetObjActState" class="selfref"><code>SetObjActState</code></a> <span class="sectioninfo">Instruction 2005[06]</span></h3>
@@ -2751,11 +2751,11 @@ section {
 <p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m12_02_00_00, m14_00_00_00, m16_00_00_00, m18_00_00_00, m34_11_00_00, m35_00_00_00, and 34 others</p>
 <pre>SetObjActState(
     uint entityId, 
-    int objactparamId, 
+    int objactParamId, 
     byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
-<li><code>DisableObjAct(uint entityId, int objactparamId)</code>
+<li><code>DisableObjAct(uint entityId, int objactParamId)</code>
 <br/><span class="conddetails">Where <code><code>state = Disabled</code></code></span></li>
-<li><code>EnableObjAct(uint entityId, int objactparamId)</code>
+<li><code>EnableObjAct(uint entityId, int objactParamId)</code>
 <br/><span class="conddetails">Where <code><code>state = Enabled</code></code></span></li>
 </ul>
 </div></section>
@@ -2819,12 +2819,12 @@ section {
 <p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m10_01_00_00</p>
 <pre>SetObjActStateAssignIdx(
     uint entityId, 
-    int objactparamId, 
+    int objactParamId, 
     int relativeTargetIdx, 
     byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
-<li><code>DisableObjActAssignIdx(uint entityId, int objactparamId, int relativeTargetIdx)</code>
+<li><code>DisableObjActAssignIdx(uint entityId, int objactParamId, int relativeTargetIdx)</code>
 <br/><span class="conddetails">Where <code><code>state = Disabled</code></code></span></li>
-<li><code>EnableObjActAssignIdx(uint entityId, int objactparamId, int relativeTargetIdx)</code>
+<li><code>EnableObjActAssignIdx(uint entityId, int objactParamId, int relativeTargetIdx)</code>
 <br/><span class="conddetails">Where <code><code>state = Enabled</code></code></span></li>
 </ul>
 </div></section>
@@ -2882,14 +2882,14 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common_func, m11_00_00_00, m12_03_00_00, m12_05_00_00, m13_00_00_00, m14_00_00_00, m34_11_00_00, m34_14_00_00, m35_00_00_00, and 21 others</p>
 <pre>SpawnOneshotSFX(
-    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; type, 
+    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; targetEntityType, 
     uint entityId, 
     int dummypolyId, 
     int sfxId)</pre></div></section>
 <section class="instr">
 <h3 id="CreateAssetfollowingSFX"><a href="#CreateAssetfollowingSFX" class="selfref"><code>CreateAssetfollowingSFX</code></a> <span class="sectioninfo">Instruction 2006[04]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m12_05_00_00, m12_08_00_00, m12_09_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m34_14_00_00, m35_00_00_00, m39_20_00_00, and 62 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m12_05_00_00, m12_08_00_00, m12_09_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m34_14_00_00, m35_00_00_00, m39_20_00_00, and 63 others</p>
 <pre>CreateAssetfollowingSFX(
     uint assetEntityId, 
     int dummypolyId, 
@@ -2897,7 +2897,7 @@ section {
 <section class="instr">
 <h3 id="DeleteAssetfollowingSFX"><a href="#DeleteAssetfollowingSFX" class="selfref"><code>DeleteAssetfollowingSFX</code></a> <span class="sectioninfo">Instruction 2006[05]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_05_00_00, m12_08_00_00, m12_09_00_00, m14_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m34_14_00_00, m35_00_00_00, m39_20_00_00, and 58 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_05_00_00, m12_08_00_00, m12_09_00_00, m14_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m34_14_00_00, m35_00_00_00, m39_20_00_00, and 59 others</p>
 <pre>DeleteAssetfollowingSFX(
     uint assetEntityId, 
     bool shouldDeleteRoot)</pre></div></section>
@@ -2911,7 +2911,7 @@ section {
 <section class="instr">
 <h3 id="DisplayGenericDialog"><a href="#DisplayGenericDialog" class="selfref"><code>DisplayGenericDialog</code></a> <span class="sectioninfo">Instruction 2007[01]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_10_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m14_00_00_00, m34_11_00_00, m34_14_00_00, m35_00_00_00, and 34 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_10_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m14_00_00_00, m34_11_00_00, m34_14_00_00, m35_00_00_00, and 35 others</p>
 <pre>DisplayGenericDialog(
     int messageId, 
     short&lt;<a href="#PromptType">PromptType</a>&gt; dialogType, 
@@ -2946,7 +2946,7 @@ section {
 <section class="instr">
 <h3 id="DisplayGenericDialogAndSetEventFlags"><a href="#DisplayGenericDialogAndSetEventFlags" class="selfref"><code>DisplayGenericDialogAndSetEventFlags</code></a> <span class="sectioninfo">Instruction 2007[10]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common_func, m11_10_00_00, m12_02_00_00, m12_03_00_00, m14_00_00_00, m16_00_00_00, and 14 others</p>
+<p class="sectionusage usageinfo">Used in common_func, m11_10_00_00, m12_02_00_00, m12_03_00_00, m14_00_00_00, m16_00_00_00, and 15 others</p>
 <pre>DisplayGenericDialogAndSetEventFlags(
     int messageId, 
     short&lt;<a href="#PromptType">PromptType</a>&gt; dialogType, 
@@ -2981,7 +2981,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_10_00_00, m18_00_00_00, and 32 others</p>
 <pre>ShowTutorialPopup(
-    int tutorialparamId, 
+    int tutorialParamId, 
     bool unknown, 
     bool unknown)</pre></div></section>
 <section class="instr">
@@ -3005,7 +3005,7 @@ section {
 <p class="sectionusage usageinfo">Used in m12_01_00_00</p>
 <pre>SetCameraVibration(
     int vibrationId, 
-    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; type, 
+    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; targetEntityType, 
     uint entityId, 
     int dummypolyId, 
     float decayStartDistance, 
@@ -3247,9 +3247,9 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m60</p>
 <pre>TimeOfDay(
-    byte hour, 
-    byte minute, 
-    byte second)</pre></div></section>
+    byte hours, 
+    byte minutes, 
+    byte seconds)</pre></div></section>
 <section class="cond">
 <h3 id="TimeOfDayInRange"><a href="#TimeOfDayInRange" class="selfref"><code>TimeOfDayInRange</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
@@ -3311,18 +3311,18 @@ section {
 <p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_05_00_00, m12_09_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m35_00_00_00, m39_20_00_00, and 106 others</p>
 <pre>EntityInOutsideRadiusOfEntity(
     byte&lt;<a href="#InsideOutsideState">InsideOutsideState</a>&gt; desiredState, 
-    uint targetEntityAId, 
-    uint targetEntityBId, 
+    uint targetEntityIdA, 
+    uint targetEntityIdB, 
     float targetDistance, 
     int numberOfTargetCharacters)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
-<li><code>EntityInRadiusOfEntity(uint targetEntityAId, uint targetEntityBId, float targetDistance, int numberOfTargetCharacters)</code>
+<li><code>EntityInRadiusOfEntity(uint targetEntityIdA, uint targetEntityIdB, float targetDistance, int numberOfTargetCharacters)</code>
 <br/><span class="conddetails">Where <code><code>desiredState = InsideOutsideState.Inside or InsideOutsideState.Outside</code></code></span></li>
 </ul>
 </div></section>
 <section class="cond">
 <h3 id="PlayerHasItem"><a href="#PlayerHasItem" class="selfref"><code>PlayerHasItem</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, m10_00_00_00, m10_01_00_00, m11_10_00_00, m15_00_00_00, m18_00_00_00, m34_11_00_00, and 24 others</p>
+<p class="sectionusage usageinfo">Used in common, m10_00_00_00, m10_01_00_00, m11_10_00_00, m15_00_00_00, m18_00_00_00, m34_11_00_00, and 25 others</p>
 <pre>PlayerHasDoesntHaveItem(
     byte&lt;<a href="#ItemType">ItemType</a>&gt; itemType, 
     int itemId, 
@@ -3334,7 +3334,7 @@ section {
 <section class="cond">
 <h3 id="HasMultiplayerState"><a href="#HasMultiplayerState" class="selfref"><code>HasMultiplayerState</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_10_00_00, m12_02_00_00, m12_03_00_00, m12_08_00_00, m12_09_00_00, m14_00_00_00, m16_00_00_00, m18_00_00_00, and 51 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_10_00_00, m12_02_00_00, m12_03_00_00, m12_08_00_00, m12_09_00_00, m14_00_00_00, m16_00_00_00, m18_00_00_00, and 52 others</p>
 <pre>HasMultiplayerState(
     sbyte&lt;<a href="#MultiplayerState">MultiplayerState</a>&gt; desiredMultiplayerState)</pre></div></section>
 <section class="cond">
@@ -3542,12 +3542,12 @@ section {
 <p class="sectionusage usageinfo">Used in common, m35_00_00_00, m60_35_42_00</p>
 <pre>PlayerHasArmorEquipped(
     byte&lt;<a href="#ArmorType">ArmorType</a>&gt; armorType, 
-    int itemId, 
+    int armorItemId, 
     int unknown)</pre></div></section>
 <section class="cond">
 <h3 id="CeremonyActive"><a href="#CeremonyActive" class="selfref"><code>CeremonyActive</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in m11_00_00_00, m11_10_00_00, m12_05_00_00, m14_00_00_00, m15_00_00_00, m39_20_00_00, m60_35_46_00, m60_39_53_00, m60_42_39_00, m60_50_56_00</p>
+<p class="sectionusage usageinfo">Used in m11_00_00_00, m11_10_00_00, m12_05_00_00, m14_00_00_00, m15_00_00_00, m39_20_00_00, m60_35_46_00, m60_39_53_00, m60_40_53_00, m60_42_39_00, m60_50_56_00</p>
 <pre>CeremonyActiveState(
     bool isActive, 
     int ceremonyId)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
@@ -4074,7 +4074,7 @@ section {
 <section class="enum">
 <h3 id="OwnershipState"><a href="#OwnershipState" class="selfref"><code>OwnershipState</code></a> <span class="sectioninfo">Enum</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, m10_00_00_00, m10_01_00_00, m11_10_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m34_11_00_00, and 34 others</p>
+<p class="sectionusage usageinfo">Used in common, m10_00_00_00, m10_01_00_00, m11_10_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m34_11_00_00, and 35 others</p>
 <ul class="enumlist">
 <li><code>OwnershipState.DoesntOwn = 0</code></li>
 <li><code>OwnershipState.Owns = 1</code></li>
@@ -4179,20 +4179,20 @@ section {
 <section class="enum">
 <h3 id="PromptType"><a href="#PromptType" class="selfref"><code>PromptType</code></a> <span class="sectioninfo">Enum</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_10_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m14_00_00_00, m16_00_00_00, m34_11_00_00, m34_14_00_00, m35_00_00_00, and 37 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_10_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m14_00_00_00, m16_00_00_00, m34_11_00_00, m34_14_00_00, m35_00_00_00, and 38 others</p>
 <ul class="enumlist">
-<li><code>PromptType.YESNO = 0</code> <span class="enumusage usageinfo">Used in common_func, m11_00_00_00, m11_10_00_00, m12_02_00_00, m12_03_00_00, m14_00_00_00, m16_00_00_00, m34_14_00_00, m35_00_00_00, and 23 others</span></li>
+<li><code>PromptType.YESNO = 0</code> <span class="enumusage usageinfo">Used in common_func, m11_00_00_00, m11_10_00_00, m12_02_00_00, m12_03_00_00, m14_00_00_00, m16_00_00_00, m34_14_00_00, m35_00_00_00, and 24 others</span></li>
 <li><code>PromptType.OKCANCEL = 1</code> <span class="enumusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_10_00_00, m12_02_00_00, m12_04_00_00, m14_00_00_00, m34_11_00_00, and 25 others</span></li>
 </ul>
 </div></section>
 <section class="enum">
 <h3 id="NumberofOptions"><a href="#NumberofOptions" class="selfref"><code>NumberofOptions</code></a> <span class="sectioninfo">Enum</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_10_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m14_00_00_00, m16_00_00_00, m34_11_00_00, m34_14_00_00, m35_00_00_00, and 37 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_10_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m14_00_00_00, m16_00_00_00, m34_11_00_00, m34_14_00_00, m35_00_00_00, and 38 others</p>
 <ul class="enumlist">
 <li><code>NumberofOptions.OneButton = 1</code> <span class="enumusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_10_00_00, m34_11_00_00, m60_35_45_00, m60_35_46_00, m60_36_47_00, m60_39_53_00, m60_41_37_00</span></li>
-<li><code>NumberofOptions.TwoButtons = 2</code> <span class="enumusage usageinfo">Used in common_func, m11_10_00_00, m12_02_00_00, m12_03_00_00, m14_00_00_00, m16_00_00_00, and 14 others</span></li>
-<li><code>NumberofOptions.NoButtons = 6</code> <span class="enumusage usageinfo">Used in common_func, m10_00_00_00, m11_00_00_00, m11_10_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m14_00_00_00, m34_14_00_00, m35_00_00_00, and 31 others</span></li>
+<li><code>NumberofOptions.TwoButtons = 2</code> <span class="enumusage usageinfo">Used in common_func, m11_10_00_00, m12_02_00_00, m12_03_00_00, m14_00_00_00, m16_00_00_00, and 15 others</span></li>
+<li><code>NumberofOptions.NoButtons = 6</code> <span class="enumusage usageinfo">Used in common_func, m10_00_00_00, m11_00_00_00, m11_10_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m14_00_00_00, m34_14_00_00, m35_00_00_00, and 32 others</span></li>
 </ul>
 </div></section>
 <section class="enum">
@@ -4227,12 +4227,12 @@ section {
 <section class="enum">
 <h3 id="ItemType"><a href="#ItemType" class="selfref"><code>ItemType</code></a> <span class="sectioninfo">Enum</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_10_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m34_11_00_00, and 44 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_10_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m34_11_00_00, and 45 others</p>
 <ul class="enumlist">
 <li><code>ItemType.Weapon = 0</code> <span class="enumusage usageinfo">Used in common, m10_00_00_00, m16_00_00_00, m18_00_00_00, m60_44_36_00, m60_44_36_10</span></li>
 <li><code class="enumunused">ItemType.Armor = 1</code></li>
 <li><code class="enumunused">ItemType.Ring = 2</code></li>
-<li><code>ItemType.Goods = 3</code> <span class="enumusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_10_00_00, m15_00_00_00, m18_00_00_00, m34_11_00_00, and 44 others</span></li>
+<li><code>ItemType.Goods = 3</code> <span class="enumusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_10_00_00, m15_00_00_00, m18_00_00_00, m34_11_00_00, and 45 others</span></li>
 </ul>
 </div></section>
 <section class="enum">
@@ -4276,12 +4276,12 @@ section {
 <section class="enum">
 <h3 id="MultiplayerState"><a href="#MultiplayerState" class="selfref"><code>MultiplayerState</code></a> <span class="sectioninfo">Enum</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_10_00_00, m12_02_00_00, m12_03_00_00, m12_08_00_00, m12_09_00_00, m14_00_00_00, m16_00_00_00, m18_00_00_00, and 51 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_10_00_00, m12_02_00_00, m12_03_00_00, m12_08_00_00, m12_09_00_00, m14_00_00_00, m16_00_00_00, m18_00_00_00, and 52 others</p>
 <ul class="enumlist">
 <li><code>MultiplayerState.Host = 0</code> <span class="enumusage usageinfo">Used in m10_00_00_00</span></li>
 <li><code class="enumunused">MultiplayerState.Client = 1</code></li>
-<li><code>MultiplayerState.Multiplayer = 2</code> <span class="enumusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_10_00_00, m12_03_00_00, m12_08_00_00, m12_09_00_00, m14_00_00_00, m16_00_00_00, m18_00_00_00, and 41 others</span></li>
-<li><code>MultiplayerState.MultiplayerPending = 3</code> <span class="enumusage usageinfo">Used in common, common_func, m11_00_00_00, m11_10_00_00, m12_03_00_00, m12_08_00_00, m12_09_00_00, m16_00_00_00, m18_00_00_00, and 25 others</span></li>
+<li><code>MultiplayerState.Multiplayer = 2</code> <span class="enumusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m11_10_00_00, m12_03_00_00, m12_08_00_00, m12_09_00_00, m14_00_00_00, m16_00_00_00, m18_00_00_00, and 42 others</span></li>
+<li><code>MultiplayerState.MultiplayerPending = 3</code> <span class="enumusage usageinfo">Used in common, common_func, m11_00_00_00, m11_10_00_00, m12_03_00_00, m12_08_00_00, m12_09_00_00, m16_00_00_00, m18_00_00_00, and 26 others</span></li>
 <li><code>MultiplayerState.Singleplayer = 4</code> <span class="enumusage usageinfo">Used in common_func, m10_00_00_00, m12_02_00_00, m14_00_00_00, and 24 others</span></li>
 <li><code>MultiplayerState.Invasion = 5</code> <span class="enumusage usageinfo">Used in common_func, m10_00_00_00, m12_02_00_00, m12_03_00_00, m16_00_00_00, m30_05_00_00, m31_00_00_00, m31_10_00_00, m31_19_00_00, m31_21_00_00, m60_35_50_00, m60_47_41_00, m60_47_58_00, m60_51_36_00, m60_51_37_00</span></li>
 <li><code>MultiplayerState.InvasionPending = 6</code> <span class="enumusage usageinfo">Used in common_func, m12_02_00_00, m12_03_00_00, m16_00_00_00, m30_05_00_00, m31_00_00_00, m31_10_00_00, m31_19_00_00, m31_21_00_00, m60_47_41_00, m60_51_37_00</span></li>

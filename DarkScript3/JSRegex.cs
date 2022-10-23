@@ -49,6 +49,6 @@ namespace DarkScript3
                 + @")\b"
                 + @"|\$Event\b",
                 RegexCompiledOption);
-        public static Regex DataType = new Regex(@"\b(byte|short|int|sbyte|ushort|uint|enum|bool)\b", RegexCompiledOption);
+        public static Regex DataType = new Regex(@"\b(byte|short|int|sbyte|ushort|uint|enum|bool|float)\b", RegexCompiledOption);
     }
 }

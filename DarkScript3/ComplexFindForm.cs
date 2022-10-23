@@ -21,7 +21,6 @@ namespace DarkScript3
         private string Dir { get; set; }
         private bool working = false;
         public FastColoredTextBox tb;
-        public ToolControl infoTip = new ToolControl();
 
         public ComplexFindForm(SharedControls controls)
         {

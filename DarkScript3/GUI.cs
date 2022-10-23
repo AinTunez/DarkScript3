@@ -11,45 +11,101 @@ using System.Text;
 using System.Drawing;
 using System.Threading.Tasks;
 using DarkScript3.Properties;
+using System.ComponentModel;
 
 namespace DarkScript3
 {
     public partial class GUI : Form
     {
         private readonly SharedControls SharedControls;
+        private readonly ContextMenuStrip FileBrowserContextMenu;
         private readonly Dictionary<string, InstructionDocs> AllDocs = new Dictionary<string, InstructionDocs>();
         private readonly Dictionary<string, EditorGUI> AllEditors = new Dictionary<string, EditorGUI>();
         private readonly Dictionary<string, FileMetadata> DirectoryMetadata = new Dictionary<string, FileMetadata>();
-        private readonly Dictionary<string, Dictionary<string, string>> AllMapNames = new Dictionary<string, Dictionary<string, string>>();
+        private readonly Dictionary<string, ProjectSettingsFile> DirectoryProjects = new Dictionary<string, ProjectSettingsFile>();
+        private readonly NameMetadata NameMetadata = new NameMetadata();
         private readonly FileSystemWatcher Watcher;
+        private readonly FileSystemWatcher GameWatcher;
+        private ProjectSettingsFile CurrentDefaultProject;
         private EditorGUI CurrentEditor;
         private string CurrentDirectory;
+        private bool ManuallySelectedProject;
 
         public GUI()
         {
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             InitializeComponent();
+            // Various rendering and data setup
             menuStrip.Renderer = new DarkToolStripRenderer();
             statusStrip.Renderer = new DarkToolStripRenderer();
             TextStyles.LoadColors();
-            // Ad-hoc way of doing settings, as tool menus (TODO: find something more permanent?)
-            showArgumentsInTooltipToolStripMenuItem.Checked = Settings.Default.ArgTooltip;
-            showArgumentsInPanelToolStripMenuItem.Checked = Settings.Default.ArgDocbox;
-            SharedControls = new SharedControls(this, statusLabel, docBox);
+            SharedControls = new SharedControls(this, statusLabel, docBox, NameMetadata);
             SharedControls.ResetStatus(true);
             SharedControls.BFF.Owner = this;
+            // Set up right-click menu
+            FileBrowserContextMenu = new ContextMenuStrip();
+            FileBrowserContextMenu.Renderer = new DarkToolStripRenderer();
+            FileBrowserContextMenu.Opening += new CancelEventHandler(FileBrowserContextMenu_Opening);
+            fileView.ContextMenuStrip = FileBrowserContextMenu;
             // Prevent fuzzy line from showing up. Tab key is handled by the textbox in any case.
             display.TabStop = false;
             display2.TabStop = false;
             Controls.Add(SharedControls.InfoTip);
             tabControl.Visible = false;
-            Watcher = new FileSystemWatcher();
-            Watcher.Created += OnDirectoryContentsChanged;
-            Watcher.Deleted += OnDirectoryContentsChanged;
-            Watcher.Renamed += OnDirectoryContentsChanged;
-            Watcher.EnableRaisingEvents = false;
-            Watcher.SynchronizingObject = this;
+            Watcher = MakeFileSystemWatcher();
+            GameWatcher = MakeFileSystemWatcher();
+            // This updates the directory listing, which uses Watchers
             RefreshGlobalStyles();
+        }
+
+        private FileSystemWatcher MakeFileSystemWatcher()
+        {
+            FileSystemWatcher watcher = new FileSystemWatcher();
+            watcher.Created += OnDirectoryContentsChanged;
+            watcher.Deleted += OnDirectoryContentsChanged;
+            watcher.Renamed += OnDirectoryContentsChanged;
+            watcher.EnableRaisingEvents = false;
+            watcher.SynchronizingObject = this;
+            return watcher;
+        }
+
+        private void GUI_Load(object sender, EventArgs e)
+        {
+            InitializeWindow();
+            RefreshTitle();
+            // Normalize all fonts at this point
+            SharedControls.SetGlobalFont(TextStyles.Font);
+            // Ad-hoc way of doing settings, as tool menus (TODO: find something more permanent?)
+            // Note this may call CheckChanged, which could have side effects
+            showArgumentsInTooltipToolStripMenuItem.Checked = Settings.Default.ArgTooltip;
+            showArgumentsInPanelToolStripMenuItem.Checked = Settings.Default.ArgDocbox;
+            connectToolStripMenuItem.Checked = Settings.Default.UseSoapstone;
+            // Update versions
+            string previousVersion = Settings.Default.Version;
+            if (!string.IsNullOrEmpty(previousVersion))
+            {
+                // Can check for default values here, using ProgramVersion.CompareVersions("3.x.x", previousVersion) > 0
+            }
+            if (previousVersion != ProgramVersion.VERSION)
+            {
+                Settings.Default.Version = ProgramVersion.VERSION;
+                Settings.Default.Save();
+            }
+            // Load projects
+            string projectJson = Settings.Default.ProjectJson;
+            if (!string.IsNullOrEmpty(projectJson)
+                && File.Exists(projectJson)
+                && Path.GetFileName(projectJson) == "project.json")
+            {
+                try
+                {
+                    LoadProject(projectJson);
+                }
+                catch (Exception ex)
+                {
+                    SharedControls.SetStatus(ex.Message);
+                }
+            }
         }
 
         #region File Handling
@@ -70,6 +126,16 @@ namespace DarkScript3
                     ofd.InitialDirectory = currentDir;
                 }
             }
+            else if (CurrentDefaultProject != null && ManuallySelectedProject)
+            {
+                // Allow using manually seiected project, if one is displayed.
+                // Only do this if manually selected, as currently loaded projects are sticky (stored in settings).
+                string projectDir = CurrentDefaultProject.ProjectEventDirectory;
+                if (Directory.Exists(projectDir))
+                {
+                    ofd.InitialDirectory = projectDir;
+                }
+            }
             if (ofd.ShowDialog() != DialogResult.OK)
             {
                 return;
@@ -79,6 +145,62 @@ namespace DarkScript3
             {
                 metadata = OpenFile(fileName, metadata);
             }
+        }
+
+        private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!openProjectToolStripMenuItem.Enabled)
+            {
+                return;
+            }
+            SharedControls.HideTip();
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "DSMapStudio Project File|project.json|All files|*.*";
+            if (ofd.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            string projectJson = ofd.FileName;
+            if (Path.GetFileName(projectJson) != "project.json")
+            {
+                return;
+            }
+            try
+            {
+                LoadProject(projectJson);
+                ManuallySelectedProject = true;
+                Settings.Default.ProjectJson = projectJson;
+                Settings.Default.Save();
+            }
+            catch (Exception ex)
+            {
+                ScrollDialog.Show(this, ex.ToString());
+            }
+        }
+
+        private void clearProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CurrentDefaultProject = null;
+            Settings.Default.ProjectJson = "";
+            Settings.Default.Save();
+            UpdateDirectoryListing();
+            RefreshTitle();
+            SharedControls.ResetStatus(true);
+            clearProjectToolStripMenuItem.Enabled = false;
+        }
+
+        private void LoadProject(string projectJson)
+        {
+            // projectJson should be a valid project file. Callers should handle exceptions.
+            CurrentDefaultProject = ProjectSettingsFile.LoadProjectFile(projectJson);
+            if (CurrentDefaultProject.ProjectEventDirectory != null)
+            {
+                DirectoryProjects[CurrentDefaultProject.ProjectEventDirectory] = CurrentDefaultProject;
+            }
+            UpdateDirectoryListing();
+            RefreshTitle();
+            SharedControls.SetStatus($"Loaded {projectJson}");
+            clearProjectToolStripMenuItem.Enabled = true;
         }
 
         private FileMetadata OpenFile(string fileName, FileMetadata metadata = null)
@@ -116,7 +238,8 @@ namespace DarkScript3
             FileMetadata metadata,
             EMEVD evd = null,
             string jsText = null,
-            Dictionary<string, string> extraFields = null)
+            Dictionary<string, string> extraFields = null,
+            string loadPath = null)
         {
             if (AllEditors.ContainsKey(fileName))
             {
@@ -132,7 +255,7 @@ namespace DarkScript3
             EventScripter scripter;
             try
             {
-                scripter = new EventScripter(fileName, docs, evd);
+                scripter = new EventScripter(fileName, docs, evd, loadPath);
             }
             catch (Exception ex)
             {
@@ -193,10 +316,20 @@ namespace DarkScript3
                 fileVersion = extraFields != null && extraFields.TryGetValue("version", out string version) ? version : null;
             }
             // If properly decompiled, the metadata is reused by the directory sidebar
+            string fileDir = Path.GetDirectoryName(fileName);
             if (decompiled)
             {
-                DirectoryMetadata[Path.GetDirectoryName(fileName)] = metadata;
+                DirectoryMetadata[fileDir] = metadata;
             }
+            if (ProjectSettingsFile.TryGetEmevdFileProject(fileName, out ProjectSettingsFile projectFile))
+            {
+                DirectoryProjects[fileDir] = projectFile;
+            }
+            else
+            {
+                DirectoryProjects.Remove(fileDir);
+            }
+
             AddAndShowFile(new EditorGUI(SharedControls, scripter, docs, settings, fileVersion, jsText));
             // Notify about possible compatibility issues
             int versionCmp = ProgramVersion.CompareVersions(ProgramVersion.VERSION, fileVersion);
@@ -448,6 +581,8 @@ namespace DarkScript3
                 display2.BackColor = Color.Transparent;
                 display2.IsSplitterFixed = true;
                 display.IsSplitterFixed = true;
+                // For now, project only makes sense when no tabs are open
+                openProjectToolStripMenuItem.Enabled = true;
             }
             else
             {
@@ -497,11 +632,25 @@ namespace DarkScript3
             display2.BackColor = Color.FromArgb(45, 45, 48);
             display2.IsSplitterFixed = false;
             display.IsSplitterFixed = false;
+            // For now, project only makes sense when no tabs are open
+            openProjectToolStripMenuItem.Enabled = false;
         }
 
         private void RefreshTitle()
         {
-            Text = CurrentEditor == null ? "DARKSCRIPT 3" : $"DARKSCRIPT 3 - {CurrentEditor.DisplayTitle}";
+            string name = $"DARKSCRIPT {ProgramVersion.VERSION}";
+            if (CurrentEditor != null)
+            {
+                Text = $"{name} - {CurrentEditor.DisplayTitleWithDir}";
+            }
+            else if (CurrentDefaultProject?.ProjectEventDirectory != null)
+            {
+                Text = $"{name} - {CurrentDefaultProject?.ProjectEventDirectory}";
+            }
+            else
+            {
+                Text = name;
+            }
         }
 
         private void EditorGUI_TitleChanged(object sender, EventArgs e)
@@ -517,43 +666,10 @@ namespace DarkScript3
             RefreshTitle();
         }
 
-        private Dictionary<string, string> LoadMapNames(string emedfName)
-        {
-            // Rough system to have named maps.
-            // Null and empty dictionaries are meant to be interchangeable here.
-            Dictionary<string, string> mapNames = null;
-            if (emedfName.EndsWith(".emedf.json"))
-            {
-                string mapFile = Regex.Replace(emedfName, @"\.emedf\.json$", ".MapName.txt");
-                AllMapNames.TryGetValue(mapFile, out mapNames);
-                if (mapNames == null)
-                {
-                    AllMapNames[mapFile] = mapNames = new Dictionary<string, string>();
-                    try
-                    {
-                        // Best-effort
-                        string mapText = Resource.Text(mapFile);
-                        foreach (string line in mapText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None))
-                        {
-                            string[] parts = line.Split(new[] { ' ' }, 2);
-                            if (parts.Length == 2)
-                            {
-                                mapNames[parts[0]] = parts[1];
-                            }
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        // Resource not exist, usually
-                    }
-                }
-            }
-            return mapNames;
-        }
-
         private void UpdateDirectoryListing(bool requireDirectoryChange = false)
         {
             string directory = null;
+            ProjectSettingsFile project = null;
             Dictionary<string, string> mapNames = null;
             if (CurrentEditor != null)
             {
@@ -562,27 +678,54 @@ namespace DarkScript3
                 {
                     directory = null;
                 }
-                mapNames = LoadMapNames(CurrentEditor.ResourceString);
+                if (directory != null)
+                {
+                    DirectoryProjects.TryGetValue(directory, out project);
+                }
+                mapNames = NameMetadata.GetMapNames(CurrentEditor.ResourceString);
             }
+            else if (CurrentDefaultProject != null)
+            {
+                project = CurrentDefaultProject;
+                directory = project.ProjectEventDirectory;
+                mapNames = NameMetadata.GetMapNames(project.ResourcePrefix);
+            }
+            // Optionally, don't change if just switching tabs, to avoid losing place
             if (requireDirectoryChange && directory == CurrentDirectory)
             {
                 return;
             }
+            string gameDir = project?.GameEventDirectory;
             SortedSet<string> allFiles = new SortedSet<string>();
+            HashSet<string> baseFiles = new HashSet<string>();
             HashSet<string> jsFiles = new HashSet<string>();
-            string[] dirFiles = directory == null ? new string[] { } : Directory.GetFiles(directory);
-            foreach (string path in dirFiles)
+            if (directory != null)
             {
-                string name = Path.GetFileName(path);
-                if (name.EndsWith(".emevd") || name.EndsWith(".emevd.dcx"))
+                // directory need not exist, as gameDir might exist
+                string[] dirFiles = Directory.Exists(directory) ? Directory.GetFiles(directory) : Array.Empty<string>();
+                foreach (string path in dirFiles)
                 {
-                    allFiles.Add(name);
+                    string name = Path.GetFileName(path);
+                    if (name.EndsWith(".emevd") || name.EndsWith(".emevd.dcx"))
+                    {
+                        allFiles.Add(name);
+                        baseFiles.Add(name);
+                    }
+                    else if (name.EndsWith(".emevd.js") || name.EndsWith(".emevd.dcx.js"))
+                    {
+                        name = name.Substring(0, name.Length - 3);
+                        allFiles.Add(name);
+                        jsFiles.Add(name);
+                    }
                 }
-                else if (name.EndsWith(".emevd.js") || name.EndsWith(".emevd.dcx.js"))
+                string[] gameFiles = gameDir != null && Directory.Exists(gameDir) ? Directory.GetFiles(gameDir) : Array.Empty<string>();
+                foreach (string path in gameFiles)
                 {
-                    name = name.Substring(0, name.Length - 3);
-                    allFiles.Add(name);
-                    jsFiles.Add(name);
+                    string name = Path.GetFileName(path);
+                    if (name.EndsWith(".emevd") || name.EndsWith(".emevd.dcx"))
+                    {
+                        allFiles.Add(name);
+                    }
                 }
             }
             fileView.BeginUpdate();
@@ -601,22 +744,55 @@ namespace DarkScript3
                     }
                 }
                 TreeNode node = new TreeNode(fullText);
-                node.Tag = file;
-                node.ForeColor = jsFiles.Contains(file) ? TextStyles.ForeColor : (TextStyles.Comment.ForeBrush as SolidBrush).Color;
+                FileBrowserTag tag = new FileBrowserTag
+                {
+                    BaseName = file,
+                    LocalPath = Path.Combine(directory, file),
+                };
+                if (gameDir != null)
+                {
+                    tag.GamePath = Path.Combine(gameDir, file);
+                }
+                node.Tag = tag;
+                if (jsFiles.Contains(file))
+                {
+                    node.ForeColor = TextStyles.ForeColor;
+                }
+                else if (baseFiles.Contains(file))
+                {
+                    node.ForeColor = (TextStyles.Comment.ForeBrush as SolidBrush).Color;
+                }
+                else
+                {
+                    node.ForeColor = (TextStyles.String.ForeBrush as SolidBrush).Color;
+                }
                 fileView.Nodes.Add(node);
             }
             fileView.Sort();
             fileView.EndUpdate();
-            if (directory == null)
+            SetWatcherDirectory(Watcher, directory);
+            SetWatcherDirectory(GameWatcher, gameDir);
+            CurrentDirectory = directory;
+        }
+
+        private class FileBrowserTag
+        {
+            public string BaseName { get; set; }
+            public string LocalPath { get; set; }
+            public string GamePath { get; set; }
+        }
+
+        private void SetWatcherDirectory(FileSystemWatcher watcher, string directory)
+        {
+            if (directory != null && Directory.Exists(directory))
             {
-                Watcher.EnableRaisingEvents = false;
+                watcher.Path = directory;
+                watcher.EnableRaisingEvents = true;
             }
             else
             {
-                Watcher.Path = directory;
-                Watcher.EnableRaisingEvents = true;
+                watcher.EnableRaisingEvents = false;
             }
-            CurrentDirectory = directory;
         }
 
         private void OnDirectoryContentsChanged(object sender, FileSystemEventArgs e)
@@ -628,34 +804,131 @@ namespace DarkScript3
             }
         }
 
+        private void fileView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            fileView.SelectedNode = e.Node;
+            // Update this whenever possible. The Opening event should follow this on right-click.
+            FileBrowserContextMenu.Tag = e.Node;
+        }
+
         private void fileView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+            {
+                return;
+            }
+            if (e.Node.Tag is not FileBrowserTag tag)
+            {
+                return;
+            }
+            OpenFileBrowserTag(tag);
+        }
+
+        private void OpenFileBrowserTag(FileBrowserTag tag)
         {
             if (CurrentDirectory == null)
             {
                 return;
             }
-            string text = e.Node.Text;
-            if (e.Node.Tag is string tagText)
+            DirectoryMetadata.TryGetValue(CurrentDirectory, out FileMetadata metadata);
+            if (File.Exists(tag.LocalPath))
             {
-                // Tag will contain filename when present, when visual text has extra annotations
-                text = tagText;
+                OpenFile(tag.LocalPath, metadata);
             }
-            string emevdPath = Path.Combine(CurrentDirectory, text);
-            if (File.Exists(emevdPath))
+            else if (tag.GamePath != null && File.Exists(tag.GamePath))
             {
-                DirectoryMetadata.TryGetValue(CurrentDirectory, out FileMetadata metadata);
-                OpenFile(emevdPath, metadata);
+                string gameFile = tag.GamePath;
+                // Try to select vanilla versions by selecting bak file
+                if (File.Exists(gameFile + ".bak"))
+                {
+                    gameFile = gameFile + ".bak";
+                }
+                metadata = metadata ?? ChooseGame(true);
+                if (metadata == null)
+                {
+                    return;
+                }
+                // At least make sure the directory exists, so opening files works, and saving later on
+                string localDir = Path.GetDirectoryName(tag.LocalPath);
+                if (!Directory.Exists(localDir))
+                {
+                    Directory.CreateDirectory(localDir);
+                    // Could also unconditionally refresh listing, but this should do it indirectly
+                    SetWatcherDirectory(Watcher, localDir);
+                }
+                OpenEMEVDFile(tag.LocalPath, metadata, loadPath: gameFile);
             }
             else
             {
+                // Make it disappear
                 UpdateDirectoryListing();
             }
+        }
+
+        private async Task OpenFileBrowserMap(string game, string map)
+        {
+            try
+            {
+                await SharedControls.Metadata.OpenMap(game, map);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, $"Could not open {map}", MessageBoxButtons.OK);
+            }
+        }
+
+        private void FileBrowserContextMenu_Opening(object sender, CancelEventArgs e)
+        {
+            if (FileBrowserContextMenu.Tag is not TreeNode treeNode || treeNode.Tag is not FileBrowserTag tag)
+            {
+                return;
+            }
+            FileBrowserContextMenu.Tag = null;
+            FileBrowserContextMenu.Items.Clear();
+            ToolStripMenuItem eventItem = new ToolStripMenuItem($"Load {tag.BaseName}");
+            // It may be worth noting existing shortcuts if more things are added to this menu.
+            // eventItem.ShortcutKeyDisplayString = "Double-click in menu";
+            eventItem.Click += (sender, e) => OpenFileBrowserTag(tag);
+            FileBrowserContextMenu.Items.Add(eventItem);
+            if (tag.BaseName.StartsWith("m") && CurrentDirectory != null)
+            {
+                // Try to freshly infer game name here. Use project first, as DSMapStudio also uses it.
+                // If there is a mismatch between files in this directory, or between this project.json and the open one,
+                // there is not much we can do.
+                string gameStr = null;
+                if (DirectoryProjects.TryGetValue(CurrentDirectory, out ProjectSettingsFile project) && project.ResourcePrefix != null)
+                {
+                    gameStr = project.ResourcePrefix;
+                }
+                else if (DirectoryMetadata.TryGetValue(CurrentDirectory, out FileMetadata metadata) && metadata.GameDocs != null)
+                {
+                    gameStr = InstructionDocs.GameNameFromResourceName(Path.GetFileName(metadata.GameDocs));
+                }
+                if (gameStr != null)
+                {
+                    string mapName = tag.BaseName.Split('.')[0];
+                    ToolStripMenuItem mapItem = new ToolStripMenuItem($"Load {mapName} in DSMapStudio");
+                    mapItem.Click += async (sender, e) => await OpenFileBrowserMap(gameStr, mapName);
+                    FileBrowserContextMenu.Items.Add(mapItem);
+                }
+            }
+            e.Cancel = false;
+        }
+
+        private void ContextEmevdToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void ContextMapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
         }
 
         private void Display_Resize(object sender, EventArgs e)
         {
             if (WindowState != FormWindowState.Minimized && display.SplitterDistance != 350)
+            {
                 display.SplitterDistance = 350;
+            }
         }
 
         private void GUI_KeyDown(object sender, KeyEventArgs e)
@@ -905,6 +1178,69 @@ namespace DarkScript3
             Settings.Default.Save();
         }
 
+        private void connectToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.UseSoapstone = connectToolStripMenuItem.Checked;
+            Settings.Default.Save();
+            SoapstoneMetadata metadata = SharedControls?.Metadata;
+            if (metadata != null && metadata.IsOpenable())
+            {
+                if (Settings.Default.UseSoapstone)
+                {
+                    metadata.Open();
+                }
+                else
+                {
+                    metadata.Close();
+                }
+            }
+        }
+
+        private void showConnectionInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            if (Settings.Default.UseSoapstone)
+            {
+                sb.AppendLine("DSMapStudio connectivity is enabled.");
+                sb.AppendLine();
+                sb.AppendLine("When DSMapStudio is open and Settings > Soapstone Server is enabled, "
+                    + "data from DSMapStudio will be used to autocomplete values from params, FMGs, and loaded maps. "
+                    + "You can also hover on numbers in DarkScript3 to get tooltip info, "
+                    + "and right-click on the tooltip to open it in DSMapStudio.");
+            }
+            else
+            {
+                sb.AppendLine("DSMapStudio connectivity is disabled.");
+                sb.AppendLine();
+                if (connectToolStripMenuItem.Enabled)
+                {
+                    sb.AppendLine($"Select \"{connectToolStripMenuItem.Text}\" to enable it.");
+                }
+                else
+                {
+                    sb.AppendLine($"Restart DarkScript3 and select \"{connectToolStripMenuItem.Text}\" to enable it.");
+                }
+            }
+            sb.AppendLine();
+            SoapstoneMetadata metadata = SharedControls.Metadata;
+            string portStr = metadata.LastPort is int port ? $"{port}" : "None";
+            sb.AppendLine($"Server port: {portStr}");
+            sb.AppendLine($"Detected game: {metadata.CurrentGameString ?? "None"}");
+            sb.AppendLine($"Client state: {metadata.State}");
+            sb.AppendLine();
+            sb.AppendLine(metadata.LastLoopResult ?? "No requests sent");
+            ScrollDialog.Show(this, sb.ToString(), "DSMapStudio Soapstone Server Info");
+        }
+
+        private void clearMetadataCacheToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SharedControls.Metadata.ResetData();
+            ScrollDialog.Show(this,
+                "Metadata cache cleared. Names and autocomplete items will be refetched from DSMapStudio when connected."
+                    + "\n\n(This may be supported automatically in the future, if that would be helpful.)",
+                "Cleared cached metadata");
+        }
+
         #endregion
 
         #region Window Position
@@ -914,12 +1250,6 @@ namespace DarkScript3
         // https://stackoverflow.com/questions/937298/restoring-window-size-position-with-multiple-monitors
         // However, don't remember maximized states. These are difficult to adapt to changing desktop
         // monitor configurations, and are quite easy to do manually.
-        private void GUI_Load(object sender, EventArgs e)
-        {
-            InitializeWindow();
-            // Also, normalize all fonts at this point
-            SharedControls.SetGlobalFont(TextStyles.Font);
-        }
 
         private void GUI_Move(object sender, EventArgs e)
         {

@@ -159,45 +159,53 @@ namespace DarkScript3
             ["EndEvent"] = new BuiltIn
             {
                 Doc = "Stops execution in the event and turns its flag on.",
+                ControlStatement = true,
             },
             ["RestartEvent"] = new BuiltIn
             {
                 Doc = "Stops execution in the event, turns its flags on, and continues from the top on the next frame.",
+                ControlStatement = true,
             },
             ["EndIf"] = new BuiltIn
             {
                 Args = new List<object> { "COND" },
                 Doc = "If the condition is true, stops execution in the event and turns its flag on.",
                 Highlight = true,
+                ControlStatement = true,
             },
             ["RestartIf"] = new BuiltIn
             {
                 Args = new List<object> { "COND" },
                 Doc = "If the condition is true, stops execution in the event, turns its flags on, and continues from the top on the next frame.",
                 Highlight = true,
+                ControlStatement = true,
             },
             ["Goto"] = new BuiltIn
             {
                 Args = new List<object> { "LABEL" },
                 Doc = "Unconditionally goes to the next instance of the given label.",
                 Highlight = true,
+                ControlStatement = true,
             },
             ["GotoIf"] = new BuiltIn
             {
                 Args = new List<object> { "LABEL", "COND" },
                 Doc = "Goes to the next instance of the given label if the condition is true.",
                 Highlight = true,
+                ControlStatement = true,
             },
             ["WaitFor"] = new BuiltIn
             {
                 Args = new List<object> { "COND" },
                 Doc = "Waits for the condition to become true. After this, all condition variables are reset.",
                 Highlight = true,
+                ControlStatement = true,
             },
             ["NoOp"] = new BuiltIn
             {
                 Args = new List<object> { },
                 Doc = "Does nothing. Not an instruction. Exists only as a target for labels.",
+                ControlStatement = true,
             },
             ["Event"] = new BuiltIn
             {
@@ -214,9 +222,15 @@ namespace DarkScript3
 
         public class BuiltIn
         {
+            // Types of arguments, as interpreted by SharedControls
             public List<object> Args { get; set; }
+            // Builtin name
             public string Doc { get; set; }
+            // Experimental feature to use different syntax highlighting for control flow commands.
+            // This is unused at present because it looks ugly.
             public bool Highlight { get; set; }
+            // Whether this keyword is a statement which is always followed by (
+            public bool ControlStatement { get; set; }
         }
 
         public class LineMapping : IComparable<LineMapping>

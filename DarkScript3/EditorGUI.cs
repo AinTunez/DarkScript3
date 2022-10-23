@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using FastColoredTextBoxNS;
 using SoulsFormats;
-using System.Text;
-using System.ComponentModel;
+using static DarkScript3.DocAutocomplete;
 using Range = FastColoredTextBoxNS.Range;
 
 namespace DarkScript3
@@ -20,6 +21,7 @@ namespace DarkScript3
         private EventScripter Scripter;
         private InstructionDocs Docs;
         private ScriptSettings Settings;
+        private AutocompleteContext AutoContext;
         private bool codeChanged;
         private bool savedAfterChanges;
         private List<FancyJSCompiler.CompileError> LatestWarnings;
@@ -36,6 +38,7 @@ namespace DarkScript3
             Scripter = scripter;
             Docs = docs;
             Settings = settings;
+            AutoContext = new AutocompleteContext(docs.ResourceString, scripter.EmevdFileName);
             FileVersion = fileVersion;
             globalConstantRegex = JSRegex.GetGlobalConstantRegex(InstructionDocs.GlobalConstants.Concat(Docs.GlobalEnumConstants.Keys));
             Dock = DockStyle.Fill;
@@ -62,44 +65,89 @@ namespace DarkScript3
             InstructionMenu.BackColor = Color.FromArgb(37, 37, 38);
             InstructionMenu.ForeColor = Color.FromArgb(240, 240, 240);
             InstructionMenu.SelectedColor = Color.FromArgb(0, 122, 204);
-            InstructionMenu.Items.MaximumSize = new Size(400, 300);
-            InstructionMenu.Items.Width = 250;
+            // Width previously 250.
+            // Both of these seem to be needed for changing the width, but it is not dynamic.
+            InstructionMenu.Items.MaximumSize = new Size(500, 300);
+            InstructionMenu.Items.Width = 500;
             InstructionMenu.AllowTabKey = true;
             InstructionMenu.AlwaysShowTooltip = false;
             InstructionMenu.ToolTipDuration = 1;
             InstructionMenu.AppearInterval = 250;
+            // Override for dynamic system, it does its own filtering
+            InstructionMenu.MinFragmentLength = 0;
+            InstructionMenu.Selected += (e, args) =>
+            {
+                if (args.Item is DocAutocompleteItem item)
+                {
+                    item.MarkSelected(AutoContext);
+                    if (item.IsFunction)
+                    {
+                        // Auto-complete immediately after selection if a ( was inserted
+                        InstructionMenu.Show(false);
+                        FetchAutocomplete();
+                    }
+                }
+            };
+            InstructionMenu.Opened += (e, args) =>
+            {
+                // Arg tooltip may come up immediately in argument context.
+                // Argument autocomplete may come up very shortly after, so cancel tooltip.
+                SharedControls.HideTip();
+            };
 
             InstructionMenu.ImageList = new ImageList();
-            // Colors match the HTML emedf documentation
+            // Colors match the HTML emedf documentation, and also indices match AutocompleteCategory enum
             InstructionMenu.ImageList.Images.Add("instruction", MakeColorImage(Color.FromArgb(0xFF, 0xFF, 0xB3)));
             InstructionMenu.ImageList.Images.Add("condition", MakeColorImage(Color.FromArgb(0xFF, 0xFF, 0xFF)));
             InstructionMenu.ImageList.Images.Add("enum", MakeColorImage(Color.FromArgb(0xE0, 0xB3, 0xFF)));
+            InstructionMenu.ImageList.Images.Add("object", MakeColorImage(Color.FromArgb(0xFD, 0xCC, 0xD5)));
 
-            List<AutocompleteItem> instructions = new List<AutocompleteItem>();
-            List<AutocompleteItem> conditions = new List<AutocompleteItem>();
+            // Create items for EMEDF. This can probably be shared between different tabs if done carefully.
+            List <DocAutocompleteItem> items = new List<DocAutocompleteItem>();
             Dictionary<string, List<string>> instrAliases = Docs.AllAliases
                 .GroupBy(e => e.Value)
                 .ToDictionary(g => g.Key, g => g.Select(e => e.Key).ToList());
+            bool isCondInstr(string id)
+            {
+                if (Docs.Translator == null) return false;
+                return Docs.Translator.Selectors.ContainsKey(id) || Docs.Translator.LabelDocs.ContainsKey(id);
+            }
             foreach (string s in Docs.AllArgs.Keys)
             {
                 string menuText = s;
                 string toolTipTitle = s;
                 string toolTipText;
-                bool isInstr = false;
+                string instrId = null;
+                bool lowQuality = false;
+                InstructionTranslator.ShortVariant sv = null;
+                // Perhaps some of the logic here should be hidden within Translator
                 if (Docs.Functions.TryGetValue(s, out (int, int) indices))
                 {
-                    isInstr = true;
-                    toolTipText = $"{indices.Item1}[{indices.Item2:d2}] ({ArgString(s)})";
+                    instrId = $"{indices.Item1}[{indices.Item2:d2}]";
+                    toolTipText = $"{instrId} ({ArgString(s)})";
+                    if (Docs.Translator != null && Docs.Translator.ShortSelectors.ContainsKey(instrId))
+                    {
+                        // If there are short selectors, prefer them
+                        lowQuality = true;
+                    }
                 }
-                // TODO: It shouldn't be necessary to delve into Translator in this case
-                else if (Docs.Translator != null && Docs.Translator.ShortDocs.TryGetValue(s, out InstructionTranslator.ShortVariant sv))
+                else if (Docs.Translator != null && Docs.Translator.ShortDocs.TryGetValue(s, out sv))
                 {
-                    isInstr = true;
-                    toolTipText = $"{sv.Cmd} ({ArgString(s)})";
+                    instrId = sv.Cmd;
+                    toolTipText = $"{instrId} ({ArgString(s)})";
+                }
+                else if (Docs.Translator != null && Docs.Translator.CondDocs.TryGetValue(s, out InstructionTranslator.FunctionDoc funcDoc))
+                {
+                    toolTipText = $"({ArgString(s)})";
                 }
                 else
                 {
-                    toolTipText = $"({ArgString(s)})";
+#if DEBUG
+                    // This should cover all AllArgs keys, but duck out in release just in case.
+                    throw new Exception($"Unknown {s} in AllArgs");
+#else
+                    continue;
+#endif
                 }
                 ToolTips[menuText] = (toolTipTitle, toolTipText);
                 if (instrAliases.TryGetValue(menuText, out List<string> aliases))
@@ -110,25 +158,53 @@ namespace DarkScript3
                     }
                 }
 
-                if (isInstr)
+                if (instrId != null)
                 {
-                    instructions.Add(new AutocompleteItem(s + "(", InstructionMenu.ImageList.Images.IndexOfKey("instruction"), menuText));
+                    FancyContextType fancy = FancyContextType.Any;
+                    if (isCondInstr(instrId))
+                    {
+                        fancy = FancyContextType.RegularOnly;
+                    }
+                    else if (sv != null)
+                    {
+                        // Short versions currently only available with translator
+                        fancy = FancyContextType.FancyOnly;
+                    }
+                    items.Add(new DocAutocompleteItem(s, menuText, AutocompleteCategory.Instruction, fancy, lowQuality, null));
                 }
                 else
                 {
-                    conditions.Add(new AutocompleteItem(s + "(", InstructionMenu.ImageList.Images.IndexOfKey("condition"), menuText));
+                    // Detection if this is the main condition whilst variants exist
+                    if (Docs.Translator != null
+                        && Docs.Translator.CondDocs.TryGetValue(s, out InstructionTranslator.FunctionDoc funcDoc)
+                        && funcDoc.ConditionDoc.Name == s
+                        && funcDoc.ConditionDoc.HasVariants)
+                    {
+                        lowQuality = true;
+                    }
+                    items.Add(new DocAutocompleteItem(s, menuText, AutocompleteCategory.Condition, FancyContextType.FancyOnly, lowQuality, null));
                 }
             }
-            IEnumerable<AutocompleteItem> enums = Docs.EnumValues.Keys.Select(s => new AutocompleteItem(s, InstructionMenu.ImageList.Images.IndexOfKey("enum"), s));
+            items.AddRange(Docs.Enums.Values
+                // Don't autocomplete booleans, to allow showing the argument name inline
+                .Where(e => e.Name != "BOOL")
+                .SelectMany(e =>
+                    e.DisplayValues.Values.Select(s =>
+                        new DocAutocompleteItem(s, s, AutocompleteCategory.Enum, FancyContextType.Any, false, e.Name))));
 
-            InstructionMenu.Items.SetAutocompleteItems(
-                instructions.OrderBy(i => i.MenuText)
-                    .Concat(conditions.OrderBy(i => i.MenuText))
-                    .Concat(enums.OrderBy(i => i.MenuText)));
+            // Finally, builtins. Only fancy ones for now.
+            items.AddRange(ScriptAst.ReservedWords
+                .Where(e => e.Value.ControlStatement)
+                .Select(e => new DocAutocompleteItem(e.Key, e.Key, AutocompleteCategory.Instruction, FancyContextType.FancyOnly, false, null)));
+
+            // Default sort for speedier future OrderBy sort
+            items.Sort();
+            InstructionMenu.Items.SetAutocompleteItems(new DocAutocompleteItemList(items, editor, Docs, SharedControls.Metadata, AutoContext));
         }
 
         // Info for GUI
         public string DisplayTitle => Scripter.EmevdFileName + (CodeChanged ? "*" : "");
+        public string DisplayTitleWithDir => Scripter.EmevdFileName + (CodeChanged ? "*" : "") + " - " + Scripter.EmevdFileDir;
         public string EMEVDPath => Scripter.EMEVDPath;
         public string ResourceString => Docs.ResourceString;
 
@@ -317,14 +393,14 @@ namespace DarkScript3
         {
             tb = tb ?? editor;
             tb.ClearStylesBuffer();
-            tb.Font = TextStyles.Font;
+            tb.Font = TextStyles.FontFor(tb);
             tb.SelectionColor = TextStyles.SelectionColor;
             tb.BackColor = TextStyles.BackColor;
             tb.ForeColor = TextStyles.ForeColor;
             SetStyles(tb.Range);
         }
 
-        public void SetStyles(Range range)
+        private void SetStyles(Range range)
         {
             range.ClearStyle(TextStyles.SyntaxStyles.ToArray());
             range.SetStyle(TextStyles.Comment, JSRegex.Comment1);
@@ -344,13 +420,29 @@ namespace DarkScript3
 
         #region Selection
 
-        // Selection state
+        // Range used for determining text-cursor-based tooltip, mainly to avoid it getting repositioned
+        // unnecessarily, and to avoid hover-based logic from removing it as well.
         private Range CursorTipRange;
+        // Range used for avoiding recomputing hover-based tooltip, when the word is the same.
+        // Also used for asynchronous fetches, to make sure the result is still applicable.
         private Range HoverTipRange;
+        // Indication to not recompute the hover tooltip yet, on editor jump or on click text.
         private Point? PreventHoverMousePosition;
+        // Used for detecting if mouse has actually moved when MouseMove is called, for out-of-bounds hover tooltip removal.
         private Point CheckMouseMovedPosition;
+        // Highlight token, and a range to prevent unnecessarily recalculating it
         private Range CurrentTokenRange;
         private string CurrentToken;
+        // Signal that autocomplete logic will run shortly, so prefetch any possible results
+        // as soon as we recalculate the current func arg name.
+        private bool PrecomputeAutocomplete;
+
+        // Metadata support. This is integrated in the UI in 3 places:
+        // 1. Hover on integer
+        // 2. Precompute when typing
+        // 3. Autocomplete after precompute
+        private static readonly List<string> metadataTypes =
+            new List<string> { "param", "fmg", "entity", "mapint", "mapparts", "eventflag" };
 
         private Action<Point> moveOutOfBounds;
         private void Editor_MouseMove(object sender, MouseEventArgs e)
@@ -375,7 +467,8 @@ namespace DarkScript3
             Place place = editor.PointToPlace(p);
             if (place.iChar == editor.GetLineLength(place.iLine))
             {
-                Editor_ToolTipNeeded(editor, new ToolTipNeededEventArgs(place, ""));
+                // Normally HoveredWord is not null, so be careful.
+                Editor_ToolTipNeeded(editor, new ToolTipNeededEventArgs(place, null));
             }
         }
 
@@ -389,49 +482,150 @@ namespace DarkScript3
                 }
                 PreventHoverMousePosition = null;
             }
-            if (!string.IsNullOrEmpty(e.HoveredWord) && ToolTips.ContainsKey(e.HoveredWord))
+            // e.HoveredWord is an [a-zA-Z] (hardcoded in FCTB), though we want to make the same word either apply to
+            // ToolTips (function names) or to various data we can look up and cache.
+            Range tipRange = editor.GetRange(e.Place, e.Place).GetFragment("[a-zA-Z0-9_.]");
+            string hoveredWord = e.HoveredWord == null ? "" : tipRange.Text;
+            Point p = editor.PlaceToPoint(e.Place);
+            if (ToolTips.ContainsKey(hoveredWord))
             {
-                // Don't reposition if it's the same range. Use the same logic FCTB does for generating HoveredWord.
-                Range tipRange = editor.GetRange(e.Place, e.Place).GetFragment("[a-zA-Z]");
+                // Don't reposition/recalculate if it's the same range. Use the same logic FCTB does for generating HoveredWord.
+                // This does mean that if a tooltip was hidden by some other means (e.g. selection change), it won't come back
+                // until moving away and then back.
                 if (HoverTipRange != null && HoverTipRange.Start.Equals(tipRange.Start))
                 {
+                    // Don't change the tooltip if it matches the last hovered tooltip location.
+                    // This has a weird relationship with the argument tooltip, because it can "remember" the last hover
+                    // tooltip from before the arg tooltip was shown, and keep the arg tooltip visible as a result.
+                    // TODO: Can this be simplified to be more consistent?
                     return;
                 }
                 (string title, string text) = ToolTips[e.HoveredWord];
-                Point p = editor.PlaceToPoint(e.Place);
-                // Translate a bit rightward to make vertical mouse movement change hover.
-                p.Offset(2, 0);
                 string s = title + "\n" + text;
                 ShowTip(s, p);
                 HoverTipRange = tipRange;
+                return;
             }
-            else
+            // Can probably add variables at some point, but for now only respect int constants.
+            if (int.TryParse(hoveredWord, out int value) && SharedControls.Metadata.IsOpen())
             {
-                if (SharedControls.InfoTip.Visible && CursorTipRange != null && CursorTipRange.Contains(e.Place))
+                List<string> argList = new List<string>();
+                ParseFuncAtRange(tipRange, out string funcName, out int argIndex, argList);
+                EMEDF.ArgDoc argDoc = Docs.GetHeuristicArgDoc(funcName, argIndex);
+                string dataType = argDoc?.MetaType?.DataType;
+                if (metadataTypes.Contains(dataType))
                 {
+                    // At this point, we're definitely going to try to display things, so count it as the current hover range
+                    if (HoverTipRange != null && HoverTipRange.Start.Equals(tipRange.Start))
+                    {
+                        return;
+                    }
+                    HoverTipRange = tipRange;
+                    void showData(SoapstoneMetadata.DisplayData data)
+                    {
+                        // Cancel if moved away in the intervening time
+                        if (HoverTipRange == null || !HoverTipRange.Start.Equals(tipRange.Start)) return;
+                        if (data != null)
+                        {
+                            string text = data.Desc;
+                            if ((data is SoapstoneMetadata.EntityData ent && ent.Type != "Self") || data is SoapstoneMetadata.EntryData)
+                            {
+                                text += "\nRight-click tooltip to open in DSMapStudio";
+                            }
+                            ShowTip(text, p, data: data);
+                        }
+                    }
+                    if (dataType == "entity")
+                    {
+                        // Exact entity subtype should not matter, since it's all one namespace.
+                        // TODO: Don't clear tooltip when hovering over it, in this particular case, if there's a button (done?)
+                        SharedControls.Metadata.GetEntityData(AutoContext.Game, value)
+                            .ContinueWith(result => showData(result.Result), TaskScheduler.FromCurrentSynchronizationContext());
+                    }
+                    else if (dataType == "param" && argDoc.MetaType.Type != null)
+                    {
+                        SharedControls.Metadata.GetParamRow(AutoContext.Game, argDoc.MetaType.Type, value)
+                            .ContinueWith(result => showData(result.Result), TaskScheduler.FromCurrentSynchronizationContext());
+                    }
+                    else if (dataType == "param" && argDoc.MetaType.MultiNames != null
+                        && argDoc.MetaType.MultiNames.Count == 2 && argDoc.MetaType.OverrideTypes != null)
+                    {
+                        List<int> multiArgs = Docs.GetArgsAsInts(argList, funcName, argDoc.MetaType.MultiNames);
+                        // Param multi-type is an enum and int. Use both of these together.
+                        // Currently this will only pop up for the int values, due to the int filter above.
+                        if (multiArgs != null && multiArgs.Count == 2)
+                        {
+                            // Only support the first matched override here (would require GetParamRow to support a list otherwise)
+                            string overrideType = argDoc.MetaType.OverrideTypes
+                                .Where(e => e.Value.Value == multiArgs[0])
+                                .Select(e => e.Key)
+                                .FirstOrDefault();
+                            if (overrideType != null)
+                            {
+                                SharedControls.Metadata.GetParamRow(AutoContext.Game, overrideType, value)
+                                    .ContinueWith(result => showData(result.Result), TaskScheduler.FromCurrentSynchronizationContext());
+                            }
+                        }
+                    }
+                    else if (dataType == "fmg" && argDoc.MetaType.Type != null)
+                    {
+                        SharedControls.Metadata.GetFmgEntry(AutoContext.Game, argDoc.MetaType.Type, value)
+                            .ContinueWith(result => showData(result.Result), TaskScheduler.FromCurrentSynchronizationContext());
+                    }
+                    else if (dataType == "mapint")
+                    {
+                        showData(SharedControls.Metadata.GetMapNameData(AutoContext.Game, value));
+                    }
+                    else if (dataType == "mapparts" && argDoc.MetaType.MultiNames != null && argDoc.MetaType.MultiNames.Count == 4)
+                    {
+                        List<int> multiArgs = Docs.GetArgsAsInts(argList, funcName, argDoc.MetaType.MultiNames);
+                        if (multiArgs != null && multiArgs.Count == 4)
+                        {
+                            showData(SharedControls.Metadata.GetMapNameData(AutoContext.Game, multiArgs));
+                        }
+                    }
+                    else if (dataType == "eventflag")
+                    {
+                        showData(SharedControls.Metadata.GetEventFlagData(AutoContext.Game, value));
+                    }
                     return;
                 }
-                SharedControls.HideTip();
-                HoverTipRange = null;
             }
-        }
-
-        private void TipBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            e.ChangedRange.SetStyle(TextStyles.ToolTipKeyword, JSRegex.DataType);
-            e.ChangedRange.SetStyle(TextStyles.EnumType, new Regex(@"[<>]"));
+            // No possible applicable hover tooltip: hide it, unless there's a text cursor one to keep.
+            if (SharedControls.InfoTip.Visible && CursorTipRange != null && CursorTipRange.Contains(e.Place))
+            {
+                // This case is specifically for the argument tooltip: if it is present, there is no hovered keyword,
+                // but we want to keep showing the arguments as long as the mouse is over them.
+                return;
+            }
+            // This may also get called by OnOutOfBoundsToolTip, when moving mouse from text -> out-of-bounds -> tooltip,
+            // so don't hide the tooltip if we've landed on it in the intervening time. This could also be changed to not depend
+            // on the delay amount and have an area of leniency above the tooltip rectangle.
+            if (SharedControls.InfoTip.Visible
+                && SharedControls.InfoTip.ClientRectangle.Contains(SharedControls.InfoTip.PointToClient(Cursor.Position)))
+            {
+                return;
+            }
+            SharedControls.HideTip();
+            HoverTipRange = null;
         }
 
         private void Editor_SelectionChanged(object sender, EventArgs e)
         {
-            // Find text around cursor in the current line, up until hitting parentheses
-            Range arguments = editor.Selection.GetFragment(@"[^)(\n]");
+            Range arguments = ParseFuncAtRange(editor.Selection, out string funcName, out int argIndex);
 
-            // Preemptively remove tooltip if changing the range; it may potentially get immediately added back.
-            // The tooltip may also change even within the same range.
+            // Preemptively remove tooltip if changing the text-cursor-based tooltip range.
+            // It may potentially get immediately added back here.
+            // This will prevent he text-cursor-based tooltip from getting removed if there is no applicable hover tooltip.
+            // If there is an applicable hover tooltip *and* the mouse moves, the hover tooltip will appear.
             if (CursorTipRange == null || !arguments.Start.Equals(CursorTipRange.Start))
             {
+                // Console.WriteLine($"Setting cursor range: [{arguments.Text}]");
                 CursorTipRange = arguments;
+                // For hover tooltips: remove it when the selection range changes, and clear its cached range.
+                // If the user clicks on text or types, we don't want to show a hover tip until their mouse moves.
+                HoverTipRange = null;
+                PreventHoverMousePosition = MousePosition;
                 SharedControls.HideTip();
             }
 
@@ -458,36 +652,139 @@ namespace DarkScript3
                 RecalculateHighlightTokenDelayed();
             }
 
+            // Process funcName/argIndex stuff
+            if (argIndex >= 0)
+            {
+                ShowArgToolTip(funcName, arguments, argIndex);
+            }
+            SharedControls.LoadDocText(funcName, argIndex, Docs, false);
+            AutoContext.FuncName = funcName;
+            AutoContext.FuncArg = argIndex;
+            // Hopefully this isn't too expensive? It only strictly needs to be done on PrecomputeAutocomplete
+            // and also during autocomplete itself.
+            AutoContext.ArgDoc = Docs.GetHeuristicArgDoc(AutoContext.FuncName, AutoContext.FuncArg);
+            if (PrecomputeAutocomplete)
+            {
+                FetchAutocomplete();
+                PrecomputeAutocomplete = false;
+            }
+        }
+
+        private void FetchAutocomplete()
+        {
+            // This method is used to fetch data before autocomplete menu pops up.
+            // Also, used in the case of function autocomplete. This latter case could also be handled
+            // if DocAutocompleteItems fetches some data and notifies the editor to re-show the menu.
+            void maybeReshow(bool result)
+            {
+                if (result)
+                {
+                    // Force reshow with new results
+                    // Can be tested with auto-complete dialog instruction
+                    ShowInstructionMenu();
+                }
+            }
+            EMEDF.DarkScriptType metaType = AutoContext.ArgDoc?.MetaType;
+            if (metadataTypes.Contains(metaType?.DataType) && SharedControls.Metadata.IsOpen())
+            {
+                if (metaType.DataType == "param" && metaType.Type != null)
+                {
+                    SharedControls.Metadata.FetchParamRowNames(AutoContext.Game, metaType.Type)
+                        .ContinueWith(result => maybeReshow(result.Result), TaskScheduler.FromCurrentSynchronizationContext());
+                }
+                if (metaType.DataType == "param" && metaType.OverrideTypes != null)
+                {
+                    List<Task<bool>> multiFetch = new List<Task<bool>>();
+                    foreach (string type in metaType.OverrideTypes.Keys)
+                    {
+                        multiFetch.Add(SharedControls.Metadata.FetchParamRowNames(AutoContext.Game, type));
+                    }
+                    Task.WhenAll(multiFetch)
+                        .ContinueWith(result => maybeReshow(result.Result.Any()), TaskScheduler.FromCurrentSynchronizationContext());
+                }
+                else if (metaType.DataType == "fmg" && metaType.Type != null)
+                {
+                    SharedControls.Metadata.FetchFmgEntryNames(AutoContext.Game, metaType.Type)
+                        .ContinueWith(result => maybeReshow(result.Result), TaskScheduler.FromCurrentSynchronizationContext());
+                }
+            }
+        }
+
+        public static Range ParseFuncAtRange(Range start, out string funcName, out int argIndex, List<string> extractArgs = null)
+        {
+            // Try to find the innermost function at this place. This does not handle nested parens well at all.
+            // This needs to be cheap. It's called any time the text cursor changes, for instance.
+
+            // Find text around cursor in the current line, up until hitting parentheses
+            Range arguments = start.GetFragment(@"[^)(\n]");
+
             // For being within function args rather than matching the exact string, check if inside parens, but not nested ones.
             // Matching IfThing(0^,1) but not WaitFor(Thi^ng(0,1))
-            string funcName;
-            int argIndex = -1;
-            if (arguments.CharBeforeStart == '(' && editor.GetRange(arguments.End, arguments.End).CharAfterStart != '(')
+            argIndex = -1;
+            if (arguments.CharBeforeStart == '(' && start.tb.GetRange(arguments.End, arguments.End).CharAfterStart != '(')
             {
                 // Scan leftward through arguments until no commas remain.
                 // This does not work with nested calls, like IfThing(getMyCustomConstant(), ^1)
                 argIndex = 0;
-                Range arg = editor.Selection.GetFragment(@"[^)(\n,]");
+                Range arg = start.GetFragment(@"[^)(\n,]");
+                if (extractArgs != null)
+                {
+                    extractArgs.Add(arg.Text);
+                }
                 while (arg.CharBeforeStart == ',')
                 {
                     argIndex++;
-                    Place start = arg.Start;
-                    start.iChar -= 2;
-                    arg = editor.GetRange(start, start).GetFragment(@"[^)(\n,]");
+                    Place argStart = arg.Start;
+                    argStart.iChar -= 2;
+                    arg = start.tb.GetRange(argStart, argStart).GetFragment(@"[^)(\n,]");
+                    if (extractArgs != null)
+                    {
+                        extractArgs.Add(arg.Text);
+                    }
                 }
                 funcName = FuncName(arguments);
-                ShowArgToolTip(funcName, arguments, argIndex);
+                // For extractArgs mode in particular, go in the reverse direction
+                // In case it all gets rewritten to be not terrible, this should be improved too.
+                if (extractArgs != null)
+                {
+                    extractArgs.Reverse();
+                    arg = start.GetFragment(@"[^)(\n,]");
+                    while (true)
+                    {
+                        // CharAfterEnd does not exist, calculate it here based on CharAfterStart
+                        char charAfterEnd = arg.End.iChar >= arg.tb[arg.End.iLine].Count ? '\n' : arg.tb[arg.End.iLine][arg.End.iChar].c;
+                        if (charAfterEnd == '\n' || charAfterEnd == ')')
+                        {
+                            break;
+                        }
+                        Place argStart = arg.End;
+                        argStart.iChar += 1;
+                        arg = start.tb.GetRange(argStart, argStart).GetFragment(@"[^)(\n,]");
+                        if (extractArgs != null)
+                        {
+                            extractArgs.Add(arg.Text);
+                        }
+                    }
+                }
             }
             else
             {
                 // Get the word immediately under the cursor. No tooltip in this case.
-                Range func = editor.Selection.GetFragment(@"[\w\$]");
+                Range func = start.GetFragment(@"[\w\$]");
                 funcName = func.Text;
             }
-            SharedControls.LoadDocText(funcName, argIndex, Docs, false);
+            return arguments;
         }
 
-        private void ShowTip(string s, Point p, int argIndex = -1)
+        private static string FuncName(Range arguments)
+        {
+            int start = arguments.Start.iChar - 2;
+            int line = arguments.Start.iLine;
+            Range pre = new Range(arguments.tb, start, line, start, line);
+            return pre.GetFragment(@"[\w\$]").Text;
+        }
+
+        private void ShowTip(string s, Point p, int argIndex = -1, object data = null)
         {
             ToolControl InfoTip = SharedControls.InfoTip;
             if (argIndex > -1)
@@ -501,9 +798,10 @@ namespace DarkScript3
             }
             else
             {
-                InfoTip.SetText(s);
+                InfoTip.SetText(s, AutoContext.Game, data);
             }
-
+            // Translate a bit rightward to make directly vertical mouse movement change hover.
+            p.Offset(3, 0);
             InfoTip.ShowAtPosition(editor, p, editor.CharHeight);
             editor.Focus();
         }
@@ -601,7 +899,8 @@ namespace DarkScript3
             {
                 return;
             }
-            // This isn't a comprehensive regex and doesn't support a lot of code on the same line.
+            // This isn't a comprehensive regex and doesn't support code on very different lines.
+            // Singleline is needed for ^ to work. But GetRangesByLines may be unnecessarily expensive vs GetRanges.
             Regex regex = new Regex($@"^\s*\$?Event\(\s*{id}\s*,", RegexOptions.Singleline);
             List<Range> ranges = editor.Range.GetRangesByLines(regex).ToList();
             string searchType = "";
@@ -901,14 +1200,6 @@ namespace DarkScript3
             }
         }
 
-        private string FuncName(Range arguments)
-        {
-            int start = arguments.Start.iChar - 2;
-            int line = arguments.Start.iLine;
-            Range pre = new Range(editor, start, line, start, line);
-            return pre.GetFragment(@"[\w\$]").Text;
-        }
-
         private string ArgString(string func, int index = -1)
         {
             List<EMEDF.ArgDoc> args = Docs.AllArgs[func];
@@ -916,6 +1207,8 @@ namespace DarkScript3
             for (int i = 0; i < args.Count; i++)
             {
                 EMEDF.ArgDoc arg = args[i];
+                // TODO: Display whether the arg is optional here.
+                // It may depend on func name. This logic is currently implemented in SharedControls.
                 if (arg.EnumName == "BOOL")
                 {
                     argStrings.Add($"bool {arg.DisplayName}");
@@ -972,8 +1265,8 @@ namespace DarkScript3
 
         public void SelectAll() => editor.SelectAll();
 
-        // TODO: There are a few improvements we can make here, like: multi-file search form,
-        // highlighting search terms, non-dialog search (Google Chrome style Ctrl+F).
+        // TODO: There are a few improvements we can make here.
+        // Highlighting search terms, non-dialog search (Google Chrome style Ctrl+F).
         public void ShowFindDialog(bool complex = false)
         {
             string text = null;
@@ -1089,8 +1382,12 @@ namespace DarkScript3
         {
             if (e.KeyCode == Keys.Escape)
             {
-                // Is this necessary?
-                SharedControls.HideTip();
+                // Is this necessary? (it's also in GUI)
+                if (SharedControls.InfoTip.Visible)
+                {
+                    SharedControls.HideTip();
+                    e.Handled = true;
+                }
             }
             else if (e.KeyCode == Keys.F && e.Control)
             {
@@ -1098,6 +1395,8 @@ namespace DarkScript3
                 ShowFindDialog();
                 e.Handled = true;
             }
+            // This happens on a similar trigger to autocomplete itself (KeyPressed) before SelectionChanged
+            PrecomputeAutocomplete = true;
         }
 
         private void Editor_Scroll(object sender, ScrollEventArgs e) => SharedControls.HideTip();

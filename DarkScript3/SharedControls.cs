@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Threading;
 using System.Threading.Tasks;
 using FastColoredTextBoxNS;
-using System.IO;
+using DarkScript3.Properties;
 
 namespace DarkScript3
 {
@@ -18,28 +19,35 @@ namespace DarkScript3
         public ComplexFindForm CFF;
         public PreviewCompilationForm Preview;
         public ToolControl InfoTip;
+        public NameMetadata NameMetadata;
+        public SoapstoneMetadata Metadata;
 
         // Misc GUI-owned controls.
         private readonly ToolStripStatusLabel statusLabel;
         private readonly FastColoredTextBox docBox;
 
-        // References to everything. These should be kept internal to this class, to avoid explicit reverse dependencies.
+        // References to everything. These should be kept internal to this class, to avoid explicit cyclic dependencies.
         private readonly GUI gui;
         private List<EditorGUI> Editors = new List<EditorGUI>();
         private List<FastColoredTextBox> AllTextBoxes => new[] { InfoTip.tipBox, docBox }.Concat(Editors.Select(editor => editor.editor)).ToList();
 
         private bool stickyStatusMessage = false;
 
-        public SharedControls(GUI gui, ToolStripStatusLabel statusLabel, FastColoredTextBox docBox)
+        public SharedControls(GUI gui, ToolStripStatusLabel statusLabel, FastColoredTextBox docBox, NameMetadata nameMetadata)
         {
             this.gui = gui;
             this.statusLabel = statusLabel;
             this.docBox = docBox;
-            BFF = new BetterFindForm(null);
+            NameMetadata = nameMetadata;
+            Metadata = new SoapstoneMetadata(nameMetadata);
+            if (Settings.Default.UseSoapstone)
+            {
+                Metadata.Open();
+            }
+            InfoTip = new ToolControl(Metadata);
+            BFF = new BetterFindForm(null, InfoTip);
             CFF = new ComplexFindForm(this);
-            InfoTip = new ToolControl();
 
-            BFF.infoTip = InfoTip;
             InfoTip.Show();
             InfoTip.Hide();
             InfoTip.tipBox.TextChanged += (object sender, TextChangedEventArgs e) => TipBox_TextChanged(sender, e);
@@ -75,6 +83,7 @@ namespace DarkScript3
             SwitchEditor(editor);
             editor.RefreshGlobalStyles();
             editor.editor.ZoomChanged += (sender, e) => { HideTip(); SetGlobalFont(((FastColoredTextBox)sender).Font); };
+            RefreshAuxiliaryStyles();
         }
 
         public void RemoveEditor(EditorGUI editor)
@@ -83,6 +92,7 @@ namespace DarkScript3
             Editors.Remove(editor);
             docBox.Clear();
             currentDoc = (null, -1);
+            RefreshAuxiliaryStyles();
         }
 
         public void SwitchEditor(EditorGUI editor)
@@ -99,7 +109,7 @@ namespace DarkScript3
 
         public void HideTip()
         {
-            InfoTip.Hide();
+            InfoTip?.Hide();
         }
 
         public void JumpToLineInFile(string path, string lineText, int lineChar, int lineHint)
@@ -156,36 +166,31 @@ namespace DarkScript3
 
         public void SetStatus(string status, bool sticky = true)
         {
+            // Statuses are sticky by default, meaning that just moving around in the script won't reset them.
+            // Non-mutating navigation statuses, like jumping to symbols, may be non-sticky.
             stickyStatusMessage = sticky;
             statusLabel.Text = status;
         }
 
-        public void ResetStatus(bool sticky)
+        public void ResetStatus(bool overrideSticky)
         {
-            if (stickyStatusMessage && !sticky)
+            if (stickyStatusMessage && !overrideSticky)
             {
                 return;
             }
+            stickyStatusMessage = false;
             statusLabel.Text = "";
         }
 
         public void SetGlobalFont(Font font)
         {
+            TextStyles.Font = font;
             foreach (FastColoredTextBox tb in AllTextBoxes)
             {
                 // Font sharing leads to post-disposal access, avoid it at all costs
-                Font f = (Font)font.Clone();
-                if (tb == InfoTip.tipBox)
-                {
-                    // Heuristic for less intrusive tips: above 8pt, show at 80% of size
-                    if (f.SizeInPoints > 8)
-                    {
-                        f = new Font(f.Name, Math.Max(8f, f.SizeInPoints * 0.8f));
-                    }
-                }
-                tb.Font = f;
+                // TextStyles get/set hides this cloning (and also custom tipBox resizing).
+                tb.Font = TextStyles.FontFor(tb);
             }
-            TextStyles.Font = font;
         }
 
         public void RefreshGlobalStyles()
@@ -194,6 +199,11 @@ namespace DarkScript3
             {
                 editor.RefreshGlobalStyles();
             }
+            RefreshAuxiliaryStyles();
+        }
+
+        private void RefreshAuxiliaryStyles()
+        {
             if (Editors.Count == 0)
             {
                 docBox.BackColor = TextStyles.BackColor;
@@ -204,6 +214,8 @@ namespace DarkScript3
             {
                 Editors.Last().RefreshGlobalStyles(docBox);
                 Editors.Last().RefreshGlobalStyles(InfoTip.tipBox);
+                // Enable CJK rendering for tipBox specially (too expensive to do in source, w/ current implementation)
+                InfoTip.tipBox.DefaultStyle = TextStyles.DefaultCJK;
             }
         }
 
@@ -465,10 +477,24 @@ namespace DarkScript3
                     }
                 }
             }
-            List<string> altNames = Docs.GetAltFunctionNames(func);
-            if (altNames != null && altNames.Count > 0)
+            if (Docs.GetConditionFunctionNames(func, out string condName, out List<string> altNames))
             {
-                docBox.AppendText(Environment.NewLine + Environment.NewLine + $"(condition{(altNames.Count == 1 ? "" : "s")}: {string.Join(", ", altNames)})");
+                if (func == condName)
+                {
+                    if (altNames.Count > 0)
+                    {
+                        docBox.AppendText(Environment.NewLine + Environment.NewLine + $"(simpler version{(altNames.Count == 1 ? "" : "s")}: {string.Join(", ", altNames)})");
+                    }
+                }
+                else if (altNames.Contains(func))
+                {
+                    docBox.AppendText(Environment.NewLine + Environment.NewLine + $"(simpler version of {condName})");
+                }
+                else
+                {
+                    altNames.Add(condName);
+                    docBox.AppendText(Environment.NewLine + Environment.NewLine + $"(condition{(altNames.Count == 1 ? "" : "s")}: {string.Join(", ", altNames)})");
+                }
             }
             if (shortText != null)
             {

@@ -132,6 +132,9 @@ namespace DarkScript3
             [JsonIgnore]
             public EnumDoc EnumDoc { get; set; }
 
+            [JsonIgnore]
+            public DarkScriptType MetaType { get; set; }
+
             public object GetDisplayValue(object val) => EnumDoc == null ? val : EnumDoc.GetDisplayValue(val);
         }
 
@@ -178,6 +181,67 @@ namespace DarkScript3
             // Custom enum globalization list.
             [JsonProperty(PropertyName = "global_enums", Order = 4)]
             public List<string> GlobalEnums { get; set; }
+
+            [JsonProperty(PropertyName = "meta_aliases", Order = 5)]
+            public Dictionary<string, List<string>> MetaAliases { get; set; }
+
+            // All metatypes used in this EMEDF, for referencing other game data and naming args.
+            // The last applicable entry is selected, so this goes in order from most generic to more specific.
+            [JsonProperty(PropertyName = "meta_types", Order = 6)]
+            public List<DarkScriptType> MetaTypes { get; set; }
+        }
+
+        public class DarkScriptType
+        {
+            // The main canonical arg name for the type
+            [JsonProperty(PropertyName = "name", Order = 1)]
+            public string Name { get; set; }
+
+            // Alternatively, a set of several consecutive arg names to combine together.
+            // The two currently supported setups for this are param type overrides, and map ids.
+            [JsonProperty(PropertyName = "multi_names", Order = 2)]
+            public List<string> MultiNames { get; set; }
+
+            // Bank ids or command ids to apply this name to.
+            [JsonProperty(PropertyName = "cmds", Order = 3)]
+            public List<string> Cmds { get; set; }
+
+            // Overall data types. If this is not present, no metadata references are used.
+            // param, fmg, entity, mapint, mapparts, objactflag
+            [JsonProperty(PropertyName = "data_type", Order = 4)]
+            public string DataType { get; set; }
+
+            // Specific to the data type.
+            // param ParamName, fmg FmgTypeEnum, entity Type/Namespace
+            // Perhaps can also include "tag" ids like Boss or Bonfire, for naming purposes
+            [JsonProperty(PropertyName = "type", Order = 5)]
+            public string Type { get; set; }
+
+            // Alternative to Type when multiple may apply
+            [JsonProperty(PropertyName = "types", Order = 6)]
+            public List<string> Types { get; set; }
+
+            // With MultiArgNames, when an enum is paired with a value, the enum name.
+            // This should be the DarkScript3 display name.
+            [JsonProperty(PropertyName = "override_enum", Order = 7)]
+            public string OverrideEnum { get; set; }
+
+            // With MultiArgNames, when an enum is paired with a value, a mapping from type to value.
+            // A value can have multiple overrides to allow for multiple types.
+            [JsonProperty(PropertyName = "override_types", Order = 8)]
+            public Dictionary<string, DarkScriptTypeOverride> OverrideTypes { get; set; }
+
+            public IEnumerable<string> AllTypes => (Type == null ? Array.Empty<string>() : new[] { Type }).Concat(Types ?? new List<string>());
+        }
+
+        public class DarkScriptTypeOverride
+        {
+            // The enum value to select a type.
+            [JsonProperty(PropertyName = "value", Order = 1)]
+            public int Value { get; set; }
+
+            [JsonIgnore]
+            public string DisplayValue { get; set; }
         }
     }
 }

@@ -10,6 +10,8 @@ namespace DarkScript3
 {
     /// <summary>
     /// Routines for generating files to check round trip conversion of packing and unpacking.
+    /// 
+    /// Also hacky decompile command line interface.
     /// </summary>
     public class RoundTripTool
     {
@@ -21,7 +23,7 @@ namespace DarkScript3
             ["sekiro"] = @"C:\Program Files (x86)\Steam\steamapps\common\Sekiro\event",
             ["er"] = @"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING\Game\event",
         };
-        private static readonly Dictionary<string, EMEVD.Game> gameTypes = new Dictionary<string, Game>
+        private static readonly Dictionary<string, Game> gameTypes = new Dictionary<string, Game>
         {
             ["ds1"] = Game.DarkSouls1,
             ["bb"] = Game.Bloodborne,
@@ -30,6 +32,92 @@ namespace DarkScript3
             ["ds3"] = Game.DarkSouls3,
             ["er"] = Game.Sekiro,
         };
+
+        public static void Decompile(string[] args)
+        {
+            // Hacky decompile interface for basic dumps
+            // TODO: Add more options in the future, also find a way to add headers here
+            List<string> expectedArgs = new List<string> { "game", "indir", "outdir" };
+            Dictionary<string, string> argDict = expectedArgs.ToDictionary(k => k, k => "");
+            string showArgs(IEnumerable<string> names) => string.Join(" ", names.Select(k => $"-{k}"));
+            string expectArg = null;
+            foreach (string arg in args)
+            {
+                if (arg.StartsWith("-"))
+                {
+                    if (expectArg != null)
+                    {
+                        throw new ArgumentException($"No value given for -{expectArg}, found {arg} instead");
+                    }
+                    string argName = arg.Substring(1);
+                    if (argName == "decompile")
+                    {
+                        continue;
+                    }
+                    if (!argDict.ContainsKey(argName))
+                    {
+                        throw new ArgumentException($"Unknown arg -{argName}, expected one of {showArgs(expectedArgs)}");
+                    }
+                    expectArg = argName;
+                }
+                else if (expectArg != null)
+                {
+                    argDict[expectArg] = arg;
+                    expectArg = null;
+                }
+                else
+                {
+                    throw new ArgumentException($"Unexpected argument {arg}");
+                }
+            }
+            if (expectArg != null)
+            {
+                throw new ArgumentException($"No value given for -{expectArg}");
+            }
+            List<string> emptyArgs = argDict.Where(e => string.IsNullOrWhiteSpace(e.Value)).Select(e => e.Key).ToList();
+            if (emptyArgs.Count > 0)
+            {
+                throw new ArgumentException($"Missing args {showArgs(emptyArgs)}");
+            }
+            string game = argDict["game"];
+            string inDir = argDict["indir"];
+            string outDir = argDict["outdir"];
+            if (!Directory.Exists(inDir))
+            {
+                throw new DirectoryNotFoundException($"Directory does not exist: {inDir}");
+            }
+            if (!Directory.Exists(outDir))
+            {
+                Directory.CreateDirectory(outDir);
+            }
+            InstructionDocs docs = new InstructionDocs($"{game}-common.emedf.json");
+            List<string> emevdPaths = Directory.GetFiles(inDir, "*.emevd").Concat(Directory.GetFiles(inDir, "*.emevd.dcx")).ToList();
+            foreach (string emevdPath in emevdPaths)
+            {
+                string name = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(emevdPath));
+                if (game == "ds3" && name.StartsWith("m2")) continue;
+                EventCFG.CFGOptions options = EventCFG.CFGOptions.GetDefault();
+                options.FailWarnings = true;
+                EventScripter scripter = new EventScripter(emevdPath, docs);
+                FancyEventScripter fes = new FancyEventScripter(scripter, docs, options);
+                string outPath = Path.Combine(outDir, Path.GetFileName(emevdPath) + ".js");
+                if (File.Exists(outPath))
+                {
+                    Console.WriteLine($"{emevdPath} -> {outPath} already exists, skipping it");
+                    continue;
+                }
+                try
+                {
+                    string output = fes.Unpack();
+                    File.WriteAllText(outPath, output);
+                    Console.WriteLine($"{emevdPath} -> wrote {outPath}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"{emevdPath} -> {ex}");
+                }
+            }
+        }
 
         public static void Run(string[] args)
         {

@@ -285,8 +285,130 @@ namespace DarkScript3
                         DisplayAliases[alias] = instrDoc.DisplayName;
                     }
                 }
+                InitializeArgTypes();
             }
             AllAliases = DisplayAliases.ToDictionary(e => e.Key, e => e.Value);
+        }
+
+        private void InitializeArgTypes()
+        {
+            // Hardcode: PlaceName should take absolute value
+            // Check if any Character Entity ID should be humans and/or self only
+            // ObjAct event flag?
+            if (DOC?.DarkScript?.MetaTypes == null) return;
+            Dictionary<string, List<EMEDF.DarkScriptType>> exactTypes = new Dictionary<string, List<EMEDF.DarkScriptType>>();
+            foreach (EMEDF.DarkScriptType metaType in DOC.DarkScript.MetaTypes)
+            {
+                if (metaType.Name == null && (metaType.MultiNames == null || metaType.MultiNames.Count == 0))
+                {
+                    throw new Exception($"EMEDF validation failure: Meta type defined without applicable arg name");
+                }
+                string name = metaType.Name ?? metaType.MultiNames[0];
+                if (!exactTypes.TryGetValue(name, out List<EMEDF.DarkScriptType> types))
+                {
+                    exactTypes[name] = types = new List<EMEDF.DarkScriptType>();
+                }
+                // Also preprocess enums
+                if (metaType.OverrideTypes != null)
+                {
+                    if (metaType.OverrideEnum == null
+                        || !Enums.TryGetValue(metaType.OverrideEnum, out EMEDF.EnumDoc enumDoc)
+                        || metaType.MultiNames == null)
+                    {
+                        throw new Exception($"EMEDF validation failure: {name} has type overrides but no enum {metaType.OverrideEnum}, with multi-names {metaType.MultiNames != null}");
+                    }
+                    foreach (EMEDF.DarkScriptTypeOverride over in metaType.OverrideTypes.Values)
+                    {
+                        if (!enumDoc.DisplayValues.TryGetValue(over.Value.ToString(), out string displayVal))
+                        {
+                            throw new Exception($"EMEDF validation failure: {over.Value} not defined in {metaType.OverrideEnum} for {name}");
+                        }
+                        over.DisplayValue = displayVal;
+                    }
+                }
+                types.Add(metaType);
+            }
+            bool printIds = false;
+            if (DOC.DarkScript.MetaAliases != null)
+            {
+                foreach (KeyValuePair<string, List<string>> entry in DOC.DarkScript.MetaAliases)
+                {
+                    foreach (string name in entry.Value)
+                    {
+                        exactTypes[name] = exactTypes[entry.Key];
+                    }
+                }
+            }
+            foreach (EMEDF.ClassDoc bank in DOC.Classes)
+            {
+                string bankStr = bank.Index.ToString();
+                foreach (EMEDF.InstrDoc instr in bank.Instructions)
+                {
+                    string cmdStr = FormatInstructionID(bank.Index, instr.Index);
+                    foreach (EMEDF.ArgDoc arg in instr.Arguments)
+                    {
+                        // If there is an exact match, use it
+                        // If "ID" is present, just warn, though could also use a suffixed match
+                        // If there is a bank/instruction filter, apply that as well.
+                        // The last applicable match takes precedence (generic -> specific order).
+                        if (arg.MetaType != null)
+                        {
+                            continue;
+                        }
+                        if (!exactTypes.TryGetValue(arg.Name, out List<EMEDF.DarkScriptType> types))
+                        {
+                            if (printIds && (arg.Name.EndsWith(" ID") || arg.Name.Contains(" ID ")))
+                            {
+                                Console.WriteLine($"No specification for ID arg name {cmdStr} {instr.Name}: {arg.Name}");
+                            }
+                            continue;
+                        }
+                        EMEDF.DarkScriptType applicable = null;
+                        foreach (EMEDF.DarkScriptType cand in types)
+                        {
+                            if (cand.Cmds == null || cand.Cmds.Contains(bankStr) || cand.Cmds.Contains(cmdStr))
+                            {
+                                applicable = cand;
+                            }
+                        }
+                        if (applicable == null)
+                        {
+                            if (printIds)
+                            {
+                                Console.WriteLine($"No matching command for arg name {cmdStr} {instr.Name}: {arg.Name}");
+                            }
+                            continue;
+                        }
+                        if (printIds)
+                        {
+                            Console.WriteLine($"Type {applicable.DataType}[{string.Join(",", applicable.AllTypes)}] for {cmdStr} {instr.Name}: {arg.Name}");
+                        }
+                        if (applicable.MultiNames == null)
+                        {
+                            arg.MetaType = applicable;
+                        }
+                        else
+                        {
+                            // If it's a multi-arg thing, propagate it to the other applicable args.
+                            // Normally, the main arg should be the first one, and the rest should be consecutive.
+                            // TriggerAISound reverses the order, so it can't be used for type-aware autocomplete currently.
+                            // It should also not overlap with any other meta types, but this is not enforced.
+                            foreach (string argName in applicable.MultiNames)
+                            {
+                                EMEDF.ArgDoc multiArg = instr.Arguments.Where(a => a.Name == argName).FirstOrDefault();
+                                if (multiArg == null)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    multiArg.MetaType = applicable;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public static string FormatInstructionID(long bank, long index)
@@ -298,6 +420,14 @@ namespace DarkScript3
         {
             string[] parts = id.TrimEnd(']').Split(new[] { '[' }, 2);
             return (int.Parse(parts[0]), int.Parse(parts[1]));
+        }
+
+        public static string GameNameFromResourceName(string resourceStr)
+        {
+            // This is for the purpose of loading metadata based on game.
+            // Assume naming like ds1-common.emedf.json and ds1-common.MapName.txt
+            // This will also just pass through the name of the game by itself.
+            return resourceStr.Split(new[] { '-', '.' }, 2)[0];
         }
 
         /// <summary>
@@ -529,6 +659,71 @@ namespace DarkScript3
             return false;
         }
 
+        // Overly specific method for extracting multiple arg values, only knowing the function name.
+        // For IDE-like functionality in the editor.
+        // Returns null if all args could not be found. All args must be non-null.
+        public List<int> GetArgsAsInts(List<string> args, string funcName, List<string> argFilter)
+        {
+            if (!AllAliases.TryGetValue(funcName, out string name))
+            {
+                name = funcName;
+            }
+            if (AllArgs.TryGetValue(name, out List<EMEDF.ArgDoc> argDocs) && argDocs.Count > 0)
+            {
+                List<int> res = new List<int>();
+                foreach (string argName in argFilter)
+                {
+                    int index = argDocs.FindIndex(a => a.Name == argName);
+                    if (index == -1 || index >= args.Count)
+                    {
+                        return null;
+                    }
+                    EMEDF.ArgDoc argDoc = argDocs[index];
+                    string arg = args[index].Trim();
+                    if (argDoc.EnumDoc != null && EnumValues.TryGetValue(arg, out int enumValue))
+                    {
+                        res.Add(enumValue);
+                    }
+                    else if (int.TryParse(arg, out int intVal))
+                    {
+                        res.Add(intVal);
+                    }
+                    else
+                    {
+                        // No obvious value.
+                        // At this point we may want to resolve const variables or basic arithmetic expressions, to support those.
+                        return null;
+                    }
+                }
+                return res;
+            }
+            return null;
+        }
+
+        public EMEDF.ArgDoc GetHeuristicArgDoc(string funcName, int funcArg)
+        {
+            if (funcName != null && funcArg >= 0)
+            {
+                if (!AllAliases.TryGetValue(funcName, out string name))
+                {
+                    name = funcName;
+                }
+                if (AllArgs.TryGetValue(name, out List<EMEDF.ArgDoc> args) && args.Count > 0)
+                {
+                    if (funcArg < args.Count)
+                    {
+                        return args[funcArg];
+                    }
+                    else if (args.Last().Vararg)
+                    {
+                        // This doesn't do anything at present - generic entity/flag etc autocomplete in future,
+                        // but initializations should actually have types at some point.
+                        return args.Last();
+                    }
+                }
+            }
+            return null;
+        }
 
         // TODO: Make this an extension method?
         // Altered version of Instruction.UnpackArgs (where else should this be used?)
@@ -579,9 +774,14 @@ namespace DarkScript3
             }
         }
 
-        public List<string> GetAltFunctionNames(string func)
+        public bool GetConditionFunctionNames(string func, out string mainName, out List<string> altNames)
         {
-            if (Translator == null) return null;
+            mainName = null;
+            altNames = null;
+            if (Translator == null)
+            {
+                return false;
+            }
 
             ConditionData.ConditionDoc doc = null;
             if (Functions.TryGetValue(func, out (int, int) indices))
@@ -597,18 +797,21 @@ namespace DarkScript3
             {
                 doc = funcDoc.ConditionDoc;
             }
-            if (doc == null || doc.Hidden) return null;
-            List<string> names = new List<string> { doc.Name };
+            if (doc == null || doc.Hidden)
+            {
+                return false;
+            }
+            mainName = doc.Name;
+            altNames = new List<string>();
             foreach (ConditionData.BoolVersion b in doc.AllBools)
             {
-                names.Add(b.Name);
+                altNames.Add(b.Name);
             }
             foreach (ConditionData.CompareVersion c in doc.AllCompares)
             {
-                names.Add(c.Name);
+                altNames.Add(c.Name);
             }
-            names.Remove(func);
-            return names;
+            return true;
         }
 
         private static readonly List<string> Acronyms = new List<string>()

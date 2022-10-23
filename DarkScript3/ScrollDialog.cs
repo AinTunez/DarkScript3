@@ -24,7 +24,7 @@ namespace DarkScript3
             using (ScrollDialog form = new ScrollDialog(title, text))
             {
                 form.Icon = parent.Icon;
-                // Ignore DialogResult here
+                form.StartPosition = FormStartPosition.CenterParent;
                 return form.ShowDialog(parent);
             }
         }

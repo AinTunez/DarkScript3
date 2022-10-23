@@ -21,26 +21,39 @@ namespace DarkScript3
         [STAThread]
         static void Main(string[] args)
         {
-            bool commandLine = args.Contains("/cmd");
+            bool commandLine = args.Length > 0 && args[0] == "/cmd";
 #if DEBUG
             commandLine = args.Length > 0;
 #endif
             if (commandLine)
             {
+                if (args[0] == "/cmd")
+                {
+                    args = args.Skip(1).ToArray();
+                }
                 // Command line things for testing
                 AttachConsole(-1);
-                if (args.Contains("test"))
-                {
-                    new CondTestingTool().Run(args);
-                }
-                else if (args.Contains("html"))
+                // These are part of the release binary.
+                if (args.Contains("html"))
                 {
                     EMEDF2HTML.Generate(args);
+                }
+                else if (args.Contains("-decompile"))
+                {
+                    RoundTripTool.Decompile(args);
+                }
+#if DEBUG
+                // The rest of these have quite unstructured arguments, so don't include them in the release binary.
+                else if (args.Contains("test"))
+                {
+                    // new CondTestingTool().Run(args);
+                    new CondTestingTool().DumpTypes();
                 }
                 else
                 {
                     RoundTripTool.Run(args);
                 }
+#endif
                 return;
             }
             Application.EnableVisualStyles();

@@ -21,7 +21,6 @@ namespace DarkScript3
     {
         public static void Generate(string[] args)
         {
-            args = args.Except(new[] { "/cmd" }).ToArray();
             string game = args[1];
             string outDir = args[2];
             string emevdDir = args.Length > 3 ? string.Join(" ", args.Skip(3)) : null;
