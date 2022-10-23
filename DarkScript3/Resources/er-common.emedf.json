@@ -11898,7 +11898,7 @@
               "unk4": 0
             },
             {
-              "name": "Entity ID 2",
+              "name": "Relative Entity ID",
               "type": 2,
               "enum_name": null,
               "default": 0,
@@ -12062,7 +12062,7 @@
               "unk4": 0
             },
             {
-              "name": "Entity ID 2",
+              "name": "Relative Entity ID",
               "type": 2,
               "enum_name": null,
               "default": 0,
@@ -17164,6 +17164,7 @@
         "cmds": ["3", "1003", "2003[05]", "2003[06]", "2003[07]", "2003[52]", "2007", "2010[02]"]
       },
       {
+        // Do entity lookup for all untyped parameters
         "name": "Parameters",
         "data_type": "entity"
       },
@@ -17210,6 +17211,10 @@
         "name": "Initial Area Entity ID",
         "data_type": "entity",
         "types": ["Region", "Player"]
+      },
+      {
+        "name": "Relative Entity ID",
+        "data_type": "entity"
       },
       {
         "name": "Respawn Area Entity ID",

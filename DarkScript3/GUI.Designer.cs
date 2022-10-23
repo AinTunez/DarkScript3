@@ -87,6 +87,10 @@ namespace DarkScript3
             this.docBox = new FastColoredTextBoxNS.FastColoredTextBox();
             this.fileView = new System.Windows.Forms.TreeView();
             this.tabControl = new System.Windows.Forms.TabControl();
+            this.clearProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.display)).BeginInit();
@@ -119,10 +123,14 @@ namespace DarkScript3
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
             this.openProjectToolStripMenuItem,
+            this.clearProjectToolStripMenuItem,
+            this.toolStripMenuItem2,
             this.closeTabToolStripMenuItem,
+            this.toolStripMenuItem3,
             this.saveToolStripMenuItem,
             this.batchDumpToolStripMenuItem,
             this.batchResaveToolStripMenuItem,
+            this.toolStripMenuItem4,
             this.exitToolStripMenuItem,
             this.nextTabToolStripMenuItem,
             this.previousTabToolStripMenuItem});
@@ -640,6 +648,28 @@ namespace DarkScript3
             this.tabControl.TabIndex = 5;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
+            // clearProjectToolStripMenuItem
+            // 
+            this.clearProjectToolStripMenuItem.Name = "clearProjectToolStripMenuItem";
+            this.clearProjectToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.clearProjectToolStripMenuItem.Text = "Clear Project";
+            this.clearProjectToolStripMenuItem.Click += new System.EventHandler(this.clearProjectToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(257, 6);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(257, 6);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(257, 6);
+            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -736,6 +766,10 @@ namespace DarkScript3
         private System.Windows.Forms.ToolStripMenuItem clearMetadataCacheToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem showConnectionInfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
     }
 }
 

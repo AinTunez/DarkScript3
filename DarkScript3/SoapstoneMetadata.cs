@@ -13,7 +13,7 @@ using static DarkScript3.DocAutocomplete;
 
 namespace DarkScript3
 {
-    public class SoapstoneMetadata : IDisposable
+    public sealed class SoapstoneMetadata : IDisposable
     {
         private static readonly int checkIntervalMs = 5000;
         private readonly NameMetadata nameMetadata;
@@ -113,7 +113,7 @@ namespace DarkScript3
             resetData = true;
         }
 
-        private class InnerData
+        private sealed class InnerData
         {
             public int DataVersion { get; set; }
             // Assume a single instance of DSMS, but do at least check the games are compatible to use the data in emevd
@@ -276,7 +276,7 @@ namespace DarkScript3
             [35000] = "Spirit Summons",
             [40000] = "Torrent",
         };
-        public class EntityData : DisplayData
+        public sealed class EntityData : DisplayData
         {
             // Entity ID, mainly for when this is given to ToolControl for opening purposes.
             public int ID { get; set; }
@@ -309,14 +309,14 @@ namespace DarkScript3
         // Simple param/FMG entries.
         // Some have quite a few entries, so hopefully this does not explode memory usage too much.
         // This is used both for autocomplete and opening.
-        public class EntryData : DisplayData
+        public sealed class EntryData : DisplayData
         {
             // Internal to SoapstoneMetadata
             internal SoulsKey Key { get; set; }
         }
 
         private readonly IDictionary<string, List<string>> stringInfixes = new ConcurrentDictionary<string, List<string>>();
-        private List<string> getSpaceBasedMatchText(string str)
+        private List<string> GetSpaceBasedMatchText(string str)
         {
             if (!stringInfixes.TryGetValue(str, out List<string> infixes))
             {
@@ -342,6 +342,19 @@ namespace DarkScript3
             return infixes;
         }
 
+        // Word boundaries from builtin MSB event/region names can behave poorly given the Japanese names.
+        // Just match the whole thing to avoid weird infixed sources. Could also check for ASCII-only
+        // andswitch to space-based match text.
+        private IEnumerable<string> GetWholeMatchText(string str)
+        {
+            string part = AutocompleteNonWordRe.Replace(str, "");
+            if (part.Length > 0)
+            {
+                return new[] { part };
+            }
+            return Array.Empty<string>();
+        }
+
         // Store some info about groups. Keep it finite, though, as some groups have >2000 members (e.g. Carian Study Hall).
         private static readonly int maxGroupModels = 2;
         private class EntityGroupData
@@ -354,7 +367,17 @@ namespace DarkScript3
         }
 
         // The data version can be exposed for cache invalidation purposes in the future, though maybe it is not needed at all.
-        public bool IsMapDataAvailable() => (currentData?.DataVersion ?? 0) > 0;
+        public bool IsDataAvailable() => (currentData?.DataVersion ?? 0) > 0;
+
+        public bool IsMapDataAvailable(string game, string map)
+        {
+            // map may be null
+            if (GetCompatibleData(game, out InnerData data))
+            {
+                return data.FullyLoadedMaps.Contains(map);
+            }
+            return false;
+        }
 
         private bool GetCompatibleData(string game, out InnerData outData)
         {
@@ -489,6 +512,10 @@ namespace DarkScript3
                 foreach (DocAutocompleteItem item in data.MapItems)
                 {
                     EntityData entity = item.SubType as EntityData;
+                    if (entity.ID == 10000)
+                    {
+                        Console.WriteLine($"considering {entity.Desc} with {entity.Namespace} {entity.Type} vs {string.Join(",", metaType.OverrideTypes.Keys)}");
+                    }
                     if (entity != null
                         && (metaType.OverrideTypes.TryGetValue(entity.Namespace, out EMEDF.DarkScriptTypeOverride over)
                             || metaType.OverrideTypes.TryGetValue(entity.Type, out over)))
@@ -595,7 +622,7 @@ namespace DarkScript3
                         DisplayData val = new DisplayData
                         {
                             Desc = string.IsNullOrWhiteSpace(entry.Value) ? entry.Key : $"{entry.Key}: {entry.Value}",
-                            MatchText = string.IsNullOrWhiteSpace(entry.Value) ? null : getSpaceBasedMatchText(entry.Value),
+                            MatchText = string.IsNullOrWhiteSpace(entry.Value) ? null : GetSpaceBasedMatchText(entry.Value),
                         };
                         intItems[entry.Key] =
                             new DocAutocompleteItem(mapInt, val.Desc, AutocompleteCategory.Custom, FancyContextType.Any, false, val);
@@ -608,6 +635,9 @@ namespace DarkScript3
             data.MapPartsItems = partsItems;
         }
 
+        // Use up less space in param name. Could also do this mid-word like with EquipParamGoods
+        // (when followed by uppercase letter), but EquipGoods looks weird.
+        private static readonly Regex paramWordRe = new Regex(@"Param$");
         public async Task<bool> FetchParamRowNames(string game, string type)
         {
             if (!GetCompatibleData(game, out InnerData data) || !provider.TryGetClient(out SoapstoneClient client))
@@ -618,7 +648,6 @@ namespace DarkScript3
             {
                 return false;
             }
-            // TODO: For autocomplete, test awaiting a second here
             List<SoulsObject> results;
             try
             {
@@ -637,6 +666,7 @@ namespace DarkScript3
             }
             Dictionary<int, EntryData> dict = new Dictionary<int, EntryData>();
             List<DocAutocompleteItem> items = new List<DocAutocompleteItem>();
+            string displayType = paramWordRe.Replace(type, "");
             foreach (SoulsObject result in results)
             {
                 if (!result.TryGetInt("ID", out int id))
@@ -650,11 +680,11 @@ namespace DarkScript3
                     EntryData entry = new EntryData
                     {
                         Key = result.Key,
-                        Desc = name == null ? $"{id}" : $"{id}: {name}",
+                        Desc = name == null ? $"{displayType} {id}" : $"{displayType} {id}: {name}",
                     };
                     if (name != null)
                     {
-                        entry.MatchText = getSpaceBasedMatchText(name);
+                        entry.MatchText = GetSpaceBasedMatchText(name);
                     }
                     dict[id] = entry;
                     items.Add(new DocAutocompleteItem(id, entry.Desc, AutocompleteCategory.Custom, FancyContextType.Any, false, entry));
@@ -705,7 +735,7 @@ namespace DarkScript3
                     {
                         Key = result.Key,
                         Desc = $"{id}: {text}",
-                        MatchText = getSpaceBasedMatchText(text),
+                        MatchText = GetSpaceBasedMatchText(text),
                     };
                     dict[id] = entry;
                     // Newlines cause lines to overlap in the autocomplete menu
@@ -786,7 +816,7 @@ namespace DarkScript3
         {
             if (!provider.TryGetClient(out SoapstoneClient client))
             {
-                throw new InvalidOperationException($"DSMapStudio is not running or not connected.\nCheck Metadata > Show DSMapStudio Connection Info for more details.");
+                throw new InvalidOperationException($"DSMapStudio is not running or not connected.\n\nCheck Metadata > Show DSMapStudio Connection Info for more details.");
             }
             if (!GetCompatibleData(game, out InnerData data))
             {
@@ -930,11 +960,11 @@ namespace DarkScript3
                             if (entity.TryGetInt("CharaInitID", out int charaId)
                                 && charaNames.TryGetValue(charaId.ToString(), out string charaName))
                             {
-                                infixes = getSpaceBasedMatchText(charaName);
+                                infixes = GetSpaceBasedMatchText(charaName);
                             }
                             if ((infixes == null || infixes.Count == 0) && modelId != null && modelNames.TryGetValue(modelId, out string modelName))
                             {
-                                infixes = getSpaceBasedMatchText(modelName);
+                                infixes = GetSpaceBasedMatchText(modelName);
                             }
                             // Make it clear this is a dummy on hover (excluded from autocomplete)
                             string special = type.StartsWith("Dummy") ? $"{type} " : "";
@@ -954,6 +984,7 @@ namespace DarkScript3
                             entityData.Desc = $"{entityId}: {objType} {entry.Name}";
                             entityData.MatchText.Add(objType);
                             entityData.MatchText.Add(ns);
+                            entityData.MatchText.AddRange(GetWholeMatchText(entry.Name));
                         }
                         entities[entityId] = entityData;
                     }
@@ -1010,7 +1041,7 @@ namespace DarkScript3
                                 string modelId = group.Models[i];
                                 if (charaNames.TryGetValue(modelId, out string modelName) || modelNames.TryGetValue(modelId, out modelName))
                                 {
-                                    modelName = getSpaceBasedMatchText(modelName).FirstOrDefault();
+                                    modelName = GetSpaceBasedMatchText(modelName).FirstOrDefault();
                                 }
                                 names.Add(modelName ?? group.Models[i]);
                             }
@@ -1030,6 +1061,24 @@ namespace DarkScript3
                     entityData.MatchText.Add("group");
                 }
             }
+            // Custom entity ids. This requires some care with autocomplete.
+            // The issue is when there is only 10000 autocomplete and nothing else, this interferes with up/down arrow
+            // keys in a ton of commands (like typing in a command, then wanting to go to a different line for an entity id).
+            // At least for now: resolve this with a custom check in map autocomplete functions checking if the map is loaded.
+            foreach (KeyValuePair<int, string> entry in selfNames)
+            {
+                int id = entry.Key;
+                if (project.Game != FromSoftGame.EldenRing && id != 10000) continue;
+                List<string> infixes = GetSpaceBasedMatchText(entry.Value);
+                EntityData entityData = entities[id] = new EntityData
+                {
+                    ID = id,
+                    Type = "Self",
+                    Namespace = "Part",
+                    Desc = $"{id}: {infixes[0]}",
+                    MatchText = infixes,
+                };
+            }
             foreach (KeyValuePair<int, EntityData> entry in entities)
             {
                 int id = entry.Key;
@@ -1042,23 +1091,6 @@ namespace DarkScript3
                 items.Add(new DocAutocompleteItem(id, entity.Desc, AutocompleteCategory.Map, FancyContextType.Any, false, entity));
             }
             items.Sort();
-            // Custom entity ids. Do this after creating autocomplete items, at least for the moment.
-            // The issue is when there is only 10000 autocomplete and nothing else, this interferes with up/down arrow
-            // keys in a ton of commands (like typing in a command, then wanting to go to a different line for an entity id).
-            foreach (KeyValuePair<int, string> entry in selfNames)
-            {
-                int id = entry.Key;
-                if (project.Game != FromSoftGame.EldenRing && id != 10000) continue;
-                List<string> infixes = getSpaceBasedMatchText(entry.Value);
-                EntityData entityData = entities[id] = new EntityData
-                {
-                    ID = id,
-                    Type = "Self",
-                    Namespace = "Part",
-                    Desc = $"{id}: {infixes[0]}",
-                    MatchText = infixes,
-                };
-            }
             pendingData.FullyLoadedMaps = new SortedSet<string>(openMaps);
             pendingData.MapEntities = entities;
             pendingData.MapItems = items;

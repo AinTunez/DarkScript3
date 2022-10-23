@@ -178,6 +178,17 @@ namespace DarkScript3
             }
         }
 
+        private void clearProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CurrentDefaultProject = null;
+            Settings.Default.ProjectJson = "";
+            Settings.Default.Save();
+            UpdateDirectoryListing();
+            RefreshTitle();
+            SharedControls.ResetStatus(true);
+            clearProjectToolStripMenuItem.Enabled = false;
+        }
+
         private void LoadProject(string projectJson)
         {
             // projectJson should be a valid project file. Callers should handle exceptions.
@@ -187,7 +198,9 @@ namespace DarkScript3
                 DirectoryProjects[CurrentDefaultProject.ProjectEventDirectory] = CurrentDefaultProject;
             }
             UpdateDirectoryListing();
+            RefreshTitle();
             SharedControls.SetStatus($"Loaded {projectJson}");
+            clearProjectToolStripMenuItem.Enabled = true;
         }
 
         private FileMetadata OpenFile(string fileName, FileMetadata metadata = null)
@@ -626,7 +639,18 @@ namespace DarkScript3
         private void RefreshTitle()
         {
             string name = $"DARKSCRIPT {ProgramVersion.VERSION}";
-            Text = CurrentEditor == null ? name : $"{name} - {CurrentEditor.DisplayTitleWithDir}";
+            if (CurrentEditor != null)
+            {
+                Text = $"{name} - {CurrentEditor.DisplayTitleWithDir}";
+            }
+            else if (CurrentDefaultProject?.ProjectEventDirectory != null)
+            {
+                Text = $"{name} - {CurrentDefaultProject?.ProjectEventDirectory}";
+            }
+            else
+            {
+                Text = name;
+            }
         }
 
         private void EditorGUI_TitleChanged(object sender, EventArgs e)
@@ -1182,7 +1206,7 @@ namespace DarkScript3
                 sb.AppendLine("When DSMapStudio is open and Settings > Soapstone Server is enabled, "
                     + "data from DSMapStudio will be used to autocomplete values from params, FMGs, and loaded maps. "
                     + "You can also hover on numbers in DarkScript3 to get tooltip info, "
-                    + "and left-click on the tooltip to open it in DSMapStudio.");
+                    + "and right-click on the tooltip to open it in DSMapStudio.");
             }
             else
             {

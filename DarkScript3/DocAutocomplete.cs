@@ -208,11 +208,10 @@ namespace DarkScript3
                     {
                         // Figure out maximum selected index (most recent), but some tricky logic to only auto-select type-appropriately.
                         // Hide this behind SelectPriority, which is (TypeAppropriate, LastSelectedIndex)
-                        if (item.LastSelectedIndex > 0)
+                        if (item.HasSelectPriority())
                         {
                             // Either the first match, or replacing an inappropriate item, or more recent than previous item and eligible.
-                            if (latest == null
-                                || item.GetSelectPriority().CompareTo(latest.GetSelectPriority()) > 0)
+                            if (latest == null || item.SelectPriority.CompareTo(latest.SelectPriority) > 0)
                             {
                                 latest = item;
                             }
@@ -234,7 +233,7 @@ namespace DarkScript3
             {
                 EMEDF.DarkScriptType metaType = argDoc.MetaType;
                 // Map entity data. It is filtered per-map
-                if (metaType.DataType == "entity" && context.Map != null && metadata.IsMapDataAvailable())
+                if (metaType.DataType == "entity" && metadata.IsMapDataAvailable(context.Game, context.Map))
                 {
                     // Three cases: normal mapping, override first arg, override second arg
                     if (metaType.OverrideTypes == null)
@@ -320,7 +319,7 @@ namespace DarkScript3
             }
         }
 
-        public class DocAutocompleteItem : AutocompleteItem, IComparable<DocAutocompleteItem>
+        public sealed class DocAutocompleteItem : AutocompleteItem, IComparable<DocAutocompleteItem>
         {
             private readonly List<string> prefixes = new List<string>();
 
@@ -484,10 +483,8 @@ namespace DarkScript3
                 LastSelectedIndex = ++context.SelectedIndex;
             }
 
-            public IComparable GetSelectPriority()
-            {
-                return (TypeAppropriate, LastSelectedIndex);
-            }
+            public bool HasSelectPriority() => TypeAppropriate || LastSelectedIndex > 0;
+            public IComparable SelectPriority => (TypeAppropriate, LastSelectedIndex);
 
             public IComparable GetSortKey(AutocompleteContext context = null)
             {

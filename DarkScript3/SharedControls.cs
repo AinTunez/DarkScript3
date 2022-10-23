@@ -166,16 +166,19 @@ namespace DarkScript3
 
         public void SetStatus(string status, bool sticky = true)
         {
+            // Statuses are sticky by default, meaning that just moving around in the script won't reset them.
+            // Non-mutating navigation statuses, like jumping to symbols, may be non-sticky.
             stickyStatusMessage = sticky;
             statusLabel.Text = status;
         }
 
-        public void ResetStatus(bool sticky)
+        public void ResetStatus(bool overrideSticky)
         {
-            if (stickyStatusMessage && !sticky)
+            if (stickyStatusMessage && !overrideSticky)
             {
                 return;
             }
+            stickyStatusMessage = false;
             statusLabel.Text = "";
         }
 

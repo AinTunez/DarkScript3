@@ -185,9 +185,12 @@ namespace DarkScript3
                     items.Add(new DocAutocompleteItem(s, menuText, AutocompleteCategory.Condition, FancyContextType.FancyOnly, lowQuality, null));
                 }
             }
-            items.AddRange(Docs.Enums.Values.SelectMany(e =>
-                e.DisplayValues.Values.Select(s =>
-                    new DocAutocompleteItem(s, s, AutocompleteCategory.Enum, FancyContextType.Any, false, e.Name))));
+            items.AddRange(Docs.Enums.Values
+                // Don't autocomplete booleans, to allow showing the argument name inline
+                .Where(e => e.Name != "BOOL")
+                .SelectMany(e =>
+                    e.DisplayValues.Values.Select(s =>
+                        new DocAutocompleteItem(s, s, AutocompleteCategory.Enum, FancyContextType.Any, false, e.Name))));
 
             // Finally, builtins. Only fancy ones for now.
             items.AddRange(ScriptAst.ReservedWords
@@ -527,7 +530,7 @@ namespace DarkScript3
                             string text = data.Desc;
                             if ((data is SoapstoneMetadata.EntityData ent && ent.Type != "Self") || data is SoapstoneMetadata.EntryData)
                             {
-                                text += "\nLeft-click tooltip to open in DSMapStudio";
+                                text += "\nRight-click tooltip to open in DSMapStudio";
                             }
                             ShowTip(text, p, data: data);
                         }
@@ -1204,6 +1207,8 @@ namespace DarkScript3
             for (int i = 0; i < args.Count; i++)
             {
                 EMEDF.ArgDoc arg = args[i];
+                // TODO: Display whether the arg is optional here.
+                // It may depend on func name. This logic is currently implemented in SharedControls.
                 if (arg.EnumName == "BOOL")
                 {
                     argStrings.Add($"bool {arg.DisplayName}");
