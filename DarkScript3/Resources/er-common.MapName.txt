@@ -74,6 +74,9 @@ m34_14_00_00 Divine Tower of East Altus
 m34_15_00_00 Isolated Divine Tower
 m35_00_00_00 Subterranean Shunning-Grounds
 m39_20_00_00 Ruin-Strewn Precipice
+m45_00_00_00 Royal Colosseum
+m45_01_00_00 Caelid Colosseum
+m45_02_00_00 Limgrave Colosseum
 m60_08_10_02 Southwest Liurnia
 m60_16_20_01 Southwest Moonlight Altar
 m60_33_40_00 Moonlight Altar - Altar South, Chelona's Rise
@@ -245,12 +248,12 @@ m60_21_19_01 East Stormhill
 m60_42_38_00 Stormhill - Warmaster's Shack, Stormgate
 m60_42_39_00 Stormhill - North of Warmaster's Shack
 m60_43_38_00 Limgrave - Murkwater Coast, Murkwater Catacombs Entrance
-m60_43_39_00 Stormhill - Saintsbridge, Deathtouched Catacombs Entrance, Highroad Cave Entrance
+m60_43_39_00 Stormhill - Saintsbridge, Deathtouched Catacombs Entrance; Limgrave - Highroad Cave Entrance
 m60_10_10_02 Northwest Limgrave Coast
 m60_20_20_01 Far South Liurnia Highway
 m60_40_40_00 Liurnia - Liurnia Highway South Endpoint, Path to Stormhill
 m60_21_20_01 Stormhill North Cliffside
-m60_42_40_00 Stormhill - Northwest Cliffside
+m60_42_40_00 Stormhill - Northwest Cliffside, Limgrave Colosseum Entrance
 m60_43_40_00 Stormhill - Northeast Cliffside
 m60_10_12_02 South Altus Plateau
 m60_20_25_01 Altus Plateau to Capital Outskirts
@@ -328,7 +331,7 @@ m60_46_40_00 Caelid - Smoldering Church, Rotview Balcony
 m60_47_40_00 Caelid - Caelem Ruins, Forsaken Ruins, Minor Erdtree, Minor Erdtree Catacombs Entrance
 m60_47_41_00 Caelid - South Great-Jar Area
 m60_23_21_01 North of Great-Jar
-m60_47_42_00 Caelid - North Great-Jar Area
+m60_47_42_00 Caelid - North Great-Jar Area, Caelid Colosseum Entrance
 m60_11_12_02 Southeast Altus Plateau
 m60_22_25_01 Capital Outskirts Southeast Cliffside
 m60_45_51_00 Capital Outskirts - Auriza Hero's Grave Entrance
@@ -374,7 +377,7 @@ m60_51_36_00 Caelid - Redmane Castle
 m60_51_37_00 Caelid - Southwest Radahn Arena
 m60_25_19_01 East Sellia; West Radahn Arena
 m60_50_38_00 Caelid - Gowry's Shack
-m60_50_39_00 Caelid - East Sellia, Church of the Plague
+m60_50_39_00 Caelid - East Sellia, Church of the Plague, Sellia Hideaway Entrance
 m60_51_38_00 Caelid - West Radahn Arena
 m60_51_39_00 Greyoll's Dragonbarrow - Fort Faroth
 m60_12_10_02 North Caelid
