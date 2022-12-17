@@ -2198,6 +2198,272 @@
               "unk4": 0
             }
           ]
+        },
+        {
+          "name": "IF Arena Match Ready State",
+          "index": 39,
+          "args": [
+            {
+              "name": "Result Condition Group",
+              "type": 3,
+              "enum_name": "Condition Group",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Ready",
+              "type": 0,
+              "enum_name": "BOOL",
+              "default": 1,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
+        },
+        {
+          "name": "IF Arena Solo Results",
+          "index": 40,
+          "args": [
+            {
+              "name": "Result Condition Group",
+              "type": 3,
+              "enum_name": "Condition Group",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Result",
+              "type": 0,
+              "enum_name": "Arena Result",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
+        },
+        {
+          "name": "IF Arena Solo Score Comparison",
+          "index": 41,
+          "args": [
+            {
+              "name": "Result Condition Group",
+              "type": 3,
+              "enum_name": "Condition Group",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Comparison Type",
+              "type": 3,
+              "enum_name": "Comparison Type",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Target Score",
+              "type": 5,
+              "enum_name": null,
+              "default": 1,
+              "min": 0,
+              "max": 9999,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
+        },
+        {
+          "name": "IF Arena Team Results",
+          "index": 42,
+          "args": [
+            {
+              "name": "Result Condition Group",
+              "type": 3,
+              "enum_name": "Condition Group",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Result",
+              "type": 0,
+              "enum_name": "Arena Result",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
+        },
+        {
+          "name": "IF Arena Team Score Comparison",
+          "index": 43,
+          "args": [
+            {
+              "name": "Result Condition Group",
+              "type": 3,
+              "enum_name": "Condition Group",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Comparison Type",
+              "type": 3,
+              "enum_name": "Comparison Type",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Target Score",
+              "type": 5,
+              "enum_name": null,
+              "default": 1,
+              "min": 0,
+              "max": 9999,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
+        },
+        {
+          "name": "IF Arena Match Type",
+          "index": 44,
+          "args": [
+            {
+              "name": "Result Condition Group",
+              "type": 3,
+              "enum_name": "Condition Group",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Match Type",
+              "type": 0,
+              "enum_name": "Arena Match Type",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Has Spirit Summon",
+              "type": 0,
+              "enum_name": "BOOL",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
+        },
+        {
+          "name": "IF Player Respawned In Arena",
+          "index": 45,
+          "args": [
+            {
+              "name": "Result Condition Group",
+              "type": 3,
+              "enum_name": "Condition Group",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
         }
       ]
     },
@@ -5282,7 +5548,7 @@
           ]
         },
         {
-          "name": "WAIT Until Random Time Of Day",
+          "name": "WAIT Until Time Of Day In Range",
           "index": 5,
           "args": [
             {
@@ -5385,6 +5651,40 @@
               "increment": 1,
               "format_string": "%d",
               "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
+        },
+        {
+          "name": "WAIT Until Arena Half Time",
+          "index": 8,
+          "args": [
+            {
+              "name": "Match Type",
+              "type": 0,
+              "enum_name": "Arena Match Type",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Is Second Half",
+              "type": 0,
+              "enum_name": "BOOL",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 1,
               "unk2": 0,
               "unk3": 0,
               "unk4": 0
@@ -7153,6 +7453,150 @@
               "min": 0,
               "max": 99,
               "increment": 1,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
+        },
+        {
+          "name": "SKIP IF Arena Match Type",
+          "index": 212,
+          "args": [
+            {
+              "name": "Number Of Skipped Lines",
+              "type": 0,
+              "enum_name": null,
+              "default": 1,
+              "min": 0,
+              "max": 99,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Match Type",
+              "type": 0,
+              "enum_name": "Arena Match Type",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Has Spirit Summon",
+              "type": 0,
+              "enum_name": "BOOL",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
+        },
+        {
+          "name": "GOTO IF Arena Match Type",
+          "index": 213,
+          "args": [
+            {
+              "name": "Label",
+              "type": 0,
+              "enum_name": "Label",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Match Type",
+              "type": 0,
+              "enum_name": "Arena Match Type",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Has Spirit Summon",
+              "type": 0,
+              "enum_name": "BOOL",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
+        },
+        {
+          "name": "END IF Arena Match Type",
+          "index": 214,
+          "args": [
+            {
+              "name": "Execution End Type",
+              "type": 0,
+              "enum_name": "Event End Type",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Match Type",
+              "type": 0,
+              "enum_name": "Arena Match Type",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Has Spirit Summon",
+              "type": 0,
+              "enum_name": "BOOL",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
               "format_string": "%d",
               "unk1": 0,
               "unk2": 0,
@@ -11493,6 +11937,26 @@
               "increment": 1,
               "format_string": "%d",
               "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
+        },
+        {
+          "name": "Unknown 2003[83]",
+          "index": 83,
+          "args": [
+            {
+              "name": "Unknown",
+              "type": 0,
+              "enum_name": null,
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 1,
               "unk2": 0,
               "unk3": 0,
               "unk4": 0
@@ -16073,6 +16537,26 @@
               "unk4": 0
             }
           ]
+        },
+        {
+          "name": "Send All Phantoms Home and Update Server PvP Stats",
+          "index": 12,
+          "args": [
+            {
+              "name": "Unknown",
+              "type": 5,
+              "enum_name": null,
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
         }
       ]
     },
@@ -16818,7 +17302,11 @@
         "27": "God Slain",
         "28": "Duelist Vanquished",
         "29": "Recusant Vanquished",
-        "30": "Invader Vanquished"
+        "30": "Invader Vanquished",
+        "31": "Commence",
+        "32": "Stalemate",
+        "33": "Victory",
+        "34": "Defeat"
       }
     },
     {
@@ -17039,6 +17527,25 @@
         "22": "Unknown 22",
         "23": "Unknown 23"
       }
+    },
+    {
+      "name": "Arena Match Type",
+      "values": {
+        "0": "Duel",
+        "1": "Two Player Brawl",
+        "2": "Four Player Brawl",
+        "3": "Six Player Brawl",
+        "4": "One Versus One",
+        "5": "Two Versus Two",
+        "6": "Three Versus Three"
+      }
+    },
+    {
+      "name": "Arena Result",
+      "values": {
+        "0": "Win",
+        "1": "Draw"
+      }
     }
   ],
   "darkscript": {
@@ -17047,7 +17554,8 @@
       "InitializeObjact": "2005[05]",
       "SetObjactState": "2005[06]",
       "SetObjactStateAssignIdx": "2005[14]",
-      "SetNetworkInteractionState": "2003[70]"
+      "SetNetworkInteractionState": "2003[70]",
+      "WaitUntilRandomTimeOfDay": "1001[05]"
     },
     "enum_aliases": null,
     "replacements": {
@@ -17164,7 +17672,6 @@
         "cmds": ["3", "1003", "2003[05]", "2003[06]", "2003[07]", "2003[52]", "2007", "2010[02]"]
       },
       {
-        // Do entity lookup for all untyped parameters
         "name": "Parameters",
         "data_type": "entity"
       },
@@ -17345,7 +17852,6 @@
       {
         "name": "Ceremony ID",
         "data_type": "param",
-        // TODO: Needs map offset in Elden Ring
         "type": "CeremonyParam"
       },
       {
@@ -17420,7 +17926,7 @@
       },
       {
         "name": "Other"
-      },
+      }
     ]
   }
 }

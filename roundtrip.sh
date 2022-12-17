@@ -1,10 +1,12 @@
-DarkScript3/bin/Debug/DarkScript3.exe sekiro sekiro diff fancy pack
-DarkScript3/bin/Debug/DarkScript3.exe ds2 "alt/ds2" diff
-DarkScript3/bin/Debug/DarkScript3.exe ds2scholar "alt/ds2scholar" diff
-DarkScript3/bin/Debug/DarkScript3.exe bb "alt/bb" diff fancy pack
-DarkScript3/bin/Debug/DarkScript3.exe ds1 ds1 diff fancy pack
-DarkScript3/bin/Debug/DarkScript3.exe ds1 ds1r diff fancy pack
-DarkScript3/bin/Debug/DarkScript3.exe ds3 ds3 diff fancy pack
-DarkScript3/bin/Debug/DarkScript3.exe er "alt/ernt" diff fancy pack
-DarkScript3/bin/Debug/DarkScript3.exe er er diff fancy pack
-DarkScript3/bin/Debug/DarkScript3.exe ds3 ds3 diff fancy unit validate
+CMD=DarkScript3/bin/Debug/net6.0-windows/win-x64/DarkScript3.exe
+set -e
+$CMD sekiro sekiro diff fancy pack
+$CMD ds2 "alt/ds2" diff
+$CMD ds2scholar "alt/ds2scholar" diff
+$CMD bb "alt/bb" diff fancy pack
+$CMD ds1 ds1 diff fancy pack
+$CMD ds1 ds1r diff fancy pack
+$CMD ds3 ds3 diff fancy pack
+$CMD er "alt/ernt" diff fancy pack
+$CMD er er diff fancy pack
+$CMD ds3 ds3 diff fancy unit validate

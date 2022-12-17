@@ -413,6 +413,8 @@ namespace DarkScript3
         // Can fetch more advanced data in the future and return richer info.
         public async Task<EntryData> GetParamRow(string game, string type, int id)
         {
+            // TODO: CeremonyParam needs offset in Elden Ring
+            // A few other params have this pattern, like CameraSetParam in Sekiro
             await FetchParamRowNames(game, type);
             if (GetCompatibleData(game, out InnerData data))
             {

@@ -174,9 +174,9 @@ namespace DarkScript3
             ins.ArgData[0] = (byte)skipCount;
         }
 
-        public int ConvertFloatToIntBytes(float input)
+        public int ConvertFloatToIntBytes(double input)
         {
-            return BitConverter.ToInt32(BitConverter.GetBytes(input), 0);
+            return BitConverter.ToInt32(BitConverter.GetBytes((float)input), 0);
         }
 
         /// <summary>

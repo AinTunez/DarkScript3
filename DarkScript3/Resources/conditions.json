@@ -27,6 +27,7 @@
     "1001[04]",
     "1001[05]",
     "1001[06]",
+    "1001[08]",
     "1003[00]",
     "1005[00]"
   ],
@@ -624,6 +625,7 @@
     },
     {
       "name": "HasHollowArenaMatchType",
+      "games": ["ds3"],
       "category": "online",
       "goto": "1003[211]"
     },
@@ -666,11 +668,69 @@
     {
       "name": "CompareFriendlyPhantomCount",
       "category": "online",
+      "games": ["ds3", "sekiro"],
       "cond": "3[39]",
       "as_compare": {
         "shortname": "FriendlyPhantomCount",
         "rhs": "Target Count"
       }
+    },
+    {
+      "name": "ArenaMatchReadyState",
+      "category": "online",
+      "games": ["er"],
+      "cond": "3[39]",
+      "negate_field": "Ready",
+      "as_bool": {
+        "shortname": "ArenaMatchReady"
+      }
+    },
+    {
+      "name": "ArenaSoloResults",
+      "category": "online",
+      "games": ["er"],
+      "cond": "3[40]"
+    },
+    {
+      "name": "CompareArenaSoloScore",
+      "category": "online",
+      "games": ["er"],
+      "cond": "3[41]",
+      "as_compare": {
+        "shortname": "ArenaSoloScore",
+        "rhs": "Target Score"
+      }
+    },
+    {
+      "name": "ArenaTeamResults",
+      "category": "online",
+      "games": ["er"],
+      "cond": "3[42]"
+    },
+    {
+      "name": "CompareArenaTeamScore",
+      "category": "online",
+      "games": ["er"],
+      "cond": "3[43]",
+      "as_compare": {
+        "shortname": "ArenaTeamScore",
+        "rhs": "Target Score"
+      }
+    },
+    {
+      "name": "HasArenaMatchType",
+      "games": ["er"],
+      "category": "online",
+      "cond": "3[44]",
+      "skip": "1003[212]",
+      "goto": "1003[213]",
+      "end": "1003[214]"
+    },
+    {
+      "name": "PlayerRespawnedInArena",
+      "category": "online",
+      "games": ["er"],
+      "cond": "3[45]"
     },
     // Character
     {

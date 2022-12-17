@@ -12,6 +12,7 @@ using System.Drawing;
 using System.Threading.Tasks;
 using DarkScript3.Properties;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace DarkScript3
 {
@@ -1131,7 +1132,7 @@ namespace DarkScript3
             }
             string path = $"{name}-emedf.html";
             string suffix = "";
-            // Unfortunately this doesn't work with Process.Start
+            // Unfortunately this doesn't work with Process.Start, since the file needs to exist
             // if (CurrentEditor != null && CurrentEditor.MayBeFancy()) suffix = "?hidecond=1";
             string getFullPath(string p)
             {
@@ -1139,31 +1140,38 @@ namespace DarkScript3
                 return p + suffix;
             }
             if (File.Exists(path))
-                System.Diagnostics.Process.Start(getFullPath(path));
+                OpenURL(getFullPath(path));
             else if (File.Exists($@"Resources\{path}"))
-                System.Diagnostics.Process.Start(getFullPath($@"Resources\{path}"));
+                OpenURL(getFullPath($@"Resources\{path}"));
             else
                 MessageBox.Show($"No EMEDF documentation found named {path}");
         }
 
+        private void OpenURL(string url)
+        {
+            Console.WriteLine(url);
+            // https://stackoverflow.com/questions/21835891/process-starturl-fails
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        }
+
         private void viewEMEVDTutorialToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://soulsmodding.wikidot.com/tutorial:learning-how-to-use-emevd");
+            OpenURL("http://soulsmodding.wikidot.com/tutorial:learning-how-to-use-emevd");
         }
 
         private void viewFancyDocumentationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://soulsmodding.wikidot.com/tutorial:mattscript-documentation");
+            OpenURL("http://soulsmodding.wikidot.com/tutorial:mattscript-documentation");
         }
 
         private void viewEldenRingEMEVDTutorialToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://soulsmodding.wikidot.com/tutorial:intro-to-elden-ring-emevd");
+            OpenURL("http://soulsmodding.wikidot.com/tutorial:intro-to-elden-ring-emevd");
         }
 
         private void checkForDarkScript3UpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/AinTunez/DarkScript3/releases");
+            OpenURL("https://github.com/AinTunez/DarkScript3/releases");
         }
 
         private void showArgumentTooltipsToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
