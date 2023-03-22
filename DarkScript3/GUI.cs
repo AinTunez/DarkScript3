@@ -18,6 +18,7 @@ namespace DarkScript3
 {
     public partial class GUI : Form
     {
+        public static readonly string NullStringReplaceCharacter = "\u001f";
         private readonly SharedControls SharedControls;
         private readonly ContextMenuStrip FileBrowserContextMenu;
         private readonly Dictionary<string, InstructionDocs> AllDocs = new Dictionary<string, InstructionDocs>();
@@ -412,7 +413,7 @@ namespace DarkScript3
                 {
                     Compression = compression,
                     Format = game,
-                    StringData = Encoding.Unicode.GetBytes(headers["string"]),
+                    StringData = Encoding.Unicode.GetBytes(headers["string"].Replace(GUI.NullStringReplaceCharacter,"\0")),
                     LinkedFileOffsets = Regex.Split(linked, @"\s*,\s*")
                         .Where(o => !string.IsNullOrWhiteSpace(o))
                         .Select(o => long.Parse(o))

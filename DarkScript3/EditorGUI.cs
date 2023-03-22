@@ -345,9 +345,9 @@ namespace DarkScript3
             sb.AppendLine($"// @compress    {Scripter.EVD.Compression}");
             sb.AppendLine($"// @game    {Scripter.EVD.Format}");
             if (Docs.IsASCIIStringData)
-                sb.AppendLine($"// @string    {Encoding.ASCII.GetString(Scripter.EVD.StringData)}");
+                sb.AppendLine($"// @string    {Encoding.ASCII.GetString(Scripter.EVD.StringData).Replace("\0",GUI.NullStringReplaceCharacter)}");
             else
-                sb.AppendLine($"// @string    {Encoding.Unicode.GetString(Scripter.EVD.StringData)}");
+                sb.AppendLine($"// @string    {Encoding.Unicode.GetString(Scripter.EVD.StringData).Replace("\0",GUI.NullStringReplaceCharacter)}");
             sb.AppendLine($"// @linked    [{string.Join(",", Scripter.EVD.LinkedFileOffsets)}]");
             foreach (KeyValuePair<string, string> extra in Settings.SettingsDict)
             {
