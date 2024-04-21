@@ -474,6 +474,11 @@ namespace DarkScript3
 
         private void Editor_ToolTipNeeded(object sender, ToolTipNeededEventArgs e)
         {
+            if (!Properties.Settings.Default.DisplayTooltips)
+            {
+                return;
+            }
+
             if (PreventHoverMousePosition != null)
             {
                 if (MousePosition.Equals(PreventHoverMousePosition))

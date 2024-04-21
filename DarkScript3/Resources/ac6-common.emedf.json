@@ -1,0 +1,292 @@
+{
+  "unknown": 576,
+  "main_classes": [
+    {
+      "name": "Condition - System",
+      "index": 0,
+      "instrs": [
+        
+      ]
+    },
+    {
+      "name": "Condition - Timer",
+      "index": 1,
+      "instrs": [
+        
+      ]
+    },
+    {
+      "name": "Condition - Event",
+      "index": 3,
+      "instrs": [
+        
+      ]
+    },
+    {
+      "name": "Condition - Character",
+      "index": 4,
+      "instrs": [
+        
+      ]
+    },
+    {
+      "name": "Condition - Asset",
+      "index": 5,
+      "instrs": [
+      
+      ]
+    },
+    {
+      "name": "Condition - Hit",
+      "index": 11,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "Condition - Map",
+      "index": 12,
+      "instrs": []
+    },
+    {
+      "name": "Condition - Advanced",
+      "index": 13,
+      "instrs": []
+    },
+    {
+      "name": "Control Flow - System",
+      "index": 1000,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "Control Flow - Timer",
+      "index": 1001,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "Control Flow - Event",
+      "index": 1003,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "Control Flow - Character",
+      "index": 1004,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "Control Flow - Asset",
+      "index": 1005,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "Control Flow - Label",
+      "index": 1014,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "System",
+      "index": 2000,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "Timer",
+      "index": 2001,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "Cutscene",
+      "index": 2002,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "Event",
+      "index": 2003,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "Character",
+      "index": 2004,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "Asset",
+      "index": 2005,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "SFX",
+      "index": 2006,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "Message",
+      "index": 2007,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "Camera",
+      "index": 2008,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "Script",
+      "index": 2009,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "Sound",
+      "index": 2010,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "Hit",
+      "index": 2011,
+      "instrs": [
+      ]
+    },
+    {
+      "name": "Map",
+      "index": 2012,
+      "instrs": [
+      ]
+    }
+  ],
+  "enums": [
+    {
+      "name": "ON/OFF",
+      "values": {
+        "0": "OFF",
+        "1": "ON"
+      }
+    },
+    {
+      "name": "ON/OFF/CHANGE",
+      "values": {
+        "0": "OFF",
+        "1": "ON",
+        "2": "CHANGE"
+      }
+    },
+    {
+      "name": "Target Event Flag Type",
+      "values": {
+        "0": "Event Flag",
+        "1": "Event ID",
+        "2": "Event ID + Slot Number"
+      }
+    },
+    {
+      "name": "Comparison Type",
+      "values": {
+        "0": "Equal",
+        "1": "NotEqual",
+        "2": "Greater",
+        "3": "Less",
+        "4": "GreaterOrEqual",
+        "5": "LessOrEqual"
+      }
+    },
+    {
+      "name": "Logical Operation Type",
+      "values": {
+        "0": "All ON",
+        "1": "All OFF",
+        "2": "Not All OFF",
+        "3": "Not All ON"
+      }
+    },
+    {
+      "name": "Calculation Type",
+      "values": {
+        "0": "Add",
+        "1": "Sub",
+        "2": "Mult",
+        "3": "Div",
+        "4": "Mod",
+        "5": "Assign"
+      }
+    },
+    {
+      "name": "Condition Group",
+      "values": {
+        "-15": "OR_15",
+        "-14": "OR_14",
+        "-13": "OR_13",
+        "-12": "OR_12",
+        "-11": "OR_11",
+        "-10": "OR_10",
+        "-9": "OR_09",
+        "-8": "OR_08",
+        "-7": "OR_07",
+        "-6": "OR_06",
+        "-5": "OR_05",
+        "-4": "OR_04",
+        "-3": "OR_03",
+        "-2": "OR_02",
+        "-1": "OR_01",
+        "0": "MAIN",
+        "1": "AND_01",
+        "2": "AND_02",
+        "3": "AND_03",
+        "4": "AND_04",
+        "5": "AND_05",
+        "6": "AND_06",
+        "7": "AND_07",
+        "8": "AND_08",
+        "9": "AND_09",
+        "10": "AND_10",
+        "11": "AND_11",
+        "12": "AND_12",
+        "13": "AND_13",
+        "14": "AND_14",
+        "15": "AND_15"
+      }
+    },
+    {
+      "name": "BOOL",
+      "values": {
+        "0": "FALSE",
+        "1": "TRUE"
+      }
+    }
+  ],
+  "darkscript": {
+    "aliases": {
+      
+    },
+    "enum_aliases": null,
+    "replacements": {
+        
+    },
+    "global_enums": [
+      "ON/OFF",
+      "ON/OFF/CHANGE",
+      "Condition Group",
+      "Condition State",
+      "Disabled/Enabled",
+      "Comparison Type"
+    ],
+    "meta_aliases": {
+      
+    },
+    "meta_types": [
+      
+    ]
+  }
+}

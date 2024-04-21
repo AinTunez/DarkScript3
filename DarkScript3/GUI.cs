@@ -78,6 +78,7 @@ namespace DarkScript3
             SharedControls.SetGlobalFont(TextStyles.Font);
             // Ad-hoc way of doing settings, as tool menus (TODO: find something more permanent?)
             // Note this may call CheckChanged, which could have side effects
+            showTooltipsToolStripMenuItem.Checked = Settings.Default.DisplayTooltips;
             showArgumentsInTooltipToolStripMenuItem.Checked = Settings.Default.ArgTooltip;
             showArgumentsInPanelToolStripMenuItem.Checked = Settings.Default.ArgDocbox;
             connectToolStripMenuItem.Checked = Settings.Default.UseSoapstone;
@@ -1172,6 +1173,11 @@ namespace DarkScript3
         private void checkForDarkScript3UpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenURL("https://github.com/AinTunez/DarkScript3/releases");
+        }
+        private void showTooltipsToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.DisplayTooltips = showTooltipsToolStripMenuItem.Checked;
+            Settings.Default.Save();
         }
 
         private void showArgumentTooltipsToolStripMenuItem_CheckedChanged(object sender, EventArgs e)

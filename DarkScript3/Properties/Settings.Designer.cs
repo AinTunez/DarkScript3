@@ -46,7 +46,20 @@ namespace DarkScript3.Properties {
                 this["WindowPosition"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DisplayTooltips
+        {
+            get {
+                return ((bool)(this["DisplayTooltips"]));
+            }
+            set {
+                this["DisplayTooltips"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]

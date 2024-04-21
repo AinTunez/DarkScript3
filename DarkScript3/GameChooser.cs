@@ -79,6 +79,12 @@ namespace DarkScript3
             Close();
         }
 
+        private void ac6Btn_Click(object sender, EventArgs e)
+        {
+            SetResult("ac6-common.emedf.json");
+            Close();
+        }
+
         private void GameChooser_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
