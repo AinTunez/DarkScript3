@@ -78,6 +78,7 @@ namespace DarkScript3
             clearMetadataCacheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            useSmithboxForMetadataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             viewEMEDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             viewEMEVDTutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -414,7 +415,7 @@ namespace DarkScript3
             // 
             // metadataToolStripMenuItem
             // 
-            metadataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { showConnectionInfoToolStripMenuItem, clearMetadataCacheToolStripMenuItem, toolStripSeparator6, connectToolStripMenuItem });
+            metadataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { showConnectionInfoToolStripMenuItem, clearMetadataCacheToolStripMenuItem, toolStripSeparator6, connectToolStripMenuItem, useSmithboxForMetadataToolStripMenuItem });
             metadataToolStripMenuItem.Name = "metadataToolStripMenuItem";
             metadataToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             metadataToolStripMenuItem.Text = "Metadata";
@@ -422,29 +423,37 @@ namespace DarkScript3
             // showConnectionInfoToolStripMenuItem
             // 
             showConnectionInfoToolStripMenuItem.Name = "showConnectionInfoToolStripMenuItem";
-            showConnectionInfoToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
-            showConnectionInfoToolStripMenuItem.Text = "Show DSMapStudio Connection Info...";
+            showConnectionInfoToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            showConnectionInfoToolStripMenuItem.Text = "Show Connection Info...";
             showConnectionInfoToolStripMenuItem.Click += showConnectionInfoToolStripMenuItem_Click;
             // 
             // clearMetadataCacheToolStripMenuItem
             // 
             clearMetadataCacheToolStripMenuItem.Name = "clearMetadataCacheToolStripMenuItem";
-            clearMetadataCacheToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
+            clearMetadataCacheToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
             clearMetadataCacheToolStripMenuItem.Text = "Clear Metadata Cache";
             clearMetadataCacheToolStripMenuItem.Click += clearMetadataCacheToolStripMenuItem_Click;
             // 
             // toolStripSeparator6
             // 
             toolStripSeparator6.Name = "toolStripSeparator6";
-            toolStripSeparator6.Size = new System.Drawing.Size(273, 6);
+            toolStripSeparator6.Size = new System.Drawing.Size(236, 6);
             // 
             // connectToolStripMenuItem
             // 
             connectToolStripMenuItem.CheckOnClick = true;
             connectToolStripMenuItem.Name = "connectToolStripMenuItem";
-            connectToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
+            connectToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
             connectToolStripMenuItem.Text = "Use DSMapStudio for Metadata";
             connectToolStripMenuItem.CheckedChanged += connectToolStripMenuItem_CheckedChanged;
+            // 
+            // useSmithboxForMetadataToolStripMenuItem
+            // 
+            useSmithboxForMetadataToolStripMenuItem.CheckOnClick = true;
+            useSmithboxForMetadataToolStripMenuItem.Name = "useSmithboxForMetadataToolStripMenuItem";
+            useSmithboxForMetadataToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            useSmithboxForMetadataToolStripMenuItem.Text = "Use Smithbox for Metadata";
+            useSmithboxForMetadataToolStripMenuItem.CheckedChanged += useSmithboxForMetadataToolStripMenuItem_CheckedChanged;
             // 
             // helpToolStripMenuItem
             // 
@@ -731,6 +740,7 @@ namespace DarkScript3
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem showTooltipsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem useSmithboxForMetadataToolStripMenuItem;
     }
 }
 

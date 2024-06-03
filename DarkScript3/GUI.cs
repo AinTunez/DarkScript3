@@ -81,7 +81,10 @@ namespace DarkScript3
             showTooltipsToolStripMenuItem.Checked = Settings.Default.DisplayTooltips;
             showArgumentsInTooltipToolStripMenuItem.Checked = Settings.Default.ArgTooltip;
             showArgumentsInPanelToolStripMenuItem.Checked = Settings.Default.ArgDocbox;
-            connectToolStripMenuItem.Checked = Settings.Default.UseSoapstone;
+
+            connectToolStripMenuItem.Checked = Settings.Default.UseSoapstoneDSMS;
+            useSmithboxForMetadataToolStripMenuItem.Checked = Settings.Default.UseSoapstoneSmithbox;
+
             // Update versions
             string previousVersion = Settings.Default.Version;
             if (!string.IsNullOrEmpty(previousVersion))
@@ -909,7 +912,15 @@ namespace DarkScript3
                 if (gameStr != null)
                 {
                     string mapName = tag.BaseName.Split('.')[0];
-                    ToolStripMenuItem mapItem = new ToolStripMenuItem($"Load {mapName} in DSMapStudio");
+
+                    var name = "DSMapStudio";
+
+                    if (DarkScript3.Properties.Settings.Default.UseSoapstoneSmithbox)
+                    {
+                        name = "Smithbox";
+                    }
+
+                    ToolStripMenuItem mapItem = new ToolStripMenuItem($"Load {mapName} in {name}");
                     mapItem.Click += async (sender, e) => await OpenFileBrowserMap(gameStr, mapName);
                     FileBrowserContextMenu.Items.Add(mapItem);
                 }
@@ -1192,14 +1203,58 @@ namespace DarkScript3
             Settings.Default.Save();
         }
 
+        // DSMapStudio
         private void connectToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
-            Settings.Default.UseSoapstone = connectToolStripMenuItem.Checked;
+            if(connectToolStripMenuItem.Checked)
+            {
+                useSmithboxForMetadataToolStripMenuItem.Checked = false;
+                Settings.Default.UseSoapstoneDSMS = true;
+                Settings.Default.UseSoapstoneSmithbox = false;
+            }
+            else
+            {
+                useSmithboxForMetadataToolStripMenuItem.Checked = true;
+                Settings.Default.UseSoapstoneDSMS = false;
+                Settings.Default.UseSoapstoneSmithbox = true;
+            }
+
             Settings.Default.Save();
             SoapstoneMetadata metadata = SharedControls?.Metadata;
             if (metadata != null && metadata.IsOpenable())
             {
-                if (Settings.Default.UseSoapstone)
+                if (Settings.Default.UseSoapstoneDSMS)
+                {
+                    metadata.Open();
+                }
+                else
+                {
+                    metadata.Close();
+                }
+            }
+        }
+
+        // Smithbox
+        private void useSmithboxForMetadataToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            if (useSmithboxForMetadataToolStripMenuItem.Checked)
+            {
+                connectToolStripMenuItem.Checked = false;
+                Settings.Default.UseSoapstoneDSMS = false;
+                Settings.Default.UseSoapstoneSmithbox = true;
+            }
+            else
+            {
+                connectToolStripMenuItem.Checked = true;
+                Settings.Default.UseSoapstoneDSMS = true;
+                Settings.Default.UseSoapstoneSmithbox = false;
+            }
+
+            Settings.Default.Save();
+            SoapstoneMetadata metadata = SharedControls?.Metadata;
+            if (metadata != null && metadata.IsOpenable())
+            {
+                if (Settings.Default.UseSoapstoneSmithbox)
                 {
                     metadata.Open();
                 }
@@ -1213,18 +1268,25 @@ namespace DarkScript3
         private void showConnectionInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             StringBuilder sb = new StringBuilder();
-            if (Settings.Default.UseSoapstone)
+
+            var name = "DSMapStudio";
+            if (Settings.Default.UseSoapstoneSmithbox)
             {
-                sb.AppendLine("DSMapStudio connectivity is enabled.");
+                name = "Smithbox";
+            }
+
+            if (Settings.Default.UseSoapstoneDSMS || Settings.Default.UseSoapstoneSmithbox)
+            {
+                sb.AppendLine($"{name} connectivity is enabled.");
                 sb.AppendLine();
-                sb.AppendLine("When DSMapStudio is open and Settings > Soapstone Server is enabled, "
-                    + "data from DSMapStudio will be used to autocomplete values from params, FMGs, and loaded maps. "
+                sb.AppendLine($"When {name} is open and Settings > Soapstone Server is enabled, "
+                    + $"data from {name} will be used to autocomplete values from params, FMGs, and loaded maps. "
                     + "You can also hover on numbers in DarkScript3 to get tooltip info, "
-                    + "and right-click on the tooltip to open it in DSMapStudio.");
+                    + $"and right-click on the tooltip to open it in {name}.");
             }
             else
             {
-                sb.AppendLine("DSMapStudio connectivity is disabled.");
+                sb.AppendLine("Cross-reference connectivity is disabled.");
                 sb.AppendLine();
                 if (connectToolStripMenuItem.Enabled)
                 {
@@ -1235,6 +1297,7 @@ namespace DarkScript3
                     sb.AppendLine($"Restart DarkScript3 and select \"{connectToolStripMenuItem.Text}\" to enable it.");
                 }
             }
+
             sb.AppendLine();
             SoapstoneMetadata metadata = SharedControls.Metadata;
             string portStr = metadata.LastPort is int port ? $"{port}" : "None";
@@ -1243,14 +1306,21 @@ namespace DarkScript3
             sb.AppendLine($"Client state: {metadata.State}");
             sb.AppendLine();
             sb.AppendLine(metadata.LastLoopResult ?? "No requests sent");
-            ScrollDialog.Show(this, sb.ToString(), "DSMapStudio Soapstone Server Info");
+            ScrollDialog.Show(this, sb.ToString(), "Soapstone Server Info");
         }
 
         private void clearMetadataCacheToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SharedControls.Metadata.ResetData();
+
+            var name = "DSMapStudio";
+            if (Settings.Default.UseSoapstoneSmithbox)
+            {
+                name = "Smithbox";
+            }
+
             ScrollDialog.Show(this,
-                "Metadata cache cleared. Names and autocomplete items will be refetched from DSMapStudio when connected."
+                $"Metadata cache cleared. Names and autocomplete items will be refetched from {name} when connected."
                     + "\n\n(This may be supported automatically in the future, if that would be helpful.)",
                 "Cleared cached metadata");
         }

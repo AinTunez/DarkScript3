@@ -535,7 +535,14 @@ namespace DarkScript3
                             string text = data.Desc;
                             if ((data is SoapstoneMetadata.EntityData ent && ent.Type != "Self") || data is SoapstoneMetadata.EntryData)
                             {
-                                text += "\nRight-click tooltip to open in DSMapStudio";
+                                var name = "DSMapStudio";
+
+                                if (DarkScript3.Properties.Settings.Default.UseSoapstoneSmithbox)
+                                {
+                                    name = "Smithbox";
+                                }
+
+                                text += $"\nRight-click tooltip to open in {name}";
                             }
                             ShowTip(text, p, data: data);
                         }

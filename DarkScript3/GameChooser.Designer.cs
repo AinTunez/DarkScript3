@@ -38,7 +38,6 @@ namespace DarkScript3
             fancyLabel = new System.Windows.Forms.Label();
             customBtn = new System.Windows.Forms.Button();
             eldenBtn = new System.Windows.Forms.Button();
-            ac6Btn = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // ds1Btn
@@ -116,7 +115,7 @@ namespace DarkScript3
             // fancy
             // 
             fancy.AutoSize = true;
-            fancy.Location = new System.Drawing.Point(13, 312);
+            fancy.Location = new System.Drawing.Point(14, 279);
             fancy.Margin = new System.Windows.Forms.Padding(2);
             fancy.Name = "fancy";
             fancy.Size = new System.Drawing.Size(103, 19);
@@ -128,7 +127,7 @@ namespace DarkScript3
             // fancyLabel
             // 
             fancyLabel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            fancyLabel.Location = new System.Drawing.Point(9, 334);
+            fancyLabel.Location = new System.Drawing.Point(10, 301);
             fancyLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             fancyLabel.Name = "fancyLabel";
             fancyLabel.Size = new System.Drawing.Size(168, 39);
@@ -138,7 +137,7 @@ namespace DarkScript3
             // customBtn
             // 
             customBtn.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            customBtn.Location = new System.Drawing.Point(14, 278);
+            customBtn.Location = new System.Drawing.Point(14, 245);
             customBtn.Margin = new System.Windows.Forms.Padding(2);
             customBtn.Name = "customBtn";
             customBtn.Size = new System.Drawing.Size(164, 30);
@@ -159,24 +158,11 @@ namespace DarkScript3
             eldenBtn.UseVisualStyleBackColor = true;
             eldenBtn.Click += eldenBtn_Click;
             // 
-            // ac6Btn
-            // 
-            ac6Btn.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            ac6Btn.Location = new System.Drawing.Point(14, 246);
-            ac6Btn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            ac6Btn.Name = "ac6Btn";
-            ac6Btn.Size = new System.Drawing.Size(164, 27);
-            ac6Btn.TabIndex = 9;
-            ac6Btn.Text = "Armored Core VI";
-            ac6Btn.UseVisualStyleBackColor = true;
-            ac6Btn.Click += ac6Btn_Click;
-            // 
             // GameChooser
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(192, 419);
-            Controls.Add(ac6Btn);
+            ClientSize = new System.Drawing.Size(192, 355);
             Controls.Add(eldenBtn);
             Controls.Add(fancyLabel);
             Controls.Add(fancy);
@@ -209,6 +195,5 @@ namespace DarkScript3
         private System.Windows.Forms.Label fancyLabel;
         private System.Windows.Forms.Button customBtn;
         private System.Windows.Forms.Button eldenBtn;
-        private System.Windows.Forms.Button ac6Btn;
     }
 }
