@@ -1,0 +1,67 @@
+0 UNUSED
+3000 Knight
+3001 Mercenary
+3002 Warrior
+3003 Herald
+3004 Thief
+3005 Assassin
+3006 Sorcerer
+3007 Pyromancer
+3008 Cleric
+3009 Deprived
+3500 UNUSED
+21000 Slave Knight Gael
+21100 Sir Vilhelm
+21200 Livid Pyromancer Dunnel
+21300 Champion's Gravetender
+21400 Amnesiac Lapp
+21500 Shira
+21640 Halflight, Spear of the Church
+21700 Painting Guardian
+21800 Halflight, Spear of the Church
+21940 Desert Pyromancer Zoey
+22000 Amnesiac Lapp
+22140 Silver Knight Ledo
+22240 Alva, Seeker of the Spurned
+22340 Moaning Knight
+24700 Madwoman
+24800 Greirat of the Undead Settlement
+25000 Yuria of Londor
+25100 Hawkwood the Deserter
+25200 Sirris of the Sunless Realms
+25300 Ringfinger Leonhard
+25400 Orbeck of Vinheim
+25500 Cornyx of the Great Swamp
+25600 Karla
+25700 Irina of Carim
+25800 Eygon of Carim
+25900 UNUSED
+26000 Anri of Astora (female)
+26050 Anri of Astora (male)
+26100 Unbreakable Patches
+26200 Siegward of Catarina
+26209 UNUSED
+26300 Horace the Hushed
+27300 Sword Master
+27420 Yellowfinger Heysel
+27500 Black Hand Kamui
+27600 Great Swamp Cuculus
+27700 Holy Knight Hodrick
+27800 Londor Pale Shade
+27900 Lion Knight Albert
+28000 Daughter of Crystal Kriemhild
+28100 Greatsword Exile Knight
+28200 Great Club Exile Knight
+28300 Brigand
+28400 Fallen Knight
+28600 Court Sorcerer
+28700 Havel Knight
+28800 Drakeblood Knight
+28900 Rapier Champion
+29000 Drang Hammers Knight
+29100 Drang Twinspears Knight
+29200 Knight Slayer Tsorig
+29340 Creighton the Wanderer
+29440 Alva, Seeker of the Spurned
+29540 Longfinger Kirk
+1000000 UNUSED

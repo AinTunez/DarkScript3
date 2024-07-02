@@ -340,22 +340,8 @@ namespace DarkScript3
         public void SaveJSFile()
         {
             var sb = new StringBuilder();
-            sb.AppendLine("// ==EMEVD==");
-            sb.AppendLine($"// @docs    {Docs.ResourceString}");
-            sb.AppendLine($"// @compress    {Scripter.EVD.Compression}");
-            sb.AppendLine($"// @game    {Scripter.EVD.Format}");
-            if (Docs.IsASCIIStringData)
-                sb.AppendLine($"// @string    {Encoding.ASCII.GetString(Scripter.EVD.StringData)}");
-            else
-                sb.AppendLine($"// @string    {Encoding.Unicode.GetString(Scripter.EVD.StringData)}");
-            sb.AppendLine($"// @linked    [{string.Join(",", Scripter.EVD.LinkedFileOffsets)}]");
-            foreach (KeyValuePair<string, string> extra in Settings.SettingsDict)
-            {
-                sb.AppendLine($"// @{extra.Key}    {extra.Value}");
-            }
-            sb.AppendLine($"// @version    {ProgramVersion.VERSION}");
-            sb.AppendLine("// ==/EMEVD==");
-            sb.AppendLine("");
+            HeaderData header = HeaderData.Create(Scripter, Docs, Settings.SettingsDict);
+            header.Write(sb, Docs);
             sb.AppendLine(editor.Text);
             File.WriteAllText($"{Scripter.EMEVDPath}.js", sb.ToString());
             FileVersion = ProgramVersion.VERSION;
@@ -500,7 +486,7 @@ namespace DarkScript3
                     // TODO: Can this be simplified to be more consistent?
                     return;
                 }
-                (string title, string text) = ToolTips[e.HoveredWord];
+                (string title, string text) = ToolTips[hoveredWord];
                 string s = title + "\n" + text;
                 ShowTip(s, p);
                 HoverTipRange = tipRange;

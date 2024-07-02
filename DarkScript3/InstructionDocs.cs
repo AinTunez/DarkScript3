@@ -125,6 +125,8 @@ namespace DarkScript3
                 return doc == DOC[100130][1] || doc == DOC[100070][0];
             else if (ResourceString.StartsWith("ds1"))
                 return doc == DOC[2000][0];
+            else if (ResourceString.StartsWith("ac6"))
+                return doc.Arguments.Length > 0 && doc.Arguments.Last().Vararg;
             else
                 return doc == DOC[2000][0] || doc == DOC[2000][6];
         }
@@ -142,6 +144,13 @@ namespace DarkScript3
             }
 
             ResourceString = Path.GetFileName(streamPath);
+
+#if DEBUG
+            if (ResourceString.StartsWith("ac6"))
+            {
+                new CondTestingTool().AddUnknownValues(DOC, "unkac6.csv");
+            }
+#endif
 
             Dictionary<string, List<string>> aliasesByEnum = new Dictionary<string, List<string>>();
             if (DOC.DarkScript?.EnumAliases != null)
@@ -484,26 +493,36 @@ namespace DarkScript3
             return $"$LAYERS({string.Join(", ", bitList)})";
         }
 
-        public static string InstrDebugStringFull(Instruction ins)
+        public static string InstrDebugStringFull(Instruction ins, string name, int insIndex = -1, Dictionary<Parameter, string> paramNames = null)
         {
             byte[] args = ins.ArgData;
             if (args.Length % 4 != 0) throw new Exception($"Irregular length {InstrDebugString(ins)}");
-            string multiformat(int i)
+            string multiformat(int arg)
             {
-                string numStr = $"{BitConverter.ToInt32(args, i)}, {BitConverter.ToInt16(args, i)} {BitConverter.ToInt16(args, i + 2)}";
-                float val = BitConverter.ToSingle(args, i);
-                if (Math.Abs(val) >= 0.00001 && Math.Abs(val) < 10000)
+                int i = arg * 4;
+                int ival = BitConverter.ToInt32(args, i);
+                if (ival == 0) return "0";
+                short sval1 = BitConverter.ToInt16(args, i);
+                short sval2 = BitConverter.ToInt16(args, i + 2);
+                string numStr = sval1 == ival && sval2 == 0 ? $"{ival}" : $"{ival} | {sval1} {sval2}";
+                float fval = BitConverter.ToSingle(args, i);
+                if (Math.Abs(fval) >= 0.00001 && Math.Abs(fval) < 10000)
                 {
-                    numStr += $", {val}";
+                    numStr += $" | {fval}f";
                 }
-                return $"{args[i]:x2} {args[i + 1]:x2} {args[i + 2]:x2} {args[i + 3]:x2}, {numStr}";
+                return $"{args[i]:X2} {args[i + 1]:X2} {args[i + 2]:X2} {args[i + 3]:X2} | {numStr}";
             }
-            return $"Nodoc {ins.Bank}[{ins.ID}]{args.Length / 4} ({string.Join(" | ", Enumerable.Range(0, args.Length / 4).Select(multiformat))})";
+            string paramStr = "";
+            if (paramNames.Count > 0)
+            {
+                paramStr = string.Join("", paramNames.Where(e => e.Key.InstructionIndex == insIndex).Select(e => $" ^({e.Key.TargetStartByte} <- {e.Value})"));
+            }
+            return $"{name} {FormatInstructionID(ins.Bank, ins.ID)} ({string.Join(", ", Enumerable.Range(0, args.Length / 4).Select(multiformat))}){paramStr}";
         }
 
         public static string InstrDebugString(Instruction ins)
         {
-            return $"{ins.Bank}[{ins.ID}] {string.Join(" ", ins.ArgData.Select(b => $"{b:x2}"))}";
+            return $"{FormatInstructionID(ins.Bank, ins.ID)} {string.Join(" ", ins.ArgData.Select(b => $"{b:X2}"))}";
         }
 
         public static string InstrDocDebugString(EMEDF.InstrDoc doc)
@@ -633,6 +652,10 @@ namespace DarkScript3
                     if (!isParam)
                     {
                         args[argIndex] = formatArgFunc(argDoc, args[argIndex]);
+                        if (argDoc.EnumDoc != null && args[argIndex] is not string)
+                        {
+                            // throw new ArgumentException($"Invalid value for {argDoc.EnumName}: {args[argIndex]}");
+                        }
                     }
                 }
                 if (expectedParams != 0)

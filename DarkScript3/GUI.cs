@@ -239,7 +239,7 @@ namespace DarkScript3
             FileMetadata metadata,
             EMEVD evd = null,
             string jsText = null,
-            Dictionary<string, string> extraFields = null,
+            HeaderData headerData = null,
             string loadPath = null)
         {
             if (AllEditors.ContainsKey(fileName))
@@ -252,7 +252,7 @@ namespace DarkScript3
             {
                 docs = AllDocs[metadata.GameDocs] = new InstructionDocs(metadata.GameDocs);
             }
-            ScriptSettings settings = new ScriptSettings(docs, extraFields);
+            ScriptSettings settings = new ScriptSettings(docs, headerData?.ExtraSettings);
             EventScripter scripter;
             try
             {
@@ -314,7 +314,7 @@ namespace DarkScript3
             }
             else
             {
-                fileVersion = extraFields != null && extraFields.TryGetValue("version", out string version) ? version : null;
+                fileVersion = headerData?.Version;
             }
             // If properly decompiled, the metadata is reused by the directory sidebar
             string fileDir = Path.GetDirectoryName(fileName);
@@ -345,78 +345,23 @@ namespace DarkScript3
             return true;
         }
 
-        private Dictionary<string, string> GetHeaderValues(string fileText)
-        {
-            Dictionary<string, string> ret = new Dictionary<string, string>();
-            // Some example lines are:
-            // ==EMEVD==
-            // @docs    sekiro-common.emedf.json
-            // @game    Sekiro
-            // ...
-            // ==/EMEVD==
-            Match headerText = Regex.Match(fileText, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==");
-            if (headerText.Success)
-            {
-                string[] result = Regex.Split(headerText.Value, @"(\r\n|\r|\n)\s*");
-                foreach (string headerLine in result.ToArray())
-                {
-                    Match lineMatch = Regex.Match(headerLine, @"^//\s+@(\w+)\s+(.*)");
-                    if (lineMatch.Success)
-                    {
-                        ret[lineMatch.Groups[1].Value] = lineMatch.Groups[2].Value.Trim();
-                    }
-                }
-            }
-            return ret;
-        }
-
         // Marked internal for Find in Files functionality. This access can be revoked or modified if necessary.
         internal bool OpenJSFile(string fileName)
         {
             string org = fileName.Substring(0, fileName.Length - 3);
             string text = File.ReadAllText(fileName);
-            Dictionary<string, string> headers = GetHeaderValues(text);
-            List<string> emevdFileHeaders = new List<string> { "docs", "compress", "game", "string", "linked" };
 
             EMEVD evd;
             FileMetadata metadata;
-            if (emevdFileHeaders.All(name => headers.ContainsKey(name)))
+            if (HeaderData.Read(text, out HeaderData headerData))
             {
-                metadata = new FileMetadata { GameDocs = headers["docs"] };
-                string dcx = headers["compress"];
-                if (!Enum.TryParse(dcx, out DCX.Type compression))
-                {
-                    // We also have to account for historical DCX.Type names, which mostly correspond
-                    // to DCX.DefaultType.
-                    if (Enum.TryParse(dcx, out DCX.DefaultType defaultComp))
-                    {
-                        compression = (DCX.Type)defaultComp;
-                    }
-                    else if (dcx == "SekiroKRAK" || dcx == "SekiroDFLT")
-                    {
-                        // This is turned into SekiroDFLT when it's actually written out. Store it as KRAK in the header
-                        // just in case it's supported one day.
-                        compression = (DCX.Type)DCX.DefaultType.Sekiro;
-                    }
-                    else
-                    {
-                        throw new Exception($"Unknown compression type in file header {headers["compress"]}");
-                    }
-                }
-                if (!Enum.TryParse(headers["game"], out EMEVD.Game game))
-                {
-                    throw new Exception($"Unknown game type in file header {headers["game"]}");
-                }
-                string linked = headers["linked"].TrimStart('[').TrimEnd(']');
+                metadata = new FileMetadata { GameDocs = headerData.GameDocs };
                 evd = new EMEVD()
                 {
-                    Compression = compression,
-                    Format = game,
-                    StringData = Encoding.Unicode.GetBytes(headers["string"]),
-                    LinkedFileOffsets = Regex.Split(linked, @"\s*,\s*")
-                        .Where(o => !string.IsNullOrWhiteSpace(o))
-                        .Select(o => long.Parse(o))
-                        .ToList()
+                    Compression = headerData.Compression,
+                    Format = headerData.Game,
+                    StringData = headerData.StringData,
+                    LinkedFileOffsets = headerData.LinkedFileOffsets,
                 };
             }
             else if (!File.Exists(org))
@@ -434,8 +379,8 @@ namespace DarkScript3
                 }
             }
 
-            text = Regex.Replace(text, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==", "");
-            return OpenEMEVDFile(org, metadata, evd: evd, jsText: text.Trim(), extraFields: headers);
+            text = HeaderData.Trim(text);
+            return OpenEMEVDFile(org, metadata, evd: evd, jsText: text.Trim(), headerData: headerData);
         }
 
         private void OpenXMLFile(string fileName)
@@ -778,8 +723,11 @@ namespace DarkScript3
 
         private class FileBrowserTag
         {
+            // map.emevd.dcx
             public string BaseName { get; set; }
+            // currentdir/map.emevd.dcx
             public string LocalPath { get; set; }
+            // gamedir/map.emevd.dcx
             public string GamePath { get; set; }
         }
 
@@ -832,7 +780,12 @@ namespace DarkScript3
                 return;
             }
             DirectoryMetadata.TryGetValue(CurrentDirectory, out FileMetadata metadata);
-            if (File.Exists(tag.LocalPath))
+            string jsPath = $"{tag.LocalPath}.js";
+            if (File.Exists(jsPath))
+            {
+                OpenFile(jsPath, metadata);
+            }
+            else if (File.Exists(tag.LocalPath))
             {
                 OpenFile(tag.LocalPath, metadata);
             }

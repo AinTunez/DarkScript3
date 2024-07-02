@@ -22,6 +22,7 @@ namespace DarkScript3
             ["ds3"] = @"C:\Program Files (x86)\Steam\steamapps\common\DARK SOULS III\Game\event",
             ["sekiro"] = @"C:\Program Files (x86)\Steam\steamapps\common\Sekiro\event",
             ["er"] = @"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING\Game\event",
+            ["ac6"] = @"C:\Program Files (x86)\Steam\steamapps\common\ARMORED CORE VI FIRES OF RUBICON\Game\event",
         };
         private static readonly Dictionary<string, Game> gameTypes = new Dictionary<string, Game>
         {
@@ -31,7 +32,10 @@ namespace DarkScript3
             ["ds2scholar"] = Game.Bloodborne,
             ["ds3"] = Game.DarkSouls3,
             ["er"] = Game.Sekiro,
+            ["ac6"] = Game.Sekiro,
         };
+
+        private static readonly bool AC6Test = false;
 
         public static void Decompile(string[] args)
         {
@@ -39,6 +43,8 @@ namespace DarkScript3
             // TODO: Add more options in the future, also find a way to add headers here
             List<string> expectedArgs = new List<string> { "game", "indir", "outdir" };
             Dictionary<string, string> argDict = expectedArgs.ToDictionary(k => k, k => "");
+
+
             string showArgs(IEnumerable<string> names) => string.Join(" ", names.Select(k => $"-{k}"));
             string expectArg = null;
             foreach (string arg in args)
@@ -74,6 +80,12 @@ namespace DarkScript3
             {
                 throw new ArgumentException($"No value given for -{expectArg}");
             }
+
+            if (AC6Test)
+            {
+                argDict["indir"] = defaultGameDirs[argDict["game"]];
+            }
+
             List<string> emptyArgs = argDict.Where(e => string.IsNullOrWhiteSpace(e.Value)).Select(e => e.Key).ToList();
             if (emptyArgs.Count > 0)
             {
@@ -91,6 +103,11 @@ namespace DarkScript3
                 Directory.CreateDirectory(outDir);
             }
             InstructionDocs docs = new InstructionDocs($"{game}-common.emedf.json");
+            if (AC6Test)
+            {
+                docs.DOC.DarkScript = null;
+                docs.DOC.WriteFile("unkac6-common.emedf.json");
+            }
             List<string> emevdPaths = Directory.GetFiles(inDir, "*.emevd").Concat(Directory.GetFiles(inDir, "*.emevd.dcx")).ToList();
             foreach (string emevdPath in emevdPaths)
             {
@@ -99,9 +116,12 @@ namespace DarkScript3
                 EventCFG.CFGOptions options = EventCFG.CFGOptions.GetDefault();
                 options.FailWarnings = true;
                 EventScripter scripter = new EventScripter(emevdPath, docs);
+                // TODO: Work for AC6
                 FancyEventScripter fes = new FancyEventScripter(scripter, docs, options);
                 string outPath = Path.Combine(outDir, Path.GetFileName(emevdPath) + ".js");
-                if (File.Exists(outPath))
+
+                // TODO could add arg for this but probably unnecessary
+                if (File.Exists(outPath) && false)
                 {
                     Console.WriteLine($"{emevdPath} -> {outPath} already exists, skipping it");
                     continue;
@@ -126,7 +146,9 @@ namespace DarkScript3
             if (defaultGameDirs.TryGetValue(inDir, out string gameDir)) inDir = gameDir;
             string outDir = args[2];
             // Fancy recompilation
-            List<string> emevdPaths = Directory.GetFiles(inDir, "*.emevd").Concat(Directory.GetFiles(inDir, "*.emevd.dcx")).ToList();
+            string pat = "*";
+            // pat = "m21_00_00_00";
+            List<string> emevdPaths = Directory.GetFiles(inDir, $"{pat}.emevd").Concat(Directory.GetFiles(inDir, $"{pat}.emevd.dcx")).ToList();
             InstructionDocs docs = new InstructionDocs($"{game}-common.emedf.json");
             if (!Directory.Exists(outDir))
             {
@@ -162,12 +184,26 @@ namespace DarkScript3
                     return null;
                 }
             }
+            bool testHeader = true;
             foreach (string emevdPath in emevdPaths)
             {
+                if (args.Contains("undcx"))
+                {
+                    byte[] f = DCX.Decompress(emevdPath);
+                    File.WriteAllBytes($@"{inDir}\dcx\{Path.GetFileNameWithoutExtension(emevdPath)}", f);
+                }
                 string name = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(emevdPath));
                 if (game == "ds3" && name.StartsWith("m2")) continue;
-                Console.WriteLine("--------------------------" + name);
+                Console.WriteLine($"-------------------------- {game} {name}");
                 EventScripter scripter = new EventScripter(emevdPath, docs);
+                if (testHeader)
+                {
+                    bool ds2 = game.StartsWith("ds2");
+                    byte[] data = scripter.EVD.StringData;
+                    string val = HeaderData.Escape(data, ds2);
+                    byte[] original = HeaderData.Unescape(val, ds2);
+                    if (!data.SequenceEqual(original)) throw new Exception($"Mismatched header:\n{val}");
+                }
                 string reg1 = recordText("reg1", name, () => scripter.Unpack());
                 if (reg1 == null) continue;
                 if (args.Contains("reg"))
