@@ -46,7 +46,20 @@ namespace DarkScript3.Properties {
                 this["WindowPosition"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DisplayTooltips
+        {
+            get {
+                return ((bool)(this["DisplayTooltips"]));
+            }
+            set {
+                this["DisplayTooltips"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -73,16 +86,29 @@ namespace DarkScript3.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool UseSoapstone {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseSoapstoneDSMS {
             get {
-                return ((bool)(this["UseSoapstone"]));
+                return ((bool)(this["UseSoapstoneDSMS"]));
             }
             set {
-                this["UseSoapstone"] = value;
+                this["UseSoapstoneDSMS"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseSoapstoneSmithbox
+        {
+            get {
+                return ((bool)(this["UseSoapstoneSmithbox"]));
+            }
+            set {
+                this["UseSoapstoneSmithbox"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
