@@ -46,8 +46,8 @@ namespace DarkScript3
                 // The rest of these have quite unstructured arguments, so don't include them in the release binary.
                 else if (args.Contains("test"))
                 {
-                    // new CondTestingTool().Run(args);
-                    new CondTestingTool().DumpTypes();
+                    new CondTestingTool().Run(args);
+                    // new CondTestingTool().DumpTypes();
                 }
                 else
                 {

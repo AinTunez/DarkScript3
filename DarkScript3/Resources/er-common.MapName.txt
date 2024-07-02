@@ -18,6 +18,14 @@ m15_00_00_00 Miquella's Haligtree
 m16_00_00_00 Volcano Manor
 m18_00_00_00 Stranded Graveyard
 m19_00_00_00 Stone Platform
+m20_00_00_00 Belurat, Tower Settlement
+m20_01_00_00 Enir-Ilim
+m21_00_00_00 Shadow Keep
+m21_01_00_00 Specimen Storehouse
+m21_02_00_00 Shadow Keep - West Rampart
+m22_00_00_00 Stone Coffin Fissure
+m25_00_00_00 Finger Birthing Grounds
+m28_00_00_00 Midra's Manse
 m30_00_00_00 Tombsward Catacombs
 m30_01_00_00 Impaler's Catacombs
 m30_02_00_00 Stormfoot Catacombs
@@ -74,6 +82,17 @@ m34_14_00_00 Divine Tower of East Altus
 m34_15_00_00 Isolated Divine Tower
 m35_00_00_00 Subterranean Shunning-Grounds
 m39_20_00_00 Ruin-Strewn Precipice
+m40_00_00_00 Fog Rift Catacombs
+m40_01_00_00 Scorpion River Catacombs
+m40_02_00_00 Darklight Catacombs
+m41_00_00_00 Belurat Gaol
+m41_01_00_00 Bonny Gaol
+m41_02_00_00 Lamenter's Gaol
+m42_00_00_00 Ruined Forge Lava Intake
+m42_02_00_00 Ruined Forge of Starfall Past
+m42_03_00_00 Taylew's Ruined Forge
+m43_00_00_00 Rivermouth Cave
+m43_01_00_00 Dragon's Pit
 m45_00_00_00 Royal Colosseum
 m45_01_00_00 Caelid Colosseum
 m45_02_00_00 Limgrave Colosseum
@@ -301,13 +320,10 @@ m60_44_35_00 Limgrave - Agheel Lake South, Forlorn Hound Evergaol
 m60_45_34_00 Weeping Peninsula - Impaler's Catacombs Entrance
 m60_45_35_00 Limgrave - Southwest of Fort Haight
 m60_11_09_02 East Limgrave
-m60_11_09_12 East Limgrave (Meteored)
 m60_22_18_01 Limgrave Waypoint Fork; Mistwood
-m60_22_18_11 Limgrave Waypoint Fork; Mistwood (Meteored)
 m60_44_36_00 Limgrave - Waypoint Ruins
 m60_44_37_00 Limgrave - Mistwood Outskirts
 m60_45_36_00 Limgrave - Fort Haight West
-m60_45_36_10 Limgrave - Fort Haight West (Meteored)
 m60_45_37_00 Limgrave - Siofra River Well, Mistwood Ruins, Minor Erdtree, Nokron Entrance
 m60_22_19_01 Summonwater Village
 m60_44_38_00 Limgrave - Artist's Shack
@@ -323,6 +339,9 @@ m60_46_38_00 Limgrave - Third Church of Marika, Gaol Cave Exit
 m60_46_39_00 Limgrave - Rear Gael Tunnel Entrance; Caelid - Gael Tunnel Entrance
 m60_47_38_00 Caelid - Fort Gael, Caelid Waypoint Ruins, Gaol Cave Entrance
 m60_47_39_00 Caelid - Fort Gael North
+m60_11_09_12 East Limgrave (Meteored)
+m60_22_18_11 Limgrave Waypoint Fork; Mistwood (Meteored)
+m60_45_36_10 Limgrave - Fort Haight West (Meteored)
 m60_11_10_02 Northwest Caelid
 m60_22_20_01 North of Summonwater Village
 m60_45_40_00 Limgrave - North of Summonwater Village
@@ -338,17 +357,17 @@ m60_45_51_00 Capital Outskirts - Auriza Hero's Grave Entrance
 m60_23_25_01 Forbidden Lands Start
 m60_47_51_00 Leyndell - Divine Tower of East Altus Entrance; Mountaintops of the Giants - Forbidden Lands Start
 m60_11_13_02 Northeast Altus Plateau
-m60_11_13_12 Northeast Altus Plateau (Ashen)
 m60_22_26_01 Northeast Capital Outskirts
-m60_22_26_11 Northeast Capital Outskirts (Ashen)
 m60_44_52_00 Capital Outskirts - South of Minor Erdtree
 m60_44_53_00 Capital Outskirts - Minor Erdtree
 m60_45_52_00 Capital Outskirts - Capital Rampart, Auriza Side Tomb Entrance
-m60_45_52_10 Capital Outskirts - Capital Rampart, Auriza Side Tomb Entrance (Ashen)
 m60_45_53_00 Capital Outskirts - Capital Rampart North Cliffside
 m60_23_27_01 Consecrated Snowfield Southwest Cliffside
 m60_46_55_00 Consecrated Snowfield - Yelough Anix Ruins West Cliffside
 m60_47_55_00 Consecrated Snowfield - Yelough Anix Ruins, Yelough Anix Tunnel Entrance
+m60_11_13_12 Northeast Altus Plateau (Ashen)
+m60_22_26_11 Northeast Capital Outskirts (Ashen)
+m60_45_52_10 Capital Outskirts - Capital Rampart, Auriza Side Tomb Entrance (Ashen)
 m60_11_14_02 West Consecrated Snowfield
 m60_23_28_01 Consecrated Snowfield West Cliffside
 m60_46_57_00 Consecrated Snowfield - Far West Cliffside
@@ -472,3 +491,175 @@ m60_53_58_00 Mountaintops of the Giants - Freezing Lake North Cliffside
 m60_27_28_01 East Freezing Lake
 m60_54_56_00 Mountaintops of the Giants - Southeast Freezing Lake
 m60_54_57_00 Mountaintops of the Giants - Northeast Freezing Lake
+m61_11_08_02 Far South Cerulean Coast
+m61_23_17_01 
+m61_46_35_00 Cerulean Coast - The Fissure West Cliffside
+m61_47_35_00 Cerulean Coast - The Fissure South, Stone Coffin Fissure Entrance
+m61_11_09_02 Southwest Cerulean Coast
+m61_22_19_01 
+m61_45_39_00 Charo's Hidden Grave - Far West Cliffside
+m61_23_18_01 
+m61_47_36_00 Cerulean Coast - The Fissure North
+m61_47_37_00 Cerulean Coast - Path to The Fissue
+m61_23_19_01 
+m61_46_38_00 Cerulean Coast - Southern Nameless Mausoleum, Far Southwest Coast
+m61_46_39_00 Cerulean Coast - Cerulean Coast West; Charo's Hidden Grave - Southwest Furnace Golem Area
+m61_47_38_00 Cerulean Coast - Southwest Coast
+m61_47_39_00 Cerulean Coast - Ravine South; Charo's Hidden Grave - South Central Lake
+m61_11_10_02 Southwest Gravesite Plain; Northwest Cerulean Coast
+m61_22_20_01 
+m61_44_41_00 Gravesite Plain - Prospect Town West Cliffside
+m61_45_40_00 Gravesite Plain - Prospect Town South Cliffside
+m61_45_41_00 Gravesite Plain - Cliffroad Terminus, Prospect Town
+m61_22_21_01 
+m61_44_43_00 Gravesite Plain - Belurat Entrance Stairs
+m61_45_42_00 Gravesite Plain - Belurat Main Gate Cross
+m61_45_43_00 Gravesite Plain - South of Dragon Lake
+m61_23_20_01 
+m61_46_40_00 Gravesite Plain - Church of Benediction; Cerulean Coast - Demi-Human Beach, Ravine North; Charo's Hidden Grave - Lamenter's Gaol Entrance
+m61_46_41_00 Gravesite Plain - Western Nameless Mausoleum, East of Prospect Town, West of Scorched Ruins
+m61_47_40_00 Gravesite Plain - South of Scorched Ruins, Gravesite Plain South Cliffside; Cerulean Coast - Ravine Northeast; Charo's Hidden Grave - North Central Lake
+m61_47_41_00 Gravesite Plain - Scorched Ruins; Ellac River Downstream
+m61_23_21_01 
+m61_46_42_00 Gravesite Plain - Three-Path Cross
+m61_46_43_00 Gravesite Plain - Ellac Greatbridge; Below Ellac Greatbridge
+m61_47_42_00 Gravesite Plain - North of Scorched Ruins, Downstream of Ellac River Cave
+m61_47_43_00 Gravesite Plain - East of Ensis Castle Front, Ellac River Cave
+m61_11_11_02 Northwest Gravesite Plain; West Scadu Altus; Rauh Ruins
+m61_22_22_01 
+m61_44_45_00 Ancient Ruins of Rauh - South Church of the Bud, Sealing Tree, Grand Stairway, West Ruins Cave Upper Levels
+m61_45_44_00 Gravesite Plain - Dragon Lake, Belurat Gaol Entrance
+m61_45_45_00 Rauh Base - West of Temple Town Ruins; Ancient Ruins of Rauh - West Ruins Cave Entrance and Grace
+m61_22_23_01 
+m61_44_46_00 Rauh Base - Scorpion River Catacombs Entrance; Ancient Ruins of Rauh - Spirit Spring Courtyard, Rot Ruins, North Church of the Bud
+m61_44_47_00 Rauh Base - West Scorpion River; Ancient Ruins of Rauh - West Ruins Northwest Cliffside
+m61_45_46_00 Rauh Base - Rot Area; Ancient Ruins of Rauh - Furnace Golem Area
+m61_45_47_00 Rauh Base - Ravine North, East Scorpion River; Ancient Ruins of Rauh - West Ruins Northeast Cliffside, East Ruins Cave Exit
+m61_23_22_01 
+m61_46_44_00 Gravesite Plain - Greatbridge North, Abandoned Ailing Village, Rivermouth Cave Entrance
+m61_46_45_00 Rauh Base - Temple Town Ruins; Gravesite Plain - Northern Nameless Mausoleum
+m61_47_44_00 Gravesite Plain - West Castle Ensis, South Fog Rift Fort
+m61_47_45_00 Gravesite Plain - North Fog Rift Fort, Northern Nameless Mausoleum East Cliffside; Scadu Altus - Scadu Altus West
+m61_23_23_01 
+m61_46_46_00 Rauh Base - North Temple Town Ruins
+m61_46_47_00 Rauh Base - Fire Spritestone Cave; Ancient Ruins of Rauh - East Ruins Grace and Cave Entrance, Scorpion Cave
+m61_47_46_00 Scadu Altus - Church of the Crusade; Gravesite Plain - Fog Rift Catacombs Entrance; Rauh Base - Above Fog Rift; Ancient Ruins of Rauh - Bloodfiend Ruins Southeast Cliffside
+m61_47_47_00 Rauh Base - Bloodfiend Cave; Ancient Ruins of Rauh - Shadow Keep Exit, Viaduct Minor Tower, Bloodfiend Ruins
+m61_11_11_12 Northwest Gravesite Plain; West Scadu Altus; Rauh Ruins (Unsealed)
+m61_22_22_11 
+m61_44_45_10 Ancient Ruins of Rauh - Church of the Bud, Sealing Tree, Grand Stairway (Unsealed)
+m61_11_12_02 North Rauh Ruins
+m61_22_24_01 
+m61_44_48_00 Rauh Base - Northwest Great Red Bear Area
+m61_45_48_00 Rauh Base - Northeast Great Red Bear Area
+m61_23_24_01 
+m61_46_48_00 Ancient Ruins of Rauh - East Ruins North Pit and Tunnels
+m61_47_48_00 Rauh Base - West Rampart Bridge Northwest Cliffside; Ancient Ruins of Rauh - Viaduct Tower North Cliffside
+m61_12_09_02 East Cerulean Coast; South Finger Ruins of Rhia; Dragon Communion Grand Altar
+m61_24_18_01 
+m61_48_37_00 Cerulean Coast - Cerulean Coast Cross, Far Southwest Fingercreeper Beach Coast
+m61_49_37_00 Cerulean Coast - Fingercreeper Beach Central Coast
+m61_24_19_01 
+m61_48_38_00 Cerulean Coast - Dragon Area, Beach-Facing Coffin; Charo's Hidden Grave - Southeast Mariner Area
+m61_48_39_00 Cerulean Coast - Cerulean Coast; Charo's Hidden Grave - Charo's Hidden Grave
+m61_49_38_00 Cerulean Coast - Fingercreeper Beach Center; Finger Ruins of Rhia - Finger-Weaver's Hovel; Charo's Hidden Grave - Far Southeast Entrance; Foot of the Jagged Peak - South of Grand Altar
+m61_49_39_00 Finger Ruins of Rhia - Climb to Finger-Weaver's Hovel; Charo's Hidden Grave - Far East Cliffside; Foot of the Jagged Peak - Grand Altar of Dragon Communion
+m61_25_18_01 
+m61_50_37_00 Cerulean Coast - Far Southeast Fingercreeper Beach Coast
+m61_25_19_01 
+m61_50_38_00 Finger Ruins of Rhia - Far Southwest from Cerulean Coast
+m61_50_39_00 Finger Ruins of Rhia - Southwest
+m61_51_38_00 Finger Ruins of Rhia - Far Southeast
+m61_51_39_00 Finger Ruins of Rhia - Southeast
+m61_12_10_02 Southeast Gravesite Plain; Fort Reprimand; Foot of the Jagged Peak; North Finger Ruins of Rhia; West Abyssal Woods
+m61_24_20_01 
+m61_48_40_00 Gravesite Plain - South of Church of Consolation, Ellac River End; Charo's Hidden Grave - Central Lake Northeast Cliffside; Abyssal Woods - Southwest Corner
+m61_48_41_00 Gravesite Plain - Church of Consolation, Suppressing Pillar, Dragon's Pit Entrance and Exit, North of Ellac River End; Abyssal Woods - Southwest Edge
+m61_49_40_00 Foot of the Jagged Peak - North of Grand Altar; Abyssal Woods - Midra's Manse Entrance
+m61_49_41_00 Foot of the Jagged Peak - Drake Lake; Abyssal Woods - North of Midra's Manse
+m61_24_21_01 
+m61_48_42_00 Gravesite Plain - Pillar Path Waypoint, Ruined Forge Lava Intake Entrance; Abyssal Woods - West Edge
+m61_48_43_00 Gravesite Plain - Pillar Path Cross; Abyssal Woods - Divided Falls; Scadu Altus - West of Moorth Highway South
+m61_49_42_00 Gravesite Plain - Elder's Hovel; Abyssal Woods - Between Divided Falls and Manse
+m61_49_43_00 Gravesite Plain - Southeast Poison Swamp; Scadu Altus - Moorth Highway South, Fort of Reprimand; Abyssal Woods - East of Divided Falls
+m61_25_20_01 
+m61_50_40_00 Finger Ruins of Rhia - Northwest, Hanging Bell; Foot of the Jagged Peak - North of Grand Altar East Edge
+m61_50_41_00 Finger Ruins of Rhia - Far Northwest; Foot of the Jagged Peak - Northeast of Drake Lake; Abyssal Woods - Central Woods South Edge
+m61_51_40_00 Finger Ruins of Rhia - Northeast; Foot of the Jagged Peak - Foot of the Jagged Peak West Cliffside
+m61_51_41_00 Finger Ruins of Rhia - Far Northeast; Foot of the Jagged Peak - First Spirit Spring and Rope Bridge; Abyssal Woods - South Winter-Lantern River by Woodland Trail
+m61_25_21_01 
+m61_50_42_00 Abyssal Woods - Central Abyssal Woods
+m61_50_43_00 Scadu Altus - Scaduview Cross, Bonny Gaol Entrance, Path to Village of Flies; Abyssal Woods - Alcove North of Central Woods
+m61_51_42_00 Abyssal Woods - Between Woodland Trail and Central Woods
+m61_51_43_00 Scadu Altus - Darklight Catacombs Entrance; Abyssal Woods - West of Forsaken Graveyard
+m61_12_11_02 Central Scadu Altus
+m61_24_22_01 
+m61_48_44_00 Gravesite Plain - East Castle Ensis, Exit to Scadu Altus; Scadu Altus - Ruined Forge of Starfall Past Entrance
+m61_48_45_00 Scadu Altus - Highroad Cross, Highway Fork
+m61_49_44_00 Scadu Altus - Moorth Ruins, Bonny Village West Entrance
+m61_49_45_00 Scadu Altus - Moorth Highway Camp, South Great Red Bear Area
+m61_24_23_01 
+m61_48_46_00 Scadu Altus - Furnace Golem Area; Rauh Base - Entrance from Poison Swamp
+m61_48_47_00 Scadu Altus - Shadow Keep Main Gate; Rauh Base - Ancient Ruins Base
+m61_49_46_00 Scadu Altus - Poison Swamp, South Great Red Bear Area, Castle Watering Hole Southwest
+m61_49_47_00 Scadu Altus - Castle Watering Hole Northwest Entrance
+m61_25_22_01 
+m61_50_44_00 Scadu Altus - Main Bonny Village, Whipping Hut, Recluses' River Downstream, Village of Flies
+m61_50_45_00 Scadu Altus - Bonny Village North Tree and Overlook, Recluses' River Upstream, Manus Metyr Graveyard and West Cliffside
+m61_51_44_00 Scadu Altus - Bridge Leading to the Village, Eastern Nameless Mausoleum, Hippo Duo Pond
+m61_51_45_00 Scadu Altus - Cathedral of Manus Metyr, Finger Ruins of Miyr, Furnace Golem Area
+m61_25_23_01 
+m61_50_46_00 Scadu Altus - Castle Watering Hole Southeast, South Ruins of Unte, Church District Highroad West Cliffside
+m61_50_47_00 Scadu Altus - Castle Watering Hole Northeast, North Ruins of Unte, Above Shadow Keep East Tunnel
+m61_51_46_00 Scadu Altus - Road to Manus Metyr, Finger Ruins of Miyr Warp Platform, Rabbath's Rise Building
+m61_51_47_00 Scadu Altus - Church District Highroad, Rabbath's Rise, Shadow Keep East Tunnel Entrance; Scaduview - Shaman Village
+m61_12_12_02 West Scaduview
+m61_24_24_01 
+m61_48_48_00 Rauh Base - Taylew's Ruined Forge Entrance
+m61_48_49_00 Scaduview - Far West Cliffside
+m61_49_48_00 Scaduview - Specimen Storehouse Exit, Commander Gaius' Arena
+m61_49_49_00 Scaduview - Scadutree Chalice, Albinauric's Shack
+m61_25_24_01 
+m61_50_48_00 Scaduview - Hinterland, Lower Shadow Keep Exit, South Scadutree Base
+m61_50_49_00 Scaduview - North Scadutree Base
+m61_51_48_00 Scaduview - Hinterland Bridge, West Fingerstone Hill
+m61_51_49_00 Scaduview - Fingerstone Hill Northwest Cliffside
+m61_13_09_02 South Jagged Peak
+m61_26_19_01 
+m61_52_39_00 Foot of the Jagged Peak - Drake Duo Area South Cliffside
+m61_53_39_00 Jagged Peak - Between Jagged Peak Mountainside and Summit, Before Senessax Lake
+m61_27_19_01 
+m61_54_39_00 Jagged Peak - Jagged Peak Summit, Bayle Arena, Senessax Lake
+m61_55_39_00 Jagged Peak - Bayle Arena East Wall, Rest of the Dread Dragon
+m61_13_10_02 North Jagged Peak; East Abyssal Woods
+m61_26_20_01 
+m61_52_40_00 Foot of the Jagged Peak - Foot of the Jagged Peak, Drake Duo Area; Abyssal Woods - Southwest of Church
+m61_52_41_00 Abyssal Woods - Big Tree West of Church
+m61_53_40_00 Abyssal Woods - South of Church; Jagged Peak - East of Drake Duo Area
+m61_53_41_00 Abyssal Woods - Abandoned Church
+m61_26_21_01 
+m61_52_42_00 Abyssal Woods - Woodland Trail East Edge
+m61_52_43_00 Abyssal Woods - Forsaken Graveyard, Darklight Catacombs Exit
+m61_27_20_01 
+m61_54_40_00 Jagged Peak - Jagged Peak Mountainside
+m61_13_11_02 Far East Scadu Altus; Finger Ruins of Dheo
+m61_26_22_01 
+m61_52_45_00 Scadu Altus - Church District Highroad Southeast Cliffside
+m61_53_45_00 Finger Ruins of Dheo - Southwest
+m61_26_23_01 
+m61_52_46_00 Scadu Altus - Church District Highroad East Cliffside
+m61_52_47_00 Scadu Altus - Church District Highroad Northast Cliffside; Scaduview - South of Fingerstone Hill Crater
+m61_53_46_00 Finger Ruins of Dheo - West, Hanging Bell
+m61_53_47_00 Finger Ruins of Dheo - Northwest
+m61_27_22_01 
+m61_54_45_00 Finger Ruins of Dheo - Southeast
+m61_27_23_01 
+m61_54_46_00 Finger Ruins of Dheo - East
+m61_54_47_00 Finger Ruins of Dheo - Northeast
+m61_13_12_02 East Scaduview
+m61_26_24_01 
+m61_52_48_00 Scaduview - Fingerstone Hill Crater
+m61_52_49_00 Scaduview - Fingerstone Hill Crater North Cliffside
+m61_53_48_00 Scaduview - East of Fingerstone Hill Crater, Colossal Fingercreeper Cave
+m61_27_24_01 
+m61_54_48_00 Scaduview - Fingerstone Hill Far East Cliffside

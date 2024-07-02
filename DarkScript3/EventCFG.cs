@@ -30,9 +30,6 @@ namespace DarkScript3
             // Decompilation
             // Combine definitions of the same condition group in the same basic block.
             public bool CombineDefinitions = true;
-            // Only combine adjacent definitions, so order is preserved with other condition groups.
-            // (TODO: this is ignored? Accomplished another way?)
-            public bool CombineNonAdjacentDefinitions = false;
             // When definitions are always used in a certain evaluation and nowhere else, inline them into the usage.
             public bool InlineDefinitions = true;
             // Only inline definitions when condition order won't change.
@@ -42,6 +39,8 @@ namespace DarkScript3
             // Name condition groups based on what they're calculating rather than based on the register number.
             // (Avoid doing this if a condition group is redefined after main group usage, indicating possible use for other purposes.)
             public bool RenameConditionGroups = true;
+            // Older behavior which resulted in incorrect interleaving for use, endif, use, endif, etc type conditions.
+            public bool InlineNonAdjacentMultiUse = false;
 
             // Compilation.
             // Minimize diffs for DS1 most of the time by using two separate condition groups for an expression like x = a && b.
@@ -964,6 +963,7 @@ namespace DarkScript3
         {
             Result result = new Result();
 
+            bool debugPrintEvent = debugPrint;
             if (debugPrint) Console.WriteLine($"$Event({func.ID}, {func.RestBehavior}, function({string.Join(", ", func.Params)}) {{");
 
             // Rewrite control flow operators and initialize CFG
@@ -1141,7 +1141,8 @@ namespace DarkScript3
                     FlowNode pred = preds[0];
                     if ((pred.Succ == null || pred.Succ == node) && (pred.JumpTo == node || pred.JumpTo == null))
                     {
-                        if (true || options.CombineNonAdjacentDefinitions || getAssign(node) == getAssign(pred))
+                        // TODO: Is assign condition still relevant? Should it be an option?
+                        if (true || getAssign(node) == getAssign(pred))
                         {
                             node.BlockID = pred.BlockID;
                         }
@@ -1246,7 +1247,7 @@ namespace DarkScript3
                                 };
                                 noInlineGroups.Add(reg);
                             }
-                            if (debugPrint) Console.WriteLine($"Adding {im.ID} as compiled cond of {use.ResultGroup}, with uses {string.Join(",", use.Uses)}");
+                            if (debugPrint) Console.WriteLine($"Adding #{im.ID} as compiled use of {use.ResultGroup}, with uses [{string.Join(",", use.Uses)}] and defines [{string.Join(",", use.Defines)}]");
                             use.CompiledUses.Add(node);
                             node.CompiledUseRegs.Add(reg);
                         }
@@ -1261,7 +1262,7 @@ namespace DarkScript3
                                 };
                                 noInlineGroups.Add(reg);
                             }
-                            if (debugPrint) Console.WriteLine($"Adding {im.ID} as uncompiled cond of {use.ResultGroup}, with uses {string.Join(",", use.Uses)}");
+                            if (debugPrint) Console.WriteLine($"Adding #{im.ID} as uncompiled use of {use.ResultGroup}, with uses [{string.Join(",", use.Uses)}] and defines [{string.Join(",", use.Defines)}]");
                             use.Uses.Add(node);
                             node.UseRegs.Add(reg);
                         }
@@ -1269,6 +1270,7 @@ namespace DarkScript3
                     // Is a cond defined?
                     if (condIm is CondAssign assign)
                     {
+                        // TODO: This doesn't account for defines of already used groups. It probably shouldn't inline either.
                         int reg = assign.ToCond;
                         if (!context.Conds.TryGetValue(reg, out ConditionDAG define))
                         {
@@ -1278,9 +1280,16 @@ namespace DarkScript3
                             };
                             context.Conds[reg] = define;
                         }
+                        if (!options.InlineNonAdjacentMultiUse && define.Uses.Count > 0)
+                        {
+                            // If defining an already used group, can't inline as the uses may be different
+                            noInlineGroups.Add(reg);
+                        }
+                        if (debugPrint) Console.WriteLine($"Adding #{im.ID} as define of {define.ResultGroup}, with uses [{string.Join(",", define.Uses)}] and defines [{string.Join(",", define.Defines)}]");
                         define.Defines.Add(node);
                         node.DefineReg = reg;
-                        // If it's main cond, all uncompiled become compiled
+                        // If it's main cond, all uncompiled become compiled.
+                        // TODO this may happen after any 1-frame wait as well, TODO see if anything depends on this.
                         if (reg == 0)
                         {
                             foreach (ConditionDAG comp in context.Conds.Values)
@@ -1402,7 +1411,38 @@ namespace DarkScript3
 
                     // The Nodes.ContainsKey filtering is because a single condition group may be conditionally used once, then used
                     // another time, and the defines list in the latter case won't be updated by the node shuffling.
-                    List<List<FlowNode>> defineGroups = dag.Defines.Where(c => Nodes.ContainsKey(c.ID)).GroupBy(c => Nodes[c.ID].BlockID).Select(g => g.ToList()).ToList();
+                    IEnumerable<FlowNode> defineNodes = dag.Defines.Where(c => Nodes.ContainsKey(c.ID));
+
+                    List<List<FlowNode>> defineGroups;
+                    if (!options.InlineNonAdjacentMultiUse && noInlineGroups.Contains(dag.ResultGroup))
+                    {
+                        // In this case, we need to be more conservative, as there could be multiple non-main uses and defines in the same block
+                        // This isn't a perfect heuristic, and potentially these should be in different blocks, or have per-block behavior.
+                        // To be less conservative, can allow interleaving with other defines from other condition groups, e.g. Elden Ring 4851.
+                        defineGroups = new();
+                        List<FlowNode> groupNodes = new();
+                        foreach (FlowNode assign in defineNodes)
+                        {
+                            if (groupNodes.Count > 0)
+                            {
+                                FlowNode prev = groupNodes[groupNodes.Count - 1];
+                                if (prev.Succ != assign)
+                                {
+                                    defineGroups.Add(groupNodes);
+                                    groupNodes = new();
+                                }
+                            }
+                            groupNodes.Add(assign);
+                        }
+                        if (groupNodes.Count > 0)
+                        {
+                            defineGroups.Add(groupNodes);
+                        }
+                    }
+                    else
+                    {
+                        defineGroups = defineNodes.GroupBy(c => Nodes[c.ID].BlockID).Select(g => g.ToList()).ToList();
+                    }
 
                     foreach (List<FlowNode> assigns in defineGroups)
                     {
@@ -1460,6 +1500,7 @@ namespace DarkScript3
                 {
                     foreach (ConditionDAG use in node.Uses)
                     {
+                        if (debugPrint && node.Uses.Count > 0) Console.WriteLine($"{node.Im}: {use.ResultGroup} uses [{string.Join(",", use.Uses)}] [{string.Join(",", use.CompiledUses)}]");
                         // Loop uses
                         if (loopEnds.Count > 0)
                         {
@@ -1488,6 +1529,7 @@ namespace DarkScript3
                     }
                 }
             }
+            if (debugPrint) Console.WriteLine($"No inline groups: {string.Join(",", noInlineGroups)}. Loop groups: {string.Join(",", loopGroups)}.");
 
             // Rewrite condition group usage (CondRef) to either inline or not
             // ConditionDAG is not updated here so it can't be used afterwards.
@@ -2160,7 +2202,7 @@ namespace DarkScript3
                 }
             }
 
-            if (debugPrint && false)
+            if (debugPrint && debugPrintEvent)
             {
                 func.Print(Console.Out);
                 Console.WriteLine();

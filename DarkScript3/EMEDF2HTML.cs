@@ -62,7 +62,7 @@ namespace DarkScript3
         };
         private readonly Dictionary<string, Regex> elidedEmevd = new Dictionary<string, Regex>()
         {
-            ["er"] = new Regex(@"^(m60|m3[0-2])"),
+            ["er"] = new Regex(@"^(m60|m61|m3[0-2]|m4[0-3])"),
         };
         private readonly Dictionary<string, string> specialCommands = new Dictionary<string, string>
         {

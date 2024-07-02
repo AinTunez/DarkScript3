@@ -201,7 +201,6 @@ namespace DarkScript3
             v8.AddHostObject("EVD", EVD);
             v8.AddHostType("EMEVD", typeof(EMEVD));
             v8.AddHostObject("Scripter", this);
-            v8.AddHostType("Object", typeof(object));
             v8.AddHostType("EVENT", typeof(Event));
             v8.AddHostType("INSTRUCTION", typeof(Instruction));
             v8.AddHostType("PARAMETER", typeof(Parameter));
@@ -350,7 +349,7 @@ namespace DarkScript3
 #if DEBUG
                     // Partial mode
                     {
-                        code.AppendLine(ScriptAst.SingleIndent + InstructionDocs.InstrDebugStringFull(ins));
+                        code.AppendLine(ScriptAst.SingleIndent + InstructionDocs.InstrDebugStringFull(ins, "Nodoc", insIndex, paramNames));
                         continue;
                     }
 #endif
@@ -368,6 +367,13 @@ namespace DarkScript3
                 }
                 catch (Exception ex)
                 {
+#if DEBUG
+                    // Partial mode
+                    {
+                        code.AppendLine(ScriptAst.SingleIndent + InstructionDocs.InstrDebugStringFull(ins, "Baddoc", insIndex, paramNames));
+                        continue;
+                    }
+#endif
                     var sb = new StringBuilder();
                     sb.AppendLine($@"Unable to unpack arguments for {funcName}({InstructionDocs.InstrDocDebugString(doc)}) at Event {CurrentEventID} at index {CurrentInsIndex}.");
                     sb.AppendLine($@"Instruction arg data: {InstructionDocs.InstrDebugString(ins)}");

@@ -2464,6 +2464,40 @@
               "unk4": 0
             }
           ]
+        },
+        {
+          "name": "IF Tutorial Seen",
+          "index": 46,
+          "args": [
+            {
+              "name": "Result Condition Group",
+              "type": 3,
+              "enum_name": "Condition Group",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Tutorial Param ID",
+              "type": 5,
+              "enum_name": null,
+              "default": 1,
+              "min": 0,
+              "max": 9999,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
         }
       ]
     },
@@ -3494,6 +3528,96 @@
           ]
         },
         {
+          "name": "IF Character Ratio HP Ratio",
+          "index": 16,
+          "args": [
+            {
+              "name": "Result Condition Group",
+              "type": 3,
+              "enum_name": "Condition Group",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Target Entity ID",
+              "type": 2,
+              "enum_name": null,
+              "default": 0,
+              "min": 0,
+              "max": 2000000000,
+              "increment": 1,
+              "format_string": "%08d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Comparison Type",
+              "type": 3,
+              "enum_name": "Comparison Type",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Target Amount",
+              "type": 6,
+              "enum_name": null,
+              "default": 0.0,
+              "min": 0.0,
+              "max": 100000000.0,
+              "increment": 1.0,
+              "format_string": "%0.3f",
+              "unk1": 0,
+              "unk2": 1,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Comparison Type",
+              "type": 3,
+              "enum_name": "Comparison Type",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Target Ratio",
+              "type": 6,
+              "enum_name": null,
+              "default": 1.0,
+              "min": 0.0,
+              "max": 100000000.0,
+              "increment": 1.0,
+              "format_string": "%0.3f",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
+        },
+        {
           "name": "IF Character Ratio Has SpEffect",
           "index": 19,
           "args": [
@@ -3575,6 +3699,82 @@
               "min": 0,
               "max": 9999,
               "increment": 1,
+              "format_string": "%0.3f",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
+        },
+        {
+          "name": "IF Character Ratio AI State",
+          "index": 22,
+          "args": [
+            {
+              "name": "Result Condition Group",
+              "type": 3,
+              "enum_name": "Condition Group",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Target Entity ID",
+              "type": 2,
+              "enum_name": null,
+              "default": 0,
+              "min": 0,
+              "max": 2000000000,
+              "increment": 1,
+              "format_string": "%08d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "AI State",
+              "type": 0,
+              "enum_name": "AI State Type",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Comparison Type",
+              "type": 3,
+              "enum_name": "Comparison Type",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Target Ratio",
+              "type": 6,
+              "enum_name": null,
+              "default": 1.0,
+              "min": 0.0,
+              "max": 100000000.0,
+              "increment": 1.0,
               "format_string": "%0.3f",
               "unk1": 0,
               "unk2": 0,
@@ -4662,6 +4862,40 @@
               "unk4": 0
             }
           ]
+        },
+        {
+          "name": "If Player Standing On Hit Group",
+          "index": 3,
+          "args": [
+            {
+              "name": "Result Condition Group",
+              "type": 3,
+              "enum_name": "Condition Group",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Hit Entity ID",
+              "type": 2,
+              "enum_name": null,
+              "default": 0,
+              "min": 0,
+              "max": 2000000000,
+              "increment": 1,
+              "format_string": "%08d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
         }
       ]
     },
@@ -5432,6 +5666,130 @@
               "unk4": 0
             }
           ]
+        },
+        {
+          "name": "SKIP IF Comparison Alt",
+          "index": 109,
+          "args": [
+            {
+              "name": "Number Of Skipped Lines",
+              "type": 0,
+              "enum_name": null,
+              "default": 1,
+              "min": 0,
+              "max": 99,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Comparison Type",
+              "type": 3,
+              "enum_name": "Comparison Type",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Left-hand Side",
+              "type": 5,
+              "enum_name": null,
+              "default": 0,
+              "min": -1,
+              "max": 2000000000,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Right-hand Side",
+              "type": 5,
+              "enum_name": null,
+              "default": 0,
+              "min": -1,
+              "max": 2000000000,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
+        },
+        {
+          "name": "END IF Comparison Alt",
+          "index": 111,
+          "args": [
+            {
+              "name": "Execution End Type",
+              "type": 0,
+              "enum_name": "Event End Type",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Comparison Type",
+              "type": 3,
+              "enum_name": "Comparison Type",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Left-hand Side",
+              "type": 5,
+              "enum_name": null,
+              "default": 0,
+              "min": -1,
+              "max": 2000000000,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Right-hand Side",
+              "type": 5,
+              "enum_name": null,
+              "default": 0,
+              "min": -1,
+              "max": 2000000000,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
         }
       ]
     },
@@ -5648,6 +6006,40 @@
               "default": 0,
               "min": 0,
               "max": 2000000000,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
+        },
+        {
+          "name": "WAIT Random Time (Real Frames)",
+          "index": 7,
+          "args": [
+            {
+              "name": "Min Number Of Frames",
+              "type": 5,
+              "enum_name": null,
+              "default": 0,
+              "min": 0,
+              "max": 99999,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 0,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Max Number Of Frames",
+              "type": 5,
+              "enum_name": null,
+              "default": 0,
+              "min": 0,
+              "max": 99999,
               "increment": 1,
               "format_string": "%d",
               "unk1": 0,
@@ -14605,6 +14997,110 @@
               "unk4": 0
             }
           ]
+        },
+        {
+          "name": "Fade To Color",
+          "index": 85,
+          "args": [
+            {
+              "name": "Opacity",
+              "type": 6,
+              "enum_name": null,
+              "default": 0,
+              "min": 0,
+              "max": 1,
+              "increment": 1,
+              "format_string": "%0.3f",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Fade Time (s)",
+              "type": 6,
+              "enum_name": null,
+              "default": 0,
+              "min": 0,
+              "max": 9999,
+              "increment": 1,
+              "format_string": "%0.3f",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Freeze Player",
+              "type": 0,
+              "enum_name": "BOOL",
+              "default": 0,
+              "min": 0,
+              "max": 0,
+              "increment": 0,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Freeze Player Delay (s)",
+              "type": 6,
+              "enum_name": null,
+              "default": 0,
+              "min": -1,
+              "max": 1,
+              "increment": 1,
+              "format_string": "%0.3f",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Red",
+              "type": 6,
+              "enum_name": null,
+              "default": 1,
+              "min": 0,
+              "max": 9999,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Green",
+              "type": 6,
+              "enum_name": null,
+              "default": 1,
+              "min": 0,
+              "max": 9999,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            },
+            {
+              "name": "Blue",
+              "type": 6,
+              "enum_name": null,
+              "default": 1,
+              "min": 0,
+              "max": 9999,
+              "increment": 1,
+              "format_string": "%d",
+              "unk1": 1,
+              "unk2": 0,
+              "unk3": 0,
+              "unk4": 0
+            }
+          ]
         }
       ]
     },
@@ -17093,6 +17589,7 @@
         "18": "Unskippable With Fade-Out Skip",
         "32": "Skippable With White Fade-Out",
         "48": "Skippable With White Fade-Out Skip",
+        "50": "Unskippable With White Fade-Out Skip",
         "64": "Skippable With White Fade-Out 2"
       }
     },
@@ -17178,7 +17675,9 @@
         "30": "Object",
         "31": "White Berserker",
         "32": "Red Berserker",
-        "33": "Arch Enemy Team"
+        "33": "Arch Enemy Team",
+        "67": "Unknown 67",
+        "70": "Unknown 70"
       }
     },
     {
@@ -17495,7 +17994,8 @@
         "-2": "Stop 1",
         "-1": "Stop 2",
         "0": "Start",
-        "1": "Heat Up"
+        "1": "Heat Up",
+        "2": "Heat Up 2"
       }
     },
     {

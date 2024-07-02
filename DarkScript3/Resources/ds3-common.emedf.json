@@ -17371,6 +17371,60 @@
     },
     "enum_aliases": null,
     "replacements": null,
-    "global_enums": null
+    "global_enums": null,
+    "meta_aliases": {
+      "Entity ID": [
+        "Area ID",
+        "Enemy Spawner ID",
+        "Initial Area ID",
+        "Respawn Point Parameter ID",
+        "Aggressor Entity ID",
+        "Area Entity ID",
+        "Attacker Entity ID",
+        "Bonfire Entity ID",
+        "Bullet Producer Entity ID",
+        "Bullet Team Entity ID",
+        "Character Entity ID",
+        "Destination Area Entity ID",
+        "Entity ID (Attachment Side)",
+        "Entity ID (Recipient Side)",
+        "Entity ID 2",
+        "Entity ID to Copy Floor From",
+        "Hit Entity ID",
+        "Line Segment Defined By Entity ID ",
+        "Map Part Entity ID",
+        "Message Entity ID",
+        "NPC Entity ID",
+        "Object Entity ID",
+        "Patrol Information Entity ID",
+        "Placement Area Entity ID",
+        "Player Entity ID",
+        "Point Entity ID 2",
+        "Point Entity ID",
+        "Respawn Point Entity ID",
+        "Source Area Entity ID",
+        "Source Entity ID",
+        "Spawn Point Entity ID",
+        "Starting Point Area Entity ID",
+        "Summon Entity ID",
+        "Summoned NPC Entity ID",
+        "Target Character Entity ID",
+        "Target Entity ID",
+        "Target Object Entity ID",
+        "Warp Destination Entity ID",
+        "Warp Destination Hit Entity ID",
+        "Warp Object Entity ID",
+      ]
+    },
+    "meta_types": [
+      {
+        "name": "Entity ID",
+        "data_type": "entity"
+      },
+      {
+        "name": "Parameters",
+        "data_type": "entity"
+      }
+    ]
   }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -34,7 +35,11 @@ namespace DarkScript3
         {
             // This file ended up being more than just cond testing, but hack pile of one-time
             // scripts still basically applies to these as well.
-            if (args.Contains("gen"))
+            if (args.Contains("ac6"))
+            {
+                DumpAc6Unknown();
+            }
+            else if (args.Contains("gen"))
             {
                 DumpEldenNew(args);
             }
@@ -48,20 +53,21 @@ namespace DarkScript3
             }
         }
 
+        private static readonly Dictionary<string, int> Types = new Dictionary<string, int>()
+        {
+            ["byte"] = 0,
+            ["ushort"] = 1,
+            ["uint"] = 2,
+            ["sbyte"] = 3,
+            ["short"] = 4,
+            ["int"] = 5,
+            ["float"] = 6,
+        };
+        private static readonly Dictionary<int, string> RevTypes = Types.ToDictionary(e => e.Value, e => e.Key);
+
         public void DumpTypes()
         {
             InstructionDocs docs = new InstructionDocs("er-common.emedf.json");
-            Dictionary<string, int> types = new Dictionary<string, int>()
-            {
-                ["byte"] = 0,
-                ["ushort"] = 1,
-                ["uint"] = 2,
-                ["sbyte"] = 3,
-                ["short"] = 4,
-                ["int"] = 5,
-                ["float"] = 6,
-            };
-            Dictionary<int, string> revTypes = types.ToDictionary(e => e.Value, e => e.Key);
             SortedDictionary<(string, string), List<string>> cmdsByType = new SortedDictionary<(string, string), List<string>>();
             foreach (EMEDF.ClassDoc bank in docs.DOC.Classes.OrderBy(i => i.Index))
             {
@@ -71,7 +77,7 @@ namespace DarkScript3
                     string name = instr.DisplayName;
                     foreach (EMEDF.ArgDoc arg in instr.Arguments)
                     {
-                        string type = revTypes[(int)arg.Type];
+                        string type = RevTypes[(int)arg.Type];
                         if (arg.EnumName == null && type != "float")
                         {
                             var key = (arg.Name, type);
@@ -120,24 +126,11 @@ namespace DarkScript3
             }
         }
 
-        public void DumpEldenNew(ICollection<string> opt)
+        private EMEDF.ArgDoc ParseArgType(string text)
         {
-            doc = EMEDF.ReadFile($"DarkScript3/Resources/er-common.emedf.json");
-            Dictionary<string, int> types = new Dictionary<string, int>()
-            {
-                ["byte"] = 0,
-                ["ushort"] = 1,
-                ["uint"] = 2,
-                ["sbyte"] = 3,
-                ["short"] = 4,
-                ["int"] = 5,
-                ["float"] = 6,
-                // ["uint"] = 8,
-            };
-            Dictionary<int, string> revTypes = types.ToDictionary(e => e.Value, e => e.Key);
             string getType(string prefix)
             {
-                foreach (KeyValuePair<string, int> type in types)
+                foreach (KeyValuePair<string, int> type in Types)
                 {
                     if (prefix.StartsWith(type.Key + " ")) return type.Key;
                 }
@@ -151,11 +144,41 @@ namespace DarkScript3
                 }
                 return null;
             }
+            string desc = text.Split('=')[0].Trim();
+            EMEDF.EnumDoc enumDoc = null;
+            string type = getType(desc);
+            if (type == null)
+            {
+                enumDoc = getEnum(desc);
+                if (enumDoc == null) throw new Exception($"Can't parse {text}");
+                desc = desc.Substring(enumDoc.Name.Length).Trim();
+                type = getType(desc);
+                if (type == null) throw new Exception($"Can't parse type in {text}");
+            }
+            desc = desc.Substring(type.Length).Trim();
+            EMEDF.ArgDoc argDoc = new EMEDF.ArgDoc
+            {
+                Name = desc,
+                Type = Types[type],
+                EnumName = enumDoc?.Name,
+                Default = desc == "Number of Target Characters" ? 1 : 0,
+                Min = 0,
+                Max = 0,
+                Increment = 0,
+                FormatString = type == "float" ? "%0.3f" : "%d",
+            };
+            if (argDoc.Name == "Parameters") argDoc.Vararg = true;
+            return argDoc;
+        }
+
+        public void DumpEldenNew(ICollection<string> opt)
+        {
+            doc = EMEDF.ReadFile($"DarkScript3/Resources/er-common.emedf.json");
             string getArgKey(EMEDF.ArgDoc argDoc)
             {
                 List<string> parts = new List<string>();
                 if (argDoc.EnumName != null) parts.Add(argDoc.EnumName);
-                if (!revTypes.TryGetValue((int)argDoc.Type, out string typeName)) throw new Exception($"Unknown type in {argDoc.Name}: {argDoc.Type}");
+                if (!RevTypes.TryGetValue((int)argDoc.Type, out string typeName)) throw new Exception($"Unknown type in {argDoc.Name}: {argDoc.Type}");
                 parts.Add(typeName);
                 parts.Add(argDoc.Name);
                 return string.Join(" ", parts);
@@ -213,40 +236,16 @@ namespace DarkScript3
             }
             EMEDF.ArgDoc getArg(string text, string debugInfo = "")
             {
-                string desc = text.Split('=')[0].Trim();
-                EMEDF.EnumDoc enumDoc = null;
-                string type = getType(desc);
-                if (type == null)
-                {
-                    enumDoc = getEnum(desc);
-                    if (enumDoc == null) throw new Exception($"Can't parse {text}");
-                    desc = desc.Substring(enumDoc.Name.Length).Trim();
-                    type = getType(desc);
-                    if (type == null) throw new Exception($"Can't parse type in {text}");
-                }
-                desc = desc.Substring(type.Length).Trim();
-                EMEDF.ArgDoc argDoc = new EMEDF.ArgDoc
-                {
-                    Name = desc,
-                    Type = types[type],
-                    EnumName = enumDoc?.Name,
-                    // TODO: Definitely make this non-zero when required
-                    Default = desc == "Number of Target Characters" ? 1 : 0,
-                    // TODO: Fill these in
-                    Min = 0,
-                    Max = 0,
-                    Increment = 0,
-                    FormatString = type == "float" ? "%0.3f" : "%d",
-                };
+                EMEDF.ArgDoc argDoc = ParseArgType(text);
                 // It seems enums don't get default values etc.
                 if (argDoc.EnumName == null)
                 {
                     string argKey = getArgKey(argDoc);
                     EMEDF.ArgDoc old = null;
-                    if (!desc.StartsWith("Unknown"))
+                    if (!argDoc.Name.StartsWith("Unknown"))
                     {
                         exampleDocs.TryGetValue(argKey, out old);
-                        if (old == null && type == "uint" && desc.EndsWith("Entity ID"))
+                        if (old == null && RevTypes[(int)argDoc.Type] == "uint" && argDoc.Name.EndsWith("Entity ID"))
                         {
                             exampleDocs.TryGetValue("uint Target Entity ID", out old);
                         }
@@ -349,6 +348,129 @@ namespace DarkScript3
             else
             {
                 RunEldenCommonTests(args);
+            }
+        }
+
+        public void DumpAc6Unknown()
+        {
+            InstructionDocs docs = new InstructionDocs("er-common.emedf.json");
+            doc = docs.DOC;
+            SortedSet<(int, int)> used = new();
+            Dictionary<(int, int), int> bad = new();
+            Dictionary<(int, int), SortedSet<int>> badBytes = new();
+            string dir = @"C:\Program Files (x86)\Steam\steamapps\common\ARMORED CORE VI FIRES OF RUBICON\Game\event";
+            foreach (string path in Directory.GetFiles(dir, "*.emevd.dcx"))
+            {
+                string fileName = Path.GetFileName(path);
+                emevd = EMEVD.Read(path);
+                foreach (EMEVD.Event e in emevd.Events)
+                {
+                    Dictionary<EMEVD.Parameter, string> pn = e.Parameters.ToDictionary(p => p, p => $"X{p.SourceStartByte}_{p.ByteCount}");
+                    for (int i = 0; i < e.Instructions.Count; i++)
+                    {
+                        EMEVD.Instruction ins = e.Instructions[i];
+                        var insId = (ins.Bank, ins.ID);
+                        used.Add(insId);
+                        try
+                        {
+                            EMEDF.InstrDoc instrDoc = doc[ins.Bank][ins.ID];
+                            List<object> args = docs.UnpackArgsWithParams(
+                                ins, i, instrDoc, pn, (argDoc, val) => argDoc.GetDisplayValue(val));
+                        }
+                        catch (Exception ex)
+                        {
+                            int len = ins.ArgData.Length / 4;
+                            bad[insId] = len;
+                            if (!badBytes.ContainsKey(insId)) badBytes[insId] = new();
+                            for (int k = 0; k < ins.ArgData.Length; k++)
+                            {
+                                if (ins.ArgData[k] != 0)
+                                {
+                                    badBytes[insId].Add(k);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            foreach (var insId in used)
+            {
+                (int bank, int id) = insId;
+                string insStr = InstructionDocs.FormatInstructionID(bank, id);
+                string name = $"XUnknown {insStr}";
+                List<string> args;
+                if (bad.TryGetValue(insId, out int len))
+                {
+                    bool init = bank == 2000 && (id == 7 || id == 8);
+                    if (init) len = 3;
+                    ISet<int> bytes = badBytes[insId];
+                    string byteChar(int i) => bytes.Contains(i) ? "X" : "0";
+                    string bytesChar(int i) => $"{byteChar(i)}{byteChar(i + 1)}{byteChar(i + 2)}{byteChar(i + 3)}";
+                    args = Enumerable.Range(0, len).Select(i => $"uint Unknown{i * 4}_{bytesChar(i * 4)}").ToList();
+                    if (bank < 100)
+                    {
+                        args.RemoveAt(0);
+                        int maxByte = bytes.Where(x => x < 4).OrderByDescending(x => x).FirstOrDefault();
+                        for (int i = maxByte; i >= 0; i--)
+                        {
+                            string s = i == 0 ? "Condition Group sbyte Result Condition Group" : $"sbyte Unknown{i}_{byteChar(i)}";
+                            args.Insert(0, s);
+                        }
+                    }
+                    else if (init) args[2] = "uint Parameters";
+                }
+                else
+                {
+                    EMEDF.InstrDoc instrDoc = doc[bank][id];
+                    name = instrDoc.Name;
+                    args = instrDoc.Arguments.Select(a => (a.EnumName == null ? "" : $"{a.EnumName} ") + $"{RevTypes[(int)a.Type]} {a.Name}").ToList();
+                }
+                Console.WriteLine($"{insStr}, {name}{string.Join("", args.Select(s => $", {s}"))}");
+            }
+        }
+
+        public void AddUnknownValues(EMEDF emedf, string csv)
+        {
+            doc = emedf;
+            foreach (string line in File.ReadAllLines(csv))
+            {
+                string[] cells = line.Split(",").Select(s => s.Trim()).ToArray();
+                string cmd = cells[0];
+                int bank, id;
+                try
+                {
+                    (bank, id) = InstructionDocs.ParseInstructionID(cmd);
+                }
+                catch (FormatException)
+                {
+                    continue;
+                }
+                string name = cells[1].Trim(new[] { '?', ' ' });
+                List<EMEDF.ArgDoc> args = cells.Skip(2)
+                    .Where(c => !string.IsNullOrWhiteSpace(c))
+                    .Select(c => ParseArgType(c))
+                    .ToList();
+                EMEDF.ClassDoc classDoc = doc[bank];
+                if (classDoc == null)
+                {
+                    doc.Classes.Add(new EMEDF.ClassDoc { Name = "Unk", Index = bank, Instructions = new() });
+                }
+                EMEDF.InstrDoc instrDoc = doc[bank][id];
+                if (instrDoc == null)
+                {
+                    instrDoc = new EMEDF.InstrDoc
+                    {
+                        Name = name,
+                        Index = id,
+                        Arguments = args.ToArray(),
+                    };
+                    doc[bank].Instructions.Add(instrDoc);
+                }
+            }
+            doc.Classes = doc.Classes.OrderBy(x => x.Index).ToList();
+            foreach (EMEDF.ClassDoc classDoc in doc.Classes)
+            {
+                classDoc.Instructions = classDoc.Instructions.OrderBy(x => x.Index).ToList();
             }
         }
 

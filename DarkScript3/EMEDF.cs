@@ -42,6 +42,12 @@ namespace DarkScript3
             return ReadText(input);
         }
 
+        public void WriteFile(string path)
+        {
+            string output = JsonConvert.SerializeObject(this, Formatting.Indented).Replace("\r\n", "\n");
+            File.WriteAllText(path, output);
+        }
+
         public class ClassDoc
         {
             [JsonProperty(PropertyName = "name", Order = 1)]

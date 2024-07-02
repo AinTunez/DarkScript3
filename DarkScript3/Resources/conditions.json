@@ -27,6 +27,7 @@
     "1001[04]",
     "1001[05]",
     "1001[06]",
+    "1001[07]",
     "1001[08]",
     "1003[00]",
     "1005[00]"
@@ -106,7 +107,17 @@
       "goto": "1000[105]",
       "as_compare": {
         "shortname": "Signed",
-        // "lhs": "Left-hand Side",
+        "rhs": "Right-hand Side"
+      }
+    },
+    {
+      "name": "CompareSignedAlt",
+      "category": "cmp",
+      "games": ["er"],
+      "skip": "1000[109]",
+      "end": "1000[111]",
+      "as_compare": {
+        "shortname": "SignedAlt",
         "rhs": "Right-hand Side"
       }
     },
@@ -732,6 +743,12 @@
       "games": ["er"],
       "cond": "3[45]"
     },
+    {
+      "name": "TutorialSeen",
+      "games": ["er"],
+      "category": "tutorial",
+      "cond": "3[46]"
+    },
     // Character
     {
       "name": "CharacterDeadAlive",
@@ -924,6 +941,17 @@
       }
     },
     {
+      "name": "CompareCharacterRatioHPRatio",
+      "category": "hp",
+      "games": ["er"],
+      "cond": "4[16]",
+      "opt_fields": ["Comparison Type", "Target Ratio"],
+      "as_compare": {
+        "shortname": "CharacterRatioHPRatio",
+        "rhs": "Target Amount"
+      }
+    },
+    {
       "name": "Unknown415",
       "games": ["ds1"],
       "cond": "4[15]"
@@ -967,6 +995,13 @@
       "category": "chr",
       "cond": "4[22]",
       "opt_fields": ["Comparison Type", "Number of Target Characters"]
+    },
+    {
+      "name": "CharacterRatioAIState",
+      "games": ["er"],
+      "category": "chr",
+      "cond": "4[22]",
+      "opt_fields": ["Comparison Type", "Target Ratio"]
     },
     {
       "name": "CompareYoelLevelCount",
@@ -1314,6 +1349,13 @@
     },
     {
       "name": "HitLoaded",
+      "games": ["sekiro"],
+      "category": "hit",
+      "cond": "11[03]"
+    },
+    {
+      "name": "PlayerStandingOnHitGroup",
+      "games": ["er"],
       "category": "hit",
       "cond": "11[03]"
     },

@@ -4,6 +4,8 @@ User-friendly editor for FromSoftware's EMEVD format with high-level language an
 
 DarkScript3 also includes MattScript, a way of formatting scripts (except in DS2, which has no control flow) which adds even more high-level language features, making scripts easier to understand and edit. See [MattScript documentation](http://soulsmodding.wikidot.com/tutorial:mattscript-documentation).
 
+.NET 6.0 Desktop and ASP.NET Runtimes are required for 3.4.x. Install them from https://aka.ms/dotnet/6.0/windowsdesktop-runtime-win-x64.exe and https://aka.ms/dotnet/6.0/aspnetcore-runtime-win-x64.exe before attempting to run the tool.
+
 ## Supported games
 
 * Dark Souls ([instruction list](https://soulsmods.github.io/emedf/ds1-emedf.html))

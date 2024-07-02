@@ -1,0 +1,183 @@
+c0000 Human NPC
+c0100 Dummy
+c1000 Invisible
+c1070 Skeleton
+c1071 Ringed City Skeleton
+c1090 Pus of Man
+c1100 Hollow Soldier
+c1101 Lothric Castle Hollow Soldier
+c1102 Grand Archives Hollow Soldier
+c1105 Large Hollow Soldier
+c1106 Lothric Castle Large Hollow Soldier
+c1130 Rotten Slug
+c1170 Carthus Curved Sword Skeleton
+c1180 Carthus Shotel Skeleton
+c1190 Cathedral Knight
+c1200 Thrall
+c1201 Dreg Heap Thrall
+c1210 Ghru Grunt
+c1211 Smouldering Ghru Grunt
+c1220 Reanimated Corpse
+c1230 Cathedral Evangelist
+c1240 Peasant Hollow
+c1241 Irirthyll Dungeon Peasant Hollow
+c1250 Grave Warden
+c1260 Hollow Manservant
+c1280 High Wall Lothric Knight
+c1281 Lothric Castle Lothric Knight
+c1282 Red-Eyed Lothric Knight
+c1283 Dreg Heap Lothric Knight
+c1290 Winged Knight
+c1300 Black Knight
+c1310 Boreal Outrider Knight
+c1320 Crystal Sage in Farron
+c1321 Crystal Sage in Archives
+c1340 Grand Archives Scholar
+c1350 Irithyllian Slave
+c1360 Lycanthrope
+c1370 Lycanthrope Hunter
+c1380 Serpent-Man Summoner
+c1390 Serpent-Man
+c1391 Large Serpent-Man
+c1400 Fire Keeper
+c1410 Silver Knight
+c1430 Cemetery Hollow
+c1440 Cathedral Hollow Soldier
+c1441 Road of Sacrifices Hollow Soldier
+c1442 Lothric Priest
+c1445 Cathedral Large Hollow Soldier
+c1446 Road of Sacrifices Sorcerer
+c1450 Ludleth of Courland
+c1470 Bonewheel Skeleton
+c1480 Irithyll Phantom 1
+c1490 Irithyll Phantom 2
+c2020 Large Starved Hound
+c2021 Starved Hound
+c2030 Pontiff Knight
+c2040 Monstrosity of Sin
+c2060 Infested Corpse
+c2070 Wretch
+c2080 Maggot Belly Starved Hound
+c2090 Consumed King Oceiros
+c2100 Sewer Centipede
+c2110 Hound Rat
+c2120 Mimic Chest
+c2130 Catacombs Writhing Flesh
+c2131 Anor Londo Writhing Flesh
+c2132 Smouldering Writhing Flesh
+c2140 Basilisk
+c2150 Crystal Lizard
+c2160 Stone-humped Hag
+c2170 Yorshka
+c2180 Corpse-grub
+c2190 Archives Gargoyle
+c2191 Profaned Capital Gargoyle
+c2200 Carthus Sandworm
+c2210 Corvian
+c2230 Jailer
+c2240 Vordt of the Boreal Valley
+c2250 Sulyvahn's Beast
+c2260 Ballista
+c2270 Greater Crab
+c2271 Lesser Crab
+c2280 Large Hound Rat
+c2290 Irithyll Starved Hound
+c3020 Irithyll Giant Slave
+c3021 Giant Slave
+c3040 Abyss Watchers
+c3050 Old Demon King
+c3060 Demon
+c3070 Demon Cleric
+c3071 Demon Cleric Helper
+c3080 Pilgrim Butterfly
+c3090 Cage Spider
+c3100 Ravenous Crystal Lizard
+c3110 Deep Accursed
+c3120 Elder Ghru
+c3140 Ancient Wyvern Mob
+c3141 Ancient Wyvern
+c3160 Dragonslayer Armour
+c3170 Darkwraith
+c3190 Andre
+c3200 Shrine Handmaid
+c3210 Poisonhorn Bug
+c3220 Rock Lizard
+c3230 Demonic Statue
+c3250 Emma
+c5020 Demon Prince
+c5021 Demon Prince Helper 1
+c5022 Demon Prince Helper 2
+c5010 Nameless King
+c5030 King of the Storm
+c5110 Gundyr
+c5140 Pontiff Sulyvahn
+c5150 Aldrich, Devourer of Gods
+c5160 High Lord Wolnir
+c5180 Curse-rotted Greatwood
+c5200 Stray Demon
+c5210 Rosaria
+c5220 Archdeacon of the Deep
+c5221 Wide Deacon of the Deep
+c5222 Tall Deacon of the Deep
+c5223 Cathedral Deacon
+c5225 Wide Deacon
+c5226 Irirthyll Tall Deacon
+c5227 Irirthyll Deacon
+c5240 Fire Witch
+c5250 Twin Princes
+c5251 Twin Princes Helper
+c5260 Yhorm the Giant
+c5270 Dancer of the Boreal Valley
+c5280 Lords of Cinder
+c6000 Farron Follower
+c6010 Father Ariandel
+c6020 Sister Friede
+c6030 Greatwolf
+c6040 Larger Wolf
+c6050 Smaller Wolf
+c6060 Tree Woman
+c6070 Corvian Knight
+c6080 Corvian Settler
+c6081 Corvian Settler
+c6090 Giant Fly
+c6100 Millwood Knight
+c6120 Ariandel Painting Child 1
+c6121 Ariandel Painting Child 2
+c6130 Ariandel Greater Crab
+c6200 Slave Knight Gael 2
+c6201 Slave Knight Gael 1
+c6210 Bridge Darkeater Midir
+c6211 Darkeater Midir
+c6230 Murkman Summoner
+c6231 Murkman
+c6232 Humanity Sprite
+c6240 Angel Pilgrim
+c6250 Angel
+c6260 Ringed Knight
+c6270 Ringed City Cleric
+c6280 Judicator
+c6281 Judicator Helper
+c6290 Hobbled Cleric
+c6300 Passive Locust Preacher
+c6310 Filianore
+c6320 Harald Legion Knight
+c6330 Locust Preacher
+c6331 Small Locust Preacher
+o000200 Chest
+o000250 Corpse
+o000499 Invisible
+o302571 Drakeblood Knight Corpse
+o319180 Hanging Settlement Corpse
+o319251 Warrior of Sunlight Table
+o342000 Archives Scholar Corpse
+o359260 Archdeacon Corpse
+o371000 Giant Blacksmith Corpse
+o371005 Corpse-grub Corpse
+o393000 Laddersmith Gilligan Corpse
+o398600 Path of the Dragon Irithyll Corpse
+o407210 Fire Keeper Corpse
+o407211 Fire Keeper Set Corpse
+o459402 Millwood Knight Corpse
+o459403 Millwood Knight Corpse
+o459404 Millwood Knight Corpse
+o502006 Lothric Knight Corpse
