@@ -1,0 +1,31 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 初期設定 -- Initial settings
+2001 マーカーON -- Marker ON
+2300 ゴーストとの接敵 -- Engagement with Ghost
+2301 ゴースト会話条件 -- Ghost conversation conditions
+2310 ゴースト撃破 -- Defeat Ghost
+2700 四脚撃破判定 -- Quadruped defeat judgment
+2701 Phase1全滅 -- Phase 1 annihilation
+2702 Phase2全滅 -- Phase 2 annihilation
+2703 増援起動 -- Reinforcements activated
+2750 Phase1接敵 -- Phase 1 enemy contact
+2751 Phase2接敵 -- Phase 2 enemy contact
+2752 Phase3接敵 -- Phase 3 enemy contact
+2760 四脚行動切り替え -- Quadruped behavior switching
+2770 四脚行動切り替え_通常固定砲台 -- Quadruped action switching_normal fixed artillery battery
+2780 視界消しを解除 -- Cancel vision erasure
+2800 ドア開け -- open the door
+2801 マーカー消去 -- marker erase
+2900 四脚よろけ確認1 -- Quadruped stagger confirmation 1
+2901 四脚よろけ確認2 -- Four-legged stagger confirmation 2
+2902 四脚HP0 -- Quadruple HP0
+2903 敵残数7割 -- 70% enemies remaining
+2904 敵残数3割 -- 30% enemies remaining
+2910 残存的にTGT -- residually TGT
+3000 ミッションクリア時の無敵 -- Invincibility when clearing a mission
+3700 ミッション開始会話フラグ -- Mission start conversation flag
+3701 ミッション終了会話フラグ -- Mission end conversation flag
+3710 ゴースト会話フラグ1 -- ghost conversation flag 1
+3711 ゴースト会話フラグ2 -- ghost conversation flag 2
+1000000000 敵リスポン -- enemy respawn

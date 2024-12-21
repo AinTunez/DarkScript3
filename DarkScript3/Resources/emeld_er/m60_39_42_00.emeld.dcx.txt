@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1039422200 戦場跡_交戦イベント -- Battlefield Ruins_Battle Event
+1039422202 死亡待機_XX -- Waiting for death_XX
+1039422210 傀儡召喚イベント_XX -- Puppet summoning event_XX
+1039422340 トロル傀儡召喚イベント -- Troll puppet summoning event
+1039422600 地図石碑光SFX切り替え -- Map stone monument light SFX switching
+1039422610 汎用ワープOBJイベント_開始 -- General purpose warp OBJ event_start

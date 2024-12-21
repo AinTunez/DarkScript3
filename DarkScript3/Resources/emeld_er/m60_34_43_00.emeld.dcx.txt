@@ -1,0 +1,10 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1034432260 気球待機イベント -- Balloon standby event
+1034432261 気球破壊イベント -- Balloon destruction event
+1034432262 人形兵解除イベント_XX -- Puppet soldier release event_XX
+1034432580 魔術師の塔梯子 -- magician tower ladder
+1034432610 魔術師の塔扉_一時無効 -- Magician's Tower Door_Temporarily Disabled

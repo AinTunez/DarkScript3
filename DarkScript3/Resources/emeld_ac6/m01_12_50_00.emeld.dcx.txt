@@ -1,0 +1,33 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 リセットイベント -- reset event
+2001 初期設定 -- Initial settings
+2020 決戦A前半_マップ演出設定 -- Decisive Battle A First Half_Map Production Settings
+2021 決戦A後半_マップ演出設定 -- Decisive Battle A Second Half_Map Production Settings
+2030 決戦C前半_マップ演出設定 -- Decisive Battle C First Half_Map Production Settings
+2031 決戦C後半_マップ演出設定 -- Second half of decisive battle C_Map production settings
+2100 次世代撃破後_CS再生判定 -- After defeating the next generation_CS regeneration judgment
+2101 会話用_次世代撃破会話判定一回目 -- For conversation_Next generation defeat conversation judgment first time
+2102 会話用_次世代撃破会話判定二回目 -- Conversation_Next Generation Defeating Conversation Judgment Second Time
+2300 次世代プロト残像初期設定 -- Next generation proto afterimage initial settings
+2500 ボスHU特殊効果かけ2 -- Boss HU special effects 2
+2510 会話判定用_HU2会話一回目 -- For conversation judgment_HU2 conversation first time
+2511 会話判定用_HU2会話二回目 -- For conversation judgment_HU2 conversation second time
+2512 会話判定用_HU2会話三回目 -- For conversation judgment_HU2 conversation third time
+3000 プロトAC_残像1召喚判定 -- Proto AC_Afterimage 1 Summoning Judgment
+3001 プロトAC_残像2召喚判定 -- Proto AC_Afterimage 2 Summon Judgment
+3002 プロトAC_残像3召喚判定 -- Proto AC_Afterimage 3 Summon Judgment
+3003 プロトAC_残像4召喚判定 -- Proto AC_Afterimage 4 Summon Judgment
+3020 プロトAC_残像1アタッチ判定 -- Proto AC_Afterimage 1 Attach Judgment
+3021 プロトAC_残像2アタッチ判定 -- Proto AC_Afterimage 2 Attach Judgment
+3022 プロトAC_残像3アタッチ判定 -- Proto AC_Afterimage 3 Attach Judgment
+3023 プロトAC_残像4アタッチ判定 -- Proto AC_Afterimage 4 Attach Judgment
+3030 プロトAC_残像1デタッチ判定 -- ProtoAC_Afterimage 1 Detachment Judgment
+3031 プロトAC_残像2デタッチ判定 -- ProtoAC_Afterimage 2 Detachment Judgment
+3032 プロトAC_残像3デタッチ判定 -- ProtoAC_Afterimage 3 Detachment Judgment
+3033 プロトAC_残像4デタッチ判定 -- ProtoAC_Afterimage 4 Detachment Judgment
+3100 プロトAC_残像1への命令イベント -- ProtoAC_Command event to afterimage 1
+3125 プロトAC_残像2への命令イベント -- ProtoAC_Command event to afterimage 2
+3150 プロトAC_残像3への命令イベント -- ProtoAC_Command event to afterimage 3
+3175 プロトAC_残像4への命令イベント -- ProtoAC_Command event to afterimage 4
+1000000000 敵リスポン -- enemy respawn

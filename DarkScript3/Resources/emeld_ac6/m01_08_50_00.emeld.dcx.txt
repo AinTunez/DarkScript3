@@ -1,0 +1,183 @@
+0 コンストラクタ -- constructor
+2000 テストイベント -- test event
+2001 追従イベント -- Follow event
+2005 初期化イベント -- initialization event
+2006 エレベータ後作戦ライン有効化 -- Activate operation line after elevator
+2010 テスト用_ミッション終了 -- For testing_mission completed
+2030 自爆衛星射撃制御イベント_前列 -- Suicide satellite fire control event_front row
+2031 自爆衛星射撃制御イベント_中列 -- Suicide satellite fire control event_middle row
+2032 自爆衛星射撃制御イベント_後列 -- Suicide satellite fire control event_back row
+2033 自爆衛星射撃制御イベント_直下 -- Suicide satellite fire control event_directly below
+2034 自爆衛星射撃制御イベント_前列_逆順 -- Suicide satellite fire control event_front row_reverse order
+2035 自爆衛星射撃制御イベント_中列_逆順 -- Suicide satellite fire control event_middle row_reverse order
+2036 自爆衛星射撃制御イベント_直下_中盤 -- Suicide satellite fire control event_directly_middle stage
+2037 自爆衛星射撃制御イベント_直下_序盤 -- Suicide satellite fire control event_directly_beginning
+2040 自爆衛星発射予兆 -- Suicide satellite launch sign
+2050 ウミグモ戦_初期化解除 -- Sea spider battle_Initialization cancellation
+2051 チェックポイントキック -- checkpoint kick
+2052 チェックポイントキック_エレベータ抜け後 -- Checkpoint kick_after exiting the elevator
+2054 ウミグモ戦_死亡時イベント_派生_サウンドステート -- Sea spider battle_Death event_Derivation_Sound state
+2055 ウミグモ戦_死亡時イベント -- Sea spider battle_death event
+2056 条件判定_終了時ハッキング完了判定 -- Condition judgment_Hacking completion judgment at the end
+2057 追加イベント_マーカー制御 -- Additional events_marker control
+2200 条件判定_ボス部屋ザコ全滅判定 -- Condition judgment_Boss room Zako annihilation judgment
+2201 条件判定_ボス部屋ザコ全滅判定_シェルパ判定 -- Condition judgment_Boss room Zako annihilation judgment_Sherpa judgment
+2700 自爆衛星_ヒット通知_終盤 -- Suicide satellite_hit notification_endgame
+2720 自爆衛星_移動指示_3点間移動_終盤 -- Suicide satellite_Movement instructions_Move between 3 points_Late stage
+2740 自爆衛星_ターゲットをPCへ_終盤 -- Suicide satellite_target to PC_endgame
+2760 自爆衛星_初期化処理_終盤 -- Suicide satellite_initialization process_final stage
+2800 自爆衛星_ヒット通知_中盤 -- Suicide satellite_hit notification_middle stage
+2820 自爆衛星_移動指示_3点間移動_中盤 -- Suicide satellite_Movement instructions_Move between 3 points_Middle stage
+2840 自爆衛星_ターゲットをPCへ_中盤 -- Suicide satellite_target to PC_middle stage
+2860 自爆衛星_初期化処理_中盤 -- Suicide satellite_initialization process_middle stage
+2900 自爆衛星_ヒット通知 -- Suicide satellite_hit notification
+2920 自爆衛星_移動指示_3点間移動 -- Suicide satellite_Movement instructions_Move between 3 points
+2940 自爆衛星_ターゲットをPCへ -- Suicide satellite_target to PC
+2960 自爆衛星_初期化処理 -- Suicide satellite_initialization process
+2970 自爆衛星_レーザー速度変更特殊効果_序盤 -- Suicide satellite_Laser speed change special effect_Early stage
+2971 自爆衛星_レーザー速度変更特殊効果_中盤 -- Suicide satellite_Laser speed change special effect_Middle stage
+2972 自爆衛星_レーザー速度変更特殊効果_終盤 -- Suicide satellite_laser speed change special effect_endgame
+3000 条件判定_自爆衛星エリアにプレイヤが居るか -- Condition judgment_Is there a player in the suicide satellite area?
+3001 条件判定_特攻MTエリアにプレイヤが居るか -- Condition judgment_Is there a player in the special attack MT area?
+3002 条件判定_自爆衛星自爆タイプが全滅しているか -- Condition judgment_Are all self-destruct satellites of the self-destruct type destroyed?
+3003 条件判定_ボスエリアにプレイヤが居るか -- Conditional judgment_Is there a player in the boss area?
+3004 条件判定_ボスを倒したか -- Conditional judgment_Did you defeat the boss?
+3005 条件判定_自爆衛星直下エリアにいるか -- Condition judgment_Are you in the area directly under the suicide satellite?
+3006 条件判定_残存チェック_通常自爆衛星 -- Condition judgment_Survival check_Normal self-destruct satellite
+3008 条件判定_マーカー01の付近か -- Condition judgment_Is it near marker 01?
+3009 条件判定_自爆衛星直下_中盤エリアにいるか -- Condition judgment_Directly below the suicide satellite_Are you in the middle area?
+3010 条件判定_自爆衛星直下_序盤エリアにいるか -- Condition judgment_Directly below the suicide satellite_Are you in the early area?
+3011 条件判定_自爆召喚衛星が全滅しているか -- Condition Judgment_Are all the self-destruct summoning satellites destroyed?
+3020 条件判定_屋上についたか -- Condition judgment_Are you on the roof?
+3030 条件判定_エレベータを起動したか -- Condition judgment_Did the elevator start?
+3031 条件判定_ウミグモに会話用特殊効果かかったか -- Conditional Judgment_Did the sea spider have a special effect for conversation?
+3050 条件判定_マーカー_エレベータに乗ったか -- Condition judgment_Marker_Did you ride the elevator?
+3060 条件判定_会話用_自爆衛星と初接敵したか -- Condition judgment_For conversation_Did you make contact with a suicide satellite for the first time?
+3061 条件判定_会話用_橋中盤に差し掛かったか -- Condition judgment_For conversation_Are you approaching the middle of the bridge?
+3062 条件判定_会話用_カゴランもうちょい -- Conditional judgment_For conversation_Kagoran a little more
+3063 条件判定_会話用_渡り切ったの偉い -- Condition judgment_For conversation_It's great that you made it through
+3065 条件判定_会話用_屋内敵と初接敵 -- Condition determination_For conversation_First contact with indoor enemy
+3066 条件判定_会話用_橋の下判定 -- Condition judgment_for conversation_under the bridge judgment
+3068 条件判定_会話用_衛星砲台詞 -- Conditional judgment_for conversation_satellite gun lines
+3070 条件判定_会話用_ウミグモAP75 -- Condition judgment_for conversation_sea spider AP75
+3071 条件判定_会話用_ウミグモAP50 -- Condition judgment_for conversation_sea spider AP50
+3072 条件判定_会話用_ウミグモAP25 -- Condition judgment_for conversation_sea spider AP25
+3073 条件判定_会話用_ウミグモHU -- Condition judgment_for conversation_sea spider HU
+3074 条件判定_会話用_PC劣勢冒頭会話後 -- Condition judgment_For conversation_PC inferiority after opening conversation
+3075 条件判定_会話用_PC劣勢HU後 -- Condition judgment_For conversation_After PC inferiority HU
+3080 条件判定_サウンド用_HUしたか -- Condition judgment_for sound_HU was done?
+3090 条件判定_衛星砲ヒット会話判定 -- Condition Judgment_Satellite Cannon Hit Conversation Judgment
+3100 マーカー制御_ターゲット追加_01 -- Marker control_target addition_01
+3110 マーカー制御_表示_目標01 -- Marker control_display_target 01
+3111 マーカー制御_非表示_目標01 -- Marker control_hide_target 01
+3120 マーカー制御_表示_目標02 -- Marker control_display_target 02
+3121 マーカー制御_非表示_目標02 -- Marker control_hide_target 02
+3130 マーカー制御_表示_エレベータ目標 -- Marker control_display_elevator target
+3131 マーカー制御_非表示_エレベータ目標 -- Marker control_hide_elevator target
+3132 マーカー制御_自爆衛星_TGT -- Marker control_Suicide satellite_TGT
+3199 マーカー制御_初期化イベント -- Marker control_initialization event
+3200 会話フラグ_108500100_ビジター -- Conversation flag_108500100_visitor
+3201 会話フラグ_108500500_リフトで上った先は -- Conversation Flag_108500500_Where you go up on the lift
+3202 会話フラグ_108500900_上層に到達しました -- Conversation flag_108500900_Upper level reached
+3203 会話フラグ_108500920_封鎖区域への侵入者を検出 -- Conversation Flag_108500920_Intruder detected in sealed area
+3204 会話フラグ_108500940_他に道はない -- Conversation flag_108500940_There is no other way
+3205 会話フラグ_108500960_排除します -- Conversation flag_108500960_exclude
+3206 会話フラグ_108501000_封鎖区域への侵入者を検出 -- Conversation Flag_108501000_Intruder detected in sealed area
+3207 会話フラグ_108501020_衛星砲のおでましだ -- Conversation flag_108501020_Satellite gun appearance
+3208 会話フラグ_108501300_強硬突破するしかなさそうです -- Conversation Flag_108501300_It seems we have no choice but to forcefully break through.
+3209 会話フラグ_108501400_焼かれるんじゃないよ -- Conversation flag_108501400_Don't get burned
+3210 会話フラグ_108501500_極めて出力の高いレーザーです -- Conversation flag_108501500_It is an extremely high output laser
+3211 会話フラグ_108501700_まさか機体ひとつで衛星砲の狙撃を -- Conversation Flag_108501700_Sniping satellite cannon with just one aircraft!
+3212 会話フラグ_108501800_侵入者が衛星狙撃地点を突破 -- Conversation Flag_108501800_Intruder breached the satellite sniping point
+3213 会話フラグ_108501900_カーゴランチャーまであと少し -- Conversation Flag_108501900_ Just a few steps left until the cargo launcher
+3214 会話フラグ_108501920_封鎖施設に接近する侵入者を検出 -- Conversation Flag_108501920_Detects an intruder approaching a closed facility
+3215 会話フラグ_108501940_せっかくだ -- Conversation flag_108501940_Thank you
+3216 会話フラグ_108502000_カゴラン起動 -- Conversation flag_108502000_Kagoran start
+3217 会話フラグ_108501960_排除します -- Conversation flag_108501960_exclude
+3218 会話フラグ_108502100_あれですあのコンテナに乗り込めば -- Conversation Flag_108502100_That's it. If you get into that container.
+3219 会話フラグ_108502200_あれですコンテナにアクセスしてください -- Conversation flag_108502200_Please access the container
+3220 会話フラグ_108502300_あとはあんたがそいつに乗り込んで -- Conversation Flag_108502300_Then you just get on board.
+3221 会話フラグ_108502400_待ってください敵性反応 -- Conversation flag_108502400_Please wait hostile reaction
+3222 会話フラグ_108502500_この機体は -- Conversation flag_108502500_This aircraft is
+3223 会話フラグ_108502600_あんたまずいのに絡まれたよ -- Conversation Flag_108502600_You got involved in something bad.
+3224 会話フラグ_108502900_ジェネレータからコーラル反応 -- Conversation flag_108502900_Coral reaction from generator
+3225 会話フラグ_108503000_敵機損耗 -- Conversation Flag_108503000_Enemy Aircraft Attrition
+3226 会話フラグ_108503300_そいつを作った技研はアイビスの火で滅んだが -- Conversation Flag_108503300_The Giken that created it was destroyed by Ibis's fire.
+3227 会話フラグ_108503400_レイヴン機体が損傷しています -- Conversation Flag_108503400_Raven aircraft is damaged
+3228 会話フラグ_108503700_おいおい -- Conversation flag_108503700_Hey
+3229 会話フラグ_108503740_うちの製品開発のヒントにもなりそうだ -- Conversation flag_108503740_It might also be a hint for our product development
+3230 会話フラグ_108503741_久々に工房に籠りたい気分だね -- Conversation Flag_108503741_I feel like I want to stay in the workshop for the first time in a while.
+3231 会話フラグ_108503800_敵機損傷拡大 -- Conversation flag_108503800_enemy aircraft damage expansion
+3232 会話フラグ_108503900_押されてるよ、ビジター -- Conversation Flag_108503900_Pressed, Visitor
+3233 会話フラグ_108504000_敵機も損耗しています -- Conversation Flag_108504000_Enemy aircraft are also damaged
+3234 会話フラグ_108504100_敵機システムダウン -- Conversation flag_108504100_Enemy aircraft system down
+3235 会話フラグ_108504500_無言 -- Conversation flag_108504500_silence
+3236 会話フラグ_108504900_面白いものを見せてもらったよビジター -- Conversation flag_108504900_I saw something interesting, visitor.
+3237 会話フラグ_108505300_よし始めるよ -- Conversation flag_108505300_Okay, let's get started.
+3238 会話フラグ_108505700_ここまでかい -- Conversation flag_108505700_That's all?
+3239 会話フラグ_108501710_衛星砲よけるのやるじゃん -- Conversation flag_108501710_Dodge the satellite cannon.
+3250 会話用フラグ_橋の下にいない -- Conversation flag_Not under the bridge
+3251 会話用フラグ_橋の下にいる -- Conversation flag_under the bridge
+3400 フラグ操作_即時賑やかし許可 -- Flag operation_Immediate liveliness permission
+3401 フラグ操作_即時賑やかし不可 -- Flag operation_immediate liveliness not possible
+3410 フラグ操作_待機賑やかし許可 -- Flag operation_Waiting liveliness permission
+3411 フラグ操作_待機賑やかし不可 -- Flag operation_No liveliness while waiting
+3420 イベントフラグ_即時賑やかし判定フラグ -- Event flag_Immediate liveliness determination flag
+3425 イベントフラグ_待機賑やかし判定フラグ -- Event flag_wait liveliness determination flag
+3500 判定フラグ_自爆衛星エリアにプレイヤが居る -- Judgment flag_There is a player in the suicide satellite area
+3501 判定フラグ_特攻MTエリアにプレイヤが居る -- Judgment flag_There is a player in the special attack MT area
+3502 判定フラグ_自爆衛星自爆タイプが全滅して居る -- Judgment flag_Suicide satellite self-destruct type is completely annihilated
+3503 判定フラグ_ボスエリアにプレイヤが居る -- Judgment flag_There is a player in the boss area
+3504 判定フラグ_ボス倒した -- Judgment flag_boss defeated
+3505 判定フラグ_自爆衛星直下エリアにいる -- Judgment flag_You are in the area directly under the suicide satellite
+3506 判定フラグ_自爆衛星残存判定 -- Judgment flag_Suicide satellite survival judgment
+3507 判定フラグ_自爆衛星停止フラグ -- Judgment flag_suicide satellite stop flag
+3508 判定フラグ_目標マーカー付近に居る -- Judgment flag_I am near the target marker
+3509 判定フラグ_自爆衛星直下_中盤エリアにいる -- Judgment flag_Directly below the suicide satellite_In the middle area
+3510 判定フラグ_自爆衛星直下_序盤エリアにいる -- Judgment flag_Directly below the suicide satellite_In the early area
+3511 判定フラグ_自爆召喚衛星が全滅している -- Judgment flag_Suicide summoning satellites are completely destroyed
+3520 判定フラグ_屋上についた -- Judgment flag_reached the rooftop
+3530 判定フラグ_会話01 -- Judgment flag_conversation 01
+3531 判定フラグ_ミッション導入時会話終わり -- Judgment flag_End of conversation when mission is introduced
+3550 判定フラグ_予兆完了フラグ -- Judgment flag_Predictive completion flag
+3560 判定フラグ_DoOnce用_序盤エリアに来た -- Judgment flag _For DoOnce_ Came to the early area
+3561 判定フラグ_DoOnce用_中盤エリアに来た -- Judgment flag _For DoOnce_ Came to the middle area
+3562 判定フラグ_DoOnce用_終盤エリアに来た -- Judgment flag _For DoOnce_ Arrived at the final stage area
+3570 判定フラグ_カーゴランチャハッキング -- Judgment Flag_Cargo Launcher Hacking
+3571 判定フラグ_ダミーカーゴランチャハッキング -- Judgment Flag_Dummy Cargo Launcher Hacking
+3572 判定フラグ_BGM遷移 -- Judgment flag_BGM transition
+3573 判定フラグ_BGM遷移_ボス撃破 -- Judgment flag_BGM transition_Boss defeat
+3581 判定フラグ_衛星砲当たった_1回 -- Judgment flag_Satellite gun hit_1 time
+3582 判定フラグ_衛星砲当たった_2回 -- Judgment flag_Satellite gun hit_2 times
+3583 判定フラグ_衛星砲当たった_3回 -- Judgment flag_Satellite gun hit_3 times
+3590 判定フラグ_チェックポイント通ったか -- Judgment flag_Did you pass the checkpoint?
+3591 判定フラグ_チェックポイント_エレベータ抜け通ったか -- Judgment flag_Checkpoint_Did you pass through the elevator?
+3592 判定フラグ_自爆衛星停止 -- Judgment flag_Suicide satellite stopped
+3600 シェルパ差し替えイベント -- Sherpa replacement event
+3701 CPからきたよフラグ01 -- I came from CP flag 01
+3702 CPからきたよフラグ02 -- I came from CP flag 02
+3800 自爆衛星ショートワープイベント -- Suicide satellite short warp event
+3801 自爆衛星_初期化イベント -- Suicide satellite_initialization event
+3810 自爆衛星_挙動確認用_特殊待機解除 -- Suicide satellite_for behavior confirmation_special standby cancellation
+3820 会話判定条件_橋の下を一度でも通ったか -- Conversation Judgment Conditions_Did you pass under the bridge at least once?
+3825 会話判定フラグ_橋の下を一度でも通ったか -- Conversation judgment flag_Did you pass under the bridge at least once?
+3880 自爆衛星_ボス前_一斉攻撃 -- Suicide satellite_before the boss_simultaneous attack
+3900 自爆衛星ジェネレートイベント -- Suicide satellite generation event
+3901 ウミグモ初期化イベント -- Sea spider initialization event
+3910 破壊可能アセット制御 -- Destructible asset control
+3920 エレベータ結果再現 -- Elevator result reproduction
+3925 CPからウミグモ挑戦中フラグ -- Sea spider challenge flag from CP
+3935 ウミグモ襲撃イベント -- Sea spider attack event
+3936 ウミグモ襲撃イベント02 -- Sea spider attack event 02
+3937 ウミグモ襲撃イベント03 -- Sea spider attack event 03
+3938 ウミグモ襲撃一連流れ版 -- Sea spider attack sequence version
+3970 弱スロー解除イベント -- Light slow release event
+3980 フラグ操作_自爆衛星のうち誰かが発見した -- Flag operation_Someone discovered the suicide satellite
+3981 フラグ操作_自爆衛星のうち誰かが発見した_中盤 -- Flag operation_Someone discovered one of the suicide satellites_Middle stage
+3982 フラグ操作_自爆衛星のうち誰かが発見した_終盤 -- Flag operation_Someone discovered one of the suicide satellites_End stage
+3985 フラグ操作_ウミグモボス戦 -- Flag operation_Sea spider boss battle
+3990 イベントフラグ_自爆衛星のうち誰かが発見した -- Event flag_Someone discovered one of the suicide satellites
+3991 イベントフラグ_自爆衛星のうち誰かが発見した_中盤 -- Event flag_Someone discovered a suicide satellite_Middle stage
+3992 イベントフラグ_自爆衛星のうち誰かが発見した_終盤 -- Event flag_Someone discovered one of the suicide satellites_End stage
+3997 イベントフラグ_自爆衛星_発見通知 -- Event flag_suicide satellite_discovery notification
+3998 イベントフラグ_会話フラグ_全ての衛星砲の内誰か発見 -- Event flag_Conversation flag_Someone found among all satellite cannons

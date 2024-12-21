@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+1000000000 敵リスポン -- enemy respawn
+1035512210 黒き刃OBJステルス（姿出し）（） -- Black Blade OBJ Stealth (Appearance) ()
+1035512211 黒き刃OBJステルス -- Black Blade OBJ Stealth
+1035512220 黒き刃OBJステルス（姿消し）（） -- Black Blade OBJ Stealth (Disappearance) ()

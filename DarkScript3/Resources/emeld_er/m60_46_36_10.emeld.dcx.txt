@@ -1,0 +1,15 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1046360700 NPC321見張り塔の貴人_砦で再開_NPC初期化イベント -- NPC321 Watchtower Noble_Restart at the fort_NPC initialization event
+1046362203 ハシゴ登録：岬の塔 -- Ladder registration: Cape Tower
+1046362220 亜人死体化 -- demihuman corpse
+1046362260 王軍VS亜人_交戦イベント -- Royal Army VS Ajin_Battle Event
+1046362300 見張り塔強敵撃破で王軍兵士出さない -- No royal soldiers will be sent out after defeating a strong enemy in the guard tower.
+1046362310 見張り塔亜人に占拠される -- Watchtower occupied by demihumans
+1046362620 チュートリアルメッセージ_壺系入手 -- Tutorial message_Obtaining pot type

@@ -18,26 +18,35 @@ namespace DarkScript3
     public partial class EditorGUI : UserControl
     {
         private string FileVersion;
-        private EventScripter Scripter;
-        private InstructionDocs Docs;
-        private ScriptSettings Settings;
-        private AutocompleteContext AutoContext;
+        private readonly EventScripter Scripter;
+        private readonly InstructionDocs Docs;
+        private readonly ScriptSettings Settings;
+        private readonly InitData.Links Links;
+        private readonly AutocompleteContext AutoContext;
         private bool codeChanged;
         private bool savedAfterChanges;
-        private List<FancyJSCompiler.CompileError> LatestWarnings;
+        private List<Exception> LatestWarnings;
 
-        private SharedControls SharedControls;
-        private AutocompleteMenu InstructionMenu;
-        private Regex globalConstantRegex;
+        private readonly SharedControls SharedControls;
+        private readonly AutocompleteMenu InstructionMenu;
+        private readonly Regex globalConstantRegex;
 
-        private Dictionary<string, (string title, string text)> ToolTips = new Dictionary<string, (string, string)>();
+        private readonly Dictionary<string, (string title, string text)> ToolTips = new();
 
-        public EditorGUI(SharedControls controls, EventScripter scripter, InstructionDocs docs, ScriptSettings settings, string fileVersion, string text)
+        public EditorGUI(
+            SharedControls controls,
+            EventScripter scripter,
+            InstructionDocs docs,
+            ScriptSettings settings,
+            string fileVersion,
+            string text,
+            InitData.Links links)
         {
             SharedControls = controls;
             Scripter = scripter;
             Docs = docs;
             Settings = settings;
+            Links = links;
             AutoContext = new AutocompleteContext(docs.ResourceString, scripter.EmevdFileName);
             FileVersion = fileVersion;
             globalConstantRegex = JSRegex.GetGlobalConstantRegex(InstructionDocs.GlobalConstants.Concat(Docs.GlobalEnumConstants.Keys));
@@ -55,13 +64,13 @@ namespace DarkScript3
             editor.Text = text;
             editor.ClearUndo();
             CodeChanged = false;
+            InstructionMenu = new AutocompleteMenu(editor);
             InitUI();
             // Colors and font are set after this so that they also apply to the doc box as appropriate.
         }
 
         private void InitUI()
         {
-            InstructionMenu = new AutocompleteMenu(editor);
             InstructionMenu.BackColor = Color.FromArgb(37, 37, 38);
             InstructionMenu.ForeColor = Color.FromArgb(240, 240, 240);
             InstructionMenu.SelectedColor = Color.FromArgb(0, 122, 204);
@@ -112,19 +121,20 @@ namespace DarkScript3
                 if (Docs.Translator == null) return false;
                 return Docs.Translator.Selectors.ContainsKey(id) || Docs.Translator.LabelDocs.ContainsKey(id);
             }
-            foreach (string s in Docs.AllArgs.Keys)
+            foreach (string s in Docs.CallArgs.Keys)
             {
                 string menuText = s;
                 string toolTipTitle = s;
                 string toolTipText;
                 string instrId = null;
                 bool lowQuality = false;
+                InitData.DocID docId = new(s);
                 InstructionTranslator.ShortVariant sv = null;
                 // Perhaps some of the logic here should be hidden within Translator
                 if (Docs.Functions.TryGetValue(s, out (int, int) indices))
                 {
                     instrId = $"{indices.Item1}[{indices.Item2:d2}]";
-                    toolTipText = $"{instrId} ({ArgString(s)})";
+                    toolTipText = $"{instrId} ({ArgString(docId)})";
                     if (Docs.Translator != null && Docs.Translator.ShortSelectors.ContainsKey(instrId))
                     {
                         // If there are short selectors, prefer them
@@ -134,11 +144,11 @@ namespace DarkScript3
                 else if (Docs.Translator != null && Docs.Translator.ShortDocs.TryGetValue(s, out sv))
                 {
                     instrId = sv.Cmd;
-                    toolTipText = $"{instrId} ({ArgString(s)})";
+                    toolTipText = $"{instrId} ({ArgString(docId)})";
                 }
                 else if (Docs.Translator != null && Docs.Translator.CondDocs.TryGetValue(s, out InstructionTranslator.FunctionDoc funcDoc))
                 {
-                    toolTipText = $"({ArgString(s)})";
+                    toolTipText = $"({ArgString(docId)})";
                 }
                 else
                 {
@@ -156,6 +166,11 @@ namespace DarkScript3
                     {
                         ToolTips[alias] = ToolTips[menuText];
                     }
+                }
+                string initName = "$" + menuText;
+                if (Docs.TypedInitIndex.ContainsKey(initName))
+                {
+                    ToolTips[initName] = ToolTips[menuText];
                 }
 
                 if (instrId != null)
@@ -199,13 +214,13 @@ namespace DarkScript3
 
             // Default sort for speedier future OrderBy sort
             items.Sort();
-            InstructionMenu.Items.SetAutocompleteItems(new DocAutocompleteItemList(items, editor, Docs, SharedControls.Metadata, AutoContext));
+            InstructionMenu.Items.SetAutocompleteItems(new DocAutocompleteItemList(items, editor, Docs, Links, SharedControls.Metadata, AutoContext));
         }
 
         // Info for GUI
         public string DisplayTitle => Scripter.EmevdFileName + (CodeChanged ? "*" : "");
         public string DisplayTitleWithDir => Scripter.EmevdFileName + (CodeChanged ? "*" : "") + " - " + Scripter.EmevdFileDir;
-        public string EMEVDPath => Scripter.EMEVDPath;
+        public string EMEVDPath => Scripter.EmevdPath;
         public string ResourceString => Docs.ResourceString;
 
         private bool CodeChanged
@@ -258,11 +273,6 @@ namespace DarkScript3
             return success;
         }
 
-        public bool MayBeFancy()
-        {
-            return editor.GetRanges(@"\$Event\(").Count() > 0 && Settings.AllowPreprocess;
-        }
-
         private bool SaveJSAndEMEVDFileOperation(out Range errorSelect)
         {
             string text = editor.Text;
@@ -272,27 +282,37 @@ namespace DarkScript3
             {
                 EMEVD result;
                 FancyJSCompiler.CompileOutput output = null;
+                // TODO: Could prompt for links again
                 if (fancyHint && Settings.AllowPreprocess && Docs.Translator != null)
                 {
-                    result = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).Pack(text, Scripter.JsFileName, out output);
+                    result = new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).Pack(text, Links, out output);
                 }
                 else
                 {
-                    result = Scripter.Pack(text, Scripter.JsFileName);
+                    result = Scripter.Pack(text, Links);
                 }
-                if (File.Exists(Scripter.EMEVDPath))
+                if (File.Exists(Scripter.EmevdPath))
                 {
-                    SFUtil.Backup(Scripter.EMEVDPath);
+                    SFUtil.Backup(Scripter.EmevdPath);
                 }
-                result.Write(Scripter.EMEVDPath);
+                result.Write(Scripter.EmevdPath);
                 SaveJSFile();
-                string saveInfo = "";
-                if (output != null && output.Warnings != null && output.Warnings.Count > 0)
+                Scripter.UpdateLinksAfterPack(Links);
+                if ((output != null && output.Warnings.Count > 0) || Scripter.PackWarnings.Count > 0)
                 {
-                    LatestWarnings = output.Warnings;
-                    saveInfo += ". Use Ctrl+J to view warnings";
+                    LatestWarnings = new();
+                    if (output != null)
+                    {
+                        LatestWarnings.Add(new FancyJSCompiler.FancyCompilerException { Errors = output.Warnings });
+                    }
+                    LatestWarnings.AddRange(Scripter.PackWarnings);
+                    SharedControls.SetStatus("SAVED WITH WARNINGS. Use Ctrl+J to view warnings");
                 }
-                SharedControls.SetStatus("SAVE SUCCESSFUL" + saveInfo);
+                else
+                {
+                    SharedControls.SetStatus("SAVE SUCCESSFUL");
+                }
+                // Clear state
                 if (editor.UndoEnabled)
                 {
                     savedAfterChanges = true;
@@ -315,7 +335,7 @@ namespace DarkScript3
                     extra.AppendLine(Environment.NewLine);
                     extra.Append(ProgramVersion.GetCompatibilityMessage(Scripter.JsFileName, Docs.ResourceString, FileVersion));
                 }
-                errorSelect = ShowCompileError(Scripter.JsFileName, ex, extra.ToString());
+                errorSelect = ShowCompileError(Scripter.JsFileName, new List<Exception>() { ex }, extra.ToString());
                 return false;
             }
         }
@@ -343,7 +363,7 @@ namespace DarkScript3
             HeaderData header = HeaderData.Create(Scripter, Docs, Settings.SettingsDict);
             header.Write(sb, Docs);
             sb.AppendLine(editor.Text);
-            File.WriteAllText($"{Scripter.EMEVDPath}.js", sb.ToString());
+            File.WriteAllText($"{Scripter.EmevdPath}.js", sb.ToString());
             FileVersion = ProgramVersion.VERSION;
         }
 
@@ -428,7 +448,7 @@ namespace DarkScript3
         // 2. Precompute when typing
         // 3. Autocomplete after precompute
         private static readonly List<string> metadataTypes =
-            new List<string> { "param", "fmg", "entity", "mapint", "mapparts", "eventflag" };
+            new List<string> { "param", "fmg", "entity", "mapint", "mapparts", "eventflag", "eventid" };
 
         private Action<Point> moveOutOfBounds;
         private void Editor_MouseMove(object sender, MouseEventArgs e)
@@ -470,7 +490,7 @@ namespace DarkScript3
             }
             // e.HoveredWord is an [a-zA-Z] (hardcoded in FCTB), though we want to make the same word either apply to
             // ToolTips (function names) or to various data we can look up and cache.
-            Range tipRange = editor.GetRange(e.Place, e.Place).GetFragment("[a-zA-Z0-9_.]");
+            Range tipRange = editor.GetRange(e.Place, e.Place).GetFragment("[a-zA-Z0-9_.$]");
             string hoveredWord = e.HoveredWord == null ? "" : tipRange.Text;
             Point p = editor.PlaceToPoint(e.Place);
             if (ToolTips.ContainsKey(hoveredWord))
@@ -486,18 +506,35 @@ namespace DarkScript3
                     // TODO: Can this be simplified to be more consistent?
                     return;
                 }
-                (string title, string text) = ToolTips[hoveredWord];
-                string s = title + "\n" + text;
+                string s = null;
+                if (Docs.TypedInitIndex.ContainsKey(hoveredWord))
+                {
+                    ParseFuncAtRange(tipRange, Docs, out InitData.DocID docId, out _);
+                    if (docId.Event >= 0 && Docs.LookupArgDocs(docId, Links, out _, out InitData.EventInit eventInit) && eventInit != null)
+                    {
+                        s = $"{hoveredWord}({eventInit.ID})\n{ArgString(docId)}";
+                        if (eventInit.Name != null)
+                        {
+                            s += "\n" + eventInit.Name;
+                        }
+                    }
+                }
+                if (s == null)
+                {
+                    (string title, string text) = ToolTips[hoveredWord];
+                    s = title + "\n" + text;
+                }
                 ShowTip(s, p);
                 HoverTipRange = tipRange;
                 return;
             }
             // Can probably add variables at some point, but for now only respect int constants.
+            // TODO: Some things are uints, like entity ids and event ids
             if (int.TryParse(hoveredWord, out int value) && SharedControls.Metadata.IsOpen())
             {
                 List<string> argList = new List<string>();
-                ParseFuncAtRange(tipRange, out string funcName, out int argIndex, argList);
-                EMEDF.ArgDoc argDoc = Docs.GetHeuristicArgDoc(funcName, argIndex);
+                ParseFuncAtRange(tipRange, Docs, out InitData.DocID docId, out int argIndex, argList);
+                EMEDF.ArgDoc argDoc = Docs.GetHeuristicArgDoc(docId, argIndex, Links);
                 string dataType = argDoc?.MetaType?.DataType;
                 if (metadataTypes.Contains(dataType))
                 {
@@ -516,7 +553,7 @@ namespace DarkScript3
                             string text = data.Desc;
                             if ((data is SoapstoneMetadata.EntityData ent && ent.Type != "Self") || data is SoapstoneMetadata.EntryData)
                             {
-                                text += "\nRight-click tooltip to open in DSMapStudio";
+                                text += $"\nRight-click tooltip to open in {SharedControls.Metadata.ServerName}";
                             }
                             ShowTip(text, p, data: data);
                         }
@@ -536,7 +573,7 @@ namespace DarkScript3
                     else if (dataType == "param" && argDoc.MetaType.MultiNames != null
                         && argDoc.MetaType.MultiNames.Count == 2 && argDoc.MetaType.OverrideTypes != null)
                     {
-                        List<int> multiArgs = Docs.GetArgsAsInts(argList, funcName, argDoc.MetaType.MultiNames);
+                        List<int> multiArgs = Docs.GetArgsAsInts(argList, docId.Func, argDoc.MetaType.MultiNames);
                         // Param multi-type is an enum and int. Use both of these together.
                         // Currently this will only pop up for the int values, due to the int filter above.
                         if (multiArgs != null && multiArgs.Count == 2)
@@ -564,9 +601,14 @@ namespace DarkScript3
                     }
                     else if (dataType == "mapparts" && argDoc.MetaType.MultiNames != null && argDoc.MetaType.MultiNames.Count == 4)
                     {
-                        List<int> multiArgs = Docs.GetArgsAsInts(argList, funcName, argDoc.MetaType.MultiNames);
-                        if (multiArgs != null && multiArgs.Count == 4)
+                        List<int> multiArgs = Docs.GetArgsAsInts(argList, docId.Func, argDoc.MetaType.MultiNames);
+                        if (multiArgs != null && multiArgs.Count > 0)
                         {
+                            // Existing mapparts should be have either 2 or 4 args
+                            while (multiArgs.Count < 4)
+                            {
+                                multiArgs.Add(0);
+                            }
                             showData(SharedControls.Metadata.GetMapNameData(AutoContext.Game, multiArgs));
                         }
                     }
@@ -598,7 +640,7 @@ namespace DarkScript3
 
         private void Editor_SelectionChanged(object sender, EventArgs e)
         {
-            Range arguments = ParseFuncAtRange(editor.Selection, out string funcName, out int argIndex);
+            Range arguments = ParseFuncAtRange(editor.Selection, Docs, out InitData.DocID docId, out int argIndex);
 
             // Preemptively remove tooltip if changing the text-cursor-based tooltip range.
             // It may potentially get immediately added back here.
@@ -641,14 +683,14 @@ namespace DarkScript3
             // Process funcName/argIndex stuff
             if (argIndex >= 0)
             {
-                ShowArgToolTip(funcName, arguments, argIndex);
+                ShowArgToolTip(docId, arguments, argIndex);
             }
-            SharedControls.LoadDocText(funcName, argIndex, Docs, false);
-            AutoContext.FuncName = funcName;
+            SharedControls.LoadDocText(docId, argIndex, Docs, Links, false);
+            AutoContext.FuncName = docId.Func;
             AutoContext.FuncArg = argIndex;
             // Hopefully this isn't too expensive? It only strictly needs to be done on PrecomputeAutocomplete
             // and also during autocomplete itself.
-            AutoContext.ArgDoc = Docs.GetHeuristicArgDoc(AutoContext.FuncName, AutoContext.FuncArg);
+            AutoContext.ArgDoc = Docs.GetHeuristicArgDoc(docId, AutoContext.FuncArg, Links);
             if (PrecomputeAutocomplete)
             {
                 FetchAutocomplete();
@@ -696,7 +738,12 @@ namespace DarkScript3
             }
         }
 
-        public static Range ParseFuncAtRange(Range start, out string funcName, out int argIndex, List<string> extractArgs = null)
+        public static Range ParseFuncAtRange(
+            Range start,
+            InstructionDocs docs,
+            out InitData.DocID docId,
+            out int argIndex,
+            List<string> extractArgs = null)
         {
             // Try to find the innermost function at this place. This does not handle nested parens well at all.
             // This needs to be cheap. It's called any time the text cursor changes, for instance.
@@ -704,15 +751,27 @@ namespace DarkScript3
             // Find text around cursor in the current line, up until hitting parentheses
             Range arguments = start.GetFragment(@"[^)(\n]");
 
+            // CharAfterEnd does not exist so do this based on CharAfterStart
+            static char charAfterEnd(Range arg) => arg.End.iChar >= arg.tb[arg.End.iLine].Count ? '\n' : arg.tb[arg.End.iLine][arg.End.iChar].c;
+            // Can be used if charAfterEnd is ',' or '('
+            static Range getNextArg(Range arg)
+            {
+                Place argStart = arg.End;
+                argStart.iChar += 1;
+                return arg.tb.GetRange(argStart, argStart).GetFragment(@"[^)(\n,]");
+            }
+
             // For being within function args rather than matching the exact string, check if inside parens, but not nested ones.
             // Matching IfThing(0^,1) but not WaitFor(Thi^ng(0,1))
+            Range nameRange;
+            long eventId = -1;
             argIndex = -1;
             if (arguments.CharBeforeStart == '(' && start.tb.GetRange(arguments.End, arguments.End).CharAfterStart != '(')
             {
                 // Scan leftward through arguments until no commas remain.
                 // This does not work with nested calls, like IfThing(getMyCustomConstant(), ^1)
-                argIndex = 0;
                 Range arg = start.GetFragment(@"[^)(\n,]");
+                argIndex = 0;
                 if (extractArgs != null)
                 {
                     extractArgs.Add(arg.Text);
@@ -728,7 +787,7 @@ namespace DarkScript3
                         extractArgs.Add(arg.Text);
                     }
                 }
-                funcName = FuncName(arguments);
+                nameRange = FuncNameRange(arguments);
                 // For extractArgs mode in particular, go in the reverse direction
                 // In case it all gets rewritten to be not terrible, this should be improved too.
                 if (extractArgs != null)
@@ -737,37 +796,83 @@ namespace DarkScript3
                     arg = start.GetFragment(@"[^)(\n,]");
                     while (true)
                     {
-                        // CharAfterEnd does not exist, calculate it here based on CharAfterStart
-                        char charAfterEnd = arg.End.iChar >= arg.tb[arg.End.iLine].Count ? '\n' : arg.tb[arg.End.iLine][arg.End.iChar].c;
-                        if (charAfterEnd == '\n' || charAfterEnd == ')')
+                        if (charAfterEnd(arg) != ',')
                         {
                             break;
                         }
-                        Place argStart = arg.End;
-                        argStart.iChar += 1;
-                        arg = start.tb.GetRange(argStart, argStart).GetFragment(@"[^)(\n,]");
-                        if (extractArgs != null)
-                        {
-                            extractArgs.Add(arg.Text);
-                        }
+                        arg = getNextArg(arg);
+                        extractArgs.Add(arg.Text);
                     }
                 }
             }
             else
             {
                 // Get the word immediately under the cursor. No tooltip in this case.
-                Range func = start.GetFragment(@"[\w\$]");
-                funcName = func.Text;
+                nameRange = start.GetFragment(@"[\w\$]");
+
+                // Special handling for Event and $Event, usually excluded from above because of the following (
+                // This could be generalized to the entire line
+                if (nameRange.CharBeforeStart == '(')
+                {
+                    Range funcRange = FuncNameRange(nameRange);
+                    string funcText = funcRange.Text;
+                    if (funcText == "Event" || funcText == "$Event")
+                    {
+                        nameRange = funcRange;
+                    }
+                }
             }
+            string funcName = nameRange.Text;
+            if ((funcName == "Event" || funcName == "$Event") && charAfterEnd(nameRange) == '(')
+            {
+                Range idRange = getNextArg(nameRange);
+                if (long.TryParse(idRange.Text, out long id))
+                {
+                    eventId = id;
+                }
+            }
+            else if (docs.TypedInitIndex.TryGetValue(funcName, out int idIndex))
+            {
+                string eventArg = null;
+                if (extractArgs != null && idIndex < extractArgs.Count)
+                {
+                    eventArg = extractArgs[idIndex];
+                }
+                else
+                {
+                    // Separate lookup for the id, rather than adding further tracking to the above logic
+                    Range fullCall = nameRange.GetFragment(@"[\w\$\s]");
+                    if (charAfterEnd(fullCall) == '(')
+                    {
+                        Range arg = getNextArg(fullCall);
+                        // This could be a loop, but assume that idIndex can only be 0 or 1
+                        if (idIndex == 0)
+                        {
+                            eventArg = arg.Text;
+                        }
+                        else if (idIndex == 1 && charAfterEnd(arg) == ',')
+                        {
+                            arg = getNextArg(arg);
+                            eventArg = arg.Text;
+                        }
+                    }
+                }
+                // Parse ignores whitespace
+                if (eventArg != null && long.TryParse(eventArg, out long id))
+                {
+                    eventId = id;
+                }
+            }
+            docId = new InitData.DocID(funcName, eventId);
             return arguments;
         }
 
-        private static string FuncName(Range arguments)
+        private static Range FuncNameRange(Range arguments)
         {
             int start = arguments.Start.iChar - 2;
             int line = arguments.Start.iLine;
             Range pre = new Range(arguments.tb, start, line, start, line);
-            return pre.GetFragment(@"[\w\$]").Text;
+            return pre.GetFragment(@"[\w\$]");
         }
 
         private void ShowTip(string s, Point p, int argIndex = -1, object data = null)
@@ -792,20 +897,21 @@ namespace DarkScript3
             editor.Focus();
         }
 
-        private void ShowArgToolTip(string funcName, Range arguments, int argument = -1)
+        private void ShowArgToolTip(InitData.DocID docId, Range arguments, int argument = -1)
         {
             if (!Properties.Settings.Default.ArgTooltip)
             {
                 return;
             }
-            if (Docs.AllAliases.TryGetValue(funcName, out string realName))
+            if (Docs.AllAliases.TryGetValue(docId.Func, out string realName))
             {
-                funcName = realName;
+                docId = new InitData.DocID(realName, docId.Event);
             }
-            if (Docs.AllArgs.ContainsKey(funcName))
+            // TODO: Use LookupArgDocs instead for init data?
+            if (Docs.CallArgs.ContainsKey(docId.Func))
             {
                 Point point = editor.PlaceToPoint(arguments.Start);
-                ShowTip(ArgString(funcName), point, argument);
+                ShowTip(ArgString(docId), point, argument);
             }
         }
 
@@ -865,7 +971,7 @@ namespace DarkScript3
                 MessageBox.Show($"Integer value {text} does not correspond to a unique float ({fval} loses precision)", "Parse float failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            DialogResult res = ScrollDialog.Show(ParentForm, $"Integer {text} is equivalent to float {fval}\n\nReplace it for event initialization? (Don't do this unless you're sure it's a float. Typed initializations are coming in a future version.)", "Confirm replacement");
+            DialogResult res = ScrollDialog.Show(ParentForm, $"Integer {text} is equivalent to float {fval}\n\nReplace it for regular event initialization? (Don't do this unless you're sure it's a float, and don't use it for typed initialization like $InitializeEvent.)", "Confirm replacement");
             if (res == DialogResult.OK)
             {
                 editor.Selection = numRange;
@@ -881,7 +987,7 @@ namespace DarkScript3
         private void JumpToEvent(Place place)
         {
             Range numRange = editor.GetRange(place, place).GetFragment(TextStyles.Number, false);
-            if (!int.TryParse(numRange.Text, out int id))
+            if (!long.TryParse(numRange.Text, out long id))
             {
                 return;
             }
@@ -892,8 +998,9 @@ namespace DarkScript3
             string searchType = "";
             if (ranges.Any(r => r.Start.iLine == place.iLine))
             {
-                // At the moment, only support regular event initialization. Common events would need to be cross-file.
-                regex = new Regex($@"^\s*InitializeEvent\(\s*\d+\s*,\s*{id}\b", RegexOptions.Singleline);
+                // Used clicked on an event definition, so go to initialization in the same file, which has a slot id
+                // Note that Elden Ring incorrectly uses common init in the same file sometimes
+                regex = new Regex($@"^\s*\$?Initialize\w+\(\s*\d+\s*,\s*{id}\b", RegexOptions.Singleline);
                 ranges = editor.Range.GetRangesByLines(regex).ToList();
                 searchType = " initialization";
             }
@@ -915,13 +1022,19 @@ namespace DarkScript3
                 string commonSuggest = "";
                 if (searchType == "")
                 {
-                    if (SharedControls.JumpToCommonFunc(id, this))
+                    // Not sure where this logic should go. It is all heuristic, doesn't use actual linked files.
+                    string checkFile = "common_func";
+                    if (Docs.ResourceGame == "bb")
+                    {
+                        checkFile = Scripter.EmevdFileName.StartsWith("m29_") ? "m29" : "common";
+                    }
+                    if (SharedControls.JumpToCommonFunc(id, checkFile, this))
                     {
                         return;
                     }
                     if (Docs != null && Docs.LooksLikeCommonFunc(id))
                     {
-                        commonSuggest = ". Open common_func in another tab to enable searching there";
+                        commonSuggest = $". Open {checkFile} in another tab to enable searching there";
                     }
                 }
                 SharedControls.SetStatus($"Event {id}{searchType} not found{commonSuggest}", false);
@@ -972,7 +1085,7 @@ namespace DarkScript3
             editor.DoSelectionVisible();
         }
 
-        public Action GetJumpToEventAction(int id)
+        public Action GetJumpToEventAction(long id)
         {
             // Used for common_func only. Some stuff copied from the above. The Action should be run in a UI thread.
             Regex regex = new Regex($@"^\s*\$?Event\(\s*{id}\s*,", RegexOptions.Singleline);
@@ -1186,9 +1299,12 @@ namespace DarkScript3
             }
         }
 
-        private string ArgString(string func, int index = -1)
+        private string ArgString(InitData.DocID docId)
         {
-            List<EMEDF.ArgDoc> args = Docs.AllArgs[func];
+            if (!Docs.LookupArgDocs(docId, Links, out List<EMEDF.ArgDoc> args))
+            {
+                return "";
+            }
             List<string> argStrings = new List<string>();
             for (int i = 0; i < args.Count; i++)
             {
@@ -1207,7 +1323,6 @@ namespace DarkScript3
                 {
                     argStrings.Add($"{InstructionDocs.TypeString(arg.Type)} {arg.DisplayName}");
                 }
-                if (i == index) return argStrings.Last();
             }
             return string.Join(", ", argStrings);
         }
@@ -1236,10 +1351,7 @@ namespace DarkScript3
             }
         }
 
-        public string GetDocName()
-        {
-            return Docs.ResourceString.Split('-')[0];
-        }
+        public string GetDocName() => Docs.ResourceGame;
 
         public void Cut() => editor.Cut();
 
@@ -1294,7 +1406,7 @@ namespace DarkScript3
             {
                 return;
             }
-            if (ShowCompileError(Scripter.JsFileName, new FancyJSCompiler.FancyCompilerException { Errors = LatestWarnings, Warning = true }, "") is Range errorSelect)
+            if (ShowCompileError(Scripter.JsFileName, LatestWarnings, "", true) is Range errorSelect)
             {
                 PreventHoverMousePosition = MousePosition;
                 editor.Selection = errorSelect;
@@ -1308,7 +1420,7 @@ namespace DarkScript3
             try
             {
                 string text = editor.Text;
-                new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).Repack(text, out FancyJSCompiler.CompileOutput output);
+                new FancyEventScripter(Scripter, Docs, Settings.CFGOptions).Repack(text, Links, out FancyJSCompiler.CompileOutput output);
                 PreviewCompilationForm preview = RefreshPreviewCompilationForm();
                 preview.SetSegments(output.GetDiffSegments(), text, output.Code);
                 preview.Show();
@@ -1316,7 +1428,7 @@ namespace DarkScript3
             }
             catch (FancyJSCompiler.FancyCompilerException ex)
             {
-                if (ShowCompileError(Scripter.JsFileName, ex, "") is Range errorSelect)
+                if (ShowCompileError(Scripter.JsFileName, new List<Exception>() { ex }, "") is Range errorSelect)
                 {
                     PreventHoverMousePosition = MousePosition;
                     editor.Selection = errorSelect;
@@ -1338,7 +1450,7 @@ namespace DarkScript3
             }
             catch (FancyJSCompiler.FancyCompilerException ex)
             {
-                if (ShowCompileError(Scripter.JsFileName, ex, "") is Range errorSelect)
+                if (ShowCompileError(Scripter.JsFileName, new List<Exception>() { ex }, "") is Range errorSelect)
                 {
                     PreventHoverMousePosition = MousePosition;
                     editor.Selection = errorSelect;
@@ -1387,10 +1499,10 @@ namespace DarkScript3
 
         private void Editor_Scroll(object sender, ScrollEventArgs e) => SharedControls.HideTip();
 
-        private Range ShowCompileError(string file, Exception ex, string extra)
+        private Range ShowCompileError(string file, List<Exception> ex, string extra, bool warnings = false)
         {
             ErrorMessageForm error = new ErrorMessageForm(editor.Font);
-            error.SetMessage(file, ex, extra);
+            error.SetMessage(file, ex, extra, warnings);
             error.ShowDialog();
             if (error.Place is Place p)
             {

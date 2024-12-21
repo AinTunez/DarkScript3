@@ -1,0 +1,22 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1036542200 死亡待機 -- Waiting for death
+1036542240 地図石碑光SFX切り替え -- Map stone monument light SFX switching
+1036542250 変身スライム_撃破_死亡アニメ長いver_デラシネ女 -- Transforming slime_defeating_death anime long ver_Deracine woman
+1036542300 間欠泉_XX -- Geyser_XX
+1036542301 間欠泉_弾丸オーナー作成 -- Geyser_Bullet owner created
+1036542350 隕鉄の獣アステ―ルなりかけ_PC側_岩橋上にいる判定 -- Almost pretending to be the meteorite beast Aster_PC side_Judging to be on the rock bridge
+1036542400 飛行人形兵_屋根上奇襲 -- Flying Puppet Soldier_Rooftop Surprise Attack
+1036542450 死体焚火ナビメッシュ切り抜き用アセット無効化_XX -- Corpse bonfire navigation mesh cutout asset invalidation_XX
+1036542500 死体焚火イベント起動 -- Corpse bonfire event started
+1036542580 梯子登録 -- ladder registration
+1036542800 アステール襲来 -- Aster Invasion
+1036542801 ボス撃破 -- Defeat the boss
+1036542810 ボス出現 -- Boss appears
+1036542849 ボス戦_イベント起動 -- Boss battle_event activation

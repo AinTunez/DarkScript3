@@ -1,0 +1,10 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1054530703 娘マリカ_下り遺跡篝火監視 -- Daughter Marika_Descent ruins bonfire monitoring
+1054532500 巨人の火取得 -- Get giant fire
+1054533700 娘マリカ_巨人の火入手許可判定 -- Daughter Marika_Giant fire acquisition permission determination
+1054533701 娘マリカ_狂い火入手許可判定 -- Daughter Marika_Crazy fire acquisition permission determination
+1054533702 娘マリカ_PC眠らせる -- Daughter Marika_PC put to sleep
+1054533703 娘マリカ_カットシーン暴発防止 -- Daughter Marika_Cutscene explosion prevention

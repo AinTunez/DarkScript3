@@ -1,0 +1,15 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+99020210 OBJACT要求テスト_XX -- OBJACT request test_XX
+99020220 澤山テストサイン作成 -- Sawayama test sign creation
+99020230 領域内外テスト -- In-field and out-of-field testing
+99020240 属性ダメージテスト_A -- Attribute damage test_A
+99020250 属性ダメージテスト_B -- Attribute damage test_B
+99020260 属性ダメージテスト_C -- Attribute damage test_C
+99020270 ボスゲージテスト -- boss gauge test
+99020280 PCコピーテスト -- PC copy test
+99020290 AI音テスト -- AI sound test
+99020300 AI状態取れるかテスト -- Test if you can get the AI ​​state
+99020400 α2版_カタパルト射出 -- α2 version_catapult injection
+99020410 α2版_カタパルト_OBJACT要求 -- α2 version_Catapult_OBJACT request
+1000000000 敵リスポン -- enemy respawn

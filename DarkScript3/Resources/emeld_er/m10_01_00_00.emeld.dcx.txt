@@ -1,0 +1,22 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+10010020 ゲーム開始 -- game start
+10010030 ゲーム開始_海中転落 -- Game start_Falling into the sea
+10010031 ゲーム開始_不死設定 -- Game start_immortality settings
+10010790 NPC338_力尽き倒れている巫女_倒れと当たり無効 -- NPC338_The shrine maiden who has exhausted her strength and has fallen down_Isn't possible to hit and fall down
+10010791 NPC338_力尽き倒れている巫女_布を血で染める -- NPC338_The shrine maiden is exhausted and has fallen down_Dyeing the cloth with blood
+10010792 ショップラインナップ_空壺先食い -- Shop lineup_Empty pot first eating
+10012500 落ちる床 -- falling floor
+10012501 黄金樹の歓迎 -- Golden Tree Welcome
+10012502 地名表示 -- Place name display
+10012504 閉じた扉 -- closed door
+10012560 来訪時扉開放 -- Door open when visiting
+10012680 チュートリアル_移動 -- Tutorial_Move
+10012682 チュートリアル_カメラ -- Tutorial_Camera
+10012800 チュートリアルボス撃破 -- Defeat the tutorial boss
+10012810 チュートリアルボス出現 -- Tutorial boss appears
+10012811 チュートリアルボス激昂 -- Tutorial boss rage
+10012849 チュートリアルボスイベント起動 -- Tutorial boss event starts
+10012900 フレームカウント -- frame count
+1000000000 敵リスポン -- enemy respawn

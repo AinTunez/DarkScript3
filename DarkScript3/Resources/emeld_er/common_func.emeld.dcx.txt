@@ -1,0 +1,206 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+9005800 【共通】ホストがボス部屋入場 -- [Common] Host enters the boss room
+9005801 【共通】ゲストがボス部屋入場 -- [Common] Guest enters the boss room
+9005810 【共通】ボス用篝火処理 -- [Common] Bonfire processing for boss
+9005811 【共通】ボス用白扉処理 -- [Common] White door treatment for boss
+9005812 【共通】ボス用白扉処理Ver2 -- [Common] Boss white door processing Ver2
+9005813 【共通】ボス用白扉処理Ver3 -- [Common] Boss white door processing Ver3
+9005822 【共通】ボス戦BGM再生_２曲 -- [Common] Boss battle BGM playback_2 songs
+9005823 【共通】ボス戦BGM再生_３曲 -- [Common] Boss battle BGM playback_3 songs
+9005840 【共通】汎用ボス撃破 -- [Common] Defeat general-purpose boss
+9005845 【共通】汎用ボス出現 -- [Common] General boss appearance
+9005910 【共通】テスト_小篝火SFX -- [Common] Test_Small Bonfire SFX
+9005911 【共通】小篝火_お試しSFX -- [Common] Small Bonfire_Trial SFX
+9005912 【共通】小篝火_お試し地名表示 -- [Common] Small Bonfire_Trial place name display
+9005920 【共通】いんちきランダム配置 -- [Common] Bogus random placement
+9005990 【共通】特殊待機文字列確認用テスト -- [Common] Special standby character string confirmation test
+90004473 【共通】高路ガーディアン_左脚部位破壊 -- [Common] Takaji Guardian_Left leg part destroyed
+90005100 【共通】篝火の導き -- [Common] Bonfire Guidance
+90005101 【共通】篝火の導き_NT用 -- [Common] Bonfire Guidance_For NT
+90005110 【共通】大ルーン取得 -- [Common] Obtain a large rune
+90005200 【共通】特殊待機_領域判定 -- [Common] Special standby_Area judgment
+90005201 【共通】特殊待機_距離判定 -- [Common] Special standby_Distance judgment
+90005210 【共通】特殊待機_領域＋距離判定 -- [Common] Special standby_area + distance judgment
+90005211 【共通】特殊待機_領域／距離判定 -- [Common] Special standby_area/distance judgment
+90005213 【共通】特殊待機_領域／距離判定Ver2 -- [Common] Special standby_area/distance judgment Ver2
+90005220 【共通】特殊待機_戦闘状態判定 -- [Common] Special standby_Combat status determination
+90005221 【共通】特殊待機_ダメージ判定 -- [Common] Special standby_Damage judgment
+90005250 【共通】思考ロジック有効化_領域判定 -- [Common] Enabling thinking logic_Area determination
+90005251 【共通】思考ロジック有効化_距離判定 -- [Common] Enabling thought logic_Distance judgment
+90005260 【共通】思考ロジック有効化_領域＋距離判定 -- [Common] Enabling thinking logic_Area + Distance Judgment
+90005261 【共通】思考ロジック有効化_領域／距離判定 -- [Common] Enabling thinking logic_area/distance judgment
+90005271 【共通】思考ロジック有効化_ダメージ判定 -- [Common] Activate thought logic_Damage judgment
+90005300 【共通】強敵リスポン処理 -- [Common] Strong enemy respawn processing
+90005360 【共通】制圧リスポン処理 -- [Common] Suppression response processing
+90005390 【共通】変身スライム_撃破 -- [Common] Transformation slime_defeat
+90005391 【共通】変身スライム_変身 -- [Common] Transformation slime_Transformation
+90005400 【共通】ネムリコレクト_ネムリ待機 -- [Common] Nemuri collect_Nemuri standby
+90005401 【共通】ネムリコレクト_ネムリ取得 -- [Common] Nemuri collect_Nemuri acquisition
+90005410 【共通】バディ召喚_撃破対象リスト設定 -- [Common] Buddy summon_defeat target list setting
+90005411 【共通】バディ召喚_石碑SFX対応 -- [Common] Buddy summon_stone monument SFX compatible
+90005420 【共通】馬車_初期設定 -- [Common] Horse carriage_Initial settings
+90005421 【共通】馬車_宝扉制御 -- [Common] Carriage_Treasure door control
+90005422 【共通】馬車_宝入手 -- [Common] Carriage_Treasure acquisition
+90005423 【共通】馬車_牽引解除_XX -- [Common] Horse carriage_traction release_XX
+90005424 【共通】馬車_破壊挙動 -- [Common] Horse carriage_destruction behavior
+90005440 【共通】黒き刃の末裔_ステルス -- [Common] Descendants of the Black Blade_Stealth
+90005450 【共通】歩く霊廟_初期設定 -- [Common] Walking Mausoleum_Initial Settings
+90005451 【共通】歩く霊廟_胡坐判定 -- [Common] Walking Mausoleum_Sitting with Crossed Legs Judgment
+90005452 【共通】歩く霊廟_胡坐完了判定 -- [Common] Walking Mausoleum_Sitting with Crossed Crossed Completion Judgment
+90005453 【共通】歩く霊廟_破壊素材対応 -- [Common] Walking Mausoleum_Destructible material compatible
+90005454 【共通】歩く霊廟_遠方待機 -- [Common] Walking Mausoleum_Long distance standby
+90005456 【共通】歩く霊廟_歩行時開閉禁止 -- [Common] Walking mausoleum_Do not open or close while walking
+90005457 【共通】歩く霊廟_天井蓋対応 -- [Common] Walking mausoleum_Ceiling cover compatible
+90005458 【共通】歩く霊廟_土台安定対応 -- [Common] Walking mausoleum_Foundation stability support
+90005459 【共通】歩く霊廟_ボスソウル複製 -- [Common] Walking Mausoleum_Boss Soul Duplication
+90005460 【共通】陸ダコ_初期設定 -- [Common] Land octopus_Initial settings
+90005461 【共通】陸ダコ_左触手破壊 -- [Common] Land Octopus_Left Tentacle Destruction
+90005462 【共通】陸ダコ_右触手破壊 -- [Common] Land octopus_Right tentacle destroyed
+90005463 【共通】陸ダコ_出産停止 -- [Common] Land octopus_Stop giving birth
+90005464 【共通】陸ダコ_出産 -- [Common] Land octopus_birth
+90005470 【共通】高路ガーディアン_部位破壊 -- [Common] Takaji Guardian_Part Destruction
+90005471 【共通】高路ガーディアン_左腕部位破壊 -- [Common] Takaji Guardian_Left arm part destroyed
+90005472 【共通】高路ガーディアン_右腕部位破壊 -- [Common] Takaji Guardian_Right arm part destroyed
+90005474 【共通】高路ガーディアン_右脚部位破壊 -- [Common] Takaji Guardian_Right leg part destroyed
+90005476 【共通】ルーン狩りの騎士_騎乗イベント -- [Common] Rune Hunting Knight_Riding Event
+90005477 【共通】ルーン狩りの騎士_死亡 -- [Common] Rune Hunting Knight_Death
+90005480 【共通】隕鉄の獣_部位破壊 -- [Common] Meteor Beast_Part Destruction
+90005481 【共通】隕鉄の獣_突進転倒 -- [Common] Meteor Beast_Charge fall
+90005485 【共通】遠距離敵_セットアップ -- [Common] Long range enemy_Setup
+90005490 【共通】カタパルト -- [Common] Catapult
+90005491 【共通】カタパルト_射手 -- [Common] Catapult_Archer
+90005500 【共通】2フロア移動エレベータ -- [Common] 2-floor moving elevator
+90005501 【共通】2フロア移動エレベータ_初期設定 -- [Common] 2-floor moving elevator_Initial settings
+90005502 【共通】2フロア移動エレベータ_初回起動 -- [Common] 2-floor moving elevator_first activation
+90005503 【共通】2軸移動エレベータ -- [Common] 2-axis moving elevator
+90005504 【共通】2軸移動エレベータ_初期設定 -- [Common] 2-axis moving elevator_Initial settings
+90005505 【共通】神門エレベータ -- [Common] Shinmon Elevator
+90005507 【共通】神塔エレベータ -- [Common] Shrine tower elevator
+90005508 【共通】神塔エレベータ_初期設定 -- [Common] Shinto tower elevator_Initial settings
+90005510 【共通】一方通行扉_鍵付き扉 -- [Common] One-way door_locked door
+90005511 【共通】一方通行扉_領域扉 -- [Common] One-way door_area door
+90005512 【共通】一方通行扉_領域扉_特殊効果付与 -- [Common] One-way door_Area door_Special effects added
+90005513 【共通】一方通行扉_レバー扉 -- [Common] One-way door_Lever door
+90005515 【共通】両開き扉_エラーメッセージ -- [Common] Double door_error message
+90005520 【共通】蹴りおろし梯子 -- [Common] Kick-down ladder
+90005525 【共通】魔法壁 -- [Common] Magic wall
+90005540 【共通】レバー操作ギミック -- [Common] Lever operation gimmick
+90005550 【共通】宝箱 -- [Common] Treasure chest
+90005560 【共通】破壊アセット宝 -- [Common] Destruction asset treasure
+90005570 【共通】ジェスチャー入手 -- [Common] Get gesture
+90005600 【共通】フィールド篝火登録 -- [Common] Field bonfire registration
+90005605 【共通】汎用ワープ -- [Common] General purpose warp
+90005616 【共通】震える死の根 -- [Common] Trembling roots of death
+90005620 【共通】ガーゴイル像 -- [Common] Gargoyle statue
+90005621 【共通】ガーゴイル像_封印扉 -- [Common] Gargoyle statue_Sealed door
+90005630 【共通】遠見台 -- [Common] Far viewing platform
+90005631 【共通】剣碑解読 -- [Common] Sword monument decipherment
+90005632 【共通】絵画宝探し_アトリエ -- [Common] Painting treasure hunt_Atelier
+90005633 【共通】絵画宝探し_モチーフ -- [Common] Painting treasure hunt_motif
+90005636 【共通】霊体キャンドル -- [Common] Spirit Candle
+90005637 【共通】霊体キャンドル_出現 -- [Common] Spirit candle_appearance
+90005640 【共通】地下迷宮_入口扉 -- [Common] Underground labyrinth_entrance door
+90005645 【共通】地下小探索_迷宮脱出スペル[仮] -- [Common] Underground exploration_labyrinth escape spell [tentative]
+90005646 【共通】地下小探索_迷宮脱出スペル -- [Common] Underground exploration_labyrinth escape spell
+90005650 【共通】英雄の墓_扉解放 -- [Common] Hero's Tomb_Door release
+90005651 【共通】英雄の墓_扉エラーメッセージ -- [Common] Hero's Tomb_Door error message
+90005652 【共通】英雄の墓_扉解放_フラグ判定 -- [Common] Hero's Grave_Door Release_Flag Judgment
+90005660 【共通】英雄の墓_弓矢トラップ_TypeA -- [Common] Hero's Grave_Bow and Arrow Trap_TypeA
+90005670 【共通】英雄の墓_トラップエレベータ -- [Common] Hero's Tomb_Trap Elevator
+90005671 【共通】英雄の墓_針ダメージ -- [Common] Hero's Tomb_Needle damage
+90005672 【共通】英雄の墓_針ダメージ_特殊効果付与 -- [Common] Hero's Tomb_Needle damage_Special effects added
+90005673 【共通】英雄の墓_トラップエレベータ_闇霊排除 -- [Common] Hero's Tomb_Trap Elevator_Dark Spirit Elimination
+90005675 【共通】英雄の墓_ギロチン -- [Common] Tomb of the Hero_Guillotine
+90005680 【共通】英雄の墓_火吹き像_初期設定 -- [Common] Tomb of the Hero_Fire-breathing statue_Initial settings
+90005681 【共通】英雄の墓_火吹き像_移動処理 -- [Common] Hero's Tomb_Fire-breathing statue_Movement process
+90005682 【共通】英雄の墓_火吹き像_火炎処理 -- [Common] Hero's Tomb_Fire-breathing statue_Flame processing
+90005683 【共通】英雄の墓_指示像 -- [Common] Hero's Tomb_Instruction Statue
+90005684 【共通】英雄の墓_メッセージ表示 -- [Common] Hero's Tomb_Message display
+90005685 【共通】英雄の墓_チャリオット初期設定 -- [Common] Hero's Tomb_Chariot initial settings
+90005686 【共通】英雄の墓_チャリオット弾丸作成 -- [Common] Hero's Tomb_Chariot bullet creation
+90005687 【共通】英雄の墓_チャリオット巡回ルート指定_初回起動 -- [Common] Tomb of the Hero_Chariot patrol route specification_First launch
+90005688 【共通】英雄の墓_チャリオット巡回ルート指定_XX -- [Common] Tomb of the Hero_Chariot patrol route specification_XX
+90005690 【共通】落下死亡無効 -- [Common] Fall death invalidity
+90005691 【共通】落下ダメージ無効 -- [Common] Falling damage disabled
+90005694 【共通】常駐ダメージアセット -- [Common] Resident damage asset
+90005695 【共通】常駐ダメージアセット_破壊有り -- [Common] Permanent damage asset_destructed
+90005700 【共通】NPC敵対化処理 -- [Common] NPC hostile processing
+90005701 【共通】NPCがX回攻撃されたらフラグを立てる処理 -- [Common] Processing to set a flag when an NPC is attacked X times
+90005702 【共通】NPC死亡処理 -- [Common] NPC death processing
+90005703 【共通】新_NPC敵対化処理 -- [Common] New_NPC hostile processing
+90005704 【共通】新_NPCがX回攻撃されたらフラグを立てる処理 -- [Common] New_Processing to set a flag when an NPC is attacked X times
+90005705 【共通】NPC101道標老婆_死亡遷移イベント -- [Common] NPC101 Signpost Old Woman_Death Transition Event
+90005706 【共通】NPC700話す死体_初期化イベント -- [Common] NPC700 talking corpse_Initialization event
+90005707 【共通】幻影敵対化 -- [Common] Phantom hostility
+90005708 【共通】椅子キャラ位置合わせワープ -- [Common] Chair character positioning warp
+90005709 【共通】幻影被ダメSFX -- [Common] Illusion damage SFX
+90005710 【共通】バディ召喚石碑_SFX再生 -- [Common] Buddy summoning stone monument_SFX playback
+90005711 【共通】バディ召喚石碑_バディ巡回ルート設定 -- [Common] Buddy summoning stone monument_Buddy patrol route setting
+90005712 【共通】バディ召喚石碑_アクセス可SFX設定 -- [Common] Buddy Summon Stone Monument_Accessible SFX Settings
+90005713 【共通】バディ召喚石碑_撃破対象リスト設定 -- [Common] Buddy summon stone monument_defeat target list setting
+90005720 【共通】ジプシーバディ召喚 -- [Common] Gypsy Buddy Summon
+90005721 【共通】ジプシーバディ死亡演出 -- [Common] Gypsy Buddy death performance
+90005722 【共通】ジプシー_敵対判定 -- [Common] Gypsy_hostile judgment
+90005723 【共通】ジプシー_会話判定 -- [Common] Gypsy_Conversation judgment
+90005724 【共通】ジプシー_リスポン処理 -- [Common] Gypsy_Respon processing
+90005725 【共通】NPC801モブ赤目_初期化イベント -- [Common] NPC801 Mob Red Eye_Initialization event
+90005726 【共通】NPC801モブ赤目_ロバ無し_初期化イベント -- [Common] NPC801 Mob Red Eye_No Donkey_Initialization Event
+90005727 【共通】NPC801モブ赤目_赤目ロバ相互敵対処理 -- [Common] NPC801 Mob Red Eye_Red Eye Donkey Mutual Hostility Processing
+90005728 【共通】NPC801モブ赤目_ロバ被ダメ台詞再生 -- [Common] NPC801 Mob Red Eye_Donkey damaged lines playback
+90005729 【共通】NPC801モブ赤目_タイプA呼び掛け会話イベント -- [Common] NPC801 Mob Red Eye_Type A calling conversation event
+90005730 【共通】リマインド自動会話 -- [Common] Reminder automatic conversation
+90005731 【共通】一定距離に入ったらフラグを立てる_チャタリング防止 -- [Common] Set a flag when you enter a certain distance_Chattering prevention
+90005732 【共通】領域に入ったらフラグを立てる_チャタリング防止 -- [Common] Set a flag when entering the area_Chattering prevention
+90005733 【共通】NPC322ユリア_同衾データサーバー打ち上げ -- [Common] NPC322 Yulia_Dojuku data server launch
+90005740 【共通】投げもどきアニメ再生_PC -- [Common] Throwback anime playback_PC
+90005741 【共通】投げもどきアニメ再生_話者 -- [Common] Throwback anime playback_Speaker
+90005742 【共通】投げもどきアニメ再生_PC_ユリア用 -- [Common] Throwback anime playback_PC_for Yuria
+90005743 【共通】投げもどきアニメ再生_話者_ユリア用 -- [Common] Throwback anime playback_speaker_for Yuria
+90005750 【共通】会話NPCアイテム光 -- [Common] Conversation NPC item light
+90005751 【共通】会話NPCバリアSFX_ワンショット -- [Common] Conversation NPC Barrier SFX_One Shot
+90005752 【共通】会話NPCバリアSFX_ループ -- [Common] Conversation NPC Barrier SFX_Loop
+90005760 【共通】会話NPC夜敵出現 -- [Common] Conversation NPC enemy appears at night
+90005770 【共通】会話NPCフラグON同期 -- [Common] Conversation NPC flag ON synchronization
+90005771 【共通】特定篝火付近判定 -- [Common] Judgment near specific bonfires
+90005772 【共通】キャラ無効化 -- [Common] Character invalidation
+90005773 【共通】セーブ要求 -- [Common] Save request
+90005774 【共通】疑似マルチ報酬取得 -- [Common] Obtain pseudo multi-reward
+90005775 【共通】会話NPC地図に情報を書き込む -- [Common] Conversation NPC Write information on the map
+90005780 【共通】協力NPC_召喚 -- [Common] Cooperation NPC_Summon
+90005781 【共通】協力NPC_バックリート有効化 -- [Common] Cooperating NPC_Backleat Activation
+90005782 【共通】協力NPC_ボス部屋入場 -- [Common] Cooperating NPC_Boss room entry
+90005783 【共通】協力NPC_帰還 -- [Common] Cooperation NPC_Return
+90005784 【共通】協力NPC_ボス部屋入場Ver2 -- [Common] Cooperation NPC_Boss room entrance Ver2
+90005785 【共通】協力NPC_帰還Ver2 -- [Common] Cooperation NPC_Return Ver2
+90005790 【共通】敵対NPC_侵入 -- [Common] Hostile NPC_Intrusion
+90005791 【共通】敵対NPC_バックリート有効化 -- [Common] Hostile NPC_Backleat enabled
+90005792 【共通】敵対NPC_撃破 -- [Common] Hostile NPC_Defeated
+90005793 【共通】敵対NPC_帰還 -- [Common] Hostile NPC_Return
+90005795 【共通】NPC疑似マルチ_開始 -- [Common] NPC pseudo multi_start
+90005796 【共通】NPC疑似マルチ_終了 -- [Common] NPC pseudo-multi_end
+90005797 【共通】NPC疑似マルチ_終了Ver2 -- [Common] NPC pseudo multi_end Ver2
+90005830 【共通】ボス戦入場時CS再生 -- [Common] CS playback when entering a boss battle
+90005860 【共通】フィールドボス撃破 -- [Common] Defeat field boss
+90005861 【共通】フィールドボス撃破_竜餐 -- [Common] Defeat Field Boss_Dragon Dinner
+90005870 【共通】フィールドボスHPゲージ -- [Common] Field boss HP gauge
+90005871 【共通】フィールドボスHPゲージ_騎乗 -- [Common] Field Boss HP Gauge_Riding
+90005872 【共通】フィールドボス_HU通知 -- [Common] Field Boss_HU notification
+90005880 【共通】円形サークルボス撃破 -- [Common] Defeat the circle boss
+90005881 【共通】円形サークルボス開始 -- [Common] Circular circle boss start
+90005882 【共通】円形サークルボス出現 -- [Common] Circular circle boss appears
+90005883 【共通】円形サークルトリガー出現 -- [Common] Circular circle trigger appears
+90005884 【共通】円形サークルバディ石碑出現 -- [Common] Circular circle buddy stone monument appears
+90005885 【共通】円形サークルボス戦BGM再生_２曲 -- [Common] Circular circle boss battle BGM playback_2 songs
+90005920 【共通】宝箱_視認性 -- [Common] Treasure Chest_Visibility
+90015502 【共通】2フロア移動エレベータ_初回起動Ver2 -- [Common] 2-floor moving elevator_Initial startup Ver2
+91005600 【共通】敵対マルチ用白壁対応 -- [Common] Compatible with white walls for enemy multiplayer
+98005100 【共通】闘技場_メイン処理 -- [Common] Arena_Main process
+98005110 【共通】闘技場_サブ処理_決闘 -- [Common] Arena_Sub-processing_Duel
+98005120 【共通】闘技場_結果表示処理 -- [Common] Arena_Result display processing
+98005121 【共通】闘技場_結果表示処理_決闘 -- [Common] Arena_Result display processing_Duel
+900005571 【共通】ジェスチャー入手with宝 -- [Common] Gesture acquisition with treasure
+900005610 【共通】馬禁止領域 -- [Common] Horse prohibited area
+900055278 【共通】魔法封印壁 -- [Common] Magic sealing wall
+1000000000 敵リスポン -- enemy respawn

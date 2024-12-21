@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1042382290 エジンバラ前砂塵SFX切り替え -- Edinburgh front dust SFX switching
+1042382300 王軍死体化 -- royal army corpse
+1042382340 死の鳥登場イベント -- Death Bird Appearance Event
+1042382350 トロル飛び降りイベント -- troll jumping event
+1042382600 彫像宝箱のイベント -- statue treasure chest event
+1042382650 チュートリアルメッセージ_バディ召喚可能範囲 -- Tutorial message_Buddy summonable range
+1042382651 チュートリアルメッセージ_バディ解放 -- Tutorial message_Buddy release
+1042383700 NPC326火山館最強の騎士_NPC初期化イベント_初期状態 -- NPC326 Volcano Hall Strongest Knight_NPC initialization event_Initial state

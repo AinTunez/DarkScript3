@@ -1,0 +1,10 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1040522240 地図石碑光SFX切り替え -- Map stone monument light SFX switching
+1040523700 NPC318_混沌の宿主_NPC初期化イベント_エレオノーラにやられる -- NPC318_Host of Chaos_NPC initialization event_Defeated by Eleonora
+1040523701 NPC318_混沌の宿主_エレオノーラにやられる_死亡処理 -- NPC318_Host of Chaos_Killed by Eleonora_Death processing
+1040523702 NPC318_混沌の宿主_傍らのエレオノーラに攻撃した -- NPC318_Host of Chaos_Attacked Eleanora nearby.
+1040523703 仮_NPC327_エレオノーラ初期化 -- Temporary_NPC327_Eleanora initialization
+1040523705 NPC351金仮面の従者_NPC初期化イベント -- NPC351 Gold Masked Squire_NPC initialization event

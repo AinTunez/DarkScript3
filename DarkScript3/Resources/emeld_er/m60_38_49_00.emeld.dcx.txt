@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1038492300 実際に邪眼を操作するイベント -- An event where you can actually manipulate the evil eye
+1038492301 邪眼周期現消 -- Evil eye cycle disappears
+1038492304 邪眼魔術師死亡 -- evil eye magician death
+1038492305 m60_38_49_00用初期フラグ設定 -- Initial flag setting for m60_38_49_00
+1038492306 邪眼周期管理 -- evil eye cycle management
+1038492310 遠距離敵_セットアップ_邪眼用 -- Long range enemy_setup_for evil eye
+1038492320 邪眼周回確認用特殊効果付与イベント -- Special effect event to confirm evil eye circulation
+1038492400 安全な林 -- safe forest
+1038492401 安全な林_他世界用 -- Safe forest_for other worlds
+1038492580 梯子登録 -- ladder registration

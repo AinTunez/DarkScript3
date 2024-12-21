@@ -29,10 +29,25 @@ namespace DarkScript3
             return Message + string.Join("\n", Stack) + (highlight == null ? "" : $"\n\n{highlight.File} line {highlight.Line}");
         }
 
+        public class JSScriptWarningException : Exception
+        {
+            public List<JSScriptException> Exceptions { get; set; }
+
+            public override string ToString()
+            {
+                return string.Join("\n\n", Exceptions ?? new());
+            }
+        }
+
         public static JSScriptException FromV8(IScriptEngineException scriptException)
         {
+            return FromV8Stack(scriptException.ErrorDetails);
+        }
+
+        public static JSScriptException FromV8Stack(string details)
+        {
             StringBuilder message = new StringBuilder();
-            string[] lines = scriptException.ErrorDetails.Split('\n');
+            string[] lines = details.Split('\n');
             List<StackFrame> frames = new List<StackFrame>();
             foreach (string line in lines)
             {

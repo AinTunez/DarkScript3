@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1034440700 NPC700話す死体_初期化イベント -- NPC700 Talking Corpse_Initialization Event
+1034442200 カエル人集中敵視_領域判定 -- Frog people concentrated hostility_area determination

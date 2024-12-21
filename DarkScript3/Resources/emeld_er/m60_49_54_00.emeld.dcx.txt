@@ -1,0 +1,12 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1049540519 エレベータ初期フラグ -- Elevator initial flag
+1049542210 墓暴きの貴人_思考ロジック有効化_ダメージ判定 -- Tomb-revealing Nobleman_Thought Logic Activation_Damage Judgment
+1049542216 墓暴きの貴人死体化 -- Tomb-revealing Noble Corpse
+1049542350 ウルフライダーのウルフ_再騎乗時ワープ_xx -- Wolf Rider's Wolf_Warp when remounting_xx
+1049542510 エレベータイベント起動 -- Elevator event activation
+1049543700 NPC228ウルフライダー_教会への誘導会話再生 -- NPC228 Wolf Rider_Church guidance conversation playback

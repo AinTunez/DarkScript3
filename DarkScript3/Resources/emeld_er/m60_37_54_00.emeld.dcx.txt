@@ -1,0 +1,33 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+101 デストラクタ_LOD1 -- Destructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1037542210 飛行人形兵_ターゲットクリアイベント_XX -- Flying Doll Soldier_Target Clear Event_XX
+1037542220 腐った亡者落下_XX -- Fallen rotten corpse_XX
+1037542250 視界強化 -- Enhanced vision
+1037542255 蛇霊視界強化 -- Snake Spirit Vision Enhancement
+1037542260 王軍VS人攫い兵器敵対イベ -- King's Army VS Kidnapping Weapons Hostile Event
+1037542270 人形兵vs蛇霊_交戦イベント -- Puppet Soldier vs Snake Spirit_Battle Event
+1037542300 罹患上位騎兵_初手ウォークライ -- Affected Top Cavalry_Beginner Warcry
+1037542350 パッチ用崖下宝死体視認性向上イベント -- Patch treasure corpse visibility improvement event under the cliff
+1037542351 パッチ用宝死体既に取得したフラグ立てイベント_XX -- Patch Treasure Corpse Already Obtained Flagging Event_XX
+1037542400 人形兵溶岩壺爆撃 -- Puppet soldier lava pot bombing
+1037542450 死体焚火ナビメッシュ切り抜き用アセット無効化_XX -- Corpse bonfire navigation mesh cutout asset invalidation_XX
+1037542500 接ぎ木の蜘蛛特殊効果操作イベント -- Grafted spider special effects operation event
+1037542505 死体焚火イベント起動 -- Corpse bonfire event started
+1037542569 ガーゴイル像封印壁_大 -- Gargoyle statue sealing wall_large
+1037542580 梯子登録 -- ladder registration
+1037542801 ボス撃破 -- Defeat the boss
+1037542810 蛇霊出現 -- Snake spirit appears
+1037543700 NPC309_盗賊の頭_NPC初期化イベント_火山館蹴落とし -- NPC309_Thief's Head_NPC Initialization Event_Killing down the Volcano Hall
+1037543701 NPC309_盗賊の頭_蹴落としカットシーン再生 -- NPC309_Thief's Head_Kick off cutscene playback
+1037543702 NPC309_盗賊の頭_火山館蹴落とし_土下座で敵対解除 -- NPC309_Head of the thieves_Killing down the volcano hall_Dismiss hostility by kneeling on the ground
+1037543703 NPC309_盗賊の頭_火山館蹴落とし_リアルタイム遷移 -- NPC309_Thief's Head_Kicking down the Volcano Hall_Real-time transition
+1037543704 NPC309_盗賊の頭_NPC初期化イベント_火山館蹴落とし_蹴落とし後 -- NPC309_Thief's head_NPC initialization event_Volcano hall kicking down_After kicking down
+1037543705 NPC309_盗賊の頭_火山館蹴落とし_血文字と灯り石表示 -- NPC309_Thief's Head_Kicking down the Volcano Hall_Blood letters and light stone display
+1037543706 NPC309_盗賊の頭_火山館蹴落とし_蹴落とし前に殺害した -- NPC309_Thief Head_Kicking down the Volcano Hall_Killed before kicking down

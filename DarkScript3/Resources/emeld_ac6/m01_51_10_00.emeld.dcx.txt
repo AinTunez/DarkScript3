@@ -1,0 +1,5 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2100 アセットアニメ再生 -- Asset animation playback
+2110 Gparam制御 -- Gparam control
+2120 アセットアニメ_終了時 -- Asset animation_at end

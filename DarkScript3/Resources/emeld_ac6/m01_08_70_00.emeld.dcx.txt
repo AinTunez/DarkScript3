@@ -1,0 +1,69 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 準備イベント -- Preparation event
+2001 採掘艦崩落イベント -- Mining ship collapse event
+2002 採掘艦崩落イベント_通過チェック -- Mining ship collapse event_passage check
+2003 採掘艦崩落イベント_崩落 -- Mining ship collapse event_collapse
+2005 エラー用_旧世界が地面貫通した時用 -- For errors_For when the old world penetrates the ground
+2010 旧世界MT特殊待機解除 -- Old world MT special standby canceled
+2020 旧世界着地後は作戦ライン無視しない -- Do not ignore the operational line after landing in the old world.
+2025 旧世界登場_会話用 -- Old world appearance_for conversation
+2026 旧世界登場_レーダーFE用 -- Old world appearance_for radar FE
+2027 BGM遷移_死亡ステート入り -- BGM transition_Enter death state
+2030 旧世界MT第1波全員死亡 -- Old World MT 1st wave all dead
+2100 サンフラワー登場_1 -- Sunflower appears_1
+2105 サンフラワー登場_2 -- Sunflower appears_2
+2110 サンフラワー登場_3 -- Sunflower appears_3
+2115 サンフラワー登場_4 -- Sunflower appears_4
+2120 サンフラワーにTGT付ける -- Attach TGT to Sunflower
+2148 サンフラワーにビックリを付ける -- Surprise Sunflower
+2149 一体のサンフラワーにTGTついたら残りのにもつける -- Once you attach TGT to one sunflower, attach it to the rest.
+2150 サンフラワー減少_個別チェック -- Sunflower decrease_Individual check
+2160 サンフラワー減少_まとめ -- Sunflower decrease_Summary
+2170 サンフラワー全滅_個別チェック -- Sunflower wiped out_Individual check
+2180 サンフラワー全滅_まとめ -- Sunflower annihilation_Summary
+2182 サンフラワー減少2_個別チェック -- Sunflower decrease 2_Individual check
+2186 サンフラワー減少2_個別チェック2 -- Sunflower decrease 2_Individual check 2
+2190 サンフラワー減少2_個別チェック3 -- Sunflower decrease 2_Individual check 3
+2194 サンフラワー減少2_個別チェック4 -- Sunflower decrease 2_Individual check 4
+2199 サンフラワー減少2_まとめ -- Sunflower Decrease 2_Summary
+2200 旧世界登場_1 -- Old world appearance_1
+2205 旧世界登場_2 -- Old world appearance_2
+2210 旧世界登場_3 -- Old world appearance_3
+2215 旧世界登場_4 -- Old world appearance_4
+2220 旧世界の作戦ラインヒット無効化OFF -- Old world operation line hit invalidation OFF
+2230 旧世界が作戦ラインのaメートル外側に入った -- The old world entered a meter outside the line of operations.
+2240 旧世界のビックリ消去 -- Surprise erasure of the old world
+2249 旧世界のどれかにTGTが付いた -- TGT was added to any part of the Old World.
+2250 旧世界MT全撃破_個別チェック -- Defeated all old world MT_Individual check
+2260 旧世界MT全撃破_まとめ -- Defeat all old world MT_Summary
+2340 サンフラワー登場_おかわり1 -- Sunflower appears_Refill 1
+2345 サンフラワー登場_おかわり2 -- Sunflower appears_Refill 2
+2350 サンフラワー登場_おかわり3 -- Sunflower appears_Refill 3
+2355 サンフラワー登場_おかわり4 -- Sunflower appears_Refill 4
+2370 おかわりサンフラワーにTGT付ける -- Add TGT to the extra sunflower
+2380 おかわりサンフラワー全滅_個別チェック -- Refill Sunflower wiped out_Individual check
+2390 おかわりサンフラワー全滅_まとめ -- Refill Sunflower wiped out_Summary
+2395 おかわりサンフラワーにビックリを付ける -- Add a surprise to the extra sunflower
+2399 おかわり_一体のサンフラワーにTGTついたら残りのにもつける -- Refill_If you add TGT to one sunflower, add it to the rest.
+2400 自機の場所判定_1番 -- Determine the location of your aircraft_No.1
+2401 自機の場所判定_2番 -- Determine the location of your aircraft_No.2
+2402 自機の場所判定_3番 -- Determine the location of your aircraft_No.3
+2403 自機の場所判定_4番 -- Determine the location of your aircraft_No.4
+2410 サンフラワー保険ワープ -- Sunflower Insurance Warp
+2420 サンフラワーおかわり保険ワープ -- Sunflower Refill Insurance Warp
+2700 目標地点表示_有効 -- Target point display_enabled
+2701 目標地点表示_無効 -- Target point display_disabled
+2710 旧世界MTその1_TGT -- Old World MT Part 1_TGT
+2711 旧世界MTその1_FE解除 -- Old world MT part 1_FE unlocked
+2900 会話終了フラグ -- Conversation end flag
+2910 旧世界MT登場会話フラグ -- Old world MT appearance conversation flag
+2913 旧世界MT撃破会話フラグ -- Old world MT defeat conversation flag
+2915 レーダーに感ありフラグ -- Flag on radar
+2916 ミッション切り替えしたフラグ -- Mission switched flag
+2920 サンフラワーを想定より早く減少させた -- Sunflower decreased faster than expected.
+2930 旧世界2波登場フラグ -- Old world 2nd wave appearance flag
+2940 サンフラワーおかわりフラグ -- Sunflower refill flag
+2941 旧世界登場後会話終了フラグ -- Conversation end flag after appearing in the old world
+2942 BGM遷移用_打ち止めのようだな -- For BGM transition_It seems like it has been discontinued.
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+99002640 アセットテスト0 -- Asset test 0
+99002641 アセットテストファルネーゼ配置 -- Asset test farnese placement
+99002645 デバッグ用NPC224爺や_被ダメ時SFX再生 -- NPC224 Grandpa for debugging_SFX playback when damaged
+99002646 テスト小壺被ダメ時SFX再生 -- SFX playback when test pot is damaged
+99013720 やってみようテスト -- Let's try the test
+99013721 やってみよう2テスト -- Let's try 2 tests
+1000000000 敵リスポン -- enemy respawn

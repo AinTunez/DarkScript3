@@ -1,0 +1,21 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+19000050 m19_00_00_00用初期フラグ設定 -- Initial flag setting for m19_00_00_00
+19000100 エンディング_メリナ -- Ending_Melina
+19000110 エンディング_ラニ -- Ending_Rani
+19000120 エンディング_狂い火 -- Ending_crazy fire
+19002500 黄金樹の封印 -- Seal of the Golden Tree
+19002502 黄金樹の篝火 -- golden tree bonfire
+19002682 血痕救済_クリア後 -- Bloodstain Relief_After Clearing
+19002800 ラスボス撃破 -- Defeat the final boss
+19002810 ラスボス出現 -- Last boss appears
+19002811 ラスボス激昂 -- Last boss rage
+19002812 ラスボス覚醒 -- Last boss awakening
+19002820 ラスボス星雲ワープ設定 -- Last boss nebula warp setting
+19002821 ラスボス星雲ワープ実行 -- Last boss nebula warp execution
+19002822 ラスボス星雲ワープ実行_XX -- Last boss nebula warp execution_XX
+19002830 ラスボス天の輪カメラ変更 -- Last boss sky ring camera change
+19002849 ラスボス_イベント起動 -- Last boss_event activation
+19002900 供犠台ワープ -- sacrificial stand warp
+1000000000 敵リスポン -- enemy respawn

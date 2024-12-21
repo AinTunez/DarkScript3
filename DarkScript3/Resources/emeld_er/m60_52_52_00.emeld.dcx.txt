@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1052520800 巨人撃破イベント -- Giant defeat event
+1052522810 巨人出現イベント -- Giant appearance event
+1052522811 巨人激昂イベント -- giant rage event
+1052522812 巨人覚醒イベント -- Giant Awakening Event
+1052522815 巨人部位破壊_内側 -- Giant part destruction_inside
+1052522816 巨人部位破壊_外側 -- Giant part destruction_outside
+1052522817 巨人部位破壊_部位破壊後弱点整理 -- Destruction of giant parts_organizing weak points after destruction of parts
+1052522849 巨人ボスイベント起動 -- Giant boss event starts

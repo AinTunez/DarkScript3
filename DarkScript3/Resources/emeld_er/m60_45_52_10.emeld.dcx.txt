@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1045520700 NPC331ならず者_椅子への位置合わせ -- NPC331 Rogue_Alignment to chair
+1045520710 NPC348マレニアの娘_神肌_ツリガ_ガーゴイル_白霊召喚停止イベント -- NPC348 Marenia's Daughter_Divine Skin_Tsuriga_Gargoyle_White Spirit Summoning Stop Event
+1045520720 NPC344_トラゴス_白霊共闘許可フラグ立て -- NPC344_Tragos_White spirit cooperation permission flag setting
+1045522200 高路のガーディアン_視覚聴覚を鈍らせる -- Guardian of the High Road_Deduens visual and hearing
+1045522500 王都の封印 -- Seal of the Royal Capital

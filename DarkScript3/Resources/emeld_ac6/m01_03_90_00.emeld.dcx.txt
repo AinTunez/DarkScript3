@@ -1,0 +1,287 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ボスゲージ表示 -- boss gauge display
+2001 ボスゲージ非表示 -- Boss gauge hidden
+2002 チェックポイント有効化フラグ -- checkpoint enable flag
+2003 チェックポイント有効化 -- checkpoint enable
+2004 ボスゲージ用ダミーキャラ特殊効果解除 -- Dummy character special effect release for boss gauge
+2005 作戦ライン有効化 -- Operation line activation
+2006 ミッションクリアフラグ_ゴースト先 -- Mission clear flag_Ghost destination
+2007 ミッション失敗フラグ_序盤 -- Mission failure flag_early stage
+2008 イグアス戦開始フラグ -- Iguazu match start flag
+2009 ヒット有効化_イグアス戦敵壁 -- Hit activation_Iguazu enemy wall
+2010 ミッションクリアフラグ_イグアス先 -- Mission clear flag_Iguazu destination
+2011 ミッション失敗フラグ_イグアス戦 -- Mission failure flag_Iguazu battle
+2012 ミッション失敗時用衝撃無効特殊効果 -- Impact nullification special effect for mission failure
+2020 ミッション会話用特殊効果付与 -- Add special effects for mission conversations
+2021 ミッション会話用特殊効果解除 -- Special effect release for mission conversation
+2040 溶鉄によるダメージイベント -- Damage event caused by molten iron
+2050 屋内に入ったらタイマー起動 -- Start the timer when you enter the room.
+2055 目標ポイント_外無効化 -- Target points_outside invalidation
+2056 目標ポイント_外有効化 -- Target points_external activation
+2057 外に出たら目標ポイント無効化 -- Target points will be invalidated if you go outside.
+2058 屋外に出た判定 -- Judgment of being outdoors
+2060 宝箱回収したらタイマー無効化 -- Disable the timer after collecting the treasure chest.
+2065 暫定クリア範囲に入った -- Entered the provisional clear range
+2066 スタート地点の扉用ダミー有効化 -- Enable dummy for door at starting point
+2070 一部敵のロジック停止 -- Some enemies' logic stopped
+2071 一部敵の無効化 -- Disable some enemies
+2072 一部敵のチームタイプ変更 -- Some enemy team types changed
+2073 一部アセットの無効化 -- Disabling some assets
+2074 一部敵の砲台化 -- Some enemy turrets
+2075 空中ガードメカローター無音化_初回 -- Aerial guard mechanical rotor silence_first time
+2076 空中ガードメカローター音ON -- Aerial guard mechanical rotor sound ON
+2077 空中ガードメカローター無音化_ループ -- Aerial guard mechanical rotor silence_loop
+2080 一部敵の常時描画 -- Constant drawing of some enemies
+2085 最終囲まれポイント無効 -- Final surrounded point invalid
+2086 最終囲まれポイント有効 -- Last surrounded point valid
+2087 囲まれポイントに入ったら目標表示を消す -- When you enter a surrounded point, the target display disappears.
+2090 最終目標マーカー -- final goal marker
+2091 最終目標マーカー非表示 -- Final goal marker hidden
+2092 最終目標マーカー無効化 -- Disable final goal marker
+2093 最終目標マーカ無効化判定 -- Final target marker invalidation judgment
+2100 ハック用ダミーキャラのロジック停止 -- Logic suspension of dummy character for hacking
+2101 ハック用ダミーキャラの当たり無効化 -- Disable hit of hack dummy character
+2102 ハック用ダミーキャラのアタッチ -- Attaching a dummy character for hacking
+2110 残骸01をスキャン完了 -- Completed scanning of wreckage 01
+2111 残骸02をスキャン完了 -- Completed scanning of wreckage 02
+2113 残骸03をスキャン完了 -- Completed scan of wreckage 03
+2114 残骸04をスキャン完了 -- Completed scan of wreckage 04
+2115 残骸05をスキャン完了 -- Completed scanning of wreckage 05
+2116 残骸06をスキャン完了 -- Completed scan of wreckage 06
+2120 残骸03をスキャン途中で奇襲 -- Surprise attack while scanning wreckage 03
+2121 残骸04をスキャン途中で奇襲 -- Surprise attack while scanning wreckage 04
+2122 残骸02スキャン開始時建機クモ起動 -- Construction machine spider starts at the start of debris 02 scan
+2150 宝箱回収数1 -- Number of treasure chests recovered: 1
+2151 宝箱回収数2 -- Number of treasure chests recovered: 2
+2152 宝箱回収数3 -- Number of treasure chests recovered: 3
+2153 宝箱回収数4 -- Number of treasure chests recovered: 4
+2154 宝箱回収数5 -- Number of treasure chests recovered: 5
+2160 全宝箱回収 -- Collect all treasure chests
+2210 最終戦用敵の無効化 -- Nullification of final battle enemies
+2215 最終戦用敵の有効化 -- Enabling Final Battle Enemies
+2220 ミッションクリア判定 -- Mission clear judgment
+2221 建機クモ起動 -- construction machine spider launch
+2235 建機クモ起動2 -- Construction machine spider launch 2
+2250 建機クモ起動3 -- Construction machine spider startup 3
+2265 建機クモ起動4 -- Construction machine spider launch 4
+2270 破壊目標ダメージSFX -- Destruction target damage SFX
+2295 第二区画の敵起動 -- Enemy activation in the second section
+2300 最終決戦輸送ヘリ投下 -- Final battle transport helicopter drop
+2301 最終決戦ヘリ消失 -- Final battle helicopter disappears
+2303 隠しボス起動 -- Hidden boss activation
+2304 第四目標周辺の建機クモ起動 -- Activate the construction machine spider around the fourth target
+2415 扉B用ダミーキャラの無効化 -- Disable dummy character for door B
+2416 宝箱全回収で扉B有効化 -- Door B is activated by collecting all treasure chests.
+2420 最終戦の敵有効化判定 -- Final battle enemy activation determination
+2430 判定_特別報酬6 -- Judgment_Special Reward 6
+2431 判定_特別報酬5 -- Judgment_Special Reward 5
+2432 判定_特別報酬3 -- Judgment_Special Reward 3
+2433 判定_特別報酬2 -- Judgment_Special reward 2
+2434 判定_特別報酬1 -- Judgment_Special Reward 1
+2435 判定_特別報酬0 -- Judgment_Special reward 0
+2436 特別報酬5 -- Special reward 5
+2437 特別報酬4 -- Special reward 4
+2438 特別報酬3 -- Special reward 3
+2439 特別報酬2 -- Special reward 2
+2440 特別報酬1 -- Special reward 1
+2441 特別報酬0 -- Special reward 0
+2442 フラグ_特別報酬6 -- Flag_Special Reward 6
+2443 フラグ_特別報酬5 -- Flag_Special Reward 5
+2444 フラグ_特別報酬4 -- Flag_Special Reward 4
+2445 フラグ_特別報酬3 -- Flag_Special Reward 3
+2446 フラグ_特別報酬2 -- Flag_Special Reward 2
+2447 フラグ_特別報酬1 -- Flag_Special Reward 1
+2448 フラグ_特別報酬0 -- Flag_Special Reward 0
+2449 判定_特別報酬4 -- Judgment_Special Reward 4
+2500 不要な扉とダミーキャラを消す -- Delete unnecessary doors and dummy characters
+2501 扉ハッキング -- door hacking
+2514 扉02ハッキング中にガードメカ出現 -- Guard mech appears while hacking door 02
+2516 扉03ハッキング完了時にガードメカ起動 -- Guard mechanism activated when door 03 hacking completed
+2520 脱出地点の扉有効化 -- Escape point door activation
+2530 扉ハッキングフラグ1500 -- door hacking flag 1500
+2531 扉ハッキングフラグ1390 -- door hacking flag 1390
+2532 扉ハッキングフラグ1350 -- door hacking flag 1350
+2533 扉ハッキングフラグ1380 -- door hacking flag 1380
+2534 扉ハッキングフラグ1310 -- door hacking flag 1310
+2535 扉ハッキングフラグ1510 -- door hacking flag 1510
+2536 扉ハッキングフラグ1520 -- door hacking flag 1520
+2537 扉ハッキングフラグ1530 -- door hacking flag 1530
+2540 フラグに応じて扉を開く1500 -- 1500 to open door depending on flag
+2541 フラグに応じて扉を開く1390 -- Open door according to flag 1390
+2542 フラグに応じて扉を開く1350 -- Open door according to flag 1350
+2543 フラグに応じて扉を開く1380 -- Open door according to flag 1380
+2545 フラグに応じて扉を開く1310 -- Open door according to flag 1310
+2546 フラグに応じて扉を開く1510 -- Open door according to flag 1510
+2547 フラグに応じて扉を開く1520 -- Open door according to flag 1520
+2548 フラグに応じて扉を開く1530 -- Open door according to flag 1530
+2549 イグアス戦で扉を閉める -- Close the door against Iguazu
+2550 フラグに応じてダミー消し1500 -- Erase dummy 1500 depending on flag
+2551 フラグに応じてダミー消し1390 -- Erase dummy according to flag 1390
+2552 フラグに応じてダミー消し1350 -- Erase dummy 1350 according to flag
+2553 フラグに応じてダミー消し1380 -- Erase dummy 1380 according to flag
+2554 フラグに応じてダミー消し1310 -- Erase dummy according to flag 1310
+2555 フラグに応じてダミー消し1510 -- Erase dummy according to flag 1510
+2556 フラグに応じてダミー消し1520 -- Erase dummy 1520 according to flag
+2557 フラグに応じてダミー消し1530 -- Erase dummy according to flag 1530
+2560 扉ハッキング_両開き対応用A -- Door hacking_for double door A
+2561 扉ハッキング_両開き対応用B -- Door hacking_For double-door opening B
+2562 扉ハッキング_両開き対応用C -- Door hacking_C for double door opening
+2563 扉ハッキング_両開き対応用D -- Door hacking_D for double door opening
+2564 扉ハッキング_両開き対応用E -- Door hacking_E for double door opening
+2565 扉ハッキング_両開き対応用F -- Door hacking_F for double door opening
+2600 破壊目標とダミーキャラの紐づけ -- Linking destruction targets and dummy characters
+2610 破壊目標にTGTマーク -- TGT mark on destruction target
+2620 破壊目標のフラグ -- Destruction target flag
+2621 破壊目標のフラグ２ -- Destruction target flag 2
+2630 破壊目標への接近 -- Approaching the target of destruction
+2640 破壊目標によりクモ落下 -- Spider falls due to destruction target
+2650 上からくるクモのロジック無効化 -- Disable spider logic coming from above
+2660 天井張り付き建機クモ左側 -- Construction machine spider left side attached to ceiling
+2661 天井張り付き建機クモ右側 -- Construction machine spider right side attached to ceiling
+2662 さいしょの特効MT -- The first special effect MT
+2663 四脚起動 -- quadruped launch
+2664 ゴースト有効化 -- Ghost enable
+2665 イグアスにTGT表示 -- TGT display on Iguazu
+2666 イグアス有効化 -- iguazu enabled
+2667 ゴーストにTGT表示 -- TGT display on ghost
+2668 ゴーストにタゲ優先特殊効果 -- Ghost and target priority special effects
+2669 ゴースト有効化フラグ -- Ghost enable flag
+2670 状況会話スキップ判定 -- Situational conversation skip judgment
+2671 状況会話ループ防止フラグ -- Status conversation loop prevention flag
+2672 イグアスに狙われない特殊効果 -- Special effects to avoid being targeted by Iguazu
+2673 イグアスに狙われない特殊効果解除 -- Special effects to avoid being targeted by Iguazu
+2674 CP再開用OBJ無効化 -- Disable OBJ for CP restart
+2675 ゴースト有効化前判定_ワープA -- Judgment before ghost activation_Warp A
+2676 ゴースト有効化前判定_ワープB -- Judgment before ghost activation_Warp B
+2677 ゴースト有効化前判定_ワープしない -- Judgment before ghost activation_Do not warp
+2678 ゴースト有効化前ワープ完了フラグ -- Warp completion flag before ghost activation
+2679 ゴースト有効化前ワープA -- Warp A before ghost activation
+2680 ゴースト有効化前ワープB -- Warp B before ghost activation
+2800 判定_第四地点に入った -- Judgment_Entered the fourth point
+2801 判定_残り3分 -- Judgment_3 minutes remaining
+2802 判定_残り2分 -- Judgment_2 minutes remaining
+2803 判定_残り1分 -- Judgment_1 minute left
+2804 判定_時間切れ -- Judgment_Time is up
+2805 判定_ハッキングMT前に来た -- Judgment_I came before hacking MT
+2815 判定_宝箱取得01 -- Judgment_Treasure box acquisition 01
+2816 判定_増援確認 -- Judgment_Reinforcement confirmation
+2817 判定_屋内に入った -- Judgment_Goed indoors
+2818 判定_最終囲まれ範囲に入った -- Judgment_Entered the final surrounded area
+2820 判定_目標破壊01 -- Judgment_Target destruction 01
+2821 判定_目標破壊02 -- Judgment_Target destruction 02
+2822 判定_目標破壊03 -- Judgment_Target destruction 03
+2823 判定_目標破壊04 -- Judgment_Target destruction 04
+2824 判定_目標破壊05 -- Judgment_Target destruction 05
+2830 判定_目標破壊数1 -- Judgment_Number of targets destroyed 1
+2831 判定_目標破壊数2 -- Judgment_Number of targets destroyed 2
+2832 判定_目標破壊数3 -- Judgment_Number of targets destroyed 3
+2833 判定_目標破壊数4 -- Judgment_Number of targets destroyed 4
+2834 判定_目標破壊数5 -- Judgment_Number of targets destroyed 5
+2840 判定_ダミーキャラHP半減 -- Judgment_Dummy character HP halved
+2841 判定_ダミーキャラHP30 -- Judgment_Dummy character HP30
+2842 判定_ダミーキャラ死亡 -- Judgment_Dummy character death
+2843 判定_ダミーキャラHP10 -- Judgment_Dummy character HP10
+2845 判定_第二エリアに入った -- Judgment_Entered the second area
+2846 判定_敵の謎全滅をチェック -- Judgment_Check the mysterious annihilation of the enemy
+2847 判定_奥の部屋で宝箱に近づいた -- Judgment_ Approaching the treasure chest in the back room
+2848 判定_カットシーン再生範囲に入った -- Judgment_Entered within cutscene playback range
+2849 判定_カットシーン再生終了待機 -- Judgment_Waiting for cutscene to finish playing
+2850 判定_CP有効化用範囲に入った -- Judgment_Entered within CP activation range
+2851 判定_ダミーキャラHP50以上 -- Judgment_Dummy character HP 50 or more
+2852 判定_ダミーキャラHP50未満 -- Judgment_Dummy character HP less than 50
+2853 判定_ダミーキャラHP40以上 -- Judgment_Dummy character HP 40 or more
+2854 判定_ダミーキャラHP40未満 -- Judgment_Dummy character HP less than 40
+2855 判定_ダミーキャラHP30以上 -- Judgment_Dummy character HP 30 or more
+2856 判定_ダミーキャラHP30未満 -- Judgment_Dummy character HP less than 30
+2857 判定_ダミーキャラHP20以上 -- Judgment_Dummy character HP 20 or more
+2858 判定_ダミーキャラHP20未満 -- Judgment_Dummy character HP less than 20
+2859 判定_ダミーキャラHP10未満 -- Judgment_Dummy character HP less than 10
+2860 判定_ダミーキャラHP40未満10以上 -- Judgment_Dummy character HP less than 40 10 or more
+2870 判定_ゴーストを無視してイグアスに攻撃した -- Judgment_Ignored the ghost and attacked Iguazu
+2871 判定_ゴースト全滅 -- Judgment_Ghost annihilated
+2872 判定_イグアス撃破 -- Judgment_Defeat Iguazu
+2873 判定_自機死亡 -- Judgment_Original death
+2874 判定_ゴースト有効化用 -- Judgment_For ghost activation
+2875 判定_ゴースト撃破数1 -- Judgment_Number of ghosts defeated 1
+2876 判定_ゴースト撃破数2 -- Judgment_Number of ghosts defeated 2
+2877 判定_ゴースト撃破数3 -- Judgment_Number of ghosts defeated 3
+2878 判定_建機クモ接敵会話 -- Judgment_Construction machine spider contact conversation
+2879 判定_屋内に侵入 -- Judgment_Intrusion indoors
+2880 判定_イグアス回復薬未使用 -- Judgment_Iguazu recovery medicine not used
+2881 判定_イグアス回復薬使用数1 -- Judgment_Number of Iguazu recovery medicines used 1
+2882 判定_イグアス回復薬使用数2 -- Judgment_Number of Iguazu recovery medicines used 2
+2883 BGM判定_イグアス死亡 -- BGM Judgment_Iguazu Death
+2884 会話判定_屋内侵入スキップ -- Conversation Judgment_Indoor Intrusion Skip
+2885 会話判定用フラグ_建機クモ紹介 -- Conversation determination flag_Introduction to Construction Machinery Spider
+2886 会話判定_建機クモ紹介 -- Conversation Judgment_Construction Machine Spider Introduction
+2887 会話判定_建機クモ紹介スキップ -- Conversation Judgment_Construction Machinery Spider Introduction Skip
+2888 判定_イグアス回復薬使用数3 -- Judgment_Number of Iguazu recovery medicines used 3
+2900 会話_ミッション開始 -- Conversation_Mission start
+2901 会話_開始会話2 -- Conversation_Start conversation 2
+2902 会話_残り90 -- Conversation_90 left
+2903 会話_ドローン発見 -- Conversation_Drone discovery
+2904 会話_目標破壊1 -- Conversation_Target Destruction 1
+2905 会話_目標破壊1A -- Conversation_Target destruction 1A
+2906 会話_目標破壊1B -- Conversation_Target destruction 1B
+2907 会話_建機クモ接敵 -- Conversation_Construction Machine Spider Engagement
+2908 会話_目標破壊2 -- Conversation_Target destruction 2
+2909 会話_目標破壊2A -- Conversation_Target destruction 2A
+2910 会話_目標破壊2B -- Conversation_Target destruction 2B
+2911 会話_目標破壊3 -- Conversation_Target Destruction 3
+2912 会話_目標破壊3A -- Conversation_Target destruction 3A
+2913 会話_目標破壊3B -- Conversation_Target destruction 3B
+2914 会話_目標破壊4 -- Conversation_Target destruction 4
+2915 会話_目標破壊4A -- Conversation_Target destruction 4A
+2916 会話_目標破壊4B -- Conversation_Target destruction 4B
+2917 会話_残り50 -- Conversation_50 left
+2918 会話_残り50_2 -- Conversation_50 remaining_2
+2919 会話_残り30 -- Conversation_30 remaining
+2920 会話_残り30_2 -- Conversation_30 left_2
+2921 会話_残り10 -- Conversation_10 remaining
+2922 会話_間に合わなかった -- Conversation_I couldn't make it in time
+2923 会話_目標破壊5 -- Conversation_Target destruction 5
+2924 会話_目標破壊5A -- Conversation_Target destruction 5A
+2925 会話_目標破壊5B -- Conversation_Target destruction 5B
+2926 会話_目標破壊5C -- Conversation_Target destruction 5C
+2927 会話_目標全破壊後1 -- Conversation_After target is completely destroyed 1
+2928 会話_目標全破壊後2 -- Conversation_After target is completely destroyed 2
+2929 会話_目標全破壊後3 -- Conversation_After target is completely destroyed 3
+2930 会話_イグアス登場1 -- Conversation_Iguazu appearance 1
+2931 会話_イグアス登場2 -- Conversation_Iguazu Appearance 2
+2932 会話_敵機識別 -- Conversation_Enemy aircraft identification
+2933 会話_挨拶_ダム共闘 -- Conversation_Greetings_Dam collaboration
+2934 会話_挨拶_ダム裏切り -- Conversation_Greetings_Dam Betrayal
+2935 会話_挨拶_続き -- Conversation_Greetings_Continued
+2936 会話_ゴースト乱入1 -- Conversation_Ghost intrusion 1
+2937 会話_ゴースト乱入2 -- Conversation_Ghost Intrusion 2
+2938 会話_ゴースト乱入3 -- Conversation_Ghost intrusion 3
+2939 会話_ゴースト暗号と共闘要請 -- Conversation_Ghost code and request for cooperation
+2941 会話_要請を無視 -- Conversation_Ignore requests
+2942 会話_イグアスを先に撃破1 -- Conversation_Defeat Iguazu first 1
+2943 会話_イグアスを先に撃破2 -- Conversation_Defeat Iguazu first 2
+2944 会話_ゴースト一機目撃破 -- Conversation_One ghost sighted
+2945 会話_その他ゴースト撃破 -- Conversation_Other Ghost Defeat
+2946 会話_イグアス後にゴースト殲滅1 -- Conversation_Ghost extermination 1 after Iguazu
+2947 会話_イグアス後にゴースト殲滅2 -- Conversation_Ghost annihilation 2 after Iguazu
+2948 会話_イグアス後にゴースト殲滅3 -- Conversation_Ghost annihilation 3 after Iguazu
+2949 会話_ゴースト・イグアス生存中に死亡 -- Conversation_Ghost Iguazu died while alive
+2950 会話_ゴーストを先に撃破1 -- Conversation_Defeat the ghost first 1
+2951 会話_ゴーストを先に撃破2 -- Conversation_Defeat the ghost first 2
+2952 会話_ゴースト後にイグアス撃破1 -- Conversation_Defeat Iguazu after Ghost 1
+2953 会話_ゴースト後にイグアス撃破2 -- Conversation_Defeat Iguazu after Ghost 2
+2954 会話_ゴースト後にイグアス撃破3 -- Conversation_Defeat Iguazu after Ghost 3
+2955 会話_ゴースト殲滅後に死亡 -- Conversation_Died after destroying ghosts
+2956 会話_ゴースト撃破2 -- Conversation_Ghost Defeat 2
+2957 会話_ゴースト撃破3 -- Conversation_Ghost Defeat 3
+2958 会話_敵性反応なし -- Conversation_No hostile reaction
+2960 BGMトランジション_ステート番号00_通常 -- BGM transition_state number 00_normal
+2961 BGMトランジション_ステート番号01_戦闘中 -- BGM transition_state number 01_in battle
+2962 BGMトランジション_ステート番号02_ヒートアップ1 -- BGM transition_state number 02_heat up 1
+2963 BGMトランジション_ステート番号03_ヒートアップ2 -- BGM transition_state number 03_heat up 2
+2964 BGMトランジション_ステート番号04_ヒートアップ3 -- BGM transition_state number 04_heat up 3
+2965 BGMトランジション_ステート番号05_ヒートアップ4 -- BGM transition_state number 05_heat up 4
+2966 BGMトランジション_ステート番号06_ヒートアップ5 -- BGM transition_state number 06_heat up 5
+2967 BGMトランジション_ステート番号07_死亡 -- BGM transition_state number 07_death
+2970 カットシーン再生_イグアス登場 -- Cutscene playback_Iguazu appears
+1000000000 敵リスポン -- enemy respawn

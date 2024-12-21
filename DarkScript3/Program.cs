@@ -38,9 +38,9 @@ namespace DarkScript3
                 {
                     EMEDF2HTML.Generate(args);
                 }
-                else if (args.Contains("-decompile"))
+                else if (args.Contains("-decompile") || args.Contains("-compile") || args.Contains("-help"))
                 {
-                    RoundTripTool.Decompile(args);
+                    RoundTripTool.CommandLine(args);
                 }
 #if DEBUG
                 // The rest of these have quite unstructured arguments, so don't include them in the release binary.

@@ -1,0 +1,15 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1049532200 野生動物霊体化 -- wild animal spirit form
+1049533700 NPC318_混沌の宿主_NPC初期化イベント_混沌に乗っ取られた -- NPC318_Host of Chaos_NPC initialization event_Hijacked by Chaos
+1049533701 NPC318_混沌の宿主_混沌に乗っ取られた_リアルタイム遷移 -- NPC318_Host of Chaos_Hijacked by Chaos_Real-time transition
+1049533702 NPC318_混沌の宿主_混沌に乗っ取られた_PCが狂い火受領済 -- NPC318_Host of Chaos_Hijacked by Chaos_PC went crazy and received fire
+1049533703 NPC318_混沌の宿主_混沌に乗っ取られた_死亡会話途切れ防止 -- NPC318_Host of Chaos_Hijacked by Chaos_Death conversation interruption prevention
+1049533705 NPC324百智卿_ロルドのエレベーター到達 -- NPC324 Lord Momochi_Roldo's elevator reached
+1049533710 NPC610巨大EV_高山雪山間_マルチ中判定 -- NPC610 Huge EV_Alpine and snowy mountains_Multi medium judgment

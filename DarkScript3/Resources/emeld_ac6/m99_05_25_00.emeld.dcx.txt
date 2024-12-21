@@ -1,0 +1,21 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+90050001 ターゲットマーカー表示 -- Target marker display
+99050000 初期化 -- Initialization
+99050002 ドア開閉イベント -- door opening/closing event
+99050003 単体破壊 -- single unit destruction
+99050004 巻き込み破壊 -- Engulfing destruction
+99050005 巻き込み爆破 -- entrapment explosion
+99052000 ダンジョン接近 -- Approaching the dungeon
+99052001 ダンジョン侵入 -- dungeon invasion
+99052010 製造ラインの破壊 -- Destruction of production line
+99052020 電気系統の破壊 -- Destruction of electrical system
+99052030 巨大生物兵器の確認 -- Confirmation of giant biological weapon
+99052040 最深部 -- deepest part
+99052050 クリアテキスト -- clear text
+99052200 部屋2 -- room 2
+99052300 部屋3 -- room 3
+99052600 部屋6 -- room 6
+99052700 生物兵器全滅 -- Biological weapons annihilation
+1000000000 敵リスポン -- enemy respawn

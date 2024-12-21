@@ -1,0 +1,20 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 サンドワームHP判定01 -- Sandworm HP judgment 01
+2001 サンドワームHP判定02 -- Sandworm HP judgment 02
+2002 サンドワームHP判定03 -- Sandworm HP judgment 03
+2005 サンドワーム戦闘開始判定 -- Sandworm battle start determination
+2006 サンドワーム戦闘開始領域 -- Sandworm battle start area
+2010 サンドワーム撃破判定 -- Sandworm defeat judgment
+2100 サンドワーム_戦闘開始前フラグ -- Sandworm_Pre-battle flag
+2101 サンドワーム_未HU状態フラグ -- Sandworm_UnHU status flag
+2102 サンドワーム_HU状態フラグ -- Sandworm_HU status flag
+2103 サンドワーム_撃破状態フラグ -- Sandworm_defeated status flag
+2200 ミッション用初期化イベント_サンドワームボスゲージ -- Mission initialization event_Sandworm boss gauge
+2201 サンドワーム無敵化 -- Sandworm invincibility
+2202 カタパルト目標地点_無効有効化イベント -- Catapult target point_disable enable event
+2203 カタパルト目標地点_無効化 -- Catapult target point_disabled
+2204 ジェネレータイベント_有効化 -- Generator event_enable
+2400 HU状態イベント_時間天候変化 -- HU status event_time weather change
+2500 撃破状態イベント_時間天候変化 -- Defeated state event_time weather change
+1000000000 敵リスポン -- enemy respawn

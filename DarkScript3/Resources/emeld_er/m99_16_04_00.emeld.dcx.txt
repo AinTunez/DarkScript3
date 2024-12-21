@@ -1,0 +1,28 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+9960100 望月マップモシャステスト -- Mochizuki Map Motious Test
+9960110 望月マップモシャステスト_プレゼン -- Mochizuki Map Motious Test_Presentation
+9960120 ボスゲージ表示 -- boss gauge display
+9960130 ボス撃破演出 -- Boss defeat performance
+9960140 ラダーンメテオ時ワープ -- Radan Meteor Time Warp
+9960150 落下時ラダーンメテオ時ワープ -- Warp when falling Radhan Meteor
+9960160 アリ当たり抜きテストイベント -- Ant hit test event
+9960170 望月マップモシャステスト_小サイズテスト -- Mochizuki Map Motious Test_Small size test
+9960180 望月マップモシャステスト_中サイズテスト -- Mochizuki Map Motious Test_Medium size test
+9960190 望月マップモシャステスト_大サイズテスト -- Mochizuki Map Motious Test_Large size test
+9960200 マザースライムテスト_スライム生成テスト -- Mother slime test_Slime generation test
+9960210 マザースライムテスト_スライム滴り生成テスト -- Mother slime test_Slime dripping generation test
+9960300 ワイバーンカメラテスト -- Wyvern camera test
+9960310 ワイバーンカメラリセット -- Wyvern camera reset
+9960800 ザリガニ待機テスト -- Crayfish waiting test
+9960900 死の鳥ロックダミポリテスト -- death bird lock dami poly test
+9961100 星雲龍ロックダミポリテスト -- Nebula Dragon Lock Damipoly Test
+9961300 星雲龍カメラ変更 -- Seiunryu camera change
+9961310 星雲龍カメラリセット -- Seiunryu camera reset
+99061000 星雲龍ワープイベント -- Nebula Dragon Warp Event
+99061200 星雲龍ワープ切りイベント -- Nebula Dragon Warp Cutting Event
+99162200 タスクライダー撃破 -- Defeat Task Rider
+99162210 タスクライダー出現 -- Task rider appears
+99162249 タスクライダー_イベント起動 -- Task rider_event activation
+1000000000 敵リスポン -- enemy respawn

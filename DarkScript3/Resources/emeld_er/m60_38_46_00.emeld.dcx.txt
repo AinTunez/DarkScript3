@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+150 コンストラクタ_LOD1 -- constructor_LOD1
+200 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+1000000000 敵リスポン -- enemy respawn
+1038460510 エレベータ起動 -- elevator start
+1038460519 エレベーター初期フラグ設定 -- Elevator initial flag setting
+1038462200 キャラクター死体化イベント_XX -- Character corpse event_XX
+1038462210 ゴロゴロ鉄球_テスト -- Rumbling Iron Ball_Test
+1038462340 壊れたガーディアン初期イベント -- Broken Guardian Initial Event

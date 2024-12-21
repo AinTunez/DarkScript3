@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+505001 巨人ポーズ待機 -- Giant pose waiting
+505002 草むら判定 -- Grass judgment
+505003 草むら特殊効果付与 -- Add grass special effects
+505004 篝火NPC位置合わせ -- Bonfire NPC position alignment
+505010 大蟹_更新頻度指定 -- Big crab_update frequency specification
+505011 草むらででしゃがんでいる時の特殊効果付与 -- Adds special effects when crouching in the grass
+505012 草むらでしゃがんでいるときのステルスボーナス特殊効果付与 -- Adds stealth bonus special effect when crouching in the grass.
+505013 PCがしゃがんでいたらエネミーの発見視覚距離を短くする -- Reduces enemy detection visual distance if PC is crouching
+1000000000 敵リスポン -- enemy respawn

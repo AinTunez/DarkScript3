@@ -1,0 +1,12 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1034482260 気球待機イベント_XX -- Balloon standby event_XX
+1034482261 気球破壊イベント_XX -- Balloon destruction event_XX
+1034482262 人形兵解除イベント_XX -- Puppet soldier release event_XX
+1034482600 地図石碑光SFX切り替え -- Map stone monument light SFX switching
+1034482610 ニト剣トラップ_起動_XX -- Nito sword trap_activation_XX
+1034482800 ボス撃破 -- Defeat the boss
+1034482810 ボス出現 -- Boss appears
+1034482849 ボス_ナズグル_イベント起動 -- Boss_Nazgul_Event activation

@@ -1,0 +1,29 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 PCのエリア挙動テスト -- PC area behavior test
+5000 草むら検証用 -- For grass field verification
+5001 しゃがみ付与イベント -- Crouching event
+5003 宝箱テスト -- treasure chest test
+5004 ＳＥ再生テスト（音認識） -- SE playback test (sound recognition)
+5005 ＳＥ再生テスト（戦闘状態） -- SE playback test (combat state)
+5006 アクションボタン呼び出し＆アニメ再生要求テスト -- Action button call & animation playback request test
+5007 ぶら下がりイベント対応1 -- Hanging event support 1
+5008 ぶら下がりイベント対応2 -- Hanging event support 2
+5009 ぶら下がりイベント対応3 -- Hanging event support 3
+5010 ぶら下がりイベント対応4 -- Hanging event support 4
+5011 ぶら下がりイベント対応5 -- Hanging event support 5
+5012 ぶら下がりイベント対応6 -- Hanging event support 6
+5013 ぶら下がりイベント対応7 -- Hanging event support 7
+5014 ５末用バディ召喚_汎用 -- Buddy Summon for 5th End_General Purpose
+5015 バディ（弓）召喚 -- Buddy (Bow) Summon
+5016 ５末用バディ召喚（ユニーク） -- 5-end buddy summon (unique)
+5017 ５末用貴人特殊待機 -- 5-year-old nobleman special standby
+5020 バディ_汎用_召喚2 -- Buddy_General_Summon_2
+5021 マップパーツ切り替え確認 -- Confirm map parts switching
+5022 ワープ確認 -- Warp confirmation
+5023 ワープ確認：篝火から版 -- Warp confirmation: version from bonfire
+5024 ナズグル強襲イベント -- Nazgul Assault Event
+5025 ウミカラス飛行初期待機1 -- Sea crow flight initial standby 1
+5026 ウミカラス飛行初期待機2 -- Sea crow flight initial standby 2
+5027 ウミカラス飛行初期待機3 -- Sea crow flight initial standby 3
+1000000000 敵リスポン -- enemy respawn

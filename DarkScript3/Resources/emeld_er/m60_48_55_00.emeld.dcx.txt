@@ -1,0 +1,12 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1248552320 ツリーガード_BGMHU管理 -- Tree guard_BGMHU management
+1248552321 フィールドボス_HU通知_ボス2体用 -- Field boss_HU notification_for 2 bosses
+1248552800 ルーン狩りの騎士２体戦_フィールドボス撃破 -- Battle of 2 Rune Hunting Knights_Defeat the field boss
+1248552820 ルーン狩りの騎士_時間帯によって馬召喚を禁止する_xx -- Knight of the Rune Hunt_Horse summoning is prohibited depending on the time of day_xx
+1248552830 ルーン狩りの騎士_時間帯によってキャラ当たりを無効化する_xx -- Rune Hunting Knight_Disable character hits depending on the time of day_xx
+1248552840 ルーン狩りの騎士_初期ワープ_xx -- Rune Hunting Knight_Initial Warp_xx

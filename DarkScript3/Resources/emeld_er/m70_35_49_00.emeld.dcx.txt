@@ -1,0 +1,5 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+4000 汎用_ナズグル従者_ナズグル王召喚 -- General Purpose_Nazgul Servant_Nazgul King Summon
+4001 汎用_ナズグル従者_ナズグルターゲット切り替え -- General Purpose_Nazgul Servant_Nazgul Target Switch
+1000000000 敵リスポン -- enemy respawn

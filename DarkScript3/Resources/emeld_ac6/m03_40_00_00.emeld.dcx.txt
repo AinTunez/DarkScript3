@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+340002210 坑道_雪SFX表示判定イベント -- Mine shaft_snow SFX display judgment event
+340002800 ナビメッシュ用アセットの無効化 -- Disabling assets for navmesh
+340002900 高度計初期化イベント -- Altimeter initialization event
+1000000000 敵リスポン -- enemy respawn

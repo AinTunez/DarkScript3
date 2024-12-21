@@ -1,0 +1,8 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1044382220 霊クラゲNPCいる時に消すイベント -- An event that disappears when a spirit jellyfish NPC is present
+1044382600 絵画イベント開始 -- Painting event begins
+1044383720 NPC318_混沌の宿主_NPC初期化イベント_ネリウス勝利後 -- NPC318_Host of Chaos_NPC initialization event_After Nerius wins
+1044383721 NPC318_混沌の宿主_死亡確認_ネリウス勝利後 -- NPC318_Host of Chaos_Death confirmation_After Nerius' victory

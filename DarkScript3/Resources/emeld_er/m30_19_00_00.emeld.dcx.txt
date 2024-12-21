@@ -1,0 +1,21 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30190050 m30_19_00_00用初期フラグ設定 -- Initial flag setting for m30_19_00_00
+30192201 番犬ゴーレムダメージ受けると落下 -- Fall if you take damage from the guard dog golem.
+30192210 サインだまりアニメ再生イベント -- Signed Damari Anime Playback Event
+30192500 英雄の墓_二段氷吹き像_氷吹き処理_クリア回数0回用 -- Hero's Tomb_Two-tiered ice-blowing statue_Ice-blowing process_For 0 clears
+30192501 英雄の墓_二段氷吹き像_氷吹き処理_クリア回数1回用 -- Hero's Tomb_Two-tiered ice blowing statue_Ice blowing process_For 1 clear count
+30192502 英雄の墓_二段氷吹き像_氷吹き処理_クリア回数2回用 -- Tomb of the Hero_Two-tiered ice-blowing statue_Ice-blowing process_For 2 clears
+30192503 英雄の墓_二段氷吹き像_氷吹き処理_クリア回数3回用 -- Tomb of the Hero_Two-tiered ice-blowing statue_Ice-blowing process_For 3 clears
+30192504 英雄の墓_二段氷吹き像_氷吹き処理_クリア回数4回用 -- Hero's Tomb_Two-tiered ice blowing statue_Ice blowing process_For 4 clears
+30192505 英雄の墓_二段氷吹き像_氷吹き処理_クリア回数5回用 -- Tomb of the Hero_Two-tiered ice blowing statue_Ice blowing process_For 5 clears
+30192506 英雄の墓_二段氷吹き像_氷吹き処理_クリア回数6回用 -- Hero's Tomb_Two-tiered ice blowing statue_Ice blowing process_For 6 clears
+30192507 英雄の墓_二段氷吹き像_氷吹き処理_クリア回数7回用 -- Tomb of the Hero_Two-tiered ice blowing statue_Ice blowing process_For 7 clears
+30192520 洞窟_ボス部屋報酬宝箱の開放制限 -- Cave_Boss room reward treasure chest opening limit
+30192600 火吹き像のマクロ起動 -- Fire-breathing statue macro launch
+30192800 ボス撃破 -- Defeat the boss
+30192801 ボス出現 -- Boss appears
+30192811 ボス激昂 -- boss rage
+30192849 剣闘士_イベント起動 -- Gladiator_event activation
+1000000000 敵リスポン -- enemy respawn

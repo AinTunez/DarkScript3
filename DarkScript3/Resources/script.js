@@ -8,13 +8,17 @@ var _skips = void 0;
 
 function Event(id, restBehavior, instructions) {
     var evt = new EVENT();
+    if (id < 0) {
+        // TODO: Auto-fix? Or just allow
+        throw new Error(`Negative event id ${id} is not supported (emitted by a previous version of DarkScript3). Did you mean ${id + Math.pow(2, 32)}?`);
+    }
     evt.ID = id;
     evt.RestBehavior = restBehavior;
 
     _labels = {};
     _skips = {};
     _event = evt;
-    instructions.apply(this, _GetArgs(instructions));
+    instructions.apply(this, _GetArgs(id, instructions));
     if (_skips.length > 0) {
         throw new Error(`Reserved skips in Event ${id} have not been filled. Unfilled skips: ${JSON.stringify(_skips)}`);
     }
@@ -26,14 +30,20 @@ function Event(id, restBehavior, instructions) {
     return evt;
 }
 
-function _GetArgs(func) {
-    var start = func.toString().indexOf("(");
-    var end = func.toString().indexOf(")");
-    var args = func.toString().substring(start, end).replace("(", "").replace(")", "");
-    return args.split(/\s*,\s*/).map(arg => arg);
+function _GetArgs(id, func) {
+    const text = func.toString();
+    const start = text.indexOf("(");
+    const end = text.indexOf(")");
+    const args = text.substring(start, end).replace("(", "").replace(")", "").split(/\s*,\s*/);
+    if (args.length == 1 && args[0] == '') {
+        return [];
+    }
+    const hostArgs = hostArray(args);
+    Scripter.LookupArgs(id, hostArgs);
+    return Array.from(hostArgs);
 }
 
-function _Instruction(bank, index, args) {
+function _Instruction(bank, index, args, namedInit) {
 
     if (_codeblock) {
         _codeblock.instructions.push(Array.from(arguments));
@@ -41,21 +51,15 @@ function _Instruction(bank, index, args) {
     }
 
     if (_event) {
-        var layer = void 0;
+        var layer = -1;
         if (args.length) {
-            var lastArg = args.pop();
+            var lastArg = args[args.length - 1];
             if (lastArg.layerValue) {
                 layer = lastArg.layerValue;
-            } else {
-                args.push(lastArg);
+                args.pop();
             }
         }
-
-        if (layer) {
-            return Scripter.MakeInstruction(_event, bank, index, layer, hostArray(args));
-        } else {
-            return Scripter.MakeInstruction(_event, bank, index, hostArray(args));
-        }
+        return Scripter.MakeInstruction(_event, bank, index, layer, hostArray(args), namedInit || false);
     }
 }
 

@@ -1,0 +1,140 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2210 重ガードメカAIon -- Heavy guard mecha AIon
+2211 重ガードメカ有効化 -- Heavy guard mechanism enabled
+2212 重ガードメカ戦開始 -- Heavy guard mecha battle begins
+2213 重ガードメカ撃破判定 -- Heavy guard mech defeat judgment
+2214 重ガードメカ死亡判定 -- Heavy guard mecha death judgment
+2215 ボス部屋シャッター開く -- Boss room shutter open
+2216 ボス部屋IN -- Boss room IN
+2217 重ガードメカAIonCP -- Heavy guard mecha AIonCP
+2218 重ガードメカBGM遷移用 -- Heavy guard mecha BGM transition
+2220 ボス部屋高所判定 -- Boss room height determination
+2230 ボス部屋端判定 -- Boss room edge determination
+2250 特殊待機にタゲ付与 -- Add tag to special standby
+2300 サブ四脚撃破でサブシェルパ起動 -- Activate Sub Sherpa by defeating Sub Quadruped
+2310 シェルパダミポリ位置の変更 -- Changing Sherpadamipoly position
+2320 エレベーター上の戦闘 -- battle on the elevator
+2350 初期準備 -- Initial preparation
+2351 土煙の表示非表示切り替え -- Toggle display/hide of dust smoke
+2352 ボス部屋のシャッターを閉じる -- Close the shutter in the boss room
+2353 キルゾーン用の敵ワープ -- Enemy warp for killzone
+2354 セーフエリア有効化 -- Safe area activation
+2360 屋内ダクトクモ起動 -- indoor duct spider launch
+2370 撒き餌の警備を倒す -- Defeat the bait guard
+2380 特殊待機解除用イベント_建機クモ -- Special standby cancellation event_Construction Machine Spider
+2385 特殊待機解除用イベント_特攻MT_複数用_クモ部隊 -- Special standby release event_Special attack MT_Multiple use_Spider unit
+2390 特殊待機解除用イベント_特攻MT_複数用 -- Special standby cancellation event_Special attack MT_for multiple use
+2395 特殊待機解除用イベント_特攻MT_単体用 -- Special standby cancellation event_Special attack MT_Single use
+2400 溶鉄ダメージ -- Molten iron damage
+2410 屋内待ち伏せ敵AIオフ -- Indoor ambush enemy AI off
+2411 屋内ラスト地点に入る -- Enter the last indoor point
+2412 隠し部屋に入る -- enter the hidden room
+2414 最後の通路に入る -- enter the last passage
+2415 通路敵2体倒す -- Defeat 2 hallway enemies
+2420 特殊待機建機クモイベント壁 -- Special standby construction machine spider event wall
+2430 屋内罠共産を倒して宝箱に近付く -- Defeat the indoor trap co-op and approach the treasure chest.
+2440 特殊待機建機クモイベ線路下 -- Special standby construction machine under the Kumoibe track
+2450 特殊待機にタゲ付与_線路下用 -- Add tag to special standby_for under railway tracks
+2461 キルゾーン第一陣を倒す -- Defeat the first group of Killzone
+2462 キルゾーン第二陣増援 -- Killzone second reinforcements
+2463 キルゾーン第二陣を倒す -- Defeat the second group of killzone
+2464 キルゾーン第三陣増援 -- Killzone Third Reinforcement
+2465 キルゾーンタンク爆発巻き込み -- Killzone tank explosion engulfment
+2466 キルゾーン全撃破 -- Defeat all kill zones
+2467 キルゾーン用シャッター開く -- Open the kill zone shutter
+2468 キルゾーン敵にTGT -- TGT to kill zone enemy
+2469 キルゾーン敵と接敵したのでターゲット共有 -- Share the target because you have engaged with the enemy in the kill zone
+2470 キルゾーン後マーカー -- Marker after kill zone
+2480 キルゾーン爆発物紐づけ -- Killzone Explosive Link
+2481 キルゾーン爆発物紐づけ2 -- Killzone Explosive Binding 2
+2482 キルゾーン爆発物紐づけ3 -- Killzone Explosive Link 3
+2483 キルゾーン爆発物紐づけ4 -- Killzone explosives tying 4
+2484 キルゾーン敵半分減ったので増援1 -- Reinforcement 1 because the kill zone enemy has decreased by half
+2485 キルゾーン敵半分減ったので増援2 -- Reinforcements 2 because kill zone enemies have decreased by half
+2486 キルゾーン敵半分減ったので増援3 -- Reinforcements 3 because kill zone enemies have decreased by half
+2487 キルゾーン敵半分減ったので増援4 -- Reinforcements 4 because kill zone enemies have decreased by half
+2492 キルゾーン四脚用 -- Killzone quadruped
+2493 キルゾーン爆発物を先に落とす -- Drop the kill zone explosives first
+2494 キルゾーン四脚に気づかれる -- Killzone quadrupeds are noticed
+2495 キルゾーン四脚の特殊効果解除 -- Killzone quadruped special effects removed
+2496 キルゾーン四脚の特殊効果解除_時間経過用 -- Killzone quadruped special effect cancellation_for time elapsed
+2498 サブ四脚レーダー有効化 -- Enable sub-quadruped radar
+2500 マーカー切替_ドランカー後 -- Marker switching_after Drunker
+2510 ボス部屋前広場につく -- Get to the plaza in front of the boss room
+2511 ボス部屋の中に入る -- enter the boss room
+2512 誘導用ターゲット切り替え -- Guidance target switching
+2520 ポイントイベント切替 -- Point event switching
+2530 会話条件用座標に入ったかどうか判定 -- Determine whether it has entered the coordinates for conversation conditions
+2545 誘導用ターゲットON -- Guidance target ON
+2550 誘導用ターゲットOFF -- Guidance target OFF
+2560 重ガードメカ前チェックポイント -- Checkpoint in front of heavy guard mechanism
+2561 チェックポイントフラグ1 -- checkpoint flag 1
+2562 チェックポイント読み込み待ち -- Waiting for checkpoint to load
+2570 ドランカー後CP -- CP after Drunker
+2571 ドランカー後CPフラグ -- CP flag after Drunker
+2572 ドランカー後初期設定 -- Initial settings after Drunker
+2580 屋内後CP -- Indoor post CP
+2581 屋内後CPフラグ -- CP flag after indoor
+2582 屋内後初期設定 -- Initial settings after indoors
+2583 ドランカーシャッター開ける -- Open the drinker shutter
+2584 独立傭兵と戦闘していたのでフラグ消し -- I erased the flag because I was fighting an independent mercenary.
+2585 独立傭兵帰巣用 -- For independent mercenary returning home
+2586 独立傭兵をロックしているか -- Do you have independent mercenaries locked?
+2600 会話1発生条件 -- Conversation 1 occurrence conditions
+2601 会話2発生条件 -- Conversation 2 occurrence conditions
+2602 会話3発生条件 -- Conversation 3 occurrence conditions
+2603 会話4発生条件 -- Conversation 4 occurrence conditions
+2604 会話5発生条件 -- Conversation 5 occurrence conditions
+2605 会話6発生条件 -- Conversation 6 occurrence conditions
+2606 会話7発生条件 -- Conversation 7 occurrence conditions
+2607 会話8発生条件 -- Conversation 8 occurrence conditions
+2608 会話9発生条件 -- Conversation 9 occurrence conditions
+2609 会話10発生条件 -- Conversation 10 occurrence conditions
+2610 会話11発生条件 -- Conversation 11 occurrence conditions
+2611 会話12発生条件 -- Conversation 12 occurrence conditions
+2612 会話13発生条件 -- Conversation 13 occurrence conditions
+2613 会話14発生条件 -- Conversation 14 occurrence conditions
+2614 会話15発生条件 -- Conversation 15 occurrence conditions
+2615 会話15発生条件_分岐 -- Conversation 15 Occurrence Conditions_Branching
+2620 会話完了フラグ1 -- Conversation complete flag 1
+2621 会話完了フラグ2 -- Conversation completion flag 2
+2622 会話完了フラグ3 -- Conversation completion flag 3
+2623 会話完了フラグ4 -- Conversation complete flag 4
+2624 会話完了フラグ5 -- Conversation completion flag 5
+2625 会話完了フラグ6 -- Conversation complete flag 6
+2626 会話完了フラグ7 -- Conversation complete flag 7
+2640 NPAC会話フラグ1 -- NPAC conversation flag 1
+2641 NPAC会話フラグ2 -- NPAC conversation flag 2
+2642 NPAC会話フラグ3 -- NPAC conversation flag 3
+2643 NPAC会話フラグ4 -- NPAC conversation flag 4
+2644 NPAC会話フラグ5 -- NPAC conversation flag 5
+2645 NPAC会話フラグ6 -- NPAC conversation flag 6
+2646 NPAC会話フラグ2_1 -- NPAC conversation flag 2_1
+2647 NPAC会話フラグ2_2 -- NPAC conversation flag 2_2
+2648 NPAC会話フラグ2_3 -- NPAC conversation flag 2_3
+2649 NPAC会話フラグ2_4 -- NPAC conversation flag 2_4
+2650 NPAC会話フラグ2_5 -- NPAC conversation flag 2_5
+2660 NPAC会話完了フラグ1 -- NPAC conversation completion flag 1
+2661 NPAC会話完了フラグ2 -- NPAC conversation completion flag 2
+2666 NPAC会話完了フラグ2_1 -- NPAC conversation completion flag 2_1
+2667 NPAC会話完了フラグ2_2 -- NPAC conversation completion flag 2_2
+2668 NPAC会話完了フラグ2_3 -- NPAC conversation completion flag 2_3
+2670 NPACゲージ表示_ドランカー -- NPAC gauge display_Drunker
+2671 NPACゲージ表示_独立傭兵A -- NPAC gauge display_Independent mercenary A
+2673 NPACゲージ非表示_独立傭兵A -- NPAC gauge hidden_Independent mercenary A
+2676 逃げたが再戦_ドランカー -- I escaped but have a rematch_Drunker
+2677 逃げたが再戦_独立傭兵A -- I ran away but fought again_Independent Mercenary A
+2680 ノーザークのレーダー有効化 -- Radar activation in Northark
+2750 ハッキング扉_屋内入り口 -- Hacking door_indoor entrance
+2751 ハッキング扉_屋内入り口敵出現 -- Hacking door_Enemy appearance at indoor entrance
+2752 ハッキング扉_屋内入り口完了 -- Hacking door_Indoor entrance completed
+2760 ハッキング扉_屋内出口 -- Hacking door_indoor exit
+2770 特別報酬の加算 -- Addition of special rewards
+2800 デバッグボス戦 -- debug boss battle
+2801 デバッグボス戦押された -- Debug boss battle pressed
+2810 プレゼン判定 -- Presentation judgment
+2811 プレゼン用キャラ入れ替え -- Character replacement for presentation
+2900 テスト1 -- test 1
+3900 リトライ判定 -- Retry judgment
+1000000000 敵リスポン -- enemy respawn

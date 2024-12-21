@@ -1,0 +1,88 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 初期設定 -- Initial settings
+2010 マーカーON -- Marker ON
+2020 雪消し -- Snow removal
+2100 拡散バズ接敵行動 -- Diffusion Buzz Engagement Action
+2101 拡散バズ接敵行動2 -- Diffusion Buzz Engagement Action 2
+2110 拡散バズのイベタゲ更新 -- Diffusion buzz event update
+2120 拡散バズを倒したので敵が向かってくる -- Now that you have defeated the Diffusion Buzz, the enemy will come towards you.
+2121 接敵後に拡散バズと戦闘 -- Battle with spread buzz after contact
+2130 帰巣解除 -- Cancellation of homing
+2150 外廊下判定 -- Outside corridor judgment
+2160 外廊下判定_追跡続行 -- Outside corridor judgment_Continue tracking
+2170 塔の中にいる判定 -- Judgment of being inside the tower
+2180 塔最下段に居る判定 -- Judgment of being at the bottom of the tower
+2700 Phase1撃破判定 -- Phase 1 defeat judgment
+2701 Phase2撃破判定 -- Phase 2 defeat judgment
+2702 Phase3撃破判定 -- Phase 3 defeat judgment
+2800 外扉OPEN -- Outer door OPEN
+2801 マーカー制御 -- marker control
+2810 屋内扉OPEN -- Indoor door OPEN
+2811 一部屋目撃破開封 -- One room witnessed and unsealed
+2820 屋内2部屋目扉OPEN -- Indoor 2nd room door open
+2821 屋内2部屋目マーカーオフ -- Indoor 2nd room marker off
+2840 重AC登場 -- Introducing heavy AC
+3000 作戦ラインヒット切替イベント -- Operation line hit switching event
+3010 作戦ラインヒット切替イベント_正規軍MT -- Operation line hit switching event_regular army MT
+3200 NPAC会話フラグ1_先制 -- NPAC conversation flag 1_preemptive
+3201 NPAC会話フラグ2_撃破 -- NPAC conversation flag 2_defeated
+3202 NPAC会話フラグ3_半分 -- NPAC conversation flag 3_half
+3203 NPAC会話フラグ4_離脱 -- NPAC conversation flag 4_leave
+3204 NPAC会話フラグ5 -- NPAC conversation flag 5
+3205 NPAC会話フラグ6_アーカイブ取得 -- NPAC conversation flag 6_archive acquisition
+3206 敵スタッガー_前半 -- Enemy Stagger_First half
+3207 敵スタッガー_後半 -- Enemy Stagger_Second half
+3208 敵HPQ -- Enemy HPQ
+3209 NPACHP75 -- NPACHP75
+3210 NPAC会話完了フラグ1 -- NPAC conversation completion flag 1
+3211 NPAC会話完了フラグ2 -- NPAC conversation completion flag 2
+3212 NPAC会話完了フラグ3 -- NPAC conversation completion flag 3
+3213 NPAC会話完了フラグ4 -- NPAC conversation completion flag 4
+3214 NPAC会話完了フラグ5 -- NPAC conversation completion flag 5
+3215 NPAC会話完了フラグ6 -- NPAC conversation completion flag 6
+3216 NPAC会話完了フラグ7 -- NPAC conversation completion flag 7
+3217 NPAC会話完了フラグ8 -- NPAC conversation completion flag 8
+3218 NPAC会話完了フラグ9 -- NPAC conversation completion flag 9
+3220 NPACゲージ表示 -- NPAC gauge display
+3221 NPACゲージ非表示 -- NPAC gauge hidden
+3222 NPAC回復使用後 -- After using NPAC recovery
+3230 逃げたが再戦 -- I ran away but had a rematch
+3240 戦闘エリアから離れすぎ -- Too far from the battle area
+3250 敵スタッガー_前半_即再生できないのでフラグオフ -- Enemy Stagger_First half_ Flag off because it cannot be played immediately
+3251 敵スタッガー_後半_即再生できないのでフラグオフ -- Enemy Stagger_Second half_Cannot be regenerated immediately, so flag off
+3260 会話無しでの離脱時タゲクリア -- Clear the target when leaving without conversation
+3270 自機が崖の上に居る -- My aircraft is on a cliff
+3280 アーカイブ取得後の接敵会話条件 -- Conversation conditions after acquiring the archive
+3290 対岸NPAC無敵 -- Opposite NPAC invincible
+3300 NPAC離脱関連エラーハンドリング -- NPAC withdrawal related error handling
+3310 NPAC離脱関連エラーハンドリング_BGMin -- NPAC withdrawal related error handling_BGMin
+3311 NPAC離脱関連エラーハンドリング_BGMout -- NPAC withdrawal related error handling_BGMout
+3600 会話_自然地形接敵 -- Conversation_Natural Terrain Engagement
+3601 会話_拡散バズ接敵 -- Conversation_Diffusion buzz contact
+3602 会話_外進捗半分 -- Conversation_Outside progress half
+3603 会話_外進捗クリア -- Conversation_Outside progress clear
+3604 会話_屋内入る -- Conversation_Go indoors
+3605 会話_屋内接敵 -- Conversation_Indoor contact
+3606 会話_屋内2部屋目 -- Conversation_Indoor 2nd room
+3607 会話_屋内部屋殲滅か -- Conversation_Indoor room annihilation?
+3608 会話_重AC66 -- Conversation_Heavy AC66
+3609 会話_重AC33 -- Conversation_Heavy AC33
+3610 会話_重ACスタッガー1 -- Conversation_Heavy AC Stagger 1
+3611 会話_重ACスタッガー2 -- Conversation_Heavy AC Stagger 2
+3612 会話_重AC死亡 -- Conversation_Heavy AC death
+3613 会話_重AC撃破 -- Conversation_Heavy AC defeat
+3620 接敵会話フラグ -- Enemy conversation flag
+3621 接敵会話終了フラグ -- Enemy conversation end flag
+3630 離脱会話前半中フラグ -- Flag during the first half of the withdrawal conversation
+3631 離脱会話前半完了フラグ -- First half of withdrawal conversation complete flag
+3632 離脱会話後半中フラグ -- Flag during the second half of the withdrawal conversation
+3633 離脱会話後半完了フラグ -- Leave conversation second half complete flag
+3700 ミッション開始会話フラグ -- Mission start conversation flag
+3701 ミッション開始会話フラグ揮発用 -- Mission start conversation flag for volatilization
+3710 ミッション終了会話フラグ -- Mission end conversation flag
+3720 ミッション会話フラグ_1 -- Mission conversation flag_1
+3721 ミッション会話フラグ_2 -- Mission conversation flag_2
+3722 ミッション会話フラグ_3 -- Mission conversation flag_3
+3723 ミッション会話フラグ_4 -- Mission conversation flag_4
+1000000000 敵リスポン -- enemy respawn

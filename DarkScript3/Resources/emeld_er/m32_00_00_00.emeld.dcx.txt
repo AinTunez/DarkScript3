@@ -1,0 +1,17 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+32000519 エレベータ初期フラグ設定 -- Elevator initial flag setting
+32002200 亡者鉱夫_採掘中止_XX -- Dead Miner_Mining Canceled_XX
+32002250 亡者鉱夫_採掘中止_武器強化素材_XX -- Dead Miner_Mining Canceled_Weapon Enhancement Materials_XX
+32002270 亡者鉱夫_採掘中止_武器強化素材_終了後待機_XX -- Dead Miner_Canceling mining_Weapon enhancement materials_Waiting after completion_XX
+32002300 ラダゴン起動_階段部屋足場上_XX -- Launch Radagon_On the scaffolding in the stair room_XX
+32002310 任意メンバーのダメージ判定_XX -- Damage judgment for any member_XX
+32002510 エレベータイベント起動 -- Elevator event activation
+32002580 梯子登録 -- ladder registration
+32002800 ボス撃破 -- Defeat the boss
+32002810 ボス出現 -- Boss appears
+32002811 ボス激昂 -- boss rage
+32002820 ボス撃破時姿隠し -- Hide when defeating boss
+32002849 ボスイベント起動 -- Boss event activation
+1000000000 敵リスポン -- enemy respawn

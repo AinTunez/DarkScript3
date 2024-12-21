@@ -1,0 +1,10 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1043350652 チュートリアルメッセージ_騎乗 -- Tutorial message_Riding
+1043352200 亜人テリトリー2_王軍死体化 -- Demi-Human Territory 2_Royal Corps Corpse
+1043352270 王軍VS亜人_交戦イベント -- Royal Army VS Ajin_Battle Event
+1043353710 NPC318_混沌の宿主_NPC初期化イベント_初期状態 -- NPC318_Host of Chaos_NPC initialization event_Initial state
+1043353711 NPC318_混沌の宿主_死亡確認_初期状態 -- NPC318_Host of Chaos_Death confirmation_Initial state
+1043353750 傭兵剣士_非表示イベント -- Mercenary swordsman_hidden event

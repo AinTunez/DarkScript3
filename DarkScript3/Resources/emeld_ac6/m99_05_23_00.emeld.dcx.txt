@@ -1,0 +1,5 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+5000 採掘艦_初期化 -- Mining ship_initialization
+5001 採掘艦_復帰アニメ再生 -- Mining ship_Return animation playback
+1000000000 敵リスポン -- enemy respawn

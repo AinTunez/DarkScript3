@@ -1,0 +1,25 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+16002520 魔法壁 -- magic wall
+30122811 ボス激昂 -- boss rage
+30170050 m30_10_00_00用初期フラグ設定 -- Initial flag setting for m30_10_00_00
+30170519 エレベータ初期フラグ -- Elevator initial flag
+30172200 虫人ゴーレム火炎壺から近接切り替え -- Switch from insect golem flame pot to melee
+30172250 洞窟_ボス部屋報酬宝箱の開放制限 -- Cave_Boss room reward treasure chest opening limit
+30172311 梯子で降りたら飛び掛かり振り下ろし -- When you get off the ladder, jump on it and swing down.
+30172400 投影サークル制御_地下墓地5_1ver -- Projection circle control_catacombs 5_1ver
+30172401 投影サークル制御_地下墓地5_1verb -- Projection circle control_catacombs5_1verb
+30172402 投影サークル制御_SP -- Projection circle control_SP
+30172500 火吹き像起動 -- Fire-breathing statue activated
+30172501 英雄の墓_火吹き像_移動処理_はじめは上にあがっているver -- Tomb of the Hero_Fire-breathing statue_Movement process_Ver. upwards at first
+30172502 英雄の墓_火吹き像_火炎処理 -- Tomb of the Hero_Fire-breathing statue_Flame treatment
+30172510 エレベータイベント起動 -- Elevator event activation
+30172520 投影像エレベータと魔方陣SFX同期イベント -- Projection elevator and magic square SFX synchronized event
+30172525 火吹き像と魔方陣SFX同期イベント -- Fire-breathing statue and magic square SFX synchronized event
+30172580 梯子登録 -- ladder registration
+30172600 影トロル撃破判定イベント -- Shadow troll defeat judgment event
+30172800 ボス撃破 -- Defeat the boss
+30172810 ボス出現 -- Boss appears
+30172849 バディ_イベント起動 -- buddy_event activation
+1000000000 敵リスポン -- enemy respawn

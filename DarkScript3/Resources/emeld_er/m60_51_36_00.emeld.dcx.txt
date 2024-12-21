@@ -1,0 +1,33 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1051360720 NPC216_狼頭の戦士_NPC初期化イベント_ラダーン祭り参加待ち -- NPC216_Wolf-headed Warrior_NPC Initialization Event_Waiting to participate in the Radhan Festival
+1051360721 NPC216_狼頭の戦士_リアルタイム遷移_ラダーン祭り参加待ち -- NPC216_Wolf-Headed Warrior_Real-time transition_Waiting for Radan Festival participation
+1051360730 名無しモブ_NPC初期化イベント_ラダーン祭り準備会場XX -- Anonymous Mob_NPC Initialization Event_Ladhan Festival Preparation Venue XX
+1051360734 名無しモブ_ジェスチャー入手 -- Anonymous mob_get gesture
+1051360735 トラゴス_NPC初期化イベント_ラダーン祭り準備会場 -- Tragos_NPC Initialization Event_Ladan Festival Preparation Venue
+1051362200 祭り時敵配置イベント -- Festival enemy placement event
+1051362210 祭り時霧壁を無効化する -- Disable the festival fog wall
+1051362215 祭り時処刑台を有効化する -- Activate the execution platform during festivals
+1051362216 常駐ダメージアセット_破壊有り -- Permanent damage asset_destructed
+1051362220 ラダーン祭り状態遷移 -- Radhan festival state transition
+1051362230 領主後ろの扉がラダーン祭り終了後特定条件で開く判定 -- The door behind the lord will open under certain conditions after the Radan Festival ends.
+1051362340 トロル飛び降りイベント -- troll jumping event
+1051362490 常時攻撃禁止区域設定 -- Setting a no-attack zone at all times
+1051362500 攻撃禁止区域設定 -- No-attack zone setting
+1051362510 エレベータイベント起動 -- Elevator event activation
+1051362519 エレベーター初期フラグ -- Elevator initial flag
+1051362560 砦_一方通行扉_領域扉_XX -- Fort_One-way door_Area door_XX
+1051362580 梯子登録 -- ladder registration
+1051362630 アセット無効化_テスト_XX -- Asset invalidation_test_XX
+1051362650 篝火の導き_ボス篝火 -- Bonfire Guidance_Boss Bonfire
+1051362800 ボス撃破 -- Defeat the boss
+1051362810 ボス出現 -- Boss appears
+1051362849 ボス_イベント起動 -- Boss_event activation
+1051363700 痩せ馬のラダーンとの戦闘開始 -- The battle with the skinny horse Ladan begins.
+1051363710 壺マイヤー_NPC初期化イベント_祭り開催待ち -- Tsubo Mayer_NPC initialization event_Waiting for the festival
+1051363711 壺マイヤー_移動処理_祭り開催待ち -- Tsubo Meyer_Moving process_Waiting for the festival
+1051363725 平原砦の領主_ﾌｪｰｽﾞ1_3_NPC初期化イベント -- Lord of Plains Fort_Phase 1_3_NPC initialization event
+1051363726 平原砦の領主_ﾌｪｰｽﾞ2_NPC初期化イベント -- Lord of Plains Fort_Phase 2_NPC initialization event
+1051363727 平原砦の領主_祭り会話挨拶自動会話 -- Lord of Plains Fort_Festival Conversation Greeting Automatic Conversation

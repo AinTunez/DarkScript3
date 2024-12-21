@@ -1,0 +1,9 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+100 HP判定検証用 -- For HP judgment verification
+4000 蝕の発動 -- activation of eclipse
+4010 幽鬼A召喚 -- Ghost A summon
+4020 幽鬼A消失 -- Ghost A disappears
+4100 巨人の起動 -- giant launch
+4110 巨人の死亡 -- death of a giant
+1000000000 敵リスポン -- enemy respawn

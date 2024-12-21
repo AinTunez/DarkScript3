@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+200 コンストラクタ_LOD2 -- constructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1037493700 NPC336傷騎士の巫女_布を血で染める -- NPC336 Wounded Knight Shrine Maiden_Dye the cloth with blood

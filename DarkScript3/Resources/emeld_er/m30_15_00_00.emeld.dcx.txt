@@ -1,0 +1,9 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30152520 洞窟_ボス部屋報酬宝箱の開放制限 -- Cave_Boss room reward treasure chest opening limit
+30152800 ボス撃破 -- Defeat the boss
+30152810 ボス出現 -- Boss appears
+30152811 ボス激昂 -- boss rage
+30152849 墓所影_イベント起動 -- Tomb Shadow_Event activation
+1000000000 敵リスポン -- enemy respawn

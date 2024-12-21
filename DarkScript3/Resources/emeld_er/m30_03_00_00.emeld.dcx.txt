@@ -1,0 +1,18 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30030050 m30_03_00_00用初期フラグ設定 -- Initial flag setting for m30_03_00_00
+30032205 虫人ゴーレム_領域待機and初回魔力壺 -- Insect Golem_Area standby and first time magic pot
+30032207 虫人ゴーレム_魔法壁内_視覚聴覚の弱化_XX -- Insect Golem_Inside Magic Wall_Visual and Hearing Weakness_XX
+30032400 湖前半地下墓地魔力矢のトラップ_XX -- Lake first half catacombs magic arrow trap_XX
+30032579 魔法壁無効化 -- Disable magic wall
+30032800 白蛇つむり_ボス撃破 -- Tsumuri White Snake_Defeat the boss
+30032810 白蛇つむり_ボス出現 -- Tsumuri White Snake_Boss Appears
+30032821 白蛇つむり_ワープ前エリア判定 -- White snake Tsumuri_Pre-warp area determination
+30032838 白蛇つむり_ボスイベントボスワープ -- White Snake Tsumuri_Boss Event Boss Warp
+30032845 白蛇つむり_HP監視 -- White snake Tsumuri_HP monitoring
+30032849 白蛇つむり_ボスイベント起動 -- Tsumuri White Snake_Boss event activated
+30032870 ボスお供マルチドーピング対応SP_XX -- Boss companion multi-doping compatible SP_XX
+30032871 ボスお供マルチドーピング対応_XX -- Boss companion multi-doping compatible_XX
+30032890 白蛇つむり_16騎士本召喚 -- White Snake Tsumuri_16 Knight Main Summon
+1000000000 敵リスポン -- enemy respawn

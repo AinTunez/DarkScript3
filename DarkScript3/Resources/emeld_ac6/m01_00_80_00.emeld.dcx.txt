@@ -1,0 +1,249 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 utl_マップ初期化 -- utl_map initialization
+2001 utl_プレイヤー初期化 -- utl_player initialization
+2010 utl_フェードアウト -- utl_fadeout
+2011 utl_フェードイン -- utl_fade in
+2090 utl_チェックポイント生成_1 -- utl_checkpoint generation_1
+2091 utl_SF_チェックポイント生成したよフラグ_1 -- utl_SF_Checkpoint generated flag_1
+2092 utl_リトライ時初期化_1 -- utl_initialize on retry_1
+2100 bas_初期化 -- bas_initialization
+2101 bas_完了化 -- bas_completed
+2102 開幕時扉演出 -- Opening door performance
+2110 bas_ -- bas_
+2111 bas_B_データ回収促し会話開始判定 -- bas_B_ Data collection prompt conversation start judgment
+2112 bas_扉開放しつつ敵出現 -- bas_Enemies appear while opening the door
+2115 bas_扉開放しつつ敵出現_派生イベント01 -- bas_Enemy appears while opening the door_Derivative event 01
+2116 bas_扉開放しつつ敵出現_派生イベント02 -- bas_Enemy appears while opening the door_Derivative event 02
+2120 bas_B_炎上ダメージ_クレバスの橋 -- bas_B_Burning damage_Crevasse bridge
+2130 bas_B_扉調べたら入口から増援来て閉じ込める判定 -- bas_B_If you check the door, reinforcements will come from the entrance and lock you in.
+2131 bas_B_閉じ込めシチュの敵殲滅したか判定 -- bas_B_Determine whether the enemy in the confinement situation has been annihilated
+2132 bas_閉じ込め解除 -- bas_unlock
+2133 斜面部屋の扉を閉じる -- Close the slope room door
+2134 斜面部屋の入口を開く -- Open the entrance to the slope room
+2135 斜面部屋出口を閉じる -- Close slope room exit
+2136 斜面部屋出口を開く -- Open slope room exit
+2160 bas_ELVを下降させる -- Lower bas_ELV
+2170 bas_B_扉開くボタンセット_Aシチュ手前 -- bas_B_Door opening button set_A situation front
+2171 bas_B_扉開くボタンセット_斜面戦闘部屋入口 -- bas_B_Door opening button set_Slope battle room entrance
+2172 bas_B_扉開くボタンセット_斜面戦闘部屋出口 -- bas_B_Door open button set_Slope battle room exit
+2173 bas_B_扉開くボタンセット_Bシチュ奥 -- bas_B_Door opening button set_B situation back
+2174 bas_B_扉開くボタンセット_縦穴入口 -- bas_B_Door opening button set_Vertical hole entrance
+2175 フラグ_扉開いたか_Bシチュ奥 -- Flag_door open_B situation back
+2180 bas_B_データ回収したか判定A -- bas_B_Determine whether data was collected A
+2181 bas_B_データ回収したか判定B -- bas_B_Determine whether data was collected B
+2182 bas_B_データ回収したか判定C -- bas_B_Determine whether data has been collectedC
+2183 TGT02表示 -- TGT02 display
+2190 破壊目標とダミーキャラの紐づけ -- Linking destruction targets and dummy characters
+2200 nac_初期化 -- nac_initialization
+2201 nac_完了化 -- nac_completion
+2202 一部の敵を無効化 -- Disable some enemies
+2203 一部の敵を味方へ -- Turn some enemies into allies
+2204 一部敵のロジック停止 -- Some enemies' logic stopped
+2210 nac_敵AC登場 -- nac_Enemy AC appears
+2211 nac_B_戦闘状態に入ったか判定 -- nac_B_Determine whether it has entered a combat state
+2212 nac_SF_戦闘終わりましたフラグ -- nac_SF_battle over flag
+2220 nac_B_NPACのAPちょっと減り始めたか判定 -- Determine whether nac_B_NPAC's AP has started to decrease a little.
+2221 nac_B_NPACのAP大きく減らしたか判定 -- Determine whether nac_B_NPAC's AP has been significantly reduced
+2222 nac_B_NPACのAP0になったか判定 -- Determine whether nac_B_NPAC has become AP0
+2223 nac_B_NPACのタグ入手 -- Obtain tag for nac_B_NPAC
+2224 nac_B_NPACのAP減らしたか判定 -- Determine whether nac_B_NPAC's AP has been reduced
+2230 nac_戦闘始める -- nac_Start battle
+2300 判定_自機炎上 -- Judgment_Self-machine on fire
+2310 判定_敵炎上 -- Judgment_Enemy on fire
+2350 アセット破壊で炎上 -- Fire due to asset destruction
+2380 火炎発射 -- flame shot
+2400 炎上領域 -- Flaming area
+2501 斜面部屋増援B有効化 -- Activate slope room reinforcement B
+2502 TGT01共産有効化 -- TGT01 communal enablement
+2503 斜面部屋増援A有効化 -- Slope room reinforcement A enabled
+2504 斜面部屋増援TGT -- Slope room reinforcement TGT
+2505 斜面部屋扉ダミーA有効化 -- Slope room door dummy A enabled
+2506 斜面部屋扉ダミーB有効化 -- Slope room door dummy B enabled
+2507 斜面部屋ハッキング中にキャラ無効化 -- Character disabled while hacking slope room
+2508 斜面部屋ハッキングで扉開く -- Open the door by hacking the sloped room
+2510 僚機01行動開始 -- Wingman 01 begins action
+2511 僚機01ルート変更 -- Wingman 01 route change
+2512 橋上チャンバラ開始 -- Hashigami Chanbara begins
+2513 ボス前敵有効化 -- Enable enemy before boss
+2514 ボス前敵有効化2 -- Pre-boss enemy activation 2
+2520 マーカーを消す処理 -- Process to erase markers
+2600 マーカー制御_バックファイアへ誘導_有効 -- Marker control_guidance to backfire_enabled
+2601 マーカー制御_バックファイアへ誘導_無効 -- Marker control_Guidance to backfire_Disabled
+2610 マーカー制御_撃ちっぱなし_斜面部屋抜けて -- Marker control_Keep shooting_Go through the slope room
+2700 判定_最初の部屋を出た -- Judgment_Leave the first room
+2701 判定_自機が斜面部屋に入った -- Judgment_My aircraft entered the slope room
+2702 判定_TGT02部屋にACが入った -- Judgment_TGT02 AC was installed in the room
+2703 判定_TGT02ハッキングor破壊 -- Judgment_TGT02 hacking or destruction
+2704 判定_斜面部屋の正規軍MTを撃破 -- Judgment_Defeat the regular army MT in the slope room
+2705 判定_斜面部屋奥のスイッチを押した -- Judgment_Pressed the switch at the back of the slope room
+2706 判定_ボスが降りた -- Judgment_The boss has descended
+2707 判定_斜面部屋に敵が入った -- Judgment_An enemy entered the slope room
+2708 判定_第二目標に近付いた -- Judgment: Closer to the second goal
+2709 判定_最初の敵を殲滅した -- Judgment_The first enemy was destroyed
+2710 判定_橋01の敵を殲滅した -- Judgment_Destroyed the enemies on bridge 01
+2711 判定_上の橋に近付いた -- Judgment_ Approaching the upper bridge
+2712 判定_下の橋に出た -- Judgment_Goed to the bridge below
+2713 判定_斜面部屋出口から増援Aが入った -- Judgment_Reinforcements A entered from the exit of the slope room.
+2714 判定_斜面部屋増援Aを倒した -- Judgment_Defeated Slope Room Reinforcement A
+2715 判定_斜面部屋奥に進行 -- Judgment_Proceed to the back of the slope room
+2716 判定_ボス前部屋の敵全滅 -- Judgment_All enemies in the boss room are annihilated
+2717 判定_燃えるMT有効化 -- Judgment_Burning MT enabled
+2718 判定_EvE部屋に近づいた -- Judgment_ Approaching the EvE room
+2719 判定_100806100 -- Judgment_100806100
+2720 判定_会話発生領域_バックファイア周辺 -- Judgment_Conversation occurrence area_Around backfire
+2721 判定_ボス領域に進入 -- Judgment_Enter the boss area
+2722 判定_斜面部屋ハッキング一回目 -- Judgment_Slope room hacking first time
+2723 判定_斜面部屋ハッキング二回目 -- Judgment_Slope room hacking second time
+2730 判定_狙撃スナ生存 -- Judgment_Sniper Suna Survival
+2740 判定_斜面部屋入場判定 -- Judgment_Slope room entrance judgment
+2750 判定_斜面部屋の敵が戦闘状態になった -- Judgment_Enemies in the slope room have entered a fighting state.
+2800 デリーター特殊待機 -- Deleter special standby
+2900 ボス部屋炎上領域 -- Boss room burning area
+3000 talk_出撃直後 -- talk_Immediately after sortie
+3001 talk_警備隊長からの通信 -- talk_Communication from the Guard Captain
+3002 talk_出口ロック -- talk_exit lock
+3003 talk_ロック解除 -- talk_unlocked
+3004 talk_撃て -- talk_shoot
+3005 talk_ボス登場 -- talk_boss appearance
+3006 talk_ボスの体力減少 -- talk_Boss physical strength reduction
+3007 talk_ボスの体力大きく減少 -- talk_Boss's physical strength is greatly reduced
+3010 talk_傭兵助けてくれ -- talk_mercenary help me
+3090 talk_ボス撃破 -- talk_defeat the boss
+3100 talk_ボスに撃破された -- talk_Destroyed by boss
+3101 talk_ボス部屋が近い -- talk_Boss room is near
+3102 talk_敵が降下 -- talk_enemy descends
+3103 talk_殲滅完了 -- talk_annihilation complete
+3200 会話フラグ_100800100_行きましょうレイヴン -- Conversation flag_100800100_Let's go Raven
+3201 会話フラグ_100800500_これは何が起きている -- Conversation Flag_100800500_What's happening?
+3202 会話フラグ_100800900_道中には企業協商の残存戦力が展開していますが -- Conversation Flag_100800900_The remaining forces of the Corporate Consultation are deployed along the way.
+3203 会話フラグ_100801300_AC識別不明 -- Conversation flag_100801300_AC identification unknown
+3204 会話フラグ_100801700_スネイルとオキーフを排除したことで -- Conversation Flag_100801700_By eliminating Snail and O'Keefe
+3205 会話フラグ_100802100_LC機体狙撃型に狙われています -- Conversation Flag_100802100_LC aircraft is being targeted by sniper type
+3206 会話フラグ_100802500_撃て識別がないものは撃つんだ -- Conversation flag_100802500_Shoot anything without identification.
+3207 会話フラグ_100802900_退避しろ隔壁を開け -- Conversation Flag_100802900_Evacuate, open the bulkhead
+3208 会話フラグ_100803300_危険です -- Conversation flag_100803300_Dangerous
+3209 会話フラグ_100803700_バックドラフト現象です -- Conversation flag_100803700_Backdraft phenomenon
+3210 会話フラグ_100804100_識別不明AC -- Conversation Flag_100804100_Unidentified AC
+3211 会話フラグ_100804500_待ってください後方から敵性反応 -- Conversation Flag_100804500_Please wait. Hostile reaction from rear.
+3212 会話フラグ_100804900_この状況あのACが絡んでいるはずだ -- Conversation Flag_100804900_This situation must involve that AC.
+3213 会話フラグ_100805300_敵性反応なし進みましょう -- Conversation Flag_100805300_No hostile reaction, let's move on
+3214 会話フラグ_100805700_所詮無人兵器だ叩き潰すぞ -- Conversation Flag_100805700_It's an unmanned weapon after all, I'll crush it.
+3215 会話フラグ_100806100_強化人間C4621レイヴン_合流地点 -- Conversation Flag_100806100_Enhanced Human C4621 Raven_Meeting Point
+3216 会話フラグ_100806500_オールマインドの指定した座標に到達 -- Conversation Flag_100806500_Allmind's specified coordinates have been reached.
+3217 会話フラグ_100806900_この異常事態貴様が一枚噛んでいると見た -- Conversation flag_100806900_This abnormal situation I saw that you were chewing on one piece.
+3218 会話フラグ_100807000_強化人間C4621レイヴン -- Conversation flag_100807000_Enhanced human C4621 Raven
+3219 会話フラグ_100807100_所属不明ACとのことだったが -- Conversation Flag_100807100_It was with an AC whose affiliation is unknown.
+3220 会話フラグ_100807140_封鎖機構の鹵獲機体 -- Conversation Flag_100807140_Captured Unit of Blockade Mechanism
+3221 会話フラグ_100807200_企業MT部隊の殲滅を確認 -- Conversation Flag_100807200_Complete MT unit annihilation confirmed
+3222 会話フラグ_100807240_あとは高機動型を -- Conversation Flag_100807240_Then, high-mobility type
+3223 会話フラグ_100807300_貴様はヴェスパー第3隊長 -- Conversation Flag_100807300_You are Vesper 3rd Captain
+3224 会話フラグ_100807400_畜生オキーフさんを -- Conversation Flag_100807400_Damn Mr. O'Keeffe
+3225 会話フラグ_100807420_うううっ -- Conversation flag_100807420_uuuuu
+3226 会話フラグ_100807440_ヴェスパー3ペイター素晴らしい響きだ -- Conversation Flag_100807440_Vesper 3 Pater sounds great
+3227 会話フラグ_100807500_貴様はオキーフ長官を殺害した -- Conversation Flag_100807500_You killed Director O'Keefe.
+3228 会話フラグ_100807600_ううオキーフさん -- Conversation Flag_100807600_Uu O'Keeffe
+3229 会話フラグ_100807640_私がオキーフの遺志を継いでみせよう -- Conversation Flag_100807640_I will carry on O'Keeffe's legacy
+3230 会話フラグ_100807700_クやるな -- Conversation Flag_100807700_Don't do it
+3231 会話フラグ_100807800_スネイルの安否が確定したら私は -- Conversation Flag_100807800_Once Snail's safety is confirmed, I will
+3232 会話フラグ_100807900_敵機、ACSダウン -- Conversation flag_100807900_Enemy aircraft, ACS down
+3233 会話フラグ_100808000_追撃を、レイヴン -- Conversation Flag_100808000_Pursuit, Raven
+3234 会話フラグ_100808100_おかしいな私はまだこれから -- Conversation Flag_100808100_That's strange, I'm still starting
+3235 会話フラグ_100808120_高機動型の撃破を確認 -- Conversation flag_100808120_Confirmed the defeat of the high-mobility type
+3236 会話フラグ_100808140_あとは安全確保を -- Conversation Flag_100808140_Also, ensure safety
+3237 会話フラグ_100808200_敵性反応なし -- Conversation flag_100808200_No hostile reaction
+3238 会話フラグ_100808220_強化人間C4621レイヴンお疲れ様でした -- Conversation Flag_100808220_Enhanced Human C4621 Raven Thank you for your hard work
+3239 会話フラグ_100808240_オールマインド管理権限により保護対象に関する全ての記録を抹消 -- Conversation Flag_100808240_All records related to the protected target are deleted using All Mind management authority.
+3240 会話フラグ_100808260_強化人間C4621レイヴン -- Conversation flag_100808260_Enhanced human C4621 Raven
+3241 会話フラグ_100808300_レイヴンの撃破を完了したペイターこれより帰投する -- Conversation Flag_100808300_Pater has completed the defeat of Raven and will now return home.
+3242 会話フラグ_100808400_オキーフやったぞ -- Conversation flag_100808400_O'Keeffe did it
+3243 会話フラグ_100808500_スネイル安らかに眠れ -- Conversation flag_100808500_Snail rest in peace
+3244 会話フラグ_100808600_待てベイラムの残党を確認した -- Conversation Flag_100808600_Wait, the remnants of Bayram have been confirmed.
+3245 会話フラグ_100808640_クソアーキバスめ -- Conversation Flag_100808640_Fucking Archibus
+3246 会話フラグ_100808700_貴様はG13か -- Conversation Flag_100808700_Are you G13?
+3247 会話フラグ_100808720_不明ACこいつの仲間か -- Conversation Flag_100808720_Unknown AC Is this guy a friend?
+3248 会話フラグ_100808740_G13レイヴン -- Conversation flag_100808740_G13 Raven
+3249 会話フラグ_100808760_機体情報レッドガン部隊の生き残り -- Conversation Flag_100808760_Unit Information Red Gun Unit Survival
+3250 会話フラグ_100808800_G13なぜ助けない -- Conversation flag_100808800_G13 Why don't you help?
+3251 会話フラグ_100808840_G6レッドが撃破されました -- Conversation flag_100808840_G6 Red has been defeated
+3252 会話フラグ_100808900_G13お前までレッドガンが壊滅 -- Conversation Flag_100808900_G13 Red Gun is destroyed even to you
+3253 会話フラグ_100809000_片付いたかG13 -- Conversation Flag_100809000_Is it cleaned up? G13
+3254 会話フラグ_100809040_だが -- Conversation flag_100809040_but
+3255 会話フラグ_100809100_攻撃 -- Conversation flag_100809100_attack
+3256 会話フラグ_100809120_G13レイヴン貴様は信用できない -- Conversation Flag_100809120_G13 Raven I can't trust you.
+3257 会話フラグ_100809140_ミシガン総長も先輩たちも死んでしまった -- Conversation flag_100809140_The Michigan president and his seniors are both dead.
+3258 会話フラグ_100809160_強い戦闘ストレス反応話し合い無理 -- Conversation flag_100809160_Strong battle stress reaction discussion impossible
+3259 会話フラグ_100809200_ヴォルタ先輩あんたが壁越えで死んでから -- Conversation Flag_100809200_Volta-senpai Since you died over the wall
+3260 会話フラグ_100809300_ミシガン総長ナイル副長なぜ傭兵にコールサイン -- Conversation flag_100809300_Michigan General Deputy Nile Why call sign to mercenary
+3261 会話フラグ_100809400_イグアス先輩まさかあんたもこの死神に -- Conversation flag_100809400_Iguazu-senpai I didn't expect you to become this Grim Reaper too.
+3262 会話フラグ_100809500_ACハーミット姿勢制御ダウン -- Conversation flag_100809500_AC Hermit attitude control down
+3263 会話フラグ_100809600_G6レッドACS負荷限界 -- Conversation Flag_100809600_G6 Red ACS Load Limit
+3264 会話フラグ_100809700_G13レッドガンの悪夢 -- Conversation Flag_100809700_G13 Red Gun's Nightmare
+3265 会話フラグ_100809740_G6レッドの撃破を確認本来の目的戻り -- Conversation Flag_100809740_G6 Confirm the defeat of Red and return to original purpose
+3266 会話フラグ_100809800_G13コールサインを復唱しろ -- Conversation flag_100809800_G13 Repeat the call sign.
+3267 会話フラグ_100803800_企業と言えどこの程度 -- Conversation flag_100803800_What is the level of a company?
+3270 会話フラグ_死亡分岐_100807400再生開始済み -- Conversation Flag_Death Branch_100807400 Playback started
+3271 会話フラグ_死亡分岐_100807800再生開始済み -- Conversation Flag_Death Branch_100807800 Playback started
+3300 item_SF_NPAC撃破時のタグ取ったフラグ -- item_SF_Flag taken from tag when defeating NPAC
+3400 フラグ_炎上ダメージ自機 -- Flag_Flame damage own aircraft
+3401 フラグ_炎上ダメージ敵 -- Flag_Burning damage enemy
+3410 フラグ_扉開放しつつ敵増援 -- Flag_Enemy reinforcements while opening the door
+3420 CP用_ボス部屋扉のアクションボタンに触った -- For CP_Touched the action button on the boss room door
+3430 フラグ_最後のレッドガンイベント中 -- Flag_During the last Red Gun event
+3431 フラグ_最後のレッドガンイベント完了 -- Flag_Last Red Gun event completed
+3432 フラグ_最後のレッドガンイベント_誘導台詞 -- Flag_Last Red Gun Event_Guiding lines
+3433 フラグ_スタッガーしたか -- Flag_Staggered?
+3440 判定_最後のレッドガン領域に居るか -- Judgment_Are you in the last red gun area?
+3441 判定_最後のレッドガン領域_雑談領域 -- Judgment_Last Red Gun Area_Chat Area
+3449 判定_最後のレッドガン_G6死亡したか_マーカー派生 -- Judgment_Last Red Gun_G6 died_Marker derived
+3450 判定_最後のレッドガン_G6死亡したか -- Judgment_The last red gun_G6 died?
+3451 判定_最後のレッドガン_G6AP75パーセント -- Judgment_Last Red Gun_G6AP75%
+3452 判定_最後のレッドガン_G6AP50パーセント -- Judgment_Last Red Gun_G6AP50%
+3453 判定_最後のレッドガン_G6AP40パーセント -- Judgment_Last Red Gun_G6AP40%
+3454 判定_最後のレッドガン_G6AP20パーセント -- Judgment_Last Red Gun_G6AP20%
+3455 判定_最後のレッドガン_G6スタッガー -- Judgment_The Last Red Gun_G6 Stagger
+3456 判定_最後のレッドガン_アーキバスMTを全滅したか -- Judgment_Last Red Gun_Did you wipe out the Archibus MT?
+3457 判定_最後のレッドガン_G6死亡したか_派生 -- Judgment_Last Red Gun_Did G6 die?Derivation
+3460 イベント_初期化 -- event_initialization
+3461 イベント_G6レッド敵対 -- Event_G6 Red Enemy
+3462 イベント_最後のレッドガンイベント開始 -- Event_Last Red Gun event starts
+3463 イベント_ボスゲージ表示 -- Event_Boss gauge display
+3464 イベント_僚機表示 -- Event_ Wingman display
+3470 判定フラグ_ボス前EvETGT保存フラグ -- Judgment flag_Pre-boss EvETGT save flag
+3500 ミッションラスト_初期化 -- Mission last_initialization
+3510 ミッションラスト_エレベータ起動 -- Mission last_elevator start
+3511 ミッションラスト_ボス前扉 -- Mission last_boss front door
+3520 ミッションラスト_ウェーブ1_有効化 -- Mission Last Wave 1 Activation
+3521 ミッションラスト_ウェーブ2_有効化 -- Mission Last Wave 2 Activation
+3522 ミッションラスト_ウェーブ3_有効化 -- Mission Last Wave 3 Activation
+3523 ミッションラスト_ウェーブ4_有効化 -- Mission Last Wave 4 Activation
+3530 ミッションラスト_個別着地判定 -- Mission last_individual landing judgment
+3540 ミッションラスト_正規軍MT撃破判定 -- Mission Last_Regular Army MT Defeated Judgment
+3541 ミッションラスト_ボス撃破判定 -- Mission last_Boss defeat judgment
+3542 ミッションラスト_5905撃破判定 -- Mission last_5905 defeat judgment
+3543 ミッションラスト_5906撃破判定 -- Mission last_5906 defeat judgment
+3550 ミッションラスト_個別着地判定_5905用 -- Mission last_Individual landing judgment_for 5905
+3560 ミッションラスト_個別着地判定_5906用 -- Mission last_Individual landing judgment_for 5906
+3570 ミッションボス_ボスゲージ表示 -- Mission boss_boss gauge display
+3600 ミッションラスト_爆破イベント -- Mission last_blast event
+3601 CPからきたよフラグ01 -- I came from CP flag 01
+3602 CPからきたよフラグ02 -- I came from CP flag 02
+3610 ミッションラスト_爆弾投下イベント -- Mission last_bomb dropping event
+3611 ミッションラスト_赤くする -- Mission last_red
+3612 ミッションラスト_自機が死んだら敵の無敵化 -- Mission last_If your aircraft dies, the enemy becomes invincible
+3620 扉締めイベント -- door closing event
+3630 エレベータ降下イベント -- Elevator descent event
+3700 マーカー制御_クレバス_2350 -- Marker control_crevasse_2350
+3701 マーカー制御_斜面部屋_2351 -- Marker control_Slope room_2351
+3702 マーカー制御_ボス前EvE_2352 -- Marker control_Before boss EvE_2352
+3703 マーカー制御_坂前部屋_2353 -- Marker control_Sakamae room_2353
+3704 マーカー制御_ボス前扉_2354 -- Marker control_Boss front door_2354
+3705 マーカー制御_斜面部屋前扉_2355 -- Marker control_Slope room front door_2355
+3800 Gparam切り替えイベント -- Gparam switching event
+3801 Gparam切り替えイベント_通常状態01 -- Gparam switching event_normal state 01
+3802 Gparam切り替えイベント_ちょっと燃えている状態01 -- Gparam switching event_slightly burning state 01
+3900 デバッグイベント_火炎弾調整 -- Debug event_flame bullet adjustment
+3910 デバッグフラグ_ミッションラスト -- Debug flag_mission last
+3911 デバッグフラグ_プレイヤワープ_初期化 -- Debug flag_player warp_initialization
+3920 オブジェアタッチ -- object attach
+3930 ボス戦用イベント_PC凸部分判定 -- Boss battle event_PC convex part determination

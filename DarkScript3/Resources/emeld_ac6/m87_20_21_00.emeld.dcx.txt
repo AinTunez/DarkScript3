@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+70005990 アイテム取得_補給キャラアニメ② -- Item acquisition_supply character anime ②
+70005991 霧テスト -- fog test
+70005992 電磁嵐テスト -- electromagnetic storm test
+1000000000 敵リスポン -- enemy respawn

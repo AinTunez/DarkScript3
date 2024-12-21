@@ -1,0 +1,29 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+5000 サンドワーム起動 -- Sandworm launch
+5001 イベントアニメ再生テスト -- Event anime playback test
+5002 ルート巡回テスト -- Route patrol test
+5003 ドロップテスト -- drop test
+5004 テスト -- test
+5005 ワープテスト1 -- warp test 1
+5006 ワープテスト2 -- warp test 2
+5007 ワープテスト3 -- warp test 3
+5008 壁越しロックオンテスト_出来る -- Lock-on test through the wall_possible
+5009 壁越しロックオンテスト_される -- Lock-on test through the wall
+5010 距離測定テスト -- Distance measurement test
+5011 集団ルート巡回テスト -- Group route patrol test
+5012 イベントリプランニングテスト -- Event replanning test
+5013 採掘テスト　無効化 -- Mining test disabled
+5014 採掘艦　甲板戦闘テスト_XX -- Mining ship deck combat test_XX
+5015 採掘艦_甲板戦闘確認_目玉起動 -- Mining ship_deck battle confirmation_eyeball activation
+5016 ロジック有効テスト -- logic validity test
+5017 発艦テスト -- launch test
+5018 巨大エレベータ_初期化 -- Giant elevator_initialization
+5020 エレベータ移動量テスト -- Elevator travel distance test
+5023 簡易砲台ロジック無効テスト -- Simple turret logic invalidation test
+5024 エレベータ縄跳びテスト起動 -- Start elevator jump rope test
+5030 行動バリーエーションIDテスト -- Behavioral variation ID test
+5031 狙撃イベントターゲットテスト -- sniper event target test
+5032 イベントポイント距離テスト -- Event point distance test
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,39 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+4000 立ち寝_起床管理 -- Standing up and waking up management
+4010 立ち寝_巡回管理 -- Standing sleep_Patrol management
+4100 よりかかり寝_起床管理 -- Sleeping leaning on sleep_wake-up management
+4110 よりかかり寝_巡回管理 -- Lean sleep_Patrol management
+4200 座り寝_起床管理 -- Sitting down/waking up management
+4210 座り寝_巡回管理 -- Sitting and sleeping_Patrol management
+4300 狼への指示 -- instructions to the wolf
+4400 亡霊_出現 -- Ghost Appearance
+4410 逆さコウモリ -- upside down bat
+4420 ジプシーバディ召喚 -- Gypsy Buddy Summon
+4430 ジプシーバディ_受信演出 -- Gypsy buddy_reception performance
+4440 ジプシーバディ_死亡演出 -- Gypsy buddy_death production
+4450 ジプシー_敵対判定 -- Gypsy_hostile judgment
+4451 ジプシー_盗み判定 -- Gypsy_Theft judgment
+4452 ジプシー_会話判定 -- Gypsy_conversation judgment
+4460 ウルフワープ -- wolf warp
+4461 ライダー死亡 -- rider death
+4470 馬ワープ -- horse warp
+4471 馬死亡 -- horse death
+4480 歩く霊廟セットアップ -- walking mausoleum setup
+4481 フジツボ破壊でアイテム取得 -- Obtain items by destroying barnacles
+4482 フジツボ強制破壊 -- Forced destruction of barnacles
+4483 霊廟座り込み判定 -- Mausoleum sit-in judgment
+4484 霊廟土台アセットの有効無効の切り替え -- Toggle enable/disable of mausoleum foundation assets
+4490 首吊りスケルトン -- hanging skeleton
+4491 スカラベの成長 -- Scarab growth
+4500 巨人の弱点部位の初期設定とダメージ表現_内側 -- Initial settings and damage expression of giant's weak points_inside
+4501 巨人の弱点部位の初期設定とダメージ表現_外側 -- Initial settings and damage expression of the giant's weak points_outside
+4502 巨人弱点部位の有効無効の切替 -- Toggle between enabling and disabling giant weak points
+4503 HU前の巨人と戦闘開始 -- Start battle with the giant in front of HU
+4504 巨人のHU演出 -- Giant HU production
+4505 HU後の巨人と戦闘開始 -- Start fighting the giant after HU
+4506 HU後の巨人を撃破 -- Defeat the giant after HU
+4507 巨人のロックダミポリ切替 -- Giant lock damipoly switching
+4508 巨人のロックダミポリを特定タイミングだけ切替 -- Switch the giant's lock damage poly at a specific timing.
+4509 ネムリコレクトチェッカー -- Nemori collect checker
+1000000000 敵リスポン -- enemy respawn

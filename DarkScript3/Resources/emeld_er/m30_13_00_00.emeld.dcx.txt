@@ -1,0 +1,17 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30130519 エレベータ初期フラグ -- Elevator initial flag
+30130790 ボス部屋報酬宝箱の開放制限 -- Restrictions on opening boss room reward treasure chests
+30132200 宝箱ワープイベント_XX -- Treasure chest warp event_XX
+30132205 宝箱ワープ用特殊効果付与用イベント_XX -- Event for adding special effects for treasure chest warp_XX
+30132510 エレベータイベント起動 -- Elevator event activation
+30132580 梯子登録 -- ladder registration
+30132800 ボス撃破 -- Defeat the boss
+30132802 ボス撃破2 -- Boss defeat 2
+30132810 ボス出現 -- Boss appears
+30132811 ボス激昂 -- boss rage
+30132812 ボス出現2 -- Boss appearance 2
+30132849 剣闘士_イベント起動 -- Gladiator_event activation
+30132850 ナズグル2_イベント起動 -- Nazgul 2_event activation
+1000000000 敵リスポン -- enemy respawn

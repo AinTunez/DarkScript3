@@ -1,0 +1,12 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1036512300 調香魔術師_巡回切り替え -- Perfumery magician_tour switching
+1036512400 思考ロジック有効化_距離判定／領域内で調香魔術師が戦闘状態_XX -- Enabling thought logic_Distance judgment/Fragrance magician is in combat state within the area_XX
+1036512450 思考ロジック有効化_距離判定／付近で調香魔術師が戦闘状態_XX -- Enabling thought logic_Distance judgment/Fragrance magician is in combat state nearby_XX
+1036512575 ガーゴイル像_扉制御 -- Gargoyle statue_door control

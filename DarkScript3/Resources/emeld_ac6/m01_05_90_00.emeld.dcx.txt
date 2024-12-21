@@ -1,0 +1,5 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2200 初期イベント -- initial event
+2201 カタパルト起動 -- catapult launch
+1000000000 敵リスポン -- enemy respawn

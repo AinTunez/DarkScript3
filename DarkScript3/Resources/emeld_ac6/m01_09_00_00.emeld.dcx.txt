@@ -1,0 +1,147 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 utl_マップ初期化 -- utl_map initialization
+2001 utl_プレイヤー初期化 -- utl_player initialization
+2010 utl_フェードアウト -- utl_fadeout
+2011 utl_フェードイン -- utl_fade in
+2090 utl_チェックポイント生成_1 -- utl_checkpoint generation_1
+2091 utl_SF_チェックポイント生成したよフラグ_1 -- utl_SF_Checkpoint generated flag_1
+2092 utl_リトライ時初期化_1 -- utl_initialize on retry_1
+2100 bas_初期化 -- bas_initialization
+2101 bas_完了化 -- bas_completed
+2102 ミッション失敗フラグ -- mission failure flag
+2103 ミッション成功フラグ -- mission success flag
+2125 talk_B_ミッション系会話再生終了 -- talk_B_Mission conversation playback finished
+2126 talk_B_FW撤退スキップ用特殊効果 -- talk_B_FW Special effects for skipping withdrawal
+2127 talk_B_FW撤退スキップ判定 -- talk_B_FW withdrawal skip judgment
+2128 talk_B_そこか判定 -- talk_B_judgment
+2129 talk_B_自分から見つかりに行った判定 -- talk_B_Judgment that you went to be found yourself
+2130 talk_B_警戒された判定 -- talk_B_warned judgment
+2131 talk_B_敵が扉の前に来た -- talk_B_The enemy came to the door
+2132 talk_B_敵が戦闘部屋に入った -- talk_B_Enemy entered the battle room
+2133 talk_B_警戒された判定キック用フラグ -- talk_B_ flag for flagged judgment kick
+2200 nac_初期化 -- nac_initialization
+2201 nac_完了化 -- nac_completion
+2210 nac_B_NPACのAPちょっと減り始めたか判定 -- Determine whether nac_B_NPAC's AP has started to decrease a little.
+2211 nac_B_NPACのAP大きく減らしたか判定 -- Determine whether nac_B_NPAC's AP has been significantly reduced
+2212 nac_B_NPACのAP0になったか判定A -- Determine whether nac_B_NPAC has become AP0 A
+2213 nac_B_NPACのAP0になったか判定B -- Determine whether nac_B_NPAC has become AP0 B
+2214 nac_B_NPACのAP0になったか判定C -- Determine whether nac_B_NPAC has become AP0 C
+2215 nac_B_NPACのタグ入手A -- nac_B_NPAC tag acquisition A
+2216 nac_B_NPACのタグ入手B -- nac_B_NPAC tag acquisition B
+2217 ボスゲージ非表示 -- Boss gauge hidden
+2218 嗅覚拡大特殊効果 -- Olfactory magnification special effects
+2219 警戒されてから一定時間で発見される -- Discovered within a certain amount of time after being alerted
+2220 nac_戦闘始める -- nac_Start battle
+2221 nac_B_戦闘開始位置に来たか判定 -- nac_B_Determine whether you have reached the battle starting position
+2222 nac_B_戦闘状態に入ったか判定 -- nac_B_Determine whether it has entered a combat state
+2223 nac_SF_戦闘終わりましたフラグ -- nac_SF_battle over flag
+2224 ボス戦用SEスイッチ -- SE switch for boss battles
+2225 エラーハンドリング用演出死亡 -- Directed death for error handling
+2226 入口扉に危険マーカー -- Danger marker on entrance door
+2227 入口マーカー無効化 -- Entrance marker disabled
+2230 nac_B_ラストヒット判定A -- nac_B_Last hit judgment A
+2231 nac_B_ラストヒット判定B -- nac_B_Last hit judgment B
+2232 nac_SF_Aがやった -- nac_SF_A did it
+2233 nac_SF_Bがやった -- nac_SF_B did it
+2300 扉解除 -- door release
+2301 扉封鎖 -- door closed
+2302 敵の入場処理 -- Enemy entrance processing
+2303 自機が部屋の外に出ないようにする処理 -- Processing to prevent your machine from leaving the room
+2310 NPAC強制帰巣行動 -- NPAC forced homing behavior
+2320 戦闘開始判定 -- Battle start determination
+2330 TGT判定 -- TGT judgment
+2340 AI判別用イベント_自機 -- AI discrimination event_own machine
+2341 AI判定用イベント_ホーキンス -- AI judgment event_Hawkins
+2342 AI判定用イベント_ペイター -- AI judgment event_Pater
+2343 AI判定用イベント_フラットウェル -- AI judgment event_Flatwell
+2344 そこかモード突入 -- Somewhere in the mode
+2345 会話判定_そこかモード中か -- Conversation judgment_Are you there or in mode?
+2346 ペイターとホーキンスに嗅覚拡大特殊効果 -- Special effects to enhance sense of smell for Pater and Hawkins
+2347 会話判定_味方が被弾 -- Conversation Judgment_Allies are hit by bullets
+3000 talk_出撃直後 -- talk_Immediately after sortie
+3001 talk_出撃直後02 -- talk_Immediately after sortie 02
+3002 talk_NPAC入場直後 -- talk_Immediately after entering NPAC
+3003 talk_入場直後02 -- talk_Immediately after entering 02
+3004 talk_NPAC待機中 -- talk_NPAC waiting
+3005 talk_NPAC待機中02 -- talk_NPAC waiting 02
+3006 talk_NPACに感づかれた -- I was impressed by talk_NPAC
+3007 talk_No7に奇襲 -- Surprise attack on talk_No7
+3008 talk_No7に奇襲02 -- Surprise attack on talk_No702
+3009 talk_No4に奇襲 -- Surprise attack on talk_No4
+3010 talk_No4に奇襲02 -- Surprise attack on talk_No4 02
+3011 talk_奇襲成功 -- talk_surprise attack success
+3012 talk_奇襲成功02 -- talk_surprise attack success 02
+3013 talk_奇襲失敗 -- talk_surprise attack failure
+3014 talk_奇襲失敗02 -- talk_surprise attack failure 02
+3015 talk_奇襲失敗03 -- talk_surprise attack failure 03
+3016 talk_奇襲失敗04 -- talk_surprise attack failure 04
+3017 talk_敵はレイヴン -- talk_The enemy is Raven
+3018 talk_NPAC二人健在_追い詰め -- talk_NPAC two alive and well_chasing
+3019 talk_No4健在_追い詰め -- talk_No4 alive_chasing
+3020 talk_No7健在_追い詰め -- talk_No7 is alive and well_chasing
+3021 talk_追い詰め会話への反応 -- talk_Reaction to corner conversation
+3024 talk_僚機撤退 -- talk_wingman withdrawal
+3025 talk_僚機撤退_敵二体健在 -- talk_wingman withdrawal_two enemies still alive
+3026 talk_僚機撤退_敵一体健在 -- talk_wingman withdrawal_enemy alive and well
+3027 talk_僚機を残して死亡 -- talk_ Died leaving his wingman behind
+3028 talk_敵二体健在で死亡 -- talk_Death with two enemies still alive
+3029 talk_No4健在で死亡 -- talk_No4 died while still alive
+3030 talk_No7健在で死亡 -- talk_No7 died while still alive
+3031 talk_No4を追い詰めた -- cornered talk_No4
+3032 talk_No7を追い詰めた -- cornered talk_No7
+3033 talk_No4撃破 -- talk_No4 defeated
+3034 talk_No4撃破_No7健在 -- talk_No4 defeated_No7 alive and well
+3035 talk_No7撃破 -- talk_No7 defeated
+3036 talk_No7撃破_No4健在 -- talk_No7 defeated_No4 alive and well
+3037 talk_敵全滅 -- talk_enemy annihilation
+3038 talk_敵全滅_僚機健在 -- talk_enemy annihilated_wing aircraft alive and well
+3039 talk_僚機撤退02 -- talk_wingman withdrawal 02
+3040 talk_入場直後03 -- talk_Immediately after entering 03
+3041 talk_No7に奇襲02ACS -- surprise attack on talk_No702ACS
+3042 talk_No4に奇襲02ACS -- Surprise attack on talk_No402ACS
+3043 talk_僚機瀕死 -- talk_wingman dying
+3044 talk_No7撃破_No4撃破済 -- talk_No7 defeated_No4 defeated
+3045 talk_もう一人は -- talk_The other person
+3046 talk_NPAC待機中02_02 -- talk_NPAC waiting 02_02
+3100 talk_B_NPAC入場後会話 -- talk_B_NPAC Conversation after entering
+3101 talk_B_No7に奇襲 -- Surprise attack on talk_B_No7
+3102 talk_B_No4に奇襲 -- Surprise attack on talk_B_No4
+3103 talk_B_奇襲失敗 -- talk_B_surprise attack failure
+3104 talk_B_追い詰められた -- talk_B_cornered
+3105 talk_B_二体生存 -- talk_B_two-body survival
+3106 talk_B_一体生存 -- talk_B_Survival
+3107 talk_B_No4生存 -- talk_B_No4survival
+3108 talk_B_No7生存 -- talk_B_No7survival
+3109 talk_B_僚機生存 -- talk_B_wingman survival
+3110 talk_B_僚機死亡 -- talk_B_wingman died
+3111 talk_B_自機死亡 -- talk_B_own machine dies
+3112 talk_B_No4を追い詰めた -- cornered talk_B_No4
+3113 talk_B_No7を追い詰めた -- cornered talk_B_No7
+3114 talk_B_No4撃破 -- talk_B_No4 defeated
+3115 talk_B_No7撃破 -- talk_B_No7 defeated
+3116 talk_B_僚機瀕死 -- talk_B_wingman near death
+3117 talk_B_敵全滅 -- talk_B_enemy annihilation
+3118 talk_B_No7に奇襲_スタッガー -- talk_B_Surprise attack on No7_Stagger
+3119 talk_B_No4に奇襲_スタッガー -- talk_B_Surprise attack on No4_Stagger
+3120 talk_B_No7を先に倒した -- Defeated talk_B_No7 first
+3121 talk_B_No4を先に倒した -- Defeated talk_B_No4 first
+3122 talk_B_No4回復使用数1 -- talk_B_No4 Number of recovery uses: 1
+3123 talk_B_No7回復使用数1 -- talk_B_No7 Number of recovery uses: 1
+3124 talk_B_ミッション系会話再生中 -- talk_B_Mission conversation playing
+3200 フラグ_奇襲成功 -- Flag_Successful surprise attack
+3201 フラグ_奇襲失敗 -- Flag_Surprise attack failure
+3202 フラグ_待ちすぎ -- Flag_waiting too long
+3203 フラグ_No4を倒した -- Defeated Flag_No.4
+3204 フラグ_No7を倒した -- Defeated Flag_No.7
+3205 フラグ_僚機死亡 -- Flag _ wingman death
+3250 BGMトランジション_ステート番号00_通常 -- BGM transition_state number 00_normal
+3251 BGMトランジション_ステート番号01_戦闘中 -- BGM transition_state number 01_in battle
+3252 BGMトランジション_ステート番号02_ヒートアップ1 -- BGM transition_state number 02_heat up 1
+3253 BGMトランジション_ステート番号03_ヒートアップ2 -- BGM transition_state number 03_heat up 2
+3254 BGMトランジション_ステート番号04_ヒートアップ3 -- BGM transition_state number 04_heat up 3
+3255 BGMトランジション_ステート番号05_ヒートアップ4 -- BGM transition_state number 05_heat up 4
+3256 BGMトランジション_ステート番号06_ヒートアップ5 -- BGM transition_state number 06_heat up 5
+3257 BGMトランジション_ステート番号07_死亡 -- BGM transition_state number 07_death
+3300 item_SF_NPAC撃破時のタグ取ったフラグ1 -- item_SF_Flag taken from tag when defeating NPAC 1
+3310 item_SF_NPAC撃破時のタグ取ったフラグ2 -- item_SF_Flag taken from tag when defeating NPAC 2

@@ -1,0 +1,101 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 時間制限 -- time limit
+2001 時間制限起動判定 -- Time limit start judgment
+2002 時間チェック -- time check
+2003 test -- test
+2006 カウントダウン用特殊効果チェック -- Countdown special effects check
+2012 足切り判定 -- Leg cut judgment
+2019 タイムオーバー判定 -- Time over judgment
+2020 経過時間 -- elapsed time
+2027 デバッグ用_タイマー停止 -- For debugging_timer stop
+2028 敵無効化 -- Nullify enemy
+2030 ＯＢＪのビックリマーク制御 -- OBJ exclamation mark control
+2040 ＯＢＪとダミー結びつける -- Connect OBJ and dummy
+2075 ＯＢＪとダミー結びつけるオマケ用 -- For bonus to connect OBJ and dummy
+2080 ＯＢＪ壊したら周りのＯＢＪも壊れる -- If you destroy an OBJ, the surrounding OBJs will also be destroyed.
+2145 爆発する輸送機 -- exploding transport plane
+2147 ＯBＪ全部壊した -- All OBJs were destroyed.
+2148 テスト_要らんＯBJ非表示 -- Test_Unnecessary OBJ hidden
+2149 ビックリマーク重力無効 -- exclamation mark gravity disabled
+2150 スタート地点に立った -- stood at the starting point
+2155 爆発物を壊した -- destroyed the explosive
+2160 PCが橋の上に来た -- PC came to the bridge
+2170 飛行機シチュ移行判定 -- Airplane situation transition judgment
+2172 残りの飛行機に特殊効果 -- Special effects on the rest of the plane
+2200 エリアに入ったら飛行機の目標オン_砲台こっち見る -- When you enter the area, the plane's target is on_Look at the gun battery
+2220 飛行機駐機状態 -- Airplane parking status
+2221 飛行機乗組員のAI切る -- Turn off airplane crew AI
+2223 飛行機発進 -- airplane launch
+2228 巡回行動の切り替え -- Switching patrol behavior
+2235 飛行機死ぬか離脱したら特殊効果解除 -- Special effects will be canceled if the plane dies or leaves.
+2240 全ての飛行機が死ぬか離脱したか -- Did all the planes die or break away?
+2242 飛行機離脱したら消す -- Delete when the plane leaves
+2251 飛行機一機でも離脱したか -- Did even one plane leave?
+2252 飛行機全滅したか -- Did the plane disappear?
+2255 対岸の輸送ヘリが先に殺されている -- The transport helicopter on the other side was killed first.
+2260 アンブッシュ起動 -- Ambush launch
+2265 輸送ヘリ護衛起動 -- Transport helicopter escort activated
+2267 ミサイル起動 -- missile launch
+2270 最後の崖の足場の敵起動 -- Enemies launch on the final cliff platform
+2280 時限の輸送機_発進 -- Time-limited transport aircraft_launch
+2285 時限輸送機_到着判定 -- Time-limited transport aircraft_arrival determination
+2287 時限輸送機_接近判定 -- Time-limited transport aircraft_approach judgment
+2288 時限輸送機_死亡判定 -- Time-limited transport machine_death judgment
+2289 時限輸送機_来るはずだった判定 -- Timed Transport Plane_Judgment that it was supposed to come
+2290 輸送機ホバリング -- transport aircraft hovering
+2295 左右輸送機_再巡回切り替え -- Left and right transport aircraft_re-patrol switching
+2300 輸送機再発進 -- Transport aircraft relaunch
+2310 垂直輸送機_発進 -- Vertical transport aircraft_launch
+2315 垂直輸送機_領域判定 -- Vertical transport machine_area determination
+2330 崖際判定 -- Cliff edge judgment
+2335 橋領域侵入判定 -- Bridge area intrusion detection
+2345 報酬に接近判定 -- Judgment of approaching reward
+2347 大渓谷の護衛起動 -- Great Valley Escort Activation
+2350 崖下の護衛起動 -- Activate the escort under the cliff
+2355 崖下の護衛起動_手前 -- Activating the escort under the cliff_front
+2357 橋の下AC起動 -- AC started under the bridge
+2358 橋の下AC死亡 -- AC death under the bridge
+2400 条件満たしたらボスが出る -- When the conditions are met, a boss will appear.
+2410 領域に入ったらボス起動 -- When you enter the area, the boss will start
+2420 ボス死んだ -- boss died
+2430 全ての敵が死亡した -- all enemies are dead
+2500 カウントテスト -- counting test
+2560 大崖の護衛起動 -- Great Cliff Escort Activation
+2565 大崖上の護衛起動 -- Activate the guard on the cliff
+2567 ゴール後敵起動 -- Enemy activation after goal
+2570 輸送ヘリ会話用判定 -- Transport helicopter conversation judgment
+3600 フラグ_会話終了 -- Flag_End of conversation
+3601 フラグ_中間地点に来た -- Flag_I came to the halfway point
+3602 フラグ_増援１ -- Flag_Reinforcements 1
+3603 フラグ_残された機体が飛ぶ会話終了 -- Flag_End of conversation where remaining aircraft flies
+3604 フラグ_メランジ機が死亡 -- Flag_Melange plane died
+3605 フラグ_飛行機飛ばす許可 -- Flag_Permission to fly an airplane
+3606 フラグ_全てのタンク破壊 -- Flag_All tanks destroyed
+3607 フラグ_輸送機発進会話終了 -- Flag_Transport plane launch conversation ends
+3610 フラグ_タイムオーバー -- flag_timeover
+3611 フラグ_敵が全滅した -- Flag_Enemies are wiped out
+3612 フラグ_ミッション目標切り替え用 -- Flag_For mission target switching
+3613 フラグ_ミッション目標切り替え完了 -- Flag_Mission objective switching completed
+3614 フラグ_大成功 -- flag_great success
+3615 フラグ_成功 -- flag_success
+3616 フラグ_失敗 -- flag_failure
+3650 会話フラグ_ミッション開始 -- Conversation Flag_Mission Start
+3651 会話フラグ_輸送ヘリ報酬説明 -- Conversation Flag_Transport Helicopter Reward Explanation
+3652 会話フラグ_特殊タンク説明 -- Conversation flag_Special tank description
+3653 会話フラグ_中間地点輸送機発進 -- Conversation flag_way point transport aircraft launch
+3654 会話フラグ_橋を渡る -- Conversation flag_Cross the bridge
+3655 会話フラグ_ボーナス前 -- Conversation flag_before bonus
+3656 会話フラグ_隠しボス会敵会話 -- Conversation flag_Hidden boss enemy conversation
+3657 会話フラグ_隠しボス死亡会話 -- Conversation Flag_Hidden Boss Death Conversation
+3658 会話フラグ_残り3分 -- Conversation flag_3 minutes remaining
+3659 会話フラグ_残り2分 -- Conversation flag_2 minutes remaining
+3660 会話フラグ_残り1分 -- Conversation flag_1 minute remaining
+3661 会話フラグ_残り30秒 -- Conversation flag_30 seconds left
+3662 会話フラグ_爆発物会話完了 -- Conversation flag_Explosives conversation complete
+3663 会話フラグ_時限輸送ヘリ会話完了 -- Conversation Flag_Timed Transport Helicopter Conversation Completed
+3700 デバッグ用_タイマー停止フラグ -- Debugging_timer stop flag
+3701 サンプル -- sample
+3800 撃破数カウント -- Count the number of defeats
+3900 撃破数カウントその２ -- Defeat number count part 2
+1000000000 敵リスポン -- enemy respawn

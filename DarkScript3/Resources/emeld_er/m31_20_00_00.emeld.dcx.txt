@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+31092849 ボス_イベント起動 -- Boss_event activation
+31202520 洞窟_ボス部屋報酬宝箱の開放制限 -- Cave_Boss room reward treasure chest opening limit
+31202550 洞窟用間欠泉トラップ_XX -- Geyser trap for cave_XX
+31202800 ボス撃破 -- Defeat the boss
+31202801 貴腐の騎士_槍_死亡時の撃破演出 -- Noble Rot Knight_Spear_Defeat performance upon death
+31202802 結晶の部族_槍_死亡時の撃破演出 -- Crystal Tribe_Spear_Defeat performance upon death
+31202810 ボス出現 -- Boss appears
+31202811 ボス激昂 -- boss rage
+1000000000 敵リスポン -- enemy respawn

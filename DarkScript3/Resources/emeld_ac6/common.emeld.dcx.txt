@@ -1,0 +1,33 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+10 アイテム取得用イベントフラグON -- Event flag for item acquisition ON
+11 カットシーン再生テスト -- Cutscene playback test
+12 スローモーテスト -- slow mo test
+13 ガレージ接続チェックイベント -- Garage connection check event
+14 過去ガレージ接続チェックイベント -- Past garage connection check event
+15 A層ガレージ接続チェックイベント -- A-tier garage connection check event
+16 D層ガレージ接続チェックイベント -- D layer garage connection check event
+17 ファラオンテスト -- pharaon test
+20 プロローグミッション_ガレージイベントとカットシーン制御 -- Prologue Mission_Garage Event and Cutscene Control
+30 汎用com用ボイス_AP判定_50以下 -- Voice for general purpose com_AP judgment_50 or less
+31 汎用com用ボイス_AP判定_25以下 -- Voice for general purpose com_AP judgment_25 or less
+32 宝有効化イベント -- Treasure activation event
+40 垂直カタパルトイベント -- vertical catapult event
+50 プリコンストラクタ -- preconstructor
+60 カメラ変更イベント -- camera change event
+80 スタッガーテスト -- stagger test
+90 死亡時テキスト演出 -- Death text display
+91 落下復帰演出 -- Fall return performance
+95 インゲーム入場時サウンドステート制御 -- In-game entry sound state control
+100 垂直カタパルトイベント_アクションボタン付き -- Vertical catapult event_with action button
+110 デバッグ_テスト_Gparam切替 -- Debug_Test_Gparam switching
+800 ボス用演出死亡イベントキック -- Boss death event kick
+810 テストイベント_アーカイブイベント入手 -- Test event_Obtain archive event
+99050000 扉テスト_扉開く -- Door test_door open
+99050100 扉テスト_自動 -- Door test_automatic
+99050110 扉テスト_ロック扉 -- Door test_lock door
+99050111 扉テスト_ロック扉_初期化 -- Door test_lock door_initialization
+99050120 扉テスト_非ロック扉 -- Door test_non-locking door
+99050130 カタパルトモック_アクションボタン -- Catapult mock_action button
+99050140 落下復帰 -- Return from fall
+1000000000 敵リスポン -- enemy respawn

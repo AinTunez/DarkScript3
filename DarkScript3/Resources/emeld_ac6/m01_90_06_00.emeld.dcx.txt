@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+90060000 ロード時処理 -- Load time processing
+90060001 マーカー表示判定 -- Marker display judgment
+90060002 マーカー表示解除判定 -- Marker display cancellation determination
+90060003 接敵判定 -- Enemy contact judgment
+90060004 接敵解除判定 -- Contact release judgment
+90060005 戦闘開始判定 -- Battle start determination
+90060006 警告判定 -- Warning judgment
+90060007 警告判定解除 -- Warning judgment canceled
+90060008 撤退判定 -- Withdrawal judgment
+90060009 撤退時処理 -- Processing upon withdrawal
+90060010 クリア時処理 -- Clear processing
+90060011 死亡時処理 -- Treatment at death
+90061000 敵殲滅状態判定イベント -- Enemy annihilation status determination event
+1000000000 敵リスポン -- enemy respawn

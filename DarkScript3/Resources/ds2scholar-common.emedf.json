@@ -3954,7 +3954,7 @@
           "args": [
             {
               "name": "HP Amount",
-              "type": 5,
+              "type": 2,
               "enum_name": null,
               "default": 0,
               "min": 0,

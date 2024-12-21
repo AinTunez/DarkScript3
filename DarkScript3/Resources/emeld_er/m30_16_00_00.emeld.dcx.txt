@@ -1,0 +1,15 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30162511 PCが領域に入ったら特殊効果をかける_XX -- Apply special effects when the PC enters the area_XX
+30162520 地下墓地_ボス部屋報酬宝箱の開放制限 -- Catacombs_Boss room reward treasure chest opening restrictions
+30162601 敵ジェネレータ_PCが領域に入ったらジェネレータを起動_XX -- Enemy generator_Start the generator when the PC enters the area_XX
+30162602 キャラの生存状況を見て特殊待機解除する_XX -- Check the character's survival status and cancel special standby_XX
+30162621 交戦シチュエーショ制御_XX -- Engagement situation control_XX
+30162622 窓口弓騎士振り向かう制御 -- Control of the counter bow knight turning around
+30162800 ボス撃破 -- Defeat the boss
+30162810 ボス出現 -- Boss appears
+30162811 ボス激昂 -- boss rage
+30162849 蛇霊_赤腐敗_イベント起動 -- Snake spirit_red rot_event activation
+30162900 地下迷宮奥地へのワープ -- Warp to the depths of the underground labyrinth
+1000000000 敵リスポン -- enemy respawn

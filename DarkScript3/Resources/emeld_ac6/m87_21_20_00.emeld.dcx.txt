@@ -1,0 +1,15 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+72125000 スティグロ_本体ダメージXX -- Stiglo_Body damage XX
+72125010 スティグロ_撃破 -- Stiglo_Defeated
+72125020 スティグロ_登場 -- Stiglo_Appearance
+72125021 スティグロ_登場（アタッチ敵） -- Stiguro_Appearance (Attach enemy)
+72125031 スティグロ_部位1ダメージ -- Stiglo_part 1 damage
+72125032 スティグロ_部位2ダメージ -- Stiglo_part 2 damage
+72125033 スティグロ_部位3ダメージ -- Stiglo_part 3 damage
+72125034 スティグロ_部位4ダメージ -- Stiglo_part 4 damage
+72125035 スティグロ_部位5ダメージ -- Stiglo_part 5 damage
+72125036 スティグロ_部位6ダメージ -- Stiglo_part 6 damage
+72125037 スティグロ_部位7ダメージ -- Stiglo_part 7 damage
+72125038 スティグロ_部位8ダメージ -- Stiglo_part 8 damage
+1000000000 敵リスポン -- enemy respawn

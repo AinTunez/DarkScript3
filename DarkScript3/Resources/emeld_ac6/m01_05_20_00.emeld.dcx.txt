@@ -1,0 +1,36 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 アバランチ_エース死亡時 -- Avalanche_When Ace dies
+2001 アバランチ_サポA死亡時 -- Avalanche_When Support A dies
+2002 アバランチ_サポB死亡時 -- Avalanche_When Support B dies
+2003 BGM再生判定 -- BGM playback judgment
+2004 スローテスト1 -- slow test 1
+2005 スローテスト2 -- slow test 2
+2006 スローテスト3 -- slow test 3
+2007 スローテスト4 -- slow test 4
+2008 スローテスト5 -- slow test 5
+2009 スローテスト6 -- slow test 6
+2705 進行管理用_ドーム入口解放判定 -- For progress management_Dome entrance release judgment
+3000 目標エリア3_USドローン帰巣イベント1 -- Target area 3_US drone homing event 1
+3001 目標エリア3_USドローン帰巣イベント2 -- Target area 3_US drone homing event 2
+3002 目標エリア3_USドローン帰巣イベント3 -- Target area 3_US drone homing event 3
+3003 右 -- right
+3010 目標エリア3_USドローン増援設定 -- Target area 3_US drone reinforcement setting
+3100 中ボスシチュ_登場演出弾丸発射時イベント -- Mid-boss situation_appearance production bullet firing event
+3101 ボスゲージ有効化 -- Boss gauge activation
+3102 ボスゲージ無効化 -- Boss gauge disabled
+3103 ボスAP0判定 -- Boss AP0 judgment
+3104 ミッション終了判定フラグ -- Mission end determination flag
+3105 ボス死亡判定 -- Boss death judgment
+3907 初期アセット設定 -- Initial asset settings
+3908 仮_ドーム中ボス演出 -- Temporary_dome boss production
+3909 ドーム内演出_アタッチ解除イベント -- In-dome production_attachment release event
+3910 ドーム内_引き撃ちテスト -- Inside the dome_pull test
+3911 ドーム内_演出終了時イベント -- Inside the dome_Event at the end of the performance
+3920 目標エリア3用_無敵設定 -- Target area 3_invincibility setting
+3921 目標エリア3_重火力リセット -- Target area 3_heavy firepower reset
+3922 目標エリア3_重火力再生 -- Target area 3_heavy firepower regeneration
+3923 重火力リセット用フラグ -- Heavy firepower reset flag
+3924 重火力再生用フラグ -- Heavy firepower regeneration flag
+3925 重火力演出再生判定 -- Heavy firepower performance regeneration judgment
+1000000000 敵リスポン -- enemy respawn

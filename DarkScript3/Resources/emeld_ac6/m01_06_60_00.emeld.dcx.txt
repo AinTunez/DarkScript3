@@ -1,0 +1,188 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッションクリア判定 -- Mission clear judgment
+2010 OBJマーカー01無効化 -- OBJ marker 01 invalidation
+2011 OBJマーカー02無効化 -- OBJ marker 02 invalidation
+2012 OBJマーカー03無効化 -- OBJ marker 03 invalidation
+2018 目標地点マーカー_坑道内 -- Target point marker_Inside the mine shaft
+2019 目標地点マーカー全消し -- Erase all target point markers
+2020 目標地点マーカー01切り替え -- Target point marker 01 switching
+2022 目標地点マーカー03切り替え -- Target point marker 03 switching
+2030 目標地点マーカー00_01表示 -- Target point marker 00_01 display
+2031 目標地点マーカー00_02表示 -- Target point marker 00_02 display
+2035 目標地点マーカー00_01非表示判定 -- Target point marker 00_01 non-display determination
+2036 目標地点マーカー00_02非表示判定 -- Target point marker 00_02 non-display determination
+2100 初期イベント -- initial event
+2109 坑道内カメラ前SFX切り替え処理 -- SFX switching process in front of the camera inside the mine
+2110 アーカイブ取得イベント01 -- Archive acquisition event 01
+2120 アーカイブ取得イベント02 -- Archive acquisition event 02
+2130 アーカイブ取得イベント03 -- Archive acquisition event 03
+2190 アーカイブ取得カウント01 -- Archive acquisition count 01
+2191 アーカイブ取得カウント02 -- Archive acquisition count 02
+2192 アーカイブ取得カウント03 -- Archive acquisition count 03
+2450 s13_A地点増援イベント -- s13_A point reinforcement event
+2650 s15_C地点増援イベント -- s15_C point reinforcement event
+3400 特別報酬加算イベント -- Special reward addition event
+3500 会話_エリア判定_A地点 -- Conversation_Area determination_Point A
+3501 会話_エリア判定_B地点 -- Conversation_Area judgment_Point B
+3502 会話_エリア判定_C地点 -- Conversation_Area judgment_Point C
+3509 会話_エリア判定_道中 -- Conversation_Area judgment_On the way
+3510 会話_特殊効果判定_A地点 -- Conversation_Special effect judgment_Point A
+3511 会話_特殊効果判定_B地点 -- Conversation_Special effect judgment_Point B
+3512 会話_特殊効果判定_C地点 -- Conversation_Special effect judgment_C point
+3519 会話_特殊効果判定_道中 -- Conversation_Special effect judgment_On the way
+3520 会話_特殊効果かいじょ判定_A地点 -- Conversation_Special effect judgment_A point
+3521 会話_特殊効果かいじょ判定_B地点 -- Conversation_Special effect judgment_Point B
+3522 会話_特殊効果かいじょ判定_C地点 -- Conversation_Special effect judgment_C point
+3529 会話_特殊効果かいじょ判定_道中 -- Conversation_Special effect judgment_On the way
+3530 会話_いるフラグ_A地点 -- Conversation_Flag_A point
+3531 会話_いるフラグ_B地点 -- Conversation_Flag_Position B
+3532 会話_いるフラグ_C地点 -- Conversation_Flag_C point
+3539 会話_いるフラグ_道中 -- Conversation_Flag_On the road
+3540 会話_いるフラグ_A地点_フラグオフ -- Conversation_Current flag_A point_Flag off
+3541 会話_いるフラグ_B地点_フラグオフ -- Conversation_Current flag_Point B_Flag off
+3542 会話_いるフラグ_C地点_フラグオフ -- Conversation_Current flag_C point_Flag off
+3549 会話_いるフラグ_道中_フラグオフ -- Conversation_Flag_On_Road_Flag off
+3550 会話_地点Aで戦闘中か -- Conversation_Are you fighting at point A?
+3551 会話_地点Aでアーカイブ会話再生可能か -- Conversation_Is it possible to play archived conversations at point A?
+3552 会話_地点Bで戦闘中か -- Conversation_Is there a battle going on at point B?
+3553 会話_地点Bでアーカイブ会話再生可能か -- Conversation_Is it possible to play archived conversations at point B?
+3554 会話_地点Cで戦闘中か -- Conversation_Is there a battle going on at point C?
+3555 会話_地点Cでアーカイブ会話再生可能か -- Conversation_Is it possible to play archived conversations at point C?
+3560 会話_A地点モブ全滅判定 -- Conversation_A point mob annihilation judgment
+3561 会話_B地点モブ全滅判定 -- Conversation_B point mob annihilation judgment
+3562 会話_C地点モブ全滅判定 -- Conversation_C point mob annihilation judgment
+3570 会話_換金アイテム取得 -- Conversation_Get exchanged items
+3571 会話_換金アイテム取得_高額01 -- Conversation_Obtain cashable items_High value 01
+3572 会話_換金アイテム取得会話_高額02 -- Conversation_Exchangeable Item Acquisition Conversation_High Price 02
+3575 会話_換金アイテム取得_高額01_再生判定用特殊効果付与 -- Conversation_Obtain cashable items_High value 01_Add special effects for regeneration judgment
+3576 会話_換金アイテム取得_高額02_再生判定用特殊効果付与 -- Conversation_Obtain cashable items_High value 02_Add special effects for regeneration judgment
+3590 会話済みフラグ925 -- Conversation completed flag 925
+3591 会話済みフラグ921 -- Conversation completed flag 921
+3592 会話済みフラグ922 -- Conversation completed flag 922
+3593 会話済みフラグ923 -- Conversation completed flag 923
+3594 会話済みフラグ924 -- Conversation completed flag 924
+3600 会話済みフラグ00 -- Conversation completed flag 00
+3601 会話済みフラグ01 -- Conversation completed flag 01
+3602 会話済みフラグ02 -- Conversation completed flag 02
+3603 会話済みフラグ03 -- Conversation completed flag 03
+3604 会話済みフラグ04 -- Conversation completed flag 04
+3605 会話済みフラグ05 -- Conversation completed flag 05
+3606 会話済みフラグ06 -- Conversation completed flag 06
+3607 会話済みフラグ07 -- Conversation completed flag 07
+3608 会話済みフラグ08 -- Conversation completed flag 08
+3609 会話済みフラグ09 -- Conversation completed flag 09
+3610 会話済みフラグ10 -- Conversation completed flag 10
+3611 会話済みフラグ11 -- Conversation completed flag 11
+3612 会話済みフラグ12 -- Conversation completed flag 12
+3613 会話済みフラグ13 -- Conversation completed flag 13
+3614 会話済みフラグ14 -- Conversation completed flag 14
+3615 会話済みフラグ15 -- Conversation completed flag 15
+3616 会話済みフラグ16 -- Conversation completed flag 16
+3617 会話済みフラグ17 -- Conversation completed flag 17
+3618 会話済みフラグ18 -- Conversation completed flag 18
+3619 会話済みフラグ19 -- Conversation completed flag 19
+3620 会話済みフラグ20 -- Conversation completed flag 20
+3621 会話済みフラグ21 -- Conversation completed flag 21
+3622 会話済みフラグ22 -- Conversation completed flag 22
+3623 会話済みフラグ23 -- Conversation completed flag 23
+3624 会話済みフラグ24 -- Conversation completed flag 24
+3625 会話済みフラグ25 -- Conversation completed flag 25
+3626 会話済みフラグ26 -- Conversation completed flag 26
+3627 会話済みフラグ27 -- Conversation completed flag 27
+3628 会話済みフラグ28 -- Conversation completed flag 28
+3629 会話済みフラグ29 -- Conversation completed flag 29
+3630 会話済みフラグ30 -- Conversation completed flag 30
+3631 会話済みフラグ31 -- Conversation completed flag 31
+3632 会話済みフラグ32 -- Conversation completed flag 32
+3633 会話済みフラグ33 -- Conversation completed flag 33
+3634 会話済みフラグ34 -- Conversation completed flag 34
+3635 会話済みフラグ35 -- Conversation completed flag 35
+3636 会話済みフラグ36 -- Conversation completed flag 36
+3637 会話済みフラグ37 -- Conversation completed flag 37
+3638 会話済みフラグ38 -- Conversation completed flag 38
+3639 会話済みフラグ39 -- Conversation completed flag 39
+3640 会話済みフラグ40 -- Conversation completed flag 40
+3641 会話済みフラグ41 -- Conversation completed flag 41
+3642 会話済みフラグ42 -- Conversation completed flag 42
+3643 会話済みフラグ43 -- Conversation completed flag 43
+3644 会話済みフラグ44 -- Conversation completed flag 44
+3645 会話済みフラグ45 -- Conversation completed flag 45
+3646 会話済みフラグ46 -- Conversation completed flag 46
+3647 会話済みフラグ47 -- Conversation completed flag 47
+3648 会話済みフラグ48 -- Conversation completed flag 48
+3649 会話済みフラグ49 -- Conversation completed flag 49
+3650 会話済みフラグ50 -- Conversation completed flag 50
+3651 会話済みフラグ51 -- Conversation completed flag 51
+3652 会話済みフラグ52 -- Conversation completed flag 52
+3653 会話済みフラグ53 -- Conversation completed flag 53
+3654 会話済みフラグ54 -- Conversation completed flag 54
+3655 会話済みフラグ55 -- Conversation completed flag 55
+3656 会話済みフラグ56 -- Conversation completed flag 56
+3657 会話済みフラグ57 -- Conversation completed flag 57
+3658 会話済みフラグ58 -- Conversation completed flag 58
+3659 会話済みフラグ59 -- Conversation completed flag 59
+3660 会話済みフラグ60 -- Conversation completed flag 60
+3661 会話済みフラグ61 -- Conversation completed flag 61
+3662 会話済みフラグ62 -- Conversation completed flag 62
+3663 会話済みフラグ63 -- Conversation completed flag 63
+3664 会話済みフラグ64 -- Conversation completed flag 64
+3665 会話済みフラグ65 -- Conversation completed flag 65
+3666 会話済みフラグ66 -- Conversation completed flag 66
+3667 会話済みフラグ67 -- Conversation completed flag 67
+3668 会話済みフラグ68 -- Conversation completed flag 68
+3669 会話済みフラグ69 -- Conversation completed flag 69
+3670 会話済みフラグ70 -- Conversation completed flag 70
+3671 会話済みフラグ71 -- Conversation completed flag 71
+3672 会話済みフラグ72 -- Conversation completed flag 72
+3673 会話済みフラグ73 -- Conversation completed flag 73
+3674 会話済みフラグ74 -- Conversation completed flag 74
+3675 会話済みフラグ75 -- Conversation completed flag 75
+3676 会話済みフラグ76 -- Conversation completed flag 76
+3677 会話済みフラグ77 -- Conversation completed flag 77
+3678 会話済みフラグ78 -- Conversation completed flag 78
+3679 会話済みフラグ79 -- Conversation completed flag 79
+3680 会話済みフラグ80 -- Conversation completed flag 80
+3681 会話済みフラグ81 -- Conversation completed flag 81
+3682 会話済みフラグ82 -- Conversation completed flag 82
+3683 会話済みフラグ83 -- Conversation completed flag 83
+3684 会話済みフラグ84 -- Conversation completed flag 84
+3685 会話済みフラグ85 -- Conversation completed flag 85
+3686 会話済みフラグ86 -- Conversation completed flag 86
+3687 会話済みフラグ87 -- Conversation completed flag 87
+3688 会話済みフラグ88 -- Conversation completed flag 88
+3689 会話済みフラグ89 -- Conversation completed flag 89
+3690 会話済みフラグ90 -- Conversation completed flag 90
+3691 会話済みフラグ91 -- Conversation completed flag 91
+3692 会話済みフラグ92 -- Conversation completed flag 92
+3693 会話済みフラグ93 -- Conversation completed flag 93
+3694 会話済みフラグ94 -- Conversation completed flag 94
+3695 会話済みフラグ95 -- Conversation completed flag 95
+3696 会話済みフラグ96 -- Conversation completed flag 96
+3697 会話済みフラグ97 -- Conversation completed flag 97
+3698 会話済みフラグ98 -- Conversation completed flag 98
+3699 会話済みフラグ99 -- Conversation completed flag 99
+3709 会話判定09_初接敵 -- Conversation Judgment 09_First Enemy
+3713 会話判定13_初戦闘開始 -- Conversation judgment 13_Start of first battle
+3717 会話判定17_奈落前 -- Conversation Judgment 17_Narakumae
+3721 会話判定21_接敵01 -- Conversation Judgment 21_Enemy Engagement 01
+3725 会話判定25_戦闘開始01 -- Conversation Judgment 25_Battle Start 01
+3737 会話判定37_アーカイブ発見01 -- Conversation Judgment 37_Archive Discovery 01
+3741 会話判定38_アーカイブアクセス01 -- Conversation Judgment 38_Archive Access 01
+3749 会話判定49_接敵02 -- Conversation Judgment 49_Enemy Engagement 02
+3753 会話判定53_戦闘開始02 -- Conversation Judgment 53_Battle Start 02
+3754 会話判定53_戦闘開始02_先に攻撃した判定 -- Conversation Judgment 53_Battle Start 02_Judgment of attacking first
+3761 会話判定61_アーカイブ02発見 -- Conversation Judgment 61_Archive 02 Found
+3765 会話判定65_アーカイブ02アクセス -- Conversation Judgment 65_Archive 02 Access
+3781 会話判定81_接敵03 -- Conversation Judgment 81_Enemy Engagement 03
+3783 会話判定83_戦闘開始03 -- Conversation judgment 83_Battle start 03
+3787 会話判定87_アーカイブ03発見 -- Conversation Judgment 87_Archive 03 Found
+3789 会話判定89_アーカイブ03アクセス -- Conversation Judgment 89_Archive 03 Access
+3799 会話_全アーカイブ取得会話再生済み判定 -- Conversation_Full archive acquisition Conversation played judgment
+3800 バグ_戦闘状態伝播 -- Bug_Combat state propagation
+3820 s04_バグ天井落下 -- s04_bug ceiling falling
+3821 s04_専用_戦闘状態伝播 -- s04_Exclusive_Combat state propagation
+3822 s04_専用_戦闘状態伝播開始用フラグ -- s04_Exclusive_Battle status propagation start flag
+3990 USドローン残骸_炎SFX無効化 -- US Drone Remains_Fire SFX Disabled
+3999 爆発SEミュート対応 -- Explosion SE mute compatible
+1000000000 敵リスポン -- enemy respawn

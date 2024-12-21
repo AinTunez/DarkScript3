@@ -1,0 +1,12 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1038542250 人さらい兵器vs王軍_交戦イベント -- Kidnapping Weapon vs Royal Army_Battle Event
+1038542260 視界強化 -- Enhanced vision
+1038542270 視界強化_王軍雑兵 -- Enhanced vision_King's army soldiers
+1038542340 人攫い兵器_巡回切り替え -- Kidnapping Weapon_Patrol Switch
+1038542400 小君主とガーディアンチーム化 -- Teaming up with the minor lord and guardian
+1038542450 死体焚火ナビメッシュ切り抜き用アセット無効化_XX -- Corpse bonfire navigation mesh cutout asset invalidation_XX
+1038542500 死体焚火イベント起動 -- Corpse bonfire event started
+1038542580 梯子登録 -- ladder registration

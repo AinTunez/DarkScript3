@@ -1,0 +1,9 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+9810200 イベントテスト -- event test
+9810210 【協力霊】AIプレイヤー召喚SOS作成テスト -- [Cooperative Spirit] AI player summoning SOS creation test
+9810211 【協力霊】非着せ替えNPCサインテスト -- [Cooperative Spirit] Non-dress-up NPC sign test
+9810220 【敵対霊】AIプレイヤー召喚SOS作成テスト -- [Hostile Spirit] AI player summoning SOS creation test
+9810230 イベントフラグ同期テスト -- Event flag synchronization test
+9810240 イベント弾丸発射テスト -- Event bullet firing test
+1000000000 敵リスポン -- enemy respawn

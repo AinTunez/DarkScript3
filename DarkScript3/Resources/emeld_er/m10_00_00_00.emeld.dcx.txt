@@ -1,0 +1,92 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1002200 中央広場_演出笛吹 -- Central Square_Piper performance
+1002680 BGM切り替えイベント -- BGM switching event
+1002700 エジンバラ門番NPC初期化 -- Edinburgh Gatekeeper NPC initialization
+10000519 エレベーター初期フラグ設定 -- Elevator initial flag setting
+10000739 NPC302門衛_罠部屋_敵無敵化 -- NPC302 Gatekeeper_Trap room_Enemy invincibility
+10000760 NPC325ロジェール_エジンバラ_NPC初期化イベント -- NPC325 Roger_Edinburgh_NPC initialization event
+10000761 NPC325ロジェール_ゴドリック撃破後リアルタイム遷移 -- NPC325 Roger_Real-time transition after defeating Godric
+10000762 NPC325ロジェール_地下の異形を見た -- NPC325 Roger_Saw a strange shape underground
+10000763 NPC325ロジェール_インチキ血痕出現 -- NPC325 Roger_False bloodstains appear
+10000764 NPC325ロジェール_インチキ血痕リプレイ -- NPC325 Roger_False Bloodstain Replay
+10002240 ルーンの市民_座り込み_XX -- Citizens of Rune_Sit-in_XX
+10002281 接ぎ木の蜘蛛_罠部屋 -- Grafted Spider_Trap Room
+10002290 崩落城壁_生きている小壺感覚弱体化 -- Collapsed castle wall_weakened sense of a small living pot
+10002310 崩落城壁_生きているツボ起動 -- Collapsed castle wall_Living pressure point activation
+10002311 喪失の兵士_笛吹反応_XX -- Lost Soldier_Picture Reaction_XX
+10002320 崩落城壁_ハゲタカ騎士出現 -- Collapsed castle wall_Vulture knight appears
+10002330 嵐の鷹_空爆_XX -- Storm Hawk_Airstrike_XX
+10002340 嵐の鷹_空爆失敗_XX -- Storm Hawk_Airstrike failure_XX
+10002350 感覚弱体化_XX -- Weakened senses_XX
+10002423 兵舎上層_ハゲタカ騎士に殺された兵士 -- Upper Barracks_Soldier killed by Vulture Knight
+10002460 嵐の鷹_夜目 -- Storm hawk_night vision
+10002480 崩落城壁_布被り騎士の鷹死亡 -- Collapsed castle wall_The hawk of the cloth-covered knight dies
+10002500 NPCによる開門 -- Gate opened by NPC
+10002501 レバー操作による開門 -- Opening the gate by lever operation
+10002510 エレベータイベント起動 -- Elevator event activation
+10002580 ハシゴ登録 -- ladder registration
+10002670 チュートリアルメッセージ_魔法杖所持 -- Tutorial message_Magic wand possession
+10002671 チュートリアルメッセージ_バディ解放 -- Tutorial message_Buddy release
+10002672 チュートリアルメッセージ_壺系入手 -- Tutorial message_Obtaining pot type
+10002673 チュートリアルメッセージ_魔石取得 -- Tutorial message_Magic stone acquisition
+10002680 馬禁止領域用SFX -- SFX for horse prohibited area
+10002690 NT対象外通告 -- Notification not covered by NT
+10002691 ジェスチャー獲得_9036あぐら睡眠 -- Gesture acquisition_9036 Cross-legged sleep
+10002800 接ぎ木の王撃破 -- Defeat the Grafted King
+10002810 接ぎ木の王出現 -- The grafted king appears
+10002811 接ぎ木の王激昂 -- Grafted King Furious
+10002820 接ぎ木の王_エネミー側_領域Aにいる判定 -- King of Grafting_Enemy side_Judging to be in area A
+10002821 接ぎ木の王_PC側_領域Aにいる判定 -- Grafting King_PC side_Judging to be in area A
+10002824 接ぎ木の王_エネミー側_領域Bにいる判定 -- Grafted King_Enemy side_Judgment that you are in area B
+10002825 接ぎ木の王_PC側_領域Bにいる判定 -- King of Grafting_PC side_Judging to be in area B
+10002849 接ぎ木の王戦イベント起動 -- Grafted King Battle event started
+10002850 マルギット撃破 -- Defeat Margit
+10002860 マルギット出現 -- Margit appears
+10002861 マルギット激昂 -- margit rage
+10002870 マルギット怨念 -- margit grudge
+10002889 マルギット戦イベント起動 -- Margit battle event starts
+10002910 敵壁暫定消去 -- Enemy wall temporary deletion
+10003500 攻撃禁止エリア設定 -- Attack prohibited area setting
+10003700 NPC302門衛_門前_NPC初期化イベント -- NPC302 Gatekeeper_In front of the gate_NPC initialization event
+10003701 NPC302門衛_ストーカー_NPC初期化イベント_XX -- NPC302 Gatekeeper_Stalker_NPC initialization event_XX
+10003702 NPC302門衛_ゴドリック撃破後_NPC初期化イベント -- NPC302 Gatekeeper_After defeating Godric_NPC initialization event
+10003703 NPC302門衛_ﾌｪｰｽﾞ3_NPC初期化イベント -- NPC302 Gatekeeper_Phase 3_NPC initialization event
+10003705 NPC302門衛_敵対状態モーション切り替えイベント_XX -- NPC302 Gatekeeper_Hostile state motion switching event_XX
+10003710 NPC302門衛_移動領域_門前 -- NPC302 Gatekeeper_Moving area_In front of the gate
+10003711 NPC302門衛_領域X_1領域監視_XX -- NPC302 Gatekeeper_Area X_1 Area Monitoring_XX
+10003715 NPC302門衛_領域X_2領域監視_XX -- NPC302 Gatekeeper_Area X_2 Area Monitoring_XX
+10003720 NPC302門衛_会話済ポイント封鎖遷移イベント_XX -- NPC302 Gatekeeper_Conversated Point Blockade Transition Event_XX
+10003724 NPC302門衛_自動会話開始_PC呼びかけ -- NPC302 Gatekeeper_Automatic conversation start_PC call
+10003726 NPC302門衛_自動会話開始_開門合図 -- NPC302 Gatekeeper_Automatic conversation start_Gate opening signal
+10003728 NPC302門衛_穴の道を使用済 -- NPC302 Gatekeeper_Used hole path
+10003729 NPC302門衛_ショップ化 -- NPC302 Gatekeeper_Shop
+10003730 NPC302門衛_死体漁りイベント -- NPC302 Gatekeeper_ Corpse Hunting Event
+10003731 NPC302門衛_罠部屋_扉ロック管理 -- NPC302 Gatekeeper_Trap room_Door lock management
+10003732 NPC302門衛_罠部屋_扉ロック中メッセージ表示 -- NPC302 Gatekeeper_Trap room_Message displayed while door is locked
+10003733 NPC302門衛_罠部屋_扉ロック解除 -- NPC302 Gatekeeper_Trap room_Door unlocked
+10003734 NPC302門衛_罠部屋_会話起動 -- NPC302 Gatekeeper_Trap Room_Start conversation
+10003735 NPC302門衛_罠部屋_ファストトラベル許可フラグ操作 -- NPC302 Gatekeeper_Trap Room_Fast travel permission flag operation
+10003736 NPC302門衛_死亡時ルーン減額 -- NPC302 Gatekeeper_Rune reduction upon death
+10003737 NPC302門衛_撃破時ルーン増額 -- NPC302 Gatekeeper_Rune amount increased when defeated
+10003738 NPC302門衛_罠部屋_マルチ壁管理 -- NPC302 Gatekeeper_Trap Room_Multi-wall management
+10003740 NPC207接ぎ木の王_HU後ブレス攻撃時フラグ操作 -- NPC207 Grafted King_Flag operation during breath attack after HU
+10003741 NPC207接ぎ木の王_体幹崩れ投げられ時フラグ操作 -- NPC207 Grafted King_Flag operation when the trunk collapses and is thrown
+10003742 NPC207接ぎ木の王_嵐起こし発動時フラグ操作 -- NPC207 King of Grafting_Flag operation when activating storm raising
+10003743 NPC207接ぎ木の王_火炎竜巻起こし発動時フラグ操作 -- NPC207 Grafting King_Flag operation when activating flame tornado
+10003744 NPC207接ぎ木の王_会話処理限界の距離変更 -- NPC207 Grafting King_Changing the distance of conversation processing limit
+10003745 接ぎ木の王_死体表示 -- King of Grafting_Cadaver Display
+10003770 NPC100娘マリカ_導き会話許可_マルギット前 -- NPC100 daughter Marika_guidance conversation permission_in front of Margit
+10003771 NPC100娘マリカ_契約会話再生監視_マルギット前 -- NPC100 daughter Marika_Contract conversation playback monitoring_In front of Margit
+10003772 NPC100娘マリカ_導き会話再生監視_マルギット前 -- NPC100 daughter Marika_Guide conversation playback monitoring_Margit front
+10003773 NPC100娘マリカ_目的会話再生禁止_マルギット前 -- NPC100 Daughter Marika_Objective conversation playback prohibited_In front of Margit
+10003775 NPC334百智卿の娘_ﾌｪｰｽﾞ1_NPC初期化イベント -- NPC334 Momochi Lord's Daughter_Phase 1_NPC Initialization Event
+10003776 NPC334百智卿の娘_ﾌｪｰｽﾞ5_NPC初期化イベント -- NPC334 Momochi Lord's Daughter_Phase 5_NPC Initialization Event
+10003777 NPC334百智卿の娘_共闘して勝利イベント -- NPC334 Daughter of Lord Hyakuchi_Fight together and win event
+10003778 NPC334百智卿の娘_死体話しかけ自動会話 -- NPC334 Lord Hyakuchi's daughter_Automatic conversation when talking to corpse
+10003779 NPC334百智卿の娘_ﾌｪｰｽﾞ1_白霊召喚停止イベント -- NPC334 Daughter of Lord Hyakuchi_Phase 1_White Spirit Summoning Stop Event
+10003780 NPC334百智卿の娘_ﾌｪｰｽﾞ5までのカウントダウンイベント -- NPC334 Lord Momochi's Daughter_Countdown event to Phase 5
+10003790 NPC321見張り塔の貴族_ﾌｪｰｽﾞ3_NPC初期化イベント -- NPC321 Watchtower Noble_Phase 3_NPC initialization event
+11002291 蛇霊登場 -- Snake spirit appears
+1000000000 敵リスポン -- enemy respawn

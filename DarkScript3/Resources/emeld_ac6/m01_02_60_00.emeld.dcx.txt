@@ -1,0 +1,128 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2200 初期イベント -- initial event
+2210 BGMアルトフラグ -- BGM alto flag
+2290 デバッグイベント -- debug event
+2291 デバッグ判定 -- Debug judgment
+2305 ドア起動判定 -- Door activation determination
+2306 ドア自動オープン -- door automatic open
+2307 施設侵入判定 -- Facility intrusion determination
+2310 破壊対象目視判定 -- Visual determination of destruction target
+2316 最深部カットシーン再生 -- Deepest cutscene playback
+2317 ボス登場カットシーン再生 -- Boss appearance cutscene playback
+2400 クライアント回収地点マーカーOFF -- Client collection point marker OFF
+2403 第一エリアターゲットマーカーON -- 1st area target marker ON
+2404 第二エリアターゲットマーカーON -- 2nd area target marker ON
+2405 第三エリアターゲットマーカーON -- Third area target marker ON
+2600 戦場移行 -- battlefield transition
+2604 ボスAC起動 -- Boss AC start
+2605 ボス攻撃判定 -- Boss attack judgment
+2606 ボス演出攻撃判定 -- Boss performance attack judgment
+2610 AC戦ボスゲージON -- AC battle boss gauge ON
+2611 AC戦ボスゲージOFF -- AC battle boss gauge OFF
+2800 会話フラグ＿ミッションスタート -- Conversation flag_Mission start
+2801 会話フラグ＿第1区画接敵 -- Conversation flag_1st section contact
+2802 会話フラグ＿第1区画数機破壊 -- Conversation flag_Destruction of several machines in the 1st section
+2803 会話フラグ＿第1区画を殲滅 -- Conversation flag_Eradicate the first section
+2804 会話フラグ＿第2区画に到達 -- Conversation flag_reached the second section
+2805 会話フラグ＿第2区画に到達2 -- Conversation flag_reached the second section 2
+2806 会話フラグ＿第2区画数機破壊 -- Conversation flag_Destruction of several machines in the 2nd section
+2807 会話フラグ＿第2区画の敵機を殲滅 -- Conversation flag _ Destroy enemy aircraft in the 2nd section
+2808 会話フラグ＿ツインタワーからシェルターを見やったとき2 -- Conversation flag_When looking at the shelter from the Twin Towers 2
+2809 会話フラグ＿ツインタワーからシェルターを見やったとき -- Conversation Flag_When looking at the shelter from the Twin Towers
+2810 会話フラグ＿敵AC登場 -- Conversation flag_Enemy AC appears
+2811 会話フラグ＿敵AC登場2 -- Conversation flag_Enemy AC appearance 2
+2812 会話フラグ＿敵AC登場3 -- Conversation flag_Enemy AC appearance 3
+2813 会話フラグ＿敵ACと戦闘中適当なタイミングで -- Conversation flag_at an appropriate time during battle with enemy AC
+2814 会話フラグ＿敵ACと戦闘中、適当なタイミングで２ -- Conversation flag_2 at an appropriate time during battle with enemy AC
+2815 会話フラグ＿敵ACを撃破 -- Conversation flag _ Defeat enemy AC
+2816 会話フラグ＿敵ACに撃破された場合 -- Conversation flag_When defeated by enemy AC
+2817 会話フラグ＿AC戦終了時会話 -- Conversation flag_Conversation at the end of AC battle
+2818 会話フラグ＿ALT敵AC登場 -- Conversation flag_ALT enemy AC appears
+2819 会話フラグ＿ALT敵AC登場2 -- Conversation flag_ALT enemy AC appearance 2
+2820 会話フラグ＿ALT敵AC登場3 -- Conversation flag_ALT enemy AC appearance 3
+2821 会話フラグ＿ALT敵ACと戦闘中適当なタイミングで -- Conversation flag_ALT At an appropriate time during battle with enemy AC
+2822 会話フラグ＿ALT敵ACと戦闘中、適当なタイミングで2 -- Conversation flag_ALT 2 at an appropriate time during battle with enemy AC
+2823 会話フラグ＿ALT敵ACを撃破 -- Conversation flag_ALT Defeat enemy AC
+2824 会話フラグ＿ALT敵ACに撃破された場合 -- Conversation flag_ALT If defeated by enemy AC
+2825 会話フラグ＿ALTゴースト殲滅AC撃破前 -- Conversation flag _ALT Ghost annihilation Before AC defeat
+2826 会話フラグ＿ALT敵AC含む第3区画の敵機を殲滅 -- Conversation flag_ALT Destroy enemy aircraft in the 3rd section including enemy AC
+2827 会話フラグ＿ALTゴースト撃破 -- Conversation Flag_ALT Ghost Defeated
+2828 会話フラグ＿ALT2体目ゴースト撃破毎に再生 -- Conversation flag_ALT Plays every time the second ghost is defeated
+2829 会話フラグ＿破壊目標を視認したとき -- Conversation flag_When you see a destruction target
+2830 会話フラグ＿ヴァルキュリアと戦闘開始 -- Conversation flag_Start of battle with Valkyria
+2831 会話フラグ＿ヴァルキュリアと戦闘開始続き -- Conversation flag_Battle with Valkyria continues
+2832 会話フラグ＿ヴァルキュリアと戦闘開始続き2 -- Conversation flag_Valkyria and battle start continuation 2
+2833 会話フラグ＿ボスAP75パー -- Conversation flag_Boss AP75 par
+2834 会話フラグ＿アサルトアーマー初回ヒートアップ -- Conversation flag_Assault armor first heat up
+2835 会話フラグ＿ボスAP25パー -- Conversation flag_Boss AP25 par
+2836 会話フラグ＿OWミサイル初回 -- Conversation flag_OW missile first time
+2837 会話フラグ＿アーマーブレイク初回 -- Conversation flag_Armor break first time
+2838 会話フラグ＿ボスAP0パー -- Conversation flag_Boss AP0 par
+2839 会話フラグ＿ボスに撃破された場合 -- Conversation flag_When defeated by the boss
+2840 会話フラグ＿ALTゴースト殲滅AC撃破済 -- Conversation flag_ALT Ghost annihilation AC defeated
+2900 ステルスエリア殲滅判定 -- Stealth area annihilation judgment
+2902 キルゾーン殲滅判定 -- Kill zone annihilation judgment
+2903 クライアント到達判定 -- Client arrival determination
+2904 ボス死亡判定 -- Boss death judgment
+2905 第二エリア到達判定 -- Judgment of reaching the second area
+2906 ボスHP0 -- Boss HP0
+2910 最終地点殲滅 -- Destroy the final point
+2914 ACHP0 -- ACHP0
+2915 AC出現判定 -- AC appearance determination
+2916 AC出現時処理 -- Processing when AC appears
+2917 ACHP75 -- ACHP75
+2918 ACHP50 -- ACHP50
+2919 ACHP25 -- ACHP25
+2920 最終防衛線到達判定 -- Judgment of reaching the final defense line
+2923 ボスHP75判定 -- Boss HP75 judgment
+2924 ボスHP50判定 -- Boss HP50 judgment
+2925 ボスHP25判定 -- Boss HP 25 judgment
+2926 ボス特殊判定_アサルトアーマー初回 -- Boss special judgment_Assault armor first time
+2927 ボス特殊判定_OWミサイル初回 -- Boss special judgment_OW missile first time
+2928 ボス特殊判定_アーマーブレイク初回 -- Boss special judgment_Armor break first time
+2930 第一区画接敵 -- First section contact
+2935 第一区画接敵後 -- After first sector engagement
+2940 第二区画接敵後 -- After second sector engagement
+2950 ボス特殊判定_死亡時BGM切り替え -- Boss special judgment_BGM switching upon death
+2960 第一殲滅後会話再生 -- Conversation playback after first annihilation
+2970 第二殲滅後会話再生 -- Conversation playback after second annihilation
+3000 自機回復判定 -- Self-recovery judgment
+3001 敵機回復 -- enemy aircraft recovery
+3100 作戦領域全無効 -- Operational area completely disabled
+3101 作戦領域1切り替え -- Operation area 1 switching
+3102 作戦領域2切り替え -- Operation area 2 switch
+3103 作戦領域3切り替え -- Operation area 3 switching
+3104 嘘作戦領域作成 -- Creating a lie operation area
+3200 企業貢献度獲得 -- Earn corporate contribution
+3201 全回復 -- full recovery
+3300 砲台道連れ破壊 -- Destruction of artillery emplacements
+3400 第二エリアライトアップ -- Second area light up
+3500 出撃前特殊CS再生 -- Special CS playback before sortie
+3501 ミッションクリアCS再生 -- Mission clear CS playback
+3610 会話用ゴースト死亡判定 -- Conversation Ghost Death Judgment
+3611 会話用ゴースト死亡判定2 -- Conversation Ghost Death Judgment 2
+3612 会話用ゴースト死亡判定3 -- Conversation Ghost Death Judgment 3
+3620 会話用ゴースト死亡判定4 -- Conversation Ghost Death Judgment 4
+3621 会話用ゴースト死亡かつAC生存 -- Conversation ghost dies and AC survives
+3622 会話用ゴースト生存かつAC死亡 -- Conversation ghost alive and AC dead
+3623 会話用ゴースト死亡かつAC死亡済 -- Conversation ghost dead and AC dead
+3624 会話用ゴースト死亡済かつAC死亡 -- Conversation ghost dead and AC dead
+3625 ALTゴーストAC同時死亡 -- ALT ghost AC died at the same time
+3630 BGM用最終地点破壊判定 -- Final point destruction judgment for BGM
+3640 ALT用ゴースト出現 -- Ghost appearance for ALT
+3700 即時ミッション会話発生フラグ -- Immediate mission conversation flag
+3701 待機ミッション会話発生フラグ -- Standby mission conversation flag
+3702 即時賑やかし会話発生フラグ -- Immediate lively conversation occurrence flag
+3703 待機賑やかし会話発生フラグ -- Waiting lively conversation occurrence flag
+3704 スキップ用即時ミッション会話再生中フラグ -- Instant mission conversation flag for skipping
+3705 スキップ用待機ミッション会話再生中フラグ -- Skip standby mission conversation flag
+3800 チェックポイント1 -- Checkpoint 1
+3801 チェックポイントフラグ1 -- checkpoint flag 1
+3802 チェックポイント2 -- Checkpoint 2
+3803 チェックポイントフラグ2 -- checkpoint flag 2
+3804 チェックポイント2処理 -- Checkpoint 2 processing
+3850 ヴァルキュリア出すか確認イベント -- Event to confirm whether Valkyria will be released
+3900 特別報酬表 -- Special reward table
+3901 特別報酬裏 -- Special reward behind
+2060000000 敵リスポン -- enemy respawn

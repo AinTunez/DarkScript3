@@ -56,6 +56,7 @@ namespace DarkScript3
             Disposed,
         }
         public ClientState State { get; private set; }
+        public string ServerName { get; private set; } = "DSMapStudio";
 
         public bool IsOpen() => State == ClientState.Open;
         public bool IsOpenable() => State != ClientState.Disposed;
@@ -80,6 +81,7 @@ namespace DarkScript3
             }
             if (State == ClientState.Closed)
             {
+                // Includes DSMapStudio/Smithbox
                 provider.Server = KnownServer.DSMapStudio;
                 State = ClientState.Open;
             }
@@ -172,6 +174,8 @@ namespace DarkScript3
                         return game == "sekiro";
                     case FromSoftGame.EldenRing:
                         return game == "er";
+                    case FromSoftGame.ArmoredCore6:
+                        return game == "ac6";
                 }
                 return false;
             }
@@ -198,6 +202,8 @@ namespace DarkScript3
                         return "sekiro";
                     case FromSoftGame.EldenRing:
                         return "er";
+                    case FromSoftGame.ArmoredCore6:
+                        return "ac6";
                 }
                 return null;
             }
@@ -620,6 +626,7 @@ namespace DarkScript3
                     if (parts != null)
                     {
                         int mapInt = int.Parse($"{parts[0]:d2}{parts[1]:d2}{parts[2]:d2}{parts[3]:d2}");
+                        // TODO: Some mapparts have only 2 parts
                         string mapArgs = $"{parts[0]}, {parts[1]}, {parts[2]}, {parts[3]}";
                         DisplayData val = new DisplayData
                         {
@@ -818,11 +825,11 @@ namespace DarkScript3
         {
             if (!provider.TryGetClient(out SoapstoneClient client))
             {
-                throw new InvalidOperationException($"DSMapStudio is not running or not connected.\n\nCheck Metadata > Show DSMapStudio Connection Info for more details.");
+                throw new InvalidOperationException($"{ServerName} is not running or not connected.\n\nCheck Metadata > Show Connection Info for more details.");
             }
             if (!GetCompatibleData(game, out InnerData data))
             {
-                throw new InvalidOperationException($"DSMapStudio does not appear to have project open for \"{game}\" (detected game: {CurrentGameString ?? "None"})");
+                throw new InvalidOperationException($"{ServerName} does not appear to have project open for \"{game}\" (detected game: {CurrentGameString ?? "None"})");
             }
             EditorResource resource = new EditorResource { Type = EditorResourceType.Map, Game = data.CurrentGame, Name = mapName };
             await client.OpenResource(resource);
@@ -875,6 +882,10 @@ namespace DarkScript3
                 return false;
             }
             ServerInfoResponse response = await client.GetServerInfo();
+            if (!string.IsNullOrEmpty(response.Id))
+            {
+                ServerName = response.Id;
+            }
             EditorResource project = response.Resources.Where(r => r.Type == EditorResourceType.Project).FirstOrDefault();
             if (project == null)
             {
@@ -945,7 +956,7 @@ namespace DarkScript3
                     entity.TryGetValue("ModelName", out string modelId);
                     if (entity.TryGetInt("EntityID", out int entityId))
                     {
-                        if (entities.ContainsKey(entityId) || entityId < minEntityId) continue;
+                        if (entities.ContainsKey(entityId) || (entityId < minEntityId && project.Game != FromSoftGame.ArmoredCore6)) continue;
                         // Description should be like "ModelName (ThingName)" for parts, "ThingType ThingName" otherwise
                         EntityData entityData = new EntityData
                         {
@@ -1070,7 +1081,11 @@ namespace DarkScript3
             foreach (KeyValuePair<int, string> entry in selfNames)
             {
                 int id = entry.Key;
-                if (project.Game != FromSoftGame.EldenRing && id != 10000) continue;
+                // Very ad hoc
+                bool valid = true;
+                if (project.Game == FromSoftGame.ArmoredCore6) valid = id <= 20000;
+                else if (project.Game != FromSoftGame.EldenRing) valid = id == 10000;
+                if (!valid) continue;
                 List<string> infixes = GetSpaceBasedMatchText(entry.Value);
                 EntityData entityData = entities[id] = new EntityData
                 {

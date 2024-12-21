@@ -1,0 +1,19 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1047410700 NPC221特大壺_初期化 -- NPC221 extra large pot_initialization
+1047410701 NPC221特大壺_壺の戦士データサーバー打ち上げ -- NPC221 extra large pot_pot warrior data server launch
+1047410702 NPC221特大壺_会話処理限界延長 -- NPC221 extra large pot_conversation processing limit extension
+1047412300 巨大壺イベント_サイン -- Giant pot event_sign
+1047412301 巨大壺イベント_イベント終了フラグを立たせる -- Giant pot event_raise event end flag
+1047412302 巨大壺イベント_サーバーにキャラデータ取得リクエストする -- Giant Pot Event_Request to obtain character data from the server
+1047412303 巨大壺_初期設定 -- Giant pot_Initial settings
+1047412304 巨大壺_遠方待機 -- Huge pot _ distant standby
+1047412305 霧壁を有効化するイベント -- Event to enable fog wall
+1047412306 サイン出現ダイアログ -- Sign appearance dialog
+1047412400 マルチ禁止の特殊効果を付与する -- Add special effects that prohibit multiplayer

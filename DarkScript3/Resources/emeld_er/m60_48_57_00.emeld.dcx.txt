@@ -1,0 +1,19 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1048572256 黒き刃の末裔_死体待機 -- Descendant of the Black Blade_Waiting for corpse
+1048572260 黒き刃の末裔_姿隠し暴き -- Descendants of the Black Blade_Hidden Revealed
+1048572270 黒き刃の末裔_姿隠し暴き_霊体用 -- Descendants of the Black Blade_Hidden Revealing_For Spirits
+1048572275 黒き刃の末裔_ダミーキャラ無敵化 -- Descendants of the Black Blade_Dummy character made invincible
+1048572300 雪街_封牢_ワープイベント -- Snow Town_Confinement_Warp Event
+1048572310 ガーゴイル像_ヒントテキスト表示 -- Gargoyle statue_hint text display
+1048572320 雪街_封牢_SFX表示 -- Snow town_confinement_SFX display
+1048572340 表世界のエネミー_霊体化 -- Enemy of the surface world_spiritualization
+1048572350 雪街_霧壁解除_最奥 -- Snow town_fog wall removed_deepest
+1048572355 雪街_霧壁解除_その他 -- Snow town_Fog wall removal_Others
+1048572370 雪街_封印解除像_アクションボタン表示_xx -- Snow town_Seal release statue_Action button display_xx
+1048572390 雪街_霧壁エラーメッセージ -- Snow town_fog wall error message
+1048572400 雪街_幻影アセット無効化 -- Snow town_phantom asset invalidation
+1048572580 雪街_梯子登録 -- Snow town_ladder registration
+1048572820 死の鳥_特殊待機_領域判定 -- Bird of Death_Special Standby_Area Judgment

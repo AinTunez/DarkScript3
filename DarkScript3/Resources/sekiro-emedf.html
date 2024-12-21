@@ -210,7 +210,7 @@ section {
 <p class="sectionusage usageinfo">Used in all but m13_00_00_00</p>
 <pre>IfElapsedSeconds(
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    float targetNumberOfSeconds)</pre><p>Condition function: <code><a href="#ElapsedSeconds">ElapsedSeconds</a></code></p>
+    float targetTimeSeconds)</pre><p>Condition function: <code><a href="#ElapsedSeconds">ElapsedSeconds</a></code></p>
 </div></section>
 <section class="instr condinstr">
 <h3 id="IfElapsedFrames"><a href="#IfElapsedFrames" class="selfref"><code>IfElapsedFrames</code></a> <span class="sectioninfo">Instruction 1[01]</span></h3>
@@ -218,7 +218,7 @@ section {
 <p class="sectionusage usageinfo">Used in common_func, m10_00_00_00</p>
 <pre>IfElapsedFrames(
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    int targetNumberOfFrames)</pre><p>Condition function: <code><a href="#ElapsedFrames">ElapsedFrames</a></code></p>
+    int targetTimeFrames)</pre><p>Condition function: <code><a href="#ElapsedFrames">ElapsedFrames</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
 <h3 id="IfRandomElapsedSeconds"><a href="#IfRandomElapsedSeconds" class="selfref"><code>IfRandomElapsedSeconds</code></a> <span class="sectioninfo">Instruction 1[02]</span></h3>
@@ -673,7 +673,7 @@ section {
 <pre>IfCharacterHasEventMessage(
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetEntityId, 
-    int targetEventMessageId, 
+    int eventMessageId, 
     bool shouldHave, 
     sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     float numberOfTargetCharacters)</pre><p>Condition function: <code><a href="#CharacterHasEventMessage">CharacterHasEventMessage</a></code></p>
@@ -764,7 +764,7 @@ section {
 <pre>IfCharacterHasEventMessageNew(
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetEntityId, 
-    int targetEventMessageId, 
+    int eventMessageId, 
     bool shouldHave, 
     sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     float numberOfTargetCharacters)</pre><p>Condition function: <code><a href="#CharacterHasEventMessageNew">CharacterHasEventMessageNew</a></code></p>
@@ -1182,27 +1182,27 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>WaitFixedTimeSeconds(
-    float numberOfSeconds)</pre></div></section>
+    float timeSeconds)</pre></div></section>
 <section class="instr">
 <h3 id="WaitFixedTimeFrames"><a href="#WaitFixedTimeFrames" class="selfref"><code>WaitFixedTimeFrames</code></a> <span class="sectioninfo">Instruction 1001[01]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all</p>
 <pre>WaitFixedTimeFrames(
-    int numberOfFrames)</pre></div></section>
+    int timeFrames)</pre></div></section>
 <section class="instr">
 <h3 id="WaitRandomTimeSeconds"><a href="#WaitRandomTimeSeconds" class="selfref"><code>WaitRandomTimeSeconds</code></a> <span class="sectioninfo">Instruction 1001[02]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m11_01_00_00, m11_02_00_00, m13_00_00_00, m25_00_00_00</p>
 <pre>WaitRandomTimeSeconds(
-    float minNumberOfSeconds, 
-    float maxNumberOfSeconds)</pre></div></section>
+    float minTimeSeconds, 
+    float maxTimeSeconds)</pre></div></section>
 <section class="instr unused">
 <h3 id="WaitRandomTimeFrames"><a href="#WaitRandomTimeFrames" class="selfref"><code>WaitRandomTimeFrames</code></a> <span class="sectioninfo">Instruction 1001[03]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>WaitRandomTimeFrames(
-    int minNumberOfFrames, 
-    int maxNumberOfFrames)</pre></div></section>
+    int minTimeFrames, 
+    int maxTimeFrames)</pre></div></section>
 <section class="instr unused">
 <h3 id="WaitHollowArenaHalfTimeStayparamLookup"><a href="#WaitHollowArenaHalfTimeStayparamLookup" class="selfref"><code>WaitHollowArenaHalfTimeStayparamLookup</code></a> <span class="sectioninfo">Instruction 1001[04]</span></h3>
 <div class="sectioncontents">
@@ -1793,7 +1793,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m11_00_00_00, m15_00_00_00, m20_00_00_00</p>
 <pre>DeactivateGenerator(
-    int entityId, 
+    int generatorEntityId, 
     byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre></div></section>
 <section class="instr">
 <h3 id="AwardItemLot"><a href="#AwardItemLot" class="selfref"><code>AwardItemLot</code></a> <span class="sectioninfo">Instruction 2003[04]</span></h3>
@@ -2131,13 +2131,13 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>WarpPlayerToRespawnPoint(
-    int respawnPointParameterId)</pre></div></section>
+    int respawnPointEntityId)</pre></div></section>
 <section class="instr unused">
 <h3 id="StartEnemyGenerator"><a href="#StartEnemyGenerator" class="selfref"><code>StartEnemyGenerator</code></a> <span class="sectioninfo">Instruction 2003[50]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>StartEnemyGenerator(
-    int enemySpawnerId)</pre></div></section>
+    int generatorEntityId)</pre></div></section>
 <section class="instr unused">
 <h3 id="SummonNPC"><a href="#SummonNPC" class="selfref"><code>SummonNPC</code></a> <span class="sectioninfo">Instruction 2003[51]</span></h3>
 <div class="sectioncontents">
@@ -2494,7 +2494,7 @@ section {
 <p class="sectionusage usageinfo">Used in common_func, m11_00_00_00</p>
 <pre>RotateCharacter(
     int entityId, 
-    int entityId2, 
+    int relativeEntityId, 
     int playAnimationId, 
     bool shouldWaitForCompletion)</pre></div></section>
 <section class="instr">
@@ -2524,7 +2524,7 @@ section {
 <p class="sectionusage usageinfo">Used in m10_00_00_00, m20_00_00_00</p>
 <pre>SetEventPoint(
     int entityId, 
-    int entityId2, 
+    int relativeEntityId, 
     float reactionDistance)</pre></div></section>
 <section class="instr">
 <h3 id="SetCharacterAIId"><a href="#SetCharacterAIId" class="selfref"><code>SetCharacterAIId</code></a> <span class="sectioninfo">Instruction 2004[19]</span></h3>
@@ -2788,7 +2788,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>ChangeCharacter(
-    int charinitparamId)</pre></div></section>
+    int charainitparamId)</pre></div></section>
 <section class="instr unused">
 <h3 id="AdaptHpchangingSpEffectToNPCPartOfTarget"><a href="#AdaptHpchangingSpEffectToNPCPartOfTarget" class="selfref"><code>AdaptHpchangingSpEffectToNPCPartOfTarget</code></a> <span class="sectioninfo">Instruction 2004[53]</span></h3>
 <div class="sectioncontents">
@@ -2855,7 +2855,7 @@ section {
 <p class="sectionusage usageinfo">Used in m11_00_00_00, m20_00_00_00</p>
 <pre>WarpPlayerWithinAreaSettingCameraOrientation(
     int characterEntityId, 
-    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; type, 
+    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; entityType, 
     int pointEntityId, 
     int unknown, 
     sbyte unknown)</pre></div></section>
@@ -3044,7 +3044,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common_func, m11_00_00_00, m15_00_00_00, m17_00_00_00, m20_00_00_00, m25_00_00_00</p>
 <pre>SpawnOneshotSFX(
-    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; type, 
+    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; entityType, 
     int entityId, 
     int dummypolyId, 
     int sfxId)</pre></div></section>
@@ -3205,7 +3205,7 @@ section {
 <p class="sectionusage usageinfo">Used in m20_00_00_00</p>
 <pre>SetCameraVibration(
     int vibrationId, 
-    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; type, 
+    int&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; entityType, 
     int entityId, 
     int dummypolyId, 
     float decayStartDistance, 
@@ -3472,13 +3472,13 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in all but m13_00_00_00</p>
 <pre>ElapsedSeconds(
-    float targetNumberOfSeconds)</pre></div></section>
+    float targetTimeSeconds)</pre></div></section>
 <section class="cond">
 <h3 id="ElapsedFrames"><a href="#ElapsedFrames" class="selfref"><code>ElapsedFrames</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common_func, m10_00_00_00</p>
 <pre>ElapsedFrames(
-    int targetNumberOfFrames)</pre></div></section>
+    int targetTimeFrames)</pre></div></section>
 <section class="cond unused">
 <h3 id="RandomElapsedSeconds"><a href="#RandomElapsedSeconds" class="selfref"><code>RandomElapsedSeconds</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
@@ -3972,11 +3972,11 @@ section {
 <p class="sectionusage usageinfo">Used in all but m13_00_00_00 and m20_00_00_00</p>
 <pre>CharacterHasEventMessageState(
     int targetEntityId, 
-    int targetEventMessageId, 
+    int eventMessageId, 
     bool shouldHave<span class="optarg">, 
     sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType = ComparisonType.Equal, 
     float numberOfTargetCharacters = 1</span>)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
-<li><code>CharacterHasEventMessage(int targetEntityId, int targetEventMessageId<span class="optarg">, sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, float numberOfTargetCharacters</span>)</code>
+<li><code>CharacterHasEventMessage(int targetEntityId, int eventMessageId<span class="optarg">, sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, float numberOfTargetCharacters</span>)</code>
 <br/><span class="conddetails">Where <code>shouldHave = true or false</code></span></li>
 </ul>
 </div></section>
@@ -4069,11 +4069,11 @@ section {
 <p class="sectionusage usageinfo">Used in m11_00_00_00, m11_01_00_00, m11_02_00_00</p>
 <pre>CharacterHasEventMessageStateNew(
     int targetEntityId, 
-    int targetEventMessageId, 
+    int eventMessageId, 
     bool shouldHave<span class="optarg">, 
     sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType = ComparisonType.Equal, 
     float numberOfTargetCharacters = 1</span>)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
-<li><code>CharacterHasEventMessageNew(int targetEntityId, int targetEventMessageId<span class="optarg">, sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, float numberOfTargetCharacters</span>)</code>
+<li><code>CharacterHasEventMessageNew(int targetEntityId, int eventMessageId<span class="optarg">, sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, float numberOfTargetCharacters</span>)</code>
 <br/><span class="conddetails">Where <code>shouldHave = true or false</code></span></li>
 </ul>
 </div></section>

@@ -1,0 +1,12 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1043522500 マルギット憑依変身_予兆 -- Margit Possessed Transformation_Omen
+1043522505 マルギット憑依変身_変身 -- Margit Possessed Transformation_Transformation
+1043522510 マルギット憑依変身_セリフ用フラグ操作 -- Margit Possessed Transformation_Speech flag operation
+1043522515 マルギット会話限界コントロール -- Margit conversation limit control

@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1043310519 エレベーター初期フラグ -- Elevator initial flag
+1043310705 半島砦の城主_NPC初期化イベント_初期状態 -- Peninsula Fort Castle Lord_NPC initialization event_Initial state
+1043310706 半島砦の城主_娘リアルタイム遷移 -- Peninsula Fort Castle Lord_Daughter Real Time Transition
+1043310707 半島砦の城主_城主リアルタイム遷移_ボス共闘白サイン -- Castle lord of Peninsula Fort_Castle lord real-time transition_Boss joint battle white sign
+1043310708 半島砦の城主_城主リアルタイム遷移_ボス撃破 -- Castle lord of the peninsula fort_Castle lord real-time transition_Defeating the boss
+1043312223 処刑塔屋上_交戦イベント -- Execution Tower Rooftop_Battle Event
+1043312242 サブ屋上_交戦イベント -- Sub rooftop_battle event
+1043312443 視界加算_XX -- Visibility addition_XX
+1043312510 エレベータイベント起動 -- Elevator event activation
+1043312580 梯子登録 -- ladder registration
+1043312709 半島砦の城主_ベンチ関係処理 -- Lord of the Peninsula Fort_Bench-related processing
+1043313700 話す死体5_アニメ再生 -- Talking Corpse 5_Anime playback

@@ -1,0 +1,20 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30080519 エレベータ初期フラグ -- Elevator initial flag
+30080520 床崩落 -- floor collapse
+30080790 ボス部屋報酬宝箱の開放制限 -- Restrictions on opening boss room reward treasure chests
+30082300 ナズグル従者開幕煙幕 -- Nazgul Servant Opening Smokescreen
+30082400 投影サークル制御_XX -- Projection circle control_XX
+30082401 剣闘士撃破判定イベント -- Gladiator defeat judgment event
+30082500 ギロチンイベント起動 -- Guillotine event starts
+30082501 ナズグル出現_本体 -- Nazgul Appears_Main Body
+30082510 エレベータイベント起動 -- Elevator event activation
+30082550 ナズグル出現_ボス部屋手前まで進んだ判定 -- Nazgul Appears - Determined to have progressed to the front of the boss room
+30082564 ガーゴイル像_封印扉 -- Gargoyle statue_sealed door
+30082580 梯子登録 -- ladder registration
+30082800 ボス撃破 -- Defeat the boss
+30082810 ボス出現 -- Boss appears
+30082811 ボス激昂 -- boss rage
+30082849 バディ_イベント起動 -- buddy_event activation
+1000000000 敵リスポン -- enemy respawn

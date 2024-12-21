@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+515201 キャラバン隊_貴人撤退イベント -- Caravan group_Nobleman withdrawal event
+10005100 キャラバンモデル接続_XX -- Caravan model connection_XX
+10005110 キャラバン_ダミーキャラ接続 -- Caravan_dummy character connection
+1000000000 敵リスポン -- enemy respawn

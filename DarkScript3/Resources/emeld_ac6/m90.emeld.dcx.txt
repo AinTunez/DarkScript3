@@ -1,0 +1,4 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+19000200 目標地点有効化イベント -- Target point activation event
+1000000000 敵リスポン -- enemy respawn

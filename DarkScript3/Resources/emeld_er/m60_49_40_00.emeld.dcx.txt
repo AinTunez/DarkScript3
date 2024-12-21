@@ -1,0 +1,8 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1046400510 エレベータ初期フラグ -- Elevator initial flag
+1049400500 ガーゴイル像解放する前にレバーをロックする -- Lock the lever before releasing the gargoyle statue
+1049402390 レビュー用イベント_腐った亡者初期設定 -- Review event_rotten corpse initial settings
+1049402650 エレベータ起動 -- elevator start

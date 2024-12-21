@@ -1,0 +1,153 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 初期設定_最初から開始した時用 -- Initial settings_for when starting from the beginning
+2001 初期設定_リトライ時も必要な物 -- Initial settings_Things required even when retrying
+2003 ボス登場CS -- Boss appearance CS
+2004 ボス戦開始時設定 -- Setting at the start of boss battle
+2005 CS開け後設定 -- Settings after opening CS
+2006 ボスエリアAC無効化 -- Boss area AC disabled
+2007 ボス戦開始時_僚機死亡時用設定 -- At the start of a boss battle_Settings for when a wingman dies
+2010 チェックポイント更新_ボスAC前 -- Checkpoint update_before boss AC
+2011 チェックポイント更新フラグ_ボスAC前 -- Checkpoint update flag_before boss AC
+2012 チェックポイント更新_中ボス後 -- Checkpoint update_after mid-boss
+2013 チェックポイント更新フラグ_中ボス後 -- Checkpoint update flag_after mid-boss
+2014 リトライ時用処理_ボスAC戦前用 -- Processing for retry_For boss AC before battle
+2015 リトライ時用処理_中ボス後用 -- Processing for retry_after middle boss
+2020 ドーム入口開ける -- Open the dome entrance
+2021 ドーム入口閉める -- Close the dome entrance
+2022 ドーム出口開ける -- Open the dome exit
+2023 ドーム出口閉める -- Close the dome exit
+2030 自機用サウンドステートON -- Own sound state ON
+2031 自機用サウンドステートOFF -- Own sound state OFF
+2100 中ボスボスゲージON -- Medium boss boss gauge ON
+2101 中ボスボスゲージOFF -- Mid boss boss gauge OFF
+2102 ボスボスゲージON -- Boss boss gauge ON
+2103 ボスボスゲージOFF -- Boss boss gauge OFF
+2104 シェルパ有効化 -- Enable Sherpa
+2120 ドーム前_初期設定 -- In front of the dome_Initial settings
+2121 ドーム前_接近時設定 -- In front of the dome_approach settings
+2122 ドーム内_演出用設定 -- Inside the dome_performance settings
+2123 ドーム内侵入時設定 -- Setting when entering the dome
+2124 ドーム内キャラ無効化と有効化 -- Disabling and enabling characters in the dome
+2126 目標エリア3_初期設定 -- Target area 3_Initial settings
+2127 目標エリア3_接近時設定 -- Target area 3_approach setting
+2129 目標エリア1_接近時設定 -- Target area 1_Setting when approaching
+2130 目標エリア1_EvE用初期設定 -- Target area 1_EvE initial settings
+2131 目標エリア1_EvE用接近時設定 -- Target area 1_EvE approach settings
+2133 目標エリア3道中_味方初期設定 -- Target area 3 route_ally initial settings
+2134 目標エリア3道中_味方接近時設定 -- On the way to target area 3_Setting when an ally approaches
+2135 目標エリア3_正規軍AC重火力登場演出再生 -- Target area 3_regular army AC heavy firepower appearance production playback
+2136 目標エリア３_建機クモ引き撃ち開始右 -- Target area 3_Construction machine spider catching start right
+2137 目標エリア３_建機クモ引き撃ち開始左 -- Target area 3_Construction machine spider catching start left
+2138 目標エリア3_自機接近後の重火力設定_右 -- Target area 3_Heavy firepower setting after own aircraft approaches_Right
+2139 目標エリア3_自機接近後の重火力設定_左 -- Target area 3_Heavy firepower setting after own aircraft approaches_Left
+2140 目標エリア3_自機接近後の僚機設定 -- Target area 3_Set up wingman after approaching own aircraft
+2200 作戦ライン設定_ミッション開始時用 -- Operation line settings_for mission start
+2201 作戦ライン設定_目標1撃破後 -- Operation line setting_After target 1 is defeated
+2202 作戦ライン設定_ドーム侵入時 -- Operation line setting_dome invasion
+2203 作戦ライン設定_右ストレート到着時 -- Strategy line setting_When arriving at the right straight
+2229 目標マーカー_全無効化 -- Target marker_all disabled
+2230 目標マーカー_目標1付近有効化 -- Target marker_activate near target 1
+2232 目標マーカー_ドーム入口付近有効化 -- Target marker_enable near dome entrance
+2234 目標マーカー_水上広場有効化 -- Objective Marker_Water Plaza Activation
+2238 目標マーカー_目標1TGT有効化 -- Objective Marker_Objective 1TGT enabled
+2239 目標マーカー_目標2TGT有効化 -- Objective Marker_Objective 2TGT enabled
+2240 目標マーカー_目標3TGT有効化 -- Objective Marker_Objective 3TGT enabled
+2241 目標マーカー_ドーム出口有効化 -- Target marker_dome exit enable
+2243 目標マーカー_工事エリア出口有効化 -- Target marker_Enable construction area exit
+2280 僚機マーカー表示 -- Wingman marker display
+2700 進行管理用_目標エリア1突破判定 -- For progress management_target area 1 breakthrough determination
+2701 進行管理用_目標1接近判定 -- For progress management_Target 1 approach judgment
+2702 進行管理用_ドーム接近判定 -- For progress management_dome approach judgment
+2705 進行管理用_ドーム入口解放判定 -- For progress management_Dome entrance release judgment
+2706 進行管理用_ドーム侵入判定 -- For progress management_Dome intrusion determination
+2710 進行管理用_ドーム中ボス撃破判定 -- For progress management_Dome boss defeat judgment
+2711 進行管理用_ドーム中ボス死亡判定 -- For progress management_Dome boss death determination
+2715 進行管理用_ドーム出口扉開放判定 -- For progress management_dome exit door open determination
+2716 進行管理用_ドーム出口進行判定 -- For progress management_dome exit progress judgment
+2720 進行管理用_通路出口扉開放判定 -- For progress management_Aisle exit door open determination
+2721 進行管理用_右ストレート市街到着判定 -- For progress management_Right straight city arrival judgment
+2722 進行管理用_通路進行中判定 -- For progress management_Aisle progress determination
+2723 進行管理用_目標エリア3接近判定 -- For progress management_target area 3 approach judgment
+2725 進行管理用_目標3撃破判定 -- For progress management_Target 3 defeat judgment
+2726 進行管理用_僚機AP0判定 -- For progress management_wingman AP0 judgment
+2730 ボス戦_ボスAP0判定 -- Boss battle_Boss AP0 judgment
+2731 ボス戦_ボスAP低下判定１ -- Boss battle_Boss AP decrease judgment 1
+2732 ボス戦_ボスAP低下判定２ -- Boss battle_Boss AP reduction judgment 2
+2733 ボス戦_ボスAP低下判定３ -- Boss battle_Boss AP decrease judgment 3
+2735 ボス戦_ボス撃破判定 -- Boss battle_Boss defeat judgment
+2736 ボス戦用_ボス特殊効果削除判定 -- For boss battles_Boss special effect deletion judgment
+2737 ボス撃破時_BGM遷移用判定 -- When boss is defeated_BGM transition judgment
+2740 左ストレート天井_隠し強敵出現イベント -- Left straight ceiling_Hidden strong enemy appearance event
+2741 左ストレート天井_隠し強敵出現イベント右側 -- Left straight ceiling_hidden strong enemy appearance event right side
+2742 隠し強敵_左よりで登場 -- Hidden enemy_Appears from the left
+2743 隠し強敵_右よりで登場 -- Hidden enemy_Appears from the right
+2760 ドーム前道中_味方起動判定 -- On the way to the dome_Ally activation judgment
+2762 ドーム手前_演出開始判定とイベント -- In front of the dome_Production start judgment and events
+2765 目標エリア3_目標に自機が接近判定 -- Target area 3_Determining that your aircraft is approaching the target
+2766 会話用_目標エリア3_重火力登場演出終了判定 -- For conversation_Target area 3_Heavy firepower appearance effect end judgment
+2767 目標エリア3_重火力一体撃破判定 -- Target area 3_Heavy firepower single unit destruction judgment
+2800 中ボスシチュ_ボスAP0判定 -- Mid-boss situation_Boss AP0 judgment
+2801 中ボスシチュ_登場演出弾丸発射時イベント -- Mid-boss situation_appearance production bullet firing event
+2845 ボスエリア_戦闘開始判定 -- Boss area_Battle start determination
+2846 目標エリア3_重火力登場演出再生判定 -- Target area 3_Heavy firepower appearance performance playback judgment
+2860 ドーム_自機侵入判定 -- Dome_ own aircraft intrusion detection
+2900 会話用_目標１AP低下判定 -- For conversation_Target 1 AP decrease judgment
+2901 会話用_目標２AP低下一回目 -- For conversation_Target 2 AP decrease first time
+2902 会話用_目標２AP低下二回目 -- For conversation_Target 2 AP decrease second time
+2903 会話用_目標１道中移動判定 -- For conversation_Target 1 movement judgment
+3010 ボスエリア手前_味方帰巣イベント -- Before the boss area_Friend return event
+3020 ボスエリア手前_前半味方前進イベント -- Before the boss area_first half ally advancement event
+3030 目標エリア3_USドローン増援設定 -- Target area 3_US drone reinforcement setting
+3300 領域から出た時に固定砲台を解除する -- Deactivate fixed turrets when exiting area
+3400 僚機死亡フラグ -- Wingman death flag
+3401 ボスAC用ゲージ表示フラグ -- Gauge display flag for boss AC
+3402 ミッション会話終了フラグ -- Mission conversation end flag
+3403 シェルパ有効化フラグ -- Sherpa enable flag
+3430 ボスAC登場CS再生許可フラグ -- Boss AC appearance CS playback permission flag
+3450 リトライ時用フラグ_中ボス撃破後から -- Flag for retry_after defeating the middle boss
+3451 リトライ時用フラグ_ボスAC戦手前から -- Flag for retry_from before the boss AC battle
+3700 会話フラグ_105300100_ミッション開始 -- Conversation flag_105300100_Mission start
+3701 会話フラグ_105300400_ミッション開始後 -- Conversation flag_105300400_After mission start
+3702 会話フラグ_105300900_目標エリア１戦闘開始１ -- Conversation flag_105300900_Target area 1 Battle start 1
+3703 会話フラグ_105301000_目標エリア１戦闘開始２ -- Conversation flag_105301000_Target area 1 Battle start 2
+3704 会話フラグ_105301040_目標エリア１戦闘開始３ -- Conversation flag_105301040_Target area 1 Battle start 3
+3705 会話フラグ_105301100_目標エリア１AP低下 -- Conversation flag_105301100_Target area 1 AP decrease
+3706 会話フラグ_105301200_目標エリア１撃破１ -- Conversation flag_105301200_Target area 1 defeat 1
+3707 会話フラグ_105301300_目標エリア１撃破２ -- Conversation Flag_105301300_Target Area 1 Destroy 2
+3708 会話フラグ_105301700_目標エリア１突破後 -- Conversation flag_105301700_After passing target area 1
+3709 会話フラグ_105302100_ドーム接近時 -- Conversation flag_105302100_When approaching the dome
+3710 会話フラグ_105302200_ドーム接近後 -- Conversation Flag_105302200_After approaching the dome
+3711 会話フラグ_105302300_目標エリア２戦闘開始１ -- Conversation Flag_105302300_Target Area 2 Battle Start 1
+3712 会話フラグ_105302500_目標エリア２戦闘開始２ -- Conversation Flag_105302500_Target Area 2 Battle Start 2
+3713 会話フラグ_105302600_目標エリア２AP低下１ -- Conversation flag_105302600_Target area 2 AP decrease 1
+3714 会話フラグ_105302640_目標エリア２AP低下２ -- Conversation flag_105302640_Target area 2 AP decrease 2
+3715 会話フラグ_105302700_目標エリア２AP僅か１ -- Conversation flag_105302700_Target area 2 AP only 1
+3716 会話フラグ_105302740_目標エリア２AP僅か２ -- Conversation flag_105302740_Target area 2 AP only 2
+3717 会話フラグ_105302800_目標エリア２撃破１ -- Conversation Flag_105302800_Target Area 2 Defeated 1
+3718 会話フラグ_105302900_目標エリア２撃破２ -- Conversation Flag_105302900_Target Area 2 Defeated 2
+3719 会話フラグ_105302910_目標エリア２突破後 -- Conversation flag_105302910_After passing target area 2
+3720 会話フラグ_105303300_空中通路移動中 -- Conversation flag_105303300_Aerial passage moving
+3721 会話フラグ_105303700_右ストレート到着後 -- Conversation Flag_105303700_After arriving at the right straight
+3722 会話フラグ_105303800_目標エリア３戦闘開始 -- Conversation Flag_105303800_Target Area 3 Battle Start
+3723 会話フラグ_105303900_目標エリア３一機撃破 -- Conversation Flag_105303900_Defeat 3 aircraft in target area
+3724 会話フラグ_105304100_目標エリア３突破 -- Conversation flag_105304100_Break through target area 3
+3725 会話フラグ_105304200_ボス戦開始１ -- Conversation flag_105304200_Boss battle start 1
+3726 会話フラグ_105304500_ボス戦開始２ -- Conversation flag_105304500_Boss battle start 2
+3727 会話フラグ_105304900_僚機死亡時 -- Conversation flag_105304900_When wingman dies
+3728 会話フラグ_105305300_ボスAP低下１ -- Conversation flag_105305300_Boss AP decrease 1
+3729 会話フラグ_105305400_ボスAP低下２ -- Conversation flag_105305400_Boss AP decrease 2
+3730 会話フラグ_105305700_ボスAP低下３ -- Conversation flag_105305700_Boss AP decrease 3
+3731 会話フラグ_105305800_ボスAP低下４ -- Conversation flag_105305800_Boss AP decrease 4
+3732 会話フラグ_105305900_ボスAP半分１ -- Conversation flag_105305900_Boss AP half 1
+3733 会話フラグ_105305940_ボスAP半分２ -- Conversation flag_105305940_Boss AP half 2
+3734 会話フラグ_105306000_ボスAP僅か -- Conversation flag_105306000_Boss AP little
+3735 会話フラグ_105306100_ボスAP０１ -- Conversation flag_105306100_Boss AP01
+3736 会話フラグ_105306500_ボスAP０２ -- Conversation flag_105306500_Boss AP02
+3737 会話フラグ_105306900_ボスAP０３ -- Conversation flag_105306900_Boss AP03
+3738 会話フラグ_105307000_ボス戦中に自機死亡 -- Conversation flag _105307000_ Own machine died during boss battle
+3900 仮_シェルパ用マーカーON -- Temporary Sherpa marker ON
+3901 仮_シェルパ用マーカーOFF -- Temporary Sherpa marker OFF
+3902 仮_シェルパマーカーOFF -- Temporary_Sherpa marker OFF
+3990 デバッグ用ボス開始フラグ -- Boss start flag for debugging
+1000000000 敵リスポン -- enemy respawn

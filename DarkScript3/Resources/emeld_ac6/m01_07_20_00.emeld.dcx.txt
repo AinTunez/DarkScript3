@@ -1,0 +1,86 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2200 初期イベント -- initial event
+2201 初期イベント2 -- Initial event 2
+2300 大足場遭遇 -- Large scaffolding encounter
+2310 大足場HP減 -- Great scaffolding HP reduced
+2320 大足場奇襲 -- Great scaffolding surprise attack
+2330 四脚の更新頻度管理 -- Quadruped update frequency management
+2331 四脚が落下している -- four legs are falling
+2332 四脚バグ対策 -- Countermeasures against quadruped bugs
+2700 即時ミッション会話発生フラグ -- Immediate mission conversation flag
+2701 待機ミッション会話発生フラグ -- Standby mission conversation flag
+2702 即時賑やかし会話発生フラグ -- Immediate lively conversation occurrence flag
+2703 待機賑やかし会話発生フラグ -- Waiting lively conversation occurrence flag
+2704 スキップ用即時ミッション会話再生中フラグ -- Instant mission conversation flag for skipping
+2705 スキップ用待機ミッション会話再生中フラグ -- Skip standby mission conversation flag
+2800 会話割り込み発生 -- Conversation interruption occurs
+2801 会話割り込み発生オフ -- Conversation interrupt generation off
+2810 プレイヤー劣勢 -- Player inferiority
+2811 AC戦長引き -- AC war drags on
+2820 AC戦前半スタッガー -- AC game first half stagger
+2821 AC戦後半スタッガー -- AC game second half stagger
+2822 室内罠起動判定 -- Indoor trap activation judgment
+2900 敵AC奇襲 -- Enemy AC surprise attack
+2905 敵AC奇襲失敗 -- Enemy AC surprise attack failure
+2906 無敵切り替え -- Invincibility switch
+2910 AC戦開始 -- AC battle begins
+2920 AC死亡判定 -- AC death determination
+2921 ACHP66パーセント -- ACHP66%
+2922 ACHP33パーセント -- ACHP33%
+2923 NPAC爆散判定 -- NPAC explosion judgment
+2930 特攻MT攻撃判定 -- Special attack MT attack judgment
+3000 飛島到着 -- Arrival at Tobishima
+3010 室内前バリア起動 -- Activate the barrier in front of the room
+3011 PA特攻MT描画OFF -- PA special attack MT drawing OFF
+3012 PA特攻MT描画管理 -- PA special attack MT drawing management
+3020 接敵判定 -- Enemy contact judgment
+3100 自爆衛星領域爆弾化 -- Suicide satellite area bomb
+3200 建機クモ起動 -- construction machine spider launch
+3250 建機クモ起動2 -- Construction machine spider launch 2
+3300 落下死亡処理 -- Fall death treatment
+3400 特攻MT起動 -- Special attack MT activation
+3450 宝近く判定 -- Judgment near treasure
+3500 警戒メカ始動 -- Warning mechanism starts
+3510 宝特攻MT起動 -- Treasure special attack MT activation
+3600 自爆衛星起爆 -- Suicide satellite detonation
+3700 目標マーカー更新 -- Goal marker update
+3750 室内SFX削除判定 -- Indoor SFX deletion judgment
+3800 チェックポイント設定 -- Checkpoint settings
+3810 チェックポイントフラグ -- checkpoint flag
+3815 チェックポイント処理 -- Checkpoint processing
+3900 会話フラグ_107200100_ミッション開始会話 -- Conversation flag_107200100_Mission start conversation
+3901 会話フラグ_107200200_開始少ししたら -- Conversation flag_107200200_Starts a little later
+3902 会話フラグ_107200300_開始少ししたら続き -- Conversation Flag_107200300_Starts and continues after a while
+3903 会話フラグ_107200500_初接敵 -- Conversation flag_107200500_First encounter
+3904 会話フラグ_107200900_レーザー目視 -- Conversation flag_107200900_Laser visual inspection
+3905 会話フラグ_107201000_レーザー目視続き -- Conversation flag_107201000_Laser visual continuation
+3906 会話フラグ_107201300_特攻MT起動 -- Conversation flag_107201300_Special attack MT activation
+3907 会話フラグ_107201700_特攻MT起動続き -- Conversation flag_107201700_Special attack MT activation continued
+3908 会話フラグ_107202100_シールド展開機体 -- Conversation flag_107202100_Shield deployment aircraft
+3909 会話フラグ_107202200_ミッション間埋め -- Conversation flag_107202200_Mission filler
+3910 会話フラグ_107202300_ミッション間埋め２ -- Conversation flag_107202300_Mission filler 2
+3911 会話フラグ_107202500_屋内 -- Conversation flag_107202500_indoor
+3912 会話フラグ_107202600_屋内続き -- Conversation flag_107202600_Indoor continuation
+3913 会話フラグ_107202601_喜んでもらえたなら -- Conversation flag_107202601_If you are happy
+3914 会話フラグ_107202900_終点見下ろし -- Conversation flag_107202900_Looking down at the end point
+3915 会話フラグ_107203300_終点到着 -- Conversation flag_107203300_Arrival at end point
+3916 会話フラグ_107203700_終点到着続き -- Conversation flag_107203700_Destination point continued
+3917 会話フラグ_107204100_開戦不意打ちスタート -- Conversation flag _107204100_ Surprise start of war
+3918 会話フラグ_107204200_開戦不意打ち回避スタート -- Conversation flag_107204200_ Start of war start surprise attack avoidance
+3919 会話フラグ_107204300_開戦続き -- Conversation flag_107204300_Start of war continued
+3920 会話フラグ_107204500_開戦続き２ -- Conversation flag_107204500_Start of war continuation 2
+3921 会話フラグ_107204900_ACに少しダメージ -- Slight damage to conversation flag_107204900_AC
+3922 会話フラグ_107205000_ACに少しダメージ続き -- Conversation Flag_107205000_Continues a little damage to AC
+3923 会話フラグ_107205100_AC瀕死 -- Conversation flag_107205100_AC dying
+3924 会話フラグ_107205300_プレイヤー劣勢 -- Conversation flag_107205300_Player inferiority
+3925 会話フラグ_107205400_ACスタッガー前半 -- Conversation flag_107205400_AC stagger first half
+3926 会話フラグ_107205500_ACスタッガー後半 -- Conversation flag_107205500_AC stagger second half
+3927 会話フラグ_107205600_戦闘長引き -- Conversation flag_107205600_Long battle
+3928 会話フラグ_107205640_戦闘長引き続き -- Conversation flag_107205640_Continuation of battle chief
+3929 会話フラグ_107205700_AC撃破 -- Conversation flag_107205700_AC defeated
+3930 会話フラグ_107206100_AC撃破続き -- Conversation flag_107206100_AC defeat continued
+3931 会話フラグ_107206500_AC撃破続き2 -- Conversation flag_107206500_AC defeat continuation 2
+3932 会話フラグ_107206900_ACに敗北 -- Defeated by conversation flag_107206900_AC
+3950 成功処理 -- Successful processing
+1000000000 敵リスポン -- enemy respawn

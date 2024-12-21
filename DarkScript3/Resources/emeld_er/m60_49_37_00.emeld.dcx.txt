@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1049372291 ルーン狩りの騎士_時間帯によって馬召喚を禁止する -- Rune Hunting Knight_Horse summoning is prohibited depending on the time of day.
+1049372299 老獅子にルート付与 -- Root given to old lion

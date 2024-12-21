@@ -1,0 +1,12 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1039392200 スカラベ出現イベント -- Scarab appearance event
+1039393700 NPC333戻れない輝石魔術師_初期状態_NPC初期化イベント -- NPC333 Pyroxene magician who cannot return_Initial state_NPC initialization event
+1039393701 NPC333戻れない輝石魔術師_購入魔術数チェック -- NPC333 Shining stone magician who cannot return_Check the number of purchased magics
+1039393702 NPC333戻れない輝石魔術師_ベンチ関係処理 -- NPC333 A pyroxene magician who cannot return_Bench-related processing

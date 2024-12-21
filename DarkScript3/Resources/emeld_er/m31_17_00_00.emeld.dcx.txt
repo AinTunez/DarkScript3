@@ -1,0 +1,19 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+31172208 オオカミ_接近時止まらない用特殊効果_XX -- Wolf_Special effects for not stopping when approaching_XX
+31172216 オオカミ_急接近用特殊効果_XX -- Wolf_Special effects for sudden approach_XX
+31172218 オオカミ飛び掛かり奇襲待機テスト_XX -- Wolf pounce surprise attack standby test_XX
+31172254 コウモリに視界延長の特殊効果付与_XX -- Adds special effect to bats to extend vision_XX
+31172499 ボス演出用特殊判定 -- Special judgment for boss production
+31172500 吊り篝火無効化 -- Disable hanging bonfire
+31172800 ボス撃破 -- Defeat the boss
+31172810 ボス出現 -- Boss appears
+31172811 ボス激昂 -- boss rage
+31172849 高路のガーディアン_イベント起動 -- Guardian of Takaji_Event activation
+31172900 チュートリアルメッセージ_サインだまり解放 -- Tutorial message_Release of signature pile
+1000000000 敵リスポン -- enemy respawn

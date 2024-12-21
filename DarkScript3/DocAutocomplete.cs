@@ -27,7 +27,8 @@ namespace DarkScript3
             // Overall map data
             public string Game { get; private set; }
             public string Map { get; private set; }
-            // Currently shown arg, determined through hacky parsing
+            // Currently shown arg, determined through hacky parsing.
+            // TODO can be this be removed?
             public string FuncName { get; set; }
             public int FuncArg { get; set; }
             // Updated only when needed, based on the above two. Use UpdateContextArgDoc
@@ -85,6 +86,7 @@ namespace DarkScript3
             private readonly List<DocAutocompleteItem> items;
             private readonly FastColoredTextBox editor;
             private readonly InstructionDocs Docs;
+            private readonly InitData.Links Links;
             private readonly SoapstoneMetadata metadata;
             private readonly AutocompleteContext context;
 
@@ -92,12 +94,14 @@ namespace DarkScript3
                 List<DocAutocompleteItem> items,
                 FastColoredTextBox editor,
                 InstructionDocs Docs,
+                InitData.Links Links,
                 SoapstoneMetadata metadata,
                 AutocompleteContext context)
             {
                 this.items = items;
                 this.editor = editor;
                 this.Docs = Docs;
+                this.Links = Links;
                 this.metadata = metadata;
                 this.context = context;
             }
@@ -188,15 +192,21 @@ namespace DarkScript3
             private IEnumerator<AutocompleteItem> GetDynamicEnumerator(Range fragment, string fragmentText)
             {
                 List<DocAutocompleteItem> argItems = new List<DocAutocompleteItem>();
-                if (context.ArgDoc?.MetaType != null && metadata.IsOpen())
+                if (context.ArgDoc?.MetaType != null)
                 {
                     // Recalculate arg data, so everything is consistent
                     List<string> argList = new List<string>();
-                    EditorGUI.ParseFuncAtRange(fragment, out string funcName, out int argIndex, argList);
-                    EMEDF.ArgDoc argDoc = Docs.GetHeuristicArgDoc(funcName, argIndex);
-                    if (argDoc?.MetaType != null)
+                    EditorGUI.ParseFuncAtRange(fragment, Docs, out InitData.DocID docId, out int argIndex, argList);
+                    EMEDF.ArgDoc argDoc = Docs.GetHeuristicArgDoc(docId, argIndex, Links);
+                    // Special case for events, which can work without game metadata
+                    if (argDoc?.MetaType?.Type == "eventid")
                     {
-                        argItems.AddRange(GetTypeEnumerator(funcName, argDoc, argList));
+                        // TODO
+                    }
+                    else if (metadata.IsOpen() && argDoc?.MetaType != null)
+                    {
+                        // Name is only relevant for multi args, for looking up arg types
+                        argItems.AddRange(GetTypeEnumerator(docId.Func, argDoc, argList));
                     }
                 }
 
@@ -369,7 +379,7 @@ namespace DarkScript3
                     }
                 }
                 // Match ids exactly, also add suffix matches for entity ids.
-                if (ID is int num)
+                else if (ID is int num)
                 {
                     prefixes.Add(Text);
                     if (Category == AutocompleteCategory.Map && Text.Length > 5)
@@ -381,6 +391,10 @@ namespace DarkScript3
                             prefixes.Add(Text.Substring(Text.Length - 3));
                         }
                     }
+                }
+                else if (ID is long lnum)
+                {
+                    prefixes.Add(Text);
                 }
                 if (SubType is SoapstoneMetadata.DisplayData displayData && displayData.MatchText != null)
                 {
@@ -447,7 +461,7 @@ namespace DarkScript3
                 // to miss an item from the menu which should be selected. We probably do want to avoid a single menu item of
                 // just what's already selected (esp an enum), but even this may be useful with selecting its case.
                 // Add this very custom case probably at menu-level if needed.
-                int prefixIndex = prefixes.FindIndex(p => p.StartsWith(fragmentText, StringComparison.InvariantCultureIgnoreCase));
+                int prefixIndex = prefixes.FindIndex(p => p.StartsWith(fragmentText, StringComparison.OrdinalIgnoreCase));
                 if (prefixIndex == -1)
                 {
                     return false;

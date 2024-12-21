@@ -1,0 +1,41 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+12030050 m12_03_00_00用初期フラグ設定 -- Initial flag setting for m12_03_00_00
+12030700 NPC322ユリア_NPC初期化イベント_死王子の死体近く -- NPC322 Yuria_NPC initialization event_near the dead prince's corpse
+12030701 NPC322ユリア_NPC初期化イベント_ボスワープOBJ化 -- NPC322 Yuria_NPC initialization event_Boss warp OBJ
+12030702 NPC322ユリア_NPC初期化イベント_死体通常版 -- NPC322 Yuria_NPC initialization event_corpse regular version
+12030703 NPC322ユリア_NPC初期化イベント_死体ダニー版 -- NPC322 Yuria_NPC initialization event_Corpse Danny version
+12030704 NPC322ユリア_同衾たち撃破後リアルタイム遷移 -- NPC322 Yuria_Real-time transition after defeating classmates
+12030705 NPC322ユリア_守護者の末裔戦リアルタイム遷移 -- NPC322 Yuria_Descendants of the Guardian Battle Real-time Transition
+12030706 NPC322ユリア_守護者の末裔撃破後リアルタイム遷移 -- NPC322 Yuria_Real-time transition after defeating the Guardian's Descendant
+12030707 NPC322ユリア_最後の強く抱く_PCアニメ -- NPC322 Yuria_last strong hug_PC anime
+12030708 NPC322ユリア_最後の強く抱く_話者アニメ -- NPC322 Yuria_last strong hug_speaker animation
+12030709 NPC322ユリア_ボス戦デバッグ用フラグセットアップ -- NPC322 Yuria_Boss battle debugging flag setup
+12030710 NPC319ダニー_NPC初期化イベント -- NPC319 Danny_NPC initialization event
+12030720 NPC101道標老婆_死亡遷移イベント_地下迷宮 -- NPC101 Signpost Old Woman_Death Transition Event_Underground Labyrinth
+12032241 天井の蟻が落ちてくるイベント_XX -- Event where ants fall from the ceiling_XX
+12032300 霊廟守りイベント -- Mausoleum protection event
+12032310 天井の蟻が落ちてくるイベント判定_XX -- Event determination where ants fall from the ceiling_XX
+12032400 歩く霊廟設定 -- walking mausoleum setting
+12032500 王都へのワープ -- Warp to the capital
+12032504 滝壺ダイブ -- Waterfall diving
+12032509 石棺滝登り_滝下 -- Sarcophagus waterfall climbing_Takishita
+12032800 ボス撃破 -- Defeat the boss
+12032810 ボス出現 -- Boss appears
+12032811 ボス_ロジェール参戦イベント -- Boss_Roger participation event
+12032812 ボス_３体同時登場イベント -- Boss_3 characters appearing at the same time event
+12032820 ボス_PCキャラデータコピー -- Boss_PC character data copy
+12032830 ホストがボス部屋入場_地下迷宮王都版 -- Host enters the boss room_Underground Labyrinth Royal Capital Edition
+12032840 ボス_ゲストキャラを封牢の中へワープ -- Boss_Warp the guest character into the prison
+12032841 ボス_闇霊を強制送還 -- Boss_Forcibly repatriate dark spirits
+12032842 ボス用白扉処理_地下迷宮王都版 -- Boss white door processing_underground labyrinth capital version
+12032849 ボス_イベント起動 -- Boss_event activation
+12032850 本ボス撃破 -- Defeat the main boss
+12032859 守護末ボス部屋ワープイベント -- Guardian end boss room warp event
+12032860 本ボス出現 -- Main boss appears
+12032861 守護末_自動ニト剣発動 -- Shugo End_Automatic Nito Sword Activation
+12032862 守護末_ゴッドウィンアーツ発動時カメラ切り替え -- Shugosue_Camera switch when Godwin Arts is activated
+12032896 守護末用ゲストがボス部屋入場 -- Shugo end guest enters boss room
+12032899 本ボス_イベント起動 -- Main boss_event activation
+1000000000 敵リスポン -- enemy respawn

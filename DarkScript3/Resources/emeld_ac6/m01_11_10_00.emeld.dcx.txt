@@ -1,0 +1,5 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 演出破壊用_建機クモ -- For production destruction_Construction spider
+2010 演出破壊用_揚陸艦副砲 -- For production destruction_Landing ship secondary gun
+1000000000 敵リスポン -- enemy respawn

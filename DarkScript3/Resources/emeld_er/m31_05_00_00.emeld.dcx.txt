@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+31052301 蛇つむりの視界制限 -- Snake Tsumuri Visibility Restriction
+31052800 ボス撃破 -- Defeat the boss
+31052810 ボス出現 -- Boss appears
+31052811 ボス激昂 -- boss rage
+31052830 ボス部屋バディ石碑_使用可能判定 -- Boss room buddy stone monument_usable determination
+31052849 ボス_イベント起動 -- Boss_event activation
+1000000000 敵リスポン -- enemy respawn

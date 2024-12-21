@@ -1,0 +1,20 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+31182200 調香魔術師の視界制限_XX -- Perfume magician's visibility limit_XX
+31182400 アステール_初期待機バグ対応 -- Aster_Initial standby bug fixed
+31182401 アステール撃破 -- Defeat Aster
+31182402 アステール特殊待機対応 -- Aster special standby support
+31182500 テスト用イベント_光源テスト_XX -- Test event_Light source test_XX
+31182515 テスト用イベント_領域にSFX_XX -- SFX_XX in the test event_area
+31182800 ボス撃破 -- Defeat the boss
+31182801 ルーンを喰う花色違い_死亡時の撃破演出 -- Flowers that eat runes are different colors_defeat performance when dying
+31182802 さまよえる処刑者_死亡時の撃破演出 -- Wandering Executioner_Defeat performance upon death
+31182810 ボス出現 -- Boss appears
+31182811 ボス激昂 -- boss rage
+31182849 ボス_イベント起動 -- Boss_event activation
+1000000000 敵リスポン -- enemy respawn

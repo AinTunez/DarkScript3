@@ -1,0 +1,100 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+14000519 エレベータ初期フラグ設定 -- Elevator initial flag setting
+14000700 レナラ_会話NPC_自動会話１ -- Renara_Conversation NPC_Automatic conversation 1
+14000701 レナラ_会話NPC_自動会話２ -- Renara_Conversation NPC_Automatic conversation 2
+14000702 NPC200_レナラ_会話NPC用待機再生 -- NPC200_Renara_Standby playback for conversation NPC
+14000703 NPC200_レナラ_生まれ変わりアニメキック -- NPC200_Renara_Reincarnation Anime Kick
+14000710 NPC316学院の女魔術師_学院_NPC初期化イベント -- NPC316 Academy Female Magician_Academy_NPC Initialization Event
+14000711 NPC316学院の女魔術師_死亡台詞再生処理 -- NPC316 Academy Female Magician_Death line playback processing
+14000712 NPC316学院の女魔術師_平原砦の領主_撃破 -- NPC316 Female Magician of Academy_Lord of Plains Fort_Defeated
+14000713 NPC316学院の女魔術師_ショートワープイベント -- NPC316 Academy Female Magician_Short Warp Event
+14000714 NPC316学院の女魔術師_白霊召喚停止イベント -- NPC316 Academy Female Magician_White Spirit Summoning Stop Event
+14000720 NPC309_盗賊の頭_PCがモンサンの乙女人形に攫われた -- NPC309_Thief Head_PC was kidnapped by Montsan's maiden doll
+14000730 NPC312平原砦の領主_ﾌｪｰｽﾞ7_NPC初期化イベント -- NPC312 Lord of Plains Fort_Phase 7_NPC initialization event
+14000731 NPC312平原砦の領主_学院の女魔術師_撃破 -- NPC312 Lord of the Plains Fort_Female Magician of the Academy_Defeated
+14000740 NPC223亜人針子_ﾌｪｰｽﾞ4_NPC初期化イベント -- NPC223 Demi-Seamchild_Phase 4_NPC initialization event
+14000741 NPC223亜人針子_ﾌｪｰｽﾞ5_NPC初期化イベント -- NPC223 Demi-Seamchild_Phase 5_NPC initialization event
+14000742 NPC223亜人針子_ﾌｪｰｽﾞ4_接近確認 -- NPC223 Demi-human seamstress_Phase 4_approach confirmation
+14000750 NPC333戻れない輝石魔術師_ﾌｪｰｽﾞ2_NPC初期化イベント -- NPC333 Unreturnable Pyroxene Magician_Phase 2_NPC Initialization Event
+14002080 鋼鉄の乙女人形による抱擁 -- Hug by the Maiden of Steel Doll
+14002145 NPC疑似マルチ_学院の女魔術師_開始 -- NPC pseudo-multi_Female magician of the academy_Start
+14002155 NPC疑似マルチ_平原砦の領主_開始 -- NPC pseudo-multi_Lord of Plains Fort_Start
+14002165 NPC疑似マルチ_平原砦の領主_終了 -- NPC pseudo-multi_Lord of Plains Fort_End
+14002328 キャラ死亡 -- character death
+14002360 腐った亡者_祈祷集団_XX -- Rotten Dead_Prayer Group_XX
+14002490 飛行人形兵_屋根上奇襲_XX -- Flying Puppet Soldier_Rooftop Surprise Attack_XX
+14002491 飛行人形兵_屋根上奇襲_距離判定_XX -- Flying Puppet Soldier_Rooftop Surprise Attack_Distance Judgment_XX
+14002495 NPC疑似マルチ_バディ石碑使用禁止 -- NPC pseudo-multi_Buddy stone monument use prohibited
+14002498 モンサン教会_蹴りおろし梯子_ナビメッシュ切り替え -- Mont Saint Church_Kick down ladder_Navimesh switching
+14002510 エレベータイベント起動 -- Elevator event activation
+14002580 梯子登録 -- ladder registration
+14002590 ゴロゴロ岩 -- rumbling rock
+14002592 ゴロゴロ岩_魔法陣 -- Rumbling rock_magic circle
+14002594 ゴロゴロ岩_判定用フラグ同期 -- Rumble rock_judgment flag synchronization
+14002606 レナラ宝箱 -- Renara treasure chest
+14002650 汎用ワープOBJイベント_開始 -- General purpose warp OBJ event_start
+14002665 水車下_ナビメッシュ切断 -- Below the water wheel_Navimesh cutting
+14002689 レナラボス部屋_Gparam切り替え -- Renala boss room_Gparam switching
+14002800 レナラ撃破 -- Defeat Renara
+14002810 レナラ出現 -- Renara appears
+14002811 レナラ激昂 -- Renara enraged
+14002820 レビュー用／HU前戦闘開始 -- For review/Start of battle before HU
+14002821 レビュー用／HU後戦闘開始 -- For review/battle starts after HU
+14002822 レビュー用／レナラ撃破 -- For review/Defeat Renara
+14002849 レナラ戦ボスイベント起動 -- Renara battle boss event starts
+14002850 ルーンウルフ撃破 -- Defeat Rune Wolf
+14002860 ルーンウルフ出現 -- Rune Wolf appears
+14002889 ルーンウルフ戦イベント起動 -- Runewolf battle event started
+14003500 攻撃禁止エリア設定 -- Attack prohibited area setting
+14003801 子供たち_歌う -- children_sing
+14003805 レナラ降下 -- Renala descent
+14003807 レナラ浮上 -- Renara levitation
+14003808 レナラ落下後タイマー -- Timer after Renara falls
+14003809 レナラ墓標弾丸収集開始 -- Renara Grave Marker Bullet Collection Started
+14003811 墓標弾丸特殊効果振り分け -- Tombstone bullet special effects distribution
+14003814 AI音用ダミーエネミーアタッチ -- Dummy enemy attach for AI sound
+14003815 AI音間隔発生 -- AI sound interval generation
+14003817 子供たち攻撃行動自粛 -- Children refrain from aggressive behavior
+14003820 ポルターガイスト_燭台_リキャスト設定_XX -- Poltergeist_Candelabra_Recast settings_XX
+14003825 子供たち_歌う_初回 -- Children_singing_first time
+14003834 ポルターガイスト_シャンデリア_リキャスト設定_XX -- Poltergeist_Chandelier_Recast settings_XX
+14003840 ポルターガイスト_燭台_起動_XX -- Poltergeist_Candlestick_Activation_XX
+14003845 ポルターガイスト_燭台_発動_XX -- Poltergeist_Candelabra_Activation_XX
+14003850 ポルターガイスト_シャンデリア_発動_XX -- Poltergeist_Chandelier_Activation_XX
+14003880 レナラ_HU前撃破後ワープ -- Warp after defeating Renara_HU before
+14003885 レナラワープ処理 -- Renara warp processing
+14003886 レナラ存在領域検索_XX -- Renara Existence Area Search_XX
+14003892 子供たち更新頻度リセット -- Children update frequency reset
+14003893 墓標弾丸発射制御_強制変化 -- Tombstone bullet firing control_forced change
+14003894 墓標弾丸発射制御_強制発射 -- Tombstone bullet firing control_forced firing
+14003898 ポルターガイスト一斉発動 -- Poltergeist activated all at once
+14003900 ポルターガイスト_背景演出_XX -- Poltergeist_background production_XX
+14003915 レナラテスト -- renara test
+14003922 狼頭の戦士召喚 -- Wolf Head Warrior Summon
+14003923 狼頭の戦士召喚攻撃_終了 -- Wolf-headed warrior summon attack_end
+14003924 狼頭の戦士帰還 -- The return of the wolf-headed warrior
+14003925 狼頭の戦士死亡 -- wolf head warrior dies
+14003926 狼頭の戦士召喚待機 -- Waiting to summon the wolf-headed warrior
+14003937 オオカミ召喚 -- wolf summon
+14003938 オオカミ召喚攻撃_終了 -- Wolf summon attack_end
+14003939 オオカミ帰還 -- wolf return
+14003940 オオカミ死亡_XX -- Wolf death_XX
+14003945 オオカミ召喚待機_XX -- Waiting for wolf summon_XX
+14003950 ポルターガイスト燭台破壊判定_XX -- Poltergeist candlestick destruction judgment_XX
+14003962 トロル召喚 -- Troll summon
+14003963 トロル召喚攻撃_終了 -- Troll summon attack_end
+14003964 トロル帰還 -- Troll returns
+14003965 トロル死亡 -- troll death
+14003966 トロル召喚待機 -- Waiting for troll summon
+14003972 ワイバーン召喚 -- Wyvern Summon
+14003973 ワイバーン召喚攻撃_終了 -- Wyvern summon attack_end
+14003974 ワイバーン帰還 -- Return of the Wyvern
+14003975 ワイバーン死亡 -- Wyvern death
+14003976 ワイバーン召喚待機 -- Waiting for wyvern summon
+14003977 召喚キャラ連動無効化 -- Disable summoned character linkage
+14003978 レナラの子供たち無効化 -- Renara's children disabled
+140028121 レナラHU前_墓標攻撃時会話 -- Before Renara HU_Tombstone attack conversation
+140028122 レナラHU後_召喚攻撃時会話 -- After Renara HU_Conversation during summon attack
+1000000000 敵リスポン -- enemy respawn

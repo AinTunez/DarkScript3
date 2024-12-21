@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,18 @@ namespace DarkScript3
         public string StartingCode { get; private set; }
         public string PendingCode { get; private set; }
         public List<FancyJSCompiler.DiffSegment> Segments { get; set; }
+
+        private static TextStyle AddStyle = MakeHighlightStyle(0xE4, 0xFF, 0xE0);
+        private static TextStyle ChangeStyle = MakeHighlightStyle(0xFF, 0xFF, 0xF0);
+        private static TextStyle RemoveStyle = MakeHighlightStyle(0xFD, 0xEC, 0xF5);
+        private static TextStyle WarningStyle = MakeHighlightStyle(0xE9, 0xDB, 0xF3);
+
+        private static TextStyle MakeHighlightStyle(int r, int g, int b)
+        {
+            Color color = Color.FromArgb(r, g, b);
+            Brush brush = new SolidBrush(color);
+            return new TextStyle(null, brush, FontStyle.Regular);
+        }
 
         public PreviewCompilationForm(Font font)
         {
@@ -39,11 +52,43 @@ namespace DarkScript3
         private void RewriteSegments()
         {
             if (Segments == null) return;
-            StringBuilder left = new StringBuilder();
-            StringBuilder right = new StringBuilder();
+            int warnings = 0;
+            StringBuilder left = new();
+            StringBuilder right = new();
+            fctb1.Clear();
+            fctb2.Clear();
+            // Batch these together because AppendText is extremely slow and always redraws
+            // This isn't an issue before the form is shown, at least
+            TextStyle lastStyle = null;
             foreach (FancyJSCompiler.DiffSegment diff in Segments)
             {
                 if (diff.Warning && !lineup.Checked) continue;
+                TextStyle style = null;
+                if (diff.Warning)
+                {
+                    style = WarningStyle;
+                    warnings++;
+                }
+                else if (diff.Left.Length == 0)
+                {
+                    style = AddStyle;
+                }
+                else if (diff.Right.Length == 0)
+                {
+                    style = RemoveStyle;
+                }
+                else if (diff.Left != diff.Right)
+                {
+                    style = ChangeStyle;
+                }
+                if (style != lastStyle)
+                {
+                    fctb1.AppendText(left.ToString(), lastStyle == AddStyle ? null : lastStyle);
+                    fctb2.AppendText(right.ToString(), lastStyle == RemoveStyle || lastStyle == WarningStyle ? null : lastStyle);
+                    left.Clear();
+                    right.Clear();
+                }
+                lastStyle = style;
                 left.Append(diff.Left);
                 right.Append(diff.Right);
                 int lines1 = diff.Left.Count(c => c == '\n');
@@ -63,8 +108,18 @@ namespace DarkScript3
                     }
                 }
             }
-            fctb1.Text = left.ToString();
-            fctb2.Text = right.ToString();
+            fctb1.AppendText(left.ToString(), lastStyle);
+            fctb2.AppendText(right.ToString(), lastStyle);
+            // ErrorMessageForm could be used, but it is modal and tied to EditorGUI where this form is persistent
+            if (warnings == 0)
+            {
+                warningL.Visible = false;
+            }
+            else
+            {
+                warningL.Visible = true;
+                warningL.Text = $"{warnings} warning{(warnings == 1 ? "" : "s")} produced";
+            }
         }
 
         public void DisableConversion()

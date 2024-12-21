@@ -1,0 +1,12 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+70005500 襲撃判定_XX -- Attack judgment_XX
+70005520 飛行敵_敵襲に反応_XX -- Flying enemy_react to enemy attack_XX
+70005530 飛行敵（空中巡回）_更新頻度を固定 -- Flying enemy (air patrol)_Update frequency fixed
+70005540 飛行敵（空中巡回）_起動タイミング調整 -- Flying enemy (air patrol)_Start timing adjustment
+70005560 戦闘開始フラグ立てる_最初の足場 -- Set the battle start flag_first foothold
+70005561 戦闘開始フラグ立てる_谷底 -- Raising the flag to start battle_at the bottom of the valley
+70005562 戦闘開始フラグ立てる_空中巡回飛行敵 -- Set the battle start flag_Aerial patrol flying enemy
+70005570 襲撃に反応_追撃 -- React to attack_pursue
+70005580 アイテム取得_補給キャラアニメ -- Item acquisition_supply character anime
+1000000000 敵リスポン -- enemy respawn

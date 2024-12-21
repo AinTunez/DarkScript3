@@ -1,0 +1,75 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+35000050 m35_00_00_00用初期フラグ設定 -- Initial flag setting for m35_00_00_00
+35000519 エレベータ初期フラグ -- Elevator initial flag
+35000700 NPC310城主の娘_NPC初期化イベント_狂い火受領 -- NPC310 Castle Lord's Daughter_NPC Initialization Event_Crazy Fire Reception
+35000702 NPC310城主の娘_アイテム出現用アセットワープ -- NPC310 Castle Lord's Daughter_Asset Warp for Item Appearance
+35000703 NPC310城主の娘_アイテム光出現タイミング調整 -- NPC310 Castle Lord's Daughter_Item light appearance timing adjustment
+35002200 虫人ゴーレムの視覚拡大 -- Insect Golem Visual Enlargement
+35002203 虫人飛び降りor乗り上げアニメ再生_XX -- Insect man jumping or running over animation play_XX
+35002208 虫人ゴーレムの視覚拡大と固定砲台化 -- Insect Golem's visual expansion and fixed artillery turret
+35002215 虫人ゴーレム不意打ち -- Insect golem surprise attack
+35002220 生きている壺_仲間斬られても起動_XX -- A living pot_starts even if a friend is killed_XX
+35002226 生きている壺_仲間斬られても起動_上層部屋XX -- Living jar_Starts up even if a friend is killed_Upper room XX
+35002230 犬ネズミ_びっくりして走り回る_下水入り口_XX -- Dog and rat_running around in surprise_sewer entrance_XX
+35002239 犬ネズミ_木箱から飛び出し -- Dog and mouse jumping out of the wooden box
+35002240 ネズミ突進_XX -- Mouse rush_XX
+35002250 蛇つむり初回召喚_王軍雑兵たち -- Snake Tsumuri first summon_Royal army soldiers
+35002251 蛇つむり召喚ストップ_王軍雑兵たち -- Snake Tsumuri summoning stop_Royal army soldiers
+35002253 召喚された王軍を殺す -- Kill the summoned royal army
+35002258 蛇つむり召喚_上段雑兵_視界延長_XX -- Snake Tsumuri Summon_Upper stage soldiers_Visibility extension_XX
+35002261 思考ロジック有効化_領域／距離判定_逆流対策 -- Enabling thought logic_Area/distance judgment_Backflow countermeasures
+35002290 バジリスク突進_XX -- Basilisk charge_XX
+35002296 バジリスク視聴覚調整_XX -- Basilisk audiovisual adjustment_XX
+35002297 バジリスク思考ロジック有効化_領域／距離判定_逆流対策 -- Basilisk thinking logic activation_Area/distance determination_Backflow countermeasures
+35002298 バジリスク_PC発見すると毒吐き -- Basilisk_When a PC is found, it spits poison.
+35002320 無反応ナメクジ_XX -- Unresponsive slug_XX
+35002361 忌み子あんまり追いかけないようにするイベント -- An event that will help you avoid chasing after your child too much
+35002365 思考ロジック有効化_領域／距離判定_仲間がダメージを受けても起動 -- Enabling thought logic_area/distance judgment_activates even if allies receive damage
+35002390 守り人の視聴覚制限解除_XX -- Guardian's audiovisual restriction removed_XX
+35002392 守り人無反応_XX -- Guardian unresponsive_XX
+35002400 ザリガニの視界調整 -- Crayfish visibility adjustment
+35002401 ザリガニの視界3倍 -- Crayfish visibility 3x
+35002410 ユビムシ一家_仲間斬られても起動_上層部屋_XX -- The Ubimushi family_Activate even if a friend is killed_Upper room_XX
+35002411 イベント4249が立っていればユビムシを消す対応 -- If event 4249 is present, the bug will be deleted.
+35002430 強制アニメ再生_領域／距離判定_XX -- Forced animation playback_area/distance judgment_XX
+35002440 死体化_XX -- Corpse _XX
+35002490 洞窟_ボス部屋報酬宝箱の開放制限 -- Cave_Boss room reward treasure chest opening limit
+35002498 蹴りおろし梯子_ナビメッシュ切り替え -- Kick down ladder_Navimesh switching
+35002500 狂い火の受領 -- Receiving crazy fire
+35002504 最下層の封印 -- bottom seal
+35002506 疑下層の崩落 -- Collapse of the lower layer of suspicion
+35002508 崩落後に落ちても死亡しないイベント -- An event where you will not die even if you fall after a collapse.
+35002510 エレベータイベント起動 -- Elevator event activation
+35002530 動く彫像 -- moving statue
+35002580 梯子登録 -- ladder registration
+35002600 世界樹炎上後の変化 -- Changes after the World Tree went up in flames
+35002642 ダミーボス部屋開放 -- Dummy boss room open
+35002679 火吹き像起動 -- Fire-breathing statue activated
+35002680 梯子登録_墓地 -- Ladder registration_cemetery
+35002800 幻影グレーター_撃破 -- Phantom Greater_Defeated
+35002810 幻影グレーター_出現 -- Phantom Greater Appearance
+35002820 ボス部屋祭壇の移動 -- Moving the boss room altar
+35002849 幻影グレーター_イベント起動 -- Phantom Greater_Event activation
+35002850 地下墓地ボス撃破 -- Defeat the catacomb boss
+35002860 地下墓地ボス出現 -- Catacomb boss appears
+35002899 地下墓地ボスイベント起動 -- Catacomb boss event started
+35003500 攻撃禁止エリア設定 -- Attack prohibited area setting
+35003710 NPC800_赤目商人カーレ_NPC初期化イベント_王都地下で再会 -- NPC800_Red-Eyed Merchant Kare_NPC Initialization Event_Reunion in the Royal Capital Underground
+35003711 NPC800_赤目商人カーレ_NPC初期化イベント_三本指に祈っている -- NPC800_Red-Eyed Merchant Kaare_NPC Initialization Event_Praying to Three Fingers
+35003712 NPC800_赤目商人カーレ_NPC初期化イベント_三本指に握られ死ぬ -- NPC800_Red-Eyed Merchant Kaare_NPC Initialization Event_Dies in the grip of three fingers
+35003713 NPC800_赤目商人カーレ_王都地下で再会_リアルタイム遷移 -- NPC800_Red-eyed Merchant Kare_Reunion in the underground of the royal capital_Real-time transition
+35003714 NPC800_赤目商人カーレ_三本指の前_リアルタイム遷移 -- NPC800_Red-Eyed Merchant Kare_In front of three fingers_Real-time transition
+35003715 NPC800_赤目商人カーレ_三本指に握られ死ぬ_死亡実行 -- NPC800_Red-Eyed Merchant Kare_Death being held by three fingers_Death execution
+35003720 NPC323糞喰い_ﾌｪｰｽﾞ2_NPC初期化イベント -- NPC323 Shit-eating_Phase 2_NPC initialization event
+35003721 NPC323糞喰い_ﾌｪｰｽﾞ5_NPC初期化イベント -- NPC323 Shit Eating_Phase 5_NPC Initialization Event
+35003722 NPC323糞喰い_呪い使用イベント -- NPC323 Shit-eater_Curse use event
+35003723 NPC323糞喰い_呪いのアイテム使用後に再訪 -- NPC323 Shit Eater_Revisit after using cursed item
+35003724 糞喰い_会話NPCアイテム光 -- Shit Eater_Conversation NPC Item Light
+35003725 NPC323糞喰い_攻撃殺害 -- NPC323 Shit-eater_Attack and kill
+35003726 NPC323糞喰い_共闘サイン停止イベント -- NPC323 Shit Eating_Cooperative Sign Stopping Event
+35003727 NPC323糞喰い_共闘エリア到達 -- NPC323 Shit-eater_Achieved the joint battle area
+35003730 NPC318混沌の宿主_狂い火受領でシャブリリ死亡 -- NPC318 Host of Chaos_Chabrili died after receiving crazy fire
+35003790 狂い火受領カットシーン後_PCアニメ再生 -- After receiving the crazy fire cutscene_PC anime playback
+1000000000 敵リスポン -- enemy respawn

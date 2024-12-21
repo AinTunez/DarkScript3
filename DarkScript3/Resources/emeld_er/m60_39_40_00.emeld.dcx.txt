@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1039400700 NPC310城主の娘_NPC初期化イベント_ブドウ渡し場所A -- NPC310 Castle lord's daughter_NPC initialization event_Grape passing place A
+1039400701 NPC310城主の娘_ブドウ渡したら闇霊化 -- NPC310 Castle lord's daughter_becomes a dark spirit after giving the grapes
+1039403710 NPC223亜人針子_NPC初期化イベント_最初の篝火近く -- NPC223 Demi-Shipper_NPC initialization event_near the first bonfire
+1039403711 NPC223亜人針子_母の声イベント -- NPC223 Demi-human seamstress_Mother's voice event

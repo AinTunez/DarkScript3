@@ -1,0 +1,113 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2200 初期イベント -- initial event
+2201 初期イベント2 -- Initial event 2
+2210 チェックポイント設定 -- Checkpoint settings
+2211 チェックポイントフラグ -- checkpoint flag
+2212 チェックポイント処理 -- Checkpoint processing
+2300 施設侵入判定 -- Facility intrusion determination
+2310 トンネル判定 -- Tunnel judgment
+2315 最終地点飛び込み判定 -- Final point diving judgment
+2320 最終地点侵入判定 -- Final point entry judgment
+2330 二の丸伏兵判定 -- Ninomaru ambush judgment
+2340 残骸ゴースト起動 -- Wreckage Ghost Activation
+2400 最終地点目標到達 -- Final point goal reached
+2410 ダイアログ一瞬閉じる -- Dialog momentarily closes
+2500 虎口撃退判定 -- Tiger mouth repulsion judgment
+2510 二の丸撃退判定 -- Ninomaru repulsion judgment
+2520 二の丸奥殲滅判定 -- Ninomaru Oku annihilation judgment
+2530 扉に目標マーカーを出す -- Put a target marker on the door
+2540 作戦ライン拡張虎口から二の丸中盤 -- Operation line expansion from Koguchi to the middle of Ninomaru
+2541 作戦ライン拡張二の丸中盤から二の丸終盤 -- Operation line expansion from middle of Ninomaru to end of Ninomaru
+2600 ゴーストワープ -- ghost warp
+2700 ボスゴーストワープ -- boss ghost warp
+2990 ボス部屋狙撃タイプ発射間隔制御 -- Boss room sniper type firing interval control
+2991 ボス部屋狙撃タイプおくれて狙撃役指定 -- Boss room sniper type late designated sniper role
+3000 虎口侵入判定 -- Tiger mouth intrusion detection
+3100 二の丸侵入判定 -- Ninomaru intrusion detection
+3101 二の丸侵入手前判定 -- Ninomaru intrusion front detection
+3120 二の丸手前扉オープン -- Ninomaru front door open
+3121 二の丸奥扉オープン -- Ninomaru back door open
+3130 トンネル到着判定 -- Tunnel arrival determination
+3140 二の丸最後到達判定 -- Judgment of reaching the end of Ninomaru
+3200 会話用ゴースト接近判定 -- Ghost approach detection for conversation
+3210 会話用扉接近判定 -- Conversation door approach detection
+3220 会話用二の丸奥戦闘状態判定 -- Ninomaru inner battle status determination for conversation
+3400 最終地点敵起動 -- Final point enemy launches
+3401 最終地点狙撃起動 -- Final point sniper launch
+3410 最終地点PAタイプ着地判定 -- Final point PA type landing determination
+3600 即時ミッション会話発生フラグ -- Immediate mission conversation flag
+3601 待機ミッション会話発生フラグ -- Standby mission conversation flag
+3602 即時賑やかし会話発生フラグ -- Immediate lively conversation occurrence flag
+3603 待機賑やかし会話発生フラグ -- Waiting lively conversation occurrence flag
+3604 スキップ用即時ミッション会話再生中フラグ -- Instant mission conversation flag for skipping
+3605 スキップ用待機ミッション会話再生中フラグ -- Skip standby mission conversation flag
+3700 最終地点ハッキング途中停止 -- Final point hacking halted
+3705 最終地点殲滅 -- Destroy the final point
+3710 会話用最終地点PA攻撃判定 -- Final point PA attack detection for conversation
+3720 会話用ボス戦撃破判定01 -- Conversation boss battle defeat judgment 01
+3721 会話用ボス戦撃破判定02 -- Conversation boss battle defeat judgment 02
+3722 会話用ボス戦撃破判定03 -- Conversation boss battle defeat judgment 03
+3730 PA死亡判定 -- PA death determination
+3750 最終地点ハッキング開始 -- Final point hacking started
+3800 二の丸最奥狙撃起動 -- Ninomaru innermost sniper launch
+3810 二の丸最奥接敵起動 -- Ninomaru innermost enemy engagement activated
+3820 本丸Gparam切り替え -- Honmaru Gparam switching
+3900 会話フラグ_103600100_ミッション開始会話 -- Conversation flag_103600100_Mission start conversation
+3901 会話フラグ_103600200_ミッション開始会話２ -- Conversation flag_103600200_Mission start conversation 2
+3902 会話フラグ_103600300_ミッション開始会話３ -- Conversation flag_103600300_Mission start conversation 3
+3903 会話フラグ_103600400_目標マーカー到達 -- Conversation flag_103600400_Goal marker reached
+3904 会話フラグ_103600500_三の丸ゴースト狙撃 -- Conversation Flag_103600500_Sannomaru Ghost Sniper
+3905 会話フラグ_103600600_三の丸ゴースト狙撃２ -- Conversation Flag_103600600_Sannomaru Ghost Sniper 2
+3906 会話フラグ_103600700_三の丸ゴースト狙撃３ -- Conversation Flag_103600700_Sannomaru Ghost Sniper 3
+3907 会話フラグ_103600800_ゴースト接近 -- Conversation flag_103600800_Ghost approaching
+3908 会話フラグ_103600900_ゴースト撃破 -- Conversation Flag_103600900_Ghost Defeated
+3909 会話フラグ_103601000_ゴースト撃破２ -- Conversation Flag_103601000_Ghost Defeat 2
+3910 会話フラグ_103601100_ゴースト撃破３ -- Conversation Flag_103601100_Ghost Defeat 3
+3911 会話フラグ_103601200_二の丸ゴースト狙撃 -- Conversation Flag_103601200_Ninomaru Ghost Sniper
+3912 会話フラグ_103601300_二の丸ゴースト狙撃２ -- Conversation Flag_103601300_Ninomaru Ghost Sniper 2
+3913 会話フラグ_103601400_二の丸ゴースト狙撃３ -- Conversation Flag_103601400_Ninomaru Ghost Sniper 3
+3914 会話フラグ_103601500_二の丸ゴースト戦闘中 -- Conversation flag_103601500_Ninomaru Ghost in battle
+3915 会話フラグ_103601600_二の丸ゴースト戦闘中２ -- Conversation Flag_103601600_Ninomaru Ghost Battle 2
+3916 会話フラグ_103601700_二の丸ゴースト撃破 -- Conversation Flag_103601700_Defeat Ninomaru Ghost
+3917 会話フラグ_103601800_二の丸ゴースト撃破２ -- Conversation Flag_103601800_Ninomaru Ghost Defeated 2
+3918 会話フラグ_103601900_二の丸ゴースト撃破３ -- Conversation Flag_103601900_Ninomaru Ghost Defeated 3
+3919 会話フラグ_103602000_二の丸奥奇襲ゴースト -- Conversation flag_103602000_Ninomaru inner surprise attack ghost
+3920 会話フラグ_103602100_二の丸奥奇襲ゴースト撃破 -- Conversation flag_103602100_Ninomaru inner surprise attack ghost defeated
+3921 会話フラグ_103602200_二の丸奥奇襲ゴースト撃破２ -- Conversation flag_103602200_Ninomaru inner surprise attack ghost defeat 2
+3922 会話フラグ_103602300_扉の近く -- Conversation flag_103602300_near the door
+3923 会話フラグ_103602400_二の丸奥ゴースト不意打ち -- Conversation Flag_103602400_Ninomaru Oku Ghost Surprise Attack
+3924 会話フラグ_103602500_二の丸奥ゴースト不意打ち２ -- Conversation Flag_103602500_Ninomaru Oku Ghost Surprise Attack 2
+3925 会話フラグ_103602600_二の丸奥殲滅不意打ちver -- Conversation flag_103602600_Ninomaru Oku annihilation surprise attack ver.
+3926 会話フラグ_103602700_二の丸奥殲滅不意打ちver２ -- Conversation flag_103602700_Ninomaru Oku annihilation surprise attack ver.2
+3927 会話フラグ_103602800_二の丸奥ゴースト事前発見 -- Conversation Flag_103602800_Ninomaru Oku Ghost Advance Discovery
+3928 会話フラグ_103602900_二の丸奥ゴースト事前発見２ -- Conversation Flag_103602900_Ninomaru Oku Ghost Advance Discovery 2
+3929 会話フラグ_103603000_二の丸奥殲滅事前発見 -- Conversation flag_103603000_Ninomaru Oku annihilation advance discovery
+3930 会話フラグ_103603100_二の丸奥殲滅事前発見２ -- Conversation flag_103603100_Ninomaru Oku extermination advance discovery 2
+3931 会話フラグ_103603200_二重扉オープン -- Conversation flag_103603200_Double door open
+3932 会話フラグ_103603300_二重扉オープン２ -- Conversation flag_103603300_Double door open 2
+3933 会話フラグ_103603400_本丸到着０ -- Conversation flag_103603400_Arrival at Honmaru 0
+3934 会話フラグ_103603500_本丸到着２ -- Conversation flag_103603500_Arrival at Honmaru 2
+3935 会話フラグ_103603600_本丸到着３ -- Conversation flag_103603600_Arrival at Honmaru 3
+3936 会話フラグ_103603700_本丸到着４ -- Conversation flag_103603700_Arrival at Honmaru 4
+3937 会話フラグ_103603800_本丸到着４ー１ -- Conversation flag_103603800_Arrival at Honmaru 4-1
+3938 会話フラグ_103603900_本丸到着４ー２ -- Conversation flag_103603900_Arrival at Honmaru 4-2
+3939 会話フラグ_103604000_本丸到着５ -- Conversation flag_103604000_Arrival at Honmaru 5
+3940 会話フラグ_103604100_本丸到着６ -- Conversation flag_103604100_Arrival at Honmaru 6
+3941 会話フラグ_103604200_本丸一機撃破 -- Conversation flag_103604200_Defeated one Honmaru aircraft
+3942 会話フラグ_103604300_本丸一機撃破２ -- Conversation flag_103604300_Defeat one Honmaru machine 2
+3943 会話フラグ_103604400_本丸二機撃破 -- Conversation Flag_103604400_Defeated two Honmaru aircraft
+3944 会話フラグ_103604500_本丸二機撃破２ -- Conversation Flag_103604500_Defeating two Honmaru aircraft 2
+3945 会話フラグ_103604600_本丸残り三機 -- Conversation flag _103604600_ Three aircraft remaining in main enclosure
+3946 会話フラグ_103604700_本丸残り三機２ -- Conversation flag_103604700_Main enclosure remaining three aircraft 2
+3947 会話フラグ_103604800_本丸残り二機 -- Conversation Flag_103604800_Two aircraft remaining in main enclosure
+3948 会話フラグ_103604900_本丸残り二機２ -- Conversation flag_103604900_2 main enclosures remaining 2
+3949 会話フラグ_103605000_本丸残り一機 -- Conversation Flag_103605000_One main unit remaining
+3950 会話フラグ_103605100_本丸残り一機２ -- Conversation flag_103605100_1 aircraft left in main enclosure 2
+3951 会話フラグ_103605200_クリア -- Conversation flag_103605200_clear
+3952 会話フラグ_103605300_クリア２ -- Conversation flag_103605300_clear 2
+3953 会話フラグ_103605400_クリア３ -- Conversation flag_103605400_clear 3
+3954 会話フラグ_103605500_死亡時 -- Conversation flag_103605500_When dying
+3955 会話フラグ_103603410_本丸到着１ -- Conversation flag_103603410_Arrival at Honmaru 1
+3956 会話フラグ_103603420_本丸到着１の続き -- Conversation flag_103603420_Continuation of Honmaru Arrival 1
+2060000000 敵リスポン -- enemy respawn

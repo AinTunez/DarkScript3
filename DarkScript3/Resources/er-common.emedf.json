@@ -202,7 +202,7 @@
               "unk4": 0
             },
             {
-              "name": "Target Number Of Seconds",
+              "name": "Target Time (Seconds)",
               "type": 6,
               "enum_name": null,
               "default": 0,
@@ -236,7 +236,7 @@
               "unk4": 0
             },
             {
-              "name": "Target Number Of Frames",
+              "name": "Target Time (Frames)",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -1826,7 +1826,7 @@
               "unk4": 0
             },
             {
-              "name": "Unknown4",
+              "name": "Start Delay During Change (s)",
               "type": 6,
               "enum_name": null,
               "default": 0,
@@ -1840,7 +1840,7 @@
               "unk4": 0
             },
             {
-              "name": "Unknown8",
+              "name": "End Delay During Change (s)",
               "type": 6,
               "enum_name": null,
               "default": 0,
@@ -5802,7 +5802,7 @@
           "index": 0,
           "args": [
             {
-              "name": "Number Of Seconds",
+              "name": "Time (Seconds)",
               "type": 6,
               "enum_name": null,
               "default": 0,
@@ -5822,7 +5822,7 @@
           "index": 1,
           "args": [
             {
-              "name": "Number Of Frames",
+              "name": "Time (Frames)",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -5842,7 +5842,7 @@
           "index": 2,
           "args": [
             {
-              "name": "Min Number Of Seconds",
+              "name": "Min Time (Seconds)",
               "type": 6,
               "enum_name": null,
               "default": 0,
@@ -5856,7 +5856,7 @@
               "unk4": 0
             },
             {
-              "name": "Max Number Of Seconds",
+              "name": "Max Time (Seconds)",
               "type": 6,
               "enum_name": null,
               "default": 0,
@@ -5876,7 +5876,7 @@
           "index": 3,
           "args": [
             {
-              "name": "Min Number Of Frames",
+              "name": "Min Time (Frames)",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -5890,7 +5890,7 @@
               "unk4": 0
             },
             {
-              "name": "Max Number Of Frames",
+              "name": "Max Time (Frames)",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -6020,7 +6020,7 @@
           "index": 7,
           "args": [
             {
-              "name": "Min Number Of Frames",
+              "name": "Min Time (Frames)",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -6034,7 +6034,7 @@
               "unk4": 0
             },
             {
-              "name": "Max Number Of Frames",
+              "name": "Max Time (Frames)",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -8944,7 +8944,7 @@
           "index": 6,
           "args": [
             {
-              "name": "Unknown",
+              "name": "Event Slot ID",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -12768,7 +12768,7 @@
               "unk4": 0
             },
             {
-              "name": "Play Animation ID",
+              "name": "Animation ID",
               "type": 5,
               "enum_name": null,
               "default": -1,
@@ -13808,7 +13808,7 @@
               "unk4": 0
             },
             {
-              "name": "Warp Type",
+              "name": "Warp Entity Type",
               "type": 0,
               "enum_name": "Target Entity Type",
               "default": 0,
@@ -13884,7 +13884,7 @@
               "unk4": 0
             },
             {
-              "name": "Warp Type",
+              "name": "Warp Entity Type",
               "type": 0,
               "enum_name": "Target Entity Type",
               "default": 0,
@@ -13946,7 +13946,7 @@
               "unk4": 0
             },
             {
-              "name": "Warp Type",
+              "name": "Warp Entity Type",
               "type": 0,
               "enum_name": "Target Entity Type",
               "default": 0,
@@ -14565,7 +14565,7 @@
               "unk4": 0
             },
             {
-              "name": "Warp Type",
+              "name": "Warp Entity Type",
               "type": 0,
               "enum_name": "Target Entity Type",
               "default": 0,
@@ -18080,7 +18080,8 @@
         "Bullet Producer Entity ID",
         "Unknown Entity ID A",
         "Unknown Entity ID B",
-        "Origin Entity ID"
+        "Origin Entity ID",
+        "Warp Destination Entity ID"
       ],
       "Character Entity ID": [
         "Attacker Entity ID",
@@ -18107,6 +18108,9 @@
       ],
       "Hit Entity ID": [
         "Warp Destination Hit Entity ID"
+      ],
+      "Target Entity Type": [
+        "Warp Entity Type"
       ],
       "Camera ID": [
         "Normal Camera ID",
@@ -18150,7 +18154,6 @@
         "Parent Dummypoly ID",
         "Achievement ID",
         "Animation ID",
-        "Play Animation ID",
         "Soul Amount Save Slot ID",
         "Soul Amount Load Slot ID",
         "Command ID",
@@ -18172,26 +18175,33 @@
         "cmds": ["3", "1003", "2003[05]", "2003[06]", "2003[07]", "2003[52]", "2007", "2010[02]"]
       },
       {
+        "name": "Relative Entity ID",
+        "data_type": "entity",
+        "detail_name": "Entity ID"
+      },
+      {
         "name": "Parameters",
         "data_type": "entity"
-      },
-      {
-        "name": "Entity ID",
-        "cmds": ["4", "1004", "2003[11]", "2003[12]", "2003[15]", "2003[73]", "2004", "2009[04]"],
-        "data_type": "entity",
-        "types": ["Enemy", "Self"]
-      },
-      {
-        "name": "Entity ID",
-        "cmds": ["5", "1005", "2005", "2009[00]", "2009[03]"],
-        "data_type": "entity",
-        "type": "Asset"
       },
       {
         "name": "Entity ID",
         "cmds": ["2003[18]"],
         "data_type": "entity",
         "types": ["Asset", "Enemy", "Self"]
+      },
+      {
+        "name": "Entity ID",
+        "cmds": ["4", "1004", "2003[11]", "2003[12]", "2003[15]", "2003[73]", "2004", "2009[04]"],
+        "data_type": "entity",
+        "types": ["Enemy", "Self"],
+        "detail_name": "Character Entity ID"
+      },
+      {
+        "name": "Entity ID",
+        "cmds": ["5", "1005", "2005", "2009[00]", "2009[03]"],
+        "data_type": "entity",
+        "type": "Asset",
+        "detail_name": "Asset Entity ID"
       },
       {
         "name": "Entity ID",
@@ -18218,10 +18228,6 @@
         "name": "Initial Area Entity ID",
         "data_type": "entity",
         "types": ["Region", "Player"]
-      },
-      {
-        "name": "Relative Entity ID",
-        "data_type": "entity"
       },
       {
         "name": "Respawn Area Entity ID",
@@ -18267,17 +18273,6 @@
         "name": "Patrol Information Entity ID",
         "data_type": "entity",
         "type": "PatrolInfo"
-      },
-      {
-        "multi_names": ["Warp Type", "Warp Destination Entity ID"],
-        "data_type": "entity",
-        "override_enum": "TargetEntityType",
-        "override_types": {
-          "Asset": {"value": 0},
-          "Region": {"value": 1},
-          "Enemy": {"value": 2},
-          "Self": {"value": 2}
-        }
       },
       {
         "multi_names": ["Target Entity Type", "Entity ID"],

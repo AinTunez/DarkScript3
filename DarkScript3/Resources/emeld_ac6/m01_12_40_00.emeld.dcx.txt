@@ -1,0 +1,123 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッション開始時処理 -- Mission start process
+2001 ミッション開始時処理_CP時も必要な物 -- Processing at the start of the mission_Things needed during CP
+2002 チェックポイント有効化 -- checkpoint enable
+2003 チェックポイントフラグ -- checkpoint flag
+2004 ミッション開始時用_マーカー無効化 -- For mission start_marker invalidation
+2005 CP更新時用_落下復帰先更新 -- For updating CP_Updating fall return destination
+2010 目標1破壊後部隊有効化 -- Activate troops after target 1 is destroyed
+2020 DOTダメージ発生 -- DOT damage occurs
+2021 DOTダメージ解除 -- DOT damage removed
+2022 後半_Gparamディアクティベートイベント -- Second half_Gparam deactivation event
+2023 目標破壊後_液体コーラルアニメ再生と予兆SFX再生 -- After target destruction_liquid coral animation playback and omen SFX playback
+2024 後半_Gparamアクティベートイベント -- Second half_Gparam activation event
+2025 後半_コーラルカメラ前SFX有効化 -- Second half_Enable SFX in front of coral camera
+2026 後半_コーラルカメラ前SFX無効化 -- Second half_SFX disabled in front of coral camera
+2027 目標破壊時間欠泉_予兆用振動再生 -- Target destruction time geyser_Vibration playback for prediction
+2100 マーカー制御_目標地点_ON -- Marker control_target point_ON
+2102 マーカー制御_坑道入口_ON -- Marker control_Davage entrance_ON
+2104 マーカー制御_坑道縦穴入口_ON -- Marker control _ Mine shaft entrance_ON
+2106 マーカー制御_坑道外_ON -- Marker control_Outside mineshaft_ON
+2108 マーカー制御_目標TGT_ON -- Marker control_Target TGT_ON
+2110 マーカー制御_復路分岐地点_ON -- Marker control_return branch point_ON
+2112 マーカー制御_復路坑道入口縦穴1_ON -- Marker control_Return tunnel entrance vertical hole 1_ON
+2114 マーカー制御_復路坑道入口縦穴2_ON -- Marker control_Return tunnel entrance vertical hole 2_ON
+2116 マーカー制御_復路分岐地点後1_ON -- Marker control_return route after branch point 1_ON
+2118 マーカー制御_復路分岐地点後2_ON -- Marker control_ON after return route branch point 2_ON
+2130 間欠泉発生イベント_分岐地点1 -- Geyser occurrence event_branch point 1
+2131 間欠泉発生イベント_分岐地点2 -- Geyser occurrence event_branch point 2
+2132 間欠泉発生イベント_分岐地点3 -- Geyser occurrence event_branch point 3
+2133 間欠泉発生イベント_細道 -- Geyser occurrence event_Narrow path
+2134 間欠泉発生イベント_寄り道部屋前1 -- Geyser occurrence event_Detour room front 1
+2136 間欠泉発生イベント_入口手前 -- Geyser occurrence event_before the entrance
+2137 間欠泉発生イベント_入口奥 -- Geyser occurrence event_behind the entrance
+2164 後半_敵のEvEダメージ上昇 -- Second half_enemy EvE damage increase
+2167 後半_目標そば_間欠泉発生 -- Second half_Beside the target_Geyser occurs
+2200 後半_脱出直前噴き出し発生1 -- Second half_Gushing occurs just before escape 1
+2201 後半_脱出直前噴き出し発生2 -- Second half_Gushing occurs just before escape 2
+2202 後半_脱出直前縦穴噴き出し発生 -- Second half_A vertical hole erupts just before escape.
+2210 後半_脱出時_噴き出し発生イベント -- Second half_Escape_Gushing event
+2211 後半_脱出直前大震動 -- Second half_Big earthquake just before escape
+2212 後半_脱出直前間欠泉発生 -- Second half_Geyser occurs just before escape
+2302 目標破壊判定 -- Target destruction judgment
+2320 マップ進行_坑道外判定 -- Map progress_Outside mine shaft judgment
+2321 マップ進行_坑道入口往路判定 -- Map progress _ Mine shaft entrance outbound route determination
+2322 マップ進行_目標接近判定 -- Map progress_target approach determination
+2323 マップ進行_坑道入口復路判定 -- Map progress_Dareway entrance return route determination
+2324 マップ進行_復路坑道外判定 -- Map progress_Return route outside mine shaft judgment
+2325 マップ進行_坑道入口縦穴中腹判定 -- Map progress _ Mine shaft entrance vertical hole judgment
+2326 マップ進行_坑道中腹判定 -- Map progress_Middleway judgment of mine shaft
+2328 マップ進行_復路目標手前判定 -- Map progress_Return route nearer goal determination
+2329 マップ進行_坑道入口縦穴出口判定 -- Map progress_Dare entrance/vertical exit determination
+2330 マップ進行_坑道縦穴入口判定 -- Map progress_ Mine shaft entrance determination
+2331 マップ進行_寄り道部屋判定 -- Map progress_Detour room determination
+2332 マップ進行_寄り道手前_マーカー更新判定 -- Map progress_before detour_marker update judgment
+2333 マップ進行_寄り道部屋イベント発生判定 -- Map progress_Detour room event occurrence determination
+2334 マップ進行_往路_入口接敵判定 -- Map progress_Outward route_Entrance contact determination
+2335 マップ進行_復路_脱出直前判定 -- Map progress_Return route_Judgment just before escape
+2350 間欠泉発生判定 -- Geyser occurrence determination
+2351 間欠泉二回目発生判定 -- Geyser second occurrence determination
+2352 間欠泉細道発生判定 -- Geyser path occurrence determination
+2353 間欠泉発生判定_坑道入口 -- Geyser occurrence determination _ Mine entrance
+2370 後半_脱出直前噴出発生判定1 -- Second half_Gush occurrence determination just before escape 1
+2371 後半_脱出直前噴出発生判定2 -- Second half_Gush occurrence determination just before escape 2
+2372 後半_脱出時間欠泉発生判定 -- Second half_escape time geyser occurrence determination
+2400 後半_暴走強制発生判定 -- Second half_Runaway forced occurrence judgment
+2401 Gparam切り替え用領域イベント -- Gparam switching area event
+2450 後半_分岐地点前_正規軍MT移動演出 -- Second half_Before the branching point_Regular army MT movement performance
+2460 後半_細道前_正規軍MT移動演出 -- Second half_Before Hosomichi_Regular army MT movement performance
+2500 間欠泉ダメージ判定_目標そば -- Geyser damage determination_near the target
+2501 間欠泉ダメージ判定_分岐地点1 -- Geyser damage determination_branch point 1
+2502 間欠泉ダメージ判定_分岐地点2 -- Geyser damage determination_branch point 2
+2503 間欠泉ダメージ判定_分岐地点3 -- Geyser damage determination_branch point 3
+2504 間欠泉ダメージ判定_細道 -- Geyser damage determination_Narrow path
+2505 間欠泉ダメージ判定_寄り道前1 -- Geyser damage determination_before detour 1
+2506 間欠泉ダメージ判定_寄り道前2 -- Geyser damage determination_before detour 2
+2507 間欠泉ダメージ判定_入口手前 -- Geyser damage determination_before the entrance
+2508 間欠泉ダメージ判定_入口奥 -- Geyser damage determination_back of entrance
+2700 後半_正規軍AC拡散バズ演出 -- Second half_regular army AC spreading buzz production
+2702 後半_間欠泉やられ役USドローン起動判定 -- Second half_ Geyser role US drone activation judgment
+2703 前半_目標手前_バグ起動判定 -- First half_Before the goal_Bug activation determination
+3050 後半_敵用継続ダメージ特殊効果設定 -- Second half_Continuous damage special effect settings for enemies
+3210 後半_間欠泉大2_正規軍MT演出 -- Second half_Geyser Large 2_Regular army MT production
+3215 後半_間欠泉大2_正規軍MT演出_固定砲 -- Second half_Geyser large 2_Regular army MT production_Fixed gun
+3216 後半_間欠泉大2_正規軍MT演出_やられ役 -- Second half_Geyser Dai 2_Regular army MT production_Role
+3400 間欠泉一回目発生済みフラグ -- Geyser first occurrence flag
+3401 間欠泉二回目発生済みフラグ -- Geyser second occurrence flag
+3402 間欠泉細道発生済みフラグ -- Geyser path occurrence flag
+3403 間欠泉_後半坑道入口後1発生済みフラグ -- Geyser_1 flag after the second half of the tunnel entrance
+3404 間欠泉_後半坑道入口後2発生済みフラグ -- Geyser_2 flag after the second half of the tunnel entrance
+3405 間欠泉_後半坑道入口縦穴1発生済みフラグ -- Geyser_Late shaft entrance vertical hole 1 flag
+3406 間欠泉_後半坑道入口縦穴2発生済みフラグ -- Geyser_Late shaft entrance vertical hole 2 flag
+3410 暴走発生フラグ -- Out-of-control flag
+3411 暴走発生後会話進行フラグ -- Conversation progress flag after runaway occurrence
+3500 会話フラグ_102300100_ミッション開始 -- Conversation flag_102300100_Mission start
+3501 会話フラグ_102300200_開始演出後 -- Conversation flag_102300200_After the start effect
+3502 会話フラグ_102300300_坑道内初接敵 -- Conversation flag_102300300_First encounter in the mine shaft
+3503 会話フラグ_102300500_坑道侵入時 -- Conversation flag_102300500_When entering the mine shaft
+3504 会話フラグ_102300600_坑道進行中 -- Conversation flag _102300600_ Mine shaft in progress
+3505 会話フラグ_102300900_破壊目標接近 -- Conversation flag_102300900_Destruction target approaching
+3506 会話フラグ_102301000_破壊目標接近後破壊しなかった時 -- Conversation Flag_102301000_When the destruction target is not destroyed after approaching it
+3507 会話フラグ_102301700_目標破壊時 -- Conversation flag_102301700_When target is destroyed
+3508 会話フラグ_102301800_振動開始時 -- Conversation flag_102301800_When vibration starts
+3509 会話フラグ_102302100_暴走発生 -- Conversation flag_102302100_Runaway occurrence
+3510 会話フラグ_102302200_暴走後初接敵 -- Conversation flag_102302200_First encounter after runaway
+3511 会話フラグ_102302500_2200の続き -- Continuation of conversation flag_102302500_2200
+3512 会話フラグ_102302900_間欠泉一回目発生 -- Conversation Flag_102302900_Geyser first occurrence
+3513 会話フラグ_102303000_間欠泉一回目後接敵時 -- Conversation Flag_102303000_When approaching enemy after the first geyser
+3514 会話フラグ_102303020_3000の続き -- Continuation of conversation flag_102303020_3000
+3515 会話フラグ_102303100_細道移動中 -- Conversation flag_102303100_Moving on narrow path
+3516 会話フラグ_102303120_3100の続き -- Continuation of conversation flag_102303120_3100
+3517 会話フラグ_102303140_細道後 -- Conversation flag_102303140_After the narrow path
+3518 会話フラグ_102303160_細道後間欠泉発生時 -- Conversation flag_102303160_When a geyser occurs after the narrow path
+3519 会話フラグ_102303300_同じエリアにとどまっていたら -- Conversation flag_102303300_If you stay in the same area
+3520 会話フラグ_102303400_脱出直前接敵時 -- Conversation Flag_102303400_When approaching enemy just before escape
+3521 会話フラグ_102303700_3400の続き -- Continuation of conversation flag_102303700_3400
+3522 会話フラグ_102303800_最後の縦穴到着時 -- Conversation flag_102303800_When arriving at the last shaft
+3523 会話フラグ_102303900_脱出直前時 -- Conversation flag_102303900_Just before escape
+3524 会話フラグ_102304000_脱出完了後 -- Conversation Flag_102304000_After escape completion
+3525 会話フラグ_102304100_ミッションクリア会話 -- Conversation flag_102304100_Mission clear conversation
+3526 会話フラグ_102304500_4100の続き -- Continuation of conversation flag_102304500_4100
+3527 会話フラグ_102304900_暴走中に死亡 -- Conversation Flag_102304900_Died during rampage
+3999 脱出SFX作業用デバッグフラグ -- Debug flag for escape SFX work

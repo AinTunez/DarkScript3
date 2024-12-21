@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+32040519 エレベータ初期フラグ設定 -- Elevator initial flag setting
+32042200 亡者鉱夫_採掘中止_XX -- Dead Miner_Mining Canceled_XX
+32042250 亡者鉱夫_採掘中止_武器強化素材_XX -- Dead Miner_Mining Canceled_Weapon Enhancement Materials_XX
+32042270 亡者鉱夫_採掘中止_武器強化素材_終了後待機_XX -- Dead Miner_Canceling mining_Weapon enhancement materials_Waiting after completion_XX
+32042510 エレベータイベント起動 -- Elevator event activation
+32042569 消費鍵のガーゴイル像A_壁制御 -- Gargoyle statue of consumption key A_Wall control
+32042580 梯子登録 -- ladder registration
+32042800 ボス撃破 -- Defeat the boss
+32042810 ボス出現 -- Boss appears
+32042811 ボス激昂 -- boss rage
+32042849 ボスイベント起動 -- Boss event activation
+32049570 消費鍵のガーゴイル像A_会話 -- Consumption key gargoyle statue A_Conversation
+1000000000 敵リスポン -- enemy respawn

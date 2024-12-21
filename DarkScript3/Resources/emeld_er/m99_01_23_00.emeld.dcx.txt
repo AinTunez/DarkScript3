@@ -1,0 +1,4 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+9992910 敵キャラ死亡 -- enemy character death
+1000000000 敵リスポン -- enemy respawn

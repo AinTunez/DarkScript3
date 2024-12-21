@@ -1,0 +1,45 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 初期化イベント -- initialization event
+2001 ロジックの初期化 -- Initializing logic
+2003 作戦ラインの初期化 -- Initializing the line of operations
+2005 プレイヤー初期位置 -- Player initial position
+2020 作戦ライン有効化01 -- Operation line activation 01
+2021 作戦ライン有効化02 -- Operation line activation 02
+2022 作戦ライン有効化03 -- Operation line activation 03
+2030 敵にTGT_tut01 -- TGT_tut01 to enemy
+2031 敵にTGT_tut02 -- TGT_tut02 to enemy
+2032 敵にTGT_tut03 -- TGT_tut03 to enemy
+2033 敵にTGT_tut04 -- TGT_tut04 to enemy
+2044 一部敵の無効化 -- Disable some enemies
+2045 Tut04有効化 -- Tut04 enabled
+2046 Tut02有効化 -- Tut02 enabled
+2047 Tut03有効化 -- Tut03 enabled
+2050 通路01の敵撃破判定 -- Enemy defeat judgment in passage 01
+2051 通路02の敵撃破判定 -- Enemy defeat judgment in passage 02
+2052 通路03の敵撃破判定 -- Enemy defeat judgment in passage 03
+2053 通路04の敵撃破判定 -- Enemy defeat judgment in passage 04
+2090 ミッション成功 -- mission success
+2091 ミッション失敗 -- mission failed
+2200 tut01表示領域_射撃反動 -- tut01 display area_shooting recoil
+2201 tut02表示領域_効率の良い殲滅 -- tut02 display area_Efficient annihilation
+2202 tut03表示領域_範囲攻撃 -- tut03 display area_range attack
+2203 tut04表示領域_ダブルトリガー -- tut04 display area_double trigger
+2204 よろけチュート表示条件 -- Stagger Tute display conditions
+2205 tut03表示領域_強射撃 -- tut03 display area_strong shooting
+2206 tut02表示領域_未発見ボーナス -- tut02 display area_undiscovered bonus
+2300 ガイド表示_2段目 -- Guide display_2nd row
+2301 ガイド表示_3段目 -- Guide display_3rd row
+2302 ガイド表示_4段目 -- Guide display_4th row
+2310 ガイド消去_2段目 -- Guide deletion_2nd stage
+2311 ガイド消去_3段目 -- Guide deletion_3rd stage
+2312 ガイド消去_4段目 -- Guide deletion_4th stage
+2500 チュートリアルIDフラグ１ -- Tutorial ID flag 1
+2501 チュートリアルIDフラグ２ -- Tutorial ID flag 2
+2502 チュートリアルIDフラグ３ -- Tutorial ID flag 3
+2503 チュートリアルIDフラグ４ -- Tutorial ID flag 4
+2600 初期イベント -- initial event
+2601 初期イベント_後 -- After the initial event
+2602 初期イベント_SE -- Initial event_SE
+2650 終了時イベント -- End event
+1000000000 敵リスポン -- enemy respawn

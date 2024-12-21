@@ -1,0 +1,21 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1051562200 野生動物霊体化 -- wild animal spirit form
+1051562500 遺跡地下室イベント_霧壁解除 -- Ruins basement event_fog wall removal
+1051562510 遺跡地下室イベント_霧壁エラーメッセージ -- Ruins basement event_fog wall error message
+1051563700 NPC227霊クラゲの少女_NPC初期化イベント -- NPC227 Spirit Jellyfish Girl_NPC initialization event
+1051563701 NPC227霊クラゲの少女_バディクラゲが近づいた判定 -- NPC227 Spirit jellyfish girl_Buddy jellyfish approaching judgment
+1051563702 NPC227霊クラゲの少女_能動会話再生済リセット -- NPC227 Spirit Jellyfish Girl_Active conversation replayed reset
+1051563703 NPC227霊クラゲの少女_墓のメッセージ表示 -- NPC227 Spirit Jellyfish Girl_Message display in the grave
+1051563704 NPC227霊クラゲの少女_敵対切り替え -- NPC227 Spirit Jellyfish Girl_Enemy Switch
+1051563710 NPC348マレニアの娘_ﾌｪｰｽﾞ5_NPC初期化イベント -- NPC348 Marenia's Daughter_Phase 5_NPC Initialization Event
+1051563715 NPC351金仮面の従者_NPC初期化イベント -- NPC351 Gold Masked Squire_NPC initialization event
+1051563716 NPC112金仮面の探究者_NPC初期化イベント -- NPC112 Gold Masked Seeker_NPC initialization event
+1051563717 NPC112金仮面の探究者_死亡イベント -- NPC112 Gold Masked Seeker_Death Event
+1051563720 NPC228ウルフライダー_城砦への誘導会話再生 -- NPC228 Wolf Rider_Conversation playback leading to the castle

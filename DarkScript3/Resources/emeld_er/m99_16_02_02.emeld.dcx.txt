@@ -1,0 +1,83 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+99002200 野生動物ロック不可 -- Wild animals cannot be locked
+99002205 野生動物召喚処理キック -- Wild animal summoning kick
+99002206 野生動物召喚 -- wild animal summoning
+99002210 野生動物召喚_XX -- Wild animal summon_XX
+99002340 野生動物召喚状態判別 -- Wild animal summoning status determination
+99002350 動物死亡時イベントキック_XX -- Event kick when animal dies_XX
+99002400 動物側憑依準備_XX -- Preparation for animal possession_XX
+99002450 祖霊憑依出現_XX -- Ancestral spirit possession appears_XX
+99002500 生命吸収 -- life absorption
+99002550 祖霊定点出現 -- Ancestral spirit fixed point appearance
+99002560 祖霊無敵解除 -- Ancestral spirit invincibility removed
+99002570 ボスゲージ表示 -- boss gauge display
+99002580 ジェネレートテスト -- Generate test
+99002590 生命吸収_初回 -- Life absorption_first time
+99002591 生命吸収_2回目 -- Life absorption_2nd time
+99002592 生命吸収_3回目以降 -- Life absorption_from 3rd time
+99002595 ボス撃破演出 -- Boss defeat performance
+99002600 無重力化イベント -- Zero gravity event
+99002601 子供たち特殊効果付与テスト -- Children's special effects test
+99002603 AI音間隔発生 -- AI sound interval generation
+99002605 レナラ落下後タイマー -- Timer after Renara falls
+99002610 子供たち_歌う -- children_sing
+99002615 レナラ浮上 -- Renara levitation
+99002616 レナラ降下 -- Renala descent
+99002617 レナラ降下キャンセル_初回用 -- Renara descent cancellation_for first time use
+99002618 レナラHU前戦闘開始 -- Battle begins in front of Renara HU
+99002649 ここまでは使えるよ -- It can be used up to this point
+99002650 子供たち空中死亡_XX -- Children died in the air_XX
+99002700 子供たち死亡処理_XX -- Children death processing_XX
+99002750 レナラ墓標弾丸収集開始 -- Renara Grave Marker Bullet Collection Started
+99002751 墓標弾丸フラグ_枠確保 -- Grave marker bullet flag_frame secured
+99002752 墓標弾丸特殊効果振り分け -- Tombstone bullet special effects distribution
+99002756 ID予約1 -- ID reservation 1
+99002760 レナラHU後ワープ封印処理 -- Warp sealing process after Renara HU
+99002761 レナラHU後ワープ解放処理 -- Warp release process after Renara HU
+99002762 レナラワープ処理 -- Renara warp processing
+99002763 レナラ存在領域検索_XX -- Renara Existence Area Search_XX
+99002769 ID予約2 -- ID reservation 2
+99002770 本棚_ポルターガイスト -- Bookshelf_Poltergeist
+99002771 燭台_ポルターガイスト -- Candelabra_Poltergeist
+99002772 シャンデリア_ポルターガイスト -- Chandelier_Poltergeist
+99002773 結晶の月_二次弾丸射出_XX -- Crystal Moon_Secondary bullet injection_XX
+99002800 マリケス戦闘開始 -- Marikes battle begins
+99002801 マリケスHU -- Mariques HU
+99002802 マリケスHU戦闘開始 -- Marikes HU battle begins
+99002803 マリケス撃破 -- Defeat Mariquez
+99002804 マリケス壁キック用イベントターゲット設定 -- Event target setting for Marikes wall kick
+99003202 結晶の部族召喚 -- Crystal Tribe Summon
+99003203 結晶の部族召喚攻撃_終了 -- Crystal tribe summoning attack_end
+99003204 結晶の部族帰還 -- Return of the Crystal Tribe
+99003205 結晶の部族死亡_XX -- Crystal Tribe Death_XX
+99003210 結晶の部族召喚待機_XX -- Waiting for crystal tribe summon_XX
+99003217 狼頭の戦士召喚 -- Wolf Head Warrior Summon
+99003218 狼頭の戦士召喚攻撃_終了 -- Wolf-headed warrior summon attack_end
+99003219 狼頭の戦士帰還 -- The return of the wolf-headed warrior
+99003220 狼頭の戦士死亡 -- wolf head warrior dies
+99003221 狼頭の戦士召喚待機 -- Waiting to summon the wolf-headed warrior
+99003231 トロル召喚 -- Troll summon
+99003232 トロル帰還 -- Troll returns
+99003237 オオカミ召喚 -- wolf summon
+99003238 オオカミ召喚攻撃_終了 -- Wolf summon attack_end
+99003239 オオカミ帰還 -- wolf return
+99003240 オオカミ死亡_XX -- Wolf death_XX
+99003245 オオカミ召喚待機_XX -- Waiting for wolf summon_XX
+99003250 老獅子ダミポリ切り替え -- Old lion switch
+99003251 マルギット_ボスゲージ表示 -- Margit_Boss gauge display
+99003252 マルギット_HP減少時HU -- Margit_HU when HP decreases
+99003253 マルギット_HP減少時特殊効果付与 -- Margit_Special effects added when HP decreases
+99003260 飛行人形兵_落下攻撃_XX -- Flying Puppet Soldier_Falling Attack_XX
+99003265 飛行人形兵_溶岩壺投擲_XX -- Flying Doll Soldier_Lava Pot Throwing_XX
+99003270 祖霊信仰者_バフ発動 -- Ancestral spirit believer_buff activation
+99003271 祖霊信仰者_バフ解除 -- Ancestral spirit believer_buff removed
+99003272 祖霊信仰者_バフ解除処理 -- Ancestral spirit believer_buff removal process
+99003280 ナビメッシュノードバンクテスト -- Navimesh node bank test
+99003290 扉解放_ナビメッシュ連動テスト -- Door release_Navimesh interlocking test
+99003295 野犬ティラノ_殺害 -- Wild dog Tyranno_murder
+99003296 雑兵ミケラ化 -- Miscellaneous soldier Michaelization
+99003300 守護者の末裔_大技タイプ_自動ニト剣_XX -- Guardian's Descendant_Great Skill Type_Automatic Nito Sword_XX
+99003310 守護者の末裔_演出カメラ_ON_XX -- Descendants of the Guardian_Production Camera_ON_XX
+99003320 守護者の末裔_演出カメラ_OFF_XX -- Descendants of the Guardian_Production Camera_OFF_XX
+1000000000 敵リスポン -- enemy respawn

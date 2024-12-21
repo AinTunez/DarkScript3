@@ -5,10 +5,12 @@ namespace DarkScript3
 {
     public class ScriptSettings
     {
+        public static readonly List<string> ValidSettings = new() { "ds1r", "nopreprocess" };
+
         private readonly InstructionDocs docs;
         private readonly Dictionary<string, string> settings;
 
-        public ScriptSettings(InstructionDocs docs, Dictionary<string, string> existing = null)
+        public ScriptSettings(InstructionDocs docs = null, Dictionary<string, string> existing = null)
         {
             this.docs = docs;
             settings = new Dictionary<string, string>();
@@ -33,7 +35,7 @@ namespace DarkScript3
             get
             {
                 EventCFG.CFGOptions opts = EventCFG.CFGOptions.GetDefault();
-                if (docs.AllowRestrictConditionGroups)
+                if (IsRemasteredSettable)
                 {
                     opts.RestrictConditionGroupCount = !IsRemastered;
                 }
@@ -41,8 +43,8 @@ namespace DarkScript3
             }
         }
 
-        public bool IsRemasteredSettable => docs.AllowRestrictConditionGroups;
-        public bool AllowPreprocessSettable => docs.Translator != null;
+        public bool IsRemasteredSettable => docs == null || docs.AllowRestrictConditionGroups;
+        public bool AllowPreprocessSettable => docs == null || docs.Translator != null;
 
         public bool IsRemastered
         {

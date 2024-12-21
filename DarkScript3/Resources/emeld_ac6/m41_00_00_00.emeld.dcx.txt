@@ -1,0 +1,8 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+41000000 画面前効果イベント -- Front screen effect event
+41002200 画面前効果出現イベント -- Front-screen effect appearance event
+41002210 画面前効果_弱メランジ -- Front screen effect_weak melange
+41002300 アセットアニメ確認用イベント -- Asset animation confirmation event
+41002900 高度計初期化イベント -- Altimeter initialization event
+1000000000 敵リスポン -- enemy respawn

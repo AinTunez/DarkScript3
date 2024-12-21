@@ -1,0 +1,5 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+5000 制御テスト_近づいたらOff -- Control test_Off when approaching
+6666 復活ポイント変更テスト -- Revival point change test
+1000000000 敵リスポン -- enemy respawn

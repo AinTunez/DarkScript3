@@ -46,6 +46,7 @@ namespace DarkScript3
             ["ds3"] = "Dark Souls III",
             ["sekiro"] = "Sekiro",
             ["er"] = "Elden Ring",
+            ["ac6"] = "Armored Core VI",
         };
         private readonly Dictionary<string, Regex> interestingEmevds = new Dictionary<string, Regex>()
         {
@@ -54,12 +55,16 @@ namespace DarkScript3
             ["ds3"] = new Regex(@"^(common|common_func|m[34].*)\.emevd\.dcx$"),
             ["sekiro"] = new Regex(@"^(common|common_func|m[12].*)\.emevd\.dcx$"),
         };
+        // Not shown unles all usages are in secondary files
         private readonly Dictionary<string, Regex> secondaryEmevd = new Dictionary<string, Regex>()
         {
             ["bb"] = new Regex(@"^m21_01"),
             ["ds3"] = new Regex(@"^m4[67]"),
             ["sekiro"] = new Regex(@"^m.._.._[1-9]"),
+            // Files for which MSBs don't exist (there are scattered cases of this in the main mission files as well)
+            ["ac6"] = new Regex(@"^m[6-9]|^m02|^m01_[29]|^m00_11_00_00|^m00_20_00_00|^m01_00_[0124]|^m01_01_[279]|^m01_02_[012479]|^m01_03_[01348]|^m01_04_[345]|^m01_05_[12456789]|^m01_06_[57]|^m01_07_[01349]|^m01_08_[023]|^m01_09_[289]|^m01_10_[1358]|^m01_11_[125]|^m01_12_[45]|^m10_01|^m11|^m22"),
         };
+        // Abbreviated if too many
         private readonly Dictionary<string, Regex> elidedEmevd = new Dictionary<string, Regex>()
         {
             ["er"] = new Regex(@"^(m60|m61|m3[0-2]|m4[0-3])"),
@@ -632,7 +637,7 @@ namespace DarkScript3
                 string showVal(object a) => Escape(arg.GetDisplayValue(a).ToString());
                 return $"<code>{Escape(arg.DisplayName)} = {showVal(val)}{(val2 == null ? "" : " or " + showVal(val2))}</code>";
             }
-            for (int i = 0; i < baseDoc.Arguments.Length; i++)
+            for (int i = 0; i < baseDoc.Arguments.Count; i++)
             {
                 if (v.ExtraArgs.TryGetValue(i, out int val))
                 {

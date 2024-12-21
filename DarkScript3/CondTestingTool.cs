@@ -1,10 +1,7 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SoulsFormats;
 using static SoulsFormats.EMEVD.Instruction;
@@ -37,7 +34,9 @@ namespace DarkScript3
             // scripts still basically applies to these as well.
             if (args.Contains("ac6"))
             {
-                DumpAc6Unknown();
+                // DumpAc6Unknown();
+                // DumpMixedEmedf(args);
+                CombineMixedEmedf(args);
             }
             else if (args.Contains("gen"))
             {
@@ -46,6 +45,14 @@ namespace DarkScript3
             else if (args.Contains("validate"))
             {
                 ValidateEmedf(args);
+            }
+            else if (args.Contains("args"))
+            {
+                AnalyzeArgs(args);
+            }
+            else if (args.Contains("types"))
+            {
+                DumpTypes(args);
             }
             else
             {
@@ -64,10 +71,26 @@ namespace DarkScript3
             ["float"] = 6,
         };
         private static readonly Dictionary<int, string> RevTypes = Types.ToDictionary(e => e.Value, e => e.Key);
-
-        public void DumpTypes()
+        private static readonly Dictionary<string, int> Widths = new()
         {
-            InstructionDocs docs = new InstructionDocs("er-common.emedf.json");
+            ["byte"] = 1,
+            ["ushort"] = 2,
+            ["uint"] = 4,
+            ["sbyte"] = 1,
+            ["short"] = 2,
+            ["int"] = 4,
+            ["float"] = 4,
+        };
+
+        public void DumpTypes(string[] args)
+        {
+            InstructionDocs baseDocs = new InstructionDocs("ds3-common.emedf.json");
+            InstructionDocs docs = new InstructionDocs("ds1-common.emedf.json");
+            Dictionary<string, List<string>> docCats = docs.DOC?.DarkScript?.MetaAliases ?? baseDocs.DOC.DarkScript.MetaAliases;
+            List<string> cats = docCats.Keys.ToList();
+            Dictionary<string, string> revCats = docCats.SelectMany(e => e.Value.Select(v => (v, e.Key))).ToDictionary(e => e.Item1, e => e.Item2);
+            List<EMEDF.DarkScriptType> metaTypes = docs.DOC?.DarkScript?.MetaTypes ?? baseDocs.DOC.DarkScript.MetaTypes;
+            List<string> metaNames = metaTypes.SelectMany(t => t.Name != null ? new[] { t.Name } : ((IEnumerable<string>)t.MultiNames ?? Array.Empty<string>())).ToList();
             SortedDictionary<(string, string), List<string>> cmdsByType = new SortedDictionary<(string, string), List<string>>();
             foreach (EMEDF.ClassDoc bank in docs.DOC.Classes.OrderBy(i => i.Index))
             {
@@ -77,6 +100,7 @@ namespace DarkScript3
                     string name = instr.DisplayName;
                     foreach (EMEDF.ArgDoc arg in instr.Arguments)
                     {
+                        if (arg.Type == 8) continue;
                         string type = RevTypes[(int)arg.Type];
                         if (arg.EnumName == null && type != "float")
                         {
@@ -90,15 +114,54 @@ namespace DarkScript3
                     }
                 }
             }
+            List<(string, string)> sortedIds = new();
+            bool standardPart(string a) => a.Length > 1 && !a.StartsWith('(') && !a.EndsWith(')');
             foreach (bool useId in new[] { true, false })
             {
                 foreach (var entry in cmdsByType)
                 {
                     (string argName, string type) = entry.Key;
                     if (argName.Contains("ID") != useId) continue;
-                    Console.WriteLine($"{type} {argName}: {string.Join(", ", entry.Value)}");
+                    if (args.Contains("print"))
+                    {
+                        Console.WriteLine($"{type} {argName}: {string.Join(", ", entry.Value)}");
+                    }
+                    if (useId)
+                    {
+                        string sortName = string.Join(" ", argName.Split(' ').Where(standardPart).Reverse());
+                        sortedIds.Add((sortName, argName));
+                    }
                 }
-                Console.WriteLine();
+                if (args.Contains("print")) Console.WriteLine();
+            }
+            sortedIds.Sort();
+            List<string> allIds = sortedIds.Select(a => a.Item2).ToList();
+            List<string> catIds = cats.ToList(); // allIds.Intersect(cats).ToList();
+            if (!catIds.Contains("Other")) catIds.Add("Other");
+            Dictionary<string, List<string>> aliases = catIds.ToDictionary(c => c, _ => new List<string>());
+            if (args.Contains("aliases"))
+            {
+                foreach (string id in allIds)
+                {
+                    if (catIds.Contains(id)) continue;
+                    // if (metaNames.Contains(id)) continue;
+                    string standard = string.Join(" ", id.Split(' ').Where(standardPart));
+                    if (!revCats.TryGetValue(id, out string cat) || !catIds.Contains(cat))
+                    {
+                        cat = Enumerable.Reverse(catIds).Where(c => standard.EndsWith(c)).FirstOrDefault("Other");
+                    }
+                    aliases[cat].Add(id);
+                }
+                foreach ((string cat, List<string> als) in aliases)
+                {
+                    Console.WriteLine($"\"{cat}\": [");
+                    foreach (string al in als.Distinct())
+                    {
+                        string suf = metaNames.Contains(al) ? "*" : "";
+                        Console.WriteLine($"  \"{al}{suf}\",");
+                    }
+                    Console.WriteLine("],");
+                }
             }
         }
 
@@ -291,7 +354,7 @@ namespace DarkScript3
                     {
                         Name = name,
                         Index = id,
-                        Arguments = args.ToArray(),
+                        Arguments = args,
                     };
                     doc[bank].Instructions.Add(instrDoc);
                 }
@@ -299,16 +362,16 @@ namespace DarkScript3
                 {
                     if (opt.Contains("changes") && instrDoc.Name != name) Console.WriteLine($"{instrDoc.Name} -> {name}");
                     instrDoc.Name = name;
-                    if (instrDoc.Arguments.Length != args.Count)
+                    if (instrDoc.Arguments.Count != args.Count)
                     {
-                        string err = $"Mismatched arg count for {cmd}: {instrDoc.Arguments.Length} -> {args.Count}";
+                        string err = $"Mismatched arg count for {cmd}: {instrDoc.Arguments.Count} -> {args.Count}";
                         if (opt.Contains("changes"))
                         {
                             Console.WriteLine(err);
                         }
-                        if (instrDoc.Arguments.Length < args.Count)
+                        if (instrDoc.Arguments.Count < args.Count)
                         {
-                            instrDoc.Arguments = instrDoc.Arguments.Concat(args.Skip(instrDoc.Arguments.Length)).ToArray();
+                            instrDoc.Arguments = instrDoc.Arguments.Concat(args.Skip(instrDoc.Arguments.Count)).ToList();
                         }
                         else throw new Exception(err);
                     }
@@ -345,6 +408,10 @@ namespace DarkScript3
             {
                 RunEldenRemoveTest(args);
             }
+            else if (args.Contains("init"))
+            {
+                RunEldenInitTests(args);
+            }
             else
             {
                 RunEldenCommonTests(args);
@@ -375,7 +442,7 @@ namespace DarkScript3
                         {
                             EMEDF.InstrDoc instrDoc = doc[ins.Bank][ins.ID];
                             List<object> args = docs.UnpackArgsWithParams(
-                                ins, i, instrDoc, pn, (argDoc, val) => argDoc.GetDisplayValue(val));
+                                ins, i, instrDoc, pn, (argDoc, val) => argDoc.GetDisplayValue(val)).Args;
                         }
                         catch (Exception ex)
                         {
@@ -429,6 +496,234 @@ namespace DarkScript3
             }
         }
 
+        public void CombineMixedEmedf(string[] args)
+        {
+            List<InstructionDocs> emedfs = new();
+            foreach (string arg in args)
+            {
+                if (arg.EndsWith("json"))
+                {
+                    emedfs.Add(new InstructionDocs(arg));
+                }
+            }
+            string csv = args.Where(a => a.EndsWith(".csv")).First();
+            SortedSet<(int, int)> used = GetUsed(@"C:\Program Files (x86)\Steam\steamapps\common\ARMORED CORE VI FIRES OF RUBICON\Game\event");
+            SortedSet<(int, int)> docced = new();
+            Dictionary<string, string> enumMap = new();
+            doc = emedfs[0].DOC;
+            foreach (string line in File.ReadAllLines(csv))
+            {
+                string[] cells = line.Split(",").Select(s => s.Trim()).ToArray();
+                string cat = cells[0];
+                if (cat != "new" && cat != "new!!") continue;
+                string cmd = cells[1];
+                int bank, id;
+                try
+                {
+                    (bank, id) = InstructionDocs.ParseInstructionID(cmd);
+                }
+                catch (FormatException)
+                {
+                    continue;
+                }
+                EMEDF.InstrDoc instr = doc[bank]?[id];
+                if (instr == null) throw new Exception($"Missing {cmd}");
+                docced.Add((bank, id));
+                string name = cells[2].Trim();
+                List<string> argStrs = cells.Skip(3).ToList();
+                if (instr.Arguments.Count != argStrs.Count) throw new Exception($"Arg length mismatch {cmd}");
+                for (int i = 0; i < argStrs.Count; i++)
+                {
+                    string argStr = argStrs[i];
+                    EMEDF.ArgDoc argDoc = instr.Arguments[i];
+                    string type = RevTypes[(int)argDoc.Type];
+                    int typeIndex = argStr.IndexOf(type + " ");
+                    if (typeIndex == -1) throw new Exception($"Arg {cmd} {i} is not {type}");
+                    string enumName = typeIndex == 0 ? null : argStr.Substring(0, typeIndex).Trim();
+                    string argName = argStr.Substring(typeIndex + type.Length).Trim();
+                    if ((enumName == null) != (argDoc.EnumName == null)) throw new Exception($"Arg {cmd} {i} enum mismatch");
+                    if (enumName != null)
+                    {
+                        if (enumMap.TryGetValue(argDoc.EnumName, out string existName) && existName != enumName)
+                        {
+                            throw new Exception($"Enum {argDoc.EnumName} -> {existName} // {enumName}");
+                        }
+                        enumMap[argDoc.EnumName] = enumName;
+                        argDoc.EnumName = enumName;
+                    }
+                    argDoc.Name = argName;
+                }
+                instr.Name = name;
+            }
+            doc.Enums = doc.Enums.Where(enumDoc =>
+            {
+                if (!enumMap.TryGetValue(enumDoc.Name, out string name)) return false;
+                bool changed = false;
+                for (int i = 2; i < 4; i++)
+                {
+                    EMEDF.EnumDoc enumDoc2 = emedfs[i].DOC.Enums.Where(n => n.Name == name).FirstOrDefault();
+                    if (enumDoc2 == null) continue;
+                    if (enumDoc.Values.Keys.SequenceEqual(enumDoc2.Values.Keys))
+                    {
+                        changed = true;
+                        enumDoc.Values = enumDoc2.Values;
+                        break;
+                    }
+                }
+                if (!changed && args.Contains("debug")) Console.WriteLine($"Missing {enumDoc.Name} -> {name}");
+                enumDoc.Name = name;
+                enumDoc.Values = new(enumDoc.Values.OrderBy(e => int.Parse(e.Key)));
+                return true;
+            }).ToList();
+            foreach (var g in enumMap.GroupBy(e => e.Value))
+            {
+                if (g.Count() > 1 && args.Contains("debug"))
+                {
+                    Console.WriteLine($"{g.Key}: {string.Join("//", g.Select(e => e.Key))}");
+                }
+            }
+            doc.Classes.RemoveAll(classDoc =>
+            {
+                classDoc.Instructions.RemoveAll(instrDoc =>
+                {
+                    (int, int) insId = ((int)classDoc.Index, (int)instrDoc.Index);
+                    if (!docced.Contains(insId))
+                    {
+                        if (used.Contains(insId)) throw new Exception($"{insId} used");
+                        return true;
+                    }
+                    return false;
+                });
+                EMEDF.ClassDoc classDoc2 = emedfs[2].DOC[(int)classDoc.Index];
+                if (classDoc2 != null) classDoc.Name = classDoc2.Name;
+                return classDoc.Instructions.Count == 0;
+            });
+            doc.WriteFile("ac6-common.emedf.json");
+        }
+
+        private SortedSet<(int, int)> GetUsed(string emevdDir)
+        {
+            SortedSet<(int, int)> used = new();
+            foreach (string path in Directory.GetFiles(emevdDir, "*.emevd.dcx"))
+            {
+                string fileName = Path.GetFileName(path);
+                emevd = EMEVD.Read(path);
+                foreach (EMEVD.Event e in emevd.Events)
+                {
+                    for (int i = 0; i < e.Instructions.Count; i++)
+                    {
+                        EMEVD.Instruction ins = e.Instructions[i];
+                        var insId = (ins.Bank, ins.ID);
+                        used.Add(insId);
+                    }
+                }
+            }
+            return used;
+        }
+
+        public void DumpMixedEmedf(string[] args)
+        {
+            List<InstructionDocs> emedfs = new();
+            foreach (string arg in args)
+            {
+                if (arg.EndsWith("json"))
+                {
+                    emedfs.Add(new InstructionDocs(arg));
+                }
+            }
+            SortedSet<(int, int)> used = GetUsed(@"C:\Program Files (x86)\Steam\steamapps\common\ARMORED CORE VI FIRES OF RUBICON\Game\event");
+            IEnumerable<(int, int)> getInstrs(InstructionDocs docs)
+            {
+                return docs.DOC.Classes.SelectMany(c => c.Instructions.Select(i => ((int)c.Index, (int)i.Index)));
+            }
+            string getName(InstructionDocs docs) => docs.ResourceString.Replace("-common.emedf.json", "");
+            Dictionary<string, List<string>> argsMap = new();
+            Dictionary<string, string> enumMap = new();
+            Dictionary<string, string> instrMap = new();
+            string argStr(EMEDF.ArgDoc a) => (a.EnumName == null ? "" : $"{a.EnumName} ") + $"{RevTypes[(int)a.Type]} {a.Name}";
+            foreach ((int bank, int id) in getInstrs(emedfs[1]))
+            {
+                EMEDF.InstrDoc first = emedfs[1].DOC[bank]?[id];
+                EMEDF.InstrDoc main = emedfs[2].DOC[bank]?[id];
+                if (main == null) continue;
+                instrMap[first.Name] = main.Name;
+                for (int i = 0; i < Math.Min(first.Arguments.Count, main.Arguments.Count); i++)
+                {
+                    EMEDF.ArgDoc firstArg = first.Arguments[i];
+                    EMEDF.ArgDoc mainArg = main.Arguments[i];
+                    if (!argsMap.TryGetValue(firstArg.Name, out List<string> mainNames))
+                    {
+                        argsMap[firstArg.Name] = mainNames = new List<string>();
+                    }
+                    mainNames.Add(mainArg.Name);
+                    if (firstArg.EnumName != null && mainArg.EnumName != null)
+                    {
+                        enumMap[firstArg.EnumName] = mainArg.EnumName;
+                    }
+                }
+            }
+            if (args.Contains("enum"))
+            {
+                foreach (var g in enumMap.GroupBy(e => e.Value))
+                {
+                    if (g.Count() > 1)
+                    {
+                        Console.WriteLine($"{g.Key}: {string.Join("//", g.Select(e => e.Key))}");
+                    }
+                }
+                return;
+            }
+            Dictionary<string, string> argMap = argsMap.ToDictionary(e => e.Key, e => e.Value.GroupBy(x => x).OrderByDescending(x => x.Count()).First().Key);
+            foreach ((int bank, int id) in getInstrs(emedfs[0]))
+            {
+                string insStr = InstructionDocs.FormatInstructionID(bank, id);
+                foreach (InstructionDocs docs in emedfs)
+                {
+                    EMEDF.InstrDoc instrDoc = docs.DOC[bank]?[id];
+                    if (instrDoc == null) continue;
+                    Console.WriteLine($"{getName(docs).PadRight(6)}, {insStr}, {instrDoc.Name}{string.Join("", instrDoc.Arguments.Select(a => $", {argStr(a)}"))}");
+                }
+                EMEDF.InstrDoc first = emedfs[0].DOC[bank]?[id];
+                EMEDF.InstrDoc main = emedfs[2].DOC[bank]?[id];
+                if (main == null) main = emedfs[3].DOC[bank]?[id];
+                if (instrMap.TryGetValue(first.Name, out string instrName))
+                {
+                    first.Name = instrName;
+                }
+                for (int i = 0; i < first.Arguments.Count; i++)
+                {
+                    EMEDF.ArgDoc firstArg = first.Arguments[i];
+                    if (firstArg.EnumName != null)
+                    {
+                        firstArg.EnumName = enumMap.TryGetValue(firstArg.EnumName, out string mainEnum) ? mainEnum : "UNKENUM" + firstArg.EnumName;
+                    }
+                    if (main != null && i < main.Arguments.Count)
+                    {
+                        EMEDF.ArgDoc mainArg = main.Arguments[i];
+                        if (firstArg.Type == mainArg.Type && firstArg.EnumName == mainArg.EnumName)
+                        {
+                            string extra = "//";
+                            if (argsMap.TryGetValue(firstArg.Name, out List<string> names))
+                            {
+                                extra = names.Contains(mainArg.Name) ? "" : "//" + argMap[firstArg.Name];
+                            }
+                            firstArg.Name = mainArg.Name + extra;
+                        }
+                    }
+                    else
+                    {
+                        if (argMap.TryGetValue(firstArg.Name, out string mainName))
+                        {
+                            firstArg.Name = mainName;
+                        }
+                    }
+                }
+                string type = used.Contains((bank, id)) ? "new" : "new!!";
+                Console.WriteLine($"{type.PadRight(6)}, {insStr}, {first.Name}{string.Join("", first.Arguments.Select(a => $", {argStr(a)}"))}");
+                Console.WriteLine();
+            }
+        }
+
         public void AddUnknownValues(EMEDF emedf, string csv)
         {
             doc = emedf;
@@ -462,7 +757,7 @@ namespace DarkScript3
                     {
                         Name = name,
                         Index = id,
-                        Arguments = args.ToArray(),
+                        Arguments = args,
                     };
                     doc[bank].Instructions.Add(instrDoc);
                 }
@@ -474,12 +769,327 @@ namespace DarkScript3
             }
         }
 
+        public void AnalyzeArgs(string[] args)
+        {
+            Dictionary<string, string> defaultGameDirs = new Dictionary<string, string>
+            {
+                ["ds1"] = @"C:\Program Files (x86)\Steam\steamapps\common\Dark Souls Prepare to Die Edition\DATA\event",
+                ["ds1r"] = @"C:\Program Files (x86)\Steam\steamapps\common\DARK SOULS REMASTERED\event",
+                ["bb"] = @"D:\Gamedev\Bloodborne\uroot\dvdroot_ps4\event",
+                ["ds3"] = @"C:\Program Files (x86)\Steam\steamapps\common\DARK SOULS III\Game\event",
+                // ["ds3"] = @"C:\Users\matt\Downloads\ModData\event_snake",
+                ["sekiro"] = @"C:\Program Files (x86)\Steam\steamapps\common\Sekiro\event",
+                ["er"] = @"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING\Game\event",
+                // ["er"] = @"C:\Users\matt\Downloads\ModData\event_erc",
+                ["ac6"] = @"C:\Program Files (x86)\Steam\steamapps\common\ARMORED CORE VI FIRES OF RUBICON\Game\event",
+            };
+            foreach ((string game, string dir) in defaultGameDirs)
+            {
+                // if (game != "er") continue;
+                List<string> paths = Directory.GetFiles(dir, "*.emevd").Concat(Directory.GetFiles(dir, "*.emevd.dcx")).ToList();
+                if (game == "ds3") paths.RemoveAll(p => Path.GetFileName(p).StartsWith("m2"));
+                Dictionary<string, EMEVD> emevds = paths.ToDictionary(
+                    p => Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(p)),
+                    p => EMEVD.Read(p));
+                string res = game == "ds1r" ? "ds1" : game;
+                InstructionDocs docs = new InstructionDocs($"{res}-common.emedf.json");
+                AnalyzeArgs(emevds, docs);
+            }
+        }
+
+        public void AnalyzeArgs(Dictionary<string, EMEVD> emevds, InstructionDocs docs)
+        {
+            doc = docs.DOC;
+            Dictionary<(string, long), List<EMEDF.ArgDoc>> inferred = new();
+            (int, int) getParamPair(EMEVD.Parameter p) => ((int)p.SourceStartByte, p.ByteCount);
+            string showParam((int, int) p) => $"X{p.Item1}_{p.Item2}";
+            string showFull(EMEVD.Parameter p) => $"^{p.InstructionIndex}({p.TargetStartByte} <- X{p.SourceStartByte}_{p.ByteCount})";
+            List<string> violations = new();
+            int total = 0;
+            void addViolation(string v)
+            {
+                Console.WriteLine(v);
+                violations.Add(v);
+            }
+            bool allowMismatch = docs.ResourceString.StartsWith("ac6");
+            Dictionary<long, List<string>> eventFiles = new();
+            foreach ((string map, EMEVD emevd) in emevds)
+            {
+                foreach (EMEVD.Event e in emevd.Events)
+                {
+                    if (e.ID > 250)
+                    {
+                        if (!eventFiles.ContainsKey(e.ID)) eventFiles[e.ID] = new();
+                        eventFiles[e.ID].Add(map);
+                    }
+                    Dictionary<(int, int), List<EMEDF.ArgDoc>> paramDocs =
+                        e.Parameters.Select(getParamPair).Distinct().ToDictionary(p => p, _ => new List<EMEDF.ArgDoc>());
+                    Dictionary<EMEVD.Parameter, string> pn = e.Parameters.ToDictionary(p => p, p => $"X{p.SourceStartByte}_{p.ByteCount}");
+                    string evId = $"{e.ID} in {map}";
+                    for (int i = 0; i < e.Instructions.Count; i++)
+                    {
+                        EMEVD.Instruction ins = e.Instructions[i];
+                        EMEDF.InstrDoc instrDoc = doc[ins.Bank]?[ins.ID];
+                        if (instrDoc == null) throw new Exception($"{map} {e.ID}: Unknown {ins.Bank} {ins.ID}");
+                        // Parse this normally for display purposes and also simple validation
+                        List<object> plainArgs;
+                        try
+                        {
+                            plainArgs = docs.UnpackArgsWithParams(
+                                ins, i, instrDoc, pn, (argDoc, val) => argDoc.GetDisplayValue(val), allowMismatch).Args;
+                        }
+                        catch
+                        {
+                            Console.WriteLine(InstructionDocs.InstrDebugStringFull(ins, evId, i, pn));
+                            throw;
+                        }
+                        string showInstr()
+                        {
+                            return $"{evId} #{i} {instrDoc.Name}({string.Join(", ", plainArgs)})";
+                        }
+                        // This is just initialization, and probably disallow recursive stuff
+                        if (docs.IsVariableLength(instrDoc))
+                        {
+                            if (e.Parameters.Any(p => p.InstructionIndex == i))
+                            {
+                                // This is fine, just need to unpack differently and repeat the last arg
+                                addViolation($"Init has parameters: {showInstr()}");
+                                Console.WriteLine($"Args ({e.Instructions.Count}): {string.Join(" ", e.Parameters.Select(showFull))}");
+                                continue;
+                            }
+                        }
+                        List<ArgType> argStruct = instrDoc.Arguments.Select(arg => arg.Type == 8 ? ArgType.UInt32 : (ArgType)arg.Type).ToList();
+                        if (allowMismatch && argStruct.Count > plainArgs.Count)
+                        {
+                            argStruct = argStruct.Take(plainArgs.Count).ToList();
+                        }
+                        List<object> args;
+                        try
+                        {
+                            args = InstructionDocs.UnpackArgsSafe(ins.ArgData, argStruct);
+                        }
+                        catch when (allowMismatch)
+                        {
+                            // Shrug
+                            continue;
+                        }
+                        List<int> positions = docs.FuncBytePositions[instrDoc];
+                        for (int argIndex = 0; argIndex < args.Count; argIndex++)
+                        {
+                            EMEDF.ArgDoc argDoc = instrDoc.Arguments[argIndex];
+                            int bytePos = positions[argIndex];
+                            EMEVD.Parameter p = e.Parameters.Find(p => p.InstructionIndex == i && bytePos == p.TargetStartByte);
+                            if (p == null) continue;
+                            paramDocs[getParamPair(p)].Add(argDoc);
+                            total++;
+                        }
+                    }
+                    if (paramDocs.Count == 0)
+                    {
+                        inferred[(map, e.ID)] = new();
+                        continue;
+                    }
+                    // Check single parameter width per offset (otherwise assume max)
+                    // TODO: Handle multiple widths
+                    Dictionary<int, int> paramWidths = new();
+                    foreach (var g in paramDocs.Keys.GroupBy(p => p.Item1))
+                    {
+                        if (g.Count() > 1)
+                        {
+                            addViolation($"Param has multiple widths: {evId} {string.Join(", ", g.Select(showParam))}");
+                        }
+                        (int pos, int width) = g.Max();
+                        if (width == 0 || pos % width != 0)
+                        {
+                            addViolation($"Invalid param alignment: {evId} {string.Join(", ", g.Select(showParam))}");
+                        }
+                        paramWidths[g.Key] = width;
+                    }
+                    // Check single arg type per parameter
+                    // Check single arg enum type per parameter
+                    Dictionary<int, EMEDF.ArgDoc> posArgs = new();
+                    foreach (((int, int) p, List<EMEDF.ArgDoc> argDocs) in paramDocs.OrderByDescending(e => e.Key))
+                    {
+                        if (argDocs.Count == 0)
+                        {
+                            // This happens in AC6 m80 because of init with parameters
+                            // But basically an internal error
+                            // addViolation($"Could not find arg info for {evId} {showParam(p)} (either vararg or invalid index)");
+                            continue;
+                        }
+                        List<string> types = argDocs.Select(a => a.Type == 8 ? "uint" : RevTypes[(int)a.Type]).Distinct().ToList();
+                        if (types.Count > 1)
+                        {
+                            addViolation($"Param has multiple types: {evId} {showParam(p)}: {string.Join(", ", types)}");
+                        }
+                        List<string> enumTypes = argDocs.Select(a => a.EnumName).Distinct().ToList();
+                        if (enumTypes.Count > 1)
+                        {
+                            // In Sekiro 20005580 etc., enum is used with comparison
+                            addViolation($"Param has multiple enum types: {evId} {showParam(p)}: {string.Join(", ", enumTypes)}");
+                        }
+                        List<int> widths = types.Select(t => Widths[t]).Distinct().ToList();
+                        widths.Remove(p.Item2);
+                        if (widths.Count > 0)
+                        {
+                            // TODO: Change width of ArgDoc if needed
+                            addViolation($"Param arg has different width: {evId} {showParam(p)}: {string.Join(", ", widths)}");
+                        }
+                        if (!posArgs.ContainsKey(p.Item1))
+                        {
+                            posArgs[p.Item1] = argDocs.Last();
+                        }
+                    }
+                    // Check everything is packed together
+                    List<EMEDF.ArgDoc> mainArgs = new();
+                    int lastPos = -1;
+                    foreach ((int pos, EMEDF.ArgDoc argDoc) in posArgs.OrderBy(x => x.Key))
+                    {
+                        int width = paramWidths[pos];
+                        if (lastPos == -1)
+                        {
+                            lastPos = 0;
+                        }
+                        else if (width > 0)
+                        {
+                            // Pad
+                            if (lastPos % width > 0)
+                            {
+                                lastPos += width - (lastPos % width);
+                            }
+                        }
+                        if (pos != lastPos)
+                        {
+                            addViolation($"Misaligned param: {evId} should have X{lastPos}_{width}, has {string.Join(",", paramDocs.Keys.OrderBy(x => x).Select(showParam))}");
+                        }
+                        lastPos = pos + width;
+                        mainArgs.Add(argDoc);
+                    }
+                    inferred[(map, e.ID)] = mainArgs;
+                }
+            }
+            // Basic parsing for now
+            foreach ((string map, EMEVD emevd) in emevds)
+            {
+                // Initializations are possible if they're both loaded by the game and linked in the file.
+                List<string> linkedMaps = new();
+                BinaryReaderEx reader = new BinaryReaderEx(false, emevd.StringData);
+                foreach (long offset in emevd.LinkedFileOffsets)
+                {
+                    reader.Position = offset;
+                    string path = reader.ReadUTF16();
+                    string linked = Path.GetFileNameWithoutExtension(path);
+                    linkedMaps.Add(linked);
+                    Console.WriteLine($"{map} -> {path}");
+                }
+                List<string> normalLinks = new();
+                if (emevds.ContainsKey("common_func")) normalLinks.Add("common_func");
+                if (docs.ResourceString.StartsWith("bb")) normalLinks.Add(map.StartsWith("m29_") ? "m29" : "common");
+                foreach ((long id, List<string> maps) in eventFiles)
+                {
+                    if (maps.Contains(map) && maps.Intersect(linkedMaps).Any())
+                    {
+                        addViolation($"Same event {id} in both {map} and linked map {string.Join(",", linkedMaps)}");
+                    }
+                }
+                // Console.WriteLine($"{map} -> {string.Join(",", linkedMaps)}");
+                foreach (EMEVD.Event e in emevd.Events)
+                {
+                    string evId = $"{e.ID} in {map}";
+                    for (int i = 0; i < e.Instructions.Count; i++)
+                    {
+                        EMEVD.Instruction ins = e.Instructions[i];
+                        EMEDF.InstrDoc instrDoc = doc[ins.Bank]?[ins.ID];
+                        if (instrDoc == null) throw new Exception($"{map} {e.ID}: Unknown {ins.Bank} {ins.ID}");
+                        if (!docs.IsVariableLength(instrDoc)) continue;
+                        // Need a better way to do this
+                        int calleeIndex = instrDoc.Arguments.ToList().FindIndex(a => a.Name == "Event ID");
+                        bool commonInit = instrDoc.Name.Contains("Common");
+                        uint callee = BitConverter.ToUInt32(ins.ArgData, calleeIndex * 4);
+                        // We have to allow all of these violations, but leave them commented to find them easier
+                        string desc() => $"{instrDoc.Name} {callee} from {evId} [{string.Join(", ", linkedMaps)}]";
+                        if (callee == 0xFFFF_FFFF)
+                        {
+                            // In most games aside from Elden Ring and AC6
+                            // addViolation($"Init -1: {evId}");
+                            continue;
+                        }
+                        List<EMEDF.ArgDoc> argDocs = null;
+                        string evMap = null;
+                        if (commonInit && inferred.TryGetValue(("common_func", callee), out argDocs))
+                        {
+                            evMap = "common_func";
+                        }
+                        else if (inferred.TryGetValue((map, callee), out argDocs))
+                        {
+                            evMap = map;
+                        }
+                        if (evMap == null)
+                        {
+                            foreach (string linked in linkedMaps)
+                            {
+                                if (inferred.TryGetValue((linked, callee), out argDocs))
+                                {
+                                    evMap = linked;
+                                    break;
+                                }
+                            }
+                        }
+                        if (evMap == null)
+                        {
+                            // Nearly all games
+                            // addViolation($"No init found anywhere: {desc()}");
+                            continue;
+                        }
+                        if (commonInit && evMap != "common_func")
+                        {
+                            // Many in Elden Ring and AC6
+                            // addViolation($"Extraneous common_func init: {desc()} -> {evMap}");
+                        }
+                        if (!commonInit && evMap == "common_func")
+                        {
+                            // One in DS3
+                            addViolation($"Unmarked common_func init: {desc()} -> {evMap}");
+                        }
+                        if (evMap != map && !normalLinks.Contains(evMap))
+                        {
+                            // None
+                            addViolation($"Unusual init: {desc()} -> {evMap}");
+                        }
+                        List<ArgType> argStruct = argDocs.Select(arg => arg.Type == 8 ? ArgType.UInt32 : (ArgType)arg.Type).ToList();
+                        if (argDocs.Count == 0)
+                        {
+                            argStruct.Add(ArgType.Int32);
+                        }
+                        List<int> positions = InstructionDocs.GetArgBytePositions(argStruct, 0);
+                        int expectLength = positions.Last();
+                        int dataLength = ins.ArgData.Length - (calleeIndex + 1) * 4;
+                        if (expectLength != dataLength)
+                        {
+                            addViolation($"Mismatched arg length: {desc()}, have {dataLength}, expect {expectLength}");
+                            continue;
+                        }
+                        // TODO fix this, add an offset arg somewhere, or add to argDocs itself
+                        List<ArgType> fullArgStruct = Enumerable.Repeat(ArgType.Int32, calleeIndex + 1).Concat(argStruct).ToList();
+                        List<object> args = InstructionDocs.UnpackArgsSafe(ins.ArgData, fullArgStruct);
+                        args.RemoveRange(0, calleeIndex + 1);
+                        if (argDocs.Count == 0 && !(args[0] is int val && val == 0))
+                        {
+                            addViolation($"Zero-param event with args: {desc()} ({string.Join(", ", args)})");
+                        }
+                    }
+                }
+            }
+            Console.WriteLine($"{docs.ResourceString}: {violations.Count} violations, {total} args");
+        }
+
         public void ValidateEmedf(ICollection<string> opt)
         {
-            InstructionDocs docs = new InstructionDocs("er-common.emedf.json");
+            InstructionDocs docs = new InstructionDocs("ac6-common.emedf.json");
             doc = docs.DOC;
             Dictionary<string, List<List<object>>> allArgs = new Dictionary<string, List<List<object>>>();
-            string dir = @"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING\Game\event";
+            // string dir = @"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING\Game\event";
+            string dir = @"C:\Program Files (x86)\Steam\steamapps\common\ARMORED CORE VI FIRES OF RUBICON\Game\event";
             foreach (string path in Directory.GetFiles(dir, "*.emevd.dcx"))
             {
                 string fileName = Path.GetFileName(path);
@@ -490,12 +1100,25 @@ namespace DarkScript3
                     for (int i = 0; i < e.Instructions.Count; i++)
                     {
                         EMEVD.Instruction ins = e.Instructions[i];
-                        EMEDF.InstrDoc instrDoc = doc[ins.Bank][ins.ID];
-                        List<object> args = docs.UnpackArgsWithParams(
-                            ins, i, instrDoc, pn, (argDoc, val) => argDoc.GetDisplayValue(val));
-                        string name = instrDoc.DisplayName;
-                        if (!allArgs.ContainsKey(name)) allArgs[name] = new List<List<object>>();
-                        allArgs[name].Add(args);
+                        EMEDF.InstrDoc instrDoc = doc[ins.Bank]?[ins.ID];
+                        if (instrDoc == null)
+                        {
+                            Console.WriteLine($"Missing {InstructionDocs.InstrDebugStringFull(ins, fileName, i, pn)}");
+                            continue;
+                        }
+                        try
+                        {
+                            List<object> args = docs.UnpackArgsWithParams(
+                                ins, i, instrDoc, pn, (argDoc, val) => argDoc.GetDisplayValue(val)).Args;
+                            string name = instrDoc.DisplayName;
+                            if (!allArgs.ContainsKey(name)) allArgs[name] = new List<List<object>>();
+                            allArgs[name].Add(args);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Bad {InstructionDocs.InstrDebugStringFull(ins, fileName, i, pn)}");
+                            continue;
+                        }
                     }
                 }
             }
@@ -514,12 +1137,21 @@ namespace DarkScript3
                     foreach (List<object> args in entry.Value)
                     {
                         object val = args[i];
-                        if (!(val is string)) vals.Add(val);
+                        if (!(val is string s && s.StartsWith("X"))) vals.Add(val);
                     }
                     if (vals.Count == 1 && positions[i] % 4 != 0)
                     {
                         // Try to detect spare byte arguments
-                        Console.WriteLine($"{argDesc} = {vals.First()}");
+                        // ...?
+                        // Console.WriteLine($"Spare {argDesc} = {vals.First()}");
+                    }
+                    if (argDoc.EnumDoc != null)
+                    {
+                        List<object> intObjs = vals.Where(v => v is not string).ToList();
+                        if (intObjs.Count > 0)
+                        {
+                            Console.WriteLine($"Enum {argDesc} = {string.Join(",", intObjs)}");
+                        }
                     }
                     // EMEDF arg checking
                     // Check all defaults fit int types
@@ -543,6 +1175,129 @@ namespace DarkScript3
                         }
                     }
                 }
+            }
+        }
+
+        public void RunEldenInitTests(ICollection<string> args)
+        {
+            string dir = @"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING\Game\event";
+            string outDir = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                @"Downloads\Mods\ModEngine-2.0.0-preview3-win64\condtest\event");
+            testItemLots = new Dictionary<int, string>
+            {
+                [997200] = "Rowa",
+                [996500] = "Poisonbloom",
+                [996540] = "Grave Violet",
+                [996800] = "Erdleaf Flower",
+                [996830] = "Golden Sunflower",
+                [997220] = "Rimed Rowa",
+                [997230] = "Bloodrose",
+                [998400] = "Cave Moss",
+                [997600] = "Mushroom",
+                [997950] = "Sanctuary Stone",
+                // [997210] = "Golden Rowa",
+                // [998410] = "Budding Cave Moss",
+                // [998420] = "Crystal Cave Moss",
+            };
+            testItemLotOrder = testItemLots.Keys.ToList();
+
+            // Just delete previous tests
+            foreach (string path in Directory.GetFiles(dir, "*.emevd.dcx"))
+            {
+                string fileName = Path.GetFileName(path);
+                string outFile = Path.Combine(outDir, fileName);
+                if (File.Exists(outFile)) File.Delete(outFile);
+            }
+            // Test if the InitializeCommonEvent self-file things always work
+            // Test whether first or second event gets initialized
+            // Test same event id in both map and common_func
+            Dictionary<string, EMEVD> emevds = new();
+            EMEVD load(string name)
+            {
+                if (emevds.TryGetValue(name, out EMEVD emevd)) return emevd;
+                emevd = EMEVD.Read(Path.Combine(dir, name + ".emevd.dcx"));
+                emevds[name] = emevd;
+                return emevd;
+            }
+            if (args.Contains("priority"))
+            {
+                addEvents = null;
+                EMEVD commonFunc = load(args.Contains("link_common") ? "common" : "common_func");
+                EMEVD commonFunc2 = args.Contains("link_common_func") ? load("common_func") : commonFunc;
+                EMEVD map = load(args.Contains("common") ? "common" : "m10_01_00_00");
+                if (args.Contains("link_common"))
+                {
+                    map.LinkedFileOffsets.Add(map.StringData.Length);
+                    // var reader = new BinaryReaderEx(false, EVD.StringData);
+                    var writer = new BinaryWriterEx(false);
+                    writer.WriteBytes(map.StringData);
+                    writer.WriteUTF16("N:\\GR\\data\\Param\\event\\common.emevd", true);
+                    map.StringData = writer.FinishBytes();
+                }
+                bool crossFile = args.Contains("common_func");
+                bool bothCrossFile = args.Contains("common_func2");
+                foreach (bool firstCommon in new[] { true, false })
+                {
+                    foreach (bool secondCommon in new[] { true, false })
+                    {
+                        int id = evBase;
+                        evBase += 10;
+                        if (args.Contains("delay")) map.Events[0].Instructions.Add(ParseAdd($"WAIT Fixed Time (Frames) (10)"));
+                        EMEVD.Event firstEvent = new EMEVD.Event(id);
+                        if (bothCrossFile) commonFunc.Events.Add(firstEvent);
+                        else map.Events.Add(firstEvent);
+                        firstEvent.Instructions.Add(ParseAdd($"WAIT Fixed Time (Frames) (1)"));
+                        AddItemTest(firstEvent, $"map event with {(firstCommon ? "common" : "reg")} init");
+                        map.Events[0].Instructions.Add(new EMEVD.Instruction(
+                            2000, firstCommon ? 6 : 0, new List<object> { 0, id, 0 }));
+
+                        if (args.Contains("delay")) map.Events[0].Instructions.Add(ParseAdd($"WAIT Fixed Time (Frames) (10)"));
+                        EMEVD.Event secondEvent = new EMEVD.Event(id);
+                        secondEvent.Instructions.Add(ParseAdd($"WAIT Fixed Time (Frames) (1)"));
+                        AddItemTest(secondEvent, $"{(crossFile ? "common_func" : "dupe")} event with {(secondCommon ? "common" : "reg")} init");
+                        if (crossFile) commonFunc2.Events.Add(secondEvent);
+                        else map.Events.Add(secondEvent);
+                        // Needs to be index 1 or else multi reg won't work
+                        map.Events[0].Instructions.Add(new EMEVD.Instruction(
+                            2000, secondCommon ? 6 : 0, new List<object> { 1, id, 0 }));
+                    }
+                }
+                // With common/reg and first/dupe: Inits first event if either use common init, second event otherwise
+                // However, this seems to be order-dependent
+
+                // Init from common:
+                // Inits second event if either use common init, first event otherwise
+
+                // With common_func:
+                // Inits common_func always
+
+                // With common and common_func:
+                // Inits map always (not linked)
+
+                // With link common
+                // Inits common always
+
+                // Two common_func events
+                // Inits second always
+
+                // Two common events
+                // Inits second always
+
+                // common_func and common both linked
+                // First link is always used
+
+                // In conclusion: linked from another file, pick the first such file, and last event
+                // If only present in this file and duplicate, do not pick one
+
+            }
+            // Test cross-byte parameter init
+            // Test recursive init after all, which indices are used
+            foreach ((string name, EMEVD emevd) in emevds)
+            {
+                string outPath = Path.Combine(outDir, name + ".emevd.dcx");
+                Console.WriteLine(outPath);
+                emevd.Write(outPath);
             }
         }
 
@@ -1627,8 +2382,8 @@ namespace DarkScript3
         {
             emevd.Events.Add(ev);
             addEvents.Add((int)ev.ID);
-            i++;
         }
+
         private void AddItemTest(EMEVD.Event ev, string desc, int group = -99)
         {
             int itemLot = testItemLotOrder.Last();
@@ -1638,8 +2393,12 @@ namespace DarkScript3
                 ev.Instructions.Add(ParseAdd($"SKIP IF Condition Group State (Uncompiled) (1,0,{group})"));
             }
             ev.Instructions.Add(ParseAdd($"Award Item Lot ({itemLot})"));
-            Console.WriteLine($"{i}. If{(group > -99 ? $" {group} in" : "")} {desc}, then awarding {testItemLots[itemLot]}");
-            AddEvent(ev);
+            Console.WriteLine($"// {i}. If{(group > -99 ? $" {group} in" : "")} {desc}, then awarding {testItemLots[itemLot]}");
+            i++;
+            if (addEvents != null)
+            {
+                AddEvent(ev);
+            }
         }
 
         // Very simple command parsing scheme.

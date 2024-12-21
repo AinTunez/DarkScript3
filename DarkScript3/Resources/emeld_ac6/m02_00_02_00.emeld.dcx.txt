@@ -1,0 +1,58 @@
+0 コンストラクタ -- constructor
+2000 初期化 -- Initialization
+2010 ギミックイベントフラグ降ろし -- Gimmick event flag lowering
+2011 ギミックイベントフラグ降ろし_プレイヤ位置 -- Gimmick event flag lowering_player position
+2021 エレベータ制御_エレベータ位置_1階 -- Elevator control_Elevator position_1st floor
+2022 エレベータ制御_エレベータ位置_2階 -- Elevator control_Elevator position_2nd floor
+2031 エレベータ制御_停止アニメ再生中_1階 -- Elevator control_Stop animation playing_1st floor
+2032 エレベータ制御_停止アニメ再生中_2階 -- Elevator control_Stop animation playing_2nd floor
+2033 エレベータ制御_移動アニメ再生中_上昇 -- Elevator control_moving animation playing_rise
+2034 エレベータ制御_移動アニメ再生中_下降 -- Elevator control_moving animation playing_descending
+2050 エレベータ制御_稼働中フラグ_ホスト -- Elevator control_operating flag_host
+2051 エレベータ制御_停止中フラグ_ホスト -- Elevator control_stop flag_host
+2055 エレベータ制御フラグ_ホスト_ONだったら稼働中_OFFだったら停止中 -- Elevator control flag_Host_If it is ON, it is running. If it is OFF, it is stopped.
+2060 エレベータ制御_稼働中フラグ_ゲスト -- Elevator control_operating flag_guest
+2061 エレベータ制御_停止中フラグ_ゲスト -- Elevator control_stop flag_guest
+2065 エレベータ制御フラグ_ゲスト_ONだったら稼働中_OFFだったら停止中 -- Elevator control flag_Guest_If it is ON, it is running. If it is OFF, it is stopped.
+2070 扉開閉制御_2F_開く中フラグ_ホスト -- Door opening/closing control_2F_opening flag_host
+2071 扉開閉制御_2F_閉る中フラグ_ホスト -- Door opening/closing control_2F_Closing flag_Host
+2072 扉開閉制御_2F_開いているフラグ_ホスト -- Door opening/closing control_2F_open flag_host
+2073 扉開閉制御_2F_閉っているフラグ_ホスト -- Door opening/closing control_2F_Closed flag_Host
+2074 扉開閉制御_1F_開く中フラグ_ホスト -- Door opening/closing control_1F_opening flag_host
+2075 扉開閉制御_1F_閉る中フラグ_ホスト -- Door opening/closing control_1F_Closing flag_Host
+2076 扉開閉制御_1F_開いているフラグ_ホスト -- Door opening/closing control_1F_open flag_host
+2077 扉開閉制御_1F_閉っているフラグ_ホスト -- Door opening/closing control_1F_Closed flag_Host
+2080 扉開閉制御_2F_開く中フラグ_ゲスト -- Door opening/closing control_2F_opening flag_guest
+2081 扉開閉制御_2F_閉る中フラグ_ゲスト -- Door opening/closing control_2F_Closing flag_Guest
+2082 扉開閉制御_2F_開いているフラグ_ゲスト -- Door opening/closing control_2F_open flag_guest
+2083 扉開閉制御_2F_閉まっているフラグ_ゲスト -- Door opening/closing control_2F_Closed flag_Guest
+2084 扉開閉制御_1F_開く中フラグ_ゲスト -- Door opening/closing control_1F_opening flag_guest
+2085 扉開閉制御_1F_閉る中フラグ_ゲスト -- Door opening/closing control_1F_Closing flag_Guest
+2086 扉開閉制御_1F_開いているフラグ_ゲスト -- Door opening/closing control_1F_Open flag_Guest
+2087 扉開閉制御_1F_閉まっているフラグ_ゲスト -- Door opening/closing control_1F_Closed flag_Guest
+2090 扉開閉制御フラグ__2F_ホスト_ONだったら開く中_OFFだったら閉る中 -- Door opening/closing control flag _2F_Host_Opening if ON_Closing if OFF
+2091 扉開閉制御フラグ__1F_ホスト_ONだったら開く中_OFFだったら閉る中 -- Door opening/closing control flag_1F_Host_If ON, it is open_If it is OFF, it is closed
+2092 扉開閉制御フラグ__2F_ホスト_ONだったら開いている_OFFだったら閉じている -- Door opening/closing control flag __2F_Host_If it is ON, it is open. If it is OFF, it is closed.
+2093 扉開閉制御フラグ__1F_ホスト_ONだったら開いている_OFFだったら閉じている -- Door opening/closing control flag_1F_Host_If it is ON, it is open. If it is OFF, it is closed.
+2095 扉開閉制御フラグ__2F_ゲスト_ONだったら開く中_OFFだったら閉る中 -- Door opening/closing control flag __2F_Guest_If ON, it's open. If it's OFF, it's closed.
+2096 扉開閉制御フラグ__1F_ゲスト_ONだったら開く中_OFFだったら閉る中 -- Door opening/closing control flag __1F_Guest_If ON, it is open_If it is OFF, it is closed
+2097 扉開閉制御フラグ__2F_ゲスト_ONだったら開いている_OFFだったら閉じている -- Door opening/closing control flag __2F_Guest_If it is ON, it is open. If it is OFF, it is closed.
+2098 扉開閉制御フラグ__1F_ゲスト_ONだったら開いている_OFFだったら閉じている -- Door opening/closing control flag __1F_Guest_If it is ON, it is open. If it is OFF, it is closed.
+2101 プレイヤ位置判定_プレイヤ位置フラグ_1階 -- Player position determination_Player position flag_1st floor
+2102 プレイヤ位置判定_プレイヤ位置フラグ_2階 -- Player position determination_Player position flag_2nd floor
+2110 プレイヤ位置判定_エレベータ呼び出し_上昇 -- Player position determination_Elevator call_Up
+2111 プレイヤ位置判定_エレベータ呼び出し_下降 -- Player position determination_Elevator call_Descent
+2112 プレイヤ位置判定_エレベータ起動_上昇 -- Player position determination_Elevator start_Up
+2113 プレイヤ位置判定_エレベータ起動_下昇 -- Player position determination_Elevator start_Down
+2200 扉開閉制御_1F_開く中 -- Door opening/closing control_1F_Opening
+2201 扉開閉制御_1F_閉る中 -- Door opening/closing control_1F_Closing
+2202 扉開閉制御_1F_開いている -- Door opening/closing control_1F_open
+2203 扉開閉制御_1F_閉まっている -- Door opening/closing control_1F_closed
+2210 扉開閉制御_2F_開く中 -- Door opening/closing control_2F_Opening
+2211 扉開閉制御_2F_閉る中 -- Door opening/closing control_2F_Closing
+2212 扉開閉制御_2F_開いている -- Door opening/closing control_2F_open
+2213 扉開閉制御_2F_閉まっている -- Door opening/closing control_2F_closed
+2220 扉開閉制御_2F_領域判定_外待機 -- Door opening/closing control_2F_area determination_standby outside
+2221 扉開閉制御_2F_領域判定_内待機 -- Door opening/closing control_2F_area determination_inside standby
+2222 扉開閉制御_1F_領域判定_外待機 -- Door opening/closing control_1F_area determination_standby outside
+2223 扉開閉制御_1F_領域判定_内待機 -- Door opening/closing control_1F_area determination_inside standby

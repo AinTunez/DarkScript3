@@ -1,0 +1,18 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1051430700 NPC202_マリケス_NPC初期化イベント -- NPC202_Marikes_NPC initialization event
+1051430701 NPC敵対化処理_マリケス個別 -- NPC hostile processing_Mariquez individual
+1051430702 NPC202_マリケス_正気に戻る -- NPC202_Marikes_Return to sanity
+1051430703 NPC202_マリケス_死の根を全て渡したら消える -- NPC202_Marikes_Disappears after handing over all the roots of death
+1051432200 ガーゴイル用思考ロジック有効化_距離判定 -- Enabling thinking logic for gargoyle_Distance judgment
+1051432209 ワープフラグをリセット -- Reset warp flag
+1051433705 NPC202_マリケス_敵対状態リセット -- NPC202_Marikes_hostile status reset
+1051433706 NPC202_マリケス_混ぜ物入りを渡していたら免罪不可 -- NPC202_Marikes_If you give adulterated food, you cannot be exonerated.
+1051433707 NPC202_マリケス_眠りチェック -- NPC202_Marikes_Sleep check
+1051433708 NPC202_マリケス_アクションボタン表記切り替え -- NPC202_Marikes_Action button notation switching

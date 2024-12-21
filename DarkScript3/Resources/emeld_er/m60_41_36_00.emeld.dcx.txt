@@ -1,0 +1,8 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1041362650 チュートリアルメッセージ_バディ解放 -- Tutorial message_Buddy release
+1041363700 NPC802赤目商人3_初期化イベント -- NPC802 Red Eye Merchant 3_Initialization event
+1041363706 NPC802赤目商人3_ロバ被ダメ台詞再生 -- NPC802 Red-Eyed Merchant 3_ Donkey Damage Line Playback
+1041363707 NPC802赤目商人3_ロバ敵対監視 -- NPC802 Red-Eyed Merchant 3_Donkey Hostile Surveillance

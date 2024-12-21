@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1038502400 思考ロジック有効化_領域と通行証で判定_XX -- Enabling thought logic_Judging by area and pass_XX
+1038502500 高山入り口_イントロ再生_大EV側判定 -- Takayama entrance_Intro play_Large EV side judgment
+1038502580 梯子登録 -- ladder registration
+1038503700 NPC313火山館の勧誘者_NPC初期化イベント_火山館へ招待_EV前 -- NPC313 Volcano Hall Recruiter_NPC Initialization Event_Invite to Volcano Hall_Before EV
+1038503701 NPC313火山館の勧誘者_火山館へ招待_エレベーター前に近づいた判定 -- NPC313 Volcano Pavilion Recruiter_Invite to Volcano Pavilion_Judgment for approaching the elevator
+1038503702 NPC313火山館の勧誘者_火山館へ招待_EV前_被ダメ系会話再生処理 -- NPC313 Volcano Pavilion Recruiter_Invite to Volcano Pavilion_Before EV_Damaged conversation playback processing
+1038503703 NPC313火山館の勧誘者_火山館へ招待_ワープ実行_EV前 -- NPC313 Volcano Hall Recruiter_Invite to Volcano Hall_Execute warp_Before EV

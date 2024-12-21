@@ -1,0 +1,28 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッションクリア判定 -- Mission clear judgment
+2010 強化MT脚力エリアフラグ -- Enhanced MT leg strength area flag
+2020 強化MT脚力襲撃１ -- Enhanced MT leg strength attack 1
+2021 強化MT脚力襲撃２ -- Enhanced MT leg strength attack 2
+2030 USドローンエリアフラグ -- US drone area flag
+2031 USドローン制御 -- us drone control
+2032 USドローン制御２ -- US drone control 2
+2100 USドローンダミポリ解除A -- US Drone Damipoly Release A
+2101 USドローンダミポリ解除B -- US Drone Damipoly Release B
+2102 USドローンダミポリ解除C -- US Drone Damipoly Release C
+2200 正規軍AC拡散バズ固定砲台化 -- Regular army AC diffusion buzz fixed artillery battery
+2201 正規軍AC死亡フラグ1 -- Regular army AC death flag 1
+2202 正規軍AC死亡フラグ2 -- Regular army AC death flag 2
+2203 正規軍AC死亡フラグ3 -- Regular army AC death flag 3
+2204 正規軍AC発見エリアフラグ -- Regular Army AC Discovery Area Flag
+2205 正規軍AC撃破数判定 -- Judgment of number of regular army AC defeats
+2210 正規軍AC有効化 -- Regular army AC enabled
+3000 目標地点マーカー有効化 -- Enable destination marker
+3001 正規軍AC２体用マーカー有効化 -- Enable markers for 2 regular army ACs
+3002 正規軍AC２体死亡時マーカー切り替１ -- Marker switch 1 when 2 regular army ACs die
+3003 正規軍AC２体死亡時マーカー切り替２ -- Marker switch 2 when 2 regular army ACs die
+3004 正規軍ACラスト前マーカー切り替え -- Regular army AC last marker switch
+3005 正規軍ACラスト前マーカー有効化 -- Regular army AC last marker enabled
+3006 正規軍ACラスト後マーカー無効 -- Marker disabled after regular army AC last
+3900 ミッションコンプリート -- mission complete
+1000000000 敵リスポン -- enemy respawn

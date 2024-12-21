@@ -1,0 +1,9 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1034472260 気球待機イベント_XX -- Balloon standby event_XX
+1034472261 気球破壊イベント_XX -- Balloon destruction event_XX
+1034472262 人形兵解除イベント_XX -- Puppet soldier release event_XX
+1034472611 鐘楼群のガーゴイル像_会話 -- Gargoyle statues in the bell towers_Conversation
+1034472612 鐘楼群のガーゴイル像_鍵モデル -- Gargoyle statues in the bell towers_key model

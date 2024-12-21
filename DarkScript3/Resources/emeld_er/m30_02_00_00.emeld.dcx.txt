@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30020050 m30_02_00_00用初期フラグ設定 -- Initial flag setting for m30_02_00_00
+30022510 エレベータイベント起動 -- Elevator event activation
+30022580 梯子登録 -- ladder registration
+30022610 英雄の墓_火吹き像_火炎処理_緑前半 -- Hero's Tomb_Fire-breathing statue_Flame treatment_First half of green
+30022650 チュートリアルメッセージ_バディ解放 -- Tutorial message_Buddy release
+30022800 m30_02ボス撃破 -- Defeat m30_02 boss
+30022810 m30_02ボス出現 -- m30_02 boss appears
+30022811 ボス激昂 -- boss rage
+30022849 m30_02ボスイベント起動 -- m30_02 boss event activation
+1000000000 敵リスポン -- enemy respawn

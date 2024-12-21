@@ -1,0 +1,37 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 utl_mapInit -- utl_mapInit
+2001 utl_playerInit -- utl_playerInit
+2002 utl_SF_isEndInitialCS -- utl_SF_isEndInitialCS
+2100 bas_init -- bas_init
+2101 bas_fini -- bas_fini
+2110 bas_railWay_beginAct -- bas_railWay_beginAct
+2111 bas_caskRoom_beginAct -- bas_caskRoom_beginAct
+2112 bas_controlRoom1_ELV -- bas_controlRoom1_ELV
+2113 bas_openLock1 -- bas_openLock1
+2114 bas_activateELV1 -- bas_activateELV1
+2115 bas_SF_isEnteringELV1 -- bas_SF_isEnteringELV1
+2120 bas_downhill_beginAct -- bas_downhill_beginAct
+2121 bas_downhill_beginBattle -- bas_downhill_beginBattle
+2130 bas_railWay2_beginBattle -- bas_railWay2_beginBattle
+2131 bas_crevasse_beginAct -- bas_crevasse_beginAct
+2132 bas_controlRoom2_ELV -- bas_controlRoom2_ELV
+2133 bas_railWay2_onHitOfTalk -- bas_railWay2_onHitOfTalk
+2134 bas_railWay2_beginTalk -- bas_railWay2_beginTalk
+2135 bas_caskRoom2_beginTalk -- bas_caskRoom2_beginTalk
+2136 bas_crevasse_activateEnemy -- bas_crevasse_activateEnemy
+2137 bas_openLock2 -- bas_openLock2
+2138 bas_activateELV2 -- bas_activateELV2
+2140 bas_airChamber_beginTalk -- bas_airChamber_beginTalk
+2141 bas_station_beginTalk -- bas_station_beginTalk
+2191 bas_onMarker_garage -- bas_onMarker_garage
+2192 bas_enterGarage -- bas_enterGarage
+3000 talk_出撃直後 -- talk_Immediately after sortie
+3001 talk_クレバス到達時 -- talk_When reaching the crevasse
+3002 talk_キャスク部屋到達時 -- talk_When reaching the cask room
+3003 talk_クレバス引き返し時 -- talk_When returning to the crevasse
+3004 talk_排熱口前到着時 -- talk_When arriving in front of the heat exhaust vent
+3005 talk_駅到着時 -- talk_When arriving at the station
+3006 talk_ELV起動前 -- talk_Before starting ELV
+3007 talk_ELV起動時 -- talk_ELV startup
+3901 talk_クレバス到達時_end -- talk_When reaching the crevasse_end

@@ -1,0 +1,44 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+13000519 エレベータ初期フラグ設定 -- Elevator initial flag setting
+13002236 獣の末裔_ターゲットクリア_XX -- Descendant of the Beast_Target Clear_XX
+13002490 守護末登場_XX -- Shugosue appears_XX
+13002493 守護者の末裔_ブレス連打_XX -- Descendant of the Guardian_Breath Consecutive Strike_XX
+13002500 メリナ炎上後脱出封印 -- Escape seal after Melina burns
+13002510 エレベータイベント起動 -- Elevator event activation
+13002580 梯子登録 -- ladder registration
+13002600 落雷演出_XX -- Lightning strike_XX
+13002610 守護末落雷 -- Thunderbolt at the end of the guardian
+13002646 守護末の末裔_撤退_XX -- Descendant of the Last Guardian_Retreat_XX
+13002660 【専用】敵対NPC_帰還 -- [Exclusive] Hostile NPC_Return
+13002800 マリケス撃破 -- Defeat Mariquez
+13002805 マリケス用篝火処理 -- Bonfire processing for Marikes
+13002810 マリケス出現 -- Marikes appears
+13002811 マリケス激昂 -- marikes rage
+13002819 マリケス柱内復帰ワープ処理 -- Marikes pillar return warp processing
+13002820 マリケス壁キック用イベントターゲット設定 -- Event target setting for Marikes wall kick
+13002827 マリケス柱内復帰処理 -- Marikes pillar return process
+13002828 マリケス柱内復帰処理_完了 -- Marikes pillar return process_completed
+13002829 マリケスボスイベント起動 -- Marikes boss event started
+13002830 古龍撃破 -- Defeat the ancient dragon
+13002834 古龍ボス部屋へワープする -- Warp to the Elder Dragon boss room
+13002835 古龍出現 -- Ancient dragon appears
+13002840 古龍激昂 -- Old dragon rage
+13002841 古龍カメラ変更イベント -- Old dragon camera change event
+13002846 古龍用ゲストがボス部屋入場 -- Ancient dragon guest enters boss room
+13002849 古龍ボスイベント起動 -- Ancient dragon boss event started
+13002850 神肌撃破 -- Defeat God's skin
+13002859 【専用】協力NPC_ボス部屋入場 -- [Exclusive] Cooperating NPC_Boss room entry
+13002860 神肌出現 -- Divine skin appears
+13002861 神肌激昂 -- divine rage
+13002865 神肌ボスイベント起動 -- Divine skin boss event started
+13002890 神肌復活カウントダウン_XX -- God skin revival countdown_XX
+13002891 神肌復活_XX -- Divine skin revival_XX
+13002892 神肌復活_両方死亡 -- God skin resurrection_both dead
+13003700 NPC202_マリケス_会話処理限界延長 -- NPC202_Marikes_Conversation processing limit extension
+13003710 壺マイヤー_NPC初期化イベント_最後の戦い -- Tsubo Meyer_NPC initialization event_Last battle
+13003711 壺マイヤー_最後の戦い -- Tsubomayer_The Last Battle
+13003720 NPC326_火山館最強の騎士_闇霊侵入許可フラグ立て -- NPC326_Volcano Pavilion's Strongest Knight_Dark Spirit Intrusion Permission Flag Set
+13003721 NPC326_火山館最強の騎士_白霊共闘許可フラグ立て -- NPC326_Volcano Pavilion's Strongest Knight_White Spirit Collaboration Permission Flag Raised
+1000000000 敵リスポン -- enemy respawn

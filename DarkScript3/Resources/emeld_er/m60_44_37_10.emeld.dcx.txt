@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1044372210 亜人擬態木_XX -- Demihuman mimicry tree_XX
+1044372650 チュートリアルメッセージ_騎乗 -- Tutorial message_Riding
+1044373700 赤目商人_初期化イベント -- Red Eye Merchant_Initialization event
+1044373701 赤目商人ランダム移動処理 -- Red-eyed merchant random movement process
+1044373702 赤目商人全体敵対 -- Entire enemy of red-eyed merchants
+1044373710 NPC700話す死体②_NPC初期化イベント -- NPC700 talking corpse ②_NPC initialization event
+1044373715 しゃべスラ_ダミー_NPC初期化イベント -- Chatsura_dummy_NPC initialization event
+1044373716 しゃべスラ_永遠の都へ案内会話再生 -- Chat Sura_Guide to the Eternal City Conversation Playback
+1044375220 予兆演出_鹿死体化 -- Omen production_deer carcass

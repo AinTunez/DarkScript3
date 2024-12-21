@@ -1,0 +1,15 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1047583500 攻撃禁止エリア設定 -- Attack prohibited area setting
+1047583700 NPC228ウルフライダー_NPC初期化イベント_聖樹の地にて -- NPC228 Wolf Rider_NPC Initialization Event_At the Sacred Tree Land
+1047583701 NPC228ウルフライダー_バディ召喚に見える動作 -- NPC228 Wolf Rider_Action that looks like buddy summoning
+1047583702 NPC228ウルフライダー_会話後に消滅 -- NPC228 Wolf Rider_Disappears after conversation
+1047583703 NPC228ウルフライダー_消滅アニメ再生待ち -- NPC228 Wolf Rider_Waiting for extinction animation to play
+1047583704 NPC228ウルフライダー_ものわたすアニメ再生 -- NPC228 Wolf Rider_Anime playback
+1247582350 魔法霊廟_足踏み開始 -- Magic Mausoleum_Start of stepping

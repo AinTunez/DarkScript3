@@ -1,0 +1,50 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 初期設定 -- Initial settings
+2001 ハッキング無効化 -- Disable hacking
+2002 ハッキング有効化 -- hacking enabled
+2010 チェックポイント更新 -- Checkpoint update
+2021 ボスエリア敵有効化 -- Enable boss area enemies
+2022 ボスエリア増援AC有効化 -- Boss area reinforcement AC enabled
+2023 袋小路増援有効化 -- Cul-de-sac reinforcements enabled
+2024 袋小路後_戦闘車両移動開始 -- After the dead end_Combat vehicle movement begins
+2030 目標地点マーカー有効化 -- Enable destination marker
+2031 ハッキング対象マーカー有効化 -- Enable hacking target marker
+2032 ボスエリア目標地点マーカー有効化 -- Boss area target point marker enabled
+2300 輸送ヘリ撃破数報付与 -- Report on number of transport helicopter defeats given
+2310 CP再開時_輸送ヘリ無効化 -- When restarting CP_transport helicopter disabled
+2700 目標ハッキング開始判定 -- Target hacking start determination
+2701 目標ハッキング終了判定 -- Judgment of completion of target hacking
+2702 ハッキング有効化判定 -- Hacking validation determination
+2703 袋小路_増援撃破判定 -- Cul-de-sac_Reinforcement defeat determination
+2704 ハッキング途中会話発生判定 -- Conversation occurrence determination during hacking
+2710 輸送ヘリ発見判定 -- Transport helicopter detection determination
+2720 ボスエリア増援ヘリ有効化 -- Boss area reinforcement helicopter enabled
+2722 ボスエリア全滅判定 -- Boss area annihilation judgment
+2730 ボスエリア接近判定 -- Boss area approach detection
+2740 目標接近判定 -- Target approach judgment
+2741 ボスエリア目標地点マーカー無効化判定 -- Boss area objective point marker invalidation judgment
+2751 ボス前広場_戦闘ヘリロジック無効ー有効化_手前 -- Plaza in front of boss_Battle heli logic disabled-enabled_front
+2752 ボス前広場_戦闘ヘリロジック無効ー有効化_奥 -- Plaza in front of boss_Battle heli logic disabled-enabled_back
+2753 BGM制御用_戦闘開始判定 -- For BGM control_Battle start determination
+2754 ボスエリア_増援AC有効化判定 -- Boss area_Reinforcement AC activation determination
+2755 ボスエリア_増援AC耐久低下判定 -- Boss area_Reinforcement AC durability reduction judgment
+2756 ボスエリア_増援AC耐久低下判定2 -- Boss area_Reinforcement AC durability reduction judgment 2
+2757 ボスエリア_増援AC死亡判定 -- Boss area_Reinforcement AC death judgment
+3000 輸送ヘリ逃走判定 -- Transport helicopter escape judgment
+3020 増援ヘリ投下判定 -- Reinforcement helicopter drop judgment
+3030 増援ヘリ投下後のターゲットイベント -- Target event after reinforcement helicopter drop
+3040 輸送ヘリ撃墜数判定 -- Determining the number of transport helicopters shot down
+3050 輸送ヘリ個別死亡判定 -- Transport helicopter individual death determination
+3400 チェックポイント通過済みフラグ -- Checkpoint passed flag
+3401 ミッションクリアフラグ -- mission clear flag
+3402 ボスエリア敵有効化フラグ -- Boss area enemy activation flag
+3403 輸送ヘリ撃破数0フラグ -- Transport helicopter destroyed count 0 flag
+3404 会話終了フラグ -- Conversation end flag
+3700 ミッション開始会話終了フラグ -- Mission start conversation end flag
+3701 ボス登場会話フラグ -- Boss appearance conversation flag
+3702 ハッキング完了会話フラグ -- Hacking complete conversation flag
+3703 増援撃破会話フラグ -- Reinforcement defeat conversation flag
+3900 与ダメ調整用特殊効果 -- Special effects for adjusting damage dealt
+3910 被ダメ調整用特殊効果 -- Special effects for adjusting damage
+1000000000 敵リスポン -- enemy respawn

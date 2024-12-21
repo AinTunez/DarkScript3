@@ -1,0 +1,47 @@
+0 コンストラクタ -- constructor
+2000 初期準備 -- Initial preparation
+2010 作戦ラインON -- Operation line ON
+2100 破壊されたA -- destroyed A
+2101 破壊されたB -- destroyed B
+2110 ガイド切替 -- Guide switching
+2200 両方破壊された -- both were destroyed
+2201 CS待ち -- Waiting for CS
+2210 CS再生とワープ -- CS playback and warp
+2211 CS後のロジック停止 -- Logic stop after CS
+2220 ボスゲージON -- Boss gauge ON
+2230 チェックポイント有効化 -- checkpoint enable
+2231 チェックポイント判定用 -- For checkpoint judgment
+2232 CP初期イベ -- CP initial event
+2233 摩擦熱起動 -- Frictional heat activation
+2234 天球起動1 -- Celestial sphere activation 1
+2235 天球起動2 -- Celestial sphere activation 2
+2236 天球起動3 -- Celestial sphere activation 3
+2237 Gparam変更 -- Gparam change
+2238 カメラ振動ループ -- camera vibration loop
+2300 敵ACを倒す -- Defeat enemy AC
+2310 敵AC66 -- Enemy AC66
+2320 敵AC33 -- Enemy AC33
+2330 敵撃破後CS再生 -- CS replay after defeating enemy
+2340 自機死亡 -- Own aircraft death
+2341 自機HP半分 -- Own machine HP half
+2342 自機HP半分2回目 -- Own machine's HP is halved 2nd time
+2350 敵AC撃破セリフタイミング -- Enemy AC defeat line timing
+2400 会話フラグ1 -- conversation flag 1
+2401 会話フラグ2 -- conversation flag 2
+2402 会話フラグ3 -- conversation flag 3
+2500 会話用破壊判定A -- Conversation Destruction Judgment A
+2501 会話用破壊判定B -- Conversation Destruction Judgment B
+2600 会話判定_スタッガー前半 -- Conversation judgment_stagger first half
+2601 会話判定_スタッガー後半 -- Conversation Judgment_Stagger Second Half
+2602 会話判定_HU -- Conversation judgment_HU
+3800 オブジェダメージ_新B層のラムジェットエンジン01 -- Object damage_New B-tier ramjet engine 01
+3801 オブジェダメージ_新B層のラムジェットエンジン02 -- Object damage_New B-tier ramjet engine 02
+3810 オブジェダメージ_新B層のラムジェットエンジン01_下登録用イベントフラグ -- Object damage_New B-tier ramjet engine 01_Event flag for lower registration
+3811 オブジェダメージ_新B層のラムジェットエンジン01_上登録用イベントフラグ -- Object damage_New B-tier ramjet engine 01_Event flag for registration above
+3812 オブジェダメージ_新B層のラムジェットエンジン02_下登録用イベントフラグ -- Object damage_New B-tier ramjet engine 02_Event flag for lower registration
+3813 オブジェダメージ_新B層のラムジェットエンジン02_上登録用イベントフラグ -- Object damage_New B-tier ramjet engine 02_Event flag for upper registration
+3900 リザルト遷移 -- Result transition
+3901 PS5用遷移 -- Transition for PS5
+3990 デバッグ判定用 -- For debugging judgment
+3991 デバッグ判定用2_CSなし -- No 2_CS for debugging judgment
+3992 自機デバッグワープ -- Own machine debug warp

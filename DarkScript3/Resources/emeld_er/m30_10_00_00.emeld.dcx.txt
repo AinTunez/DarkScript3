@@ -1,0 +1,33 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30100050 m30_10_00_00用初期フラグ設定 -- Initial flag setting for m30_10_00_00
+30100100 英雄の墓_扉開放_レバー無しver -- Tomb of the Hero_door open_no lever ver.
+30100519 エレベータ初期フラグ -- Elevator initial flag
+30102200 投影像光SFX作成 -- Projection image light SFX creation
+30102300 チャリオットダメージ作成_中央 -- Chariot damage creation_center
+30102305 チャリオットダメージ作成_左右 -- Chariot damage creation_left and right
+30102400 英雄の墓_チャリオット初期設定 -- Hero's Tomb_Chariot initial settings
+30102410 チャリオット巡回ルート指定_XX -- Chariot patrol route specification_XX
+30102445 チャリオットワープA通路 -- Chariot Warp A Passage
+30102450 チャリオットワープボス前 -- In front of Chariot Warp Boss
+30102455 チャリオットワープC通路 -- Chariot Warp C Passage
+30102460 チャリオットワープB通路中央 -- Chariot Warp B aisle center
+30102465 チャリオット同士討ち -- chariot battle
+30102470 チャリオットワープフラグリセット -- Chariot warp flag reset
+30102480 チャリオット消し -- Chariot eraser
+30102490 チャリオット破壊時宝入手_ホストのみ -- Obtain treasure when destroying Chariot_Host only
+30102500 火吹き像起動 -- Fire-breathing statue activated
+30102510 エレベータイベント起動 -- Elevator event activation
+30102520 英雄の墓_二段火吹き像_火炎処理上 -- Tomb of the Hero_Two-tiered fire-breathing statue_Flame processing top
+30102521 英雄の墓_二段火吹き像_火炎処理 -- Hero's Tomb_Two-tiered fire-breathing statue_Flame treatment
+30102530 英雄の墓_二段火吹き像_火炎処理下 -- Tomb of the Hero_Two-tiered fire-breathing statue_Under flame treatment
+30102540 英雄の墓_二段火吹き像_移動処理 -- Hero's Tomb_Two-stage fire-breathing statue_Movement processing
+30102560 火吹き像の上下による魔法陣出現消失イベント -- Magic circle appearance and disappearance event due to the up and down of the fire-breathing statue
+30102580 梯子登録 -- ladder registration
+30102800 ボス撃破 -- Defeat the boss
+30102810 ボス出現 -- Boss appears
+30102811 ボス激昂 -- boss rage
+30102849 ゴッドフレイの16騎士達_イベント起動 -- 16 Knights of Godfrey_Event activated
+301002550 火吹き像が下がっていた場合C通路にチャリオットがワープして来れるためのフラグ操作 -- If the fire-breathing statue is lowered, operate the flag so that the chariot can warp to passage C.
+1000000000 敵リスポン -- enemy respawn

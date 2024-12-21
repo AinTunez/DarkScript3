@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1036492610 樽破壊イベント -- Barrel destruction event
+1036493700 NPC310城主の娘_NPC初期化イベント_指痕のブドウ渡し -- NPC310 Castle Lord's Daughter_NPC Initialization Event_Fingerprint Grape Passing

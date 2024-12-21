@@ -1,0 +1,12 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1045340700 NPC310城主の娘_NPC初期化イベント_初期状態 -- NPC310 Castle Lord's Daughter_NPC initialization event_Initial state
+1045340701 NPC310城主の娘_NPC初期化イベント_偽装死している -- NPC310 Castle Lord's Daughter_NPC initialization event_Fake death
+1045340705 NPC311半島砦の城主_NPC初期化イベント_娘の遺体発見 -- NPC311 Lord of the Peninsula Fort_NPC initialization event_Daughter's body discovered
+1045340706 NPC311半島砦の城主_出現要求 -- NPC311 Peninsula Fort Castle Lord_Appearance Request
+1045340707 NPC311半島砦の城主_被ダメで固定化 -- NPC311 Lord of Peninsula Fort_Fixed due to damage
+1045342250 死亡待機 -- Waiting for death
+1045342580 梯子登録 -- ladder registration
+1045342680 馬禁止領域用SFX -- SFX for horse prohibited area

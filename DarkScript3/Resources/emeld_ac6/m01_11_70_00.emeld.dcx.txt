@@ -1,0 +1,18 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 初期設定 -- Initial settings
+2010 マーカーON -- Marker ON
+2100 NPAC接敵行動 -- NPAC engagement action
+2700 NPAC撃破判定 -- NPAC defeat judgment
+2710 自機HP半分 -- Own machine HP half
+2720 敵スタッガー_前半 -- Enemy Stagger_First half
+2721 敵スタッガー_後半 -- Enemy Stagger_Second half
+2730 敵スタッガー_前半監視 -- Enemy stagger_first half monitoring
+2731 敵スタッガー_後半監視 -- Enemy Stagger_Second half monitoring
+3700 ミッション開始会話フラグ -- Mission start conversation flag
+3710 ミッション終了会話フラグ -- Mission end conversation flag
+3720 ミッション会話フラグ_1 -- Mission conversation flag_1
+3721 ミッション会話フラグ_2 -- Mission conversation flag_2
+3722 ミッション会話フラグ_3 -- Mission conversation flag_3
+3723 ミッション会話フラグ_4 -- Mission conversation flag_4
+1000000000 敵リスポン -- enemy respawn

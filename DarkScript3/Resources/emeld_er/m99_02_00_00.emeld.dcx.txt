@@ -1,0 +1,17 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+1550 条件登録並べ方検証イベント -- Condition registration sorting verification event
+1560 ログ報告確認イベント -- Log report confirmation event
+2000 採集イベント：草木 -- Gathering event: plants
+2010 採集イベント：鉱石 -- Gathering event: ore
+2020 採集イベント：草木（ObjAct版） -- Collection event: Plants (ObjAct version)
+2030 採集イベント：鉱石（ObjAct版） -- Gathering event: Ore (ObjAct version)
+2040 バディ巡回ルートイベント -- Buddy patrol route event
+2050 ワープイベント -- warp event
+3000 死亡チェック -- death check
+4000 行削除テスト2 -- Row deletion test 2
+5000 イベント呼び出しテスト -- Event call test
+6000 復活アクションテスト -- resurrection action test
+7000 草刈りOBJイベント -- Grass cutting OBJ event
+9200 イベントフラグテスト -- event flag test
+1000000000 敵リスポン -- enemy respawn

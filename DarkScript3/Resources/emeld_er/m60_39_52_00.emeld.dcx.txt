@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1039522220 トロル解除 -- troll removal
+1039522400 ユラがいたら血の信徒を消去 -- If Yura is there, erase Blood Believers.
+1039522650 魔術師の塔_ギミック装置の起動 -- Magician's Tower_Activation of gimmick device
+1039522660 魔術師の塔_ギミック装置の停止 -- Magician's Tower_Stopping the gimmick device
+1039522700 魔術師の塔_装置を防衛するゴーレム -- Magician's Tower_Golem defending the device
+1039523700 NPC318_混沌の宿主_NPC初期化イベント_エレオノーラにやられる -- NPC318_Host of Chaos_NPC initialization event_Defeated by Eleonora
+1039523701 NPC318_混沌の宿主_エレオノーラにやられる_死亡処理 -- NPC318_Host of Chaos_Killed by Eleonora_Death processing
+1039523702 NPC327_エレオノーラ_侵入許可フラグ立て -- NPC327_Eleanora_Intrusion permission flag setting
+1039523703 NPC318_混沌の宿主_血のり出現処理 -- NPC318_Host of Chaos_Blood appearance processing
+1039523704 NPC318_混沌の宿主_死亡確認_エレオノーラにやられる -- NPC318_Host of Chaos_Death confirmation_Killed by Eleonora

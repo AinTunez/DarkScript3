@@ -1,0 +1,77 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッションテストイベント01 -- Mission test event 01
+2001 スキャンイベント -- scan event
+2005 デリータ特殊待機 -- Delete special standby
+2010 テストイベントアニメ再生01 -- Test event anime playback 01
+2011 テストイベントアニメ再生02 -- Test event anime playback 02
+2015 ポイント移動テスト1 -- Point movement test 1
+2016 ポイント移動テスト2 -- Point movement test 2
+2017 ポイント移動テスト3 -- Point movement test 3
+2018 ポイント移動テスト4 -- Point movement test 4
+2020 テストイベント_オブジェダミーキャラ -- Test event_object dummy character
+2030 テストイベント_企業貢献度 -- Test event_Corporate contribution
+2031 テストイベント_企業貢献度02 -- Test event_Corporate contribution 02
+2040 テストイベント_アーカイブイベント入手 -- Test event_Obtain archive event
+2100 チュートリアルテストイベント01 -- Tutorial test event 01
+2110 確認イベント_ボスゲージ -- Confirmation event_Boss gauge
+2150 シェルパテスト -- sherpa test
+2200 マップ移動テストイベント01 -- Map movement test event 01
+2301 ガレージヘリ_アニメ再生01 -- Garage helicopter_anime play 01
+2302 ガレージヘリ_アニメ再生02 -- Garage helicopter_anime play 02
+2303 ガレージヘリ_アニメ再生03 -- Garage helicopter_anime play 03
+2310 アクションスポット -- action spot
+2311 初期化 -- Initialization
+2399 フラグリセット -- flag reset
+2400 マップ接続イベント -- map connection event
+2411 死亡カメライベント_AP判定01 -- Death camera event_AP judgment 01
+2412 死亡カメライベント_AP判定02 -- Death camera event_AP judgment 02
+2413 死亡カメライベント_AP判定03 -- Death camera event_AP judgment 03
+2421 死亡カメライベント_死亡判定01 -- Death camera event_death determination 01
+2422 死亡カメライベント_死亡判定02 -- Death Camera Event_Death Judgment 02
+2423 死亡カメライベント_死亡判定03 -- Death Camera Event_Death Judgment 03
+2430 死亡時ロックオンカメラ00 -- Lock-on camera upon death 00
+2431 死亡時ロックオンカメラ01 -- Lock-on camera at death 01
+2432 死亡時ロックオンカメラ02 -- Lock-on camera at death 02
+2433 死亡時ロックオンカメラ03 -- Lock-on camera at death 03
+2434 死亡時ロックオンカメラ04 -- Lock-on camera at death 04
+2435 死亡時ロックオンカメラ05 -- Lock-on camera at death 05
+2436 死亡時ロックオンカメラ06 -- Lock-on camera at death 06
+2437 死亡時ロックオンカメラ07 -- Lock-on camera at death 07
+2438 死亡時ロックオンカメラ08 -- Lock-on camera at death 08
+2439 死亡時ロックオンカメラ09 -- Lock-on camera at death 09
+2440 死亡時FE_FE消去 -- FE_FE erased on death
+2441 死亡時FE_FE有効 -- FE_FE valid at death
+2450 死亡演出_特殊効果判定_とどめ演技遷移ジャガー -- Death Production_Special Effects Judgment_Death Performance Transition Jaguar
+2451 死亡演出_特殊効果判定_とどめ演技終了 -- Death production_Special effects judgment_Final performance finished
+2452 死亡演出_特殊効果判定_とどめ遷移ジャガー03 -- Death effect_Special effect judgment_Final transition Jaguar 03
+2453 死亡演出_特殊効果判定_とどめ演技遷移NPAC -- Death production_Special effect judgment_Final performance transition NPAC
+2460 死亡演出_スロー -- Death production_slow
+2470 VANQUISHモード -- VANQUISH mode
+2471 スローモーテスト_特殊効果版01 -- Slow Motest_Special Effects Version 01
+2472 スローモーテスト_特殊効果版02 -- Slow Motest_Special Effects Version 02
+2473 スローモーテスト_特殊効果版03 -- Slow Motest_Special Effects Version 03
+2474 スローモーテスト_特殊効果版04 -- Slow Motest_Special Effects Version 04
+2475 スローモーテスト_特殊効果版01_NPC -- Slow Motest_Special effects version 01_NPC
+2476 スローモーテスト_特殊効果版02_NPC -- Slow Motest_Special Effects Version 02_NPC
+2477 スローモーテスト_特殊効果版03_NPC -- Slow Motest_Special effects version 03_NPC
+2478 スローモーテスト_特殊効果版04_NPC -- Slow Motest_Special Effects Version 04_NPC
+2480 ロックオン判定テスト -- Lock-on judgment test
+2490 ロジック停止イベント -- logic stop event
+2500 重要オブジェアクセス_アクションボタン判定 -- Important object access_action button determination
+2510 重要オブジェアクセス_FE無効化 -- Important object access_FE invalidation
+2511 重要オブジェアクセス_FE有効化 -- Important object access_FE enable
+2512 重要オブジェアクセス_カメラ変更 -- Important object access_camera change
+2600 特殊効果設定 -- Special effect settings
+2610 テスト出撃 -- test sortie
+2620 弾丸発射確認 -- Confirmation of bullet firing
+2630 自爆衛星テスト_識別 -- Suicide satellite test_identification
+2640 自爆衛星テスト_当たった通知判定 -- Suicide satellite test_Notification judgment of success
+2650 自爆衛星テスト_3点間移動 -- Suicide satellite test_Moving between 3 points
+2900 自爆衛星_ヒット通知 -- Suicide satellite_hit notification
+2920 自爆衛星_移動指示_3点間移動 -- Suicide satellite_Movement instructions_Move between 3 points
+2940 自爆衛星_ターゲットをPCへ -- Suicide satellite_target to PC
+2960 自爆衛星_初期化処理 -- Suicide satellite_initialization process
+3980 フラグ操作_自爆衛星のうち誰かが発見した -- Flag operation_Someone discovered the suicide satellite
+3990 イベントフラグ_自爆衛星のうち誰かが発見した -- Event flag_Someone discovered one of the suicide satellites
+1000000000 敵リスポン -- enemy respawn

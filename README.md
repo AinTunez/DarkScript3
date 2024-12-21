@@ -15,6 +15,7 @@ DarkScript3 also includes MattScript, a way of formatting scripts (except in DS2
 * Dark Souls III ([instruction list](https://soulsmods.github.io/emedf/ds3-emedf.html))
 * Sekiro ([instruction list](https://soulsmods.github.io/emedf/sekiro-emedf.html))
 * Elden Ring ([instruction list](https://soulsmods.github.io/emedf/er-emedf.html))
+* Armored Core VI ([instruction list](https://soulsmods.github.io/emedf/ac6-emedf.html))
 * Aside from these, you can bring your own EMEDF JSON file
 
 ## Images

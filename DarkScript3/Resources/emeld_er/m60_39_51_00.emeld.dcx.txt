@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1039512451 ルーン狩りの騎士_時間帯によって馬召喚を禁止する -- Rune Hunting Knight_Horse summoning is prohibited depending on the time of day.
+1039513700 NPC223亜人針子_NPC初期化イベント_三叉路の篝火近く -- NPC223 Demi-Seamiko_NPC initialization event_Near the bonfire at the three-way intersection
+1039513701 NPC223亜人針子_母の声イベント -- NPC223 Demi-human seamstress_Mother's voice event

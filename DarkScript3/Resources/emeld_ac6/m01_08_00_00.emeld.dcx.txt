@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+2000 初期準備 -- Initial preparation
+2100 破壊されたA -- destroyed A
+2101 破壊されたB -- destroyed B
+2200 両方破壊された -- both were destroyed
+2210 CS再生とワープ -- CS playback and warp
+2220 座標入ったら敵が出てくる -- Once you enter the coordinates, an enemy will appear.
+2300 敵ACを倒す -- Defeat enemy AC
+2400 会話フラグ1 -- conversation flag 1
+2401 会話フラグ2 -- conversation flag 2
+2500 火炎放射弾丸イベントテスト -- Flamethrower bullet event test
+2600 フラグ -- flag
+2601 ヘリチェンジ -- helicopter change

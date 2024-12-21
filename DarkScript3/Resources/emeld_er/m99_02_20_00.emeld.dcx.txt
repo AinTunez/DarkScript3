@@ -1,0 +1,67 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+99022400 エネミー更新権限をホストに固定_XX -- Fixed enemy update authority to host_XX
+99022410 祖霊ワープイベントテスト_XX -- Ancestral spirit warp event test_XX
+99022420 騎乗キャラ無効イベント_XX -- Riding character invalid event_XX
+99022430 キャラ無効テストイベント_XX -- Character invalidation test event_XX
+99022440 フィルタ確認用あたり調整イベント_XX -- Adjustment event for filter confirmation_XX
+99022450 NPC擬似マルチテスト_XX -- NPC pseudo multi-test_XX
+99022460 ロジック無効イベント_XX -- Logic invalid event_XX
+99022470 イベントレイヤーID_実行条件確認イベント_XX -- Event layer ID_Execution condition confirmation event_XX
+99022480 儀式ID判定確認_XX -- Ritual ID judgment confirmation_XX
+99022500 コンストラクタもどき -- Constructor imitation
+99022501 ロジック切り替えイベントテスト -- Logic switching event test
+99022502 ロジック切り替えイベントテスト2 -- Logic switching event test 2
+99022503 バディ撃破対象リスト登録 -- Buddy defeat target list registration
+99022504 バディ召喚石碑_SFX再生 -- Buddy summoning stone monument_SFX playback
+99022505 イベントポイントテスト -- event point test
+99022506 AI命令要求テスト -- AI command request test
+99022507 ロジックID指定テスト -- Logic ID specification test
+99022508 イベントターゲット指定テスト -- Event targeting test
+99022509 ダミーキャラアタッチテスト -- Dummy character attach test
+99022510 アセットダメージテストイベント -- Asset damage test event
+99022511 NPC初期化出現イベント -- NPC initialization appearance event
+99022512 トロル召喚イベントテスト -- Troll summoning event test
+99022513 テスト用ボスゲージ表示イベント -- Test boss gauge display event
+99022514 アクションボタン領域生成イベント -- Action button area generation event
+99022515 指定領域内で特殊効果付与するイベント -- Event that gives special effects within a specified area
+99022516 緑パネル_ロジック起動 -- Green panel_Logic start
+99022517 青パネル_アセットダメージ発生テスト -- Blue panel_asset damage generation test
+99022518 イベントアニメ連打するキャラ用 -- For characters who repeatedly hit event animations
+99022519 ボス撃破イベント_マルチ終了確認用 -- Boss defeat event_For confirmation of multiplayer completion
+99022520 黄緑パネル_ロジック起動 -- Yellow-green panel_Logic activation
+99022521 無パネル_ロジック起動 -- No panel_logic start
+99022522 無パネル_ボス死亡でおヒキとジェネレータ無効 -- No panel_Ohiki and generator disabled due to boss death
+99022523 NPC擬似マルチテスト_ボスイベントもどき -- NPC pseudo multi-test_boss event mockup
+99022524 黒パネル_ロジック起動 -- Black panel_logic activation
+99022525 発生時AI音確認用_アニメ要求 -- AI sound confirmation at occurrence_Animation request
+99022526 黄パネル_ロジック起動 -- Yellow panel_logic start
+99022527 NPC擬似マルチ成否判定 -- NPC pseudo multi success/failure judgment
+99022528 コピースライムNPC_ワープ出現 -- Copy Slime NPC_Warp Appears
+99022529 コピースライムNPC_PCデータコピー要求 -- Copy slime NPC_PC data copy request
+99022530 コピースライムNPC_検証用 -- Copy slime NPC_for verification
+99022531 強制死亡要求のテスト -- Testing forced death requests
+99022532 遠見台テスト -- far lookout test
+99022533 レイヤー指定起動確認 -- Layer specification startup confirmation
+99022534 イベントレイヤーID状態でアクションスキップ -- Skip action in event layer ID state
+99022535 イベントレイヤーID状態でラベルジャンプ -- Label jump in event layer ID state
+99022536 イベントレイヤーID状態でイベント終了 -- Event ends with event layer ID status
+99022537 儀式IDでアクションスキップ -- Skip action with ritual ID
+99022538 儀式IDでラベルジャンプ -- Label jump with ritual ID
+99022539 儀式IDでイベント終了 -- Event ends with ritual ID
+99022540 協力NPC_ボス部屋入場_検証用 -- Cooperation NPC_Boss room entrance_For verification
+99022541 マルチ検証用_霧壁 -- For multi-verification_fog wall
+99022542 百智卿召喚 -- Lord Hyakuchi summons
+99022543 アクターテスト -- actor test
+99022544 ローカルプレイヤーテスト -- local player test
+99022545 ジェスチャテスト -- gesture test
+99022546 ジェスチャテスト_赤 -- Gesture test_red
+99022547 特殊待機解除フラグ_操作 -- Special standby release flag_operation
+99022548 特殊待機解除フラグ_操作_同期あり -- Special standby release flag_operation_with synchronization
+99022549 特殊待機解除フラグ_実行条件 -- Special standby release flag_execution conditions
+99022550 特殊待機解除フラグ_ラベルジャンプ -- Special standby release flag_label jump
+99022551 特殊待機解除フラグ_アクションスキップ -- Special standby release flag_action skip
+99022552 特殊待機解除フラグ_イベント終了 -- Special standby release flag_event end
+99022553 重力無効確認 -- Gravity invalidation confirmation
+1000000000 敵リスポン -- enemy respawn

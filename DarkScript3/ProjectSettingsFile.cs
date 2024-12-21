@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DarkScript3
 {
-    // Extremely limited readonly copy of DSMapStudio ProjectSettings just to extract project data.
+    // Extremely limited readonly copy of DSMapStudio/Smithbox ProjectSettings just to extract project data.
     // This could be moved into a shared library if desired.
     public class ProjectSettingsFile
     {
@@ -28,6 +28,7 @@ namespace DarkScript3
         public enum GameType
         {
             Undefined = 0,
+            // DSMS names
             DemonsSouls = 1,
             DarkSoulsPTDE = 2,
             DarkSoulsRemastered = 3,
@@ -36,6 +37,22 @@ namespace DarkScript3
             Bloodborne = 6,
             Sekiro = 7,
             EldenRing = 8,
+            // Smithbox names
+            // Duplicates are fine but makes reflection name lookup ambiguous
+            DES = 1,
+            DS1 = 2,
+            DS1R = 3,
+            DS2S = 4,
+            DS3 = 5,
+            BB = 6,
+            SDT = 7,
+            ER = 8,
+            AC6 = 9,
+            DS2 = 10,
+            AC4 = 11,
+            ACFA = 12,
+            ACV = 13,
+            ACVD = 14,
         }
 
         // https://github.com/soulsmods/DSMapStudio/blob/master/StudioCore/Editor/ProjectSettings.cs
@@ -50,7 +67,8 @@ namespace DarkScript3
         {
             GameType.DarkSoulsPTDE, GameType.DarkSoulsRemastered,
             GameType.DarkSoulsIII, GameType.Bloodborne,
-            GameType.Sekiro, GameType.EldenRing
+            GameType.Sekiro, GameType.EldenRing,
+            GameType.AC6
         };
         private static readonly Dictionary<GameType, string> resourcePrefixHint = new Dictionary<GameType, string>
         {
@@ -62,6 +80,7 @@ namespace DarkScript3
             [GameType.Bloodborne] = "bb",
             [GameType.Sekiro] = "sekiro",
             [GameType.EldenRing] = "er",
+            [GameType.AC6] = "ac6",
         };
 
         // Expects a fully specified valid project JSON path.

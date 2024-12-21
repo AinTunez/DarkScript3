@@ -1,0 +1,38 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+18000020 チュートリアル開始 -- Start tutorial
+18000021 チュートリアル時間固定 -- Fixed tutorial time
+18000022 チュートリアル時間固定_保険 -- Tutorial time fixed_insurance
+18000050 チュートリアルPlayGo対応 -- Tutorial PlayGo compatible
+18000820 ボス共通イベント起動 -- Boss common event activation
+18000870 ボス共通イベント起動_チュートリアル -- Boss common event activation_tutorial
+18002023 チュートリアル案内 -- Tutorial guide
+18002200 チュートリアル王軍兵士位置移動 -- Tutorial royal army soldier position movement
+18002211 チュートリアル貴人攻撃 -- Tutorial noble attack
+18002250 チュートリアル特殊効果 -- tutorial special effects
+18002270 話す死体_アニメ再生 -- Talking corpse_anime playback
+18002400 チャリオット初期設定 -- Chariot initial settings
+18002410 チャリオット巡回ルート指定_初回起動 -- Chariot patrol route specification_first launch
+18002411 チャリオット巡回ルート指定_XX -- Chariot patrol route specification_XX
+18002440 吊り下げ火炎樽_XX -- Hanging flame barrel_XX
+18002450 チャリオット吊り下げ火炎樽で破壊_XX -- Destroyed by Chariot hanging flame barrel_XX
+18002510 エレベータイベント起動 -- Elevator event activation
+18002520 エレベーター用初期フラグ設定 -- Initial flag setting for elevator
+18002569 ガーゴイル像_封印扉_大 -- Gargoyle statue_Sealed door_Large
+18002580 梯子登録 -- ladder registration
+18002640 チュートリアルメッセージ_イベント_XX -- Tutorial message_event_XX
+18002650 チュートリアルメッセージ_イベントアイテム -- Tutorial message_event item
+18002651 チュートリアルメッセージ_イベント_再読みアイテム無し_XX -- Tutorial message_Event_No reread items_XX
+18002654 チュートリアルメッセージ_イベント素性魔術師以外 -- Tutorial message_Events other than magicians
+18002655 チュートリアルメッセージ_イベント素性魔術師 -- Tutorial message_Event Magician
+18002662 チュートリアルメッセージ_イベント素性弓持ち -- Tutorial Message_Event Character Bow Holder
+18002663 チュートリアルメッセージ_イベントガードカウンター -- Tutorial message_Event guard counter
+18002665 チュートリアルメッセージ_マルチプレイ協力 -- Tutorial message_Multiplayer cooperation
+18002671 チュートリアルメッセージ_リセット_XX -- Tutorial message_Reset_XX
+18002690 ジェスチャーアイテム解禁 -- Gesture items unlocked
+18002800 ボス撃破 -- Defeat the boss
+18002810 ボス出現 -- Boss appears
+18002850 ボス撃破_チュートリアル -- Boss defeat_tutorial
+18002860 ボス出現_チュートリアル -- Boss appearance_tutorial
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,142 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2100 タワーディフェンス用初期設定 -- Initial settings for tower defense
+2203 敵のターゲット優先度を変更 -- Change enemy target priority
+2204 タワーディフェンス用の敵無効化 -- Enemy nullification for tower defense
+2205 初期敵配置 -- Initial enemy placement
+2206 ミッション開始テキスト -- Mission start text
+2216 タワーのシールド量表示 -- Tower shield amount display
+2217 敵停止 -- enemy stopped
+2218 敵弱体化 -- enemy weakening
+2224 敵ブースト移動 -- Enemy boost movement
+2225 プレイヤー強化 -- Player reinforcement
+2239 タイマー表示 -- timer display
+2240 チームタイプ変更 -- Team type change
+2244 狙撃ACに自機をあらかじめ登録 -- Register your aircraft in sniper AC in advance
+2300 TD開始地点到着 -- Arrive at TD starting point
+2500 シールドのHPが50 -- Shield HP is 50
+2501 シールドのHPが20 -- Shield HP is 20
+2502 シールドのHPが0 -- Shield HP is 0
+2503 シールド被弾 -- Shield hit
+2510 タワーのHPが50 -- Tower HP is 50
+2511 タワーのHPが20 -- Tower HP is 20
+2512 タワーのHPが0 -- Tower HP is 0
+2520 タワーのアニメ再生 -- tower anime play
+2590 ハッキング80パーセント -- 80% hacking
+2591 ハッキング50パーセント -- hacking 50%
+2599 ミッション終了 -- Mission completed
+2610 右増援ヘリ投下ポイント判定 -- Right reinforcement helicopter drop point determination
+2630 左増援ヘリ投下ポイント判定 -- Left reinforcement helicopter drop point determination
+2680 中央増援ヘリ投下ポイント判定 -- Central reinforcement helicopter drop point determination
+2700 ドローン目標攻撃 -- drone target attack
+2800 ドローン増援 -- Drone reinforcements
+2900 会話フラグ_104800100_開幕 -- Conversation flag_104800100_opening
+2901 会話フラグ_104800200_開幕２ -- Conversation flag_104800200_Opening 2
+2902 会話フラグ_104800300_開幕３ -- Conversation flag_104800300_Opening 3
+2903 会話フラグ_104800400_開幕４ -- Conversation flag_104800400_Opening 4
+2904 会話フラグ_104800900_配置についた -- Conversation flag_104800900_placed
+2905 会話フラグ_104801500_配置についた２ -- Conversation flag_104801500_placed 2
+2906 会話フラグ_104801600_配置についた３ -- Conversation flag_104801600_3 in place
+2907 会話フラグ_104801700_配置についた４ -- Conversation flag _104801700_ placed 4
+2908 会話フラグ_104801800_配置についた５ -- Conversation flag_104801800_placed 5
+2909 会話フラグ_104801900_後４分 -- Conversation flag_104801900_4 minutes left
+2910 会話フラグ_104802000_後３分 -- Conversation flag_104802000_3 minutes left
+2911 会話フラグ_104802020_後３分２ -- Conversation flag_104802020_3 minutes left 2
+2912 会話フラグ_104802100_後２分 -- Conversation flag_104802100_2 minutes left
+2913 会話フラグ_104802200_後１分 -- Conversation flag_104802200_1 minute after
+2914 会話フラグ_104802240_後１分２ -- Conversation flag_104802240_1 minute after 2
+2915 会話フラグ_104802300_後30秒 -- 30 seconds after conversation flag_104802300_
+2916 会話フラグ_104802340_後30秒２ -- Conversation flag_104802340_30 seconds after 2
+2917 会話フラグ_104802400_砲台使用可能 -- Conversation flag_104802400_turret available
+2918 会話フラグ_104802440_砲台使用可能２ -- Conversation flag_104802440_turret usable 2
+2919 会話フラグ_104802500_砲台充電 -- Conversation flag_104802500_turret charging
+2920 会話フラグ_104802900_砲台利用可能 -- Conversation flag_104802900_turret available
+2921 会話フラグ_104803300_シールド被弾 -- Conversation flag_104803300_Shield hit
+2922 会話フラグ_104803700_シールド50 -- Conversation flag_104803700_shield 50
+2923 会話フラグ_104804100_シールド瀕死 -- Conversation flag_104804100_Shield dying
+2924 会話フラグ_104804200_自爆特攻兵器 -- Conversation flag_104804200_Suicide attack weapon
+2925 会話フラグ_104804500_シールド０ -- Conversation flag_104804500_shield 0
+2926 会話フラグ_104804900_タワーピンチ -- Conversation flag_104804900_Tower pinch
+2927 会話フラグ_104805300_タワー破壊失敗 -- Conversation flag_104805300_Tower destruction failure
+2928 会話フラグ_104805400_主人公死亡 -- Conversation Flag_104805400_Main character dies
+2929 会話フラグ_104806100_空てい部隊 -- Conversation Flag_104806100_Air Force
+2930 会話フラグ_104806500_狙撃部隊 -- Conversation flag_104806500_Sniper unit
+2931 会話フラグ_104806900_増援大量 -- Conversation flag_104806900_Large amount of reinforcements
+2932 会話フラグ_104808400_殲滅早すぎ殲滅用 -- Conversation flag_104808400_Eradicate too fast For annihilation
+2933 会話フラグ_104808500_殲滅早すぎ後半用 -- Conversation flag_104808500_Extermination is too fast for the second half
+2934 待機会話用フラグ -- Waiting conversation flag
+2935 残1分会話用フラグ -- 1 minute remaining conversation flag
+2936 残30秒会話用フラグ -- 30 seconds remaining conversation flag
+2990 会話中断判定 -- Conversation interruption determination
+2991 会話禁止判定 -- Conversation prohibited judgment
+3000 砲台死亡 -- Battery death
+3100 ウェーブ1判定 -- Wave 1 judgment
+3110 ウェーブ2判定 -- Wave 2 judgment
+3120 ウェーブ3判定 -- Wave 3 judgment
+3130 ウェーブ4判定 -- Wave 4 judgment
+3140 スカッド判定 -- Squad judgment
+3200 第1w_01 -- 1st w_01
+3201 第1w_02 -- 1st w_02
+3202 第1w_03 -- 1st w_03
+3210 第2w_01 -- 2nd w_01
+3211 第2w_02 -- 2nd w_02
+3212 第2w_03 -- 2nd w_03
+3220 第3w_01 -- 3rd w_01
+3221 第3w_02 -- 3rd w_02
+3222 第3w_03 -- 3rd w_03
+3223 第3w_04 -- 3rd w_04
+3230 第4w_01 -- 4th w_01
+3231 第4w_02 -- 4th w_02
+3232 第4w_03 -- 4th w_03
+3233 第4w_04 -- 4thw_04
+3234 第4w_05 -- 4thw_05
+3235 第4w_06 -- 4th w_06
+3236 第4w_07 -- 4th w_07
+3240 自爆特攻01 -- Suicide attack 01
+3241 自爆特攻02 -- Suicide attack 02
+3242 自爆特攻03 -- Suicide attack 03
+3250 スカッドミサイル飛翔判定 -- Scud missile flight judgment
+3300 輸送ヘリ仮爆破 -- Transport helicopter temporary explosion
+3400 砲台ギミック初期設定 -- Battery gimmick initial settings
+3410 砲台ギミック判定 -- Cannon gimmick judgment
+3420 砲台会話再生 -- Battery conversation playback
+3430 砲台会話終了 -- Cannon conversation ends
+3440 砲台用意 -- Battery ready
+3500 帰巣MT到達 -- Arrival at homing MT
+3550 特別報酬計算用 -- For special reward calculation
+3560 特別報酬加算 -- Special reward addition
+3570 特別報酬計算用_無傷 -- For special reward calculation_Undamaged
+3580 撃破報酬イベント -- Defeat reward event
+3600 バリア展開 -- Barrier deployment
+3610 バリアブレイク -- barrier break
+3620 四分 -- quarter
+3630 三分 -- three minutes
+3640 二分 -- dichotomy
+3650 一分 -- one minute
+3660 三十秒 -- thirty seconds
+3670 会話用シールドのHP0 -- Conversation shield HP0
+3700 即時ミッション会話発生フラグ -- Immediate mission conversation flag
+3701 待機ミッション会話発生フラグ -- Standby mission conversation flag
+3702 即時賑やかし会話発生フラグ -- Immediate lively conversation occurrence flag
+3703 待機賑やかし会話発生フラグ -- Waiting lively conversation occurrence flag
+3704 スキップ用即時ミッション会話再生中フラグ -- Instant mission conversation flag for skipping
+3705 スキップ用待機ミッション会話再生中フラグ -- Skip standby mission conversation flag
+3800 タイムライン付近判定 -- Judgment near timeline
+3810 増援追いついていない -- Reinforcements haven't caught up
+3820 増援追いついていない2 -- Reinforcements haven't caught up 2
+3900 デバッグ初期 -- Early debugging
+3901 デバッグ第一W -- Debugging first W
+3902 デバッグ第二W -- Debugging second W
+3903 デバッグ第三W -- Debugging third W
+3904 デバッグスカッド -- debug squad
+3905 デバッグ第四W -- Debugging 4th W
+3910 デバッグするかどうか -- Whether to debug or not
+3920 デバッグタワーアニメ再生0 -- debug tower anime play 0
+3921 デバッグタワーアニメ再生1 -- debug tower anime play 1
+3922 デバッグタワーアニメ再生2 -- debug tower anime play 2
+3930 デバッグタワー開始 -- Start debug tower
+3931 デバッグタワーアニメ再生0判定 -- Debug tower anime playback 0 judgment
+3932 デバッグタワーアニメ再生1判定 -- Debug Tower Anime Playback 1 Judgment
+3933 デバッグタワーアニメ再生2判定 -- Debug Tower Anime Playback 2 Judgment
+3950 失敗時処理 -- Failure handling
+1000000000 敵リスポン -- enemy respawn

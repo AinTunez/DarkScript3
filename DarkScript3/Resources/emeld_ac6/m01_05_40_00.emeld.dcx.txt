@@ -1,0 +1,32 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ボスHP判定01 -- Boss HP judgment 01
+2001 ボスHP判定02 -- Boss HP judgment 02
+2002 ボスHP判定03 -- Boss HP judgment 03
+2006 ボス戦闘開始領域 -- Boss battle start area
+2010 ボス撃破判定 -- Boss defeat judgment
+2100 ボス_戦闘開始前フラグ -- Boss_Flag before battle start
+2101 ボス_未HU状態フラグ -- Boss_UnHU status flag
+2102 ボス_HU状態フラグ -- Boss_HU status flag
+2103 ボス_撃破状態フラグ -- Boss_Defeated status flag
+2200 ミッション用初期化イベント_ボスゲージ -- Mission initialization event_Boss gauge
+2205 ボス停止 -- boss stop
+2400 BGMトランジション_ステート番号00_通常 -- BGM transition_state number 00_normal
+2410 BGMトランジション_ステート番号01_戦闘中 -- BGM transition_state number 01_in battle
+2420 BGMトランジション_ステート番号02_ヒートアップ1 -- BGM transition_state number 02_heat up 1
+2430 BGMトランジション_ステート番号03_ヒートアップ2 -- BGM transition_state number 03_heat up 2
+2440 BGMトランジション_ステート番号04_ヒートアップ3 -- BGM transition_state number 04_heat up 3
+2450 BGMトランジション_ステート番号05_ヒートアップ4 -- BGM transition_state number 05_heat up 4
+2460 BGMトランジション_ステート番号06_ヒートアップ5 -- BGM transition_state number 06_heat up 5
+2470 BGMトランジション_ステート番号07_死亡 -- BGM transition_state number 07_death
+2490 BGM用HP判定_00以下 -- HP judgment for BGM_00 or less
+2491 BGM用HP判定_10以下 -- HP judgment for BGM_10 or less
+2492 BGM用HP判定_20以下 -- HP judgment for BGM_20 or less
+2493 BGM用HP判定_30以下 -- HP judgment for BGM_30 or less
+2494 BGM用HP判定_40以下 -- HP judgment for BGM_40 or less
+2495 BGM用HP判定_50以下 -- HP judgment for BGM_50 or less
+2496 BGM用HP判定_60以下 -- HP judgment for BGM_60 or less
+2497 BGM用HP判定_70以下 -- HP judgment for BGM_70 or less
+2498 BGM用HP判定_80以下 -- HP judgment for BGM_80 or less
+2499 BGM用HP判定_90以下 -- HP judgment for BGM_90 or less
+1000000000 敵リスポン -- enemy respawn

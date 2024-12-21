@@ -1,0 +1,10 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1047402301 巡回ルート変更_XX -- Patrol route change_XX
+1047402302 腐った亡者アクティベーション -- rotten corpse activation
+1047402399 腐った亡者行軍到着 -- March of the rotten dead arrives

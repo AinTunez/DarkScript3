@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+31152849 ラダーン_イベント起動 -- Radhan_event activation
+1000000000 敵リスポン -- enemy respawn
+1052392500 ラダーン砂漠の幟_表示_XX -- Radan Desert Flag_Display_XX
+1052392800 ボス撃破 -- Defeat the boss
+1052392810 ボス出現 -- Boss appears
+1052392826 ラダーンメテオ時ワープ -- Radan Meteor Time Warp

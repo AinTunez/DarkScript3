@@ -1,0 +1,15 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1042372610 円形サークル用ナビメッシュ切り抜きアセット無効化 -- Disable navimesh cutout asset for circular circle
+1042372620 地図石碑光SFX切り替え -- Map stone monument light SFX switching
+1042372651 チュートリアルメッセージ_騎乗 -- Tutorial message_Riding
+1042373700 NPC100娘マリカ_導き会話許可_関所前 -- NPC100 daughter Marika_guidance conversation permission_in front of the checkpoint
+1042373701 NPC100娘マリカ_契約会話再生監視_関所前 -- NPC100 daughter Marika_Contract conversation playback monitoring_In front of the checkpoint
+1042373702 NPC100娘マリカ_導き会話再生監視_関所前 -- NPC100 daughter Marika_Guide conversation playback monitoring_In front of the checkpoint
+1042373703 NPC100娘マリカ_目的会話再生禁止_関所前 -- NPC100 Daughter Marika_Objective conversation playback prohibited_In front of the checkpoint

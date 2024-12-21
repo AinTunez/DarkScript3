@@ -1,0 +1,12 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1042392145 NPC疑似マルチ_火山館の依頼ターゲット1_開始 -- NPC pseudo-multi_volcano hall request target 1_start
+1042392200 ストームオオカミ出現_XX -- Storm wolf appears_XX
+1042392300 NPC世界への侵入開始 -- Start of invasion into the NPC world
+1042392301 NPC世界への侵入中 -- Invading the NPC world
+1042392302 NPC世界への侵入アセット -- Intrusion assets into the NPC world
+1042392600 テスト用イベント_鳴子作動_XX -- Test event_Naruko activation_XX
+1042393700 NPC369火山館モブ_闇霊侵入許可フラグ立て -- NPC369 Volcano Hall Mob_Dark spirit invasion permission flag set
+1042393710 NPC345火山館ターゲット1_侵入許可フラグ立て -- NPC345 Volcano Hall Target 1_Intrusion permission flag setting

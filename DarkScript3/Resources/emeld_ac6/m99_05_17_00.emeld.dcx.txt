@@ -1,0 +1,9 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+99051700 強制帰巣テスト -- Forced homing test
+99051701 ナビメッシュコスト制御テスト -- Navimesh cost control test
+99051702 ボスゲージテスト１ -- Boss gauge test 1
+99051703 ボスゲージテスト２ -- Boss gauge test 2
+99051704 ボスゲージテスト３ -- Boss gauge test 3
+1000000000 敵リスポン -- enemy respawn

@@ -10,7 +10,7 @@ namespace DarkScript3
 {
     public class EventCFG
     {
-        // This is usually an int, but can be a SourceNode in source-to-source transformations.
+        // This is usually a long, but can be a SourceNode in source-to-source transformations.
         public object ID { get; set; }
 
         private bool debugPrint = false;
@@ -48,13 +48,13 @@ namespace DarkScript3
             // This is a hacky way to pass this in, but it is effectively a change-able input to how the compiler is called.
             // It should be set for DS1 PTDE only, not DS1R.
             public bool RestrictConditionGroupCount = false;
-            // Don't silently swallow warnings
+            // Don't silently swallow warnings (unused, because some vanilla events cannot convert)
             public bool FailWarnings = false;
 
             // Combines and inlines conditions without changing underlying behavior.
             public static CFGOptions GetDefault() => new CFGOptions();
             // Matches the original nearly line-for-line but with additional control flow structures.
-            public static CFGOptions GetMin() => new CFGOptions
+            internal static CFGOptions GetMin() => new CFGOptions
             {
                 CombineDefinitions = false,
                 InlineDefinitions = false,
@@ -443,6 +443,7 @@ namespace DarkScript3
                         CondAssign assign = new CondAssign { ToVar = var, Cond = arg, Op = op.And ? CondAssignOp.AssignAnd : CondAssignOp.AssignOr };
                         newIntermediate(assign, source);
                     }
+                    // TODO: Should have cond decorations?
                     return useExisting ? null : new CondRef { Compiled = false, Name = var, Negate = op.Negate };
                 }
                 else
@@ -927,7 +928,7 @@ namespace DarkScript3
                         prevNoOp.MoveDecorationsTo(instr);
                         prevNoOp = null;
                     }
-                    node.Im.MoveDecorationsTo(instr);
+                    node.Im.MoveDecorationsTo(instr, true);
                     node.Im = instr;
                 }
                 catch (Exception ex) when (ex is FancyNotSupportedException || ex is InstructionTranslationException)
@@ -955,6 +956,7 @@ namespace DarkScript3
 
             func.Body = instrs;
             func.Fancy = false;
+            // func.Print(Console.Out);
 
             return result;
         }
@@ -1006,7 +1008,7 @@ namespace DarkScript3
                 if (im is Instr instr)
                 {
                     cmds[i] = im = info.DecompileCond(instr);
-                    instr.MoveDecorationsTo(im);
+                    instr.MoveDecorationsTo(im, true);
                     // Labels may already exist from FillSkip above
                     im.Labels = instr.Labels;
                 }

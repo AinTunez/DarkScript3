@@ -1,0 +1,42 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1034500519 エレベーター初期フラグ -- Elevator initial flag
+1034500700 NPC216狼頭の戦士_NPC初期化イベント_顔合わせ幻影 -- NPC216 Wolf-Headed Warrior_NPC Initialization Event_Face-to-face Illusion
+1034500701 NPC216狼頭の戦士_NPC初期化イベント_気が狂った -- NPC216 Wolf-headed Warrior_NPC initialization event_crazy
+1034500702 NPC216狼頭の戦士_戦闘開始会話 -- NPC216 Wolf Head Warrior_Battle Start Conversation
+1034500710 NPC224爺や_NPC初期化イベント_顔合わせ幻影 -- NPC224 Grandpa_NPC initialization event_Face meeting illusion
+1034500712 NPC307傀儡師_NPC初期化イベント_傀儡部屋汎用 -- NPC307 Puppeteer_NPC initialization event_Puppet room general purpose
+1034500713 NPC307傀儡師_NPC初期化イベント_傀儡部屋ネフェリ -- NPC307 Puppeteer_NPC initialization event_Puppet room Nefeli
+1034500714 NPC307傀儡師_NPC初期化イベント_傀儡部屋糞喰い -- NPC307 Puppeteer_NPC initialization event_Puppet room shit eating
+1034500715 NPC307傀儡師_NPC初期化イベント_顔合わせ幻影 -- NPC307 Puppeteer_NPC initialization event_Meeting illusion
+1034500716 NPC307傀儡師_NPC初期化イベント_セルブスの塔 -- NPC307 Puppet Master_NPC Initialization Event_Tower of Serbs
+1034500717 NPC307傀儡師_NPC初期化イベント_ラニに呪われた -- NPC307 Puppeteer_NPC initialization event_Cursed by Rani
+1034500718 NPC307傀儡師_X個以上傀儡購入 -- NPC307 Puppeteer_Purchase more than X puppets
+1034500719 NPC307傀儡師_高度な魔術を学んだ -- NPC307 Puppeteer_Learned advanced magic
+1034500730 NPC106ラニ_NPC初期化イベント_ラニの塔 -- NPC106 Rani_NPC initialization event_Rani's Tower
+1034500731 NPC106ラニ_リアルタイム状態遷移_ラニの塔 -- NPC106 Rani_Real-time state transition_Rani's Tower
+1034500732 NPC106ラニ_リアルタイム状態遷移_顔合わせ開始 -- NPC106 Rani_Real-time state transition_Meeting begins
+1034500733 NPC106ラニ_リアルタイム状態遷移_顔合わせ終了 -- NPC106 Rani_Real-time state transition_Meeting finished
+1034500734 NPC106ラニ_顔合わせ完了 -- NPC106 Rani_Meeting completed
+1034500735 NPC106ラニ_リアルタイム状態遷移_薬を飲ませようとした -- NPC106 Rani_Real-time state transition_Tried to give medicine
+1034502340 キャララグドール化_XX -- Character ragdollization_XX
+1034502510 エレベータイベント起動 -- Elevator event activation
+1034502580 梯子登録 -- ladder registration
+1034502610 ラニ塔囲みアセットイベント -- Rani Tower Surrounding Asset Event
+1034502620 ラニ塔前オオカミイベント -- Rani tower wolf event
+1034502800 ワイバーン特殊効果設定 -- Wyvern special effect settings
+1034502801 ワイバーン撤退イベント -- Wyvern withdrawal event
+1034502802 ワイバーン既に二回目倒されていたら消す処理 -- Process to erase the Wyvern if it has already been defeated for the second time
+1034502803 ワイバーン飛行特殊効果設定 -- Wyvern flight special effects setting
+1034502804 ワイバーン撤退時無効化するイベント -- Event to be disabled when Wyvern retreats
+1034503600 攻撃禁止エリア設定 -- Attack prohibited area setting
+1034503705 NPC316学院の女魔術師_新しい身体_NPC初期化イベント -- NPC316 Academy Female Magician_New Body_NPC Initialization Event
+1034503706 NPC316学院の女魔術師_死亡台詞再生処理 -- NPC316 Academy Female Magician_Death line playback processing
+1034503707 NPC316学院の女魔術師_NPCタイプ切替 -- NPC316 Female magician of the academy_NPC type switching
+1034503740 NPC106ラニ_篝火会話④再生許可コントロール -- NPC106 Rani_Bonfire conversation ④ Playback permission control

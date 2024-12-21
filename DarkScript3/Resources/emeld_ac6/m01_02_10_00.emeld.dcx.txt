@@ -1,0 +1,30 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 キャラの死亡判定 -- Character death determination
+2001 条件グループ条件状態で判定 -- Judgment based on condition group condition status
+2002 指定領域到達 -- Reaching specified area
+2003 クリア領域 -- clear area
+2004 敵全滅 -- Enemy annihilation
+2005 終了会話 -- end conversation
+2006 援軍無効化 -- Disable reinforcements
+2007 援軍有効化 -- Enable reinforcements
+2008 援軍死亡判定 -- Reinforcement death determination
+2009 増援ヘリ無効化 -- Reinforcement helicopter disabled
+2010 増援ヘリ有効化 -- Enable reinforcement helicopter
+2011 増援ヘリ投下 -- Reinforcement helicopter drop
+2012 増援ヘリ消失 -- Reinforcement helicopter disappears
+2013 キャラアタッチ -- character attach
+2014 キャラアタッチ解除 -- Character attach release
+2015 脱出ポイント有効化 -- Escape point activation
+2016 脱出ポイント無効化 -- Escape point disabled
+2020 建機クモ味方化 -- Construction machinery spider on your side
+2021 建機クモレーザーサイト待機 -- Construction machine spider laser site standby
+2022 建機クモ起動 -- construction machine spider launch
+2030 強制アニメテスト -- forced anime test
+2040 ヘリ追跡とターゲット共有テスト -- Heli tracking and target sharing test
+2041 ターゲット共有テスト02 -- Target sharing test 02
+2042 弾発射テスト -- Bullet firing test
+2043 OBJ破壊テスト -- OBJ destruction test
+2044 ダミキャラテスト -- Dummy character test
+2050 アッシュと重ガードメカを戦わせる -- Have Ash fight the heavy guard mecha
+1000000000 敵リスポン -- enemy respawn

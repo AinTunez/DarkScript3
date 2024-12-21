@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+70005000 ドローン大隊起動 -- Drone battalion launch
+70005010 ドローン大隊起動_個別__XX -- Drone battalion launch_individual__XX
+70005015 スティグロ初期化 -- Stiglo initialization
+70005020 地下施設の扉が開く -- The door to the underground facility opens
+70005800 補給ドローン初期化 -- Supply drone initialization
+70005801 補給イベント -- supply event
+72125031 スティグロ_部位1ダメージ -- Stiglo_part 1 damage
+72125032 スティグロ_部位2ダメージ -- Stiglo_part 2 damage
+72125033 スティグロ_部位3ダメージ -- Stiglo_part 3 damage
+72125034 スティグロ_瀕死表現 -- Stiglo_dying expression
+1000000000 敵リスポン -- enemy respawn

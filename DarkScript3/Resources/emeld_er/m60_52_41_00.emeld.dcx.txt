@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1052410519 エレベーター初期フラグ -- Elevator initial flag
+1052412200 ゴロゴロ鉄球 -- rumbling iron ball
+1052412220 魔術師塔イベント_霧壁 -- Magician Tower Event_Mist Wall
+1052412230 飛竜初期設定 -- Hiryu initial settings
+1052412270 雷地帯_弾丸イベント_XX -- Thunder Zone_Bullet Event_XX
+1052412291 ルーン狩りの騎士_時間帯によって馬召喚を禁止する -- Rune Hunting Knight_Horse summoning is prohibited depending on the time of day.
+1052412510 エレベータイベント起動 -- Elevator event activation

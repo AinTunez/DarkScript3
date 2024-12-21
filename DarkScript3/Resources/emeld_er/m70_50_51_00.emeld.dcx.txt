@@ -1,0 +1,18 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+7002 巨人姿勢切り替え（4末暫定対応） -- Giant posture switching (temporary support at the end of April)
+505102 ワイバーン無効化 -- Wyvern Disable
+505103 ワイバーン登場 -- Wyvern appears
+505104 ワイバーン強襲着陸 -- Wyvern assault landing
+505105 ワイバーンBGM再生開始許可 -- Permission to start playing Wyvern BGM
+505109 ワイバーン一定距離判別 -- Wyvern constant distance determination
+505111 ワイバーンBGM再生判定 -- Wyvern BGM playback judgment
+505120 傭兵部隊_起動 -- Mercenary unit_launch
+505130 草むら判定 -- Grass judgment
+505131 草むら特殊効果付与 -- Add grass special effects
+505132 篝火NPC位置合わせ -- Bonfire NPC position alignment
+505140 ナズグル_遺跡広場出現 -- Nazgul Ruins Square Appears
+505150 下層オープン進入時落下ダメージ無効 -- Fall damage is disabled when entering the lower level open.
+505160 森後半敵配置_街道時無効化処理 -- Enemy placement in the second half of the forest_Disabled processing when on the road
+505190 街道_キャラ有効化待ちフレーム数変更 -- Kaido_Change the number of frames waiting for character activation
+1000000000 敵リスポン -- enemy respawn

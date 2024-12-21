@@ -1,0 +1,12 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+200 採掘艦_ドリル死亡時アタッチ解除 -- Mining ship_Drill detached when dead
+201 足場アタッチ -- scaffolding attach
+202 デバッグ_ドリル閉める -- Debug_Drill close
+300 部位表示テスト -- Part display test
+301 部位表示テスト2 -- Part display test 2
+302 飛び去り確認用 -- For confirmation of flying away
+303 膝カバー確認用 -- For checking knee cover
+304 バリア確認用 -- For barrier confirmation
+305 とりあえず対応_プレイヤーワープ -- Supported for now_Player Warp
+1000000000 敵リスポン -- enemy respawn

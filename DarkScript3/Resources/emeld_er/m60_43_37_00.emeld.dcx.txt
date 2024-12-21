@@ -1,0 +1,27 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1043372250 ストームオオカミ出現_XX -- Storm wolf appears_XX
+1043372340 ルーン狩りの騎士の馬の対応 -- Rune hunting knight horse response
+1043372650 チュートリアルメッセージ_騎乗 -- Tutorial message_Riding
+1043373700 NPC800赤目商人1_初期化イベント -- NPC800 Red Eye Merchant 1_Initialization event
+1043373701 NPC800赤目商人1_地図ポイント発見 -- NPC800 Red Eye Merchant 1_Map point discovery
+1043373703 NPC800赤目商人1_演奏管理 -- NPC800 Red-Eyed Merchant 1_Performance Management
+1043373705 NPC800赤目商人1_集中演奏時ロジック管理 -- NPC800 Red Eye Merchant 1_Logic management during intensive performance
+1043373706 NPC800赤目商人1_ロバ被ダメ台詞再生 -- NPC800 Red-Eyed Merchant 1_ Donkey Damage Line Playback
+1043373707 NPC800赤目商人1_ロバ敵対監視 -- NPC800 Red Eye Merchant 1_Donkey Hostile Surveillance
+1043373710 NPC700話す死体⑨_NPC初期化イベント -- NPC700 talking corpse ⑨_NPC initialization event
+1043373711 NPC700話す死体⑨_自動会話イベント -- NPC700 Talking Corpse⑨_Automatic conversation event
+1043373721 NPC318_混沌の宿主_ネリウス戦自動会話再生 -- NPC318_Host of Chaos_Nerius battle automatic conversation playback
+1043373722 NPC318_混沌の宿主_ネリウス戦中_切り替え処理 -- NPC318_Host of Chaos_During the battle with Nerius_Switching process
+1043373726 NPC343ネリウス_更新権限を戻す -- NPC343 Nerius_Return update authority
+1043373730 NPC223亜人針子_NPC初期化イベント_初期状態 -- NPC223 Demi-Shimiko_NPC initialization event_Initial state
+1043373731 NPC223亜人針子_初期状態_能動会話再生済リセット -- NPC223 Ajin seamstress_Initial state_Active conversation played reset
+1043373732 NPC223亜人針子_初期状態_擬態解除 -- NPC223 Demi-human seamstress_initial state_mimetic release
+1043373733 NPC223亜人針子_初期状態_擬態中常時バックリード処理 -- NPC223 Demi-human seamstress_Initial state_Continuous backread processing during mimicry
+1043373734 NPC223亜人針子_初期状態_敵対時アニメ再生 -- NPC223 Demi-Shinko_Initial state_Animation playback when hostile

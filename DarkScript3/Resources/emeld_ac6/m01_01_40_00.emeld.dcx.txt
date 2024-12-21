@@ -1,0 +1,306 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッション開始時処理 -- Mission start process
+2001 目玉起動 -- eyeball activation
+2002 ミッション失敗時処理 -- Processing when mission fails
+2003 ミッション開始時処理_チェックポイント無し -- Mission start process_no checkpoint
+2004 A_進行管理特殊効果 -- A_ Progress management special effects
+2005 B_進行管理特殊効果 -- B_ Progress management special effects
+2006 C_進行管理特殊効果 -- C_Progress management special effects
+2010 Gparamディアクティベート -- Gparam deactivate
+2011 Gparamアクティべ－ト_甲板上 -- Gparam Activate_On Deck
+2012 Gparamディアクティべ－ト_甲板上 -- Gparam deactivate_on deck
+2013 カメラ変更 -- camera change
+2014 カメラ変更起動イベント -- Camera change trigger event
+2016 破壊対象とダミー結びつける -- Connect the target of destruction to the dummy
+2022 破壊対象_ダメージSFX -- Destruction target_Damage SFX
+2030 背景シフト_有効化 -- Background shift_enable
+2031 背景シフト_無効化 -- Background shift_disable
+2034 採掘艦歩行停止命令 -- Order to stop mining ship walking
+2035 振動1_Gparam有効化時 -- Vibration 1_When Gparam is enabled
+2050 採掘艦が作戦領域離脱判定 -- Determining that the mining ship has left the operational area.
+2055 作戦ライン変更 -- Change of operational line
+2060 死亡床1有効化 -- Activate death bed 1
+2061 死亡床1無効化 -- Death bed 1 disabled
+2062 死亡床2有効化 -- Activate death bed 2
+2063 死亡床2無効化 -- Death bed 2 disabled
+2072 復帰ポイント切り替え_2両目尻 -- Return point switching_2nd corner of both eyes
+2073 復帰ポイント切り替え_2両目左脚 -- Return point switching_2nd eye left leg
+2074 復帰ポイント切り替え_2両目甲板 -- Return point switching_2nd car deck
+2075 復帰ポイント切り替え_1両目 -- Return point switching_1st car
+2076 復帰ポイント切り替え_腹部 -- Return point switching_Abdomen
+2077 復帰ポイント切り替え_2両目右脚 -- Return point switching_2nd eye right leg
+2080 落下死亡したか判定 -- Determine if you died from falling
+2083 採掘艦に踏みつぶされた_右前チェック -- Crushed by a mining ship_Check the front right
+2084 採掘艦に踏みつぶされた_右前_ベース -- Right front base trampled by mining ship
+2085 採掘艦に踏みつぶされた_右前_転倒進行1 -- Trampled by a mining ship_front right_fall progress 1
+2086 採掘艦に踏みつぶされた_右前_転倒進行2 -- Trampled by a mining ship_front right_fall progress 2
+2087 採掘艦に踏みつぶされた_右前_死亡1 -- Crushed by a mining ship_front right_death 1
+2088 採掘艦に踏みつぶされた_右前_死亡2 -- Crushed by a mining ship_front right_death 2
+2089 採掘艦に踏みつぶされた_左前チェック -- Crushed by a mining ship_Check the front left
+2090 採掘艦に踏みつぶされた_左前_ベース -- _Front left_ Base trampled by a mining ship
+2091 採掘艦に踏みつぶされた_左前_転倒進行1 -- Trampled by a mining ship_Front left_Falling progress 1
+2092 採掘艦に踏みつぶされた_左前_転倒進行2 -- Trampled by a mining ship_Front left_Falling progress 2
+2093 採掘艦に踏みつぶされた_左前_死亡1 -- Crushed by a mining ship_Front left_Death 1
+2094 採掘艦に踏みつぶされた_左前_死亡2 -- Crushed by a mining ship_Front left_Death 2
+2095 採掘艦に踏みつぶされた_全OFF -- Trampled by a mining ship_all OFF
+2100 チェックポイント_目玉前_有効化 -- Checkpoint_In front of the eyeball_Enable
+2101 チェックポイント_目玉前__フラグ -- Checkpoint_In front of the eyeball_Flag
+2104 チェックポイント_目玉前_必要イベント -- Checkpoint_Before the eyeball_Required event
+2105 チェックポイント_目玉前_その他必要イベント -- Checkpoint_Before the eyeball_Other necessary events
+2106 チェックポイント_脚部破壊_有効化 -- Checkpoint_Leg Destruction_Enable
+2107 チェックポイント_脚部破壊_フラグ -- Checkpoint_Leg destruction_Flag
+2108 チェックポイント_脚部破壊_必要イベント -- Checkpoint_Leg destruction_Required event
+2109 チェックポイント_脚部破壊_その他必要イベント -- Checkpoint_Leg destruction_Other necessary events
+2110 チェックポイント_2両目渡る_有効化 -- Checkpoint_Cross the second car_Enable
+2111 チェックポイント_2両目渡る_フラグ -- Checkpoint_2nd car crossing_flag
+2112 チェックポイント_2両目渡る_必要イベント -- Checkpoint_Cross the second car_Required event
+2113 チェックポイント_2両目渡る_その他必要イベント -- Checkpoint_Cross the second car_Other necessary events
+2114 シチュ3_目玉アセット不死身 -- Situation 3_ Featured asset immortality
+2115 シチュ3_目玉死亡したら不死身解除 -- Situation 3_ Immortality is canceled if the eyeball dies
+2120 採掘艦体力表示 -- Mining ship health display
+2130 体力減少特殊効果_3パー -- Physical strength reduction special effect_3 par
+2131 体力減少特殊効果_5パー -- Physical strength reduction special effect_5%
+2132 体力減少特殊効果_7パー -- Physical strength reduction special effect_7%
+2133 体力減少特殊効果_10パー -- Physical strength reduction special effect_10%
+2134 体力減少特殊効果_15パー -- Physical strength reduction special effect_15%
+2135 体力減少特殊効果_20パー -- Physical strength reduction special effect_20%
+2136 体力減少特殊効果_30パー -- Physical strength reduction special effect_30%
+2137 体力減少特殊効果_50パー -- Physical strength reduction special effect_50%
+2138 体力回復特殊効果 -- Physical recovery special effect
+2139 体力減少特殊効果_13パー -- Physical strength reduction special effect_13 par
+2140 採掘艦ダメージと目玉ダメージ連動 -- Mining ship damage and eyeball damage linked
+2150 体力管理_転倒判定 -- Physical fitness management_fall determination
+2160 体力管理_死亡判定 -- Physical strength management_Death judgment
+2169 サウンド制御2のキックイベント_サブジェネレータエラー用 -- Sound control 2 kick event_for sub generator error
+2170 サウンド制御1 -- sound control 1
+2171 サウンド制御1のキックイベント -- Sound control 1 kick event
+2172 サウンド制御2のキックイベント -- Sound control 2 kick event
+2173 サウンド制御2_進行防止イベント -- Sound control 2_progress prevention event
+2174 サウンド制御2_進行防止イベント2 -- Sound control 2_Progress prevention event 2
+2175 サウンド制御2 -- sound control 2
+2176 サウンド制御3 -- sound control 3
+2177 サウンド制御3のキックイベント -- Sound control 3 kick event
+2178 サウンド制御2のキックイベント_敵機振り払えません用 -- Sound control 2 kick event_for unable to shake off enemy aircraft
+2179 サウンド制御2のキックイベント_サブジェネレータ破壊確認用 -- Sound control 2 kick event_for confirmation of sub-generator destruction
+2180 シチュ1_自機採掘艦に接近後_脚部を破壊しない -- Situation 1_After approaching own mining ship_Do not destroy the legs
+2185 シチュ1_目玉起動範囲入り -- Situation 1_ Eyeball activation range
+2186 シチュ1_目玉初撃撃ち始め -- Situation 1_ Eyeball first shot start
+2187 シチュ1_目玉2撃目 -- Situation 1_ Eyeball 2nd shot
+2190 シチュ1_脚部AP50パーセント -- Situation 1_ Leg AP50%
+2191 シチュ1_遠距離砲台発射 -- Situation 1_ long range artillery launch
+2198 シチュ1_遠距離砲台_砲撃領域 -- Situation 1_ long-range artillery battery_ bombardment area
+2199 シチュ1_遠距離砲台_領域外 -- Situation 1_Long range artillery battery_Outside area
+2200 シチュ1_採掘艦ダウン判定 -- Situation 1_ Mining ship down judgment
+2205 シチュ1_採掘艦ダウン完了判定 -- Situation 1_ Mining ship down completion judgment
+2206 シチュ1_自機が採掘艦に取りついた -- Situation 1_ Own ship is attached to a mining ship
+2207 シチュ1_PC予備領域を踏んだ判定 -- Situation 1_ Judgment that stepped on the PC reserve area
+2210 シチュ1_PC登攀完了 -- Situation 1_PC climbing completed
+2220 シチュ1_採掘艦復帰開始 -- Situation 1_Return of mining ship begins
+2226 シチュ1_ジェネレータ無敵かつロックオン無効 -- Situation 1_ Generator invincible and lock-on disabled
+2227 シチュ1_OFF_ジェネレータ無敵かつロックオン無効 -- Situation 1_OFF_ Generator invincible and lock-on disabled
+2235 シチュ1_2両目歩行待ち -- Situation 1_Waiting for 2nd car to walk
+2236 シチュ1_2両目歩行待ち解除 -- Situation 1_2 cars waiting to walk canceled
+2240 シチュ1_採掘艦転倒時押しつぶし判定_脚 -- Situation 1_Crush judgment when mining ship falls_Leg
+2241 シチュ1_採掘艦転倒時押しつぶし判定_胴体 -- Situation 1_Crush judgment when mining ship falls_Torso
+2250 シチュ1_採掘艦転倒開始 -- Situation 1_ Mining ship begins to fall
+2260 シチュ1_PC落下したか -- Situation 1_PC fell?
+2270 シチュ1_部位破壊カメラ振動 -- Situation 1_ Part destruction camera vibration
+2280 シチュ1_砲台PCを攻撃 -- Situation 1_Attack the cannon PC
+2290 シチュ1_下に入った砲台死亡 -- Situation 1_The battery died when it went under
+2300 シチュ1_3両目甲板砲撃 -- Situation 1_3 deck gunfire
+2310 シチュ1_転倒時のミサイル領域 -- Situation 1_Missile area when falling
+2320 シチュ1_転倒時のミサイル起動 -- Situation 1_Missile launch when falling down
+2330 シチュ1_ミッション進行_3両目砲台もう撃たない -- Situation 1_Mission progress_3rd gun turret no longer fires
+2340 シチュ1_副砲制御1_上方1 -- Situation 1_Secondary gun control 1_Upward 1
+2350 シチュ1_副砲制御1_上方2 -- Situation 1_Secondary gun control 1_Upward 2
+2360 シチュ1_副砲制御1_中腹 -- Situation 1_Secondary gun control 1_Midway
+2370 シチュ1_副砲制御1_中腹上部 -- Situation 1_Secondary gun control 1_Upper midsection
+2380 シチュ1_副砲の更新頻度を一瞬上げる -- Situation 1_ Instantly increase the update frequency of secondary guns
+2445 シチュ2_目玉にPAバリア付与 -- Situation 2_ Add PA barrier to eyeball
+2450 シチュ2_ジェネレータ破壊数判定 -- Situation 2_Generator destruction number determination
+2460 シチュ2_ジェネレータ全破壊 -- Situation 2_generator complete destruction
+2465 シチュ2_会話用_いずれかのジェネ破壊 -- Situation 2_For conversation_Destroy any gene
+2471 シチュ2_会話用_差し込み遷移_取りつかれた -- Situation 2_For conversation_Insert transition_Obsessed
+2475 シチュ2_会話用_腹部のジェネレータに気づかないカウント -- Situation 2_For conversation_Count not noticing the generator in the abdomen
+2476 シチュ2_会話用_腹部のジェネレータを壊しているかどうか -- Situation 2_Conversation_Whether the abdominal generator is broken or not
+2480 シチュ2_目玉ほぼ無敵 -- Situation 2_ Eyeball almost invincible
+2485 シチュ2_目玉ほぼ無敵解除 -- Situation 2_ Eyeball almost invincibility removed
+2600 シチュ3_目玉接近判定 -- Situation 3_Eyeball approach detection
+2601 シチュ3_目玉戦前チェックポイント判定 -- Situation 3_Main pre-battle checkpoint determination
+2602 シチュ3_目玉体力表示 -- Situation 3_Eyeball physical strength display
+2603 シチュ3_体力表示オフ -- Situation 3_Stamina display off
+2604 シチュ3_サウンドステート制御 -- Situ 3_Sound state control
+2605 シチュ3_目玉接近後初撃 -- Situation 3_First attack after approaching the eyeball
+2610 シチュ3_目玉体力減少 -- Situation 3_ Eyeball physical strength decrease
+2615 シチュ3_目玉体力減少その２ -- Situation 3_ Eyeball physical strength decrease part 2
+2620 シチュ3_目玉撃破判定 -- Situation 3_Eyeball destruction judgment
+2625 シチュ3_目玉死亡時柱壊れた -- Situation 3_ Pillar broke when eyeball died
+2630 シチュ3_目玉演出の瞬間 -- Situation 3_The moment of highlight production
+2640 シチュ3_目玉死亡アニメ流れ始めチェック -- Situation 3_ Eyeball death animation start flow check
+2650 シチュ3_死亡ループ開始判定 -- Situation 3_death loop start judgment
+2655 シチュ3_死亡アニメ開始 -- Situation 3_death animation start
+2660 シチュ3_採掘艦死亡判定 -- Situation 3_ Mining ship death judgment
+2670 シチュ3_アセット吸着有効 -- Situation 3_Asset adsorption enabled
+2671 シチュ3_アセット吸着無効 -- Situation 3_Asset absorption disabled
+2680 シチュ3_採掘艦の周りから離れたか -- Situation 3_Did you leave the vicinity of the mining ship?
+2681 シチュ3_採掘艦転倒途中 -- Situation 3_ Mining ship falling down
+2682 シチュ3_採掘艦転倒頭でまだ甲板にいるか判定 -- Situation 3_ Determine if the mining ship is still on deck when its head falls.
+2685 シチュ3_振り返る促し判定 -- Situation 3_Reflection judgment
+2690 シチュ3_採掘艦崩れ始めた -- Situation 3_ Mining ship begins to collapse
+2693 シチュ3_大爆発用セリフ判定 -- Situation 3_Large explosion line judgment
+2695 シチュ3_採掘艦大爆発判定 -- Situation 3_ Mining ship large explosion judgment
+2701 シチュ3_巻き込まれ死亡領域判定 -- Situation 3_ Caught up in death area determination
+2702 シチュ3_自機殺しがオフになった -- Situation 3_Self-kill has been turned off.
+2703 シチュ3_巻き込まれ死亡領域判定_爆発終了 -- Situation 3_ Caught in death area judgment_ End of explosion
+2704 シチュ3_巻き込まれ死亡領域判定_自機殺す -- Situation 3_ Caught in death area judgment_ Kill own aircraft
+2710 シチュ3_砲台全死亡 -- Situation 3_All batteries dead
+2720 シチュ3_FEマーカー管理_既に地面に降りているorFE消去を踏んでいる -- Situation 3_FE Marker Management_Stepping on the orFE eraser that is already on the ground
+2722 シチュ3_FEマーカー管理_FEの近くにたどり着いた -- Situation 3_FE marker management_Arrived near FE
+2723 シチュ3_FEマーカー管理_採掘艦崩落途中_振り向き促し -- Situation 3_FE marker management_Mining ship is collapsing_Encourage to turn around
+2724 シチュ3_FEマーカー管理_採掘艦が倒壊し始めた -- Situation 3_FE Marker Management_Mining ship has begun to collapse
+2725 シチュ3_FEマーカー管理_採掘艦から十分に離れた -- Situation 3_FE Marker Management_Enough distance from the mining ship
+2726 シチュ3_FEマーカー管理_採掘艦が大爆発した -- Situation 3_FE marker management_The mining ship exploded
+2730 シチュ3_FEマーカー管理_崩落時FE表示_遠方 -- Situation 3_FE marker management_FE display when collapsing_Distant
+2731 シチュ3_FEマーカー管理_消去_崩落時FE表示_遠方 -- Situation 3_FE marker management_Erase_FE display when collapsing_Distant
+2732 シチュ3_FEマーカー管理_崩落時FE表示_甲板上 -- Situation 3_FE marker management_FE display when collapsing_On deck
+2733 シチュ3_FEマーカー管理_消去_崩落時FE表示_甲板上 -- Situation 3_FE marker management_Erase_FE display when collapsing_On deck
+2750 二両目_副砲攻撃命令_側面右奥 -- Second car_Secondary gun attack order_Back right side
+2760 二両目_副砲攻撃命令_側面右手前 -- Second car_Secondary battery attack order_Front right side side
+2770 二両目_副砲攻撃命令_右脚部 -- Second car_Secondary gun attack command_Right leg
+2775 二両目_副砲攻撃命令_側面左奥 -- Second car_Secondary gun attack order_Back left side
+2777 二両目_副砲攻撃命令_側面左手前 -- Second car_Secondary battery attack order_Front left side
+2779 二両目_副砲攻撃命令_左脚部 -- Second car_secondary gun attack order_left leg
+2781 グレネード_砲撃やめ -- Grenade_Stop shelling
+2786 グレネード_砲撃再開 -- Grenade_Resuming bombardment
+2787 目玉レーザー待機_まだ近距離モーション中 -- Eyeball laser standby_still in short-distance motion
+2788 目玉ジェネレータ壊れた怯み -- Eyeball generator broken fear
+2799 目玉一度でも怯んだ -- I was scared even once of my eyeballs
+2800 目玉レーザーモード判定 -- Eyeball laser mode judgment
+2801 目玉レーザーモード -- eyeball laser mode
+2802 目玉レーザー照射 -- Eyeball laser irradiation
+2803 目玉レーザーモード以外に入ったか -- Did you enter anything other than eyeball laser mode?
+2805 目玉レーザー止める判定 -- Eyeball laser stop judgment
+2806 レーザー照射中止 -- Laser irradiation stopped
+2807 レーザー再照射判定 -- Laser re-irradiation judgment
+2808 レーザー終了判定 -- Laser end judgment
+2809 レーザー初撃判定 -- Laser first hit judgment
+2810 目玉ミサイルモード判定 -- Eyeball missile mode judgment
+2811 目玉ミサイルモード -- Eyeball missile mode
+2812 目玉ミサイル発射 -- Eyeball missile launch
+2813 目玉ミサイルモード以外に入ったか -- Did you enter anything other than eyeball missile mode?
+2815 目玉ミサイル止める判定 -- Judgment to stop eyeball missile
+2816 ミサイル発射中止 -- Missile launch canceled
+2817 ミサイル再発射判定 -- Missile relaunch determination
+2820 目玉近距離モード判定 -- Eyeball short-range mode determination
+2821 目玉近距離モード -- Eyeball close-range mode
+2830 遠距離砲モード -- long range artillery mode
+2832 遠距離砲モード判定 -- Long range artillery mode determination
+2833 遠距離砲撃止める判定_足元入った -- Judgment to stop long-range bombardment_feet entered
+2835 遠距離砲撃止める判定 -- Judgment to stop long range bombardment
+2836 遠距離砲照射 -- long range artillery irradiation
+2837 遠距離砲照射中止 -- Long-range artillery irradiation canceled
+2838 遠距離砲モード以外に入ったか -- Did you enter anything other than long-range gun mode?
+2839 遠距離砲撃再照射判定 -- Long-range artillery re-irradiation judgment
+2840 遠距離砲撃初撃判定 -- Long-range artillery first hit determination
+2841 遠距離砲撃再照射判定_足元から出た -- Long-range artillery re-irradiation judgment_came out from underfoot
+2843 遠距離ミサイルモード判定 -- Long range missile mode determination
+2844 遠距離ミサイル止める判定 -- Judgment to stop long range missiles
+2845 遠距離ミサイル再発射判定 -- Long range missile re-launch determination
+2848 ミッション進行_遠距離モードに戻らない判定 -- Mission progress_judgment not to return to long range mode
+2849 全モードリセット -- All mode reset
+2900 脚ターゲット表示 -- leg target display
+2905 脚ターゲット表示解除 -- Cancel leg target display
+2910 甲板上ターゲット表示 -- Target display on deck
+2915 甲板上ターゲット表示解除 -- Cancel target display on deck
+2920 破壊対象ターゲット表示 -- Destruction target display
+2947 目玉ターゲット表示 -- Eyeball target display
+2949 目玉ターゲット表示解除 -- Eyeball target display cancellation
+2950 復帰制御_2両目に触った判定 -- Return control_2nd eye touch judgment
+2960 砲台_地上の敵を削除する -- Artillery _Delete enemies on the ground
+3010 二両目に移れなかった_失敗フラグ -- Could not move to second car_failure flag
+3011 採掘艦が作戦領域離脱_失敗フラグ -- Mining ship leaves the operational area_failure flag
+3012 採掘艦の爆発に巻き込まれた_失敗フラグ -- Caught up in the explosion of a mining ship_Failure flag
+3013 順調にすすんだフラグ -- Flags that went smoothly
+3014 採掘艦復帰フラグ_エラー用 -- Mining ship return flag_for error
+3015 採掘艦転倒した_チェックポイント用フラグ -- Mining ship overturned_checkpoint flag
+3020 成功フラグ -- success flag
+3025 ミッション開始フラグ -- mission start flag
+3030 脚破壊目標表示フラグ -- Leg destruction target display flag
+3031 脚破壊ミッション目標表示済みフラグ -- Leg destruction mission objective flag
+3032 脚破壊ミッション目標更新フラグ -- Leg destruction mission objective update flag
+3035 登攀目標表示フラグ -- Climbing target display flag
+3036 ジェネレータ目標表示フラグ -- Generator target display flag
+3037 前方目標表示フラグ -- Forward target display flag
+3040 目玉破壊目標表示フラグ -- Eyeball destruction target display flag
+3045 目玉破壊目標表示完了フラグ -- Eyeball destruction target display completion flag
+3047 目玉に体力表示フラグ -- Physical strength display flag in the eyeball
+3048 逃げろ目標表示フラグ -- Run away target display flag
+3050 会話済みフラグ_ジェネレータを先に狙え -- Conversation completed flag_Aim for the generator first
+3052 会話済みフラグ_目玉の射程内だ -- Conversation completed flag_within eyeball range
+3055 会話済みフラグ_ジェネレータ壊さずに目玉に向かった -- Conversation Completed Flag_Headed to the eyeball without destroying the generator
+3056 会話済みフラグ_ジェネレータ壊さずに目玉にずっといる -- Conversation Completed Flag_Stay in the eyeball without breaking the generator
+3060 会話済みフラグ_まずいぜ爆発する -- Conversation completed flag_I'm afraid it will explode
+3070 会話済みフラグ_左ジェネレータを壊した -- Conversation complete flag_left generator broken
+3071 会話済みフラグ_右ジェネレータを壊した -- Conversation complete flag_right generator broken
+3072 会話済みフラグ_全てのジェネレータを壊した -- Conversation completed flag_Destroyed all generators
+3073 会話済みフラグ_3両目切り離せ -- Conversation Completed Flag_Separate 3rd Eye
+3074 会話済みフラグ_レーザー初撃 -- Conversation completed flag_Laser first shot
+3075 会話済みフラグ_敵機に取りつかれた -- Conversation completed flag_Occupied by enemy aircraft
+3080 会話済みフラグ_ジェネ破壊1 -- Conversation completed flag_Gene destruction 1
+3081 会話済みフラグ_ジェネ破壊2 -- Conversation completed flag_Gene destruction 2
+3082 会話済みフラグ_ジェネ破壊3 -- Conversation Flag_Gene Destruction 3
+3083 会話済みフラグ_ジェネ破壊4 -- Conversation completed flag_Gene destruction 4
+3084 会話済みフラグ_ジェネ破壊時遷移用_揮発フラグ -- Conversation completed flag_Transition when generating is destroyed_Volatile flag
+3085 会話済みフラグ_目玉起動 -- Conversation completed flag_eyeball activation
+3087 会話済みフラグ_目玉大爆発 -- Conversation completed flag_eyeball explosion
+3090 未使用会話フラグ_仮置き -- Unused conversation flag_temporary
+3091 会話終了フラグ -- Conversation end flag
+3092 テスト_アクティベート -- test_activate
+3093 テストフラグ0 -- test flag 0
+3095 テスト_3両目チェック用_右前脚前 -- Test_3rd vehicle check_right front leg front
+3096 テスト_3両目チェック用_左前脚前 -- Test_3rd vehicle check_front left front leg
+3097 テストフラグ1 -- test flag 1
+3098 テストフラグ2 -- test flag 2
+3099 テストフラグ3 -- test flag 3
+3100 六中_目玉まぶた開く -- Sixth grade_open eyelids
+3101 六中_目玉レーザー照射 -- Sixth grade_Eyeball laser irradiation
+3102 六中_目玉近距離モード -- Sixth grade_Epic close-range mode
+3103 六中_目玉近距離モード解除 -- Sixth grade_Eyeball close-range mode release
+3108 六中_目玉レーザー待機_近距離モーション中 -- 6th grade_eyeball laser standby_close range motion in progress
+3109 六中_目玉レーザー待機_近距離モーション終わった -- 6th grade_eyeball laser standby_close range motion finished
+3110 十二末_近距離モーション終わった関係フラグリセット -- End of the Twelve_Reset the relationship flag when the short-distance motion is over
+3111 六中_目玉ジェネレータ壊れた怯み -- Sixth grade_Eyeball generator broken fear
+3112 十二末_目玉ジェネ全破壊よろけ終了判定 -- End of the Twelve_Eyeball Gene Complete Destruction Stagger End Judgment
+3114 十二末_目玉レーザー待機_まぶた開き中か -- Twelfth end_eyeball laser waiting_eyelids open?
+3115 十二末_目玉レーザー待機_まぶた開け終わった -- End of the twelfth_eyeball laser waiting_eyelids finished opening
+3116 十二末_まぶた開け関係フラグリセット -- Twelfth End_Eyelid opening related flag reset
+3120 六中_レーザー照射_甲板 -- 6th grade_laser irradiation_deck
+3121 六中_レーザー照射_側面 -- Sixth grade_laser irradiation_side
+3150 甲板砲撃_場所判定_甲板 -- Deck bombardment_location determination_deck
+3151 甲板砲撃_場所判定_側面 -- Deck bombardment_location determination_side
+3152 甲板砲撃_場所判定_1両目 -- Deck bombardment_location determination_1st car
+3153 甲板砲撃_場所判定_まぶた -- Deck bombardment_location determination_eyelids
+3154 甲板砲撃_場所判定_ボス戦中甲板 -- Deck bombardment_location determination_deck during boss battle
+3155 甲板砲撃_場所判定_ボス戦中側面 -- Deck bombardment_location determination_side during boss battle
+3156 甲板砲撃_場所判定_ボス戦中1両目 -- Deck bombardment_location determination_first car during boss battle
+3157 甲板砲撃_場所判定_ボス戦中まぶた -- Deck bombardment_location determination_eyelids during boss battle
+3170 デバッグ用_歩行0歩目 -- For debugging_walking step 0
+3171 デバッグ用_歩行5歩目 -- For debugging_5th walking step
+3172 デバッグ用_歩行10歩目 -- For debugging_10th walking step
+3173 デバッグ用_歩行15歩目 -- For debugging_walking step 15
+3174 デバッグ用_歩行20歩目 -- For debugging_walking step 20
+3180 テストフラグ1歩目 -- Test flag 1st step
+3181 テストフラグ2歩目 -- Test flag 2nd step
+3182 テストフラグ3歩目 -- Test flag 3rd step
+3183 テストフラグ4歩目 -- Test flag 4th step
+3184 テストフラグ5歩目 -- Test flag 5th step
+3900 オブジェダメージ_採掘艦のサブジェネレーター01 -- Object damage_Mining ship sub generator 01
+3901 オブジェダメージ_採掘艦のサブジェネレーター02 -- Object damage_Mining ship sub generator 02
+3902 オブジェダメージ_採掘艦のサブジェネレーター03 -- Object damage_Mining ship sub generator 03
+3903 オブジェダメージ_採掘艦のサブジェネレーター04 -- Object damage_Mining ship sub generator 04
+3910 オブジェダメージ_採掘艦のサブジェネレーター01_登録用イベントフラグ -- Object damage_Mining ship sub generator 01_Event flag for registration
+3911 オブジェダメージ_採掘艦のサブジェネレーター02_登録用イベントフラグ -- Object damage_Mining ship sub generator 02_Registration event flag
+3912 オブジェダメージ_採掘艦のサブジェネレーター03_登録用イベントフラグ -- Object damage_Mining ship sub generator 03_Registration event flag
+3913 オブジェダメージ_採掘艦のサブジェネレーター04_登録用イベントフラグ -- Object damage_Mining ship sub generator 04_Event flag for registration
+1000000000 敵リスポン -- enemy respawn

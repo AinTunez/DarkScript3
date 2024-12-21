@@ -1,0 +1,25 @@
+0 コンストラクタ -- constructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+12092200 動物死亡時イベントキック_XX -- Event kick when animal dies_XX
+12092230 動物側憑依準備_XX -- Preparation for animal possession_XX
+12092260 祖霊憑依出現_XX -- Ancestral spirit possession appears_XX
+12092290 祖霊憑依出現_セーフティ -- Ancestral spirit possession appears_Safety
+12092295 野生動物ロック不可 -- Wild animals cannot be locked
+12092800 祖霊撃破 -- Defeat ancestral spirits
+12092810 祖霊出現 -- Ancestral spirits appear
+12092848 地下迷宮平原へワープ -- Warp to the underground labyrinth plain
+12092849 祖霊戦イベント起動 -- Ancestral spirit battle event started
+12092854 野生動物召喚処理キック -- Wild animal summoning kick
+12092859 野生動物召喚 -- wild animal summoning
+12092860 野生動物召喚状態判別 -- Wild animal summoning status determination
+12092861 祖霊無敵解除 -- Ancestral spirit invincibility removed
+12092862 生命吸収_初回 -- Life absorption_first time
+12092863 生命吸収_2回目 -- Life absorption_2nd time
+12092864 生命吸収_3回目以降 -- Life absorption_from 3rd time
+12092865 生命吸収時野生動物SFX消滅 -- Wild animal SFX disappears when absorbing life
+12092910 SFX射出用弾丸オーナー設定 -- Bullet owner settings for SFX injection
+12092920 動物の霊SFX射出_XX -- Animal spirit SFX injection_XX
+1000000000 敵リスポン -- enemy respawn

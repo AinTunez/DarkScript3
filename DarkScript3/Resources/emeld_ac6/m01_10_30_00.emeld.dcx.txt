@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 演出破壊用_坑道破壊目標 -- For production destruction_mine shaft destruction target
+2010 演出破壊用_湖畔の街破壊目標 -- For production destruction_Lakeside town destruction target
+2020 演出破壊用_燃料基地破壊目標 -- For production destruction_Fuel base destruction target
+2030 演出破壊用_スパコン -- Supercomputer for production destruction
+2040 演出破壊用_吊り下げメランジタンクイベント -- For production destruction_hanging melange tank event
+2050 演出破壊用_新B層ジェネレーター -- New B layer generator for production destruction
+2060 演出破壊用_採掘艦ジェネレータ -- For production destruction_mining ship generator
+2070 採掘艦アタッチ -- mining ship attach
+2080 ダム破壊目標A_破壊設定 -- Dam destruction target A_destruction setting
+2090 ダム破壊目標B_破壊設定 -- Dam destruction target B_destruction setting
+2100 D層炉心_破壊設定 -- D layer core_destruction settings
+1000000000 敵リスポン -- enemy respawn

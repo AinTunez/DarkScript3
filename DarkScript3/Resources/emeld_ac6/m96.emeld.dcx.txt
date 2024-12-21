@@ -1,0 +1,55 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+3999999 サウンドさん用大壁でも -- Even a large wall for Mr. Sound
+4000000 ラストシチュ　戦艦移動開始　01 -- Last Situation Battleship Movement Start 01
+4000001 ラストシチュ　戦艦移動開始　02 -- Last Situation Battleship Movement Start 02
+4000002 ラストシチュ　戦艦移動開始　03 -- Last Situation Battleship Movement Start 03
+5000001 ラストシチュ　水門　突破してくる奴用 -- Last Situation Floodgate For those who break through
+5000002 ラストシチュ　水門　撃破してくる奴用 -- Last Situation - For those who destroy the water gate
+5000003 ラストシチュ　戦艦水門迎撃 -- Last Situation Battleship Sluice Interception
+5000103 ラストシチュ　迎撃戦艦の出撃　第一陣 -- Last situation: Sortie of the interceptor battleship, first group
+5000104 ラストシチュ　迎撃戦艦の出撃　第二陣 -- Last situation: Sortie of the interceptor battleship, second group
+5000105 ラストシチュ　迎撃戦艦　第一陣　進軍終了 -- Last Situation: First Battleship Interceptor Advancement Completed
+5000106 ラストシチュ　迎撃戦艦　第二陣　進軍終了 -- Last Situation Interceptor Battleship 2nd Line Advancement Ended
+5000107 ラストシチュ　逃走船団 -- Last Situation Escape Fleet
+6000200 装備展開_01 -- Equipment deployment_01
+6000201 装備展開　02 -- Equipment deployment 02
+6000202 装備展開　03 -- Equipment deployment 03
+6000300 巡回戦艦の特殊効果 -- Patrol battleship special effects
+6000400 空母　戦闘機発艦 -- Aircraft carrier fighter jet launch
+7000000 アセットアニメ初期化 -- Asset animation initialization
+7000100 アセットアニメ初期化200002 -- Asset animation initialization 200002
+7000200 アセットアニメ初期化2 -- Asset animation initialization 2
+7000300 アセットアニメ初期化3 -- Asset animation initialization 3
+7000400 アセットアニメ初期化4 -- Asset animation initialization 4
+7000500 アセットアニメ初期化5 -- Asset animation initialization 5
+7000600 アセットアニメ初期化　追いかけっこ -- Asset animation initialization chase
+7000700 アセットアニメ初期化　水門　01 -- Asset animation initialization water gate 01
+7000800 アセットアニメ　初期化　水門02 -- Asset animation initialization water gate 02
+7001000 水門　壁展開 -- Water gate wall expansion
+7001001 水門　門閉じ -- Flood gate closed
+7002001 シャア専用戦闘機　登場 -- Char's exclusive fighter appears
+7003000 駆逐艦発進 -- destroyer launch
+7003001 戦艦発進 -- Battleship launch
+7003002 戦艦装備展開イベント -- Battleship equipment deployment event
+7004000 空母発進 -- Aircraft carrier launch
+7005000 水上戦闘機用イベントターゲット設定 -- Event target setting for surface combat aircraft
+7005010 水上戦闘機　出発 -- Seaplane fighter departure
+7100100 デモ用　ドッグ前浮上砦　左側 -- Demonstration floating fort in front of dog left side
+7100200 デモ用　ドッグ　汎用小壁　展開 -- Demo dog general-purpose small wall deployment
+7100300 デモ用　小壁展開 -- Demo small wall deployment
+8000000 アセットアニメ再生テスト -- Asset animation playback test
+8000100 アセットアニメ再生テスト200002 -- Asset animation playback test 200002
+8000110 アセットアニメ再生テスト200002　2 -- Asset animation playback test 200002 2
+8000200 小波再生テスト -- Small wave playback test
+8000300 大波再生テスト -- Big wave playback test
+8430001 戦艦追いかけっこ -- Battleship chase
+8430101 戦艦　砲台展開 -- Battleship battery deployment
+8430201 戦艦　戦闘機発艦 -- Battleship fighter jet launch
+8430300 間欠泉_大_　イベント -- Geyser _large_ event
+8430301 調整様間欠泉大 -- Adjustable geyser size
+19600200 マーカ起動イベント -- Marker activation event
+19600201 巡洋艦　移動開始領域　01 -- Cruiser movement start area 01
+19600202 デモ用間欠泉小領域_起動 -- Demo geyser small area_startup
+19600203 大ジャンプテスト -- big jump test
+1000000000 敵リスポン -- enemy respawn

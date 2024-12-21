@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1049552200 ブリザードエリア_交戦イベント -- Blizzard area_battle event
+1049552210 墓暴きの貴人_怯え待機_xx -- Grave-revealing nobleman_Waiting in fear_xx
+1049552400 変身スライム_撃破 -- Transforming slime_defeat
+1049552401 変身スライム_変身 -- Transformation slime_transformation
+1049552410 墓暴きの貴人_埋もれ待機 -- Grave-revealing nobleman_waiting to be buried
+1049552420 墓暴きの貴人_埋もれた貴人を救出 -- Tomb-revealing Nobleman_Rescuing the Buried Nobleman
+1049552500 貴人逃走イベント -- noble escape event
+1049552550 墓暴きの貴人_光石吸着 -- Tomb-revealing Nobleman_Light Stone Adsorption

@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+1001 ミッションテストイベント2 -- Mission test event 2
+1002 ミッションテストイベント -- mission test event
+9900 テストその１ -- Test 1
+1000000000 敵リスポン -- enemy respawn

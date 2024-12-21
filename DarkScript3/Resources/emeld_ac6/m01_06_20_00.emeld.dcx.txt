@@ -1,0 +1,187 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 utl_マップ初期化 -- utl_map initialization
+2001 utl_プレイヤー初期化 -- utl_player initialization
+2010 utl_フェードアウト -- utl_fadeout
+2011 utl_フェードイン -- utl_fade in
+2090 utl_チェックポイント生成_1 -- utl_checkpoint generation_1
+2091 utl_SF_チェックポイント生成したよフラグ_1 -- utl_SF_Checkpoint generated flag_1
+2092 utl_リトライ時初期化_1 -- utl_initialize on retry_1
+2093 utl_チェックポイント生成_斜面部屋 -- utl_checkpoint generation_slope room
+2094 utl_SF_チェックポイント生成したよフラグ_斜面部屋 -- utl_SF_Checkpoint generated flag_Slope room
+2095 utl_リトライ時初期化_斜面部屋 -- utl_initialize on retry_slope room
+2100 bas_初期化 -- bas_initialization
+2101 bas_完了化 -- bas_completed
+2102 bas_B_大扉開けるやつ1_縦穴から線路 -- bas_B_The one that opens the big door 1_Tracks from the vertical hole
+2110 bas_B_線路1_近づいたら戦闘状態に -- bas_B_Railway 1_When you get close, it becomes a battle state
+2111 bas_B_キャスク部屋1_下層に降りたら戦闘状態に -- bas_B_Cask room 1_When you go down to the lower floor, you will be in a battle state
+2112 bas_B_制御室1_エレベーター起動 -- bas_B_Control room 1_Elevator start
+2113 bas_B_ロック扉1を開ける -- bas_B_Open lock door 1
+2114 bas_SF_制御室1_エレベーター起動したフラグ -- bas_SF_Control room 1_Elevator activated flag
+2115 bas_B_制御室1_エレベーター接近判定 -- bas_B_Control room 1_Elevator approach determination
+2116 bas_B_線路1_封鎖された扉にマーカー付ける -- bas_B_Railway 1_Attach a marker to the blocked door
+2117 bas_B_制御室1_侵入判定 -- bas_B_Control room 1_Intrusion detection
+2118 判定_ロック扉1会話用 -- Judgment_Lock door 1 conversation
+2120 判定_キャスク部屋1_下層に降りた -- Judgment_Cask room 1_Goed down to the lower floor
+2121 判定_エレベーター1ハッキング -- Judgment_Elevator 1 Hacking
+2122 判定_ボス前会話用 -- Judgment_For conversation before boss
+2123 判定_ダクト進行 -- Judgment_Duct progress
+2124 bas_B_斜面戦闘部屋_奥の扉を開けたらデリーターのロジック動かす -- bas_B_Slope battle room_When you open the back door, activate the deleter's logic
+2125 bas_B_斜面戦闘部屋_下に降りたらカバー共産MT達を戦闘状態に -- bas_B_Slope battle room_When you go down, put the cover communist MTs in a fighting state.
+2126 判定_エレベーター2ハッキング -- Judgment_Elevator 2 Hacking
+2131 bas_B_クレバス到達判定 -- bas_B_Crevasse arrival determination
+2132 bas_B_制御室2_エレベーター起動 -- bas_B_Control room 2_Elevator start
+2133 bas_B_ロック扉2を見て引き返した時の会話開始判定 -- bas_B_ Conversation start determination when looking at lock door 2 and turning back
+2134 bas_B_ロック扉2を見た時の会話開始判定 -- bas_B_Conversation start determination when looking at lock door 2
+2137 bas_B_ロック扉2を開ける -- bas_B_Open lock door 2
+2138 bas_SF_制御室2_エレベーター起動したフラグ -- bas_SF_Control room 2_Elevator activated flag
+2140 bas_B_ダクト_入口到達判定 -- bas_B_Duct_Entrance arrival determination
+2143 bas_B_制御室2_侵入判定 -- bas_B_Control room 2_Intrusion detection
+2144 bas_ダクト_入口示すマーカーON -- bas_duct_entrance marker ON
+2145 bas_ダクト_入口示すマーカーOFF -- bas_duct_entrance marker OFF
+2163 bas_B_大扉開けるやつ2_線路から中ボス部屋 -- bas_B_The one that opens the big door 2_Mid-boss room from the railroad tracks
+2190 DBG_クレバスシチュテスト_セットアップ -- DBG_Crevasse Situation Test_Setup
+2191 DBG_クレバスシチュテスト_ヘリ死亡時 -- DBG_Crevasse situation test_Helicopter death
+2200 nac_初期化 -- nac_initialization
+2201 nac_完了化 -- nac_completion
+2210 nac_B_NPACのAPちょっと減り始めたか判定 -- Determine whether nac_B_NPAC's AP has started to decrease a little.
+2211 nac_B_NPACのAP大きく減らしたか判定 -- Determine whether nac_B_NPAC's AP has been significantly reduced
+2212 nac_B_NPACのAP0になったか判定 -- Determine whether nac_B_NPAC has become AP0
+2213 nac_B_NPACのタグ入手 -- Obtain tag for nac_B_NPAC
+2214 nac_B_NPACのAPひん死判定 -- nac_B_NPAC's AP death judgment
+2220 nac_戦闘始める -- nac_Start battle
+2221 nac_B_戦闘開始位置に来たか判定 -- nac_B_Determine whether you have reached the battle starting position
+2222 nac_B_戦闘状態に入ったか判定 -- nac_B_Determine whether it has entered a combat state
+2223 nac_SF_戦闘終わりましたフラグ -- nac_SF_battle over flag
+2230 nac_ワイルドギースA_中ボス戦開始 -- nac_Wild Geese A_Medium boss battle begins
+2231 nac_ワイルドギースA_扉閉め -- nac_Wild Geese A_door closed
+2233 イベント2230と2530の中ボスイベント派生_シェルパ解禁 -- Event 2230 and 2530 mid-boss event derivative_Sherpa unlocked
+2240 イグアス_HP0判定 -- Iguazu_HP0 judgment
+2241 トゥルダク_HP0判定 -- Turdak_HP0 judgment
+2300 追加扉解除イベント -- Additional door release event
+2310 判定イベント_会話判定_アレガシンドボウエイ -- Judgment Event_Conversation Judgment_Alega Sindbouei
+2320 判定イベント_会話判定_リフトロックされてるよ -- Judgment event_Conversation judgment_Lift is locked
+2330 判定イベント_会話判定_床ロックされてるよ -- Judgment event_Conversation judgment_The floor is locked
+2340 判定イベント_会話判定_制御盤ここじゃよ -- Judgment event_Conversation judgment_Control panel here.
+2350 判定イベント_会話判定_くたばれ独立傭兵 -- Judgment event_Conversation judgment_Fuck you independent mercenary
+2351 判定イベント_会話判定_ALT_トゥルダク -- Judgment event_Conversation judgment_ALT_Turdak
+2352 判定イベント_会話判定_ALT_トゥルダクが裏まで来た -- Judgment event_Conversation judgment_ALT_Turdak came to the back
+2360 判定イベント_会話判定_隔壁解除会話 -- Judgment event_Conversation judgment_Bulkhead release conversation
+2365 判定イベント_会話判定用_鳥足ビーム一発目 -- Judgment event_For conversation judgment_First shot of bird's foot beam
+2370 判定イベント_会話判定_鳥足襲撃 -- Judgment event_Conversation judgment_Birdfoot attack
+2375 判定イベント_会話判定_鳥足撤退 -- Judgment event_Conversation judgment_Birdstep withdrawal
+2500 ALT_用初期化イベント -- Initialization event for ALT_
+2501 ALT_nac_完了化 -- ALT_nac_completed
+2510 ALT_nac_B_NPACのAPちょっと減り始めたか判定 -- Determine whether ALT_nac_B_NPAC's AP has started to decrease a little.
+2511 ALT_nac_B_NPACのAP大きく減らしたか判定 -- Determine whether ALT_nac_B_NPAC's AP has been significantly reduced
+2512 ALT_nac_B_NPACのAP0になったか判定 -- Determine whether ALT_nac_B_NPAC has become AP0
+2513 ALT_nac_B_NPACのタグ入手 -- Obtain tag for ALT_nac_B_NPAC
+2520 ALT_nac_戦闘始める -- ALT_nac_Start battle
+2521 ALT_nac_B_戦闘開始位置に来たか判定 -- ALT_nac_B_Determine whether you have reached the battle starting position
+2522 ALT_nac_B_戦闘状態に入ったか判定 -- ALT_nac_B_Determine whether it has entered a combat state
+2523 ALT_nac_SF_戦闘終わりましたフラグ -- ALT_nac_SF_Battle finished flag
+2530 ALT_nac_ワイルドギースA_中ボス戦開始 -- ALT_nac_Wild Geese A_Medium boss battle begins
+2531 ALT_nac_ワイルドギースA_扉閉め -- ALT_nac_Wild Geese A_door close
+2532 ALT_nac_HP判定_1段階 -- ALT_nac_HP judgment_1 stage
+2533 ALT_nac_HP判定_2段階 -- ALT_nac_HP judgment_2 stages
+2534 ALT_nac_HP判定_3段階 -- ALT_nac_HP judgment_3 stages
+2535 ALT_nac_HP判定_死亡 -- ALT_nac_HP judgment_death
+3000 talk_出撃直後 -- talk_Immediately after sortie
+3001 talk_リフト起動 -- talk_lift start
+3002 talk_強力な敵反応 -- talk_Strong enemy reaction
+3003 talk_挨拶射撃後 -- talk_after greeting shot
+3004 talk_行き止まり2 -- talk_dead end 2
+3005 talk_ダクト発見 -- talk_Duct discovery
+3006 talk_出撃直後2 -- talk_Immediately after sortie 2
+3007 talk_最初の行き止まり隔壁前 -- talk_In front of the first dead end bulkhead
+3008 talk_伏兵 -- talk_Ambush
+3009 talk_予備電源を発見 -- talk_Discover backup power supply
+3010 talk_クレバスに戻った -- talk_ Returned to the crevasse
+3100 talk_ダクト進行中 -- talk_duct in progress
+3101 talk_補給可能地点 -- talk_Resupply point
+3102 talk_ボス部屋前 -- talk_In front of the boss room
+3103 talk_ボス戦開始 -- talk_Boss battle begins
+3104 talk_ヒートアップ -- talk_heat up
+3105 talk_ボス撃破 -- talk_defeat the boss
+3106 talk_ミッション完了 -- talk_Mission completed
+3107 talk_NPAC開幕時会話 -- talk_NPAC opening conversation
+3108 talk_NPAC撃破時会話 -- talk_Conversation when defeating NPAC
+3109 talk_NPACHP減少時時会話 -- talk_NPACHP decrease time conversation
+3110 talk_リフトロック会話 -- talk_liftlock conversation
+3111 talk_床ロック会話 -- talk_floor lock conversation
+3112 talk_NPACに撃破された時の会話 -- talk_Conversation when defeated by NPAC
+3113 talk_ボスに撃破された時の会話 -- talk_Conversation when defeated by a boss
+3114 talk_NPACHP減少時時会話_2 -- talk_NPACHP decrease conversation_2
+3120 talk_ダクト直通会話 -- talk_duct direct conversation
+3121 talk_フェイズ2会話 -- talk_Phase 2 conversation
+3200 NPAC戦闘中かフラグ -- NPAC in battle flag
+3201 NPAC戦闘開始 -- NPAC battle begins
+3202 NPAC戦闘終了 -- NPAC battle ends
+3210 ボス戦かフラグ -- boss fight or flag
+3211 ボス戦闘開始 -- Boss battle begins
+3212 ボス戦闘終了 -- Boss battle finished
+3213 会話フラグ_106202630_イグアス戦会話_体力66パーセント以下 -- Conversation flag_106202630_Iguazu battle conversation_Physical strength 66% or less
+3214 会話フラグ_106202640_イグアス戦会話_体力33パーセント以下 -- Conversation Flag_106202640_Iguazu Battle Conversation_Stamina 33% or less
+3215 会話フラグ_106201400_アーキバスめ -- Conversation flag_106201400_Archibus
+3250 会話フラグ_106202800_誰もいないようですね -- Conversation Flag_106202800_It seems like no one is here.
+3251 会話フラグ_106202810_レイヴン、後ろです -- Conversation flag_106202810_Raven, behind you
+3252 会話フラグ_106202820_なるほどお前がレイヴンか -- Conversation Flag_106202820_I see, you're Raven.
+3253 会話フラグ_106202830_敵の情報を集めます -- Conversation flag_106202830_Collect enemy information
+3254 会話フラグ_106202840_坊やでは敵わんわけだ -- Conversation Flag_106202840_Young boys are no match for you
+3255 会話フラグ_106202850_そう来るかなるほどな -- Conversation Flag_106202850_I see.
+3256 会話フラグ_106202860_第4世代の強化人間 -- Conversation flag_106202860_4th generation enhanced human
+3257 会話フラグ_106202870_死んだか -- Conversation flag_106202870_Dead?
+3258 会話フラグ_106202880_なるほどこういうことも -- Conversation Flag_106202880_I see, things like this happen too.
+3259 会話フラグ_106202890_トゥルダクの撃破を確認 -- Conversation flag_106202890_Confirm the defeat of Turdak
+3260 会話フラグ_106202900_異常なまでの敵愾心を抱いている -- Conversation Flag_106202900_Feeling an abnormal amount of hostility
+3271 会話フラグ_106202720_私たちの今いる深度 -- Conversation flag_106202720_The depth we are in now
+3272 会話フラグ_106202740_地中に潜ってから -- Conversation flag_106202740_After going underground
+3300 item_SF_NPAC撃破時のタグ取ったフラグ -- item_SF_Flag taken from tag when defeating NPAC
+3350 Gparam_上キャスク部屋_オレンジ -- Gparam_upper cask room_orange
+3351 Gparam_上キャスク部屋_通常色 -- Gparam_upper cask room_normal color
+3360 Gparam_下キャスク部屋_オレンジ -- Gparam_lower cask room_orange
+3361 Gparam_下キャスク部屋_通常色 -- Gparam_lower cask room_normal color
+3362 Gparam_下キャスク部屋_赤色 -- Gparam_lower cask room_red
+3370 Gparam_変更イベント_通常色 -- Gparam_change event_normal color
+3371 Gparam_変更イベント_オレンジ色 -- Gparam_change event_orange
+3372 Gparam_変更イベント_赤色 -- Gparam_change event_red
+3380 Gparam_フラグ折るイベント -- Gparam_flag fold event
+3400 デリーター特殊待機 -- Deleter special standby
+3410 デリーター特殊待機_ダメージ解除のみ -- Deleter special standby_damage cancellation only
+3500 会話条件判定_不意打ちイベントキャラ殲滅されたか -- Conversation condition judgment_Surprise event character wiped out?
+3510 会話条件判定_斜面部屋会話予兆 -- Conversation condition judgment_Slope room conversation sign
+3520 会話条件判定_即時賑やかし会話01 -- Conversation condition judgment_Immediate lively conversation 01
+3530 会話条件判定_即時賑やかし会話02 -- Conversation condition judgment_Immediate lively conversation 02
+3601 CPからきたよフラグ01 -- I came from CP flag 01
+3602 CPからきたよフラグ02 -- I came from CP flag 02
+3700 ボス戦用BGM監視イベント -- BGM monitoring event for boss battles
+3800 ダクト用デリータ解除監視イベント -- Duct deleter release monitoring event
+3810 ダクト部屋バグイベント -- Duct room bug event
+3820 ダクト部屋出口バグイベント -- Duct room exit bug event
+3830 バグ箇所固定イベント -- Bug fixing event
+3900 宮武強敵登場アニメイベント -- Anime event where Miyatake's strong enemy appears
+3901 talk_隔壁開閉可能 -- talk_Bulkhead can be opened and closed
+3915 鳥足イベント_登場イベント -- Bird foot event_Appearance event
+3916 鳥足イベント_撤退イベント -- Bird foot event_withdrawal event
+3917 鳥足イベント_条件判定_射撃状態許可か -- Bird's foot event_condition determination_shooting state permission?
+3920 鳥足イベント_射撃指示_レーザー -- Bird foot event_shooting instructions_laser
+3925 鳥足イベント_射撃指示_ミサイル -- Bird foot event_shooting instructions_missile
+3950 鳥足イベント_条件判定_登場アニメ再生領域にPCが居るか -- Bird's Foot Event_Condition Judgment_Is there a PC in the appearance animation playback area?
+3951 鳥足イベント_条件判定_撤退アニメ再生領域にPCが居るか -- Birdshoe event_Condition determination_Is there a PC in the withdrawal animation playback area?
+3952 鳥足イベント_共産起動範囲 -- Birdshoe event_community activation range
+3953 鳥足イベント_共産セットアップ -- Birdshoe event_community setup
+3954 鳥足イベント_移動動作終了判定 -- Bird foot event_determination of movement end
+3960 鳥足イベント_逃げ込んだ後扉を閉める -- Bird's foot event_close the door after running away
+3961 鳥脚イベント_扉前射撃判定 -- Bird leg event_Fire judgment in front of the door
+3962 鳥脚イベント_扉前射撃 -- Bird leg event_Shooting in front of the door
+3970 暗闇イベント_地下二階キャスク部屋 -- Darkness event_Cask room on the second basement floor
+3975 直通イベント差分_地下二階キャスク部屋 -- Direct event difference_Cask room on the second basement floor
+3980 上キャスク部屋領域内外判定 -- Upper cask room area determination
+3981 上キャスク内側判定 -- Judgment inside upper cask
+3982 上キャスク外側判定 -- Upper cask outer judgment
+3984 上キャスクフラグ折り -- upper cask flag fold
+3985 下キャスク部屋領域内外判定 -- Lower cask room area determination
+3986 下キャスク内側判定 -- Judgment inside the lower cask
+3987 下キャスク外側判定 -- Judgment on the outside of the lower cask
+3989 下キャスクフラグ折り -- lower cask flag fold
+3990 宮武強敵イベントアニメリスタートフラグ -- Miyatake Strong Enemy Event Anime Restart Flag

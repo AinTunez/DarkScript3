@@ -1,0 +1,8 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+45022200 PC死亡復活時_バディ召喚済みフラグ折る -- When PC dies and revives_Fold buddy summoned flag
+45022210 PC死亡時_バディを帰還させる -- When PC dies_Return buddy
+45022220 バディ召喚無効化 -- Buddy summon disabled
+45022260 位置非表示設定 -- Location hidden setting
+1000000000 敵リスポン -- enemy respawn

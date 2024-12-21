@@ -1,0 +1,15 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1045362200 陸ダコ_出産用特殊効果 -- Land octopus_Special effects for childbirth
+1045362400 隕石アイコンの非表示フラグをON -- Turn on the hide flag of the meteorite icon
+1045363700 NPC802赤目商人3_初期化イベント -- NPC802 Red Eye Merchant 3_Initialization event
+1045363702 NPC802赤目商人3_ここで死亡監視 -- NPC802 Red Eye Merchant 3_Death monitoring here
+1045363703 NPC802赤目商人3_演奏管理 -- NPC802 Red Eye Merchant 3_Performance management
+1045363704 NPC802赤目商人3_地図ポイント発見 -- NPC802 Red Eye Merchant 3_Map point discovery
+1045363705 NPC802赤目商人3_集中演奏時ロジック管理 -- NPC802 Red Eye Merchant 3_Logic management during intensive performance
+1045363706 NPC802赤目商人3_ロバ被ダメ台詞再生 -- NPC802 Red-Eyed Merchant 3_ Donkey Damage Line Playback
+1045363707 NPC802赤目商人3_ロバ敵対監視 -- NPC802 Red-Eyed Merchant 3_Donkey Hostile Surveillance
+1045363710 NPC700話す死体⑧_NPC初期化イベント -- NPC700 talking corpse⑧_NPC initialization event
+1045363715 NPC801赤目モブ１_血文字表示 -- NPC801 Red Eye Mob 1_Blood text display

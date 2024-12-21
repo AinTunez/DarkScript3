@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+32012200 亡者鉱夫_採掘中止_XX -- Dead Miner_Mining Canceled_XX
+34120519 エレベータ初期フラグ -- Elevator initial flag
+34122400 感覚弱体化_XX -- Weakened senses_XX
+34122510 エレベータイベント起動 -- Elevator event activation
+34122515 エレベータイベント起動_神の塔 -- Elevator event activation_Tower of God
+34122580 梯子登録 -- ladder registration
+34122800 ボス撃破 -- Defeat the boss
+34122810 ボス出現 -- Boss appears
+34122811 ボス激昂 -- boss rage
+34122849 ボスイベント起動 -- Boss event activation
+1000000000 敵リスポン -- enemy respawn

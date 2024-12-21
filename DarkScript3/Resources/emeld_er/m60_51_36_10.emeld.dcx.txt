@@ -1,0 +1,24 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+9922012 壺マイヤー_NPC初期化イベント_祭り開催待ち -- Tsubo Mayer_NPC initialization event_Waiting for the festival
+9922013 壺マイヤー_NPC初期化イベント_祭りの後 -- Tsubomayer_NPC initialization event_After the festival
+1000000000 敵リスポン -- enemy respawn
+1051362200 祭り時敵配置イベント -- Festival enemy placement event
+1051362340 トロル飛び降りイベント -- troll jumping event
+1051362500 攻撃禁止区域設定 -- No-attack zone setting
+1051362510 エレベータイベント起動 -- Elevator event activation
+1051362519 エレベーター初期フラグ -- Elevator initial flag
+1051362560 砦_一方通行扉_領域扉 -- Fort_One-way door_Area door
+1051362580 梯子登録 -- ladder registration
+1051362600 ワープ装置イベント_開始 -- Warp device event_start
+1051362630 アセット無効化_テスト_XX -- Asset invalidation_test_XX
+1051362650 篝火の導き_ボス篝火 -- Bonfire Guidance_Boss Bonfire
+1051362800 ボス撃破 -- Defeat the boss
+1051362810 ボス出現 -- Boss appears
+1051362849 ボス_イベント起動 -- Boss_event activation
+1051363700 痩せ馬のラダーンとの戦闘開始 -- The battle with the skinny horse Ladan begins.
+1051363711 壺マイヤー_移動処理_祭り開催待ち -- Tsubo Meyer_Moving process_Waiting for the festival
+1051363712 壺マイヤー_祭り後_リアルタイム遷移 -- Tsubo Meyer_After the festival_Real-time transition
+1051363720 NPC216_狼頭の戦士_NPC初期化イベント_ラダーン祭り参加待ち -- NPC216_Wolf-headed Warrior_NPC Initialization Event_Waiting to participate in the Radhan Festival
+1051363725 平原砦の領主_NPC初期化イベント -- Lord of Plains Fort_NPC initialization event

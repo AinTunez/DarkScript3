@@ -1,0 +1,93 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 初期処理 -- Initial processing
+2005 サウンド_可聴距離対応 -- Sound_Audible distance compatible
+2006 サウンド_可聴距離対応_OFF -- Sound_Audible distance compatible_OFF
+2010 ボス全撃破 -- Defeat all bosses
+2011 AC片方撃破 -- Defeat one AC
+2012 重AC撃破 -- Defeat heavy AC
+2013 AC両方撃破 -- Defeat both ACs
+2014 ボスがだれか死んだ -- someone's boss died
+2015 ボスB1級士長死亡 -- Boss B1 class chief dies
+2016 ボスB2級士長死亡 -- Boss B2 class chief dies
+2020 ボス移動中間地点判定 -- Boss movement intermediate point determination
+2023 エラーハンドリング用強制遷移判定1_露天方面 -- Forced transition judgment for error handling 1_Outdoor direction
+2024 エラーハンドリング用強制遷移判定1_廊下方面 -- Forced transition judgment for error handling 1_corridor direction
+2025 エラーハンドリング用強制遷移判定1_袋小路方面 -- Forced transition judgment for error handling 1_Dead end direction
+2030 にぎやかしセリフ用_他のセリフを読んでいる最中である -- For lively lines_While reading other lines
+2031 にぎやかしセリフ用_他のセリフを読んでいない -- For lively dialogues_not reading other dialogues
+2033 にぎやかしセリフ用_ボスA体力低下1 -- For lively lines_Boss A physical strength reduction 1
+2034 にぎやかしセリフ用_ボスA体力低下2 -- For lively lines_Boss A physical strength decrease 2
+2035 にぎやかしセリフ用_再読防止ボスA体力低下1 -- For lively lines_Rereading prevention boss A physical strength reduction 1
+2036 にぎやかしセリフ用_再読防止ボスA体力低下2 -- For lively lines_Rereading prevention boss A physical strength reduction 2
+2100 ボスA_自機同じエリアに侵入 -- Boss A_ Own machine invades the same area
+2105 ボスA_自機接敵会話エリアに侵入 -- Boss A_Invade own machine's enemy conversation area
+2110 ボスA_移動1 -- Boss A_Move 1
+2111 ボスA_移動_分岐_増援場所へ -- Boss A_Move_Branch_To reinforcement location
+2112 ボスA_移動_分岐_廊下方向へ -- Boss A_Move_Branch_Toward the hallway
+2113 ボスA_移動時にイベントポイントを切り替える -- Boss A_Switch event points when moving
+2120 ボスA_自機と同じ場所に居るか判定_個別 -- Boss A_Determine if you are in the same place as your own machine_Individual
+2125 ボスA_自機と同じ場所に居るか判定_まとめ -- Boss A_Determine if you are in the same place as your own machine_Summary
+2140 ボスA_プレイヤーが半径Xm以内に入った -- Boss A_player entered within radius Xm
+2145 ボスA_戦闘遷移 -- Boss A_battle transition
+2150 ボスA_初期接敵_戦闘開始 -- Boss A_Initial encounter_Battle start
+2151 ボスA_初回起動用 -- Boss A_for first startup
+2152 ボスA_後から合流起動用 -- Boss A_ for merging and starting later
+2170 ボスA_ボスゲージ表示0番 -- Boss A_Boss gauge display number 0
+2171 ボスA_ボスゲージ表示1番 -- Boss A_Boss gauge display number 1
+2172 ボスA_演出死亡 -- Boss A_ production death
+2200 ボスB_自機同じエリアに侵入 -- Boss B_ Own machine invades the same area
+2205 ボスB_自機接敵会話エリアに侵入 -- Boss B_Invade own machine's enemy conversation area
+2210 ボスB_移動1 -- Boss B_Move 1
+2213 ボスB_移動_分岐_露天方向へ -- Boss B_Move_Branch_Towards the open air
+2215 ボスB_移動_分岐_廊下方向へ -- Boss B_Move_Branch_Toward the hallway
+2216 ボスB2_移動1 -- Boss B2_Move 1
+2217 ボスB2_移動_分岐_露天方向へ -- Boss B2_Move_Branch_Towards the open air
+2218 ボスB2_移動_分岐_廊下方向へ -- Boss B2_Move_Branch_Toward the hallway
+2220 ボスB_自機と同じ場所に居るか判定_個別 -- Boss B_Determine if you are in the same place as your own machine_Individual
+2230 ボスB_自機と同じ場所に居るか判定_まとめ -- Boss B_Determine if you are in the same place as your own machine_Summary
+2231 ボスB2_自機と同じ場所に居るか判定_個別 -- Boss B2_Determine if you are in the same place as your own machine_Individual
+2238 ボスB2_自機と同じ場所に居るか判定_まとめ -- Boss B2_Determine if you are in the same place as your own machine_Summary
+2240 ボスB_1_プレイヤーが半径Xm以内に入った -- Boss B_1_player entered within radius of Xm
+2241 ボスB_1_戦闘遷移 -- Boss B_1_battle transition
+2245 ボスB_2_プレイヤーが半径Xm以内に入った -- Boss B_2_player entered within Xm radius
+2246 ボスB_2_戦闘遷移 -- Boss B_2_battle transition
+2250 ボスB_初期接敵_戦闘開始 -- Boss B_Initial encounter_Battle start
+2251 ボスB1_初回起動用 -- Boss B1_for first startup
+2252 ボスB2_初回起動用 -- Boss B2_for first startup
+2255 ボスB1_後半起動用 -- Boss B1_for late start
+2256 ボスB2_後半起動用 -- Boss B2_for late start
+2270 ボスB_ボスゲージ表示0番 -- Boss B_Boss gauge display number 0
+2271 ボスB_ボスゲージ表示1番 -- Boss B_Boss gauge display number 1
+2272 ボスゲージ全消去 -- Clear all boss gauges
+2400 自機の場所判定_露天周り -- Determine the location of your aircraft_around the open air
+2401 自機の場所判定_分岐点 -- Determine the location of your aircraft_turning point
+2402 自機の場所判定_増援が来るところ -- Determining the location of your aircraft_Where reinforcements will arrive
+2403 自機の場所判定_廊下 -- Determine the location of your aircraft_corridor
+2404 自機の場所判定_奥廊下 -- Determining the location of your aircraft_back hallway
+2500 ボスA移動開始フラグ -- Boss A movement start flag
+2510 ボスB移動開始フラグ -- Boss B movement start flag
+2511 AC片方死んでいるフラグ -- AC one dead flag
+2512 AC1級士長が死んでいる -- AC 1st class chief is dead.
+2513 AC2級士長が死んでいる -- AC 2nd class chief is dead
+2515 重ACエリア侵入会話完了フラグ -- Heavy AC area intrusion conversation completion flag
+2516 ACエリア侵入会話完了フラグ -- AC area intrusion conversation completion flag
+2517 そろい踏み戦闘開始フラグ_重ACfirstルート -- Matching step battle start flag_heavy ACfirst route
+2518 そろい踏み戦闘開始フラグ_AC2機firstルート -- Matching battle start flag_AC2 aircraft first route
+2520 会話完了フラグ -- Conversation complete flag
+2530 最後に死亡したのが重AC -- The last person to die was severe AC.
+2531 最後に死亡したのがAC -- AC was the last to die.
+2540 にぎやかしセリフ用_重ACと戦闘中判定 -- For lively lines_Heavy AC and battle detection
+2900 ボスAに特殊効果1 -- Special effect 1 for boss A
+2901 テスト_ボスAに特殊効果2 -- Test_Special effects 2 for boss A
+2910 テスト_ボスAを召喚して戦闘状態に -- Test_Summon boss A and enter battle mode
+2915 テスト_ボスA用フラグ_入場1 -- Test_Boss A flag_Entrance 1
+2916 テスト_ボスA用フラグ_入場2 -- Test_Boss A flag_Entrance 2
+2917 テスト_ボスA用フラグ_ワープ -- Test_Boss A flag_Warp
+2918 テスト_ボスA用フラグオフ -- Test_Flag Off for Boss A
+2930 ボスBに特殊効果1 -- Special effect 1 for boss B
+2931 ボスB2に特殊効果1 -- Special effect 1 for boss B2
+2935 テスト_ボスBを召喚して戦闘状態に -- Test_Summon boss B and enter battle state
+2945 テスト_ボスB用フラグ -- Test_Boss B flag
+2946 テスト_ボスB用フラグオフ -- Test_Boss B flag off
+2947 テスト_ボスB視界延ばして自機を登録する -- Test_Boss B Extend visibility and register own aircraft

@@ -1,0 +1,105 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2030 撃破P加算_10000 -- Destruction P addition_10000
+2031 撃破P加算_20000 -- Destruction P addition_20000
+2032 撃破P加算_30000 -- Destruction P addition_30000
+2034 撃破P加算_40000 -- Destruction P addition_40000
+2200 初期イベント_ミッション前 -- Initial event_before mission
+2201 初期イベント_ミッション中 -- Initial event_during mission
+2300 AC出現1 -- AC appearance 1
+2301 AC死亡判定 -- AC death determination
+2303 ジャガノ接近判定 -- Jagano approach detection
+2304 AC接敵 -- AC contact
+2305 四脚登場 -- Quadrupeds appear
+2306 穴増援攻撃 -- hole reinforcement attack
+2310 追加イベ_USドローン投下処理 -- Additional event_US drone drop processing
+2320 追加イベ_USドローン無効化処理 -- Additional event_US drone disabling process
+2400 残四分会話フラグ -- 4 minutes remaining conversation flag
+2401 残三分会話フラグ -- Three minutes remaining conversation flag
+2402 残二分会話フラグ -- Two minutes remaining conversation flag
+2403 残一分会話フラグ -- One minute remaining conversation flag
+2501 宝1判定 -- Treasure 1 judgment
+2502 宝2判定 -- Treasure 2 judgment
+2503 宝3判定 -- Treasure 3 judgment
+2504 宝4判定 -- Treasure 4 judgment
+2505 宝5判定 -- Treasure 5 judgment
+2506 宝6判定 -- Treasure 6 judgment
+2507 宝7判定 -- Treasure 7 judgment
+2508 宝8判定 -- Treasure 8 judgment
+2900 一分経過 -- One minute has passed
+2901 二分経過 -- Two minutes passed
+2902 三分経過 -- Three minutes have passed
+2903 四分経過 -- Four minutes have passed
+2904 五分経過 -- Five minutes have passed
+2905 四分三十経過 -- A quarter of a century has passed
+2906 残り90s -- 90s remaining
+3000 うじゃうじゃ全員敵 -- Everyone is enemy
+3001 うじゃうじゃ全員敵再起 -- All the enemies are back
+3010 罠宝取得判定 -- Trap treasure acquisition judgment
+3020 基地敵戦闘開始 -- Base enemy battle begins
+3021 狙撃敵戦闘開始 -- Sniper enemy battle begins
+3100 会話スイッチオフ -- conversation switch off
+3200 ハッキング触れた判定 -- Judgment of hacking
+3250 会話用回収個数判定 -- Conversation collection number determination
+3300 会話用ACダメージ小 -- Conversation AC damage small
+3301 会話用ACダメージ大 -- Conversation AC damage large
+3302 会話用AC死亡 -- Conversation AC death
+3500 BGM範囲内判定 -- BGM within range determination
+3501 BGM範囲内フラグ -- BGM within range flag
+3600 即時ミッション会話発生フラグ -- Immediate mission conversation flag
+3601 待機ミッション会話発生フラグ -- Standby mission conversation flag
+3602 即時賑やかし会話発生フラグ -- Immediate lively conversation occurrence flag
+3603 待機賑やかし会話発生フラグ -- Waiting lively conversation occurrence flag
+3604 スキップ用即時ミッション会話再生中フラグ -- Instant mission conversation flag for skipping
+3605 スキップ用待機ミッション会話再生中フラグ -- Skip standby mission conversation flag
+3700 回収個数判定 -- Judgment of number of collected items
+3701 全回収 -- All collection
+3711 回収個数判定1 -- Collection number judgment 1
+3712 回収個数判定2 -- Collection number judgment 2
+3713 回収個数判定3 -- Collection number judgment 3
+3714 回収個数判定4 -- Collection number judgment 4
+3715 回収個数判定5 -- Collection number judgment 5
+3716 回収個数判定6 -- Collection number judgment 6
+3717 回収個数判定7 -- Collection number judgment 7
+3718 回収個数判定8 -- Collection number judgment 8
+3800 会話フラグ_ミッションスタート -- Conversation Flag_Mission Start
+3801 会話フラグ_初回ログ回収 -- Conversation flag_first log collection
+3802 会話フラグ_アッシュ普通 -- Conversation flag_Ash normal
+3803 会話フラグ_二個目 -- Conversation flag_second
+3804 会話フラグ_アッシュ価値あり -- Conversation flag_ash value
+3805 会話フラグ_三個目 -- Conversation flag_third
+3806 会話フラグ_アッシュとても価値あり -- Conversation flag_Ash very valuable
+3807 会話フラグ_四個目 -- Conversation flag_fourth
+3808 会話フラグ_灰の民情報普通 -- Conversation flag_Ash people information normal
+3809 会話フラグ_五個目 -- Conversation flag_fifth
+3810 会話フラグ_灰の民情報価値あり -- Conversation flag_Ash people information value
+3811 会話フラグ_6個目 -- Conversation flag_6th
+3812 会話フラグ_ゴミ情報 -- Conversation flag_garbage information
+3820 会話フラグ_7個目 -- Conversation flag_7th
+3821 会話フラグ_ゴミ情報２ -- Conversation flag_garbage information 2
+3822 会話フラグ_８個目 -- Conversation flag_8th
+3823 会話フラグ_変情報 -- Conversation flag_weird information
+3824 会話フラグ_灰の民ACが乱入 -- Conversation Flag_Ash People AC intrudes
+3825 会話フラグ_灰の民ACが乱入続き -- Conversation flag_Ash people AC continues to intrude
+3826 会話フラグ_ACちょい削れ -- Conversation flag_AC a little sharper
+3827 会話フラグ_AC瀕死 -- Conversation flag_AC dying
+3828 会話フラグ_AC死亡 -- Conversation flag_AC death
+3829 会話フラグ_残り時間が少なくなったら -- Conversation flag_When the remaining time is running low
+3830 会話フラグ_残り時間が更に少なくなったら -- Conversation flag_When the remaining time becomes even less
+3831 会話フラグ_全て回収したら -- Conversation flag_After collecting all
+3832 会話フラグ_時間切れ成功条件を満たしていた場合 -- Conversation flag_If the timeout success conditions are met
+3833 会話フラグ_時間切れ成功条件を満たしていない場合 -- Conversation flag_If the timeout success conditions are not met
+3834 会話フラグ_103500902_1個目回収後 -- Conversation flag_103500902_After collecting the first piece
+3835 会話フラグ_103502101_3個目回収後 -- Conversation flag_103502101_After collecting the third piece
+3836 会話フラグ_103502902_6個目回収後 -- Conversation flag_103502902_After collecting the 6th flag
+3837 会話フラグ_初回ログ回収後立て -- Conversation flag_After the initial log collection
+3838 会話フラグ_三個目後立て -- Conversation flag_three-eyed back
+3839 会話フラグ_6個目後立て -- Conversation flag_6 pieces
+3840 会話フラグ_103503600基地共産 -- Conversation Flag_103503600 Base Communist Party
+3841 会話フラグ_103503620狙撃共産 -- Conversation Flag_103503620 Sniper Communist
+3842 会話フラグ_103503640増援共産 -- Conversation Flag_103503640 Reinforcement Communist Party
+3843 会話フラグ_AC登場後立て -- Conversation flag_AC appearance post
+3900 会話イベント発生フラグ -- Conversation event occurrence flag
+3950 成功処理 -- Successful processing
+3960 失敗処理 -- Failure handling
+2060000000 敵リスポン -- enemy respawn

@@ -140,7 +140,7 @@
               "unk4": 0
             },
             {
-              "name": "Target Number Of Seconds",
+              "name": "Target Time (Seconds)",
               "type": 6,
               "enum_name": null,
               "default": 0.0,
@@ -174,7 +174,7 @@
               "unk4": 0
             },
             {
-              "name": "Target Number Of Frames",
+              "name": "Target Time (Frames)",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -1622,7 +1622,7 @@
               "unk4": 0
             },
             {
-              "name": "Line Segment Defined By Entity ID ",
+              "name": "Line Segment Defined By Entity ID",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -1768,7 +1768,7 @@
               "unk4": 0
             },
             {
-              "name": "Line Segment Defined By Entity ID ",
+              "name": "Line Segment Defined By Entity ID",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -2784,7 +2784,7 @@
               "unk4": 0
             },
             {
-              "name": "Target Event Message ID",
+              "name": "Event Message ID",
               "type": 5,
               "enum_name": null,
               "default": -1,
@@ -4032,7 +4032,7 @@
           "index": 0,
           "args": [
             {
-              "name": "Number Of Seconds",
+              "name": "Time (Seconds)",
               "type": 6,
               "enum_name": null,
               "default": 0.0,
@@ -4052,7 +4052,7 @@
           "index": 1,
           "args": [
             {
-              "name": "Number Of Frames",
+              "name": "Time (Frames)",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -4072,7 +4072,7 @@
           "index": 2,
           "args": [
             {
-              "name": "Min Number Of Seconds",
+              "name": "Min Time (Seconds)",
               "type": 6,
               "enum_name": null,
               "default": 0.0,
@@ -4086,7 +4086,7 @@
               "unk4": 0
             },
             {
-              "name": "Max Number Of Seconds",
+              "name": "Max Time (Seconds)",
               "type": 6,
               "enum_name": null,
               "default": 0.0,
@@ -4106,7 +4106,7 @@
           "index": 3,
           "args": [
             {
-              "name": "Min Number Of Frames",
+              "name": "Min Time (Frames)",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -4120,7 +4120,7 @@
               "unk4": 0
             },
             {
-              "name": "Max Number Of Frames",
+              "name": "Max Time (Frames)",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -6416,7 +6416,7 @@
           "index": 3,
           "args": [
             {
-              "name": "Entity ID",
+              "name": "Generator Entity ID",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -8172,7 +8172,7 @@
           "index": 49,
           "args": [
             {
-              "name": "Respawn Point Parameter ID",
+              "name": "Respawn Point Entity ID",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -8192,7 +8192,7 @@
           "index": 50,
           "args": [
             {
-              "name": "Enemy Spawner ID",
+              "name": "Generator Entity ID",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -8922,7 +8922,7 @@
               "unk4": 0
             },
             {
-              "name": "Entity ID 2",
+              "name": "Relative Entity ID",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -9086,7 +9086,7 @@
               "unk4": 0
             },
             {
-              "name": "Entity ID 2",
+              "name": "Relative Entity ID",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -10591,7 +10591,7 @@
           "index": 52,
           "args": [
             {
-              "name": "CharInitParam ID",
+              "name": "CharaInitParam ID",
               "type": 5,
               "enum_name": null,
               "default": 0,
@@ -11525,7 +11525,7 @@
           "index": 3,
           "args": [
             {
-              "name": "Type",
+              "name": "Entity Type",
               "type": 5,
               "enum_name": "Target Entity Type",
               "default": 0,
@@ -11993,7 +11993,7 @@
               "unk4": 0
             },
             {
-              "name": "Type",
+              "name": "Entity Type",
               "type": 5,
               "enum_name": "Target Entity Type",
               "default": 0,
@@ -14057,5 +14057,315 @@
         "2": "Installed"
       }
     }
-  ]
+  ],
+  "darkscript": {
+    "aliases": {
+      "IfCharacterHasSpeffect": "4[05]",
+      "SetSpeffect": "2004[08]",
+      "ClearSpeffect": "2004[21]",
+      "AdaptHpchangingSpeffectToNPCPartOfTarget": "2004[53]",
+      "SetSpeffectAndUnknown200455": "2004[55]"
+    },
+    "enum_aliases": null,
+    "replacements": null,
+    "global_enums": null,
+    "meta_aliases": {
+      "Entity ID": [
+        "Entity ID (Attachment Side)",
+        "Entity ID (Recipient Side)",
+        "Entity ID 2",
+        "Line Segment Defined By Entity ID",
+        "Warp Destination Entity ID",
+        "Point Entity ID",
+        "Respawn Point Entity ID",
+        "Spawn Point Entity ID",
+        "Bullet Producer Entity ID",
+        "Source Entity ID",
+        "Target Entity A ID",
+        "Target Entity B ID",
+        "Target Entity ID"
+      ],
+      "Character Entity ID": [
+        "Entity ID to Copy Floor From",
+        "Aggressor Entity ID",
+        "Attacker Entity ID",
+        "Target Character Entity ID",
+        "Bullet Team Entity ID"
+      ],
+      "NPC Entity ID": [
+        "Summoned NPC Entity ID",
+        "Summon Entity ID"
+      ],
+      "Object Entity ID": [
+        "Target Object Entity ID",
+        "Warp Object Entity ID"
+      ],
+      "Area Entity ID": [
+        "Initial Area ID",
+        "Destination Area Entity ID",
+        "Placement Area Entity ID",
+        "Starting Point Area Entity ID",
+        "Source Area Entity ID"
+      ],
+      "Hit Entity ID": [
+        "Hitbox Entity ID",
+        "Warp Destination Hitbox Entity ID"
+      ],
+      "Camera ID": [
+        "Locked Camera ID",
+        "Normal Camera ID"
+      ],
+      "Event Flag ID": [
+        "Event Flag ID End",
+        "Appearence Event Flag ID",
+        "Disable Bottom Event Flag ID",
+        "Dismissal Event Flag ID",
+        "Summon Event Flag ID",
+        "Target Event Flag ID",
+        "Ending Target Event Flag ID",
+        "Starting Target Event Flag ID",
+        "Disable Top Event Flag ID",
+        "Event Flag ID Max",
+        "Event Flag ID Min",
+        "Event Flag ID Start"
+      ],
+      "Base Event Flag ID": [
+        "Base Event Flag ID (Operand)",
+        "Left-side Base Event Flag ID",
+        "Right-side Base Event Flag ID",
+        "Humanity Event Value Base Event Flag ID"
+      ],
+      "Message ID": [
+        "Help Message ID"
+      ],
+      "Target Entity Type": [
+        "Warp Type",
+        "Entity Type"
+      ],
+      "Armor Item ID": [
+        "Target Armor ID Start",
+        "Target Armor ID End"
+      ],
+      "Other": [
+        "Achievement ID",
+        "Animation ID",
+        "Character Animation ID",
+        "Play Animation ID",
+        "Command ID",
+        "Cutscene ID",
+        "Dummypoly ID",
+        "Dummypoly ID (Attachment Side)",
+        "Dummypoly ID (Recipient Side)",
+        "Event ID",
+        "Multiplayer Event ID",
+        "Measurement ID",
+        "Event Message ID",
+        "Pad ID",
+        "Content Image Part ID",
+        "NPC Part ID",
+        "Time Period ID",
+        "Request ID",
+        "Defense Material SE ID",
+        "SFX ID",
+        "Defense Material SFX ID",
+        "Event Slot ID",
+        "Sound ID",
+        "State ID",
+        "Vibration ID"
+      ]
+    },
+    "meta_types": [
+      {
+        "name": "Entity ID",
+        "data_type": "entity"
+      },
+      {
+        "name": "Relative Entity ID",
+        "data_type": "entity",
+        "detail_name": "Entity ID"
+      },
+      {
+        "name": "Parameters",
+        "data_type": "entity"
+      },
+      {
+        "name": "Entity ID",
+        "cmds": ["2003[01]", "2003[18]"],
+        "data_type": "entity",
+        "types": ["Object", "Enemy", "Self"]
+      },
+      {
+        "name": "Entity ID",
+        "cmds": ["4", "1004", "2003[11]", "2003[12]", "2003[15]", "2004", "2009[04]"],
+        "data_type": "entity",
+        "types": ["Enemy", "Self"],
+        "detail_name": "Character Entity ID"
+      },
+      {
+        "name": "Entity ID",
+        "cmds": ["5", "1005", "2005", "2009[00]", "2009[03]"],
+        "data_type": "entity",
+        "type": "Object",
+        "detail_name": "Object Entity ID"
+      },
+      {
+        "name": "Entity ID",
+        "cmds": ["2006[01]", "2006[02]"],
+        "data_type": "entity",
+        "types": ["SFX"]
+      },
+      {
+        "name": "Character Entity ID",
+        "data_type": "entity",
+        "types": ["Enemy", "Self"]
+      },
+      {
+        "name": "NPC Entity ID",
+        "data_type": "entity",
+        "types": ["Enemy", "Human"]
+      },
+      {
+        "name": "Area Entity ID",
+        "data_type": "entity",
+        "type": "Region"
+      },
+      {
+        "name": "Message Entity ID",
+        "data_type": "entity",
+        "type": "Message"
+      },
+      {
+        "name": "Object Entity ID",
+        "data_type": "entity",
+        "type": "Object"
+      },
+      {
+        "name": "Hit Entity ID",
+        "data_type": "entity",
+        "type": "Collision"
+      },
+      {
+        "name": "Player Entity ID",
+        "data_type": "entity",
+        "type": "Self"
+      },
+      {
+        "name": "Map Part Entity ID",
+        "data_type": "entity",
+        "type": "MapPiece"
+      },
+      {
+        "name": "Generator Entity ID",
+        "data_type": "entity",
+        "type": "Generator"
+      },
+      {
+        "name": "Patrol Information Entity ID",
+        "data_type": "entity",
+        "type": "PatrolInfo"
+      },
+      {
+        "multi_names": ["Target Entity Type", "Entity ID"],
+        "data_type": "entity",
+        "override_enum": "TargetEntityType",
+        "override_types": {
+          "Object": {"value": 0},
+          "Region": {"value": 1},
+          "Enemy": {"value": 2},
+          "Self": {"value": 2}
+        }
+      },
+      {
+        "multi_names": ["Area ID", "Block ID"],
+        "data_type": "mapparts"
+      },
+      {
+        "multi_names": ["Item Type", "Item ID"],
+        "data_type": "param",
+        "override_enum": "ItemType",
+        "override_types": {
+          "EquipParamWeapon": {"value": 0},
+          "EquipParamProtector": {"value": 1},
+          "EquipParamAccessory": {"value": 2},
+          "EquipParamGoods": {"value": 3}
+        }
+      },
+      {
+        "name": "AI ID",
+        "data_type": "param",
+        "type": "NpcThinkParam"
+      },
+      {
+        "name": "Action Button Parameter ID",
+        "data_type": "param",
+        "type": "ActionButtonParam"
+      },
+      {
+        "name": "Armor Item ID",
+        "data_type": "param",
+        "type": "EquipParamProtector"
+      },
+      {
+        "name": "Behavior ID",
+        "data_type": "param",
+        "type": "BehaviorParam"
+      },
+      {
+        "name": "Camera ID",
+        "data_type": "param",
+        "type": "LockCamParam"
+      },
+      {
+        "name": "CharaInitParam ID",
+        "data_type": "param",
+        "type": "CharaInitParam"
+      },
+      {
+        "name": "Item Lot ID",
+        "data_type": "param",
+        "type": "ItemLotParam"
+      },
+      {
+        "name": "Object Parameter ID",
+        "data_type": "param",
+        "type": "ObjectParam"
+      },
+      {
+        "name": "SpEffect ID",
+        "data_type": "param",
+        "type": "SpEffectParam"
+      },
+      {
+        "name": "Wind Parameter ID",
+        "data_type": "param",
+        "type": "Wind"
+      },
+      {
+        "name": "Name ID",
+        "data_type": "fmg",
+        "type": "NpcName"
+      },
+      {
+        "name": "Message ID",
+        "data_type": "fmg",
+        "type": "EventText"
+      },
+      {
+        "name": "Area Name Message ID",
+        "data_type": "fmg",
+        "type": "PlaceName"
+      },
+      {
+        "name": "Event Flag ID",
+        "data_type": "eventflag"
+      },
+      {
+        "name": "Base Event Flag ID",
+        "data_type": "eventflag"
+      },
+      {
+        "name": "Other"
+      }
+    ]
+  }
 }

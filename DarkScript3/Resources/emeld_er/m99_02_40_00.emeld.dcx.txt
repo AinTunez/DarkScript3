@@ -1,0 +1,52 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+4719 NPC800赤目商人1_キャラ状態遷移 -- NPC800 Red Eye Merchant 1_Character state transition
+4999 NPC8XX赤目商人全体_状態遷移 -- All NPC8XX red-eyed merchants_state transition
+10000 ジプシー関連処理 -- Gypsy related processing
+10002 黒き刃の末裔初期処理 -- Descendants of the Black Blade Initial Processing
+10003 PCから攻撃を受けた -- Attacked by PC
+10004 黒き刃の末裔敵対処理 -- Descendants of the Black Blade Hostile Processing
+10005 土葬スケルトン初期処理 -- Initial treatment of burial skeleton
+10006 土葬スケルトン敵対処理 -- Burial skeleton hostile processing
+10015 文書アイテム用イベントフラグ操作テスト -- Event flag manipulation test for document items
+10020 共闘NPCサインテスト -- Collaborative NPC Sign Test
+10025 ジェスチャ取得テスト -- Gesture acquisition test
+10030 赤目出し消し -- red eye eraser
+10040 NPC宝化 -- NPC Treasure
+10050 後ろ蹴り感知 -- Back kick detection
+10060 特殊効果感知 -- special effect sensing
+10070 傭兵剣士テスト01 -- Mercenary swordsman test 01
+10071 傭兵剣士テスト02 -- Mercenary swordsman test 02
+10080 暗殺騎士無効化管理 -- Assassin knight invalidation management
+10082 暗殺騎士闇霊登場 -- Assassin Knight Dark Spirit Appears
+10084 暗殺騎士闇霊死亡 -- Assassin Knight Dark Spirit Death
+10086 暗殺騎士闇霊退場 -- Assassin Knight Dark Spirit Leaves
+10090 北の傭兵無効化 -- Disable northern mercenaries
+10100 死亡時ルーン減額 -- Rune reduction on death
+10101 撃破時ルーン増額 -- Rune increase when defeated
+10102 死亡時ルーン減額_上書き用 -- Rune reduction on death_for overwriting
+10105 鳥無敵化 -- Bird invincibility
+10106 鳥無効化 -- bird disabled
+10107 ホストゲスト判定テスト -- Host guest judgment test
+10110 亀味方化 -- Turtle ally
+99023700 チュートリアル用イベント -- Tutorial event
+99023701 無限復活白霊召喚テスト -- Infinite resurrection white spirit summoning test
+99023704 PCを移動させてアニメ再生するテスト -- Test of moving the PC and playing anime
+99023705 カメラパラメータ変更テスト -- Camera parameter change test
+99023706 話す死体用テスト -- talking corpse test
+99023707 PCがアイテムを渡すテスト -- Test where the PC passes an item
+99023708 口パク特殊効果付け替え -- Lip sync special effects replacement
+99023709 OBJ削除テスト -- OBJ deletion test
+99023710 イベント値テスト -- Event value test
+99023711 攻撃禁止テスト -- Attack prohibition test
+99023712 一定距離内外テスト -- Fixed distance internal/external test
+99023713 アセットダメージテスト -- Asset damage test
+99023714 ファルネーゼSFXテスト -- Farnese SFX test
+99023715 位置合わせテスト -- Alignment test
+99023716 命令要求テスト -- command request test
+99023717 敵対用特殊効果テスト -- Adversary special effects test
+99023718 ロジェールワープ -- roger warp
+99023719 ロジェールワープ繰り返し -- Roger warp repeat
+99023720 初期位置ワープテスト -- Initial position warp test
+1000000000 敵リスポン -- enemy respawn

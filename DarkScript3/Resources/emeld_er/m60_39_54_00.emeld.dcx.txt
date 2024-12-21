@@ -1,0 +1,20 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1039542200 上層橋_亡者犬思考ロジック有効化 -- Upper bridge_Dead dog thinking logic enabled
+1039542283 王軍死体 -- royal army corpse
+1039542290 敵毒無効_XX -- Enemy poison nullification_XX
+1039542498 砦_蹴りおろし梯子_ナビメッシュ切り替え -- Fort_Kick down ladder_Navimesh switching
+1039542499 砦_蹴りおろし梯子_ナビメッシュ切り替え2 -- Fort_Kick down ladder_Navimesh switching 2
+1039542510 エレベータイベント起動 -- Elevator event activation
+1039542520 火薬樽爆破用_XX -- For exploding powder keg_XX
+1039542580 梯子登録 -- ladder registration
+1039542720 ナズグル出現 -- Nazgul appears
+1039542800 ボス撃破 -- Defeat the boss
+1039542810 ボス出現 -- Boss appears
+1039542811 ボス激昂 -- boss rage
+1039542849 ボス戦イベント起動 -- Boss battle event starts
+1039543700 NPC309_盗賊の頭_NPC初期化イベント_タニスへの贈り物を託す -- NPC309_Head of Thieves_NPC initialization event_Entrust a gift to Tanis
+1039543702 NPC309_盗賊の頭_タニスへの贈り物を託す_死んだふり処理 -- NPC309_Head of Thieves_Entrust a gift to Tanis_Pretend to be dead
+1039543709 NPC309_盗賊の頭_フェーズ6キャラを出さない -- NPC309_Thief Head_Phase 6 characters will not appear

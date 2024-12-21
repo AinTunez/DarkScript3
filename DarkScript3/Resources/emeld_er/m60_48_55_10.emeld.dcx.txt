@@ -1,0 +1,8 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1048552320 荒廃させるもの_ロック不可 -- What Desolates_Unlockable
+1048552330 荒廃させるもの_強制死亡_xx -- What Destroys_Forced Death_xx

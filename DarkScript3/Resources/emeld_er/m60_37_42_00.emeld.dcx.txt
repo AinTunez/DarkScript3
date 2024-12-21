@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1037422600 火山館の勧誘者_バリア設定 -- Volcano Hall Recruiter_Barrier Settings
+1037422610 汎用ワープOBJイベント_開始 -- General purpose warp OBJ event_start
+1037423700 NPC313火山館の勧誘者_NPC初期化イベント_初期状態 -- NPC313 Volcano Hall Recruiter_NPC initialization event_Initial state
+1037423702 NPC313火山館の勧誘者_初期状態_二回目自動会話処理 -- NPC313 Volcano Hall Recruiter_Initial state_Second automatic conversation process
+1037423703 NPC313火山館の勧誘者_初期状態_被ダメ系会話再生処理 -- NPC313 Volcano Hall Recruiter_Initial state_Damaged conversation playback processing
+1037423710 NPC309_盗賊の頭_NPC初期化イベント_新_湖で再会 -- NPC309_Thief Head_NPC initialization event_New_Reunion at the lake
+1037423711 NPC309_盗賊の頭_新_湖で再会_土下座で敵対解除 -- NPC309_Head of the thieves_New_Reunion at the lake_Dismiss hostility by prostrate
+1037423712 NPC309_盗賊の頭_新_湖で再会_リアルタイム遷移 -- NPC309_Thief Head_New_Reunion at the lake_Real-time transition

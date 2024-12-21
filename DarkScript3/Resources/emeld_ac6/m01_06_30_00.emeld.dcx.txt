@@ -1,0 +1,183 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 utl_マップ初期化 -- utl_map initialization
+2001 utl_プレイヤー初期化 -- utl_player initialization
+2010 utl_フェードアウト -- utl_fadeout
+2011 utl_フェードイン -- utl_fade in
+2090 utl_チェックポイント生成_1 -- utl_checkpoint generation_1
+2091 utl_SF_チェックポイント生成したよフラグ_1 -- utl_SF_Checkpoint generated flag_1
+2092 utl_リトライ時初期化_1 -- utl_initialize on retry_1
+2100 bas_初期化 -- bas_initialization
+2101 bas_完了化 -- bas_completed
+2110 bas_B_ビューポイント到達したか判定1_洞窟内 -- bas_B_Determine whether the viewpoint has been reached 1_Inside the cave
+2111 bas_B_ビューポイント到達したか判定2_ジオフロント眺望 -- bas_B_Determine whether you have reached the viewpoint 2_Geofront view
+2112 bas_B_結晶ゾーンに降りてるか判定 -- bas_B_ Determine if you are descending into the crystal zone
+2113 ビューポイント到着時のカットシーン再生 -- Cutscene plays when arriving at viewpoint
+2120 bas_B_戦闘開始判定_群れ1 -- bas_B_Battle start determination_Flock 1
+2122 bas_B_戦闘開始判定_群れ2 -- bas_B_Battle start determination_Flock 2
+2123 bas_B_戦闘開始判定_群れ3 -- bas_B_Battle start determination_Flock 3
+2124 bas_B_戦闘開始判定_群れ7 -- bas_B_Battle start determination_Flock 7
+2130 bas_B_生体兵器トラップシチュ1 -- bas_B_Biological Weapon Trap Situation 1
+2131 bas_B_生体兵器トラップシチュ2 -- bas_B_Biological Weapon Trap Situation 2
+2132 bas_B_生体兵器トラップシチュ3 -- bas_B_Biological Weapon Trap Situation 3
+2133 bas_B_生体兵器谷底シチュ -- bas_B_Biological Weapon Bottom Situation
+2200 nac_初期化 -- nac_initialization
+2201 nac_完了化 -- nac_completion
+2202 ALTイベント初期化 -- ALT event initialization
+2210 nac_B_戦闘開始位置に来たか判定 -- nac_B_Determine whether you have reached the battle starting position
+2211 nac_B_戦闘状態に入ったか判定 -- nac_B_Determine whether it has entered a combat state
+2212 nac_SF_戦闘終わりましたフラグ -- nac_SF_battle over flag
+2220 nac_B_NPACのAPちょっと減り始めたか判定 -- Determine whether nac_B_NPAC's AP has started to decrease a little.
+2221 nac_B_NPACのAP大きく減らしたか判定 -- Determine whether nac_B_NPAC's AP has been significantly reduced
+2222 nac_B_NPACのAP0になったか判定 -- Determine whether nac_B_NPAC has become AP0
+2223 nac_B_NPACのタグ入手 -- Obtain tag for nac_B_NPAC
+2224 プレイヤの無敵化_通常ALT共用 -- Player invincibility_normal ALT shared
+2225 プレイヤの無敵化_ALT用 -- Player invincibility_for ALT
+2230 nac_戦闘始める -- nac_Start battle
+2231 nac_戦闘始める_戦闘開始猶予時間用 -- nac_start battle_for battle start grace time
+2240 nac_カットシーン再生_ライバル登場 -- nac_cutscene play_rival appears
+2241 nac_カットシーン再生_ライバル退場 -- nac_cutscene playback_rival exit
+2250 スタン爆弾 -- stun bomb
+2255 スタンSFX -- Stan SFX
+2260 ECM障害 -- ECM failure
+2261 ECM障害終了 -- ECM failure end
+2262 メランジ結晶発見 -- Discovery of melange crystals
+2263 虫と初接敵 -- First encounter with insects
+2264 虫への警告 -- Warning to insects
+2265 虫について云々 -- Something about insects
+2266 傭兵の気配 -- Sign of a mercenary
+2267 養育ポッド発見 -- Found nurturing pod
+2268 大穴からメランジ -- Melange from the big hole
+2270 会話条件判定0126_コーラルの味 -- Conversation condition judgment 0126_Taste of coral
+2300 マーカー_アッシュ戦前 -- Marker_Ash before the battle
+2400 ECM障害特殊効果01 -- ECM failure special effects 01
+2401 ECM障害特殊効果02 -- ECM failure special effects 02
+2402 リングレーダー解除 -- ring radar release
+2403 リングレーダー有効 -- Ring radar enabled
+2800 ALTイベント_ALTNPAC有効化 -- ALT event_ALTNPAC enabled
+2801 ALTイベント_ALTNPACの撃破演出 -- ALT event_ALTNPAC's defeat production
+2802 ALTイベント_ALTNPACのボスゲージ監視 -- ALT event_ALTNPAC boss gauge monitoring
+2803 ALTイベント_ALTNPACBGMステート遷移 -- ALT event_ALTNPACBGM state transition
+2810 ALTイベント_NPACHPチェック -- ALT event_NPACHP check
+2820 ALTイベント_その1 -- ALT event_part 1
+2821 ALTイベント_ラスティHPチェック -- ALT event_Rusty HP check
+2830 ALTイベント_増援NPAC体力0になったか -- ALT event_Reinforcement NPAC health reduced to 0?
+2831 ALTイベント_増援NPAC死亡フラグ通ったか -- ALT event_Reinforcement NPAC death flag passed?
+2840 ALTイベント_HP判定_ラスティ_1段階 -- ALT event_HP judgment_Rusty_1 stage
+2841 ALTイベント_HP判定_ラスティ_2段階 -- ALT event_HP judgment_Rusty_2nd stage
+2842 ALTイベント_スタッガー判定_ラスティ_1回目 -- ALT event_stagger judgment_Rusty_1st time
+2843 ALTイベント_スタッガー判定_ラスティ_2回目 -- ALT event_stagger judgment_Rusty_2nd time
+2844 ALTイベント_HP判定_フラットウェル_0よりおおきい -- ALT Event_HP Judgment_Flatwell_Bigger than 0
+2845 ALTイベント_HP判定_ラスティ_ちょっとへった -- ALT Event_HP Judgment_Rusty_A little tired
+2850 ALTイベント完了フラグ_ラスティ最後撃破 -- ALT event completion flag_Last defeat of Rusty
+2851 ALTイベント完了フラグ_フラット最後撃破 -- ALT event completion flag_Flat final defeat
+2860 ALTイベントボスゲージ管理_ラスティ先死 -- ALT event boss gauge management_Rusty dies first
+2865 ALTイベントボスゲージ管理_ラスティ後死 -- ALT event boss gauge management_death after Rusty
+3000 talk_出撃直後 -- talk_Immediately after sortie
+3001 talk_メランジ結晶 -- talk_melange crystal
+3002 talk_ECMレーダー障害 -- talk_ECM radar failure
+3003 talk_ミールワーム -- talk_mealworm
+3004 talk_ミールワーム体内 -- talk_mealworm body
+3005 talk_かつて人間が養育 -- talk_Once raised by humans
+3006 talk_傭兵の気配 -- talk_Sign of a mercenary
+3007 talk_ミールワームの養育ポッド -- talk_mealworm rearing pod
+3008 talk_アフターイメージ -- talk_after image
+3100 talk_接敵時 -- talk_when approaching enemy
+3101 talk_HP減少時1 -- talk_When HP decreases 1
+3102 talk_HP減少時2 -- talk_When HP decreases 2
+3103 talk_撃破時 -- talk_When defeated
+3104 talk_PC死亡時1 -- talk_When PC dies 1
+3105 talk_PC死亡時2 -- talk_When PC dies 2
+3106 talk_締め会話 -- talk_closing conversation
+3107 talk_メランジ集積反応 -- talk_melange accumulation reaction
+3200 talk_締め会話眺望 -- talk_closing conversation view
+3201 talk_予感 -- talk_premonition
+3300 会話フラグ_106305700_ACスティールヘイズ -- Conversation Flag_106305700_AC Steel Haze
+3301 会話フラグ_106305800_踊らされるつもりもないが -- Conversation flag_106305800_I don't intend to make you dance.
+3302 会話フラグ_106305900_互いが抹殺対象 -- Conversation flag_106305900_Elimination target for each other
+3303 会話フラグ_106306000_止せラスティ -- Conversation Flag_106306000_Stop Rusty
+3304 会話フラグ_106306100_どういうことだ解放戦線の重鎮が -- Conversation Flag_106306100_What do you mean, a heavyweight of the Liberation Front?
+3305 会話フラグ_106306200_そいつは使われるだけの猟犬ではない -- Conversation Flag_106306200_That guy is not just a hunting dog to be used.
+3306 会話フラグ_106306300_知っているさ -- Conversation flag_106306300_I know
+3307 会話フラグ_106306400_教えてくれ戦友 -- Conversation flag_106306400_Tell me, comrade
+3308 会話フラグ_106306500_援護するぞラスティ -- Conversation Flag_106306500_I'll support you, Rusty
+3309 会話フラグ_106306600_機体が持たんここまでか -- Conversation flag_106306600_The aircraft doesn't have this much?
+3310 item_SF_谷底の宝残骸取ったフラグ -- item_SF_Flag taken from the bottom of the valley treasure remains
+3311 会話フラグ_106306800_やるな -- Conversation flag_106306800_Don't do it
+3312 会話フラグ_106306900_以前とは何かが違うようだ -- Conversation Flag_106306900_Something seems different from before.
+3313 会話フラグ_106307000_敵機ACSダウン -- Conversation flag_106307000_Enemy aircraft ACS down
+3314 会話フラグ_106307100_敵に回すと実感するよ -- Conversation Flag_106307100_You will feel it when you turn it into an enemy.
+3315 会話フラグ_106307200_好機ですレイヴン -- Conversation Flag_106307200_Opportunity Raven
+3316 会話フラグ_106307300_まだだ -- Conversation flag_106307300_Not yet
+3317 会話フラグ_106307400_残念だ戦友 -- Conversation flag_106307400_Sorry, comrade
+3318 会話フラグ_106307500_流石だな -- Conversation flag_106307500_As expected
+3319 会話フラグ_106307600_だが終わるわけにはいかない -- Conversation flag _106307600_ but it can't end
+3320 会話フラグ_106307700_ACスティールヘイズ機体反応消失 -- Conversation flag_106307700_AC Steel Haze aircraft reaction disappears
+3321 会話フラグ_106307800_ラスティは逃れたかよしそれでいい -- Conversation Flag_106307800_Rusty escaped, that's fine.
+3322 会話フラグ_106307900_ここまでか脱出する -- Conversation flag_106307900_Escape here?
+3323 会話フラグ_106308000_フラットウェル乗機ACツバサの撃破を確認 -- Conversation Flag_106308000_Flatwell vehicle AC Tsubasa's defeat confirmed
+3324 会話フラグ_106306700_戻れフラットウェル -- Conversation flag_106306700_Go back Flatwell
+3400 会話フラグ_106300100_0126ミッション開始だ -- Conversation flag_106300100_0126 Mission begins
+3401 会話フラグ_106300200_0126どうした621 -- Conversation flag_106300200_0126 What's up 621
+3402 会話フラグ_106300500_0126これは -- Conversation flag_106300500_0126 This is
+3403 会話フラグ_106300600_0126それが気になるか -- Conversation flag_106300600_0126 Are you interested in that?
+3404 会話フラグ_106300900_0126レーダー障害が発生しています -- Conversation flag_106300900_0126 Radar failure has occurred
+3405 会話フラグ_106301000_0126カメラ障害が発生しています -- Conversation flag_106301000_0126 Camera failure has occurred
+3406 会話フラグ_106301300_0126それはミールワームか -- Conversation flag_106301300_0126 Is that a mealworm?
+3407 会話フラグ_106301700_0126生体内部からコーラル反応 -- Conversation flag_106301700_0126 Coral reaction from inside the living body
+3408 会話フラグ_106302100_0126こいつらもコーラルの味を覚えたようだな -- Conversation Flag_106302100_0126 Looks like these guys have learned the taste of coral too.
+3409 会話フラグ_106302200_0126ミールワームがここにも -- Conversation Flag_106302200_0126 Mealworm is here too
+3410 会話フラグ_106302500_0126レイヴン後方から機体反応 -- Conversation flag_106302500_0126 Raven aircraft reaction from behind
+3411 会話フラグ_106302900_0126ミールワームの養育ポッドか -- Conversation Flag_106302900_0126 Mealworm breeding pod?
+3412 会話フラグ_106303300_0126ACスティールヘイズ来ます -- Conversation Flag_106303300_0126AC Steel Haze is coming
+3413 会話フラグ_106303400_0126互いが抹殺対象というわけか -- Conversation Flag_106303400_0126 Are both parties targeted for erasure?
+3414 会話フラグ_106303500_0126変わらないな君は -- Conversation flag_106303500_0126 You haven't changed.
+3415 会話フラグ_106303700_0126やるな -- Conversation flag_106303700_0126 Don't do it
+3416 会話フラグ_106303720_0126どうしたそんなものではないだろう -- Conversation flag_106303720_0126 What's the matter? It's not like that.
+3417 会話フラグ_106303800_0126敵機ACSダウン -- Conversation flag_106303800_0126 Enemy aircraft ACS down
+3418 会話フラグ_106303900_0126敵に回すと実感するよ -- Conversation flag_106303900_0126 You will feel it when you turn it against your enemy.
+3419 会話フラグ_106303920_0126好機ですレイヴン -- Conversation flag_106303920_0126 It's a good opportunity Raven
+3420 会話フラグ_106304000_0126まだだ -- Conversation flag_106304000_0126 Not yet
+3421 会話フラグ_106304100_0126お別れだ戦友 -- Conversation Flag_106304100_0126 Farewell, comrade
+3422 会話フラグ_106304500_0126良くやった621 -- Conversation flag_106304500_0126 Well done 621
+3423 会話フラグ_106304900_0126コーラル集積反応は -- Conversation flag_106304900_0126 Coral accumulation reaction
+3424 会話フラグ_106305000_0126反応が近い -- Conversation flag_106305000_0126 Reaction is close
+3425 会話フラグ_106305300_0126これはアイビスの火以前の -- Conversation Flag_106305300_0126 This is before Ibis Fire
+3426 会話フラグ_106305700_0126ACスティールヘイズ来ます -- Conversation Flag_106305700_0126AC Steel Haze is coming
+3427 会話フラグ_106305800_0126踊らされるつもりもないが -- Conversation flag_106305800_0126I don't intend to make you dance.
+3428 会話フラグ_106305900_0126互いが抹殺対象というわけか -- Conversation Flag_106305900_0126 Are both parties targeted for erasure?
+3429 会話フラグ_106306000_0126待て先走るなラスティ -- Conversation Flag_106306000_0126 Wait, don't run first Rusty
+3430 会話フラグ_106306100_0126フラットウェル解放戦線の重鎮が何故 -- Conversation Flag_106306100_0126 Why are the leaders of the Flatwell Liberation Front
+3431 会話フラグ_106306200_0126ラスティ -- Conversation flag_106306200_0126 Rusty
+3432 会話フラグ_106306300_0126知っているさ帥叔フラットウェル -- Conversation flag _106306300_0126 I know Mr. Flatwell
+3433 会話フラグ_106306400_0126教えてくれ戦友 -- Conversation Flag_106306400_0126 Tell me, comrade
+3434 会話フラグ_106306500_0126止むを得ん -- Conversation flag_106306500_0126 Unavoidable
+3435 会話フラグ_106306600_0126機体が持たんここまでか -- Conversation flag_106306600_0126 Is this all the aircraft has?
+3436 会話フラグ_106306700_0126戻れフラットウェル -- Conversation Flag_106306700_0126 Go back Flatwell
+3437 会話フラグ_106306800_0126やるな -- Conversation flag_106306800_0126 Don't do it
+3438 会話フラグ_106306900_0126確かに以前とは何かが違うようだ -- Conversation flag_106306900_0126 It certainly seems like something is different from before.
+3439 会話フラグ_106307000_0126敵機ACSダウン -- Conversation flag_106307000_0126 Enemy aircraft ACS down
+3440 会話フラグ_106307100_0126敵に回すと実感するよ -- Conversation flag_106307100_0126 You will feel it when you turn it into an enemy.
+3441 会話フラグ_106307200_0126好機ですレイヴン -- Conversation flag_106307200_0126 It's a good opportunity Raven
+3442 会話フラグ_106307300_0126まだだ -- Conversation flag_106307300_0126 Not yet
+3443 会話フラグ_106307400_0126残念だ戦友 -- Conversation Flag_106307400_0126 Sorry, comrade
+3444 会話フラグ_106307500_0126流石だな -- Conversation flag_106307500_0126 As expected
+3445 会話フラグ_106307600_0126だが終わるわけにはいかない -- Conversation flag_106307600_0126 but it can't end
+3446 会話フラグ_106307700_0126ACスティールヘイズ機体反応消失 -- Conversation flag_106307700_0126AC Steel Haze aircraft reaction disappears
+3447 会話フラグ_106307800_0126ラスティは逃れたかよしそれでいい -- Conversation Flag_106307800_0126 Rusty escaped, that's fine.
+3448 会話フラグ_106307900_0126ここまでか脱出する -- Conversation flag_106307900_0126 Escape this far
+3449 会話フラグ_106308000_0126フラットウェル乗機ACツバサの撃破を確認 -- Conversation Flag_106308000_0126 Confirmed the defeat of Flatwell vehicle AC Tsubasa
+3601 CPからきたよフラグ01 -- I came from CP flag 01
+3602 CPからきたよフラグ02 -- I came from CP flag 02
+3700 ラスティ_戦闘領域判定イベントロジック判定領域01_2800 -- Rusty_Battle area judgment event logic judgment area 01_2800
+3701 ラスティ_戦闘領域判定イベントロジック判定領域02_2801 -- Rusty_Battle area judgment event logic judgment area 02_2801
+3750 フラットウェル_戦闘領域判定イベントロジック判定領域01_2800 -- Flatwell_Battle area judgment event logic judgment area 01_2800
+3751 フラットウェル_戦闘領域判定イベントロジック判定領域02_2801 -- Flatwell_Battle area judgment event logic judgment area 02_2801
+3800 会話用条件判定_通常_NPACの体力が33パーセント以下 -- Conversation condition judgment_Normal_NPAC's physical strength is 33% or less
+3801 会話用条件判定_通常_NPACの体力が66パーセント以下 -- Conversation condition judgment_Normal_NPAC's physical strength is 66% or less
+3802 会話用条件判定_通常_NPACにスタッガー特殊効果かかった -- Conversation condition judgment_Normal_Stagger special effect applied to NPAC
+3803 会話用条件判定_通常_PC体力半分 -- Conversation condition judgment_Normal_PC physical strength half
+3804 会話用条件判定_通常_NPAC体力半分 -- Conversation condition judgment_Normal_NPAC physical strength half
+3810 会話用条件判定_コーラルが近い -- Conversation condition judgment_Coral is close
+3890 高度計判定イベント -- Altimeter judgment event
+3900 リザルトカットシーン検証用テストフラグ -- Test flag for result cutscene verification

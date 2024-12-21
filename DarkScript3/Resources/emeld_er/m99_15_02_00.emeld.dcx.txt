@@ -1,0 +1,23 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+100 ボスイベント初期設定 -- Boss event initial settings
+110 カメラテストジャンプ -- camera test jump
+120 カメラテスト通常 -- camera test normal
+130 カメラテストリセット -- camera test reset
+2000 HU切り替え -- HU switching
+2010 HU前死亡 -- Death before HU
+4000 地震テスト（HU後）_ループ -- Earthquake test (after HU)_loop
+4010 地震演出（HU前） -- Earthquake production (in front of HU)
+4011 地震効果（HU前） -- Earthquake effect (before HU)
+4020 地震演出（HU後） -- Earthquake production (after HU)
+4021 地震効果（HU後） -- Earthquake effect (after HU)
+6000 黒き刃ステルス（姿出し）（） -- Black Blade Stealth (Appearance) ()
+6010 黒き刃ステルス（姿消し）（） -- Black Blade Stealth (Disappearance) ()
+6020 黒き刃OBJステルス（姿出し）（） -- Black Blade OBJ Stealth (Appearance) ()
+6030 黒き刃OBJステルス（姿消し）（） -- Black Blade OBJ Stealth (Disappearance) ()
+7000 剣闘士の毒解除_アイテム使用テスト（） -- Gladiator's poison removal_item usage test ()
+7010 剣闘士の毒解除_毒発症テスト（） -- Gladiator's poison release_Tox onset test ()
+7100 剣闘士の猛毒解除_アイテム使用テスト（） -- Gladiator's Deadly Poison Removal_Item Usage Test ()
+7110 剣闘士の猛毒解除_猛毒発症テスト（） -- Gladiator's Deadly Poison Removal_Very Poison Onset Test ()
+9952300 バーサクテスト -- berserk test
+1000000000 敵リスポン -- enemy respawn

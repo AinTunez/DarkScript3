@@ -1,0 +1,17 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1044350710 NPC216_狼頭の戦士_NPC初期化イベント_牢に囚われている -- NPC216_Wolf Head Warrior_NPC initialization event_Captive in prison
+1044350711 NPC216_狼頭の戦士_ダリウィル戦_召喚可否監視 -- NPC216_Wolf Head Warrior_Daliwill Battle_Monitoring whether or not to summon
+1044350712 NPC216_狼頭の戦士_ダリウィル戦自動会話キック -- NPC216_Wolf-Headed Warrior_Dariwill battle automatic conversation kick
+1044350713 NPC216_狼頭の戦士_ダリウィル撃破時に召喚していたかを見る -- NPC216_Wolf Head Warrior_See if it was summoned when defeating Dariwill
+1044350714 NPC216_狼頭の戦士_白霊初期化 -- NPC216_Wolf Head Warrior_White Spirit Initialization
+1044350715 NPC216_狼頭の戦士_牢に囚われている_封牢から解放 -- NPC216_Wolf-Headed Warrior_Captive in prison_Release from imprisonment
+1044352250 亜人死体化 -- demihuman corpse
+1044352600 テスト用イベント_鳴子作動_XX -- Test event_Naruko activation_XX
+1044352650 チュートリアルメッセージ_騎乗 -- Tutorial message_Riding
+1044352740 傭兵剣士_非表示イベント -- Mercenary swordsman_hidden event
+1044353720 NPCNPC801赤目モブ１_NPC初期化イベント -- NPCNPC801 Red Eye Mob 1_NPC Initialization Event

@@ -1,0 +1,140 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2200 初期イベント -- initial event
+2201 初期イベント2 -- Initial event 2
+2360 ファラオン死亡判定 -- Pharaon death judgment
+2361 殲滅判定 -- Extermination judgment
+2362 ボス戦死亡演出待ち判定 -- Boss battle death effect waiting judgment
+2363 ボス戦4体撃破 -- Defeated 4 boss battles
+2364 お供殲滅 -- Extermination of offerings
+2370 接敵判定 -- Enemy contact judgment
+2371 接敵判定2 -- Enemy contact judgment 2
+2380 ボス戦会話用判定正規軍AC2体撃破 -- Defeat 2 regular army ACs for boss battle conversation
+2390 会話用狙撃死亡かつファラオン死亡済 -- Conversation sniper dead and Pharaon dead
+2391 会話用狙撃死亡済かつファラオン死亡 -- Conversation sniper dead and Pharaon dead
+2392 ファラオン狙撃同時死亡 -- Pharaon sniper killed simultaneously
+2500 ALT置き物無効 -- ALT ornament disabled
+2600 施設破壊判定0 -- Facility destruction judgment 0
+2601 施設破壊判定1 -- Facility destruction judgment 1
+2602 施設破壊判定2 -- Facility destruction judgment 2
+2603 施設破壊判定3 -- Facility destruction judgment 3
+2604 奇襲敵殲滅 -- Surprise enemy annihilation
+2605 ウェーブ開始 -- wave start
+2610 出現1 -- appearance 1
+2611 出現2 -- appearance 2
+2612 出現3 -- appearance 3
+2620 制御装置アニメ -- control device anime
+2700 チェックポイントフラグ -- checkpoint flag
+2701 チェックポイント立て -- check point stand
+2710 チェックポイントフラグ2 -- checkpoint flag 2
+2711 チェックポイント立て2 -- Checkpoint setting 2
+2712 チェックポイント2処理 -- Checkpoint 2 processing
+2720 チェックポイントヒット設定 -- Checkpoint hit settings
+2800 ハッキング処理 -- Hacking process
+2810 ハッキング処理2 -- Hacking process 2
+2900 会話用ボス戦ハッキング判定 -- Conversation boss battle hacking judgment
+3010 待機敵始動 -- Standby enemy starts
+3012 待機AC始動 -- Standby AC start
+3020 正規軍AC起動 -- Regular army AC activation
+3050 ファラオン領域侵入判定 -- Pharaon area invasion detection
+3060 ファラオン領域侵入判定2 -- Pharaon area intrusion detection 2
+3070 ファラオン領域侵入判定3 -- Pharaon area intrusion detection 3
+3100 目標目視判定A -- Target visual judgment A
+3101 目標目視判定B -- Target visual judgment B
+3102 目標目視判定C -- Target visual judgment C
+3103 目標目視判定D -- Target visual judgment D
+3110 マーカー到達判定 -- Marker arrival judgment
+3200 残骸奇襲 -- wreckage surprise attack
+3210 ゴースト戦闘状態か判定 -- Determine if Ghost is in combat mode
+3220 ゴースト殲滅判定 -- Ghost annihilation judgment
+3300 ALT敵登場して死ぬ -- ALT enemy appears and dies
+3400 会話用＿ファラオン三分の一 -- For conversation_One-third of Pharaon
+3410 会話用＿ファラオン三分の二 -- For conversation_Two-thirds of Pharaon
+3415 ファラオン二分の一 -- Pharaon's half
+3416 ファラオンゼロ -- Pharaon Zero
+3420 会話用＿ハッキング開始 -- For conversation_Start hacking
+3430 会話用＿飛行MT接敵 -- Conversation_Flying MT contact
+3440 ハッキング初アクセスドローン -- Hacking first access drone
+3450 ハッキング初アクセス飛行MT -- Hacking first access flight MT
+3500 ALT_AC登場 -- ALT_AC appears
+3505 ALT_AC近付いた -- ALT_AC approached
+3510 ALT_AC三分の一 -- ALT_AC one-third
+3520 ALT_AC三分の二 -- ALT_AC two-thirds
+3525 ALT_AC三回目使用 -- ALT_AC third use
+3530 ALT_AC死亡 -- ALT_AC died
+3540 死亡時特殊効果判定＿ファラオン -- Special effect judgment upon death_Pharaon
+3550 死亡時特殊効果判定＿ドルマヤン -- Special effect judgment upon death_Dolmayan
+3600 最終ポイント有効化 -- Final point activation
+3640 チェックポイント2用最終ポイント有効化 -- Final point activation for checkpoint 2
+3700 即時ミッション会話発生フラグ -- Immediate mission conversation flag
+3701 待機ミッション会話発生フラグ -- Standby mission conversation flag
+3702 即時賑やかし会話発生フラグ -- Immediate lively conversation occurrence flag
+3703 待機賑やかし会話発生フラグ -- Waiting lively conversation occurrence flag
+3704 スキップ用即時ミッション会話再生中フラグ -- Instant mission conversation flag for skipping
+3705 スキップ用待機ミッション会話再生中フラグ -- Skip standby mission conversation flag
+3800 会話フラグ_104700100_ミッション開始会話 -- Conversation flag_104700100_Mission start conversation
+3801 会話フラグ_104700500_調査ビーコン到達 -- Conversation flag_104700500_Research beacon reached
+3802 会話フラグ_104700900_接敵 -- Conversation flag_104700900_Enemy contact
+3803 会話フラグ_104701300_装置A発見 -- Conversation flag_104701300_Device A discovered
+3804 会話フラグ_104701700_装置A停止 -- Conversation flag_104701700_Device A stopped
+3805 会話フラグ_104701720_装置A後＿道中 -- Conversation flag_104701720_After device A_On the way
+3806 会話フラグ_104702100_装置B発見 -- Conversation flag_104702100_Device B discovered
+3807 会話フラグ_104702500_装置B停止 -- Conversation flag_104702500_Device B stopped
+3808 会話フラグ_104702600_装置B後＿道中 -- Conversation flag_104702600_After device B_On the way
+3809 会話フラグ_104702900_調査ドローン発見 -- Conversation flag_104702900_Research drone discovered
+3810 会話フラグ_104703300_ゴースト奇襲 -- Conversation flag_104703300_Ghost surprise attack
+3811 会話フラグ_104703700_調査ドローンハック -- Conversation Flag_104703700_Investigation Drone Hack
+3812 会話フラグ_104703800_調査ドローンハック後＿道中 -- Conversation flag_104703800_Investigation drone after hack_On the way
+3813 会話フラグ_104703900_調査ドローンハック後＿道中２ -- Conversation Flag_104703900_Investigation Drone After Hack_On the Road 2
+3814 会話フラグ_104704100_装置C発見 -- Conversation Flag_104704100_Device C discovered
+3815 会話フラグ_104704500_装置Cハッキング中 -- Conversation flag_104704500_Device C hacking in progress
+3816 会話フラグ_104704600_装置Cハッキング後 -- Conversation flag_104704600_Device C after hacking
+3817 会話フラグ_104704900_装置Cハッキング後２ -- Conversation flag_104704900_Device C after hacking 2
+3818 会話フラグ_104705300_装置Cハッキング後３ -- Conversation flag_104705300_Device C after hacking 3
+3819 会話フラグ_104705800_ファラオン戦闘中 -- Conversation flag_104705800_Pharaon in battle
+3820 会話フラグ_104705900_ファラオン戦闘中２ -- Conversation flag_104705900_Pharaon in battle 2
+3821 会話フラグ_104706100_ファラオン撃破 -- Conversation Flag_104706100_Defeat Pharaon
+3822 会話フラグ_104707000_ALT装置Cハッキング後 -- Conversation flag_104707000_ALT device C after hacking
+3823 会話フラグ_104707100_ALT装置Cハッキング後２ -- Conversation flag_104707100_ALT device C after hacking 2
+3824 会話フラグ_104707200_ALT装置Cハッキング後３ -- Conversation flag_104707200_ALT device C after hacking 3
+3825 会話フラグ_104707300_ALT装置Cハッキング後４ -- Conversation flag_104707300_ALT device C after hacking 4
+3826 会話フラグ_104707400_ALT装置Cハッキング後５ -- Conversation flag_104707400_ALT device C after hacking 5
+3827 会話フラグ_104707500_ALT装置Cハッキング後６ -- Conversation flag_104707500_ALT device C after hacking 6
+3828 会話フラグ_104707600_ALT＿AC三分の一 -- Conversation flag_104707600_ALT_AC one-third
+3829 会話フラグ_104707700_ALT＿AC三分の一＿２ -- Conversation flag_104707700_ALT_AC one-third_2
+3830 会話フラグ_104707800_ALT＿AC三分の二 -- Conversation flag_104707800_ALT_AC two-thirds
+3831 会話フラグ_104707900_ALT＿AC撃破 -- Conversation flag_104707900_ALT_AC defeated
+3832 会話フラグ_104708000_ALT＿AC撃破２ -- Conversation flag_104708000_ALT_AC defeat 2
+3833 会話フラグ_104708100_ALT＿AC撃破３ -- Conversation flag_104708100_ALT_AC defeat 3
+3834 会話フラグ_104708200_ALT＿AC撃破４ -- Conversation flag_104708200_ALT_AC defeated 4
+3835 会話フラグ_104708300_ALT＿AC敗北 -- Conversation flag_104708300_ALT_AC defeat
+3836 会話フラグ_104705700_装置Cハッキング後４ -- Conversation flag_104705700_Device C after hacking 4
+3837 会話フラグ_104707810_ALT＿AC三回目使用 -- Conversation flag_104707810_ALT_AC third use
+3840 会話フラグ_104700600_接敵０ -- Conversation flag_104700600_Enemy engagement 0
+3841 会話フラグ_104701800_飛行MT接敵 -- Conversation flag_104701800_Flight MT contact
+3842 会話フラグ_104701900_飛行MT接敵２ -- Conversation flag_104701900_Flight MT contact 2
+3843 会話フラグ_104703400_ドローン前奇襲 -- Conversation Flag_104703400_Surprise attack in front of drone
+3844 会話フラグ_104704540_道中死亡 -- Conversation flag_104704540_Death on the road
+3845 会話フラグ_104706000_ハッキング会話 -- Conversation flag_104706000_hacking conversation
+3846 会話フラグ_104706100_ハッキング会話アクセス -- Conversation flag_104706100_hacking conversation access
+3847 会話フラグ_104706200_ハッキング会話A -- Conversation Flag_104706200_Hacking Conversation A
+3848 会話フラグ_104706300_ハッキング会話B -- Conversation Flag_104706300_Hacking Conversation B
+3849 会話フラグ_104706301_ハッキング会話C -- Conversation Flag_104706301_Hacking Conversation C
+3850 会話フラグ_104706302_ハッキング会話D -- Conversation Flag_104706302_Hacking Conversation D
+3851 会話フラグ_104706340_ハッキング後 -- Conversation flag_104706340_After hacking
+3853 会話フラグ_104706400_ファラオン削れ -- Conversation Flag_104706400_Pharaon Sharpen
+3854 会話フラグ_104706500_防衛兵器利用可能 -- Conversation flag_104706500_Defense weapons available
+3855 会話フラグ_104706600_ファラオン瀕死 -- Conversation flag_104706600_Pharaon dying
+3856 会話フラグ_104706700_防衛兵器利用可能2 -- Conversation flag_104706700_Defense weapons available 2
+3857 会話フラグ_104706900_ALT装置Cハッキング後０ -- Conversation flag_104706900_ALT device C after hacking 0
+3858 会話フラグ_104707440_ALT装置Cハッキング後５B -- Conversation flag_104707440_ALT device C after hacking 5B
+3859 会話フラグ_104706800_ファラオン撃破 -- Conversation Flag_104706800_Defeat Pharaon
+3860 会話フラグ_104706840_ファラオン撃破2 -- Conversation Flag_104706840_Defeat Pharaon 2
+3861 会話フラグ_104706040_開始時ハッキング誘導会話 -- Conversation flag_104706040_Hacking guidance conversation at start
+3862 会話フラグ_104700100_ミッション開始会話後 -- Conversation flag_104700100_After mission start conversation
+3863 会話フラグ_104701710_接敵2 -- Conversation Flag_104701710_Enemy Engagement 2
+3864 会話フラグ_104706040_開始時ハッキング誘導会話2 -- Conversation Flag_104706040_Hacking Guided Conversation 2 at Start
+3865 会話フラグ_104703710_調査ドローンハック2 -- Conversation Flag_104703710_Investigation Drone Hack 2
+3866 会話フラグ_104703500_ゴースト奇襲続き -- Conversation flag_104703500_Ghost surprise attack continued
+3900 特別報酬裏 -- Special reward behind
+2060000000 敵リスポン -- enemy respawn

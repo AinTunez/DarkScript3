@@ -1,0 +1,17 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30180050 m30_18_00_00用初期フラグ設定 -- Initial flag setting for m30_18_00_00
+30180519 エレベータ初期フラグ -- Elevator initial flag
+30182218 帰り道にゴーレム君起動_事前領域判定_XX -- Golem-kun activated on the way back_Preliminary area determination_XX
+30182219 帰り道にゴーレム君起動_本体_XX -- On the way home, Golem-kun starts up_main unit_XX
+30182220 虫人ゴーレム用_思考ロジック有効化_ダメージ判定_XX -- For insect golem_Thought logic activation_Damage judgment_XX
+30182227 魔法壁空いたらゴーレム起動 -- When the magic wall is empty, activate the golem.
+30182350 生きている壺鉄の体強制付与 -- Forced grant of living pot iron body
+30182500 ギミックのマクロ起動 -- Gimmick macro launch
+30182510 エレベータイベント起動 -- Elevator event activation
+30182800 ボス撃破 -- Defeat the boss
+30182810 ボス出現 -- Boss appears
+30182811 ボス激昂 -- boss rage
+30182849 接ぎ木の蜘蛛_イベント起動 -- Grafted spider_event activation
+1000000000 敵リスポン -- enemy respawn

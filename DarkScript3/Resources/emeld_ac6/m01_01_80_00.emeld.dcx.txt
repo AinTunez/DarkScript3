@@ -1,0 +1,188 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッションクリアフラグ -- mission clear flag
+2010 EVEテスト -- EVE test
+2020 CP1有効化 -- CP1 enabled
+2021 CP1有効化済み判定用フラグ -- CP1 enabled determination flag
+2100 初期イベント -- initial event
+2102 開幕イベント_初回 -- Opening event_first time
+2103 開幕イベント_CP1から再開時 -- Opening event_Resuming from CP1
+2115 レイブン登場タイマー起動兼作戦ライン切り替え判定 -- Raven appearance timer activation and strategy line switching judgment
+2120 開幕ダム03破壊処理 -- Opening dam 03 destruction process
+2121 開幕ダム02破壊処理 -- Opening dam 02 destruction process
+2130 増援登場判定 -- Reinforcement appearance determination
+2140 レイヴン参戦タイマー -- Raven participation timer
+2141 レイヴン登場CS再生 -- Raven appears CS playback
+2142 レイヴン登場フラグ -- Raven appearance flag
+2143 レイヴン_ボスゲージ表示 -- Raven_Boss gauge display
+2144 レイヴン_開幕アサブ処理 -- Raven_opening sub processing
+2145 レイヴン_開幕アサブ解除追従開始 -- Raven_Opening Asab release follow-up start
+2146 レイヴン_開幕追従解除 -- Raven_opening follow-up canceled
+2200 キング死亡判定 -- King death judgment
+2201 シャルトルーズ死亡判定 -- Chartreuse death determination
+2202 レイヴン死亡判定 -- Raven death judgment
+2204 全機撃墜判定 -- All aircraft shot down judgment
+2207 撃破数カウント -- Count the number of defeats
+2220 ラストショット用死亡演出許可01 -- Death effect permission for last shot 01
+2221 ラストショット用死亡演出許可02 -- Death effect permission for last shot 02
+2222 ラストショット用死亡演出許可03 -- Death effect permission for last shot 03
+2400 レイヴン_初回_開幕処理 -- Raven_first time_opening process
+2500 開幕合流回避_初期イベント -- Avoidance of opening merge_initial event
+2510 開幕合流回避_初回行動解除 -- Avoid opening meeting_first action cancellation
+2511 開幕合流回避_初回行動解除_フェイルセーフ -- Avoid opening meeting_first action cancellation_failsafe
+2900 接敵判定_キング -- Enemy contact judgment_King
+2901 接敵判定_シャルトルーズ -- Enemy contact determination_Chartreuse
+2902 接敵判定_誰とも出会わなかった -- Enemy contact judgment_I didn't meet anyone
+2903 両者合流判定 -- Judgment of both merging
+2904 レイヴン匂わせ_キング -- Raven Smell_King
+2905 レイヴン匂わせ_シャルトルーズ -- Raven Smell_Chartreuse
+2906 レイヴン匂わせ_発話停止判定 -- Raven Smell_Speech Stop Judgment
+2930 レイヴン登場後プレイヤー劣勢 -- Player disadvantage after Raven appears
+2931 レイヴンスタッガー判定_初回 -- Raven Stagger Judgment_First Time
+2932 レイヴンスタッガーから復帰判定_初回 -- Return judgment from Raven Stagger_First time
+2947 キングAP50パー判定_特殊効果経由しない -- King AP50 par judgment_no special effects
+2948 シャルトルーズAP50パー判定_特殊効果経由しない -- Chartreuse AP50 par judgment_no special effects
+2949 キングシャルトルーズいずれか死亡判定 -- King Chartreuse is determined to be dead
+2950 キングAP0パー判定 -- King AP0 par judgment
+2951 シャルトルーズAP0パー判定 -- Chartreuse AP0 par judgment
+2952 レイヴンAP0パー判定 -- Raven AP0 par judgment
+2953 レイヴンAP70パー判定_特殊効果経由しない -- Raven AP70 par judgment_no special effects
+2954 キングAP0パー会話再生判定 -- King AP0 par conversation playback judgment
+2955 シャルトルーズAP0パー会話再生判定 -- Chartreuse AP0 par conversation playback judgment
+2956 レイヴンAP0パー会話再生判定 -- Raven AP0 par conversation playback judgment
+2957 レイヴンAP75パー判定 -- Raven AP75 par judgment
+2958 レイヴンAP50パー判定 -- Raven AP50 par judgment
+2959 レイヴンAP25パー判定 -- Raven AP25 par judgment
+2960 会話_エア発話判定_選び戦う意思 -- Conversation_Air utterance judgment_Intention to choose and fight
+2970 キングFB特効付与 -- King FB special effect granted
+2971 シャルトルーズFB特効付与 -- Chartreuse FB special effect granted
+2972 レイヴンFB特効付与 -- Raven FB special effect granted
+2973 キングFB判定 -- King FB judgment
+2974 シャルトルーズFB判定 -- Chartreuse FB judgment
+2975 レイヴンFB判定 -- Raven FB judgment
+3400 回復薬使用判定_キング_1回目 -- Recovery medicine use judgment_King_1st time
+3401 回復薬使用判定_キング_2回目 -- Recovery medicine use judgment_King_2nd time
+3410 回復薬使用判定_シャルトルーズ_1回目 -- Recovery medicine use judgment_Chartreuse_1st time
+3411 回復薬使用判定_シャルトルーズ_2回目 -- Recovery medicine use judgment_Chartreuse_2nd time
+3420 回復薬使用判定_レイヴン_1回目 -- Recovery medicine use judgment_Raven_1st time
+3421 回復薬使用判定_レイヴン_2回目 -- Recovery medicine use judgment_Raven_2nd time
+3430 回復薬使用会話停止_発話停止判定_前半 -- Recovery medicine use conversation stop_speech stop judgment_first half
+3431 回復薬使用会話_スタック回避処理 -- Recovery medicine use conversation_stack avoidance process
+3500 BGM_死亡ステートへ遷移 -- BGM_Transition to death state
+3510 BGM_死亡ステートへ遷移判定_キング -- BGM_Death state transition judgment_King
+3511 BGM_死亡ステートへ遷移判定_シャルトルーズ -- BGM_Transition judgment to death state_Chartreuse
+3512 BGM_死亡ステートへ遷移通知_レイヴン -- BGM_Transition notification to death state_Raven
+3600 会話済みフラグ00 -- Conversation completed flag 00
+3601 会話済みフラグ01 -- Conversation completed flag 01
+3602 会話済みフラグ02 -- Conversation completed flag 02
+3603 会話済みフラグ03 -- Conversation completed flag 03
+3604 会話済みフラグ04 -- Conversation completed flag 04
+3605 会話済みフラグ05 -- Conversation completed flag 05
+3606 会話済みフラグ06 -- Conversation completed flag 06
+3607 会話済みフラグ07 -- Conversation completed flag 07
+3608 会話済みフラグ08 -- Conversation completed flag 08
+3609 会話済みフラグ09 -- Conversation completed flag 09
+3610 会話済みフラグ10 -- Conversation completed flag 10
+3611 会話済みフラグ11 -- Conversation completed flag 11
+3612 会話済みフラグ12 -- Conversation completed flag 12
+3613 会話済みフラグ13 -- Conversation completed flag 13
+3614 会話済みフラグ14 -- Conversation completed flag 14
+3615 会話済みフラグ15 -- Conversation completed flag 15
+3616 会話済みフラグ16 -- Conversation completed flag 16
+3617 会話済みフラグ17 -- Conversation completed flag 17
+3618 会話済みフラグ18 -- Conversation completed flag 18
+3619 会話済みフラグ19 -- Conversation completed flag 19
+3620 会話済みフラグ20 -- Conversation completed flag 20
+3621 会話済みフラグ21 -- Conversation completed flag 21
+3622 会話済みフラグ22 -- Conversation completed flag 22
+3623 会話済みフラグ23 -- Conversation completed flag 23
+3624 会話済みフラグ24 -- Conversation completed flag 24
+3625 会話済みフラグ25 -- Conversation completed flag 25
+3626 会話済みフラグ26 -- Conversation completed flag 26
+3627 会話済みフラグ27 -- Conversation completed flag 27
+3628 会話済みフラグ28 -- Conversation completed flag 28
+3629 会話済みフラグ29 -- Conversation completed flag 29
+3630 会話済みフラグ30 -- Conversation completed flag 30
+3631 会話済みフラグ31 -- Conversation completed flag 31
+3632 会話済みフラグ32 -- Conversation completed flag 32
+3633 会話済みフラグ33 -- Conversation completed flag 33
+3634 会話済みフラグ34 -- Conversation completed flag 34
+3635 会話済みフラグ35 -- Conversation completed flag 35
+3636 会話済みフラグ36 -- Conversation completed flag 36
+3637 会話済みフラグ37 -- Conversation completed flag 37
+3638 会話済みフラグ38 -- Conversation completed flag 38
+3639 会話済みフラグ39 -- Conversation completed flag 39
+3640 会話済みフラグ40 -- Conversation completed flag 40
+3641 会話済みフラグ41 -- Conversation completed flag 41
+3642 会話済みフラグ42 -- Conversation completed flag 42
+3643 会話済みフラグ43 -- Conversation completed flag 43
+3644 会話済みフラグ44 -- Conversation completed flag 44
+3645 会話済みフラグ45 -- Conversation completed flag 45
+3646 会話済みフラグ46 -- Conversation completed flag 46
+3647 会話済みフラグ47 -- Conversation completed flag 47
+3648 会話済みフラグ48 -- Conversation completed flag 48
+3649 会話済みフラグ49 -- Conversation completed flag 49
+3650 会話済みフラグ50 -- Conversation completed flag 50
+3651 会話済みフラグ51 -- Conversation completed flag 51
+3652 会話済みフラグ52 -- Conversation completed flag 52
+3653 会話済みフラグ53 -- Conversation completed flag 53
+3654 会話済みフラグ54 -- Conversation completed flag 54
+3655 会話済みフラグ55 -- Conversation completed flag 55
+3656 会話済みフラグ56 -- Conversation completed flag 56
+3657 会話済みフラグ57 -- Conversation completed flag 57
+3658 会話済みフラグ58 -- Conversation completed flag 58
+3659 会話済みフラグ59 -- Conversation completed flag 59
+3660 会話済みフラグ60 -- Conversation completed flag 60
+3661 会話済みフラグ61 -- Conversation completed flag 61
+3662 会話済みフラグ62 -- Conversation completed flag 62
+3663 会話済みフラグ63 -- Conversation completed flag 63
+3664 会話済みフラグ64 -- Conversation completed flag 64
+3665 会話済みフラグ65 -- Conversation completed flag 65
+3666 会話済みフラグ66 -- Conversation completed flag 66
+3667 会話済みフラグ67 -- Conversation completed flag 67
+3668 会話済みフラグ68 -- Conversation completed flag 68
+3669 会話済みフラグ69 -- Conversation completed flag 69
+3670 会話済みフラグ70 -- Conversation completed flag 70
+3671 会話済みフラグ71 -- Conversation completed flag 71
+3672 会話済みフラグ72 -- Conversation completed flag 72
+3673 会話済みフラグ73 -- Conversation completed flag 73
+3674 会話済みフラグ74 -- Conversation completed flag 74
+3675 会話済みフラグ75 -- Conversation completed flag 75
+3676 会話済みフラグ76 -- Conversation completed flag 76
+3677 会話済みフラグ77 -- Conversation completed flag 77
+3678 会話済みフラグ78 -- Conversation completed flag 78
+3679 会話済みフラグ79 -- Conversation completed flag 79
+3680 会話済みフラグ80 -- Conversation completed flag 80
+3681 会話済みフラグ81 -- Conversation completed flag 81
+3682 会話済みフラグ82 -- Conversation completed flag 82
+3683 会話済みフラグ83 -- Conversation completed flag 83
+3684 会話済みフラグ84 -- Conversation completed flag 84
+3685 会話済みフラグ85 -- Conversation completed flag 85
+3686 会話済みフラグ86 -- Conversation completed flag 86
+3687 会話済みフラグ87 -- Conversation completed flag 87
+3688 会話済みフラグ88 -- Conversation completed flag 88
+3689 会話済みフラグ89 -- Conversation completed flag 89
+3690 会話済みフラグ90 -- Conversation completed flag 90
+3691 会話済みフラグ91 -- Conversation completed flag 91
+3692 会話済みフラグ92 -- Conversation completed flag 92
+3693 会話済みフラグ93 -- Conversation completed flag 93
+3694 会話済みフラグ94 -- Conversation completed flag 94
+3695 会話済みフラグ95 -- Conversation completed flag 95
+3696 会話済みフラグ96 -- Conversation completed flag 96
+3697 会話済みフラグ97 -- Conversation completed flag 97
+3698 会話済みフラグ98 -- Conversation completed flag 98
+3699 会話済みフラグ99 -- Conversation completed flag 99
+3700 会話済みフラグ712 -- Conversation completed flag 712
+3701 会話済みフラグ742 -- Conversation completed flag 742
+3702 会話済みフラグ744 -- Conversation completed flag 744
+3703 会話済みフラグ746 -- Conversed flag 746
+3704 会話済みフラグ752 -- Conversation completed flag 752
+3705 会話済みフラグ762 -- Conversation completed flag 762
+3706 会話済みフラグ764 -- Conversation completed flag 764
+3707 会話済みフラグ772 -- Conversed flag 772
+3708 会話済みフラグ792 -- Conversation completed flag 792
+3709 会話済みフラグ802 -- Conversation completed flag 802
+3750 会話_キング死亡ステート遷移済み判定 -- Conversation_King death state transition completed judgment
+3751 会話_シャルトルーズ死亡ステート遷移済み判定 -- Conversation_Chartreuse death state transition completed judgment
+3752 会話_レイヴン死亡ステート遷移済み判定 -- Conversation_Raven death state transition completed judgment
+1000000000 敵リスポン -- enemy respawn

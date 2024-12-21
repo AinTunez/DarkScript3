@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1040542201 キャラバン通過後検問を敷く_XX -- A checkpoint will be set up after the caravan passes_XX
+1040542210 キャラバン終着後陣形変更_XX -- Formation change after caravan ends_XX
+1040542300 キャラバン馬車_障害物アセット破壊ダメージ定期発生 -- Caravan carriage_Obstacle asset destruction damage occurs regularly
+1040542301 キャラバン小隊全員が死亡したらダミーリーダーも殺す_グループ撃破報酬用 -- If all caravan platoons are dead, kill the dummy leader too_For group defeat reward
+1040542700 NPC351金仮面の従者_NPC初期化イベント -- NPC351 Gold Masked Squire_NPC initialization event
+1040542705 NPC112金仮面の探究者_NPC初期化イベント -- NPC112 Gold Masked Seeker_NPC initialization event
+1040542706 NPC112金仮面の探究者_死亡イベント -- NPC112 Gold Masked Seeker_Death Event

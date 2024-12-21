@@ -1,0 +1,4 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+11000000 A層⇔B層エレベータイベント_現在方道 -- A layer ⇔ B layer elevator event_current direction
+1000000000 敵リスポン -- enemy respawn

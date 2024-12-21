@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+99000900 樽無効化 -- Disable barrel
+99000910 樽有効化 -- barrel activation
+99001000 鴉ティラノ落下攻撃 -- Raven Tyranno falling attack
+99002810 夜の王の眷属土葬スケルトン呼び_XX -- Night King's Heir Burial Skeleton Call_XX
+99002820 夜の王の眷属ワープ処理 -- Night King's Heir Warp Process
+99002830 夜の王の眷属領域検索_XX -- Night King's Heir Domain Search_XX
+99002840 巨大スケルトン自動消滅 -- Giant skeleton self-destruction
+99002850 召喚スケルトン強制死亡 -- Summoned skeleton forced death
+99002860 巨大スケルトン死亡アニメ再生 -- giant skeleton death anime play
+1000000000 敵リスポン -- enemy respawn

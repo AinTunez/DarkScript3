@@ -1,0 +1,108 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッション開始時処理 -- Mission start process
+2001 リトライ時必要イベント -- Event required for retry
+2002 カットシーン再生 -- Cutscene playback
+2003 エレベーター起動時アニメ再生 -- Animation plays when the elevator starts
+2004 チェックポイント有効化 -- checkpoint enable
+2005 砲台のバックリード設定 -- Battery back lead setting
+2006 砲台のバックリード解除 -- Cannon back lead release
+2007 味方の無効化 -- Disable allies
+2020 ジャガーノートボス戦開始処理 -- Juggernaut boss battle start process
+2023 ボス戦開始時イベント -- Event at the start of a boss battle
+2024 ボス戦終了時イベント -- Event at the end of the boss battle
+2025 ジャガノ僚機集中狙い -- Aim to focus on Jagano wingman
+2030 ボスエリア透明壁有効化 -- Boss area transparent wall enabled
+2041 ボス部屋入口扉閉じるイベント -- Boss room entrance door closing event
+2050 CS後僚機有効化 -- CS rear wing aircraft enabled
+2052 ボス戦_戦闘開始時ターゲット登録 -- Boss battle_Target registration at the start of battle
+2060 正面目標地点マーカー有効化 -- Enable front target point marker
+2061 正面目標地点マーカー無効化 -- Disable front target point marker
+2062 ボスエリア扉前_移動目標マーカー無効化 -- In front of the boss area door_Disable moving target marker
+2070 企業貢献度設定 -- Corporate contribution setting
+2080 砲台攻撃範囲内特殊効果ON -- Special effects within artillery attack range ON
+2081 砲台攻撃範囲内特殊効果OFF -- Special effects within artillery attack range OFF
+2082 スタート地点_味方移動開始 -- Starting point_Start of ally movement
+2100 僚機撤退開始イベント -- Wingman withdrawal start event
+2250 ジャガノ砲台_自機ターゲット登録 -- Jagano Battery_ own machine target registration
+2251 ジャガノ砲台_自機イベントターゲット登録 -- Jagano Battery_ own machine event target registration
+2252 ジャガノ砲台_イベントターゲットを狙う特殊効果ON -- Jagano Battery_Special effects for aiming at event targets ON
+2253 ジャガノ砲台_イベントターゲットを狙う特殊効果OFF -- Jagano Battery_Special effects aimed at event targets OFF
+2254 スナイパー砲台_自機ターゲット登録 -- Sniper battery_ own target registration
+2255 スナイパー砲台_自機イベントターゲット登録 -- Sniper battery_own event target registration
+2256 スナイパー砲台_イベントターゲットを狙う特殊効果ON -- Sniper turret_Special effects for aiming at event targets ON
+2257 スナイパー砲台_イベントターゲットを狙う特殊効果OFF -- Sniper turret_Special effects for aiming at event targets OFF
+2258 ジャガノ砲台_嗅覚拡大特殊効果ON -- Jagano Battery_Olfaction expansion special effect ON
+2259 ジャガノ砲台_嗅覚拡大特殊効果OFF -- Jagano Battery_Olfaction expansion special effect OFF
+2260 スナイパー砲台_嗅覚拡大特殊効果ON -- Sniper battery_olfactory expansion special effect ON
+2261 スナイパー砲台_嗅覚拡大特殊効果OFF -- Sniper battery_olfactory expansion special effect OFF
+2262 ジャガノ砲台_ターゲット解除 -- Jagano Battery_Target Cancellation
+2263 スナイパー砲台_ターゲット解除 -- Sniper turret_target removal
+2264 ジャガノ砲台_初回ターゲット登録 -- Jagano Battery_Initial target registration
+2265 ジャガノ砲台_味方のみターゲット登録 -- Jagano Battery_Register targets only for allies
+2266 スナイパー砲台_初回ターゲット登録 -- Sniper battery_first target registration
+2267 スナイパー砲台_輸送ヘリのみターゲット登録 -- Sniper battery_Only transport helicopters are registered as targets
+2268 スナイパー砲台_味方のみターゲット登録 -- Sniper battery_Register targets only on allies
+2269 ジャガノ砲台_砲撃特殊効果 -- Jagano Battery_Artillery special effects
+2300 壁面砲台発射特殊効果 -- Wall turret firing special effects
+2700 砲台攻撃範囲内判定 -- Judgment within artillery attack range
+2701 砲台攻撃範囲外判定 -- Judgment of out of range of turret attack
+2702 味方全滅判定 -- Ally annihilation judgment
+2703 味方砲撃範囲内侵入判定 -- Intrusion detection within friendly fire range
+2710 壁内部侵入判定 -- Intrusion detection inside the wall
+2711 ボス部屋侵入判定 -- Boss room intrusion detection
+2712 僚機ボス部屋侵入判定 -- Wingman boss room intrusion detection
+2713 ボス部屋_戦闘開始判定 -- Boss room_battle start determination
+2714 ボスエリア扉_アクションボタン判定 -- Boss area door_action button determination
+2720 エレベーター起動判定 -- Elevator activation determination
+2730 ボスAP0判定 -- Boss AP0 judgment
+2731 ボスAP低下判定 -- Boss AP decrease judgment
+2732 ボスAP瀕死判定 -- Boss AP moribund judgment
+2733 ボス死亡判定 -- Boss death judgment
+2734 ジャガノボスエリア端判定 -- Jaganobos area edge determination
+2735 ジャガノ自機安置判定 -- Jagano machine placement judgment
+2740 僚機撤退判定 -- Consort aircraft withdrawal decision
+2741 僚機手抜きイベント -- wingman shoddy event
+2750 スタート地点_味方MT帰巣と砲撃イベント -- Starting point_Allied MT returning home and bombardment event
+2751 砲台制御_味方輸送ヘリ部隊全滅判定 -- Artillery control_Allied transport helicopter unit annihilation determination
+2753 スタート地点_味方移動開始判定 -- Start point_Friendly movement start determination
+2800 会話用_ボス正面装甲跳弾判定 -- For conversation_Boss frontal armor ricochet detection
+2801 会話用_ボス背面攻撃有効判定 -- For conversation_Boss rear attack effectiveness determination
+2802 会話用_ボス突進攻撃判定 -- For conversation_Boss rush attack judgment
+2803 会話用_突進時ターゲットが自機か判定 -- For conversation_Determine whether the target is your own aircraft when charging
+2804 会話用_突進時ターゲットが僚機か判定 -- For conversation_Determine whether the target is a wingman when charging
+2805 会話用_自機に突進が当たった判定 -- For conversation_Determining if your aircraft was hit by a charge
+2806 会話用_僚機に突進が当たった判定 -- For conversation_Judgment when a wingman is hit by a rush
+2807 会話用_ボスダウン判定 -- For conversation_Boss down detection
+2808 会話用_ボス初回攻撃判定 -- For conversation_Boss first attack judgment
+2809 会話用_市街地会話判定1 -- Conversation_Urban Conversation Judgment 1
+2810 会話用_市街地会話判定2 -- Conversation_Urban Conversation Judgment 2
+2811 会話用_壁内部会話判定1 -- For conversation_Inside wall conversation judgment 1
+2812 会話用_壁内部会話判定2 -- For conversation_Inside wall conversation judgment 2
+2900 跳ね橋共産帰巣ポイント更新左 -- Drawbridge communal homecoming point update left
+2901 跳ね橋共産帰巣ポイント更新右 -- Drawbridge communal homecoming point update right
+2904 スタート地点_味方輸送ヘリ左 -- Starting point_Left of ally transport helicopter
+2905 スタート地点_味方輸送ヘリ右 -- Starting point_Allied transport helicopter right
+2907 スタート地点_味方部隊巣の更新イベント -- Starting point_Allied unit nest update event
+2999 保持用 -- For holding
+3020 スタート地点_ジャガノに砲撃される味方イベント -- Starting point_Allied event being bombarded by Jagano
+3400 チェックポイント通過フラグ -- Checkpoint passing flag
+3410 僚機撤退開始フラグ -- Wingman withdrawal start flag
+3420 会話用ステートマップ終了フラグ -- Conversation state map end flag
+3430 スタート地点_初回砲撃終了フラグ -- Start point_first bombardment end flag
+3431 砲台砲撃終了フラグ -- Artillery bombardment end flag
+3700 エレベーター起動会話フラグ -- Elevator start conversation flag
+3701 正面装甲跳弾会話フラグ -- Frontal Armor Ricochet Conversation Flag
+3702 正面装甲有効会話フラグ -- Frontal armor active conversation flag
+3703 突進攻撃会話1フラグ -- Charge attack conversation 1 flag
+3704 突進攻撃会話2フラグ -- Charge attack conversation 2 flag
+3705 僚機突進回避会話フラグ -- Wingman rush avoidance conversation flag
+3706 背面攻撃会話フラグ -- Rear attack conversation flag
+3707 僚機撤退会話フラグ -- Wingman withdrawal conversation flag
+3708 とどめ演出開始会話フラグ -- Finishing effect start conversation flag
+3709 ボス撃破会話フラグ -- Boss defeat conversation flag
+3710 ジャガノ突進爆弾発生会話フラグ -- Jagano Rush Bomb Occurrence Conversation Flag
+3711 ジャガノHP低下時会話フラグ -- Jagano conversation flag when HP decreases
+3712 ジャガノ突進被弾会話フラグ -- Jagano Rush Hit Conversation Flag
+3713 部屋内部侵入会話フラグ -- Room intrusion conversation flag
+1000000000 敵リスポン -- enemy respawn

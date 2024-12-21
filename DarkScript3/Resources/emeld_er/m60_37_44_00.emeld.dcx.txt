@@ -1,0 +1,7 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1037442610 地図石碑光SFX切り替え -- Map stone monument light SFX switching
+1037443700 NPC314ムノウ_NPC初期化イベント_従者の死 -- NPC314 Munou_NPC initialization event_Death of servant
+1037443701 NPC314ムノウ_リアルタイム遷移_従者の死 -- NPC314 Munou_Real-time transition_Death of the servant

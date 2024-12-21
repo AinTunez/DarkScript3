@@ -1,0 +1,21 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 初期設定 -- Initial settings
+2100 NPAC接敵行動 -- NPAC engagement action
+2700 NPAC撃破判定 -- NPAC defeat judgment
+2710 NPACHP半分 -- NPACHP half
+2711 自機HP半分 -- Own machine HP half
+2800 最下部で戦闘 -- battle at the bottom
+3000 回復薬1回目 -- Recovery potion 1st time
+3001 回復薬2回目 -- Recovery potion second time
+3002 回復薬3回目 -- Recovery potion 3rd time
+3700 ミッション開始会話フラグ -- Mission start conversation flag
+3710 ミッション終了会話フラグ -- Mission end conversation flag
+3720 ミッション会話フラグ_1 -- Mission conversation flag_1
+3721 ミッション会話フラグ_2 -- Mission conversation flag_2
+3722 ミッション会話フラグ_3 -- Mission conversation flag_3
+3723 ミッション会話フラグ_4 -- Mission conversation flag_4
+3724 ミッション会話フラグ_5 -- Mission conversation flag_5
+3725 ミッション会話フラグ_6 -- Mission conversation flag_6
+3726 ミッション会話フラグ_7 -- Mission conversation flag_7
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,7 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+95550000 初期化 -- Initialization
+95550001 着地死亡確認1 -- Confirmation of death on landing 1
+95550002 着地死亡確認2 -- Confirmation of death on landing 2
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,108 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2200 初期イベント -- initial event
+2201 初期イベント2 -- Initial event 2
+2300 増援追加 -- Add reinforcements
+2400 エリアイン -- area in
+2500 初期エリア殲滅 -- Destroy initial area
+2505 初期エリア殲滅2 -- Initial area annihilation 2
+2510 扉オープン -- door open
+2511 会話用初接敵判定 -- First contact detection for conversation
+2520 扉クローズ -- door close
+2530 初期増援制御 -- initial reinforcement control
+2540 会話用_初期エリア何体か倒す -- For conversation_Defeat several creatures in the initial area
+2600 正規軍重AC入場 -- Regular army heavy AC entry
+2601 二体入場 -- Two bodies enter
+2602 プレイヤー正規軍シチュ入場 -- Player regular army situation entrance
+2605 会話用_プレイヤー正規軍シチュ入場 -- For conversation_Player regular army situation entrance
+2606 会話用_正規軍劣勢 -- For conversation_regular army inferiority
+2610 工廠エリア殲滅 -- Destroy the factory area
+2615 工廠エリア殲滅2 -- Arsenal area annihilation 2
+2700 即時ミッション会話発生フラグ -- Immediate mission conversation flag
+2701 待機ミッション会話発生フラグ -- Standby mission conversation flag
+2702 即時賑やかし会話発生フラグ -- Immediate lively conversation occurrence flag
+2703 待機賑やかし会話発生フラグ -- Waiting lively conversation occurrence flag
+2704 スキップ用即時ミッション会話再生中フラグ -- Instant mission conversation flag for skipping
+2705 スキップ用待機ミッション会話再生中フラグ -- Skip standby mission conversation flag
+2800 虎口殲滅判定 -- Toraguchi annihilation judgment
+2810 虎口侵入判定 -- Tiger mouth intrusion detection
+2811 虎口侵入時処理 -- Processing when entering the tiger's mouth
+2900 ボス到達 -- Reach the boss
+2910 ボス死亡 -- boss death
+2920 会話用_ボスHP減 -- For conversation_Boss HP decrease
+2921 会話用_ボスHP更に減 -- For conversation_Boss HP further reduced
+2930 会話用_大ボス死亡 -- For conversation_Big boss death
+3000 僚機出現 -- A wingman appears
+3010 ボス戦闘 -- boss battle
+3200 僚機瀕死 -- Wingman dying
+3210 僚機死亡 -- Wingman died
+3300 マーカー表示A -- Marker display A
+3310 マーカー表示B -- Marker display B
+3320 マーカー表示C -- Marker display C
+3330 アバランチエース死亡 -- Avalanche Ace dies
+3340 アバランチ子分死亡 -- Avalanche henchman dies
+3350 ボスHPバー表示 -- Boss HP bar display
+3360 ADF作戦ラインIN -- ADF Operation Line IN
+3370 正規軍AC作戦ラインIN -- Regular Army AC Operation Line IN
+3380 正規軍AC狙撃作戦ラインIN -- Regular army AC sniper operation line IN
+3390 ADFHU -- ADFHU
+3400 特務機体死亡数1 -- Number of special mission aircraft deaths: 1
+3401 特務機体死亡数2 -- Special mission aircraft deaths 2
+3402 特務機体死亡数3 -- Special mission aircraft deaths 3
+3500 アバランチエースが最後に死んだ -- Avalanche Ace was the last to die.
+3501 アバランチ子分が最後に死んだ -- Avalanche henchman was the last to die.
+3502 ADFが最後に死んだ -- ADF died last
+3510 死亡時特殊効果判定＿アバランチエース -- Special effect judgment upon death_Avalanche Ace
+3511 死亡時特殊効果判定＿アバランチ子分 -- Special effect judgment upon death_Avalanche henchman
+3512 死亡時特殊効果判定＿ADF -- Special effect judgment upon death_ADF
+3520 ボス戦台上検知判定 -- Boss battle table detection judgment
+3530 ボス戦ターゲット判定 -- Boss battle target determination
+3600 会話スイッチオフ -- conversation switch off
+3700 会話イベント発生フラグ -- Conversation event occurrence flag
+3800 チェックポイント -- checkpoint
+3801 チェックポイントフラグ -- checkpoint flag
+3802 チェックポイント処理 -- Checkpoint processing
+3900 会話フラグ_108100100_ミッション開始会話 -- Conversation flag_108100100_Mission start conversation
+3901 会話フラグ_108100200_ミッション開始会話２ -- Conversation flag_108100200_Mission start conversation 2
+3902 会話フラグ_108100300_ミッション開始会話３ -- Conversation flag_108100300_Mission start conversation 3
+3903 会話フラグ_108100400_最初シチュエーション -- Conversation flag_108100400_First situation
+3904 会話フラグ_108100500_最初シチュエーション２ -- Conversation flag_108100500_First situation 2
+3905 会話フラグ_108100600_最初シチュエーション_数体撃破 -- Conversation Flag_108100600_First Situation_Defeat several enemies
+3906 会話フラグ_108100700_最初シチュエーション_殲滅 -- Conversation flag_108100700_First situation_annihilation
+3907 会話フラグ_108100800_２つ目シチュエーション -- Conversation flag_108100800_Second situation
+3908 会話フラグ_108100900_２つ目シチュエーション２ -- Conversation flag_108100900_Second situation 2
+3909 会話フラグ_108101000_２つ目シチュエーション３ -- Conversation flag_108101000_Second situation 3
+3910 会話フラグ_108101100_２つ目シチュエーション_敵劣勢 -- Conversation Flag_108101100_Second Situation_Enemy Outnumbered
+3911 会話フラグ_108101200_２つ目シチュエーション_殲滅 -- Conversation flag_108101200_Second situation_annihilation
+3912 会話フラグ_108101300_２つ目シチュエーション_殲滅２ -- Conversation flag_108101300_Second situation_annihilation 2
+3913 会話フラグ_108101400_２つ目シチュエーション_殲滅後_移動中 -- Conversation flag_108101400_Second situation_After annihilation_Moving
+3914 会話フラグ_108101500_３つ目シチュエーション -- Conversation flag_108101500_Third situation
+3915 会話フラグ_108101600_３つ目シチュエーション２ -- Conversation flag_108101600_Third situation 2
+3916 会話フラグ_108101700_３つ目シチュエーション_殲滅 -- Conversation flag_108101700_Third situation_annihilation
+3917 会話フラグ_108101800_３つ目シチュエーション_殲滅２ -- Conversation flag_108101800_Third situation_annihilation 2
+3918 会話フラグ_108101900_３つ目シチュエーション_殲滅３ -- Conversation flag_108101900_Third situation_annihilation 3
+3919 会話フラグ_108102000_ボス_接敵 -- Conversation flag_108102000_Boss_Enemy contact
+3920 会話フラグ_108102100_ボス_CS終了時 -- Conversation flag_108102100_Boss_When CS ends
+3921 会話フラグ_108102200_ボス_戦闘中 -- Conversation flag_108102200_Boss_During battle
+3922 会話フラグ_108102300_ボス_アバランチB撃破 -- Conversation Flag_108102300_Boss_Defeated Avalanche B
+3923 会話フラグ_108102400_ボス_アバランチA撃破 -- Conversation Flag_108102400_Boss_Defeated Avalanche A
+3924 会話フラグ_108102500_ボス_ADF撃破 -- Conversation flag_108102500_Boss_ADF defeated
+3925 会話フラグ_108102600_ユーリア死亡 -- Conversation flag_108102600_Uria dies
+3926 会話フラグ_108102700_プレイヤー死亡_ユーリア死亡 -- Conversation Flag_108102700_Player Death_Uria Death
+3927 会話フラグ_108102800_プレイヤー死亡_ユーリア生存 -- Conversation Flag_108102800_Player Death_Uria Survival
+3928 会話フラグ_108102900_殲滅_ユーリア死亡 -- Conversation flag_108102900_annihilation_Uria death
+3929 会話フラグ_108103000_殲滅_ユーリア死亡２ -- Conversation flag_108103000_annihilation_Uria death 2
+3930 会話フラグ_108103100_殲滅_ユーリア生存 -- Conversation flag_108103100_annihilation_Uria survival
+3931 会話フラグ_108103200_殲滅_ユーリア生存２ -- Conversation flag_108103200_annihilation_Uria survival 2
+3932 会話フラグ_108102320_アバランチ一体撃破 -- Conversation Flag_108102320_Defeat all Avalanche
+3933 会話フラグ_108102340_アバランチ一体撃破_ユーリア生存 -- Conversation flag_108102340_Avalanche defeated_Uria survives
+3934 会話フラグ_108102410_2体撃破 -- Conversation Flag_108102410_2 units defeated
+3935 会話フラグ_108102420_2体撃破_ユーリア生存 -- Conversation Flag_108102420_2 bodies defeated_Uria survives
+3936 会話フラグ_108102430_ADFちょい削れ -- Conversation flag_108102430_ADF cut a little
+3937 会話フラグ_108102440_ADFちょい削れ_ユーリア生存 -- Conversation flag_108102440_ADF scrape a little_Uria survival
+3938 会話フラグ_108102450_ADF瀕死 -- Conversation flag_108102450_ADF dying
+3939 会話フラグ_108102460_ADF瀕死２ -- Conversation flag_108102460_ADF dying 2
+3940 会話フラグ_108102470_ADF瀕死_ユーリア生存 -- Conversation Flag_108102470_ADF Dying_Uria Survival
+3941 会話フラグ_108102720_ユーリア死亡_ADF撃破済 -- Conversation Flag_108102720_Uria dies_ADF defeated
+3942 会話フラグ_108102740_ユーリア死亡_ADFとアバランチＥｎ死亡済 -- Conversation Flag_108102740_Uria Death_ADF and Avalanche En died
+1000000000 敵リスポン -- enemy respawn

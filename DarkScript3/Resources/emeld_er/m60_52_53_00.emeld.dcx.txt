@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1052532400 協力NPC_召喚_xx -- Cooperation NPC_Summon_xx
+1052532500 巨人ボス部屋バディ石碑_使用可能判定 -- Giant boss room buddy stone monument_usable determination
+1052532510 バディ召喚距離を延ばすイベント -- Event that increases buddy summoning distance
+1052533700 NPC220壺マイヤー_共闘して勝利イベント -- NPC220 Tsubo Meyer_Fight together and win event
+1052533701 NPC220壺マイヤー_白霊召喚停止イベント -- NPC220 Jarmeyer_White Spirit Summoning Stop Event

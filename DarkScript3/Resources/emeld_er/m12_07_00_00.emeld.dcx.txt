@@ -1,0 +1,9 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+12070510 エレベータ起動 -- elevator start
+12070519 エレベータ初期フラグ -- Elevator initial flag
+12073700 しゃべスラ_ダミー_NPC初期化イベント -- Chatsura_dummy_NPC initialization event
+12073701 しゃべスラ_聖杯へ案内会話再生 -- Chatsura_Guide to the Holy Grail Conversation Playback
+12073702 しゃべスラ_大聖杯へ案内会話再生 -- Chat Sura_Guide to the Great Holy Grail Conversation Playback
+1000000000 敵リスポン -- enemy respawn

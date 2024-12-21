@@ -1,0 +1,4 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+1000000000 敵リスポン -- enemy respawn
+1040372200 蟹待機＆飛び出し仮ver_XX -- Crab waiting & jumping temporary ver_XX

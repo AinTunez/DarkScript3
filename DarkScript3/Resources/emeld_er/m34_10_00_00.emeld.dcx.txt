@@ -1,0 +1,9 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+34102510 エレベータイベント起動 -- Elevator event activation
+34102690 天候固定 -- weather fixed
+34102800 ボス撃破 -- Defeat the boss
+34102810 ボス出現 -- Boss appears
+34102849 ボスイベント起動 -- Boss event activation
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+31012200 犬ネズミ伏兵登場_XX -- Dog and mouse ambush appears_XX
+31012207 落とし穴波状攻撃用_思考ロジック有効化_領域／距離判定_XX -- For pitfall wave attack_Thought logic activation_Area/distance judgment_XX
+31012220 犬ネズミ_接近かダメージ受けて即起動_XX -- Dog and rat_Immediately activated when approaching or receiving damage_XX
+31012230 犬ネズミ伏兵_突進止まらない用特殊効果_XX -- Dog and Rat Ambush_Special effects for charging and not stopping_XX
+31012500 落とし穴 -- Pitfall
+31012800 ボス撃破 -- Defeat the boss
+31012810 ボス出現 -- Boss appears
+31012811 ボス激昂 -- boss rage
+31012830 ボス部屋バディ石碑_使用可能判定 -- Boss room buddy stone monument_usable determination
+31012849 ルーンベア_イベント起動 -- Runebear_event activation
+1000000000 敵リスポン -- enemy respawn

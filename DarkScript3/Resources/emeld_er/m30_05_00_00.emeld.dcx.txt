@@ -1,0 +1,23 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30052203 スケルトン_奇襲_特殊効果付与_XX -- Skeleton_Surprise_Special effect_XX
+30052300 ルーンの市民_ネクロマンサー_バフ_XX -- Rune Citizen_Necromancer_Buff_XX
+30052301 PCが領域に入ったら巡回を始める -- When the PCs enter the area, begin patrolling.
+30052302 PCが領域に入ったらアニメを流す -- Play the anime when the PC enters the area
+30052350 ルーンの市民_ネクロマンサー_死亡_XX -- Citizen of Rune_Necromancer_Death_XX
+30052400 地下墓地ギロチン起動 -- Catacombs guillotine activated
+30052450 カニ_大_特殊待機_ルートによって解除タイミングが違う -- Crab_Large_Special standby_Release timing differs depending on route
+30052580 梯子登録 -- ladder registration
+30052800 ボス撃破 -- Defeat the boss
+30052810 ボス出現 -- Boss appears
+30052811 ボス激昂 -- boss rage
+30052825 協力NPC_ボス部屋入場 -- Cooperating NPC_Boss room entrance
+30052849 ボス_イベント起動 -- Boss_event activation
+30052850 隠しボス_ボス撃破 -- Hidden boss_defeat boss
+30052860 隠しボス_ボス出現 -- Hidden boss_boss appearance
+30052861 隠しボス激昂 -- Hidden boss rage
+30052870 ホストがボス部屋入場_ガストも帰還する -- Host enters boss room_Gust also returns
+30052880 隠しボス含めてマルチ権限対応 -- Multi-authority support including hidden bosses
+30052899 隠しボス_イベント起動 -- Hidden boss_event activation
+1000000000 敵リスポン -- enemy respawn

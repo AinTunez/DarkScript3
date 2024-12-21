@@ -1,0 +1,8 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+5000 s1．【ドラゴン】近づいたら飛び立つ -- s1. [Dragon] Takes flight when approached
+5010 s2－1．【ドラゴン】八の字旋回 -- s2-1. [Dragon] Figure eight turning
+5020 s2－2．【ドラゴン】ホバリング -- s2-2. [Dragon] Hovering
+5030 s2－3．【ドラゴン】気づいてブレス -- s2-3. [Dragon] Notice and breathe
+5040 s3．【ドラゴン】巣に向かって飛んでくる -- s3. [Dragon] Flying towards the nest
+1000000000 敵リスポン -- enemy respawn

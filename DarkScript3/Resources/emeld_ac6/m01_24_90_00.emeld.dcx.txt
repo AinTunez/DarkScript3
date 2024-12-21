@@ -1,0 +1,36 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+12490000 ロード時処理 -- Load time processing
+12490001 マーカー表示判定 -- Marker display judgment
+12490002 マーカー表示解除判定 -- Marker display cancellation determination
+12490003 接敵判定 -- Enemy contact judgment
+12490004 接敵解除判定 -- Contact release judgment
+12490005 戦闘開始判定 -- Battle start determination
+12490006 警告判定 -- Warning judgment
+12490007 警告判定解除 -- Warning judgment canceled
+12490010 クリア時処理 -- Clear processing
+12490011 死亡時処理 -- Treatment at death
+12490012 作戦領域展開判定 -- Operation area deployment determination
+12490100 クリア処理 -- Clear processing
+12490101 クリア条件チェック -- Clear condition check
+12490102 ダミーキャラ無効化 -- Disable dummy character
+12490103 目標マーカー非表示 -- Target marker hidden
+12490104 目標マーカー非表示条件チェック -- Target marker hiding condition check
+12490105 開始前メッセージ -- Pre-start message
+12490106 撤退判定 -- Withdrawal judgment
+12490107 撤退時処理 -- Processing upon withdrawal
+12490108 開始判定 -- Start judgment
+12490200 全敵初期化 -- Initialize all enemies
+12490210 扉開く -- open the door
+12490220 扉閉じる条件チェック -- Door closing condition check
+12490230 扉閉じる -- door close
+12490240 敵逃走判定 -- Enemy escape judgment
+12490280 敵終了判定 -- Enemy end determination
+12490300 クリア条件付与 -- Assign clear conditions
+12490320 ウェーブ始動条件チェック -- Wave start condition check
+12490321 ウェーブ1 -- wave 1
+12490322 増援1 -- reinforcements 1
+12490323 ウェーブ2 -- wave 2
+12490324 増援2 -- reinforcements 2
+12490325 ウェーブ3 -- wave 3
+12490326 増援3 -- reinforcements 3

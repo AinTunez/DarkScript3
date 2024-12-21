@@ -1,0 +1,17 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 アバランチターゲット -- avalanche target
+2001 ヘリ輸送特殊効果 -- helicopter transport special effects
+2002 輸送ヘリ削除 -- Transport helicopter deleted
+2003 輸送ヘリ積載 -- Transport helicopter loading
+2004 初期で実行しておきたい物 -- Things to do at the beginning
+2210 上昇下降チェック_最初上へ -- Rise and fall check_First up
+2211 上昇下降チェック_最初下へ -- Rise and fall check_first to the bottom
+2212 ボス戦_アバランチエースが先に死んだ -- Boss battle_ Avalanche Ace died first
+2213 ボス戦_アバランチサポBが先に死んだ -- Boss battle_Avalanche Support B died first
+2214 揚陸艦の艦橋設定 -- Landing ship bridge settings
+2215 強制解除テスト -- Forced release test
+2216 強制アタッチ -- force attach
+2217 USドローンアセットアタッチ -- US Drone Asset Attach
+2218 ダミーキャラPAテスト -- Dummy character PA test
+1000000000 敵リスポン -- enemy respawn

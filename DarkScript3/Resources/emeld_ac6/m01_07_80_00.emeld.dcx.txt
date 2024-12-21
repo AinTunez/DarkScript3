@@ -1,0 +1,68 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 後半用キャラ無効化 -- Character invalidation for the second half
+2001 前半_更新頻度固定 -- First half_Update frequency fixed
+2002 前半_更新頻度固定解除 -- First half_Unlock update frequency
+2003 後半_更新頻度固定 -- Second half_Fixed update frequency
+2004 後半_更新頻度固定解除 -- Second half_Unlock update frequency
+2010 前半_初期AI停止 -- First half_Initial AI stop
+2011 前半_初期AI有効化 -- First half_Initial AI activation
+2012 前半_サウンドステート制御ON -- First half_Sound state control ON
+2013 前半_サウンドステート制御OFF -- First half_Sound state control OFF
+2020 前半_演出許可設定 -- First half_Direction permission setting
+2021 後半_演出許可設定 -- Second half_Direction permission setting
+2022 後半_背景アセット変更 -- Second half_background asset change
+2030 前半終了時CS再生 -- CS playback at the end of the first half
+2031 後半HU時CS再生 -- CS playback during second half HU
+2032 次世代撃破後_CS再生判定 -- After defeating the next generation_CS regeneration judgment
+2033 後半終了時_FE無効化設定 -- At the end of the second half_FE invalidation setting
+2040 前半_ボスゲージ表示 -- First half_Boss gauge display
+2041 前半_ボスゲージ無効化 -- First half_Boss gauge disabled
+2042 後半_ボスゲージ表示 -- Second half_boss gauge display
+2043 後半_ボスゲージ無効化 -- Second half_boss gauge disabled
+2050 後半_キャラ有効化 -- Second half_Character activation
+2051 後半_僚機有効化 -- Second half_ Wingman enabled
+2052 後半_僚機の撤退イベント -- Second half_wingman withdrawal event
+2053 後半_前半キャラの無効化 -- Second half_Disable first half characters
+2056 後半_ウミグモのイベントターゲット設定 -- Second half_Sea spider event target setting
+2057 後半_次世代プロトAP半減特殊効果設定 -- Second half_Next generation proto AP halved special effect settings
+2058 後半_お供死亡イベント -- Second half_accompanied death event
+2060 前半_HU増援の無効化 -- First half_Disable HU reinforcements
+2061 前半_HU増援の有効化 -- First half_HU reinforcement activation
+2100 前半_ボス撃破後の雑魚強制死亡イベント -- First half_Minor fish forced death event after defeating the boss
+2101 後半_ボス撃破後のお供強制死亡イベント -- Second half_Compulsory death event after defeating the boss
+2102 ウミグモ1死亡時副砲無効化 -- Secondary gun disabled when 1 sea spider dies
+2103 ウミグモ2死亡時副砲無効化 -- Secondary gun disabled when Sea Spider 2 dies
+2700 前半_ボスHU判定 -- First half_Boss HU judgment
+2730 前半_ボスAP減少判定一回目 -- First half_Boss AP reduction judgment first time
+2731 前半_ボスAP0判定 -- First half_Boss AP0 judgment
+2732 前半_ボス死亡判定 -- First half_Boss death judgment
+2733 前半_ボスAP減少判定二回目 -- First half_Boss AP reduction judgment second time
+2820 後半_次世代プロトAP半減判定 -- Second half_Next generation proto AP halved judgment
+2821 後半_ボスHU技使用判定 -- Second half_Boss HU technique use judgment
+2822 後半_ボスAP低下判定一回目 -- Second half_Boss AP decrease judgment first time
+2830 後半_ボスAP残り僅か判定 -- Second half_Boss AP remaining determination
+2831 後半_ボスAP0判定 -- Second half_Boss AP0 judgment
+2832 後半_ボス死亡判定 -- Second half_Boss death judgment
+2833 後半_エアAP0判定 -- Second half_Air AP0 judgment
+2840 後半_次世代プロトお供消す判定 -- Second half_Judgment to remove next generation proto
+2850 会話用_次世代プロトよろけ発生判定 -- For conversation_Next generation proto stagger occurrence determination
+2860 会話用_次世代撃破会話判定一回目 -- For conversation_Next generation defeat conversation judgment first time
+2861 会話用_次世代撃破会話判定二回目 -- Conversation_Next Generation Defeating Conversation Judgment Second Time
+3400 自機死亡フラグ -- own aircraft death flag
+3700 会話フラグ_107800100_ミッション開始 -- Conversation flag_107800100_Mission start
+3701 会話フラグ_107800200_ミッション開始後 -- Conversation flag_107800200_After mission start
+3702 会話フラグ_107800500_ユーリア機AP半減 -- Conversation flag_107800500_Uria machine AP halved
+3703 会話フラグ_107800900_前半で死亡 -- Conversation flag_107800900_Died in the first half
+3704 会話フラグ_107801000_未使用 -- Conversation flag_107801000_unused
+3705 会話フラグ_107801300_未使用 -- Conversation flag_107801300_unused
+3706 会話フラグ_107801700_未使用 -- Conversation flag_107801700_unused
+3707 会話フラグ_107802100_後半開始 -- Conversation flag_107802100_second half start
+3708 会話フラグ_107802500_エア離脱 -- Conversation flag_107802500_Air departure
+3709 会話フラグ_107802900_後半_ボスAP四分の一 -- Conversation flag_107802900_Second half_Boss AP quarter
+3710 会話フラグ_107803000_後半_ボス撃破 -- Conversation flag_107803000_Second half_Boss defeated
+3711 会話フラグ_107803300_後半で死亡 -- Conversation Flag_107803300_Died in the second half
+3712 会話フラグ_107802200_後半_AP低下一回目1 -- Conversation flag_107802200_Second half_AP drop first time 1
+3900 リザルト遷移 -- Result transition
+3910 PS5用遷移 -- Transition for PS5
+1000000000 敵リスポン -- enemy respawn

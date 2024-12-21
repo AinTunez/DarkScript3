@@ -1,0 +1,68 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 初期設定 -- Initial settings
+2100 第一目標マーカー有効化 -- Activate first objective marker
+2101 第一目標マーカー無効化 -- Disable first target marker
+2102 第二目標マーカー有効化 -- Activate second objective marker
+2103 第二目標マーカー無効化 -- Disable second target marker
+2104 第一目標TGT有効化 -- First goal TGT activation
+2105 第二目標TGT有効化 -- Second target TGT activation
+2106 第三目標TGT有効化 -- Third objective TGT activation
+2107 第三目標マーカー有効化 -- Third objective marker enabled
+2108 第三目標マーカー無効化 -- Disable third objective marker
+2700 目標1_接近判定 -- Target 1_ Approach judgment
+2701 目標2_接近判定 -- Target 2_ Approach judgment
+2702 目標1撃破判定 -- Target 1 destruction judgment
+2703 目標2撃破判定 -- Target 2 destruction judgment
+2704 目標エリア一個突破判定 -- Judgment of breaking through one target area
+2705 目標エリア二個突破判定 -- Judgment of breaking through two target areas
+2706 目標3撃破判定 -- Target 3 destruction judgment
+2707 目標エリア三個突破判定 -- Judgment of breaking through three target areas
+2708 目標3_接近判定 -- Target 3_ Approach judgment
+2800 目標エリア1_敵残存判定 -- Target area 1_enemy remaining determination
+2801 目標エリア2_敵残存判定 -- Target area 2_enemy remaining determination
+2802 目標エリア3_敵残存判定 -- Target area 3_enemy remaining determination
+2810 四脚よろけ判定一回目 -- First quadruped stagger judgment
+2811 四脚よろけ判定二回目 -- Second quadruped stagger judgment
+2820 四脚よろけ復帰判定一回目 -- First time to recover from quadrupedal stagger
+2821 四脚よろけ復帰判定二回目 -- Second judgment of recovery from quadrupedal stagger
+2830 四脚AP0判定 -- Quadruped AP0 judgment
+2831 四脚戦闘開始判定 -- Quadruped combat start determination
+2832 会話用_クリア時四脚生存会話判定 -- For conversation_4 leg survival conversation judgment when clearing
+2833 会話用_目標エリア1接近時判定 -- For conversation_Judgment when approaching target area 1
+2834 会話用_目標エリア2接近時判定 -- For conversation_Judgment when approaching target area 2
+2835 会話用_目標エリア3接近時判定 -- For conversation_Judgment when approaching target area 3
+3400 最後に壊したのが目標エリア1フラグ -- The last thing I destroyed was the target area 1 flag.
+3401 最後に壊したのが目標エリア2フラグ -- The last thing I destroyed was the target area 2 flag.
+3402 最後に壊したのが目標エリア3フラグ -- The last thing I destroyed was the target area 3 flag.
+3410 目標1つ破壊フラグ -- 1 target destroyed flag
+3411 目標2つ破壊フラグ -- 2 targets destroyed flag
+3412 目標3つ破壊フラグ -- 3 target destruction flag
+3420 四脚よろけ一回目 -- First time staggering on four legs
+3421 四脚よろけ二回目 -- Second quadrupedal stumble
+3430 四脚よろけ復帰一回目 -- First time returning from hobbling on all four legs
+3431 四脚よろけ復帰二回目 -- Second time to wobble on all four legs
+3801 会話フラグ_110000100_ミッション開始 -- Conversation flag_110000100_Mission start
+3802 会話フラグ_110000500_目標1接近1 -- Conversation Flag_110000500_Target 1 Approach 1
+3803 会話フラグ_110000900_目標1接近2 -- Conversation flag_110000900_Target 1 approach 2
+3804 会話フラグ_110001300_目標撃破1 -- Conversation Flag_110001300_Target Destroyed 1
+3805 会話フラグ_110001700_目標2接近1 -- Conversation Flag_110001700_Target 2 Approach 1
+3806 会話フラグ_110002100_目標2接近2 -- Conversation flag_110002100_Target 2 approach 2
+3807 会話フラグ_110002400_目標撃破21 -- Conversation Flag_110002400_Target Destroyed 21
+3808 会話フラグ_110002500_目標撃破22 -- Conversation Flag_110002500_Target Destroyed 22
+3809 会話フラグ_110002600_目標破壊リマインド -- Conversation flag_110002600_Target destruction reminder
+3810 会話フラグ_110002900_目標3接近1 -- Conversation flag_110002900_Target 3 approach 1
+3811 会話フラグ_110003300_目標3接近2 -- Conversation flag_110003300_Target 3 approach 2
+3812 会話フラグ_110003340_四脚発見時 -- Conversation flag_110003340_When four legs are found
+3813 会話フラグ_110003400_四脚戦闘開始 -- Conversation Flag _110003400_ Quadruped Battle Start
+3814 会話フラグ_110003420_四脚ダウン一回目 -- Conversation flag_110003420_Quadruped down first time
+3815 会話フラグ_110003440_四脚復帰一回目 -- Conversation Flag_110003440_First time returning to quadrupeds
+3816 会話フラグ_110003460_四脚ダウン二回目 -- Conversation flag_110003460_quadruped down second time
+3817 会話フラグ_110003480_四脚復帰二回目 -- Conversation Flag_110003480_Second return to quadruped
+3818 会話フラグ_110003500_四脚撃破1 -- Conversation Flag_110003500_Quadruped Defeated 1
+3819 会話フラグ_110003520_四脚撃破2 -- Conversation flag _110003520_ Quadruped defeat 2
+3820 会話フラグ_110003700_目標残り1 -- Conversation Flag_110003700_Goal 1 remaining
+3821 会話フラグ_110004100_全目標撃破1 -- Conversation Flag_110004100_All targets destroyed 1
+3822 会話フラグ_110004500_全目標撃破時四脚が近くにいる -- Conversation Flag_110004500_ Quadrupeds are nearby when all targets are defeated
+3823 会話フラグ_110004900_全目標撃破2 -- Conversation Flag_110004900_All targets destroyed 2
+1000000000 敵リスポン -- enemy respawn

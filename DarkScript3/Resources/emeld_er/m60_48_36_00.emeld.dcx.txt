@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1048360700 NPC605_竜餐ショップ_平原 -- NPC605_Dragon Restaurant_Plains
+1048360701 NPC605_竜餐ショップ_平原アニメ起動 -- NPC605_Dragon Shop_Hiragen Anime Launch

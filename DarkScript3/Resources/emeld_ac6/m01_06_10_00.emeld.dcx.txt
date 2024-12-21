@@ -1,0 +1,150 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 utl_マップ初期化 -- utl_map initialization
+2001 utl_プレイヤー初期化 -- utl_player initialization
+2010 utl_フェードアウト -- utl_fadeout
+2011 utl_フェードイン -- utl_fade in
+2012 リトライ判定 -- Retry judgment
+2020 CP作成 -- CP creation
+2021 CP作成フラグ -- CP creation flag
+2022 CP時初期化処理 -- Initialization processing during CP
+2023 CP初期化フラグを折る -- Fold CP initialization flag
+2100 bas_初期化 -- bas_initialization
+2101 bas_完了化 -- bas_completed
+2110 bas_エレベーター初期化 -- bas_elevator initialization
+2111 bas_B_エレベーター起動 -- bas_B_Elevator start
+2114 bas_SF_エレベーター停止したフラグ -- bas_SF_Elevator stopped flag
+2115 bas_SF_エレベーター動き始めたフラグ -- bas_SF_Elevator started moving flag
+2170 bas_B_隔壁ゾーンのガードメカを戦闘状態に -- bas_B_The guard mecha in the bulkhead zone is in combat mode.
+2171 bas_B_底ゾーンの砲台のAIロジックを開始 -- bas_B_Start AI logic for bottom zone turret
+2172 bas_B_隔壁シチュの敵殲滅判定 -- bas_B_Enemy annihilation judgment in bulkhead situation
+2173 bass_B_隔壁ボタンの条件判定 -- bass_B_bulkhead button condition determination
+2174 bas_B_隔壁シチュの敵一体倒した判定 -- bas_B_Judgment of defeating one enemy in bulkhead situation
+2175 bas_B_隔壁シチュの敵撃破判定2体 -- bas_B_2 enemy destruction judgment in bulkhead situation
+2176 bas_B_隔壁シチュの敵撃破判定3体 -- bas_B_3 enemies destroyed in bulkhead situation
+2180 bas_B_隔壁閉じる -- bas_B_bulkhead close
+2181 bas_エレベーター緊急停止時ガードメカを戦闘状態に -- bas_When the elevator stops in an emergency, the guard mechanism goes into combat mode.
+2182 bas_B_隔壁解放スイッチを押した -- bas_B_Bulkhead release switch pressed
+2183 bas_隔壁開く -- bas_bulkhead open
+2184 bas_仮_エレベーター緊急停止時アラーム演出_光点明滅_音はEzState上で -- bas_Temporary_Elevator emergency stop alarm production_Flashing light_Sound on EzState
+2185 bas_透明ヒット無効化タイミング -- bas_transparent hit invalidation timing
+2186 bas_仮_隔壁解放スイッチ付近のアラーム演出_光点明滅_音はEzState上で -- bas_temporary_alarm production_flashing light_sound near bulkhead release switch on EzState
+2187 bas_B_隔壁解放スイッチに到着したか判定 -- bas_B_ Determine whether the bulkhead release switch has been reached
+2188 bas_B_隔壁の下に進み始めたか判定 -- bas_B_ Determine whether it has started to move under the bulkhead
+2189 bas_B_ダメージ受けたらガードメカを戦闘状態に -- bas_B_When receiving damage, put the guard mech into combat mode
+2190 イベント2183隔壁開く連携イベント_イベントフラグ -- Event 2183 Bulkhead opening cooperation event_event flag
+2191 イベント2183隔壁開く連携イベント_ヒット無効化 -- Event 2183 Bulkhead opening cooperation event_hit invalidation
+2195 イベント2182_bas_B_隔壁解放スイッチを押した派生_マーカー制御 -- Event 2182_bas_B_Derivation of bulkhead release switch pressed_Marker control
+2196 イベント通知用フラグ_bas_B_隔壁解放スイッチを押した -- Event notification flag_bas_B_Bulkhead release switch pressed
+2200 anm_初期化 -- anm_initialization
+2201 anm_完了化 -- anm_completed
+2202 anm_B_アネモネAP0にした -- anm_B_Anemone set to AP0
+2203 anm_SF_アネモネ起動したフラグ_ついでにエレベーターのマーカー消す -- anm_SF_Anemone activated flag_Also, erase the elevator marker
+2204 anm_SF_エレベーター停止で起動した場合のフラグ -- anm_SF_Flag when starting when the elevator stops
+2205 anm_SF_エレベータースルーで落下して領域入って起動した場合のフラグ -- anm_SF_Flag when falling through the elevator and entering the area and starting up
+2206 anm_B_アネモネ絶対作動領域に入ったか判定 -- anm_B_Determine whether the anemone has entered the absolute operating range
+2208 anm_B_縦穴の底にやってきたか判定 -- anm_B_Determine whether you have reached the bottom of the vertical hole
+2209 anm_SF_アネモネが完全に死亡したフラグ -- anm_SF_Anemone completely dead flag
+2212 anm_SF_アネモネ攻撃やめようフラグ -- anm_SF_Anemone attack stop flag
+2213 anm_仮_爆発演出 -- anm_temporary_explosion production
+2214 anm_SF_爆発についての会話開始用フラグ -- anm_SF_flag to start a conversation about explosions
+2220 anm_ボスゲージ表示 -- anm_boss gauge display
+2230 anm_B_ボイス用判定領域に入ったか判定 -- anm_B_Determine whether it has entered the voice determination area
+2270 anm_副砲射撃 -- anm_secondary gun fire
+2271 anm_副砲射撃_ウェイト -- anm_secondary gun fire_weight
+2272 anm_B_副砲射撃ループ終了判定 -- anm_B_Secondary gun firing loop end determination
+2273 anm_副砲_ロック距離150m化 -- anm_secondary gun_lock distance 150m
+2280 anm_底着いて以降_曲射ミサイル -- anm_After reaching the bottom_Curved missile
+2289 anm_B_ミサイルエスカレートするか判定 -- anm_B_Missile Determine whether to escalate
+2290 anm_チャージ演出およびインターバル -- anm_charge performance and interval
+2291 anm_前半用攻撃行動_レーザー -- anm_first half attack action_laser
+2292 anm_前半用攻撃行動インターバル -- anm_Attack action interval for the first half
+2293 anm_後半用攻撃行動_レーザー -- anm_attack action for the second half_laser
+2294 anm_後半用攻撃行動インターバル -- anm_Attack action interval for the second half
+2295 anm_後半用攻撃行動_レーザーとミサイル_テスト -- anm_second half attack action_laser and missile_test
+2296 anm_後半用攻撃行動_ミサイル -- anm_second half attack action_missile
+2297 anm_B_初回チャージを始めよう判定 -- anm_B_Judgment to start the first charge
+2298 anm_初回チャージを始めたのでSFX出す -- anm_I started charging for the first time, so I issued SFX
+2299 anm_射撃行動中断時にSFX消す -- anm_Turn off SFX when shooting action is interrupted
+2500 アネモネ_射撃制御_遠距離射撃_開始 -- Anemone_Fire control_Long range shooting_Start
+2501 アネモネ_射撃制御_遠距離射撃_終了 -- Anemone_Fire control_Long range shooting_End
+2510 アネモネ_射撃制御_近距離射撃_開始 -- Anemone_Fire control_Close-range shooting_Start
+2511 アネモネ_射撃制御_近距離射撃_終了 -- Anemone_Fire control_Close range shooting_End
+2520 アネモネ_射撃制御_ミサイル射撃_開始 -- Anemone_Fire control_Missile fire_Start
+2521 アネモネ_射撃制御_ミサイル射撃_手加減_開始 -- Anemone_Fire control_Missile fire_Relaxation_Start
+2530 アネモネ_隔壁中特殊効果 -- Anemone_Special effects during bulkhead
+2540 アネモネ_初撃特殊ミサイル_特殊効果設定 -- Anemone_First shot special missile_Special effect settings
+2541 アネモネ_初撃特殊ミサイル_特殊効果解除 -- Anemone_First hit special missile_Special effect cancellation
+2550 アネモネ_ミサイル初回領域判定 -- Anemone_Missile initial area determination
+3000 talk_出撃直後 -- talk_Immediately after sortie
+3001 talk_アネモネ起動時 -- talk_When starting Anemone
+3002 talk_ELV停止時 -- talk_ELV stopped
+3003 talk_隔壁作動時 -- talk_When the bulkhead is activated
+3004 talk_隔壁解錠時 -- talk_When unlocking bulkhead
+3005 talk_底到達時 -- talk_When reaching the bottom
+3006 talk_アネモネ爆発時 -- talk_When anemone explodes
+3007 talk_アネモネ停止時 -- talk_When Anemone is stopped
+3008 talk_解錠装置に接近時 -- talk_When approaching the unlocking device
+3009 talk_ELV起動時 -- talk_ELV startup
+3010 talk_後半突入時 -- talk_At the start of the second half
+3020 talk_殲滅後会話 -- talk_Conversation after annihilation
+3021 talk_隔壁作動タイミング調整 -- talk_Bulkhead activation timing adjustment
+3100 会話フラグ_106100100_ミッション開始だ -- Conversation Flag_106100100_Mission begins
+3101 会話フラグ_106100200_どうした621 -- Conversation flag_106100200_What's up 621
+3102 会話フラグ_106100500_脅威度未測定の侵入者 -- Conversation Flag_106100500_Intruder with unmeasured threat level
+3103 会話フラグ_106100900_リフトがロックされ -- Conversation flag_106100900_lift is locked
+3104 会話フラグ_106101300_危険です下を -- Conversation flag_106101300_Dangerous below
+3105 会話フラグ_106101700_待て隔壁が作動した -- Conversation Flag_106101700_Wait, the bulkhead has activated
+3106 会話フラグ_106101800_侵入者を隔離対象を -- Conversation flag_106101800_Isolate intruder
+3107 会話フラグ_106101900_侵入者の脅威度を計測 -- Conversation flag_106101900_Measures the threat level of intruders
+3108 会話フラグ_106102100_片付いたか -- Conversation flag_106102100_Is it cleaned up?
+3109 会話フラグ_106102120_あちらです -- Conversation flag_106102120_That's it
+3110 会話フラグ_106102200_「ネペンテス」 -- Conversation flag_106102200_"Nepenthes"
+3111 会話フラグ_106102500_アクセスポイントを見 -- View conversation flag_106102500_access point
+3112 会話フラグ_106102600_開きます進みましょ -- Open conversation flag_106102600_Let's proceed
+3113 会話フラグ_106102700_不正アクセスを検出 -- Conversation flag_106102700_Unauthorized access detected
+3114 会話フラグ_106102900_複合砲台の制御パター -- Conversation flag_106102900_Composite artillery control pattern
+3115 会話フラグ_106103000_ネペンテスが目視圏内 -- Conversation Flag_106103000_Nepenthes is within visual range
+3116 会話フラグ_106103100_狙われているぞ621 -- Conversation flag_106103100_You're being targeted 621
+3117 会話フラグ_106103200_レイヴン回避を -- Conversation flag_106103200_Raven avoidance
+3118 会話フラグ_106103300_懐に入ったようだな -- Conversation flag_106103300_It looks like it's in your pocket.
+3119 会話フラグ_106103400_ネペンテス損傷拡大 -- Conversation flag_106103400_Nepenthes damage expansion
+3120 会話フラグ_106103700_複合砲台ネペンテス -- Conversation Flag_106103700_Composite Artillery Nepenthes
+3121 会話フラグ_106104100_目標の破壊を確認した -- Conversation flag_106104100_Target destruction confirmed
+3130 会話フラグ_106101910_侵入者の脅威度を計測その1 -- Conversation flag_106101910_Measuring the threat level of intruders part 1
+3131 会話フラグ_106101920_侵入者の脅威度を計測その2 -- Conversation flag_106101920_Measuring the threat level of intruders part 2
+3500 条件判定_会話用_アネモネ目視判定 -- Condition judgment_For conversation_Anemone visual judgment
+3501 条件判定_会話用_ウォルター注意 -- Condition judgment_for conversation_Walter attention
+3502 条件判定_会話用_エア注意 -- Condition judgment_For conversation_Air caution
+3503 条件判定_会話用_アネモネHP低下 -- Condition judgment_For conversation_Anemone HP decrease
+3510 条件判定_会話用_狙撃デリーター部隊 -- Condition Judgment_For Conversation_Sniper Deleteer Unit
+3601 CPからきたよフラグ01 -- I came from CP flag 01
+3602 CPからきたよフラグ02 -- I came from CP flag 02
+3700 アネモネ_アセット連携_アニメID200_レーザー_近距離_チャージチャージ射撃 -- Anemone_Asset cooperation_Anime ID200_Laser_Close range_Charge charge shooting
+3710 アネモネ_アセット連携_アニメID300_死亡 -- Anemone_Asset cooperation_Anime ID300_Death
+3711 アネモネ_アセット連携_アニメID_オブジェ破壊 -- Anemone_Asset cooperation_Anime ID_Object destruction
+3800 デリータ登場演出位置判定イベント00 -- Delita appearance performance position determination event 00
+3801 デリータ登場演出位置判定イベント01 -- Delita appearance production position determination event 01
+3802 デリータ登場演出位置判定イベント02 -- Delita appearance production position determination event 02
+3803 デリータ登場演出位置判定イベント03 -- Delita appearance production position determination event 03
+3804 デリータ登場演出位置判定イベント04 -- Delita appearance production position determination event 04
+3810 デリータ登場ショートワープイベント00 -- Delita Appears Short Warp Event 00
+3811 デリータ登場ショートワープイベント01 -- Delita Appearance Short Warp Event 01
+3812 デリータ登場ショートワープイベント02 -- Delita Appearance Short Warp Event 02
+3813 デリータ登場ショートワープイベント03 -- Delita Appearance Short Warp Event 03
+3814 デリータ登場ショートワープイベント04 -- Delita Appearance Short Warp Event 04
+3850 判定フラグ_出現箇所00 -- Judgment flag_occurrence location 00
+3851 判定フラグ_出現箇所01 -- Judgment flag_appearance location 01
+3852 判定フラグ_出現箇所02 -- Judgment flag_appearance location 02
+3853 判定フラグ_出現箇所03 -- Judgment flag_appearance location 03
+3854 判定フラグ_出現箇所04 -- Judgment flag_appearance location 04
+3900 緊急演出用_アセットアニメ制御_緊急01_待機 -- Emergency production_Asset animation control_Emergency 01_Standby
+3910 緊急演出用_Gparam制御_緊急01_待機 -- Emergency production_Gparam control_Emergency 01_Standby
+3911 会話条件フラグ_QU_エレベータ止まった判定 -- Conversation condition flag_QU_Elevator stopped judgment
+3912 会話条件フラグ_QU_エレベータ止まった判定秒数待機 -- Conversation condition flag_QU_Wait for the number of seconds to determine if the elevator has stopped
+3913 緊急演出用_QU_自爆衛星特殊待機解除 -- For emergency production_QU_Suicide satellite special standby cancellation
+3914 緊急演出用_QU_会話フラグ_デリーター登場会話通知フラグ -- For emergency production_QU_conversation flag_Deleter appearance conversation notification flag
+3920 緊急演出用_アセットアニメ制御_緊急01_起動からループ -- Emergency production_Asset animation control_Emergency 01_Loop from startup
+3940 緊急演出用_アセットアニメ制御_緊急01から02_解除からループ -- Emergency production_Asset animation control_Emergency 01 to 02_Loop from release
+3960 緊急演出用_アセットアニメ制御_緊急02_起動からループ -- Emergency production_Asset animation control_Emergency 02_Loop from startup
+3980 緊急演出用_アセットアニメ制御_緊急02_解除 -- Emergency production_Asset animation control_Emergency 02_Cancellation

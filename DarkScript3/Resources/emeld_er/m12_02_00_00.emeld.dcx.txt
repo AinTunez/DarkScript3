@@ -1,0 +1,53 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+12020050 m12_02_00_00用初期フラグ設定 -- Initial flag setting for m12_02_00_00
+12020500 ガーゴイル像解放する前にレバーをロックする -- Lock the lever before releasing the gargoyle statue
+12020510 エレベータ起動 -- elevator start
+12020519 エレベータ初期フラグ -- Elevator initial flag
+12020700 NPC319ダニー_NPC初期化イベント -- NPC319 Danny_NPC initialization event
+12020701 NPC319ダニー_白霊召喚リアルタイム状態遷移 -- NPC319 Danny_White Spirit Summon Real-time state transition
+12022200 領域_特殊効果解除_XX -- Area_Special effect cancellation_XX
+12022300 祖霊信仰者_出現_XX -- Ancestral Spirit Believer_Appearance_XX
+12022350 祖霊信仰者_バフ掛け_XX -- Ancestral Spirit Believer_Buffing_XX
+12022360 祖霊信仰者_バフ解除_XX -- Ancestral Spirit Believer_Buff Removal_XX
+12022370 祖霊信仰者_踊りだす -- Ancestor spirit believer_begins to dance
+12022371 祖霊信仰者_踊りやめ -- Ancestral spirit believers_stop dancing
+12022372 祖霊信仰者_踊り中央 -- Ancestor Spirit Believers_Odori Chuo
+12022373 祖霊信仰者_踊り最後 -- Ancestor spirit believers_last dance
+12022400 マリカスライム_NPC変身_XX -- Marika slime_NPC transformation_XX
+12022404 マリカスライム参戦 -- Marika slime participation
+12022419 マリカスライム_トロル変身_XX -- Marika Slime_Troll Transformation_XX
+12022420 マリカスライム_NPC移動_XX -- Marika slime_NPC movement_XX
+12022440 バディ汎用_参戦_XX -- Buddy general purpose_participation_XX
+12022502 石棺滝登り_滝下 -- Sarcophagus waterfall climbing_Takishita
+12022503 石棺への導き -- Guide to the sarcophagus
+12022567 消費鍵のガーゴイル像_ギミック制御 -- Gargoyle statue of consumption key_gimmick control
+12022568 ガーゴイル像_封印扉 -- Gargoyle statue_sealed door
+12022569 平原エレベータ_ガーゴイル像で初回起動 -- Plains Elevator_First activation with gargoyle statue
+12022580 梯子登録 -- ladder registration
+12022600 下層灯火台イベント -- Lower lighthouse event
+12022601 下層灯火点火イベント_XX -- Lower level light ignition event_XX
+12022609 下層祖霊部屋へワープ -- Warp to the lower ancestral spirit room
+12022620 上層灯火台イベント -- Upper lighthouse event
+12022621 上層灯火点火イベント_XX -- Upper light ignition event_XX
+12022629 上層祖霊部屋へワープ -- Warp to the upper ancestral spirit room
+12022670 マリカ遺跡２入り口へのワープ -- Warp to Marika Ruins 2 entrance
+12022680 馬禁止領域用SFX -- SFX for horse prohibited area
+12022698 敵壁暫定消去 -- Enemy wall temporary deletion
+12022699 協力NPC_ボス部屋入場 -- Cooperating NPC_Boss room entrance
+12022800 本ボス撃破 -- Defeat the main boss
+12022810 本ボス出現 -- Main boss appears
+12022820 本ボス_乱入イベント -- Main boss_intrusion event
+12022821 本ボス_２体判定イベント -- This boss_2 body judgment event
+12022849 本ボス_イベント起動 -- Main boss_event activation
+12022850 前座ボス撃破 -- Defeat the undercard boss
+12022860 前座ボス出現 -- Undercard boss appears
+12022865 コピースライムNPC_ワープ出現 -- Copy Slime NPC_Warp Appears
+12022869 ホストがボス部屋入場_スライムボス用 -- Host enters boss room_for slime boss
+12022899 前座ボス_イベント起動 -- Undercard boss_event activation
+12023710 しゃべスラ_ダミー_NPC初期化イベント -- Chatsura_dummy_NPC initialization event
+12023711 しゃべスラ_聖杯に接近 -- Shabesura_Approaching the Holy Grail
+12023720 NPC216狼頭の戦士_初期化イベント_地下迷宮で探索 -- NPC216 Wolf-headed Warrior_Initialization event_Explore in the underground labyrinth
+12023721 NPC106ラニ_仲間になるまで秘宝入手不可 -- NPC106 Rani_Unable to obtain secret treasure until you become a friend
+1000000000 敵リスポン -- enemy respawn

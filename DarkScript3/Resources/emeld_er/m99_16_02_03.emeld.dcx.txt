@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+99002200 ウルフライダーのウルフ_再騎乗時ワープ -- Wolf Rider's Wolf_Warp when remounting
+99002210 気球人形兵_魔力供給 -- Balloon Puppet Soldier_Magic Supply
+99002220 嵐の鷹_空爆_XX -- Storm Hawk_Airstrike_XX
+99002230 嵐の鷹_空爆失敗_XX -- Storm Hawk_Airstrike failure_XX
+99002240 遠見台_ワープイベント_XX -- Far Lookout_Warp Event_XX
+99002245 遠見台_目印OBJ描画切り替え -- Far viewing platform_landmark OBJ drawing switching
+99002250 奇襲する飛行人形兵_帰巣位置指定XX -- Surprise attack flying doll soldiers_Returning location designation XX
+1000000000 敵リスポン -- enemy respawn

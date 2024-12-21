@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+31022211 巡回信徒_索敵タイミング調整_XX -- Patrolling believer_enemy search timing adjustment_XX
+31022223 毒信徒_特殊待機_集団集中祈祷_XX -- Poison believers_Special standby_Group concentrated prayer_XX
+31022250 犬ネズミ_大廻通路_突進止まらない用特殊効果_XX -- Dog Mouse_Omawari Passage_Special effects for charging and not stopping_XX
+31022255 追いつめ大ネズミ_思考ロジック有効化_PC奥まで行った判定 -- Chasing Big Mouse_Thought Logic Activation_Judgment of going deep into the PC
+31022256 追いつめ大ネズミ_思考ロジック有効化 -- Chasing Big Rat_Thought Logic Enabled
+31022260 犬ネズミに毒無効の特殊効果付与_XX -- Gives special effect of poison immunity to dogs and rats_XX
+31022800 ボス撃破 -- Defeat the boss
+31022810 ボス出現 -- Boss appears
+31022811 ボス激昂 -- boss rage
+31022849 ルーンを喰らう花_親株_イベント起動 -- Rune-eating flower_parent plant_event activation
+31022900 チュートリアルメッセージ_壺系入手 -- Tutorial message_Obtaining pot type
+31022901 チュートリアルメッセージ_サインだまり解放 -- Tutorial message_Release of signature pile
+1000000000 敵リスポン -- enemy respawn

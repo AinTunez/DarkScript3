@@ -1,0 +1,17 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+31152570 亜人針子隣の光源制御 -- Light source control next to the demi-human seamstress
+31152650 チュートリアルメッセージ_サインだまり解放 -- Tutorial message_Release of signature pile
+31152800 ボス撃破 -- Defeat the boss
+31152810 ボス出現 -- Boss appears
+31152811 ボス激昂 -- boss rage
+31152816 ボス_初回戦闘白壁出現 -- Boss_First battle white wall appears
+31152820 亜人バーサーカー撃破時姿隠し_XX -- Hiding when defeating Demi-Human Berserker_XX
+31152825 協力NPC_ボス部屋入場_敵壁を無効化 -- Cooperation NPC_Enter boss room_Disable enemy wall
+31152830 ボス部屋バディ石碑_使用可能判定 -- Boss room buddy stone monument_usable determination
+31152849 亜人バーサーカー_イベント起動 -- Ajin Berserker_Event activation
+31153700 NPC223亜人針子_NPC初期化イベント_洞窟で倒れている -- NPC223 Demi-Shimiko_NPC initialization event_Collapsed in the cave
+31153701 NPC223亜人針子_洞窟で倒れている_能動会話再生済リセット -- NPC223 Ajin seamstress_Collapsed in the cave_Active conversation played reset
+31153710 NPC345火山館の依頼ターゲット1_白霊召喚許可フラグ立て -- NPC345 Volcano Hall Request Target 1_ White Spirit Summon Permission Flag Set
+1000000000 敵リスポン -- enemy respawn

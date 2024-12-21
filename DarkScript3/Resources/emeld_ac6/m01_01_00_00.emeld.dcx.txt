@@ -1,0 +1,210 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 制限時間設定 -- Time limit setting
+2001 制限時間解除 -- Time limit removed
+2003 チェックポイント有効化 -- checkpoint enable
+2004 チェックポイント有効化済みフラグ -- Checkpoint enabled flag
+2005 チェックポイントから再開フラグ -- Checkpoint restart flag
+2008 チェックポイント再開時処理 -- Checkpoint restart processing
+2009 制限時間切れ時処理 -- Processing when time limit expires
+2010 初期設定 -- Initial settings
+2011 管理室アセットの初期設定 -- Initial settings for management room assets
+2012 管理室扉用ダミーキャラ有効化 -- Enable dummy character for control room door
+2013 通しプレイ時に必要なイベント -- Events required during full play
+2016 管理室入口_目標地点マーカーON -- Control room entrance_Target point marker ON
+2017 管理室入口_目標地点マーカーOFF -- Control room entrance_Target point marker OFF
+2018 管理室入口_縦穴目標地点マーカーON -- Control room entrance_vertical target point marker ON
+2019 管理室入口_縦穴目標地点マーカーOFF -- Control room entrance_vertical target point marker OFF
+2020 部屋1_TGTマーカー設置 -- Room 1_TGT marker installation
+2021 部屋2_TGTマーカー設置 -- Room 2_TGT marker installation
+2022 部屋3_TGTマーカー設置 -- Room 3_TGT marker installation
+2023 部屋１出口_目標地点マーカーON -- Room 1 exit_Target point marker ON
+2024 部屋１出口_目標地点マーカーOFF -- Room 1 exit_Target point marker OFF
+2025 部屋２出口_目標地点マーカーON -- Room 2 exit_Target point marker ON
+2026 部屋２出口_目標地点マーカーOFF -- Room 2 exit_Target point marker OFF
+2040 作戦ライン_全部有効化 -- Operation line_all enabled
+2041 作戦ライン_第一エリア開放 -- Operation line_first area opened
+2042 作戦ライン_第二エリア開放 -- Operation line_Second area opened
+2043 管理室扉閉めるアニメ再生 -- Animation play of the control room door closing
+2044 管理室縦穴入口透明壁有効化 -- Control room vertical hole entrance transparent wall enabled
+2045 管理室縦穴出口透明壁有効化 -- Control room shaft exit transparent wall enabled
+2046 管理室扉_開けておくアニメ再生 -- Control room door_open animation play
+2050 管理室用初期設定 -- Initial settings for management room
+2051 管理室タイマー用ボスゲージ表示 -- Boss gauge display for control room timer
+2052 管理室タイマー用ボスゲージ無効化 -- Disable boss gauge for control room timer
+2053 管理室タイマー用ボスゲージ回復開始 -- Boss gauge recovery starts for control room timer
+2054 管理室タイマー用ダミーキャラ_更新頻度設定 -- Dummy character for control room timer_Update frequency setting
+2055 管理室タイマー用ボスゲージ減少開始 -- Boss gauge for control room timer starts decreasing
+2056 管理室ハッキング用ダミーキャラ有効化 -- Enable dummy character for management room hacking
+2057 管理室サブコンダメージ用ダミーキャラ有効化 -- Enable dummy character for control room subcomputer damage
+2058 管理室サブコン砲撃用ダミーキャラ有効化 -- Enable dummy character for control room subcomputer bombardment
+2059 管理室タイマー用_ハッキング開始時 -- For control room timer_When hacking starts
+2060 エマージェンシー演出_Gparam切り替え -- Emergency production_Gparam switching
+2061 管理室侵入時_Gparam切り替え -- When entering the control room_Gparam switching
+2100 部屋2_AI有効化 -- Room 2_AI enabled
+2101 部屋3_AI有効化 -- Room 3_AI activation
+2200 管理室_制限時間用特殊効果_25 -- Management room_Special effects for time limit_25
+2201 管理室_制限時間用特殊効果_50 -- Management room_Special effects for time limit_50
+2202 管理室_制限時間用特殊効果_70 -- Management room_Special effects for time limit_70
+2203 管理室_制限時間用特殊効果_90 -- Management room_Special effects for time limit_90
+2210 前半_制限時間用特殊効果_残り五分 -- First half_Special effects for time limit_Five minutes left
+2211 前半_制限時間用特殊効果_残り四分 -- First half_Special effects for time limit_Four minutes left
+2212 前半_制限時間用特殊効果_残り三分 -- First half_Special effects for time limit_3 minutes remaining
+2213 前半_制限時間用特殊効果_残り二分 -- First half_Special effects for time limit_Two minutes remaining
+2214 前半_制限時間用特殊効果_残り一分 -- First half_Special effects for time limit_One minute left
+2230 管理室アニメ再生_メインコンバリア発生 -- Control room animation play_Main con barrier occurrence
+2232 管理室アニメ再生_メインバリア解除 -- Control room animation playback_main barrier removed
+2233 管理室アニメ再生_メインコンハッキング解除 -- Control room animation play_main computer hacking release
+2234 管理室アニメ再生_メインコンハッキング開始 -- Control room animation play_Main computer hacking started
+2300 目標とダミーキャラ紐づけ_探索用 -- Linking goals and dummy characters_for exploration
+2310 目標のAP判定 -- Target AP judgment
+2340 管理室のサブコンダミーキャラ紐づけ -- Management room subcondummy character association
+2350 管理室アニメ再生_サブコン砲台起動 -- Control room animation playback_subcomputer turret activation
+2360 管理室アニメ再生_サブコンバリア発生 -- Control room animation play_Subcon barrier occurrence
+2710 部屋2侵入判定 -- Room 2 intrusion detection
+2711 部屋3侵入判定 -- Room 3 intrusion detection
+2712 後半_縦穴落下開始判定 -- Second half_Vertical hole fall start determination
+2713 後半_管理室侵入判定 -- Second half_Control room intrusion detection
+2714 後半_管理室天井有効化判定 -- Second half_Control room ceiling activation determination
+2715 目標マーカー_部屋1出口無効化判定 -- Target marker_room 1 exit invalidation judgment
+2716 目標マーカー_部屋2出口無効化判定 -- Target marker_Room 2 exit invalidation judgment
+2720 カウントダウン開始判定 -- Countdown start determination
+2730 隊長機撃破数判定1 -- Captain aircraft destruction number judgment 1
+2731 隊長機撃破数判定2 -- Determining the number of captain's aircraft destroyed 2
+2732 隊長機撃破数判定3 -- Captain aircraft destruction number judgment 3
+2743 部屋1_目標目視判定 -- Room 1_Target visual judgment
+2750 管理室扉ハッキング判定 -- Management room door hacking judgment
+2751 管理室扉ハッキング判定_BGM用 -- Management room door hacking judgment_for BGM
+2752 縦穴部屋侵入判定 -- Vertical hole room intrusion detection
+2753 管理室入口縦穴_目標地点マーカー削除イベント -- Control room entrance vertical hole_target point marker deletion event
+2760 部屋2_バグ落下イベント -- Room 2_Bug falling event
+2761 部屋3_バグ落下イベント -- Room 3_Bug falling event
+2770 会話用_ゴースト発見判定 -- For conversation_Ghost detection judgment
+2800 管理室_制限時間切れ判定 -- Management room_time limit determination
+2801 管理室_ゲージ25判定 -- Management room_Gauge 25 judgment
+2802 管理室_ゲージ50判定 -- Management room_Gauge 50 judgment
+2803 管理室_ゲージ70判定 -- Management room_Gauge 70 judgment
+2804 管理室_ゲージ90判定 -- Management room_Gauge 90 judgment
+2805 管理室_ゲージ用キャラAP1判定 -- Management room_Character AP1 judgment for gauge
+2806 管理室_ゲージ用キャラAP1判定_クリア時用 -- Management room_Character AP1 judgment for gauge_For clearing
+2810 管理室_側面スパコン全破壊判定 -- Control room_side supercomputer complete destruction determination
+2811 管理室_側面スパコン半分破壊判定 -- Control room_side supercomputer half destroyed
+2820 管理室_ハッキング完了判定 -- Management room_Hacking completion determination
+2821 管理室_ハッキング開始判定 -- Management room_Hacking start determination
+2822 管理室_ハッキング判定_OS強化二段階か -- Management room_Hacking judgment_OS enhancement stage 2?
+2900 管理室_制限時間経過特殊効果判定_25 -- Management room_Time limit elapsed special effect judgment_25
+2901 管理室_制限時間経過特殊効果判定_50 -- Management room_Time limit elapsed special effect judgment_50
+2902 管理室_制限時間経過特殊効果判定_70 -- Management room_Time limit elapsed special effect judgment_70
+2903 管理室_制限時間経過特殊効果判定_90 -- Management room_Time limit elapsed special effect judgment_90
+3000 制限時間判定 -- Time limit judgment
+3030 目標達成数判定 -- Judgment of goal achievement
+3050 隊長機撃破判定 -- Captain aircraft destruction judgment
+3400 隊長機撃破フラグ_部屋1 -- Captain aircraft destruction flag_room 1
+3401 隊長機撃破フラグ_部屋2 -- Captain aircraft destruction flag_Room 2
+3402 隊長機撃破フラグ_部屋3 -- Captain aircraft destruction flag_Room 3
+3410 前半_制限時間経過フラグ -- First half_time limit elapsed flag
+3411 目標達成フラグ -- Goal achievement flag
+3413 会話終了フラグ -- Conversation end flag
+3414 管理室フェーズ開始フラグ -- Control room phase start flag
+3415 管理室フェーズ制限時間更新フラグ -- Control room phase time limit update flag
+3416 後半_制限時間経過フラグ -- Second half_time limit elapsed flag
+3499 側面TGT_初期設定 -- Side TGT_Initial settings
+3500 側面TGT_ハッキング不可状態 -- Side TGT_Unhackable state
+3510 側面TGT_ハッキング可能状態 -- Side TGT_Hackable state
+3520 側面TGT_ハッキング完了判定 -- Side TGT_Hacking completion determination
+3530 側面TGT_ハッキング開始判定 -- Side TGT_hacking start determination
+3538 側面TGT_二段階目以降判定 -- Side TGT_Judgment from second stage onwards
+3539 側面TGT_三段階目以降判定 -- Side TGT_Judgment after third stage
+3540 側面砲台_プラズマ発射 -- Side turret_Plasma firing
+3550 側面砲台_発射砲台判定用特殊効果設定 -- Side gun turret_Special effect settings for firing turret determination
+3560 側面砲台_発射砲台判定用特殊効果無効化 -- Side battery _ Disable special effects for firing battery determination
+3561 側面砲台_攻撃可能時間判定用特殊効果 -- Side gun turret_Special effects for determining attack time
+3562 側面砲台_攻撃可能時間判定用特殊効果解除 -- Side gun battery_Special effects for determining attack time can be removed
+3600 管理室レーザー_射撃終了 -- Control room laser_shooting finished
+3601 管理室レーザー終了特殊効果設定 -- Control room laser end special effect setting
+3602 砲撃終了 -- Bombardment ends
+3620 側面砲台_自機追従レーザー発射 -- Side gun turret _ Own aircraft tracking laser firing
+3630 側面砲台_自機追従レーザー終了 -- Side gun turret_Own aircraft tracking laser ended
+3640 瞬間照射レーザー１ -- Instant irradiation laser 1
+3650 JGレーザー後半１ -- JG laser second half 1
+3651 JGレーザー後半2 -- JG laser second half 2
+3652 JGレーザー後半3 -- JG laser second half 3
+3680 ラスト用JG瞬間レーザー1 -- Last JG Instant Laser 1
+3681 ラスト用追尾レーザー -- Last tracking laser
+3700 後半_管理室戦闘開始フラグ -- Second half_Control room battle start flag
+3800 会話フラグ_101000100_ミッション開始 -- Conversation flag_101000100_Mission start
+3801 会話フラグ_101000200_ミッション開始後 -- Conversation flag_101000200_After mission start
+3802 会話フラグ_101000300_残り六分 -- Conversation Flag_101000300_Six minutes remaining
+3803 会話フラグ_101000400_残り十分 -- Conversation flag_101000400_Enough remaining
+3804 会話フラグ_101000500_残り九分 -- Conversation flag_101000500_9 minutes left
+3805 会話フラグ_101000600_残り八分 -- Conversation flag_101000600_8 minutes remaining
+3806 会話フラグ_101000700_残り七分 -- Conversation flag_101000700_7 minutes remaining
+3807 会話フラグ_101000800_残り五分 -- Conversation Flag_101000800_Five minutes left
+3808 会話フラグ_101000900_残り時間減少掛け合い -- Conversation flag_101000900_Remaining time decrease dialogue
+3809 会話フラグ_101001000_ゴースト示唆会話 -- Conversation flag_101001000_Ghost suggestion conversation
+3810 会話フラグ_101001020_ゴースト戦闘開始会話１ -- Conversation flag_101001020_Ghost battle start conversation 1
+3811 会話フラグ_101001040_ゴースト戦闘開始会話２ -- Conversation flag_101001040_Ghost battle start conversation 2
+3812 会話フラグ_101001100_ゴースト発撃破会話１ -- Conversation flag_101001100_Ghost blasting conversation 1
+3813 会話フラグ_101001200_ゴースト発撃破会話２ -- Conversation flag_101001200_Ghost blasting conversation 2
+3814 会話フラグ_101001300_目標OBJ視認会話 -- Conversation flag_101001300_Target OBJ visual conversation
+3815 会話フラグ_101001400_目標OBJ破壊一回目 -- Conversation flag_101001400_Target OBJ destruction first time
+3816 会話フラグ_101001500_目標OBJ破壊二回目１ -- Conversation flag_101001500_Target OBJ destruction second time 1
+3817 会話フラグ_101001600_目標OBJ破壊二回目２ -- Conversation flag_101001600_Target OBJ destruction second time 2
+3818 会話フラグ_101001700_部屋２開始時会話１ -- Conversation flag_101001700_Conversation 1 at the start of room 2
+3819 会話フラグ_101001800_部屋２開始時会話２ -- Conversation flag_101001800_Conversation 2 at the start of room 2
+3820 会話フラグ_101001900_部屋２開始時会話３ -- Conversation flag_101001900_Room 2 start conversation 3
+3821 会話フラグ_101002000_目標OBJ破壊三回目 -- Conversation flag_101002000_Target OBJ destruction third time
+3822 会話フラグ_101002100_目標OBJ破壊四回目１ -- Conversation flag_101002100_Target OBJ destruction 4th time 1
+3823 会話フラグ_101002200_目標OBJ破壊四回目２ -- Conversation flag_101002200_Target OBJ destruction 4th time 2
+3824 会話フラグ_101002300_部屋３開始時会話１ -- Conversation flag_101002300_Conversation 1 at the start of room 3
+3825 会話フラグ_101002400_部屋３開始時会話２ -- Conversation flag_101002400_Conversation 2 at the start of room 3
+3826 会話フラグ_101002500_目標OBJ破壊五回目１ -- Conversation flag_101002500_Target OBJ destruction 5th time 1
+3827 会話フラグ_101002540_目標OBJ破壊五回目２ -- Conversation flag_101002540_Target OBJ destruction 5th time 2
+3828 会話フラグ_101002600_残り五分 -- Conversation Flag_101002600_Five minutes left
+3829 会話フラグ_101002700_残り四分 -- Conversation Flag_101002700_Four minutes remaining
+3830 会話フラグ_101002800_残り三分 -- Conversation flag_101002800_3 minutes remaining
+3831 会話フラグ_101002900_残り二分 -- Conversation Flag_101002900_Two minutes remaining
+3832 会話フラグ_101003000_残り一分 -- Conversation flag_101003000_1 minute left
+3833 会話フラグ_101003100_失敗_制限時間切れ１ -- Conversation flag_101003100_Failure_Time limit expired 1
+3834 会話フラグ_101003140_失敗_制限時間切れ２ -- Conversation flag_101003140_Failure_Time limit expired 2
+3835 会話フラグ_101003200_全目標OBJ破壊１ -- Conversation flag_101003200_All target OBJ destruction 1
+3836 会話フラグ_101003300_全目標OBJ破壊２_エマージェンシー -- Conversation flag_101003300_All targets OBJ destruction 2_Emergency
+3837 会話フラグ_101003400_全目標OBJ破壊３ -- Conversation flag_101003400_All targets OBJ destruction 3
+3838 会話フラグ_101003500_移動リマインド１ -- Conversation flag_101003500_Movement reminder 1
+3839 会話フラグ_101003600_移動リマインド２ -- Conversation flag_101003600_Movement reminder 2
+3840 会話フラグ_101003640_移動リマインド二回目 -- Conversation flag_101003640_Move reminder second time
+3841 会話フラグ_101003700_後半_開始時１ -- Conversation flag_101003700_second half_start 1
+3842 会話フラグ_101003800_後半_開始時２ -- Conversation flag_101003800_second half_start time 2
+3843 会話フラグ_101003900_後半_開始時３ -- Conversation flag_101003900_second half_start time 3
+3844 会話フラグ_101004000_後半_開始時４ -- Conversation flag_101004000_second half_start time 4
+3845 会話フラグ_101004100_後半_開始時５ -- Conversation flag_101004100_second half_start time 5
+3846 会話フラグ_101004200_後半_開始時６ -- Conversation flag_101004200_second half_start 6
+3847 会話フラグ_101004300_後半_OBJ半分破壊１ -- Conversation flag_101004300_second half_OBJ half destroyed 1
+3848 会話フラグ_101004400_後半_OBJ半分破壊２ -- Conversation flag_101004400_second half_OBJ half destroyed 2
+3849 会話フラグ_101004500_後半_OBJ全破壊 -- Conversation flag_101004500_second half_OBJ complete destruction
+3850 会話フラグ_101004600_後半_ハッキング開始 -- Conversation flag_101004600_Second half_Hacking started
+3851 会話フラグ_101004640_後半_ハッキング開始_差分 -- Conversation flag_101004640_second half_hacking start_difference
+3852 会話フラグ_101004700_ハッキング完了_ミッションクリア１ -- Conversation flag_101004700_Hacking completed_Mission clear 1
+3853 会話フラグ_101004800_ハッキング完了_ミッションクリア２ -- Conversation flag_101004800_Hacking completed_Mission clear 2
+3854 会話フラグ_101004900_後半_２５％進行 -- Conversation flag_101004900_Second half_25% progress
+3855 会話フラグ_101005000_後半_５０％進行１ -- Conversation flag_101005000_second half_50% progress 1
+3856 会話フラグ_101005100_後半_５０％進行２ -- Conversation flag_101005100_Second half_50% progress 2
+3857 会話フラグ_101005200_後半_７０％進行 -- Conversation flag_101005200_Second half_70% progress
+3858 会話フラグ_101005300_後半_９０％進行１ -- Conversation flag_101005300_Second half_90% progress 1
+3859 会話フラグ_101005400_後半_９０％進行２ -- Conversation flag_101005400_Second half_90% progress 2
+3860 会話フラグ_101005500_後半_制限時間切れ１ -- Conversation flag_101005500_Second half_Time limit expired 1
+3861 会話フラグ_101005600_後半_制限時間切れ２ -- Conversation flag_101005600_second half_time limit expired 2
+3862 会話フラグ_101005640_後半_制限時間切れ３ -- Conversation flag_101005640_second half_time limit expired 3
+3863 会話フラグ_101005700_後半_自機死亡 -- Conversation flag_101005700_Second half_Ownership died
+3900 JGレーザー_7発射中 -- JG laser_7 firing
+3901 JGレーザー_2発射中 -- JG laser_2 firing
+3902 JGレーザー_6発射中 -- JG laser_6 firing
+3903 JGレーザー_3発射中 -- JG laser_3 firing
+3904 JGレーザー_0発射中 -- JG laser_0 firing
+3905 JGレーザー_5発射中 -- JG laser_5 firing
+3906 JGレーザー_1発射中 -- JG laser_1 firing
+3907 JGレーザー_4発射中 -- JG laser_4 firing
+3908 JGレーザー_最後のハッキング前 -- JG Laser_Before the last hack
+3910 JGレーザー発射終了用 -- For ending JG laser firing
+3911 JGレーザー終了済み判定 -- JG laser completed judgment
+1000000000 敵リスポン -- enemy respawn

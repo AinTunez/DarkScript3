@@ -1,0 +1,28 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1051570519 エレベーター初期フラグ -- Elevator initial flag
+1051572250 足萎えの叫び_喪失兵特殊待機解除_xx -- Scream of withering feet_Cancellation of special standby for lost soldiers_xx
+1051572274 特殊待機_喪失騎士救援 -- Special standby_Lost knight rescue
+1051572310 闘技場の老獅子_二体目が戦闘に参加 -- The old lion in the arena_The second one joins the battle
+1051572311 闘技場の老獅子_二体目のHPを減らしておく -- Old lion in the arena_Reduce the second HP
+1051572350 雷地帯_弾丸イベント_XX -- Thunder Zone_Bullet Event_XX
+1051572430 夜の王の眷属巨大骸骨_思考ロジック有効化_領域判定_xx -- Night King's Heir Giant Skeleton_Thought Logic Activation_Area Judgment_xx
+1051572450 夜の王の眷属巨大骸骨_遠隔用特殊効果 -- Night King's Heir Giant Skeleton_Remote Special Effects
+1051572460 夜の王の眷属巨大骸骨_死亡_xx -- Night King's Heir Giant Skeleton_Death_xx
+1051572510 エレベータイベント起動 -- Elevator event activation
+1051572580 梯子登録 -- ladder registration
+1051572581 梯子登録_LOD2 -- Ladder registration_LOD2
+1051572800 老いた宿将撃破 -- Defeat the old innkeeper
+1051572810 老いた宿将出現 -- An old innkeeper appears
+1051572811 老いた宿将激昂 -- Old innkeeper enraged
+1051572812 老いた宿将激嵐 -- Old Inn General Geki Arashi
+1051572820 老いた宿将イベント_お供の喪失の騎士を呼び出す -- Old Commander Event_Calling the Lost Knight to accompany you
+1051572821 老いた宿将イベント_お供の喪失騎士を帰還させる -- Old Commander Event_Returning the lost knight who accompanied you
+1051572822 老いた宿将イベント_お供がやられたら宿将軍がHUを行うように特殊効果を渡す -- Old Inn General Event_Give special effects so that the Inn General performs HU when his companion is killed.
+1051572828 老いた宿将イベント_ボス部屋内部へのワープ禁止_バディver -- Old innkeeper event_No warp inside the boss room_Buddy ver
+1051572829 老いた宿将イベント_ボス部屋内部へのワープ禁止 -- Old Commander Event_Warp inside the boss room is prohibited
+1051572849 老いた宿将戦イベント起動 -- Old Warlord Battle Event Launched

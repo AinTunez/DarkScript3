@@ -1,0 +1,39 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+1000000000 敵リスポン -- enemy respawn
+1039442341 夜の王の眷属土葬スケルトン呼び -- Night King's Heir Burial Skeleton Call
+1039442342 夜の王の眷属ワープ処理 -- Night King's Heir Warp Process
+1039442343 夜の王の眷属領域検索 -- Night King's Heir Area Search
+1039442344 夜の王の眷属死亡時イベント -- Night King's Follower Death Event
+1039442345 夜の王の眷属_ターゲットクリアイベント -- Heir of the Night King_Target Clear Event
+1039443700 壺マイヤー_NPC初期化イベント_二回目の穴 -- Pot Meyer_NPC initialization event_Second hole
+1039443701 壺マイヤー_不死設定_二回目の穴 -- Pot Meyer_Immortality Setting_Second Hole
+1039443702 壺マイヤー_助けを呼ぶイベント_二回目の穴 -- Pot Mayor_Event that calls for help_Second hole
+1039443705 壺マイヤー_油まみれイベント -- Tsubo Meyer_Oil covered event
+1039443706 壺マイヤー_穴に埋まっているフラグ操作 -- Tsubo Meyer_Flag operation buried in the hole
+1039443707 壺マイヤー_状態遷移イベント -- Tsubomeyer_state transition event
+1039443710 NPC314ムノウ_NPC初期化イベント_壺のお世話 -- NPC314 Munou_NPC initialization event_Taking care of the pot
+1039443711 NPC314ムノウ_NPC初期化イベント_壺を守って瀕死 -- NPC314 Munou_NPC initialization event_Dying while protecting the pot
+1039443712 NPC314ムノウ_壺を守って瀕死_死亡実行 -- NPC314 Munou_Dying while protecting the pot_Execution of death
+1039443713 NPC314ムノウ_死亡台詞再生処理 -- NPC314 Munou_death line playback process
+1039443720 生きている小壺_NPC初期化イベント_初期位置 -- Living pot_NPC initialization event_Initial position
+1039443721 生きている小壺_NPC初期化イベント_壺村が襲われた -- Living Small Pot_NPC Initialization Event_Tsubo Village was attacked
+1039443722 生きている小壺_NPC初期化イベント_死体漁り -- Living pot_NPC initialization event_Corpse hunting
+1039443724 NPC226生きている小壺_初期位置 -- NPC226 Living pot_Initial position
+1039443725 NPC226生きている小壺_壺村が襲われた -- NPC226 Alive Kotsubo_Tsubo Village was attacked
+1039443726 NPC226生きている小壺_死体漁り -- NPC226 Living pot_scavenging corpses
+1039443727 壺村襲撃までカウントダウンイベント -- Countdown event until Tsubomura attack
+1039443728 敵壺アセット切替イベント -- Enemy jar asset switching event
+1039443729 壺村全体敵対イベント -- Tsubomura-wide hostile event
+1039443730 壺村全体敵対_免罪不可イベント -- Entire Tsubomura is hostile_No impunity event
+1039443731 NPC226_生きている小壺_睡眠抽選 -- NPC226_Living pot_Sleep lottery
+1039443732 NPC226生きている小壺_眠り -- NPC226 Living pot_Sleep
+1039443740 敵壺A_NPC初期化イベント -- Enemy pot A_NPC initialization event
+1039443741 敵壺B_NPC初期化イベント -- Enemy pot B_NPC initialization event
+1039443742 敵壺C_NPC初期化イベント -- Enemy pot C_NPC initialization event
+1039443743 敵壺D_NPC初期化イベント -- Enemy pot D_NPC initialization event
+1039443744 敵壺E_NPC初期化イベント -- Enemy pot E_NPC initialization event
+1039443745 敵壺F_NPC初期化イベント -- Enemy pot F_NPC initialization event
+1039443746 敵壺G_NPC初期化イベント -- Enemy pot G_NPC initialization event

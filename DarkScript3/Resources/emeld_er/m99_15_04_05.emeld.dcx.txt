@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+99152201 喪失の兵士_特殊待機解除 -- Lost Soldier_Special Standby Cancellation
+99152203 喪失の兵士_特殊待機解除2 -- Lost Soldier_Special standby release 2
+99152213 喪失の兵士_特殊待機解除2_領域判定 -- Lost Soldier_Special Standby Cancellation 2_Area Judgment
+99152231 素材の再取得不可 -- Materials cannot be reacquired
+99152301 北の傭兵_棒立ち解除 -- Mercenary of the North_Standing lifted
+99152904 素材の取得判定 -- Material acquisition determination
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,140 @@
+c0000 AC
+c3000 Light Guard Mech
+c3001 Medium Walker
+c3002 Heavy Walker
+c3020 Light MT
+c3050 PCA Subject Guard MT
+c3100 Xylem Wing Drone
+c3150 Juggernaut
+c3200 Ekdromoi
+c3250 Light Cavalry
+c3260 Heavy Cavalry
+c3300 Ghost
+c3400 BAWS Tetrapod MT
+c3500 Institute Drone
+c3600 RaD Tetrapod MT
+c3700 PCA Heavy MT
+c4000 Cataphract
+c4100 Balteus
+c4150 RaD TOYBOX
+c4200 Ayre
+c4201 ALLMIND
+c4210 Ayre Clone
+c4250 IBIS CEL 240
+c4260 IBIS CEL 240 Drones
+c5000 Helicopter Drone
+c5010 Scavenger Drone
+c5020 Smart Cleaner
+c5100 Quadcopter
+c5101 Broken Helicopter
+c5120 Small Quadcopter
+c5150 Small Helicopter
+c5200 Artillery Vehicle
+c5250 Helianthus Machine
+c5300 Suicide Squid Drone
+c5500 Coral Mealworm
+c6050 HC Helicopter
+c6100 Sea Spider
+c6101 Orb?
+c6250 Ice Worm
+c6350 Giant Mobile Cannon?
+c6400 Strider
+c6420 Strider Eye
+c7222 RaD Missile
+c7230 Artillery Shielded Cannon
+c7240 Artillery Cannon
+c7250 Artillery Gatling Cannon
+c7260 Artillery Missile Launcher
+c7261 Artillery Verticle Missile Launcher
+c7262 Artillery Horizontal Missile Launcher
+c7270 Artillery Rifle Cannon
+c7280 Artillery Laser Cannon
+c7290 Artillery Heavy Laser Cannon
+c7300 Artillery Pulse Cannon
+c7310 Artillery Heavy Plasma Cannon
+c7320 Artillery Dual Plasma Cannon
+c7390 Nepenthes
+c7400 Heavy Warship
+c7401 Mounted Cannon
+c7402 Mounted Turret
+c7403 Mounted Laser Turret
+c7410 PCA Laser Drone
+c8135 Enforcer
+c8145 Enforcer Flight Mode
+c9980 Dummy
+c0400 Test AC Light Legs
+c0401 Test AC Heavy Legs
+c0402 Test AC Heavy Legs
+c0403 Test AC Reverse Legs
+c0404 Test AC Reverse Legs
+c0405 Test AC Reverse Legs
+c0406 Test AC Reverse Legs
+c0407 Test AC Reverse Legs
+c0408 Test AC Heavy Reverse Legs
+c0411 Six tetrapod ACs
+c2000 Unused Helicopter
+c6000 Closure Station Satellite
+c6010 Closure Station Satellite part
+c6410 EB-0309 Strider Drill Column
+c7220 Artillery Missile Launcher
+c7221 Artillery Verticle Missile Launcher
+c7223 Artillery Missile Launcher
+c7224 RaD Heavy Missile
+c8000 KA-R1
+c8020 AC5
+c8040 AC5 Drone
+c8060 AC5 F21C Stork
+c8110 AC4 AC
+c8130 Beta Enforcer
+c8200 Robot spider
+c8510 AC with tower shield
+c8530 Beta Strider
+c8535 Beta Strider eye
+c8536 Beta Strider drill column
+c8540 AC5 Hanged Man
+c9000 AC5 R2B Shchit
+c9201 Minigun walker
+c9400 Artillery Cannon
+c9401 Artillery Heavy Cannon
+c9410 Artillery Rifle Cannon
+c9411 Artillery Heavy Rifle Cannon
+c9420 Artillery Missile Launcher
+c9431 Artillery Gatling Cannon
+c0400 Test AC Light Legs
+c0401 Test AC Heavy Legs
+c0402 Test AC Heavy Legs
+c0403 Test AC Reverse Legs
+c0404 Test AC Reverse Legs
+c0405 Test AC Reverse Legs
+c0406 Test AC Reverse Legs
+c0407 Test AC Reverse Legs
+c0408 Test AC Heavy Reverse Legs
+c0411 Six tetrapod ACs
+c2000 Unused Helicopter
+c6000 Closure Station Satellite
+c6010 Closure Station Satellite part
+c6410 EB-0309 Strider Drill Column
+c7220 Artillery Missile Launcher
+c7221 Artillery Verticle Missile Launcher
+c7223 Artillery Missile Launcher
+c7224 RaD Heavy Missile
+c8000 KA-R1
+c8020 AC5
+c8040 AC5 Drone
+c8060 AC5 F21C Stork
+c8110 AC4 AC
+c8130 Beta Enforcer
+c8200 Robot spider
+c8510 AC with tower shield
+c8530 Beta Strider
+c8535 Beta Strider eye
+c8536 Beta Strider drill column
+c8540 AC5 Hanged Man
+c9000 AC5 R2B Shchit
+c9201 Minigun walker
+c9400 Artillery Cannon
+c9401 Artillery Heavy Cannon
+c9410 Artillery Rifle Cannon
+c9411 Artillery Heavy Rifle Cannon
+c9420 Artillery Missile Launcher
+c9431 Artillery Gatling Cannon

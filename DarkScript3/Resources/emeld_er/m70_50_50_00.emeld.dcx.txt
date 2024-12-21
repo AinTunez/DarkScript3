@@ -1,0 +1,15 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+505001 巨人ポーズ待機 -- Giant pose waiting
+505002 草むら判定 -- Grass judgment
+505003 草むら特殊効果付与 -- Add grass special effects
+505004 篝火NPC位置合わせ -- Bonfire NPC position alignment
+505010 大蟹_更新頻度指定 -- Big crab_update frequency specification
+505020 ワイバーン無効化（野営地） -- Wyvern nullification (camp)
+505021 ワイバーン強襲着陸（野営地） -- Wyvern assault landing (camp)
+505100 ステルス_巡回ルート切り替え -- Stealth_Patrol route switching
+5050200 コウモリテスト -- bat test
+5050201 地下室テスト -- basement test
+5050210 コウモリテスト_レビュー向け_領域反応あり -- Bat test_for review_with area reaction
+5050211 コウモリテスト_レビュー向け_HP判定のみ -- Bat test_For review_HP judgment only
+1000000000 敵リスポン -- enemy respawn

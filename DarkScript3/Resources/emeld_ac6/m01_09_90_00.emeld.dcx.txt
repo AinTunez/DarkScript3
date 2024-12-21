@@ -1,0 +1,79 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2100 マップアセット初期化イベント -- Map asset initialization event
+2110 ボス戦用ファラオン初期化イベント -- Pharaon initialization event for boss battles
+2200 条件判定_チュートリアル部屋内部_敵全滅判定 -- Condition judgment_Tutorial room interior_Enemy annihilation judgment
+2201 条件判定_チュート移動部屋領域判定_移動 -- Condition judgment_Tute movement room area judgment_Movement
+2202 条件判定_チュート移動部屋領域判定_ブースト -- Condition judgment_Tute movement room area judgment_Boost
+2203 条件判定_チュート移動部屋領域判定_ジャンプ上昇 -- Condition judgment_Tute movement room area judgment_Jump rise
+2204 条件判定_チュート移動部屋領域判定_振り返りEN -- Condition judgment_Tute moving room area judgment_Look back EN
+2205 条件判定_チュート移動部屋領域判定_ロックオン -- Condition judgment_Tute movement room area judgment_Lock-on
+2206 条件判定_チュート移動部屋領域判定_橋上屋内移動判定 -- Condition judgment_Tute movement room area judgment_Indoor movement judgment on the bridge
+2207 条件判定_チュート橋上部屋領域判定_ブレQB -- Condition Judgment_Chute Bridge Room Area Judgment_Break QB
+2208 条件判定_チュート橋上部屋領域判定_ミサイル -- Condition Judgment_Chute Bridge Room Area Judgment_Missile
+2209 条件判定_チュート部屋外部領域判定_回復 -- Condition judgment_Tute room external area judgment_Recovery
+2210 条件判定_ハッキングカタパルト完了したか -- Condition Judgment_Hacking Catapult completed?
+2211 条件判定_チュート山岳手前領域判定_アサブ -- Condition Judgment_Chute Mountain Front Area Judgment_Asab
+2212 条件判定_チュート山岳奥側領域_ジャンプ台 -- Condition determination_Chute Mountain back area_Jumping platform
+2220 条件判定_PC山岳の街に到着したか -- Condition Judgment_PC Have you arrived at the mountain town?
+2221 条件判定_山岳の街_マーカー表示判定 -- Condition judgment_Mountain town_Marker display judgment
+2230 条件判定_ハッキング_左側A層残骸を完了した -- Condition Judgment_Hacking_Complete left side A layer debris
+2231 条件判定_ハッキング_中心大通を完了した -- Completed Condition Judgment_Hacking_Central Odori
+2232 条件判定_ハッキング_奥側A層残骸を完了した -- Condition Judgment_Hacking_Dear A layer debris completed.
+2234 条件判定_ハッキング_ボス戦用ダミーキャラ_ちょっとハッキング -- Condition judgment_Hacking_Dummy character for boss battle_Slight hacking
+2235 条件判定_ハッキング_ボス戦用ダミーキャラ_だいぶハッキング -- Condition judgment_Hacking_Dummy character for boss battle_Significant hacking
+2236 条件判定_山岳の街_ボス部屋領域に近づいた -- Condition Judgment_Mountain Town_Approaching the boss room area
+2240 条件判定_ファラオン戦開始か -- Condition judgment_Pharaon battle begins?
+2241 条件判定_ファラオンを倒したか -- Conditional judgment_Did you defeat Pharaon?
+2250 条件判定_会話判定_ファラオン登場会話 -- Condition judgment_Conversation judgment_Pharaon appearance conversation
+2251 条件判定_会話判定_ファラオン登場会話02 -- Condition Judgment_Conversation Judgment_Pharaon Appearance Conversation 02
+2252 条件判定_会話判定_山岳の街ガヤ会話01 -- Condition judgment_Conversation judgment_Mountain town Gaya conversation 01
+2253 条件判定_会話判定_山岳の街ガヤ会話01_攻撃を受けている -- Condition judgment_Conversation judgment_Mountain town Gaya conversation 01_Under attack
+2254 条件判定_会話判定_ハッキングOBJ会話01_近づいた -- Condition Judgment_Conversation Judgment_Hacking OBJ Conversation 01_ Approaching
+2255 条件判定_会話判定_ハッキングOBJ会話02_近づいた -- Condition Judgment_Conversation Judgment_Hacking OBJ Conversation 02_ Approaching
+2256 条件判定_会話判定_ハッキングOBJ会話03_近づいた -- Condition Judgment_Conversation Judgment_Hacking OBJ Conversation 03_ Approaching
+2300 イベント実行_チュートA層屋外扉開け -- Event execution_Cute A layer outdoor door opening
+2310 イベント実行_CP実行_山岳の街 -- Event execution_CP execution_Mountain town
+2311 イベント実行_CP実行_ファラオン -- Event execution_CP execution_Pharaon
+2320 イベント実行_道中ファラオン襲撃 -- Event execution_Pharaon attack on the way
+2321 イベント実行_チュート山岳手前_共産MTにターゲット -- Event execution_Before Chute Mountain_Target Communist MT
+2330 イベント実行_山岳の街初期化イベント -- Event execution_Mountain town initialization event
+2331 イベント実行_山岳の街最終地点ハッキング有効化 -- Event execution_Mountain town final point hacking enabled
+2370 イベント実行_目標地点マーカー有効化_Ent2900 -- Event execution_target point marker activation_Ent2900
+2371 イベント実行_目標地点マーカー有効化_Ent2905 -- Event execution_target point marker activation_Ent2905
+2372 イベント実行_目標地点マーカー有効化_Ent2903 -- Event execution_target point marker activation_Ent2903
+2380 イベント実行_目標地点マーカー有効化_Ent2850 -- Event execution_target point marker activation_Ent2850
+2381 イベント実行_目標地点マーカー有効化_Ent2851 -- Event execution_target point marker activation_Ent2851
+2382 イベント実行_目標地点マーカー有効化_Ent2852 -- Event execution_target point marker activation_Ent2852
+2385 イベント実行_目標地点マーカー有効化_Ent2930 -- Event execution_target point marker activation_Ent2930
+2386 イベント実行_目標地点マーカー有効化_Ent2932 -- Event execution_target point marker activation_Ent2932
+2500 イベント実行_ボスファラオン_初期化 -- Event execution_Boss Pharaon_Initialization
+2510 イベント実行_ボスファラオン_登場イベント -- Event execution_Boss Pharaon_appearance event
+2810 フラグ_CP有効化_山岳の街到着 -- Flag_CP enable_Mountain town arrival
+2811 フラグ_CP有効化_ファラオン戦 -- Flag_CP enable_Pharaon battle
+2820 フラグ_チュートA層扉開け -- Flag_Chute A layer door open
+2821 フラグ_回復キーガイド表示 -- Flag_Recovery key guide display
+2822 フラグ_ジャンプ台キーガイド表示 -- Flag_Jumping table key guide display
+2830 フラグ_ハッキング一段階完了 -- Flag_Hacking stage 1 completed
+2831 フラグ_ハッキング二段階完了 -- Flag_Hacking stage 2 completed
+2890 仮フラグ_10末用_00 -- Temporary flag_for end of October_00
+2891 仮フラグ_10末用_01 -- Temporary flag_for end of October_01
+2892 仮フラグ_10末用_02 -- Temporary flag_for end of October_02
+2893 仮フラグ_10末用_03 -- Temporary flag_for end of October_03
+2894 仮フラグ_10末用_04 -- Temporary flag_for end of October_04
+2895 仮フラグ_10末用_05 -- Temporary flag_for end of October_05
+2896 仮フラグ_10末用_06 -- Temporary flag_for end of October_06
+2897 仮フラグ_10末用_07 -- Temporary flag_for end of October_07
+2898 仮フラグ_10末用_08 -- Temporary flag_for end of October_08
+2899 仮フラグ_10末用_09 -- Temporary flag_for end of October_09
+2900 仮フラグ_10末用_10 -- Temporary flag_10 end_10
+2901 仮フラグ_10末用_11 -- Temporary flag_for end of October_11
+2902 仮フラグ_10末用_12 -- Temporary flag_for end of October_12
+2903 仮フラグ_10末用_13 -- Temporary flag_for end of October_13
+3900 ボスイベント制御_青領域_ファラオンが内部 -- Boss event control_Blue area_Pharaon is inside
+3901 ボスイベント制御_黄領域_ファラオンが内部 -- Boss event control_yellow area_Pharaon is inside
+3902 ボスイベント制御_橙領域_ファラオンが内部 -- Boss event control_orange area_Pharaon is inside
+3903 ボスイベント制御_赤領域_ファラオンが外部 -- Boss event control_Red area_Pharaon is outside
+3910 ボスイベント制御_青領域_PCが内部 -- Boss event control_Blue area_PC is inside
+3920 イベントターゲット追加 -- Add event target
+1000000000 敵リスポン -- enemy respawn

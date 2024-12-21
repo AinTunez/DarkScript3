@@ -1,0 +1,29 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30070510 エレベータイベント起動 -- Elevator event activation
+30070519 エレベータ初期フラグ -- Elevator initial flag
+30072341 大蟹地中潜り -- Giant crab diving underground
+30072500 壺ゴーレム_ボスレバー部屋手前まで進んだ判定 -- Pot Golem_Judgment that it has advanced to the front of the boss lever room
+30072501 壺ゴーレム_奇襲 -- Pot Golem_Surprise Attack
+30072505 英雄の墓_ギロチン_アニメ高さ変更ver -- Tomb of the Hero_Guillotine_Anime height change ver.
+30072510 [小探索_墓3]トラップエレベータ -- [Small exploration_grave 3] Trap elevator
+30072515 [小探索_墓3]針ダメージ -- [Small exploration_grave 3] Needle damage
+30072516 [小探索_墓3]針ダメージ_特殊効果付与 -- [Small exploration_grave 3] Needle damage_special effects added
+30072520 洞窟_ボス部屋報酬宝箱の開放制限 -- Cave_Boss room reward treasure chest opening limit
+30072580 梯子登録 -- ladder registration
+30072605 弓矢トラップ_１２個同時 -- Bow and arrow trap_12 pieces at the same time
+30072610 弓矢トラップ_放射状_0周 -- Bow and arrow trap_radial_0 laps
+30072611 弓矢トラップ_放射状_1周 -- Bow and arrow trap_radial_1 lap
+30072612 弓矢トラップ_放射状_2周 -- Bow and arrow trap_radial_2 laps
+30072613 弓矢トラップ_放射状_3周 -- Bow and arrow trap_radial_3 laps
+30072614 弓矢トラップ_放射状_4周 -- Bow and arrow trap_radial_4 laps
+30072615 弓矢トラップ_放射状_5周 -- Bow and arrow trap_radial_5 laps
+30072616 弓矢トラップ_放射状_6周 -- Bow and arrow trap_radial_6 laps
+30072617 弓矢トラップ_放射状_7周 -- Bow and arrow trap_radial_7 laps
+30072618 トラップ雷矢マクロ起動イベント -- Trap Thunder Arrow Macro Activation Event
+30072800 ボス撃破 -- Defeat the boss
+30072810 ボス出現 -- Boss appears
+30072811 ボス激昂 -- boss rage
+30072849 ボス_イベント起動 -- Boss_event activation
+1000000000 敵リスポン -- enemy respawn

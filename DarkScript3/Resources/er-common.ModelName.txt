@@ -249,7 +249,7 @@ c5011 Hippopotamus
 c5020 Putrescent Knight
 c5030 Romina
 c5040 Curseblade
-c5050 Small Midra
+c5050 Mini Midra
 c5051 Midra, Lord of Frenzied Flame
 c5060 Lamprey
 c5061 Large Lamprey
@@ -257,38 +257,38 @@ c5070 Death Knight
 c5080 Bloodfiend
 c5081 Chief Bloodfiend
 c5090 Gravebird
-c5110 Blue Worm
+c5110 Spirit Eel
 c5120 Bayle the Dread
-c5130 Messmer the Impaler
-c5140 Messmer Serpent
-c5141 Messmer Serpent 2
+c5130 Messmer
+c5140 Large Messmer Serpent
+c5141 Messmer Serpent
 c5160 Fire Knight
 c5170 Furnace Golem
 c5180 DLC Dummy
 c5181 DLC Dummy 2
 c5190 Spider Scorpion
-c5192 Spider Scorpion 2
+c5192 Large Spider Scorpion
 c5193 Small Spider Scorpion
 c5200 Metyr, Mother of Fingers
 c5210 Divine Beast Dancing Lion
 c5220 Promised Consort Radahn
 c5230 Scadutree Avatar
 c5240 Shadow Commoner
-c5241 Shadow Commoner 2
-c5250 Horned Warrior
-c5251 Horned Shaman
+c5241 Large Shadow Commoner
+c5250 Divine Bird Warrior
+c5251 Hornsent Shaman
 c5260 Smith Golem
 c5270 Jar Innards
-c5271 Jar Innards 2
-c5280 Winter-Lantern
+c5271 Large Jar Innards
+c5280 Aging Untouchable
 c5300 Rellana, Twin Moon Knight
-c5311 Candle Inquisitor
+c5311 Hornsent Inquisitor
 c5312 Jori, Elder Inquisitor
-c5320 Fat Inquisitor
+c5320 Fat Hornsent Inquisitor
 c5330 St. Trina
 c5340 DLC Dummy 3
 c5350 Basilisk Eyes
-c5360 Giant Beast Skeleton
+c5360 Skeleton
 c5370 Ancient Dragon Senessax
 c5380 Miranda Blossom
 c5381 Miranda Sprout
@@ -296,7 +296,7 @@ c5390 Troll
 c5391 Troll Knight
 c5401 Eagle
 c5410 Deer
-c5421 Red Bear
+c5421 Bear
 c5430 Owl
 c5440 Boar
 c5450 Ram
@@ -307,35 +307,35 @@ c5472 Great Dragonfly
 c5480 Turtle
 c5490 Springhare
 c5500 Living Magma
-c5511 Shade
-c5513 Cemetary Shade
-c5520 Stray
-c5521 Stray 2
-c5522 Stray 3
-c5523 Stray 4
-c5524 Braided Stray
-c5525 Braided Stray 2
+c5511 Putrid Corpse
+c5513 Cemetery Shade
+c5520 Large Messmerfire Stray
+c5521 Messmerfire Stray
+c5522 Large Shadow Stray
+c5523 Shadow Stray
+c5524 Large Stray
+c5525 Stray
 c5526 Large Bloodbane Stray
 c5527 Bloodbane Stray
 c5530 Man-Bat
 c5540 Wolf
-c5541 Wolf 2
+c5541 White Wolf
 c5550 Fingercreeper
 c5551 Colossal Fingercreeper
 c5560 Small Fingercreeper
 c5570 Marionette Soldier
-c5580 Flying Dragon
+c5580 Jagged Peak Drake
 c5590 Putrid Flesh
 c5591 Large Putrid Flesh
-c5600 Catacomb Skeleton
+c5600 Catacombs Skeleton
 c5620 Tibia Mariner
 c5630 Giant Crayfish
 c5640 Giant Crab
 c5641 Crab
 c5651 Messmer Foot Soldier
 c5661 Shadow Militia
-c5680 Wheeled Ballista
-c5690 Dragon-faced Flamethrower
+c5680 Ballista
+c5690 Dragon-Faced Flamethrower
 c5700 Demi-Human
 c5701 Large Demi-Human
 c5710 Demi-Human Shaman
@@ -356,9 +356,9 @@ c5840 Black Knight
 c5850 Giant Ram
 c5860 Ghostflame Dragon
 c5870 Imp
-c5871 Large Dragon Head Imp
-c5872 Massive Dragon Head Imp
-c5880 Putrescence Sorcerer
+c5871 Large Bigmouth Imp
+c5872 Massive Bigmouth Imp
+c5880 Catacombs Sorcerer
 c5890 Black Knight Horse
 c5900 Man-Fly
 c5910 Hornsent Grandam
@@ -386,7 +386,7 @@ c6091 Giant Turtle
 c6100 Springhare
 c6201 Scarab
 c6210 Albinauric Archer
-c6220 Wolf
+c6220 Archer's Wolf
 c6231 Perfumer
 c6232 Glintstone Sorcerer
 c6233 Page
@@ -439,3 +439,17 @@ AEG099_812 Unknown
 AEG099_990 Shiny Item
 AEG099_991 Great Rune
 AEG237_062 Horned Remains
+# DLC
+AEG052_407 Hanging Bell
+AEG052_775 Map Stele
+AEG463_600 Guilty Corpse
+AEG463_610 Commoner Corpse
+AEG463_620 Noble Corpse
+AEG463_625 Hornsent Corpse
+AEG463_641 Demi-Human Corpse
+AEG464_027 Nanaya's Corpse
+AEG464_058 Sword of Light Altar
+AEG464_059 Sword of Darkness Altar
+AEG464_070 Painting
+AEG464_071 Painting
+AEG464_072 Painting

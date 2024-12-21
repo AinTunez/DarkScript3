@@ -1,0 +1,17 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30060519 エレベータ初期フラグ -- Elevator initial flag
+30062206 虫人ゴーレム_巡回からの奇襲 -- Insect Golem_Surprise attack from patrol
+30062211 虫人ゴーレム_特殊待機_距離または忌み子の戦闘状態で判定_XX -- Insect golem_Special standby_Determined by distance or combat status of the abomination_XX
+30062300 最下層忌み子巡回起動 -- Bottom-tier Abominable Child Patrol Activation
+30062304 忌み子事前HP減少特殊効果 -- Abandoned child pre-HP reduction special effect
+30062400 湖前半地下墓地魔力矢のトラップ_XX -- Lake first half catacombs magic arrow trap_XX
+30062510 エレベータイベント起動 -- Elevator event activation
+30062520 地下墓地_ボス部屋報酬宝箱の開放制限 -- Catacombs_Boss room reward treasure chest opening restrictions
+30062580 梯子登録 -- ladder registration
+30062800 ボス撃破 -- Defeat the boss
+30062810 ボス出現 -- Boss appears
+30062811 ボス激昂 -- boss rage
+30062849 番犬ゴーレムメイス三つ首_イベント起動 -- Guard dog golem mace three heads_event activated
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,60 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+11000519 エレベータ初期フラグ -- Elevator initial flag
+11000600 神の門エレベータ_初回起動 -- God's Gate Elevator_First Startup
+11000602 神門エレベータ封鎖 -- Shinmon elevator blocked
+11002145 NPC疑似マルチ_火山館最強の騎士_開始 -- NPC pseudo-multi_volcano hall strongest knight_start
+11002155 NPC疑似マルチ_終了_ターゲット2人用 -- NPC pseudo multi_end_target for 2 people
+11002203 月の従者_ゴロゴロ往復_右側判定_XX -- Moon servant_Rumbling back and forth_Right side judgment_XX
+11002205 月の従者_ゴロゴロ往復_左側判定_XX -- Moon Servant_Rumbling back and forth_Left side judgment_XX
+11002207 月の従者_ゴロゴロ移動右_XX -- Moon Squire_Rumbling movement right_XX
+11002209 月の従者_ゴロゴロ移動左_XX -- Moon Squire_Rumbling left_XX
+11002260 ルーンの市民_調香バグで特殊待機解除_XX -- Citizen of Rune_Special standby canceled due to incense mixing bug_XX
+11002317 見張り兵士_騎士呼び_XX -- Watch Soldier_Knight Call_XX
+11002360 喪失の兵士_笛吹反応_XX -- Lost Soldier_Picture Reaction_XX
+11002370 キャラ死亡_喪失の兵士 -- Character death_lost soldier
+11002397 ラダゴンの獅子参戦 -- Radagon's Lion Joins the Battle
+11002402 特殊待機解除_警戒状態判定含め_XX -- Special standby release_including warning status determination_XX
+11002497 蛇霊登場 -- Snake spirit appears
+11002500 黄金樹の封印 -- Seal of the Golden Tree
+11002501 黄金樹の我儘 -- Golden Tree's Selfishness
+11002502 黄金樹の涙 -- Tears of the Golden Tree
+11002503 黄金樹の執着 -- Golden Tree's Obsession
+11002510 エレベータイベント起動 -- Elevator event activation
+11002540 扉初期開放 -- Initial door opening
+11002546 リアル円卓扉_神塔側 -- Real round table door_Shinto tower side
+11002547 リアル円卓扉_円卓側 -- Real round table door_round table side
+11002580 梯子登録 -- ladder registration
+11002601 ワープトラップ_ワープ禁止特殊効果 -- Warp Trap_Warp Prohibition Special Effect
+11002603 地下迷宮王都からワープ_カメラ角度変更 -- Warp from the underground labyrinth capital_Change camera angle
+11002604 闘技場の扉解放 -- Opening the arena door
+11002690 落ち葉SFX処理 -- Fallen leaves SFX processing
+11002691 アセット破壊禁止 -- Prohibition of asset destruction
+11002696 ジェスチャー入手_9022剣に誓って -- Gesture acquisition_9022 Swear on the sword
+11002697 チュートリアルメッセージ_円卓のマリカ像 -- Tutorial message_Marika statue at the round table
+11002698 チュートリアルメッセージ_王都闘技場 -- Tutorial message_Royal Capital Arena
+11002699 闘技場入り口_マルチ中は稼働しない -- Arena entrance_does not operate during multiplayer
+11002800 マルギット撃破 -- Defeat Margit
+11002810 マルギット出現 -- Margit appears
+11002811 マルギット激昂 -- margit rage
+11002829 マルギット戦イベント起動 -- Margit battle event starts
+11002850 中ボス撃破 -- Defeat mid-boss
+11002859 中ボスイベント起動 -- Mid-boss event starts
+11002860 中ボス出現 -- Mid-boss appears
+11002861 中ボス激昂 -- Middle boss rage
+11002910 炎上ヒント -- Flaming tips
+11002920 【専用】両開き扉_エラーメッセージ -- [Exclusive] Double door_error message
+11003710 NPC223亜人針子_NPC初期化イベント_入り口すぐの篝火近く -- NPC223 Demi-Shipper_NPC initialization event_Near the bonfire right at the entrance
+11003711 NPC223亜人針子_母の声イベント -- NPC223 Demi-human seamstress_Mother's voice event
+11003715 NPC204マルギット_会話用の瀕死状態表示 -- NPC204 Margit_Dying state display for conversation
+11003720 NPC351金仮面の従者_NPC初期化イベント -- NPC351 Gold Masked Squire_NPC initialization event
+11003721 NPC112金仮面の探究者_NPC初期化イベント -- NPC112 Gold Masked Seeker_NPC initialization event
+11003722 NPC112金仮面の探究者_死亡イベント -- NPC112 Gold Masked Seeker_Death Event
+11003723 ラダゴン像変化イベント -- Radagon statue change event
+11003724 NPC351金仮面の従者_自動会話イベント -- NPC351 Gold Masked Servant_Automatic conversation event
+11003725 NPC800_赤目商人カーレ_NPC初期化イベント_王都地下へ行きたい -- NPC800_Red-eyed merchant Kare_NPC initialization event_I want to go to the underground of the royal capital
+11003730 NPC360_円卓の最初の褪せ人の生き残り_侵入サイン表示 -- NPC360_Survival of the first faded person at the Round Table_Intrusion sign display
+11003740 NPC323糞喰い_共闘サイン停止イベント -- NPC323 Shit Eating_Cooperative Sign Stopping Event
+11003741 NPC323糞喰い_共闘エリア到達 -- NPC323 Shit-eater_Achieved the joint battle area
+1000000000 敵リスポン -- enemy respawn

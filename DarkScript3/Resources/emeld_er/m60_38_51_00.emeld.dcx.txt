@@ -1,0 +1,18 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1038512405 亜人_特殊待機_距離と初回咆哮で判定_XX -- Demi-human_Special standby_Determined by distance and first roar_XX
+1038512500 高山入り口_イントロ再生 -- Takayama entrance_Intro playback
+1038512800 ボス撃破 -- Defeat the boss
+1038512810 ボス出現 -- Boss appears
+1038512849 ボス_亜人の王_イベント起動 -- Boss_King of Demijin_Event activation
+1038513700 NPC313火山館の勧誘者_NPC初期化イベント_火山館へ招待_遺跡 -- NPC313 Volcano Hall Recruiter_NPC Initialization Event_Invitation to Volcano Hall_Ruins
+1038513701 NPC313火山館の勧誘者_火山館へ招待_遺跡に近づいた判定 -- NPC313 Volcano Pavilion Recruiter_Invite to Volcano Pavilion_Judgment of approaching the ruins
+1038513702 NPC313火山館の勧誘者_火山館へ招待_遺跡_被ダメ系会話再生処理 -- NPC313 Volcano Pavilion Recruiter_Invitation to Volcano Pavilion_Ruins_Damaged conversation playback processing
+1038513703 NPC313火山館の勧誘者_火山館へ招待_ワープ実行_遺跡 -- NPC313 Volcano Hall Recruiter_Invite to Volcano Hall_Execute warp_Ruins
+1038513705 NPC348マレニアの娘_ﾌｪｰｽﾞ3_NPC初期化イベント -- NPC348 Marenia's Daughter_Phase 3_NPC initialization event

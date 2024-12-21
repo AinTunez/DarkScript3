@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1050562145 NPC疑似マルチ_火山館の依頼ターゲット3_開始 -- NPC pseudo-multi_volcano hall request target 3_start
+1050562200 峡谷_交戦イベント -- Canyon_Battle Event
+1050562250 魔術師塔イベント_霧壁解除 -- Magician Tower Event_Fog Wall Release
+1050562260 魔術師塔イベント_霧壁エラーメッセージ -- Magician Tower Event_Fog Wall Error Message
+1050562400 NPC疑似マルチ_バディ石碑使用禁止 -- NPC pseudo-multi_Buddy stone monument use prohibited
+1050562555 絵画宝探し_画家の重力を無効化 -- Painting treasure hunt_Disable the painter's gravity
+1050562580 梯子登録 -- ladder registration
+1050563700 NPC347火山館ターゲット3_侵入許可フラグ立て -- NPC347 Volcano Hall Target 3_Intrusion permission flag setting

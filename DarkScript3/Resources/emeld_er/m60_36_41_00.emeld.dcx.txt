@@ -1,0 +1,7 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1036413700 NPC228ウルフライダー_NPC初期化イベント_初期状態 -- NPC228 Wolf Rider_NPC initialization event_Initial state
+1036413701 NPC228ウルフライダー_初期状態_会話後に消滅 -- NPC228 Wolf Rider_Initial state_Disappears after conversation
+1036413702 NPC228ウルフライダー_敵対時アニメ再生 -- NPC228 Wolf Rider_Anime playback when hostile

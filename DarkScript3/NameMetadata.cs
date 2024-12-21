@@ -47,7 +47,7 @@ namespace DarkScript3
                         {
                             if (line.StartsWith("#")) continue;
                             string[] parts = line.Split(new[] { ' ' }, 2);
-                            if (parts.Length == 2)
+                            if (parts.Length == 2 && !string.IsNullOrEmpty(parts[1]))
                             {
                                 names[parts[0]] = parts[1];
                             }

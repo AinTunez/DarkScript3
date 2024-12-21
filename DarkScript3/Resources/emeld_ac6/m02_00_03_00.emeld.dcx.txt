@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+2000 初期化 -- Initialization
+2050 アニメ再生_自機_a082000_カタパルト搭乗 -- Anime playback_Ownership_a082000_Catapult boarding
+2060 アニメ再生_自機_a082001_カタパルト射出待機 -- Anime playback_Ownership_a082001_Catapult ejection standby
+2100 アニメ再生_a010_000000_待機 -- Anime play_a010_000000_Waiting
+2110 アニメ再生_a010_000001_起動 -- Anime playback_a010_000001_Start
+2120 アニメ再生_a010_000002_起動後待機 -- Anime playback_a010_000002_Waiting after startup
+2130 アニメ再生_a010_000003_ -- Anime play_a010_000003_
+2140 アニメ再生_a010_000004_射出後起動待機前に戻る -- Anime playback_a010_000004_Return to before startup standby after injection
+2150 カットシーン再生_プロローグミッション用 -- Cutscene playback_for prologue mission
+2160 カットシーン再生_燃料基地用 -- Cutscene playback_for fuel base
+2200 キャラアタッチ -- character attach
+2210 キャラデタッチ -- character detach
+2300 カタパルトイベント -- catapult event

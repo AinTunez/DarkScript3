@@ -1,0 +1,45 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+31002200 鳴子対応_特殊待機_領域／距離判定_XX -- Naruko response_Special standby_Area/distance determination_XX
+31002210 鳴子対応_思考ロジック有効化_領域／距離判定_XX -- Naruko compatible_Thought logic activation_Area/distance judgment_XX
+31002230 雑兵思考ロジック有効化_領域／距離判定 -- Activation of casual soldier thinking logic_area/distance judgment
+31002500 テスト用イベント_鳴子作動_XX -- Test event_Naruko activation_XX
+31002800 ボス撃破 -- Defeat the boss
+31002810 ボス出現 -- Boss appears
+31002811 ボス降参処理 -- Boss surrender process
+31002813 ボス部屋入場処理 -- Boss room entry process
+31002814 ボス降参後また敵対する -- After the boss surrenders, he will become hostile again.
+31002830 ホストがボス部屋入場_1回目 -- Host enters boss room_1st time
+31002831 ゲストがボス部屋入場_1回目 -- Guest enters boss room_1st time
+31002832 ボス用白扉処理_1回目 -- Boss white door processing_1st time
+31002833 ボス戦BGM再生_２曲_1回目 -- Boss battle BGM playback_2 songs_1st time
+31002845 ボス部屋セーブ制限対応 -- Supports boss room save restrictions
+31002849 ボス_パッチ特殊対応1回目_イベント起動 -- Boss_patch special response 1st_event activation
+31002850 ボス撃破_2回目 -- Boss defeat_2nd time
+31002860 ボス出現_2回目 -- Boss appearance_2nd time
+31002861 ボス降参処理_2回目 -- Boss surrender process_2nd time
+31002863 ボス部屋入場処理_2回目 -- Boss room entry process_2nd time
+31002870 ホストがボス部屋入場_2回目 -- Host enters boss room_2nd time
+31002872 ボス用白扉処理_2回目 -- Boss white door processing_2nd time
+31002873 ボス戦BGM再生_２曲_2回目 -- Boss battle BGM play_2 songs_2nd time
+31002875 ボス部屋宝箱切替え -- Boss room treasure chest switch
+31002876 地下小探索_迷宮脱出スペル -- Small underground exploration_labyrinth escape spell
+31002899 ボス_パッチ特殊対応2回目_イベント起動 -- Boss_Patch special response 2nd time_Event activation
+31003700 NPC309_盗賊の頭_NPC初期化イベント_宝箱トラップ待ち -- NPC309_Thief Head_NPC initialization event_Waiting for treasure chest trap
+31003701 NPC309_盗賊の頭_初期状態_土下座で敵対解除 -- NPC309_Head of the thief_Initial state_Dismiss hostility by prostrate
+31003702 NPC309_盗賊の頭_初期状態_会話処理限界を伸ばす -- NPC309_Thief Head_Initial state_Extend conversation processing limit
+31003703 NPC309_盗賊の頭_初戦開始前_敵対フラグON -- NPC309_Head of the thieves_Before the start of the first battle_Hostile flag ON
+31003704 NPC309_盗賊の頭_初期状態_降伏イベント -- NPC309_Thief Head_Initial state_Surrender event
+31003705 NPC309_盗賊の頭_初期状態_降伏後の攻撃回数監視 -- NPC309_Thief Head_Initial state_Monitor the number of attacks after surrender
+31003706 NPC309_盗賊の頭_NPC死亡処理_ボス用 -- NPC309_Thief's head_NPC death processing_For boss
+31003707 NPC309_盗賊の頭_宝箱トラップ待ち_ワープ実行 -- NPC309_Thief Head_Waiting for treasure chest trap_Executing warp
+31003709 NPC309盗賊の頭_ボス以外無効化 -- NPC309 Thief Head_Disabled except for bosses
+31003710 NPC309_盗賊の頭_NPC初期化イベント_最後のショップ -- NPC309_Thief Head_NPC Initialization Event_Last Shop
+31003711 NPC309_盗賊の頭_2戦目以降_土下座で敵対解除 -- NPC309_Head of the thieves_After the 2nd battle_Dogeza to cancel hostility
+31003712 NPC309盗賊の頭_ボス戦2に遷移させない用フラグON -- NPC309 Thief Head_Flag ON to prevent transition to boss battle 2
+31003713 NPC309_盗賊の頭_追い剥ぎとして再会_2戦目開始前準備 -- NPC309_Head of the thieves_Reunited as a robber_Preparation before the start of the second battle
+31003714 NPC309_盗賊の頭_追い剥ぎとして再会_降伏イベント -- NPC309_Head of the Bandit_Reunion as a robber_Surrender event
+31003715 NPC309_盗賊の頭_追い剥ぎとして再会_降伏後の攻撃回数監視 -- NPC309_Head of the thieves_Reunited as a robber_Monitor the number of attacks after surrendering
+31003716 NPC309_盗賊の頭_NPC死亡処理_ボス二戦目用 -- NPC309_Thief's head_NPC death processing_For second boss battle
+1000000000 敵リスポン -- enemy respawn

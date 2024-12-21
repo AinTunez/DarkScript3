@@ -1,0 +1,17 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1035542200 デブ僧兵_初回接敵攻撃指定 -- Fat Monk_First contact attack designation
+1035542201 巨人の火の僧兵vs王軍_交戦イベント -- Giant Fire Monk vs Royal Army_Battle Event
+1035542220 ガンメン_初回接敵火吹き -- Gunmen_First contact fire blower
+1035542230 宝箱最初から開いてる -- The treasure chest is open from the beginning
+1035542236 王軍死体化 -- royal army corpse
+1035542450 死体焚火ナビメッシュ切り抜き用アセット無効化_XX -- Corpse bonfire navigation mesh cutout asset invalidation_XX
+1035542500 死体焚火イベント起動 -- Corpse bonfire event started
+1035542580 梯子登録 -- ladder registration
+1035543700 NPC702話す死体_ミニ砦の中_処理限界を伸ばす -- NPC702 Talking corpse_Inside the mini fort_Extend processing limit

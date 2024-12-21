@@ -1,0 +1,7 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1051372598 ワープ装置イベント_開始 -- Warp device event_start
+1051372599 ワープ装置イベント_開始_マルチ用 -- Warp device event_start_for multi

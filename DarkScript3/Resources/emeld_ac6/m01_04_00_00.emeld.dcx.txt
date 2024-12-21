@@ -1,0 +1,112 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッション開始時処理_チェックポイント分岐前 -- Mission start process_before checkpoint branch
+2001 ミッション開始時処理_チェックポイント分岐後 -- Mission start process_after checkpoint branch
+2002 目標プラントダミー紐づけ -- Target plant dummy linking
+2003 ＣＰ更新 -- CP update
+2004 CP更新用フラグ -- CP update flag
+2007 目標プラント破壊演出 -- Target plant destruction production
+2008 シェルパ無効化 -- disable sherpa
+2009 CP再開時用_破壊OBJアニメ設定 -- For restarting CP_Destruction OBJ animation settings
+2010 燃料_ボス登場カットシーン再生 -- Fuel_Boss appearance cutscene playback
+2020 目標マーカー有効化_ミッション開始時用 -- Activate objective marker_for mission start
+2021 目標マーカー有効化_プラント発見後用 -- Activate target marker_for use after plant discovery
+2022 目標マーカー有効化_プラント接近時用 -- Activate target marker_for when approaching plant
+2023 目標マーカー無効化_ミッション開始時用 -- Target marker invalidation_for mission start
+2024 目標マーカー無効化_プラント発見後用 -- Target marker invalidation_for after plant discovery
+2025 目標マーカー無効化_プラント接近時用 -- Disable target marker_for when approaching plant
+2026 ボス戦開始時のマーカー有効化 -- Marker activation at the start of a boss battle
+2027 ボスの巣の更新 -- Boss nest update
+2030 ボス有効化 -- boss enable
+2031 ボス敵の更新頻度とターゲット設定 -- Boss enemy update frequency and targeting
+2032 ボス戦開始後作戦ライン更新 -- Operation line updated after boss battle starts
+2033 ボスゲージ表示 -- boss gauge display
+2034 ボスゲージ非表示 -- Boss gauge hidden
+2035 ボス戦開始時_雑魚無効化 -- At the start of the boss battle_disable small fry
+2036 ボス戦開始時_AI対応 -- At the start of a boss battle_AI compatible
+2037 ボスエリア侵入時作戦ライン更新 -- Operation line updated when entering boss area
+2040 橋_ガトリング砲台攻撃開始 -- Bridge_Gatling battery attack begins
+2041 橋_ガトリング砲台攻撃終了 -- Bridge_Gatling battery attack finished
+2042 橋_ガトリング砲台攻撃特殊効果 -- Bridge_Gatling battery attack special effects
+2043 橋_ガトリング砲台攻撃終了特殊効果 -- Bridge_Gatling battery attack end special effect
+2044 ガトリング砲台_更新頻度設定 -- Gatling gun turret_update frequency setting
+2045 ガトリング砲台_更新頻度終了 -- Gatling gun battery_update frequency ended
+2046 ガトリング砲台攻撃中イベント -- Gatling battery attack event
+2050 プラント広場_垂直ミサイル砲台発射特殊効果かけ -- Plant Square_Vertical missile battery launch special effects
+2700 ボス戦_ボス一体撃破判定 -- Boss battle_Boss defeat judgment
+2701 ボス戦_ボス二体撃破判定 -- Boss battle_Double boss defeat judgment
+2702 ボス戦_アバランチエースが先に死んだ -- Boss battle_ Avalanche Ace died first
+2703 ボス戦_アバランチサポBが先に死んだ -- Boss battle_Avalanche Support B died first
+2704 ボス戦終了判定 -- Boss battle end determination
+2705 リトライ時ボス読み込み判定 -- Boss loading judgment when retrying
+2706 会話用_ボス戦片方AP半減判定 -- For conversation_Boss battle one side AP halved judgment
+2707 会話用_エース死亡判定 -- For conversation_Ace death judgment
+2708 会話用_サポ死亡判定 -- For conversation_support death judgment
+2710 BGM遷移用判定_アバランチ撃破時 -- BGM transition judgment_When defeating Avalanche
+2720 燃料タンク説明会話発生判定 -- Fuel tank explanation conversation occurrence determination
+2721 燃料プラント発見会話発生判定 -- Fuel plant discovery conversation occurrence determination
+2722 プラント接近会話発生判定 -- Plant approach conversation occurrence determination
+2723 正規軍AC接近会話発生判定 -- Regular army AC close conversation occurrence determination
+2724 正規軍ACAP0判定 -- Regular army ACAP0 judgment
+2730 橋_砲台視界範囲内判定 -- Bridge_Artillery battery visibility range determination
+2731 橋_砲台視界範囲外判定 -- Bridge_Artillery out of sight range determination
+2732 橋_砲台全滅判定 -- Bridge_ Battery annihilation judgment
+2733 橋_砲台MTターゲット登録判定 -- Bridge_Artillery MT target registration determination
+2740 橋手前_正規軍AC登場演出 -- In front of the bridge_regular army AC appearance production
+2743 橋_橋下雑魚AI停止と解除 -- Bridge_Hashimoto small fry AI suspension and cancellation
+2744 橋_最終遮蔽カバーMTターゲット登録 -- Bridge_Final shielding cover MT target registration
+2745 崖下_狙撃ACターゲット共有 -- Under the Cliff_Sniper AC target sharing
+2760 ご褒美タンク全破壊判定 -- Reward tank complete destruction judgment
+2761 崖下_ご褒美タンク破壊判定 -- Under the Cliff_Reward Tank Destruction Judgment
+2762 ご褒美タンク一つ目破壊判定 -- Reward tank first destruction judgment
+2770 撃破報酬獲得数少ない判定 -- Determined that there are few rewards for defeating
+2771 撃破報酬獲得数多い判定 -- Determined that the number of defeat rewards received is high
+2781 プラント広場_垂直ミサイル発射開始判定 -- Plant Square_ Vertical missile launch start determination
+2782 プラント広場_垂直ミサイル発射終了判定 -- Plant Square_ Vertical missile launch completion determination
+2800 会話用_初接敵判定 -- For conversation_first contact judgment
+2810 会話用_崖下狙撃AC戦闘開始判定 -- For conversation_ Cliff sniper AC battle start judgment
+2811 会話用_橋後ヘリエリア戦闘開始判定 -- For conversation_Heli area after the bridge battle start determination
+2812 会話用_橋後ヘリエリア戦闘開始イベント -- Conversation_Hashigo helicopter area battle start event
+2813 会話用_橋後雑魚戦闘開始判定 -- For conversation_Hashigo small fish battle start judgment
+3090 ご褒美タンク_ダミーキャラ連携 -- Reward tank_dummy character collaboration
+3400 CS再生フラグ -- CS playback flag
+3401 プラント爆発フラグ -- plant explosion flag
+3402 アバランチ死亡演出中BGM遷移フラグ -- Avalanche death effect BGM transition flag
+3403 テスト用フラグ -- test flag
+3410 エース先に死亡 -- dies before ace
+3411 サポB先に死亡 -- Supporter B died first.
+3500 会話フラグ_104000100_ミッション開始 -- Conversation flag_104000100_Mission start
+3501 会話フラグ_104000200_初接敵 -- Conversation flag_104000200_First encounter
+3502 会話フラグ_104000500_ご褒美タンク示唆 -- Conversation flag_104000500_Reward tank suggestion
+3503 会話フラグ_104000900_正規軍AC接敵 -- Conversation flag_104000900_Regular army AC contact
+3504 会話フラグ_104001000_正規軍AC撃破 -- Conversation flag_104001000_Regular army AC defeated
+3505 会話フラグ_104001300_ドーム視認 -- Conversation flag_104001300_Dome visibility
+3506 会話フラグ_104001700_ご褒美タンク破壊 -- Conversation flag_104001700_Reward tank destruction
+3507 会話フラグ_104001800_橋下接敵 -- Conversation Flag_104001800_Hashimoto Engagement
+3508 会話フラグ_104001840_橋後ヘリエリア接敵 -- Conversation Flag_104001840_Hashigo Heli Area Engagement
+3509 会話フラグ_104001900_橋接敵１ -- Conversation Flag_104001900_Bridge Engagement 1
+3510 会話フラグ_104001940_橋接敵２ -- Conversation Flag_104001940_Bridge Engagement 2
+3511 会話フラグ_104001960_橋接敵３ -- Conversation Flag_104001960_Bridge Engagement 3
+3512 会話フラグ_104002000_橋後接敵１ -- Conversation flag_104002000_Enemy after bridge 1
+3513 会話フラグ_104002020_橋後接敵２ -- Conversation flag_104002020_Enemy after bridge 2
+3515 会話フラグ_104002060_ボスエリア手間接敵２ -- Conversation flag_104002060_Boss area manual enemy 2
+3516 会話フラグ_104002100_ご褒美タンク全破壊 -- Conversation flag_104002100_Reward tank completely destroyed
+3517 会話フラグ_104002500_ボスエリア進入A -- Conversation flag_104002500_Boss area entry A
+3518 会話フラグ_104002510_ボスエリア進入B -- Conversation flag_104002510_Boss area entry B
+3519 会話フラグ_104002900_目標プラント破壊 -- Conversation flag_104002900_Target plant destruction
+3520 会話フラグ_104003000_ボス戦開始１ -- Conversation flag_104003000_Boss battle start 1
+3521 会話フラグ_104003020_ボス戦開始２ -- Conversation flag_104003020_Boss battle start 2
+3522 会話フラグ_104003040_ボス戦開始３ -- Conversation flag_104003040_Boss battle start 3
+3523 会話フラグ_104003060_ボスAP低下時 -- Conversation flag_104003060_When boss AP decreases
+3524 会話フラグ_104003100_エース機撃破 -- Conversation Flag_104003100_Ace plane destroyed
+3525 会話フラグ_104003110_エース機撃破後 -- Conversation flag_104003110_After defeating Ace plane
+3526 会話フラグ_104003200_サポ機撃破 -- Conversation Flag_104003200_Support machine defeated
+3527 会話フラグ_104003210_サポ機撃破後 -- Conversation Flag_104003210_After defeating the support plane
+3528 会話フラグ_104003300_一機撃破会話 -- Conversation flag_104003300_One machine destruction conversation
+3529 会話フラグ_104003700_二機撃破会話 -- Conversation flag_104003700_Two aircraft destruction conversation
+3530 会話フラグ_104004100_ミッションクリア後会話１ -- Conversation Flag_104004100_Conversation 1 after mission clear
+3531 会話フラグ_104004500_追加報酬会話_多 -- Conversation flag_104004500_Additional reward conversation_Many
+3532 会話フラグ_104004900_追加報酬会話_小 -- Conversation flag_104004900_Additional reward conversation_Small
+3533 会話フラグ_104005300_自機死亡_エース生存 -- Conversation flag_104005300_Original death_Ace alive
+3534 会話フラグ_104005700_自機死亡_エース死亡 -- Conversation flag_104005700_Original death_Ace death
+1000000000 敵リスポン -- enemy respawn

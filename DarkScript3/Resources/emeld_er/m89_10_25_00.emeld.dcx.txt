@@ -1,0 +1,4 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+4000 寝てるワイバーン -- wyvern sleeping
+1000000000 敵リスポン -- enemy respawn

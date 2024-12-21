@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1034452800 ワイバーン特殊効果設定 -- Wyvern special effect settings
+1034452805 ワイバーン帰巣位置設定 -- Wyvern homing position setting
