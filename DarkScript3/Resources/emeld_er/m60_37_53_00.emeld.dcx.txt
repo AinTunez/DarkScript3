@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1037532200 間欠泉_XX -- Geyser_XX
+1037532201 間欠泉_弾丸オーナー作成 -- Geyser_Bullet owner created
+1037532300 エネミー睡眠禁止 -- No energy sleep
+1037532345 亜人王視界強化 -- Demi-King vision enhancement
+1037532350 亜人王が死んだら周囲の取り巻きも死ぬイベント -- An event where when the demi-king dies, his surrounding people also die.
+1037532400 ストームオオカミ出現_XX -- Storm wolf appears_XX
+1037532450 思考ロジック有効化_領域／距離判定_村奥亜人王用 -- Enabling thought logic_area/distance judgment_for Murokuku Demi-King
+1037533700 NPC111アズール死亡 -- NPC111 Azure dies

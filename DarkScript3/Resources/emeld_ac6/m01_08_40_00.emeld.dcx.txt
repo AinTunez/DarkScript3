@@ -1,0 +1,130 @@
+0 コンストラクタ -- constructor
+2209 敵キャラ無効化系 -- Enemy character invalidation system
+2210 ミサイルチャージ時間表示 -- Missile charge time display
+2211 初期準備 -- Initial preparation
+2212 ミサイルの常時有効化 -- Missile always enabled
+2213 時間を超す -- exceed time
+2215 残りn秒 -- n seconds left
+2230 初期敵の撃破 -- Defeat the initial enemy
+2240 初期ガトリング右が撃破されたのでミサイルをターゲット -- The initial Gatling right was destroyed, so target the missile.
+2241 初期ガトリング左が撃破されたのでミサイルをターゲット -- Since the initial Gatling left was destroyed, target the missile.
+2310 ミサイルが破壊される -- missile is destroyed
+2320 サブミサイルA撃破後判定右ガト生存か -- Judgment after sub-missile A is defeated: Is Gato alive?
+2321 サブミサイルA撃破後右ガトにターゲット -- After defeating sub-missile A, target on the right gato.
+2322 サブミサイルA撃破後判定ミサイルB生存か -- Will missile B survive after sub-missile A is defeated?
+2323 サブミサイルA撃破後ミサイルBにターゲット -- After sub-missile A is defeated, target missile B.
+2324 両方死んでいるのでメインミサイルをターゲット -- Since both are dead, target the main missile.
+2325 ミサイルA死亡判定用 -- Missile A death determination
+2326 ガトリングA死亡判定用 -- Gatling A for death determination
+2330 サブミサイルB撃破後判定ガト生存か -- Is Gato alive after defeating sub-missile B?
+2331 サブミサイルB撃破後ガトにターゲット -- After defeating sub-missile B, target Gato.
+2332 サブミサイルB撃破後判定ミサイルA生存か -- Is missile A alive after sub-missile B is defeated?
+2333 サブミサイルB撃破後ミサイルAにターゲット -- After sub-missile B is defeated, target missile A.
+2334 両方死んでいるのでメインミサイルをターゲットB -- Since both are dead, target the main missile B
+2335 ミサイルB死亡判定用 -- Missile B death determination
+2336 ガトリングB死亡判定用 -- Gatling B for death determination
+2400 メインミサイルの起動 -- Main missile activation
+2410 撃破報酬イベント1 -- Defeat reward event 1
+2411 撃破報酬イベント2 -- Defeat reward event 2
+2412 撃破報酬イベント3 -- Defeat reward event 3
+2413 撃破報酬イベント4 -- Defeat reward event 4
+2414 撃破報酬イベント5 -- Defeat reward event 5
+2430 サブミサイル打ち上げ成功 -- Successful sub-missile launch
+2450 ミサイル打上イベント -- missile launch event
+2470 ミサイルがダメージを食らう -- missile takes damage
+2500 ヘリ起動右狙い -- Helicopter launch right aim
+2520 ヘリ起動メイン狙い -- Main aim of helicopter launch
+2540 ヘリ起動左狙い -- Helicopter launch left aim
+2950 ジェノミサイル攻撃命令 -- Geno missile attack order
+2960 ジェノ死亡判定 -- Geno death judgment
+2970 ジェノ近接判定 -- Geno proximity detection
+3010 会話フラグ1 -- conversation flag 1
+3011 会話フラグ2 -- conversation flag 2
+3012 会話フラグ3 -- conversation flag 3
+3013 会話フラグ4 -- conversation flag 4
+3014 会話フラグ5 -- conversation flag 5
+3015 会話フラグ6 -- conversation flag 6
+3016 会話フラグ7 -- conversation flag 7
+3017 敗北時会話終了フラグ -- Conversation end flag when defeated
+3018 会話フラグ8 -- conversation flag 8
+3030 会話判定用サブミサイル残数1 -- 1 sub-missile remaining for conversation determination
+3031 会話判定用サブミサイル残数0 -- 0 remaining sub-missiles for conversation determination
+3032 会話フラグ複数回避け用1 -- Conversation flag for multiple avoidance 1
+3033 会話フラグ複数回避け用2 -- Conversation flag for multiple avoidance 2
+3034 会話フラグ複数回避け用3 -- Conversation flag for multiple avoidance 3
+3035 会話フラグ複数回避け用4 -- Conversation flag for multiple avoidance 4
+3036 会話フラグ複数回避け用5 -- Conversation flag for multiple avoidance 5
+3037 会話フラグ複数回避け用6 -- Conversation flag for multiple avoidance 6
+3040 打ち上げ開始フラグ -- launch start flag
+3050 ダミー常時 -- Dummy always
+3061 ジェノにマーカー -- Marker on Geno
+3062 ジェノにマーカー2 -- Marker 2 on Geno
+3063 ジェノがミサイルに攻撃 -- Geno attacks the missile
+3064 ジェノ攻撃対象切り替え -- Geno attack target switching
+3065 ジェノ攻撃対象切り替え_2 -- Geno attack target switching_2
+3066 ジェノにマーカー3 -- Marker 3 on Geno
+3067 ジェノを倒す -- Defeat Geno
+3068 既にミサイルが死んでいるかA -- Is the missile already dead? A
+3069 既にミサイルが死んでいるかB -- Is the missile already dead?B
+3070 定期的にミサイルをターゲットに追加する -- Add missiles to targets periodically
+3071 既にミサイルが死んでいるかC -- Is the missile already dead?C
+3072 既にミサイルが死んでいるかD -- Is the missile already dead?D
+3075 ジェノにマーカー4 -- Marker 4 on Geno
+3080 定期的にツインタワー敵にダミーターゲット付与 -- Periodically assigns dummy targets to Twin Tower enemies.
+3090 自機がツインタワー近辺にいる -- Your aircraft is near the Twin Towers
+3091 定期的にガトリングBをターゲットに追加する -- Add Gatling B to targets regularly
+3092 定期的にミサイルをターゲットに追加するB -- Add missiles to targets periodically B
+3100 揚陸艦起動 -- Landing ship launch
+3101 揚陸艦副砲起動ループ -- Landing ship secondary gun activation loop
+3102 アタッチ砲台にターゲット -- Attach target to turret
+3103 揚陸艦の砲台を倒す -- Defeat the landing ship's battery
+3104 揚陸艦を倒す -- Defeat the landing ship
+3105 揚陸艦AP半分 -- Landing ship AP half
+3106 揚陸艦の無敵解除 -- Landing ship invincibility removed
+3107 揚陸艦のAPが1ならAI無効化 -- If the landing ship's AP is 1, AI will be disabled.
+3108 艦橋の消去 -- Deleting the bridge
+3110 揚陸艦敵を撃破 -- Destroy the landing ship enemy
+3150 揚陸艦にマーカー -- Marker on landing ship
+3200 揚陸艦から敵が出てくる -- Enemies emerge from the landing ship
+3300 揚陸艦から自機狙いの敵が出てくる -- An enemy will come out from the landing ship to target your aircraft.
+3400 橋の上の敵を生成 -- Spawn enemies on the bridge
+3450 橋の上の敵を生成BR -- Generate enemies on the bridge BR
+3500 揚陸艦_砲台_ロック距離150化_グループ1 -- Landing ship_Battery_Lock distance 150_Group 1
+3510 揚陸艦_砲台_ロック距離150化_グループ2 -- Landing ship_Battery_Lock distance 150_Group 2
+3520 揚陸艦_砲台_ロック距離150化_グループ3 -- Landing ship_Battery_Lock distance 150_Group 3
+3550 揚陸艦_破砕孔表示 -- Landing ship_fracture hole display
+3570 地上敵の生成_R -- Generation of ground enemies_R
+3580 地上敵の生成_L -- Generation of ground enemies_L
+3590 地上敵の生成_追加 -- Generation of ground enemies_added
+3600 揚陸艦アニメテスト01 -- Landing ship anime test 01
+3601 揚陸艦アニメテスト02 -- Landing ship anime test 02
+3602 揚陸艦アニメテスト03 -- Landing ship anime test 03
+3603 AItest -- AItest
+3700 揚陸艦無理やり射撃 -- Landing ship forced shooting
+3800 ミサイル破壊後の特殊効果変更 -- Special effects changed after missile destruction
+3801 ミサイル破壊後の特殊効果変更L -- Special effect change after missile destruction L
+3802 橋の下の敵をずらす -- Move the enemy under the bridge
+3810 ミサイル用マーカー表示 -- Missile marker display
+3820 敵死亡判定_軍団 -- Enemy death judgment_corps
+3830 時間判定_会話用 -- Time judgment_for conversation
+3840 敵の生成フラグ -- enemy generation flag
+3850 ミサイルがダメージを食らう_時間経過OFF -- Missile takes damage_Time elapsed OFF
+3860 ミサイルがボロボロ -- Missile is in tatters
+3890 ミッション失敗時の処理 -- Processing when mission fails
+3900 全敵ロジック停止 -- Stop all enemy logic
+3990 デバッグ判定用 -- For debugging judgment
+3991 デバッグミサイル発射 -- Debug missile launch
+3992 デバッグ判定用2 -- For debugging judgment 2
+3993 デバッグミサイル発射2 -- Debug missile launch 2
+3994 デバッグ判定用3 -- For debugging judgment 3
+3995 デバッグミサイル発射3 -- Debug missile launch 3
+3996 デバッグ判定用4 -- For debugging judgment 4
+3997 デバッグミサイル発射ALL -- Debug missile launch ALL
+3998 デバッグ判定用v5 -- Debug judgment v5
+3999 デバッグ揚陸艦移動 -- Debug landing ship movement
+4300 賑やかし初期準備 -- Initial preparations for excitement
+4301 賑やかしツインタワー射撃A -- Lively twin tower shooting A
+4302 賑やかしツインタワー射撃B -- Lively twin tower shooting B
+4303 賑やかし海上射撃左 -- Lively sea shooting left
+4304 賑やかし海上射撃右 -- Lively sea shooting right
+4305 賑やかし海上射撃真ん中 -- In the middle of lively sea shooting

@@ -1,0 +1,5 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+9000000 レーダーハッキング -- radar hacking
+9100000 レーダーハッキング完了時挙動 -- Behavior when radar hacking is completed
+1000000000 敵リスポン -- enemy respawn

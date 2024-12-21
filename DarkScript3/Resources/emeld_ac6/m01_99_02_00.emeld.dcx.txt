@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+99020000 開始処理 -- Start processing
+99020001 アイテム奪取 -- Stealing items
+99020002 ステルス判断 -- stealth judgment
+99020003 破壊 -- destruction
+99020004 壁信者受け渡し -- Wall believer delivery
+99020005 壁信者受け渡し拒否 -- Refusal to receive wall followers
+99020006 壁アンチ受け渡し -- wall anti handover
+99020007 壁アンチ受け渡し拒否 -- wall anti delivery refusal
+99020008 壁信者攻撃 -- wall believer attack
+99020009 賞金首撃破 -- Defeat the bounty head
+1000000000 敵リスポン -- enemy respawn

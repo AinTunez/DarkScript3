@@ -4,6 +4,7 @@ using System.Linq;
 using System.IO;
 using System.Text;
 using static SoulsFormats.EMEVD;
+using Esprima;
 
 namespace DarkScript3
 {
@@ -14,17 +15,19 @@ namespace DarkScript3
 
         public class EventFunction
         {
-            // Normally an int, but may be a SourceNode :fatcat:
+            // Normally a long (Elden Ring bigger than int range), but may be a SourceNode :fatcat:
             public object ID { get; set; }
             public Event.RestBehaviorType RestBehavior { get; set; }
             public bool Fancy { get; set; }
             public List<string> Params = new List<string>();
             public List<Intermediate> Body = new List<Intermediate>();
+            public string Name { get; set; }
 
             // Cosmetics
             public List<SourceDecoration> EndComments = null;
             public LineMapping LineMapping { get; set; }
             public string Header { get; set; }
+            public LineMapping HeaderLine { get; set; }
             // Repack coherency
             public Dictionary<int, string> CondHints = null;
 
@@ -33,28 +36,12 @@ namespace DarkScript3
             public void Print(TextWriter writer)
             {
                 LineTrackingWriter lineWriter = writer as LineTrackingWriter;
-                lineWriter?.RecordMapping(LineMapping);
-                string processDecorations(List<SourceDecoration> decs, string sp)
+                if (Header != null)
                 {
-                    if (decs == null) return "";
-                    string suffix = "";
-                    foreach (SourceDecoration dec in decs)
-                    {
-                        if (dec.Type == SourceDecoration.DecorationType.PRE_BLANK)
-                        {
-                            writer.WriteLine();
-                        }
-                        else if (dec.Type == SourceDecoration.DecorationType.PRE_COMMENT)
-                        {
-                            writer.WriteLine(sp + dec.Comment);
-                        }
-                        else if (dec.Type == SourceDecoration.DecorationType.POST_COMMENT)
-                        {
-                            suffix += " " + dec.Comment;
-                        }
-                    }
-                    return suffix;
+                    lineWriter?.RecordMapping(HeaderLine);
+                    writer.Write(Header);
                 }
+                lineWriter?.RecordMapping(LineMapping);
                 // For some reason, in particular scoped cases, V8 cries bloody murder about label redeclaration
                 // (label_redeclaration in parser.cc). But ECMAScript spec doesn't seem to require it? V8 just
                 // does want it wants with no clear pattern.
@@ -62,7 +49,7 @@ namespace DarkScript3
                 // It mainly seems to arise when two label commands are literally next to each other, and when declared
                 // in a parent scope right before a child scope which also includes it.
                 // Well, for now, hardcode the only vanilla event which causes this. Fix me :fatcat:
-                bool disambiguateLabels = 11052860.Equals(ID);
+                bool disambiguateLabels = "11052860" == ID.ToString();
                 List<string> usedLabels = new List<string>();
                 string getLabelWithSuffix(string label)
                 {
@@ -82,7 +69,7 @@ namespace DarkScript3
                     bool prevLabel = false;
                     foreach (Intermediate im in ims)
                     {
-                        string suffix = processDecorations(im.Decorations, sp);
+                        string suffix = SourceDecoration.Print(writer, im.Decorations, sp);
                         foreach (string l in im.Labels)
                         {
                             writer.WriteLine(getLabelWithSuffix(l) + ":");
@@ -105,9 +92,10 @@ namespace DarkScript3
                         else
                         {
                             string fullLine = sp + prefix + im + suffix;
-                            if (fullLine.Length > columnLimit && Fancy)
+                            if (true || fullLine.Length > columnLimit && Fancy)
                             {
-                                writer.WriteLine(sp + prefix + im.GetStringTree().Render(sp) + suffix);
+                                TreeDecorator treeDec = new();
+                                writer.Write(im.GetStringTree().RenderLine(sp, prefix, suffix));
                                 lineWriter?.PostMapping(im.LineMapping);
                             }
                             else
@@ -146,7 +134,7 @@ namespace DarkScript3
                 }
                 writer.WriteLine($"{(Fancy ? "$" : "")}Event({ID}, {RestBehavior}, function({string.Join(", ", Params)}) {{");
                 subprint(Body, 1);
-                string funcSuffix = processDecorations(EndComments, SingleIndent);
+                string funcSuffix = SourceDecoration.Print(writer, EndComments, SingleIndent);
                 writer.WriteLine($"}});{funcSuffix}");
             }
         }
@@ -257,15 +245,49 @@ namespace DarkScript3
             public LineMapping LineMapping { get; set; }
             public string ToLabelHint { get; set; }
 
-            public void MoveDecorationsTo(Intermediate other)
+            public void MoveDecorationsTo(Intermediate other, bool moveConds = false)
             {
-                if (Decorations != null && other != this)
+                if (other != this)
                 {
-                    if (other.Decorations == null) other.Decorations = new List<SourceDecoration>();
-                    other.Decorations.AddRange(Decorations);
-                    Decorations = null;
+                    if (moveConds && this is CondIntermediate condIm)
+                    {
+                        // These must be moved, since the other command will not have a cond
+                        condIm.Cond.RewriteCond(cond =>
+                        {
+                            if (cond.Decorations != null)
+                            {
+                                other.Decorations ??= new();
+                                other.Decorations.AddRange(cond.Decorations);
+                                cond.Decorations = null;
+                            }
+                            return null;
+                        });
+                    }
+                    if (Decorations != null)
+                    {
+                        // These can be moved if they originally belonged to a cond
+                        if (moveConds && other is CondIntermediate condIm2)
+                        {
+                            Decorations.RemoveAll(dec =>
+                            {
+                                if (dec.ForCond)
+                                {
+                                    condIm2.Cond.Decorations ??= new();
+                                    condIm2.Cond.Decorations.Add(dec);
+                                    return true;
+                                }
+                                return false;
+                            });
+                        }
+                        if (Decorations.Count > 0)
+                        {
+                            other.Decorations ??= new();
+                            other.Decorations.AddRange(Decorations);
+                        }
+                        Decorations = null;
+                    }
                 }
-                other.LineMapping = LineMapping == null ? LineMapping : LineMapping.Clone();
+                other.LineMapping = LineMapping?.Clone();
                 other.ToLabelHint = ToLabelHint;
             }
 
@@ -279,6 +301,34 @@ namespace DarkScript3
                 }
             }
 
+            // Simple inline rewrite
+            public static List<Intermediate> Rewrite(List<Intermediate> ims, Func<Intermediate, Intermediate> visitor)
+            {
+                if (ims == null)
+                {
+                    return null;
+                }
+                for (int i = 0; i < ims.Count; i++)
+                {
+                    ims[i] = ims[i].Rewrite(visitor);
+                }
+                return ims;
+            }
+
+            public Intermediate Rewrite(Func<Intermediate, Intermediate> visitor)
+            {
+                if (this is LoopStatement loop)
+                {
+                    loop.Body = Rewrite(loop.Body, visitor);
+                }
+                else if (this is IfElse ifElse)
+                {
+                    ifElse.True = Rewrite(ifElse.True, visitor);
+                    ifElse.False = Rewrite(ifElse.False, visitor);
+                }
+                return visitor(this) ?? this;
+            }
+
             public virtual StringTree GetStringTree() => StringTree.Of(this);
             public virtual bool IsMeta => false;
         }
@@ -288,7 +338,54 @@ namespace DarkScript3
             public enum DecorationType { PRE_COMMENT, POST_COMMENT, PRE_BLANK }
             public DecorationType Type { get; set; }
             public int Position { get; set; }
+            public int Line { get; set; }
             public string Comment { get; set; }
+            // Marker for consistency for repack
+            public bool ForCond { get; set; }
+
+            public static string Print(TextWriter writer, List<SourceDecoration> decs, string sp)
+            {
+                if (decs == null) return "";
+                string suffix = "";
+                foreach (SourceDecoration dec in decs)
+                {
+                    if (dec.Type == DecorationType.PRE_BLANK)
+                    {
+                        // Previously was a blank line, but IDE does not fake cursor position
+                        writer.WriteLine(sp);
+                    }
+                    else if (dec.Type == DecorationType.PRE_COMMENT)
+                    {
+                        writer.WriteLine(sp + dec.Comment);
+                    }
+                    else if (dec.Type == DecorationType.POST_COMMENT)
+                    {
+                        suffix += " " + dec.Comment;
+                    }
+                }
+                return suffix;
+            }
+
+            public static void AddToTree(List<SourceDecoration> decs, TreeDecorator treeDec)
+            {
+                foreach (SourceDecoration dec in decs)
+                {
+                    if (dec.Type == DecorationType.PRE_BLANK)
+                    {
+                        treeDec.AddPrefix("");
+                    }
+                    else if (dec.Type == DecorationType.PRE_COMMENT)
+                    {
+                        treeDec.AddPrefix(dec.Comment);
+                    }
+                    else if (dec.Type == DecorationType.POST_COMMENT)
+                    {
+                        treeDec.AddSuffix(" " + dec.Comment);
+                    }
+                }
+            }
+
+            public override string ToString() => $"{Type}[{Comment}]";
         }
 
         public class NoOp : Intermediate
@@ -313,11 +410,11 @@ namespace DarkScript3
             // TODO: Is this actually used anywhere?
             public Instruction Inner { get; set; }
             // The command id, like 3[00], from the source.
-            public string Cmd { get; set; }
+            public string Cmd { get; init; }
             // The command name from EMEDF.
-            public string Name { get; set; }
+            public string Name { get; init; }
             // The values for each of the args.
-            // In decompilation, these are the literal values from emevd, or an EnumInt for pretty printing enums.
+            // In decompilation, these are the literal values from emevd, or a DisplayArg for pretty printing enums.
             // In compilation, these may be JavaScript expression but they are copied into V8 as-is.
             public List<object> Args = new List<object>();
             // Layer
@@ -353,6 +450,8 @@ namespace DarkScript3
         {
             // Allow JS statements to be passed through compilation in some cases
             public string Code { get; set; }
+            // Which variable names have been declared
+            public List<string> Declared { get; set; }
 
             public override string ToString() => Code;
             public override bool IsMeta => true;
@@ -532,7 +631,8 @@ namespace DarkScript3
             protected string Prefix => Negate ? "!" : "";
             public bool Always => this is CmdCond cond && cond.Name == "Always";
             public abstract string DocName { get; }
-            public virtual StringTree GetStringTree(bool stripParens = false) => StringTree.Of(this);
+            public List<SourceDecoration> Decorations { get; set; }
+            public virtual StringTree GetStringTree(bool stripParens = false) => StringTree.Of(this, Decorations);
 
             public static Cond ALWAYS = new CmdCond { Name = "Always" };
 
@@ -611,6 +711,7 @@ namespace DarkScript3
                 Sep = CombineOp,
                 Start = stripParens && Prefix == "" ? "" : $"{Prefix}(",
                 End = stripParens && Prefix == "" ? "" : ")",
+                Decorations = Decorations,
             };
         }
 
@@ -657,6 +758,40 @@ namespace DarkScript3
             }
         }
 
+        public class CompileError
+        {
+            public Position? Loc { get; set; }
+            public int Line { get; set; }
+            public string Message { get; set; }
+            public object Event { get; set; }
+
+            public static CompileError FromNode(Esprima.Ast.Node node, string message, object ev)
+            {
+                Position? loc = node == null ? null : node.Location.Start;
+                return new CompileError
+                {
+                    Loc = loc,
+                    Line = loc?.Line ?? 0,
+                    Message = message,
+                    Event = ev,
+                };
+            }
+
+            public static CompileError FromInstr(Intermediate im, string message, EventFunction ev)
+            {
+                // Esprima 3.0.5, constructor is internal
+                LineMapping mapping = im?.LineMapping ?? ev.LineMapping;
+                Position? loc = mapping == null ? null : Position.From(mapping.SourceLine, 0);
+                return new CompileError
+                {
+                    Loc = loc,
+                    Line = loc?.Line ?? 0,
+                    Message = message,
+                    Event = ev.ID,
+                };
+            }
+        }
+
         public class LineTrackingWriter : TextWriter
         {
             public TextWriter Writer { get; set; }
@@ -697,6 +832,7 @@ namespace DarkScript3
         {
             public string Start = "";
             public List<StringTree> Children { get; set; }
+            public List<SourceDecoration> Decorations { get; set; }
             public string Sep = "";
             public string End = "";
             private int _Length;
@@ -714,44 +850,132 @@ namespace DarkScript3
             }
 
             // A simple unbreakable string
-            public static StringTree Of(object s) => new StringTree { Start = s.ToString() };
+            public static StringTree Of(object s, List<SourceDecoration> decorations = null) => new StringTree
+            {
+                Start = s.ToString(),
+                Decorations = decorations,
+            };
             // A start which can appear on its own line when the rest of it is too long
             public static StringTree IsolatedStart(string start, StringTree mid, string end) => new StringTree
             {
                 Children = new List<StringTree> { Of(start), mid },
-                End = end
+                End = end,
             };
             // A start where the rest of it can be broken up, but it doesn't appear on its own line.
             public static StringTree CombinedStart(string start, StringTree mid, string end) => new StringTree
             {
                 Start = start,
                 Children = new List<StringTree> { mid },
-                End = end
+                End = end,
             };
 
-            private string RenderOneLine() => Start + (Children == null ? "" : string.Join(Sep, Children.Select(c => c.RenderOneLine()))) + End;
-
-            public string Render(string sp)
+            private string RenderOneLine(TreeDecorator treeDec)
             {
-                // TODO: Consider passing in a StringBuilder to use recursively for a rather minor efficiency gain.
-                // Most printed lines won't use StringTree in any case.
+                if (Decorations != null)
+                {
+                    SourceDecoration.AddToTree(Decorations, treeDec);
+                }
+                return Start + (Children == null ? "" : string.Join(Sep, Children.Select(c => c.RenderOneLine(treeDec)))) + End;
+            }
+
+            public string RenderLine(string sp, string linePrefix, string lineSuffix)
+            {
+                TreeDecorator treeDec = new();
+                string line = linePrefix + Render(sp, treeDec) + lineSuffix;
+                return treeDec.WrapLine(line, sp);
+            }
+
+            private string Render(string sp, TreeDecorator treeDec)
+            {
+                // StringBuilder could be used here, especially if the length is known in advance, but TreeDecorator
+                // adds prefixes after the fact. But this should be pretty rare (only in repacking).
+                // Also, ideally most printed lines won't use StringTree.
+                // (string decPrefix, string decSuffix) = Decorations == null ? ("", "") : ;
                 if (Children == null || Children.Count == 0 || sp.Length + Length <= columnLimit)
                 {
-                    return RenderOneLine();
+                    return RenderOneLine(treeDec);
+                }
+                if (Decorations != null)
+                {
+                    SourceDecoration.AddToTree(Decorations, treeDec);
                 }
                 string sp2 = sp + SingleIndent;
                 if (Children.Count == 1)
                 {
-                    return Start + Children[0].Render(sp) + End;
+                    return Start + Children[0].Render(sp, treeDec) + End;
                 }
                 StringBuilder ret = new StringBuilder();
-                ret.AppendLine(Start + Children[0].Render(sp));
+                string firstChild = Children[0].Render(sp, treeDec);
+                ret.Append(treeDec.WrapLineEnd(Start + firstChild));
                 for (int i = 1; i < Children.Count - 1; i++)
                 {
-                    ret.AppendLine(sp2 + Sep.TrimStart() + Children[i].Render(sp2));
+                    string midChild = Children[i].Render(sp2, treeDec);
+                    ret.Append(treeDec.WrapLine(Sep.TrimStart() + midChild, sp2));
                 }
-                ret.Append(sp2 + Sep.TrimStart() + Children[Children.Count - 1].Render(sp2) + End);
+                string lastChild = Children[Children.Count - 1].Render(sp2, treeDec);
+                ret.Append(treeDec.WrapLineStart(Sep.TrimStart() + lastChild + End, sp2));
                 return ret.ToString();
+            }
+        }
+
+        public class TreeDecorator
+        {
+            // Prefix lines with no additional whitespace
+            private List<string> prefixes;
+            // Concatenated line suffixes (must be comments)
+            private string suffix;
+
+            public void AddPrefix(string addPrefix)
+            {
+                // Console.WriteLine($"### < Add start [{addPrefix}]");
+                prefixes ??= new();
+                prefixes.Add(addPrefix);
+            }
+
+            public void AddSuffix(string addSuffix)
+            {
+                // Console.WriteLine($"### < Add end [{addSuffix}]");
+                suffix = suffix == null ? addSuffix : suffix + addSuffix;
+            }
+
+            public string WrapLine(string text, string sp)
+            {
+                if (prefixes == null && suffix == null)
+                {
+                    return sp + text + Environment.NewLine;
+                }
+                // Note that text may include its own lines/indentation
+                // Console.WriteLine($"### > Process start [{string.Join("; ", prefixes ?? new())}] end [{suffix}]");
+                text = (prefixes == null ? "" : string.Join("", prefixes.Select(p => $"{sp}{p}{Environment.NewLine}")))
+                    + sp + text + suffix + Environment.NewLine;
+                prefixes = null;
+                suffix = null;
+                return text;
+            }
+
+            public string WrapLineStart(string text, string sp)
+            {
+                if (prefixes == null)
+                {
+                    return sp + text;
+                }
+                // Console.WriteLine($"### > Process start [{string.Join("; ", prefixes ?? new())}]");
+                text = (prefixes == null ? "" : string.Join("", prefixes.Select(p => $"{sp}{p}{Environment.NewLine}")))
+                    + sp + text;
+                prefixes = null;
+                return text;
+            }
+
+            public string WrapLineEnd(string text)
+            {
+                if (suffix == null)
+                {
+                    return text + Environment.NewLine;
+                }
+                // Console.WriteLine($"### > Process end [{suffix}]");
+                text = text + suffix + Environment.NewLine;
+                suffix = null;
+                return text;
             }
         }
     }

@@ -20,10 +20,16 @@ namespace DarkScript3
     {
         private readonly SharedControls SharedControls;
         private readonly ContextMenuStrip FileBrowserContextMenu;
+        // Map from ResourceString
         private readonly Dictionary<string, InstructionDocs> AllDocs = new Dictionary<string, InstructionDocs>();
+        // Map from full filename
         private readonly Dictionary<string, EditorGUI> AllEditors = new Dictionary<string, EditorGUI>();
+        // Map from full directory name
         private readonly Dictionary<string, FileMetadata> DirectoryMetadata = new Dictionary<string, FileMetadata>();
+        // Map from full directory name (project event dir)
         private readonly Dictionary<string, ProjectSettingsFile> DirectoryProjects = new Dictionary<string, ProjectSettingsFile>();
+        // Map from full directory name
+        private readonly Dictionary<string, InitData> DirectoryInits = new Dictionary<string, InitData>();
         private readonly NameMetadata NameMetadata = new NameMetadata();
         private readonly FileSystemWatcher Watcher;
         private readonly FileSystemWatcher GameWatcher;
@@ -31,6 +37,7 @@ namespace DarkScript3
         private EditorGUI CurrentEditor;
         private string CurrentDirectory;
         private bool ManuallySelectedProject;
+        private bool BatchOperation;
 
         public GUI()
         {
@@ -264,6 +271,105 @@ namespace DarkScript3
                 return false;
             }
 
+            string fileDir = Path.GetDirectoryName(fileName);
+            ProjectSettingsFile.TryGetEmevdFileProject(fileName, out ProjectSettingsFile projectFile);
+            if (!DirectoryInits.TryGetValue(fileDir, out InitData initData))
+            {
+                // This will duplicate the m29 inits per m29 subdirectory, but should be correct otherwise
+                DirectoryInits[fileDir] = initData = new InitData { BaseDir = fileDir };
+            }
+
+            InitData.Links links = null;
+            // This could be done on save as well, but a file does have to be opened to be saved in the first place.
+            List<string> missingFiles = scripter.GetMissingLinkFiles();
+            if (missingFiles.Count > 0)
+            {
+                // Use one directory at a time so it's as consistent as possible
+                string extraDir = projectFile?.GameEventDirectory;
+                List<string> copyFiles = new();
+                foreach (string name in missingFiles)
+                {
+                    while (true)
+                    {
+                        if (extraDir != null && InitData.TryGetLinkedFilePath(extraDir, name, out string linkPath))
+                        {
+                            copyFiles.Add(linkPath);
+                            break;
+                        }
+                        OpenFileDialog ofd = new OpenFileDialog();
+                        ofd.Title = $"Select {name} emevd to resolve event initialization";
+                        List<string> allowedFiles = new() { $"{name}.emevd.dcx", $"{name}.emevd" };
+                        // Exact filenames cannot be specified in the filter
+                        List<string> allowedExts = new() { "*.emevd.dcx", "*.emevd" };
+                        ofd.Filter = $"{name} emevd|{string.Join(", ", allowedExts)}|All files|*.*";
+                        // Don't use TryGetLinkedFilePath here, use the exact selected file.
+                        if (ofd.ShowDialog() == DialogResult.OK && File.Exists(ofd.FileName) && allowedFiles.Contains(Path.GetFileName(ofd.FileName)))
+                        {
+                            copyFiles.Add(ofd.FileName);
+                            extraDir = Path.GetDirectoryName(ofd.FileName);
+                            break;
+                        }
+                        else
+                        {
+                            // Could also warn that initialization values may have incorrect types, or events and inits with types cannot be resolved
+                            DialogResult result = MessageBox.Show(
+                                $"{allowedFiles[0]} is linked by {scripter.EmevdFileName} "
+                                    + $"so it may be required to compile and decompile event initializations. "
+                                    + (string.IsNullOrEmpty(ofd.FileName) ? "" : $"(Got {Path.GetFileName(ofd.FileName)}.)")
+                                    + $"\n\nTry to find {name} again?",
+                                $"{name} missing", MessageBoxButtons.YesNoCancel);
+                            if (result == DialogResult.Cancel)
+                            {
+                                // TODO: Maybe save this as a static variable
+                                return false;
+                            }
+                            else if (result == DialogResult.No)
+                            {
+                                goto afterFiles;
+                            }
+                        }
+                    }
+                }
+            afterFiles:
+                if (missingFiles.Count == copyFiles.Count)
+                {
+                    foreach (string copyFile in copyFiles)
+                    {
+                        string destDir = fileDir;
+                        // Special case for m29, copy to parent directory if the structure looks like chalice subdir.
+                        // This should be detected by InitData.TryGetLinkedFilePath
+                        if (InitData.GetEmevdName(copyFile) == "m29")
+                        {
+                            DirectoryInfo dirInfo = new DirectoryInfo(fileDir);
+                            if (dirInfo.Name.StartsWith("m29_") && dirInfo.Parent?.Name == "event")
+                            {
+                                destDir = dirInfo.Parent.FullName;
+                            }
+                        }
+                        // This will error out if destination file exists (intentional)
+                        File.Copy(copyFile, Path.Combine(destDir, Path.GetFileName(copyFile)));
+                    }
+                    missingFiles.Clear();
+                }
+            }
+            if (missingFiles.Count == 0)
+            {
+                links = scripter.LoadLinks(initData);
+                // TODO: Do this asynchronous (and maybe periodically?)
+                if (jsText != null && !BatchOperation)
+                {
+                    try
+                    {
+                        scripter.UpdateLinksBeforePack(links, jsText);
+                    }
+                    catch
+                    {
+                        // This is only for docs/autocomplete so it's fine.
+                        // Maybe should warn?
+                    }
+                }
+            }
+
             string fileVersion = ProgramVersion.VERSION;
             bool decompiled = false;
             if (jsText == null)
@@ -273,11 +379,11 @@ namespace DarkScript3
                 {
                     if (metadata.Fancy && docs.Translator != null)
                     {
-                        jsText = new FancyEventScripter(scripter, docs, settings.CFGOptions).Unpack();
+                        jsText = new FancyEventScripter(scripter, docs, settings.CFGOptions).Unpack(links);
                     }
                     else
                     {
-                        jsText = scripter.Unpack();
+                        jsText = scripter.Unpack(links);
                     }
                 }
                 catch (Exception ex)
@@ -285,7 +391,14 @@ namespace DarkScript3
                     // Also try to do it in compatibility mode, for emevd files which are no longer allowed, such as changing EMEDFs.
                     try
                     {
-                        jsText = scripter.Unpack(compatibilityMode: true);
+                        if (metadata.Fancy && docs.Translator != null)
+                        {
+                            jsText = new FancyEventScripter(scripter, docs, settings.CFGOptions).Unpack(links, compatibilityMode: true);
+                        }
+                        else
+                        {
+                            jsText = scripter.Unpack(links, compatibilityMode: true);
+                        }
                     }
                     catch
                     {
@@ -316,13 +429,12 @@ namespace DarkScript3
             {
                 fileVersion = headerData?.Version;
             }
-            // If properly decompiled, the metadata is reused by the directory sidebar
-            string fileDir = Path.GetDirectoryName(fileName);
+            // If properly decompiled, the metadata is reused by the directory sidebar, and the file's project is used
             if (decompiled)
             {
                 DirectoryMetadata[fileDir] = metadata;
             }
-            if (ProjectSettingsFile.TryGetEmevdFileProject(fileName, out ProjectSettingsFile projectFile))
+            if (projectFile != null)
             {
                 DirectoryProjects[fileDir] = projectFile;
             }
@@ -331,7 +443,7 @@ namespace DarkScript3
                 DirectoryProjects.Remove(fileDir);
             }
 
-            AddAndShowFile(new EditorGUI(SharedControls, scripter, docs, settings, fileVersion, jsText));
+            AddAndShowFile(new EditorGUI(SharedControls, scripter, docs, settings, fileVersion, jsText, links));
             // Notify about possible compatibility issues
             int versionCmp = ProgramVersion.CompareVersions(ProgramVersion.VERSION, fileVersion);
             if (versionCmp > 0)
@@ -356,13 +468,7 @@ namespace DarkScript3
             if (HeaderData.Read(text, out HeaderData headerData))
             {
                 metadata = new FileMetadata { GameDocs = headerData.GameDocs };
-                evd = new EMEVD()
-                {
-                    Compression = headerData.Compression,
-                    Format = headerData.Game,
-                    StringData = headerData.StringData,
-                    LinkedFileOffsets = headerData.LinkedFileOffsets,
-                };
+                evd = headerData.CreateEmevd();
             }
             else if (!File.Exists(org))
             {
@@ -380,7 +486,7 @@ namespace DarkScript3
             }
 
             text = HeaderData.Trim(text);
-            return OpenEMEVDFile(org, metadata, evd: evd, jsText: text.Trim(), headerData: headerData);
+            return OpenEMEVDFile(org, metadata, evd: evd, jsText: text, headerData: headerData);
         }
 
         private void OpenXMLFile(string fileName)
@@ -514,6 +620,11 @@ namespace DarkScript3
             SharedControls.RemoveEditor(editor);
             AllEditors.Remove(filePath);
             editor.Dispose();
+
+            if (DirectoryInits.TryGetValue(Path.GetDirectoryName(filePath), out InitData initData))
+            {
+                initData.ClearUnused(AllEditors.Keys);
+            }
 
             concurrentTabChange = true;
             tabControl.TabPages.RemoveByKey(filePath);
@@ -678,22 +789,50 @@ namespace DarkScript3
             fileView.Nodes.Clear();
             fileView.BackColor = TextStyles.BackColor;
             fileView.ForeColor = TextStyles.ForeColor;
+            // Nodes can't be hidden, they can only be added/removed, so handle this here
+            fileFilter.BackColor = TextStyles.BackColor;
+            fileFilter.ForeColor = TextStyles.ForeColor;
+            fileFilter.Enabled = allFiles.Count > 0;
+            fileFilter.BorderStyle = fileFilter.Enabled ? BorderStyle.FixedSingle : BorderStyle.None;
+            if (!fileFilter.Enabled)
+            {
+                // This should be fine, text change is no-op when disabled
+                fileFilter.Text = "";
+            }
+            string filterText = null;
+            if (!string.IsNullOrWhiteSpace(fileFilter.Text))
+            {
+                filterText = fileFilter.Text;
+            }
             foreach (string file in allFiles)
             {
                 string fullText = file;
+                string mapName = null;
                 if (mapNames != null && mapNames.Count > 0)
                 {
                     string matchText = file.Split(new[] { '.' }, 2)[0];
-                    if (mapNames.TryGetValue(matchText, out string mapName))
+                    if (mapNames.TryGetValue(matchText, out mapName))
                     {
                         fullText = $"{file} <{mapName}>";
+                    }
+                }
+                string emevdPath = Path.Combine(directory, file);
+                if (filterText != null && !AllEditors.ContainsKey(emevdPath))
+                {
+                    // This could do globs/per-word search in the future. For now search these separately.
+                    // Keep the dot for map suffix searches I guess.
+                    string shortName = InitData.GetEmevdName(file) + ".";
+                    if (!shortName.Contains(filterText, StringComparison.OrdinalIgnoreCase)
+                        && (mapName == null || !mapName.Contains(filterText, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        continue;
                     }
                 }
                 TreeNode node = new TreeNode(fullText);
                 FileBrowserTag tag = new FileBrowserTag
                 {
                     BaseName = file,
-                    LocalPath = Path.Combine(directory, file),
+                    LocalPath = emevdPath,
                 };
                 if (gameDir != null)
                 {
@@ -771,6 +910,14 @@ namespace DarkScript3
                 return;
             }
             OpenFileBrowserTag(tag);
+        }
+
+        private void fileFilter_TextChanged(object sender, EventArgs e)
+        {
+            if (fileFilter.Enabled)
+            {
+                UpdateDirectoryListing();
+            }
         }
 
         private void OpenFileBrowserTag(FileBrowserTag tag)
@@ -861,7 +1008,7 @@ namespace DarkScript3
                 if (gameStr != null)
                 {
                     string mapName = tag.BaseName.Split('.')[0];
-                    ToolStripMenuItem mapItem = new ToolStripMenuItem($"Load {mapName} in DSMapStudio");
+                    ToolStripMenuItem mapItem = new ToolStripMenuItem($"Load {mapName} in {SharedControls.Metadata.ServerName}");
                     mapItem.Click += async (sender, e) => await OpenFileBrowserMap(gameStr, mapName);
                     FileBrowserContextMenu.Items.Add(mapItem);
                 }
@@ -965,101 +1112,117 @@ namespace DarkScript3
 
         private void batchDumpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var ofd = new OpenFileDialog();
-            ofd.Title = "Open (note: skips existing JS files)";
-            ofd.Multiselect = true;
-            ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx";
-            if (ofd.ShowDialog() == DialogResult.OK)
+            try
             {
-                FileMetadata metadata = ChooseGame(true);
-                if (metadata == null) return;
-                List<string> succeeded = new List<string>();
-                List<string> failed = new List<string>();
-                foreach (var fileName in ofd.FileNames)
+                BatchOperation = true;
+                var ofd = new OpenFileDialog();
+                ofd.Title = "Open (note: skips existing JS files)";
+                ofd.Multiselect = true;
+                ofd.Filter = "EMEVD Files|*.emevd; *.emevd.dcx";
+                if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    if (File.Exists(fileName + ".js"))
+                    FileMetadata metadata = ChooseGame(true);
+                    if (metadata == null) return;
+                    List<string> succeeded = new List<string>();
+                    List<string> failed = new List<string>();
+                    foreach (var fileName in ofd.FileNames)
                     {
-                        continue;
-                    }
-                    try
-                    {
-                        bool wasOpen = AllEditors.ContainsKey(fileName);
-                        if (OpenEMEVDFile(fileName, metadata))
+                        if (File.Exists(fileName + ".js"))
                         {
-                            CurrentEditor.SaveJSFile();
-                            succeeded.Add(fileName);
-                            if (!wasOpen)
-                            {
-                                RemoveFile(CurrentEditor.EMEVDPath);
-                            }
                             continue;
                         }
+                        try
+                        {
+                            bool wasOpen = AllEditors.ContainsKey(fileName);
+                            if (OpenEMEVDFile(fileName, metadata))
+                            {
+                                CurrentEditor.SaveJSFile();
+                                succeeded.Add(fileName);
+                                if (!wasOpen)
+                                {
+                                    RemoveFile(CurrentEditor.EMEVDPath);
+                                }
+                                continue;
+                            }
+                        }
+                        catch
+                        {
+                        }
+                        failed.Add(fileName);
                     }
-                    catch
-                    {
-                    }
-                    failed.Add(fileName);
-                }
 
-                List<string> lines = new List<string>();
-                if (failed.Count > 0)
-                {
-                    lines.Add("The following emevds failed to be dumped to JS:" + Environment.NewLine);
-                    lines.AddRange(failed);
-                    lines.Add("");
+                    List<string> lines = new List<string>();
+                    if (failed.Count > 0)
+                    {
+                        lines.Add("The following emevds failed to be dumped to JS:" + Environment.NewLine);
+                        lines.AddRange(failed);
+                        lines.Add("");
+                    }
+                    if (succeeded.Count > 0)
+                    {
+                        lines.Add("The following emevds were dumped to JS:" + Environment.NewLine);
+                        lines.AddRange(succeeded);
+                    }
+                    ScrollDialog.Show(this, string.Join(Environment.NewLine, lines));
                 }
-                if (succeeded.Count > 0)
-                {
-                    lines.Add("The following emevds were dumped to JS:" + Environment.NewLine);
-                    lines.AddRange(succeeded);
-                }
-                ScrollDialog.Show(this, string.Join(Environment.NewLine, lines));
+            }
+            finally
+            {
+                BatchOperation = false;
             }
         }
 
         private void batchResaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var ofd = new OpenFileDialog();
-            ofd.Multiselect = true;
-            ofd.Filter = "EMEVD Files|*.emevd.js; *.emevd.dcx.js";
-            if (ofd.ShowDialog() == DialogResult.OK)
+            try
             {
-                List<string> succeeded = new List<string>();
-                List<string> failed = new List<string>();
-                foreach (var fileName in ofd.FileNames)
+                BatchOperation = true;
+                var ofd = new OpenFileDialog();
+                ofd.Multiselect = true;
+                ofd.Filter = "EMEVD Files|*.emevd.js; *.emevd.dcx.js";
+                if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    try
+                    List<string> succeeded = new List<string>();
+                    List<string> failed = new List<string>();
+                    foreach (var fileName in ofd.FileNames)
                     {
-                        bool wasOpen = AllEditors.ContainsKey(fileName);
-                        if (OpenJSFile(fileName) && CurrentEditor.SaveJSAndEMEVDFile())
+                        try
                         {
-                            succeeded.Add(fileName);
-                            if (!wasOpen)
+                            bool wasOpen = AllEditors.ContainsKey(fileName);
+                            if (OpenJSFile(fileName) && CurrentEditor.SaveJSAndEMEVDFile())
                             {
-                                RemoveFile(CurrentEditor.EMEVDPath);
+                                succeeded.Add(fileName);
+                                if (!wasOpen)
+                                {
+                                    RemoveFile(CurrentEditor.EMEVDPath);
+                                }
+                                continue;
                             }
-                            continue;
                         }
+                        catch
+                        {
+                        }
+                        failed.Add(fileName);
                     }
-                    catch
-                    {
-                    }
-                    failed.Add(fileName);
-                }
 
-                List<string> lines = new List<string>();
-                if (failed.Count > 0)
-                {
-                    lines.Add("The following JS files failed to be saved:" + Environment.NewLine);
-                    lines.AddRange(failed);
-                    lines.Add("");
+                    List<string> lines = new List<string>();
+                    if (failed.Count > 0)
+                    {
+                        lines.Add("The following JS files failed to be saved:" + Environment.NewLine);
+                        lines.AddRange(failed);
+                        lines.Add("");
+                    }
+                    if (succeeded.Count > 0)
+                    {
+                        lines.Add("The following JS files were saved:" + Environment.NewLine);
+                        lines.AddRange(succeeded);
+                    }
+                    ScrollDialog.Show(this, string.Join(Environment.NewLine, lines));
                 }
-                if (succeeded.Count > 0)
-                {
-                    lines.Add("The following JS files were saved:" + Environment.NewLine);
-                    lines.AddRange(succeeded);
-                }
-                ScrollDialog.Show(this, string.Join(Environment.NewLine, lines));
+            }
+            finally
+            {
+                BatchOperation = false;
             }
         }
 
@@ -1160,18 +1323,19 @@ namespace DarkScript3
         private void showConnectionInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             StringBuilder sb = new StringBuilder();
+            string serverName = SharedControls.Metadata.ServerName;
             if (Settings.Default.UseSoapstone)
             {
-                sb.AppendLine("DSMapStudio connectivity is enabled.");
+                sb.AppendLine($"{serverName} connectivity is enabled.");
                 sb.AppendLine();
-                sb.AppendLine("When DSMapStudio is open and Settings > Soapstone Server is enabled, "
-                    + "data from DSMapStudio will be used to autocomplete values from params, FMGs, and loaded maps. "
-                    + "You can also hover on numbers in DarkScript3 to get tooltip info, "
-                    + "and right-click on the tooltip to open it in DSMapStudio.");
+                sb.AppendLine($"When {serverName} is open and Settings > Soapstone Server is enabled, "
+                    + $"data from {serverName} will be used to autocomplete values from params, FMGs, and loaded maps. "
+                    + $"You can also hover on numbers in DarkScript3 to get tooltip info, "
+                    + $"and right-click on the tooltip to open it in {serverName}.");
             }
             else
             {
-                sb.AppendLine("DSMapStudio connectivity is disabled.");
+                sb.AppendLine($"{serverName} connectivity is disabled.");
                 sb.AppendLine();
                 if (connectToolStripMenuItem.Enabled)
                 {
@@ -1190,14 +1354,14 @@ namespace DarkScript3
             sb.AppendLine($"Client state: {metadata.State}");
             sb.AppendLine();
             sb.AppendLine(metadata.LastLoopResult ?? "No requests sent");
-            ScrollDialog.Show(this, sb.ToString(), "DSMapStudio Soapstone Server Info");
+            ScrollDialog.Show(this, sb.ToString(), "Soapstone Server Info");
         }
 
         private void clearMetadataCacheToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SharedControls.Metadata.ResetData();
             ScrollDialog.Show(this,
-                "Metadata cache cleared. Names and autocomplete items will be refetched from DSMapStudio when connected."
+                $"Metadata cache cleared. Names and autocomplete items will be refetched from {SharedControls.Metadata.ServerName} when connected."
                     + "\n\n(This may be supported automatically in the future, if that would be helpful.)",
                 "Cleared cached metadata");
         }

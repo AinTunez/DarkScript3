@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+1000000000 敵リスポン -- enemy respawn
+1049382200 距離で現消する -- disappear with distance
+1049382210 間欠泉_弾丸オーナー作成 -- Geyser_Bullet owner created
+1049382211 間欠泉_XX -- Geyser_XX
+1049382399 スカラベ_メタル個体ミニゲーム_イベント -- Scarab_Metal Individual Mini Game_Event
+1049382820 老いた宿将イベント_お供の喪失兵士を呼び出す -- Old Commander Event_Calling the Lost Soldier to Accompany
+1049382821 老いた宿将イベント_お供の喪失兵士を帰還させる -- Old Warlord Event_Returning the lost soldiers who accompanied you
+1049382822 老いた宿将イベント_召喚行動 -- Old Commander Event_Summoning Action
+1049382823 老いた宿将イベント_召喚行動_第2波 -- Old Commander Event_Summoning Action_Second Wave
+1049382824 老いた宿将イベント_お供の喪失兵士を呼び出す_第二波 -- Old Commander Event_Calling Lost Soldiers to Accompany_Second Wave
+1049382825 老いた宿将イベント_特殊効果解除 -- Old innkeeper event_special effects removed

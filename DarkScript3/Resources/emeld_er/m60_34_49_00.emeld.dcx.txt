@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1034490700 NPC224爺や_NPC初期化イベント_初期状態 -- NPC224 Grandpa_NPC initialization event_initial state
+1034490701 NPC224爺や_NPC初期化イベント_ラニの仲間になった後 -- NPC224 Old Man_NPC Initialization Event_After becoming Rani's friend
+1034492210 遠距離敵_セットアップ_邪眼用 -- Long range enemy_setup_for evil eye
+1034492270 アローレインタイミング管理_XX -- Arrow rain timing management_XX
+1034492290 アローレインラダーンベース_XX -- Arrow Rain Radan Base_XX
+1034492340 キャララグドール化_XX -- Character ragdollization_XX
+1034493704 デバッグ用NPC224爺や_被ダメ時SFX再生 -- NPC224 Grandpa for debugging_SFX playback when damaged

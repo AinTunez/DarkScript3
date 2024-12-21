@@ -1,0 +1,21 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+31042810 ボス出現 -- Boss appears
+31042849 ボス_イベント起動 -- Boss_event activation
+31072213 柱の周りを信徒がぐるぐる_XX -- Believers circle around the pillar_XX
+31072220 信徒_視覚聴覚低下の追加_XX -- Believers_Addition of visual and hearing loss_XX
+31072225 信徒_視界角度調整_XX -- Believer_View angle adjustment_XX
+31072230 信徒_仲間が殴られると起動_終端部屋_XX -- Believer_Starts when a friend is hit_Terminal room_XX
+31072280 ネズミ突進_XX -- Mouse rush_XX
+31072800 ボス撃破 -- Defeat the boss
+31072801 腐敗の眷属その１_死亡時の撃破演出 -- Heir of Corruption Part 1_Defeat performance upon death
+31072802 腐敗の眷属その２_死亡時の撃破演出 -- Heir of Corruption Part 2_Defeat performance upon death
+31072811 ボス激昂 -- boss rage
+310722205 信徒_視覚聴覚低下の削除_XX -- Believers_Delete visual and hearing loss_XX
+310722300 犬ネズミ_びっくりして走り回る_ボス前縦穴_XX -- Dog and mouse_running around in surprise_vertical hole in front of boss_XX
+1000000000 敵リスポン -- enemy respawn

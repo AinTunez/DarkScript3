@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 初期化 -- Initialization
+2010 自機に光点アタッチ出来るかテスト -- Test whether you can attach a light point to your aircraft
+2015 生体兵器地中待機テスト -- Biological weapon underground test
+2020 地面汚しテスト -- soil soil test
+2030 AC戦テスト -- AC battle test
+2040 自機にダメージ発生させるテスト -- Test to cause damage to own aircraft
+2050 大爆発SFXテスト -- Big explosion SFX test
+2700 イベント弾丸発射テスト -- Event bullet firing test
+2920 宮武強敵テスト -- Miyatake strong enemy test
+2930 SE再生テスト -- SE playback test
+1000000000 敵リスポン -- enemy respawn

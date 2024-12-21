@@ -109,7 +109,7 @@ namespace DarkScript3
                 List<string> names = name.Split('|').ToList();
                 if (pos >= 0)
                 {
-                    if (pos >= doc.Arguments.Length) throw new ArgumentException($"{doc.Name} doesn't have arg {pos}");
+                    if (pos >= doc.Arguments.Count) throw new ArgumentException($"{doc.Name} doesn't have arg {pos}");
                     if (!names.Contains(doc.Arguments[pos].Name)) throw new ArgumentException($"{doc.Name} arg {pos} dooesn't have name {name}, has {string.Join(", ", doc.Arguments.Select(s => s.Name))}");
                     arg = pos;
                 }
@@ -245,12 +245,12 @@ namespace DarkScript3
                     // In all cases, they can be established from the COND variant.
                     if (use == ControlType.COND && cond.OptFields != null)
                     {
-                        bool matching = cond.OptFields.Select((a, i) => a == doc.Arguments[doc.Arguments.Length - cond.OptFields.Count + i].Name).All(b => b);
+                        bool matching = cond.OptFields.Select((a, i) => a == doc.Arguments[doc.Arguments.Count - cond.OptFields.Count + i].Name).All(b => b);
                         // Missing opt args can happen when "# of target character"-type arguments get added over time.
                         // This is mostly a pretty-printing feature. so it might be tedious to specify each individual change between games.
                         if (matching)
                         {
-                            int optArg = doc.Arguments.Length - cond.OptFields.Count;
+                            int optArg = doc.Arguments.Count - cond.OptFields.Count;
                             if (ignore.Contains(optArg)) throw new Exception($"Optional arg {cond.OptFields[0]} is not part of the normal argument list for {name} with {cmd}");
                             optArgDoc = doc.Arguments[optArg];
                         }
@@ -312,7 +312,7 @@ namespace DarkScript3
                 if (shortDoc.OptFields != null)
                 {
                     // Unlike condition docs, this length is always fixed.
-                    int optStart = doc.Arguments.Length - shortDoc.OptFields.Count;
+                    int optStart = doc.Arguments.Count - shortDoc.OptFields.Count;
                     bool matching = shortDoc.OptFields.Select((a, i) => a == doc.Arguments[optStart + i].Name).All(b => b);
                     if (matching)
                     {
@@ -552,17 +552,17 @@ namespace DarkScript3
                     {
                         Cmd = cmd,
                         Name = instrDoc.DisplayName,
-                        Args = Enumerable.Repeat((object)null, instrDoc.Arguments.Length).ToList(),
+                        Args = Enumerable.Repeat((object)null, instrDoc.Arguments.Count).ToList(),
                         Layers = imInstr.Layers,
                     };
                     variant.SetInstrArgs(instr, imInstr);
                     return instr;
                 }
                 else if (InstrDocs.TryGetValue(imInstr.Cmd, out EMEDF.InstrDoc optDoc)
-                    && optDoc.OptionalArgs > 0 && imInstr.Args.Count < optDoc.Arguments.Length)
+                    && optDoc.OptionalArgs > 0 && imInstr.Args.Count < optDoc.Arguments.Count)
                 {
                     // Make a defensive copy (should use clone?)
-                    int missingArgs = optDoc.Arguments.Length - imInstr.Args.Count;
+                    int missingArgs = optDoc.Arguments.Count - imInstr.Args.Count;
                     return new Instr
                     {
                         Cmd = imInstr.Cmd,
@@ -618,7 +618,7 @@ namespace DarkScript3
                 {
                     Cmd = cmd,
                     Name = instrDoc.DisplayName,
-                    Args = Enumerable.Repeat((object)null, instrDoc.Arguments.Length).ToList(),
+                    Args = Enumerable.Repeat((object)null, instrDoc.Arguments.Count).ToList(),
                 };
                 // Re-expose error (such as Goto in bad state) alongside instruction
                 object controlVal = condIm.ControlArg;
@@ -1119,7 +1119,7 @@ namespace DarkScript3
         {
             if (InstrDocs.TryGetValue(instr.Cmd, out EMEDF.InstrDoc doc))
             {
-                for (int i = 0; i < doc.Arguments.Length; i++)
+                for (int i = 0; i < doc.Arguments.Count; i++)
                 {
                     if (i >= instr.Args.Count) break;
                     EMEDF.EnumDoc edoc = doc.Arguments[i].EnumDoc;

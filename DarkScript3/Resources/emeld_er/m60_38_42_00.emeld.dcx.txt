@@ -1,0 +1,8 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1038422200 死亡待機_XX -- Waiting for death_XX
+1038422230 傀儡召喚イベント_XX -- Puppet summoning event_XX
+1038422240 輝石魔術師_特殊効果付与 -- Pyroxene Magician_Special effects added
+1038422580 梯子登録 -- ladder registration

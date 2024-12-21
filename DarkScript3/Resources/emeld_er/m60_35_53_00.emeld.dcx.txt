@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1035532200 火の信徒vs王軍_交戦イベント -- Fire Believers vs Royal Army_Battle Event
+1035532210 視界特殊効果 -- vision special effects
+1035532300 土竜_接敵時初回熔岩タックル -- Earth Dragon_First lava tackle when approaching enemy
+1035532340 土竜_ワープ判定 -- Earth Dragon_Warp Judgment
+1035532450 死体焚火ナビメッシュ切り抜き用アセット無効化_XX -- Corpse bonfire navigation mesh cutout asset invalidation_XX
+1035532500 死体焚火イベント起動 -- Corpse bonfire event started
+1035533700 壺マイヤー_NPC初期化イベント_溶岩風呂 -- Pot Mayor_NPC initialization event_Lava bath
+1035533701 壺マイヤー_溶岩風呂での雄叫びイベント_溶岩風呂 -- Tsubomayer_Lava bath roar event_Lava bath

@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+32072200 亡者鉱夫_採掘中止_笛吹判定追加_XX -- Dead Miner_Mining Canceled_Picture Judgment Added_XX
+32072580 梯子登録 -- ladder registration
+32072800 ボス撃破 -- Defeat the boss
+32072810 ボス出現 -- Boss appears
+32072811 ボス激昂 -- boss rage
+32072820 ボス閉鎖 -- boss closure
+32072849 ボスイベント起動 -- Boss event activation
+32073700 壺マイヤー_NPC初期化イベント_一方通行扉で再開 -- Tsubomayer_NPC initialization event_Restart with one-way door
+32073701 壺マイヤー_移動処理_一方通行扉前_裏口 -- Tsubo Meyer_Movement process_In front of one-way door_Back door
+32073702 壺マイヤー_移動処理_一方通行扉前_表口 -- Tsubo Meyer_Movement process_In front of one-way door_Front entrance
+1000000000 敵リスポン -- enemy respawn

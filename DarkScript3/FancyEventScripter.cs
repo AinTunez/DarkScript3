@@ -5,7 +5,6 @@ using System.IO;
 using System.Text;
 using SoulsFormats;
 using static DarkScript3.ScriptAst;
-using static DarkScript3.InstructionTranslator;
 using static SoulsFormats.EMEVD.Instruction;
 using static SoulsFormats.EMEVD;
 
@@ -25,50 +24,77 @@ namespace DarkScript3
             this.options = options;
         }
 
-        public string Unpack()
+        public string Unpack(InitData.Links links, bool compatibilityMode = false)
         {
+            scripter.GetEventNames();
+            scripter.UpdateLinksForUnpack(links);
             StringWriter writer = new StringWriter();
-            Decompile(writer);
+            Decompile(writer, links, compatibilityMode);
             return writer.ToString();
         }
 
-        public EMEVD Pack(string code, string documentName, out FancyJSCompiler.CompileOutput output)
+        public string Pass(string code, out FancyJSCompiler.CompileOutput output)
         {
-            output = new FancyJSCompiler(options).Compile(code, docs);
-            try
-            {
-                return scripter.Pack(output.Code, documentName);
-            }
-            catch (JSScriptException ex)
-            {
-                output.RewriteStackFrames(ex, documentName);
-                throw ex;
-            }
-        }
-
-        public EMEVD Pack(string code, string documentName)
-        {
-            return Pack(code, documentName, out FancyJSCompiler.CompileOutput _);
-        }
-
-        public string Repack(string code, out FancyJSCompiler.CompileOutput output)
-        {
-            output = new FancyJSCompiler(options).Compile(code, docs, true);
+            output = new FancyJSCompiler(scripter.JsFileName, code, options).Compile(docs, FancyJSCompiler.Mode.Reparse);
+            // TODO: Need to rewrite stack?
             return output.Code;
         }
 
-        public string Repack(string code)
+        public EMEVD Pack(string code, InitData.Links links, out FancyJSCompiler.CompileOutput output)
         {
-            return Repack(code, out FancyJSCompiler.CompileOutput _);
+            output = new FancyJSCompiler(scripter.JsFileName, code, options).Compile(docs, FancyJSCompiler.Mode.Pack);
+            try
+            {
+                return scripter.Pack(output.Code, links, output.MainInit);
+            }
+            catch (JSScriptException ex)
+            {
+                output.RewriteStackFrames(ex, scripter.JsFileName);
+                throw ex;
+            }
+            finally
+            {
+                foreach (JSScriptException ex in scripter.PackWarnings)
+                {
+                    output.RewriteStackFrames(ex, scripter.JsFileName);
+                }
+            }
+        }
+
+        internal EMEVD Pack(string code, InitData.Links links)
+        {
+            return Pack(code, links, out FancyJSCompiler.CompileOutput _);
+        }
+
+        public string Repack(string code, InitData.Links links, out FancyJSCompiler.CompileOutput output)
+        {
+            output = new FancyJSCompiler(scripter.JsFileName, code, options)
+                .Compile(docs, FancyJSCompiler.Mode.Repack, links, scripter.GetEventNames());
+            return output.Code;
+        }
+
+        internal string Repack(string code, InitData.Links links)
+        {
+            return Repack(code, links, out _);
         }
 
         public List<FancyJSCompiler.DiffSegment> PreviewPack(string code)
         {
-            FancyJSCompiler.CompileOutput output = new FancyJSCompiler(options).Compile(code, docs, printFancyEnums: true);
+            FancyJSCompiler.CompileOutput output =
+                new FancyJSCompiler(scripter.JsFileName, code, options).Compile(docs, FancyJSCompiler.Mode.PackPreview);
             return output.GetDiffSegments();
         }
 
-        private void Decompile(TextWriter writer)
+        public static object GetDisplayArg(EMEDF.ArgDoc argDoc, object val)
+        {
+            if (argDoc.GetDisplayValue(val) is string displayStr)
+            {
+                return new DisplayArg { DisplayValue = displayStr, Value = val };
+            }
+            return val;
+        }
+
+        private void Decompile(TextWriter writer, InitData.Links links, bool compatibilityMode = false)
         {
             EMEDF DOC = docs.DOC;
             InstructionTranslator info = docs.Translator;
@@ -78,11 +104,12 @@ namespace DarkScript3
                 string id = evt.ID.ToString();
                 string restBehavior = evt.RestBehavior.ToString();
 
-                Dictionary<Parameter, string> paramNames = docs.ParamNames(evt);
+                Dictionary<Parameter, string> paramNames = docs.InferredParamNames(evt, links);
                 List<string> argNameList = paramNames.Values.Distinct().ToList();
                 Dictionary<Parameter, ParamArg> paramArgs = paramNames.ToDictionary(e => e.Key, e => new ParamArg { Name = e.Value });
 
-                EventFunction func = new EventFunction { ID = (int)evt.ID, RestBehavior = evt.RestBehavior, Params = argNameList };
+                long funcId = evt.ID;
+                EventFunction func = new EventFunction { ID = funcId, RestBehavior = evt.RestBehavior, Params = argNameList };
 
                 string eventName = scripter.EventName(evt.ID);
                 if (eventName != null) writer.WriteLine($"// {eventName}");
@@ -99,19 +126,11 @@ namespace DarkScript3
 
                     IEnumerable<ArgType> argStruct = doc.Arguments.Select(arg => arg.Type == 8 ? ArgType.UInt32 : (ArgType)arg.Type);
 
-                    Layers layers = ins.Layer is uint l ? new Layers { Mask = l } : null;
-                    Instr instr = new Instr { Inner = ins, Cmd = InstructionDocs.FormatInstructionID(ins.Bank, ins.ID), Name = funcName, Layers = layers };
-
+                    Instr instr;
                     try
                     {
-                        instr.Args = docs.UnpackArgsWithParams(ins, insIndex, doc, paramArgs, (argDoc, val) =>
-                        {
-                            if (argDoc.GetDisplayValue(val) is string displayStr)
-                            {
-                                return new DisplayArg { DisplayValue = displayStr, Value = val };
-                            }
-                            return val;
-                        });
+                        instr = docs.UnpackArgsWithParams(
+                            ins, insIndex, doc, paramArgs, GetDisplayArg, allowArgMismatch: compatibilityMode, links: links);
                     }
                     catch (Exception ex)
                     {
@@ -135,7 +154,7 @@ namespace DarkScript3
                     // For the moment, swallow this.
                     // Can find a way to expose the error, but these are basically intentional bail outs, also existing in vanilla emevd.
                     StringBuilder code = new StringBuilder();
-                    scripter.UnpackEvent(evt, code);
+                    scripter.UnpackEvent(evt, code, links, compatibilityMode, addEventName: false);
                     writer.Write(code.ToString());
                     continue;
                 }

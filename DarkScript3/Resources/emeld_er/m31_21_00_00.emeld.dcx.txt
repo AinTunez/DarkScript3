@@ -1,0 +1,23 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+31032849 ボス_イベント起動 -- Boss_event activation
+31212205 監視所前_卑兵飛び出してくる -- In front of the guard post_Soldiers jump out
+31212210 卑兵たちに毒無効の特殊効果付与_XX -- Gives special effects of poison immunity to lowly soldiers_XX
+31212230 キャラ死亡_XX -- Character death_XX
+31212250 牢獄が開くと亡者出てくる特殊待機_XX -- Special standby where the dead appear when the prison opens_XX
+31212260 牢獄が開くと内でウロウロしている亡者が出てくる_XX -- When the prison opens, the dead wandering inside come out_XX
+31212308 ネズミ突進_XX -- Mouse rush_XX
+31212400 牢屋レバー_XX -- Prison lever_XX
+31212500 落とし穴壊れたら周回まで復活しない -- If the pit breaks, it won't come back until the lap.
+31212800 ボス撃破 -- Defeat the boss
+31212810 ボス出現 -- Boss appears
+31212815 ホストがボス部屋入場 -- Host enters boss room
+31212830 ボス部屋バディ石碑_使用可能判定 -- Boss room buddy stone monument_usable determination
+31212860 ホスト入場フラグ_2回目以上 -- Host entry flag_2nd or more time
+312112811 ボス激昂 -- boss rage
+1000000000 敵リスポン -- enemy respawn

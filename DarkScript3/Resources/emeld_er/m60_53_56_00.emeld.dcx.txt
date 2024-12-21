@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1053562200 野生動物霊体化 -- wild animal spirit form
+1053562250 気球待機イベント_XX -- Balloon standby event_XX
+1053562260 気球破壊イベント_XX -- Balloon destruction event_XX
+1053562270 人形兵解除イベント_XX -- Puppet soldier release event_XX
+1053562820 円形サークル_天候変化無効イベント -- Circular circle_weather change invalid event

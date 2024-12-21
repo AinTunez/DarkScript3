@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 増援バグ無効化 -- Reinforcement bug disabled
+2010 増援バグ起動 -- Reinforcement bug activated
+2102 監督バグイベント -- Director bug event
+1000000000 敵リスポン -- enemy respawn

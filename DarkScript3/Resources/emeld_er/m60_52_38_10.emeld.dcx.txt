@@ -1,0 +1,19 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1051382850 ラダーン_イベント起動 -- Radhan_event activation
+1052382300 なんちゃってNPC召喚_起動_XX -- What the heck NPC summon_start_XX
+1052382340 なんちゃってNPC召喚_召喚_XX -- NPC summoning_summoning_XX
+1052382380 なんちゃってNPC召喚_サイン出す_XX -- What the heck is NPC summoning_signing_XX
+1052382420 なんちゃってNPC召喚_サインに近づいたら幻影出す_XX -- What the heck is NPC summoned_If you get close to the sign, an illusion will appear_XX
+1052382460 なんちゃってNPC召喚_死んだらサイン復活_XX -- What the hell is NPC summoned_Sign resurrection after death_XX
+1052382570 ラダーン砂漠の幟_表示_XX -- Radan Desert Flag_Display_XX
+1052382590 ラダーン祭りNPC召喚_XX -- Radan Festival NPC Summon_XX
+1052382597 貴腐騎士_カットシーン再生用ダミー化 -- Noble Knight_dummy for cutscene playback
+1052382800 ボス撃破 -- Defeat the boss
+1052382810 ボス出現 -- Boss appears
+1052382820 ボス激昂_1回目 -- Boss rage_1st time
+1052382830 ボス激昂_2回目以降 -- Boss rage_2nd time onwards

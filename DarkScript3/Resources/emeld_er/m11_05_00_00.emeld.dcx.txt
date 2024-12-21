@@ -1,0 +1,31 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+11052500 灰に包まれた王都 -- The royal capital shrouded in ashes
+11052510 エレベータイベント起動 -- Elevator event activation
+11052580 梯子登録 -- ladder registration
+11052691 アセット破壊禁止 -- Prohibition of asset destruction
+11052692 神門稼働禁止 -- Shin gate operation prohibited
+11052696 闘技場の扉解放 -- Opening the arena door
+11052697 チュートリアルメッセージ_円卓のマリカ像 -- Tutorial message_Marika statue at the round table
+11052698 チュートリアルメッセージ_王都闘技場 -- Tutorial message_Royal Capital Arena
+11052699 闘技場入り口_マルチ中は稼働しない -- Arena entrance_does not operate during multiplayer
+11052800 ゴッドフレイ撃破 -- Defeat Godfrey
+11052810 ゴッドフレイ出現 -- Godfrey appears
+11052811 ゴッドフレイ激昂 -- godfrey rage
+11052830 ゴッドフレイカメラ -- godfrey camera
+11052849 ゴッドフレイ戦イベント起動 -- Godfrey battle event starts
+11052850 百智卿撃破 -- Defeat Lord Hyakuchi
+11052859 百智卿イベント起動 -- Lord Hyakuchi event started
+11052860 百智卿出現 -- Lord Baekchi appears
+11052861 百智卿激昂 -- Lord Baichi enraged
+11053700 NPC206ゴッドフレイ_会話処理限界の距離変更 -- NPC206 Godfrey_Distance change for conversation processing limit
+11053705 NPC351金仮面の従者_NPC初期化イベント -- NPC351 Gold Masked Squire_NPC initialization event
+11053706 NPC112金仮面の探究者_NPC初期化イベント -- NPC112 Gold Masked Seeker_NPC initialization event
+11053707 NPC112金仮面の探究者_アイテム光_再訪 -- NPC112 Golden Masked Seeker_Item Light_Revisited
+11053708 NPC351金仮面の従者_王都_灰_アイテム光 -- NPC351 Gold Masked Servant_Royal Capital_Ash_Item Light
+11053710 NPC324_百智卿_ボス戦開始会話 -- NPC324_Lord Hyakuchi_Boss battle start conversation
+11053720 NPC318_混沌の宿主_白霊共闘許可フラグ立て -- NPC318_Host of Chaos_White Spirit Collaboration Permission Flag Set
+11053730 NPC223亜人針子_NPC初期化イベント_入り口すぐの篝火近く_灰都 -- NPC223 Demi-Shipper_NPC initialization event_Near the bonfire right at the entrance_Haito
+11053731 NPC223亜人針子_母の声イベント -- NPC223 Demi-human seamstress_Mother's voice event
+1000000000 敵リスポン -- enemy respawn

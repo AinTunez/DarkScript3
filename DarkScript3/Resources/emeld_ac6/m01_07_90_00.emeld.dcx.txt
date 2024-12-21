@@ -1,0 +1,71 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 カメラ起動 -- camera start
+2001 TGT制御_脚 -- TGT control_legs
+2002 TGT制御_斜め設計 -- TGT control_diagonal design
+2003 TGT制御_横並び設計 -- TGT control_Side-by-side design
+2005 TGT制御起動イベント1 -- TGT control activation event 1
+2006 TGT制御起動イベント2 -- TGT control activation event 2
+2007 TGT制御起動イベント3 -- TGT control activation event 3
+2008 TGT制御起動イベント4 -- TGT control activation event 4
+2010 採掘艦転倒 -- Mining ship falls
+2011 設計チェック起動イベント -- Design check trigger event
+2012 設計チェック起動イベント2 -- Design check launch event 2
+2013 設計チェック起動イベント3 -- Design check launch event 3
+2015 設計チェック_右足前 -- Design check_right foot front
+2016 設計チェック_左足前 -- Design check_front left foot
+2017 設計チェック_射撃_右足前下 -- Design check_shooting_lower front right foot
+2018 設計チェック_射撃_右足前上 -- Design check_shooting_right foot front upper
+2019 設計チェック_二両目 -- Design check_second car
+2100 テスト_目玉アセット不死身 -- Test_Eyeball Asset Immortality
+2110 テスト_目玉死亡したら不死身解除 -- Test_If the eyeball dies, immortality will be canceled
+2111 テスト_目玉死亡したら不死身解除2 -- Test_Unlock immortality if eyeball dies 2
+2260 撃つのやめるトリガー -- trigger to stop shooting
+2270 テスト_手順 -- test_procedure
+2280 テスト_手順にTGT -- TGT to test_procedure
+2290 目玉にTGT -- TGT as the highlight
+2300 テスト_遮蔽の外判定 -- Test_Outside of shielding judgment
+2320 テスト_遮蔽無敵 -- Test_shield invincibility
+2340 テスト_遮蔽の内側判定 -- Test_Inner shielding determination
+2360 テスト_遮蔽壊れる -- Test_shielding broken
+2400 目玉出現判定 -- Eyeball appearance determination
+2401 目玉出現 -- Eyeballs appear
+2450 採掘艦歩く -- mining ship walking
+2500 テスト用アタッチ -- Attach for testing
+2600 破壊対象とダミー結びつける -- Connect the target of destruction to the dummy
+2800 目玉レーザーモード判定 -- Eyeball laser mode judgment
+2801 目玉レーザーモード -- eyeball laser mode
+2802 目玉レーザー照射 -- Eyeball laser irradiation
+2803 目玉レーザーモード以外に入ったか -- Did you enter anything other than eyeball laser mode?
+2805 目玉レーザー止める判定 -- Eyeball laser stop judgment
+2806 レーザー照射中止 -- Laser irradiation stopped
+2807 レーザー再照射判定 -- Laser re-irradiation judgment
+2810 目玉ミサイルモード判定 -- Eyeball missile mode judgment
+2811 目玉ミサイルモード -- Eyeball missile mode
+2812 目玉ミサイル発射 -- Eyeball missile launch
+2813 目玉ミサイルモード以外に入ったか -- Did you enter anything other than eyeball missile mode?
+2815 目玉ミサイル止める判定 -- Judgment to stop eyeball missile
+2816 ミサイル発射中止 -- Missile launch canceled
+2817 ミサイル再発射判定 -- Missile relaunch determination
+2820 目玉近距離モード判定 -- Eyeball short-range mode determination
+2821 目玉近距離モード -- Eyeball close-range mode
+2825 test -- test
+2900 一個目のターゲット破壊 -- Destroy the first target
+2903 甲板に登った一回目 -- The first time I climbed on deck
+2910 ターゲット通過 -- Target passing
+2911 基本無効 -- Basically disabled
+2912 砲台に特殊効果 -- Special effects on the turret
+2913 砲台副砲に特殊効果 -- Special effects on secondary guns
+2920 二個目のターゲット破壊 -- Destroy the second target
+2925 甲板に登った二回目 -- Second time on deck
+2930 TGT起動用フラグ -- TGT startup flag
+2940 使わないTGT無効化 -- Disable unused TGT
+2941 使わないTGT有効化 -- Enabling unused TGT
+2945 動かす用一個目のターゲット破壊 -- Destroy the first moving target
+2950 チェック用_ミッション開始時処理 -- For checking_mission start process
+2955 動かす用甲板に登った一回目 -- The first time I climbed onto the moving deck
+2960 動かす用ターゲット通過 -- Passing the moving target
+2965 動かす用二個目のターゲット破壊 -- Destroy the second target for movement
+2970 動かす用甲板に登った二回目 -- The second time I climbed onto the moving deck.
+2980 動かす用目玉にTGT -- TGT for the moving eyeball
+1000000000 敵リスポン -- enemy respawn

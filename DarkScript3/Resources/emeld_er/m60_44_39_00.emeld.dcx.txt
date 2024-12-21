@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1044390715 NPC319ダヴィド_NPC初期化イベント -- NPC319 David_NPC initialization event
+1044393710 NPCNPC801赤目モブ２_NPC初期化イベント -- NPCNPC801 Red Eye Mob 2_NPC initialization event

@@ -1,0 +1,19 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+22001000 蟻の巣　スポットライト　特殊効果追加 -- Ant nest spotlight special effects added
+22002000 エレベータ部屋　隔壁1　開閉イベント -- Elevator room bulkhead 1 opening/closing event
+22002100 エレベータ戦1イベント -- Elevator battle 1 event
+22002200 エレベータ下降イベント -- Elevator descending event
+22002201 蟻の巣　遮蔽破壊 -- Ant nest shield destruction
+22002300 エレベータ戦2イベント -- Elevator battle 2 event
+22002400 エレベータ死亡イベント -- elevator death event
+22003000 ワラワライベント1 -- Walla Walla Event 1
+22008000 ナビボリューム生成のためのイベント -- Event for navigation volume generation
+22009000 巨大エレベータ_初期化 -- Giant elevator_initialization
+22010000 巨大エレベータ_レーザーキャノン発射制御 -- Giant elevator_laser cannon firing control
+22020000 巨大エレベータ_ミサイル発射制御 -- Giant elevator_Missile launch control
+22030000 巨大エレベータ_縄跳びレーザー発射制御 -- Giant elevator_jumping rope laser firing control
+22040000 足場アニメイベント1 -- Scaffolding anime event 1
+22040001 足場アニメイベント2 -- Scaffolding anime event 2
+1000000000 敵リスポン -- enemy respawn

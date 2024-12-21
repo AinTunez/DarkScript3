@@ -1,0 +1,31 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+31222300 狼召喚_森奥地 -- Wolf Summon_Forest Deep
+31222301 狼召喚_穴通路 -- Wolf summon_hole passage
+31222303 狼召喚_小森 -- Wolf summon_Komori
+31222304 騎士召喚_森の前 -- Knight Summon_In front of the forest
+31222305 追加敵召喚_森途中 -- Additional enemy summons_Middle of the forest
+31222306 追加敵召喚_森奥地 -- Additional Enemy Summon_Forest Deep
+31222311 狼召喚停止_森奥地 -- Stop summoning wolves_deep in the forest
+31222312 召喚された狼を殺す_森奥地 -- Kill the summoned wolf _ deep in the forest
+31222313 召喚された狼を殺す_小森 -- Kill the summoned wolf_Komori
+31222314 狼召喚停止_小森 -- Stop summoning wolves_Komori
+31222315 狼召喚停止_穴通路 -- Stop summoning wolves_hole passage
+31222316 召喚された狼を殺す_穴通路 -- Kill the summoned wolf_hole passage
+31222317 召喚された狼を殺す_森途中 -- Kill the summoned wolf_Middle of the forest
+31222330 召喚された騎士を殺す_森の前 -- Kill the summoned knight_in front of the forest
+31222340 NPC敵ジェネレータアニメ対応_XX -- NPC enemy generator anime compatible_XX
+31222500 落とし穴 -- Pitfall
+31222520 洞窟_ボス部屋報酬宝箱の開放制限 -- Cave_Boss room reward treasure chest opening limit
+31222800 ボス撃破 -- Defeat the boss
+31222810 ボス出現 -- Boss appears
+31222811 ボス出現_神父アナザー -- Boss appearance_Priest Another
+31222812 ボス出現_白蛇つむり -- Boss appearance_White snake Tsumuri
+31222813 マルチドーピング対応_XX -- Multi-doping compatible_XX
+31222849 ボス_イベント起動 -- Boss_event activation
+1000000000 敵リスポン -- enemy respawn

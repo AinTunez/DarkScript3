@@ -1,0 +1,9 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1037460700 NPC330_贖罪司祭_NPC初期化イベント_初期状態 -- NPC330_Atonement Priest_NPC initialization event_Initial state
+1037460702 NPC330贖罪司祭_殻にこもる -- NPC330 Atonement Priest_Remains in a shell
+1037460710 NPC330_贖罪司祭_免罪対象判定_汎用 -- NPC330_Atonement Priest_Absolution target determination_General purpose
+1037460711 NPC330_贖罪司祭_免罪対象判定_特殊 -- NPC330_Atonement Priest_Absolution target determination_Special
+1037460719 NPC330_贖罪司祭_免罪実行 -- NPC330_Atonement Priest_Performing absolution

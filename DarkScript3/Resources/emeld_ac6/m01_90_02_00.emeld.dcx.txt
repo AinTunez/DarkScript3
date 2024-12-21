@@ -1,0 +1,17 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+10026000 敵殲滅状態判定イベント -- Enemy annihilation status determination event
+90020000 ロード時処理 -- Load time processing
+90020001 マーカー表示判定 -- Marker display judgment
+90020002 マーカー表示解除判定 -- Marker display cancellation determination
+90020003 接敵判定 -- Enemy contact judgment
+90020004 接敵解除判定 -- Contact release judgment
+90020005 戦闘開始判定 -- Battle start determination
+90020006 警告判定 -- Warning judgment
+90020007 警告判定解除 -- Warning judgment canceled
+90020008 撤退判定 -- Withdrawal judgment
+90020009 撤退時処理 -- Processing upon withdrawal
+90020010 クリア時処理 -- Clear processing
+90020011 死亡時処理 -- Treatment at death
+90021001 タンクマーカー表示 -- tank marker display
+1000000000 敵リスポン -- enemy respawn

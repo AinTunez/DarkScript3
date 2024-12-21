@@ -1,0 +1,61 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000 キャンプ制御イベント -- camp control events
+1001 キャンプ可否制御イベント -- Camping permission control event
+1006 フラグ制御：レバー -- Flag control: lever
+1007 フラグ制御：LOD0 -- Flag control: LOD0
+1008 フラグ制御：LOD1 -- Flag control: LOD1
+1009 フラグ制御：LOD2 -- Flag control: LOD2
+1010 巨人姿勢制御 -- giant attitude control
+1011 キャラバン_活動制御 -- Caravan_Activity Control
+1012 キャラバン_初期化 -- Caravan_Initialization
+1020 ５末用バディ召喚（ユニーク） -- 5-end buddy summon (unique)
+1021 ５末用バディ召喚（汎用） -- 5-end buddy summon (general purpose)
+1022 ５末用バディ召喚（汎用）_Ver2（複製版） -- 5-end buddy summon (general purpose)_Ver2 (duplicate version)
+1100 ステルス_草むら特殊効果付与 -- Stealth_Grass special effect added
+1101 ステルス_発見視界補正 -- Stealth_detection visibility correction
+1102 ステルス_索敵視界補正 -- Stealth_enemy search visibility correction
+1200 汎用_亜人特殊待機 -- General purpose_Ajin special standby
+1210 ５末用貴人特殊待機 -- 5-year-old nobleman special standby
+1220 墓暴きの貴人（箱持ち）_アイテム出現 -- Grave-revealing nobleman (box holder)_Item appearance
+1230 箱アイテム取得 -- Get box items
+1240 貴人_箱持ちが夜出歩く -- Nobleman_A box holder goes out at night
+1300 汎用_亜人逃走初期化 -- General purpose_Ajin escape initialization
+1310 汎用_亜人昼夜変化 -- General purpose_Ajin day/night change
+1320 汎用_亜人集団戦闘制御初期化 -- General-purpose_Ajin group battle control initialization
+1330 汎用_亜人チビカウンター初期化 -- General purpose_Ajin Chibi counter initialization
+1400 復帰ポイント変更：巨人を臨む丘 -- Return point change: Hill overlooking the giant
+1401 復帰ポイント変更：野営地 -- Return point change: Camp
+1402 復帰ポイント変更：鐘の前 -- Return point change: Before the bell
+1403 復帰ポイント変更：巨人（起動前） -- Return point change: Giant (before launch)
+1404 復帰ポイント変更：巨人_起動後 -- Return point change: Giant_After startup
+1405 復帰ポイント変更：レガシー入口前 -- Return point changed: In front of Legacy entrance
+1406 復帰ポイント変更：水辺の小キャンプ -- Return point change: Waterside small camp
+1407 復帰ポイント変更：野営地裏手 -- Return point changed: Behind the camp
+1408 復帰ポイント変更：森前半 -- Return point change: Mori first half
+1409 復帰ポイント変更：森遺跡 -- Return point change: Mori Ruins
+1410 ワープ：巨人を臨む丘 -- Warp: Hill overlooking the giant
+1411 ワープ：野営地 -- Warp: Encampment
+1412 ワープ：鐘の前 -- Warp: In front of the bell
+1413 ワープ：巨人起動前 -- Warp: Before titan activation
+1414 ワープ：巨人起動後 -- Warp: After titan activation
+1530 キャンプ襲撃イベント -- camp raid event
+1600 汎用_野生フラコン_決め打ち版 -- General Purpose_Wild Flacon_Definitive Edition
+1610 汎用_野生フラコン_ランダム版 -- General Purpose_Wild Flacon_Random Edition
+1620 汎用_蟹死亡判定初期化 -- General-purpose_crab death determination initialization
+1630 汎用_大蟹反応判定初期化 -- General purpose_Large crab reaction judgment initialization
+1690 汎用_野生動物初期化 -- General purpose_Wildlife initialization
+1700 傭兵部隊_野営地→街道移動 -- Mercenary unit_camp → road movement
+1710 傭兵部隊_野営地→街道移動（走行移動） -- Mercenary unit_camp → road movement (driving movement)
+1800 汎用_傭兵起床管理 -- General purpose_mercenary wake-up management
+1810 汎用_傭兵巡回管理 -- General purpose_Mercenary patrol management
+1820 集団ステルス用_傭兵起床管理 -- For group stealth_mercenary wake-up management
+1900 汎用_強制リスポン制御 -- General purpose_forced response control
+2000 人間性獲得（キャラバン停止） -- Obtaining humanity (caravan stopped)
+2001 人間性獲得（ワイバーン討伐） -- Obtaining humanity (slaying the wyvern)
+2002 人間性獲得（巨人討伐１） -- Acquiring humanity (Slaying Titans 1)
+2003 人間性獲得（巨人討伐２） -- Acquisition of humanity (Slaying Titans 2)
+2004 人間性獲得（巨人討伐３） -- Acquiring humanity (Slaying Titans 3)
+2005 オオカミ夜変化 -- wolf night change
+1000000000 敵リスポン -- enemy respawn

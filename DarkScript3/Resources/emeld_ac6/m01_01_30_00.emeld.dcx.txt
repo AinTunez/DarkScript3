@@ -1,0 +1,246 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッションクリア判定 -- Mission clear judgment
+2002 落下死亡したか判定 -- Determine if you died from falling
+2003 汎用COM切り替え判定_アッシュAP50パー以下 -- General purpose COM switching judgment_Ash AP50 par or less
+2006 CP1有効化 -- CP1 enabled
+2007 CP1有効化済み判定用フラグ -- CP1 enabled determination flag
+2008 CP2有効化 -- CP2 enabled
+2009 CP2有効化済み判定用フラグ -- CP2 enabled determination flag
+2010 初期イベント_共通 -- Initial event_common
+2011 初期イベント_最初から -- Initial event_from the beginning
+2012 初期イベント_CP1から -- Initial event_From CP1
+2013 初期イベント_CP2から -- Initial event_from CP2
+2015 天球制禦_火球アニメ再生 -- Celestial sphere control_Fireball animation playback
+2016 天球制禦_火球アニメ再生停止判定 -- Heavenly sphere control_fireball animation playback stop judgment
+2020 艦橋アタッチ処理 -- Bridge attach processing
+2050 戦闘開始特効付与 -- Battle start special effect added
+2080 揚陸艦死亡演技指定 -- Landing ship death performance designation
+2081 揚陸艦初期HP削り -- Landing ship initial HP reduction
+2100 ミッション目標更新フラグ01 -- Mission target update flag 01
+2101 ミッション目標更新フラグ02 -- Mission target update flag 02
+2102 ミッション目標更新フラグ03 -- Mission objective update flag 03
+2103 ミッション目標更新フラグ04 -- Mission objective update flag 04
+2104 ミッション目標更新フラグ05 -- Mission objective update flag 05
+2110 作戦ライン有効化_01 -- Operation line activation_01
+2111 作戦ライン有効化_02 -- Operation line activation_02
+2112 作戦ライン有効化_03 -- Operation line activation_03
+2113 作戦ライン有効化_04 -- Operation line activation_04
+2122 作戦ライン切り替え判定_03 -- Operation line switching judgment_03
+2130 目標地点マーカー01表示 -- Target point marker 01 display
+2131 目標地点マーカー02表示 -- Target point marker 02 display
+2132 目標地点マーカー03表示 -- Target point marker 03 display
+2133 目標地点マーカー04表示 -- Target point marker 04 display
+2141 目標地点マーカー02表示判定 -- Target point marker 02 display judgment
+2142 目標地点マーカー03表示判定 -- Target point marker 03 display judgment
+2149 目標地点マーカー03表示スキップ -- Target point marker 03 display skip
+2153 目標地点マーカー04消し判定 -- Target point marker 04 erasure judgment
+2159 目標地点マーカー全消し -- Erase all target point markers
+2200 s01_開幕演出イベント -- s01_Opening production event
+2201 s01_開幕砲台発射イベント -- s01_Opening battery firing event
+2210 s01_二番艦ビグザム発射 -- s01_Second ship Bigzam launch
+2220 s01_地上艦撃破判定 -- s01_Ground ship destruction judgment
+2230 s01_副砲展開処理 -- s01_Secondary battery deployment process
+2250 s01_CP1復帰用処理 -- s01_CP1 recovery process
+2300 s02_にぎやかし艦02撃墜処理 -- s02_ Lively ship 02 shooting down process
+2301 s02艦_前進開始 -- s02 ship_start moving forward
+2302 s02_ビグザム艦01ルート移動状態解除 -- s02_Bigzam ship 01 route movement status cancelled.
+2303 s02_ビグザム艦02ルート移動状態解除 -- s02_Bigzam ship 02 route movement status cancelled.
+2304 s02_にぎやかし艦02ルート移動状態解除 -- s02_Lively ship 02 route movement status cancelled.
+2310 s02_ビグザム01開始判定 -- s02_Bigzam 01 start judgment
+2311 s02_ビグザム01起動 -- s02_Bigzam01 launch
+2320 s02_ビグザム02パターン切り替え判定 -- s02_Bigzam02 pattern switching judgment
+2321 s02_ビグザム02パターン切り替え -- s02_Big Zam 02 pattern switching
+2390 s02_ビグザム艦撃破判定 -- s02_Bigzam ship destruction judgment
+2400 s03_にぎやかし艦撃墜処理 -- s03_ Lively ship shooting down process
+2401 s03_右翼艦戦闘開始特効付与 -- s03_ Right wing ship battle start special effect added
+2402 s03_04艦子機展開判定 -- s03_04 Fleet aircraft deployment judgment
+2403 s03_揚陸艦本体ミサイル発射 -- s03_Landing ship body missile launch
+2410 s03_子機_自爆特攻処理 -- s03_Slave unit_Suicide attack processing
+2420 s03_子機_自爆特攻処理_艦載 -- s03_Slave unit_Suicide attack processing_Shipboard
+2430 s03_子機_集団自爆 -- s03_child unit_mass suicide bombing
+2431 s03_艦載子機_無効化 -- s03_Shipborne handset_Disable
+2440 s03艦_前進開始 -- s03 ship_start moving forward
+2441 s03_八艘01艦ルート移動状態解除 -- s03_Eight ships 01 ship route movement status canceled
+2442 s03_八艘02艦ルート移動状態解除 -- s03_Eight ships 02 ship route movement status canceled
+2443 s03_八艘03艦ルート移動状態解除 -- s03_Eight ships 03 ship route movement status canceled
+2450 s03_子機_自爆特攻準備 -- s03_Slave unit_Suicide attack preparation
+2490 s03_八艘艦撃破判定 -- s03_Eight ships destroyed judgment
+2500 s04_にぎやかし艦撃墜処理 -- s04_ Lively ship shot down process
+2501 s04_レールガン攻撃開始判定 -- s04_Railgun attack start determination
+2510 s04_レールガン発射準備 -- s04_Railgun launch preparation
+2520 s04_レールガン攻撃開始判定_接近 -- s04_Railgun attack start determination_Approach
+2521 s04_レールガンのみ発射 -- s04_Railgun only fires
+2530 s04_レールガン停止判定 -- s04_Railgun stop judgment
+2531 s04_ミサイル同時発射 -- s04_Missile simultaneous launch
+2540 s04_レールガン再開判定 -- s04_Railgun restart judgment
+2600 s05_アッシュ登場CS再生判定 -- s05_Ash appearance CS playback judgment
+2601 s05_爆発SFX再生 -- s05_Explosion SFX playback
+2610 s05_アッシュ登場CS再生処理 -- s05_Ash appearance CS playback process
+2611 s05_アッシュ作戦ライン適用判定 -- s05_Ash operation line application judgment
+2612 s05_アッシュ戦開始処理 -- s05_Ash battle start process
+2613 s05_アッシュ初回行動用特殊効果解除判定 -- s05_Ash's first action special effect cancellation determination
+2620 s05_アッシュ撃破判定 -- s05_Ash defeat judgment
+2630 s05_アッシュAP75パー判定 -- s05_Ash AP75 par judgment
+2631 s05_アッシュAP50パー判定 -- s05_Ash AP50 par judgment
+2632 s05_アッシュAP25パー判定 -- s05_Ash AP25 par judgment
+2640 s05_プレイヤー劣勢判定_前半 -- s05_Player inferiority judgment_first half
+2641 s05_プレイヤー劣勢判定_後半 -- s05_Player inferiority judgment_Second half
+2650 s05_衛星砲再びCS再生 -- s05_Satellite gun CS play again
+2900 会話_第三艦隊が一艦でも墜ちたか -- Conversation_Did even one ship of the Third Fleet crash?
+2901 会話_即時ミッション_レールガンに接近 -- Conversation_Immediate Mission_Approach the railgun
+2902 会話判定_艦砲射撃が来る -- Conversation Judgment_ Naval gunfire is coming
+2950 撃破数カウント -- Count the number of defeats
+2970 撃破カウント会話再生済み -- Defeat count conversation played
+3000 揚陸艦死亡処理 -- Landing ship death processing
+3030 揚陸艦砲台発射制禦 -- Landing ship battery firing control
+3060 演出_新B砲_発射制禦 -- Production_New B gun_Fire control
+3100 レールガン狙わせダミー初期イベント -- Railgun aiming dummy initial event
+3110 レールガン_狙わせイベント01_ビグザム -- Railgun_Aim Event 01_Big Zam
+3111 レールガン_狙わせイベント02_右翼 -- Railgun_Aim event 02_Right wing
+3112 レールガン_狙わせイベント03_左翼 -- Railgun_Aim event 03_Left wing
+3113 レールガン_狙わせイベント04_レールガン -- Railgun_Aim Event 04_Railgun
+3120 レールガン_地面着弾イベ準備 -- Railgun_ground landing event preparation
+3121 レールガン_地面着弾イベ左 -- Railgun_ground impact event left
+3122 レールガン_地面着弾イベ右 -- Railgun_ground impact event right
+3123 レールガン_地面着弾イベ終了処理 -- Railgun_ground impact event end process
+3200 揚陸艦破砕孔有効化_前 -- Landing ship fracture hole activation_before
+3220 揚陸艦破砕孔有効化_中央 -- Landing ship fracture hole activation_center
+3240 揚陸艦破砕孔有効化_後 -- Landing ship fracture hole activation_after
+3400 回復薬使用判定_アッシュ_1回目 -- Recovery medicine use judgment_Ash_1st time
+3401 回復薬使用判定_アッシュ_2回目 -- Recovery medicine use judgment_Ash_2nd time
+3402 回復薬使用判定_アッシュ_3回目 -- Recovery medicine use judgment_Ash_3rd time
+3450 BGMサウンドステート変更_HU -- BGM sound state change_HU
+3451 BGMサウンドステート変更_死亡 -- BGM sound state change_death
+3452 BGMサウンドステート変更_通常 -- BGM sound state change_normal
+3455 着弾音_サウンドステート変更_ボス戦 -- Impact sound_Sound state change_Boss battle
+3456 着弾音_サウンドステート変更_通常時 -- Impact sound_Sound state change_Normal
+3460 BGM転調判定_アッシュHU -- BGM modulation judgment_Ash HU
+3461 BGM転調_アッシュショートSEコール -- BGM modulation_Ash short SE call
+3490 アッシュHU演出_トライアル -- Ash HU production_trial
+3491 アッシュHU演出_PA展開 -- Ash HU production_PA development
+3492 アッシュHU演出_発話開始判定 -- Ash HU production_Speech start judgment
+3597 会話済みフラグ861 -- Conversation completed flag 861
+3598 会話済みフラグ862 -- Conversation completed flag 862
+3599 会話済みフラグ171 -- Conversed flag 171
+3600 会話済みフラグ00 -- Conversation completed flag 00
+3601 会話済みフラグ01 -- Conversation completed flag 01
+3602 会話済みフラグ02 -- Conversation completed flag 02
+3603 会話済みフラグ03 -- Conversation completed flag 03
+3604 会話済みフラグ04 -- Conversation completed flag 04
+3605 会話済みフラグ05 -- Conversation completed flag 05
+3606 会話済みフラグ06 -- Conversation completed flag 06
+3607 会話済みフラグ07 -- Conversation completed flag 07
+3608 会話済みフラグ08 -- Conversation completed flag 08
+3609 会話済みフラグ09 -- Conversation completed flag 09
+3610 会話済みフラグ10 -- Conversation completed flag 10
+3611 会話済みフラグ11 -- Conversation completed flag 11
+3612 会話済みフラグ12 -- Conversation completed flag 12
+3613 会話済みフラグ13 -- Conversation completed flag 13
+3614 会話済みフラグ14 -- Conversation completed flag 14
+3615 会話済みフラグ15 -- Conversation completed flag 15
+3616 会話済みフラグ16 -- Conversation completed flag 16
+3617 会話済みフラグ17 -- Conversation completed flag 17
+3618 会話済みフラグ18 -- Conversation completed flag 18
+3619 会話済みフラグ19 -- Conversation completed flag 19
+3620 会話済みフラグ20 -- Conversation completed flag 20
+3621 会話済みフラグ21 -- Conversation completed flag 21
+3622 会話済みフラグ22 -- Conversation completed flag 22
+3623 会話済みフラグ23 -- Conversation completed flag 23
+3624 会話済みフラグ24 -- Conversation completed flag 24
+3625 会話済みフラグ25 -- Conversation completed flag 25
+3626 会話済みフラグ26 -- Conversation completed flag 26
+3627 会話済みフラグ27 -- Conversation completed flag 27
+3628 会話済みフラグ28 -- Conversation completed flag 28
+3629 会話済みフラグ29 -- Conversation completed flag 29
+3630 会話済みフラグ30 -- Conversation completed flag 30
+3631 会話済みフラグ31 -- Conversation completed flag 31
+3632 会話済みフラグ32 -- Conversation completed flag 32
+3633 会話済みフラグ33 -- Conversation completed flag 33
+3634 会話済みフラグ34 -- Conversation completed flag 34
+3635 会話済みフラグ35 -- Conversation completed flag 35
+3636 会話済みフラグ36 -- Conversation completed flag 36
+3637 会話済みフラグ37 -- Conversation completed flag 37
+3638 会話済みフラグ38 -- Conversation completed flag 38
+3639 会話済みフラグ39 -- Conversation completed flag 39
+3640 会話済みフラグ40 -- Conversation completed flag 40
+3641 会話済みフラグ41 -- Conversation completed flag 41
+3642 会話済みフラグ42 -- Conversation completed flag 42
+3643 会話済みフラグ43 -- Conversation completed flag 43
+3644 会話済みフラグ44 -- Conversation completed flag 44
+3645 会話済みフラグ45 -- Conversation completed flag 45
+3646 会話済みフラグ46 -- Conversation completed flag 46
+3647 会話済みフラグ47 -- Conversation completed flag 47
+3648 会話済みフラグ48 -- Conversation completed flag 48
+3649 会話済みフラグ49 -- Conversation completed flag 49
+3650 会話済みフラグ50 -- Conversation completed flag 50
+3651 会話済みフラグ51 -- Conversation completed flag 51
+3652 会話済みフラグ52 -- Conversation completed flag 52
+3653 会話済みフラグ53 -- Conversation completed flag 53
+3654 会話済みフラグ54 -- Conversation completed flag 54
+3655 会話済みフラグ55 -- Conversation completed flag 55
+3656 会話済みフラグ56 -- Conversation completed flag 56
+3657 会話済みフラグ57 -- Conversation completed flag 57
+3658 会話済みフラグ58 -- Conversation completed flag 58
+3659 会話済みフラグ59 -- Conversation completed flag 59
+3660 会話済みフラグ60 -- Conversation completed flag 60
+3661 会話済みフラグ61 -- Conversation completed flag 61
+3662 会話済みフラグ62 -- Conversation completed flag 62
+3663 会話済みフラグ63 -- Conversation completed flag 63
+3664 会話済みフラグ64 -- Conversation completed flag 64
+3665 会話済みフラグ65 -- Conversation completed flag 65
+3666 会話済みフラグ66 -- Conversation completed flag 66
+3667 会話済みフラグ67 -- Conversation completed flag 67
+3668 会話済みフラグ68 -- Conversation completed flag 68
+3669 会話済みフラグ69 -- Conversation completed flag 69
+3670 会話済みフラグ70 -- Conversation completed flag 70
+3671 会話済みフラグ71 -- Conversation completed flag 71
+3672 会話済みフラグ72 -- Conversation completed flag 72
+3673 会話済みフラグ73 -- Conversation completed flag 73
+3674 会話済みフラグ74 -- Conversation completed flag 74
+3675 会話済みフラグ75 -- Conversation completed flag 75
+3676 会話済みフラグ76 -- Conversation completed flag 76
+3677 会話済みフラグ77 -- Conversation completed flag 77
+3678 会話済みフラグ78 -- Conversation completed flag 78
+3679 会話済みフラグ79 -- Conversation completed flag 79
+3680 会話済みフラグ80 -- Conversation completed flag 80
+3681 会話済みフラグ81 -- Conversation completed flag 81
+3682 会話済みフラグ82 -- Conversation completed flag 82
+3683 会話済みフラグ83 -- Conversation completed flag 83
+3684 会話済みフラグ84 -- Conversation completed flag 84
+3685 会話済みフラグ85 -- Conversation completed flag 85
+3686 会話済みフラグ86 -- Conversation completed flag 86
+3687 会話済みフラグ87 -- Conversation completed flag 87
+3688 会話済みフラグ88 -- Conversation completed flag 88
+3689 会話済みフラグ89 -- Conversation completed flag 89
+3690 会話済みフラグ90 -- Conversation completed flag 90
+3691 会話済みフラグ91 -- Conversation completed flag 91
+3692 会話済みフラグ92 -- Conversation completed flag 92
+3693 会話済みフラグ93 -- Conversation completed flag 93
+3694 会話済みフラグ94 -- Conversation completed flag 94
+3695 会話済みフラグ95 -- Conversation completed flag 95
+3696 会話済みフラグ96 -- Conversation completed flag 96
+3697 会話済みフラグ97 -- Conversation completed flag 97
+3698 会話済みフラグ98 -- Conversation completed flag 98
+3699 会話済みフラグ99 -- Conversation completed flag 99
+3700 自機behavior制禦_コンストラクタキック -- Machine behavior control_Constructor kick
+3710 s01_アサブ復帰特殊効果解除 -- s01_Asab return special effect cancellation
+3711 s02_アサブ復帰特殊効果付与 -- s02_Asab return special effect added
+3720 s01_落下復帰ポイント一時上書き -- s01_Fall return point temporary overwrite
+3721 s02_落下復帰ポイント一時上書き -- s02_Fall return point temporary overwrite
+3722 s03_落下復帰ポイント一時上書き -- s03_Fall return point temporary overwrite
+3723 s04_落下復帰ポイント一時上書き -- s04_Fall return point temporary overwrite
+3800 p01_地上敵無効化 -- p01_Ground enemy nullification
+3810 p0203_空中敵無効化 -- p0203_Aerial enemy nullification
+3811 p02_空中小型敵無効化_初期 -- p02_Aerial small enemy nullification_Initial
+3812 p02_空中小型敵有効化 -- p02_Aerial small enemy enable
+3813 p03_空中小型敵無効化_初期 -- p03_Aerial small enemy nullification_Initial
+3814 p03_空中小型敵有効化 -- p03_Aerial small enemy enable
+3890 p99_にぎやかし揚陸艦ロジック停止_テスト -- p99_busy landing ship logic stop_test
+3891 p99_にぎやかし揚陸艦ロジック再起動_テスト -- p99_Lively landing ship logic restart_test
+3920 テスト_揚陸艦砲台発射イベント_地上 -- Test_Landing ship battery firing event_Ground
+3921 テスト_2番艦ビグザム -- Test_2nd ship Bigzam
+3940 ヒヤリハットイベント準備 -- Near miss event preparation
+3941 ヒヤリハットイベント -- Near miss event
+3999 お試しSEフェード_リスタートしたか判定 -- Trial SE Fade_Determine whether restarted
+1000000000 敵リスポン -- enemy respawn

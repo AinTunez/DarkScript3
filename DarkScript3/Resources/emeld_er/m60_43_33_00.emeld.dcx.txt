@@ -1,0 +1,15 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1043330050 m60_43_33_00用初期フラグ設定 -- Initial flag setting for m60_43_33_00
+1043330510 エレベーター初期フラグ設定 -- Elevator initial flag setting
+1043332230 コウモリ_視界拡大 -- Bat_Visibility expansion
+1043332270 雷地帯_弾丸イベント_XX -- Thunder Zone_Bullet Event_XX
+1043332520 梯子登録 -- ladder registration
+1043332650 エレベータ起動 -- elevator start
+1043332680 馬禁止領域用SFX -- SFX for horse prohibited area

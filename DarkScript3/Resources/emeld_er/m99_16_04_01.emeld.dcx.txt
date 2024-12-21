@@ -1,0 +1,21 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+9960100 望月マップモシャステスト -- Mochizuki Map Motious Test
+9960110 望月マップモシャステスト_プレゼン -- Mochizuki Map Motious Test_Presentation
+9960200 望月マップ半島砦の城主死体食いテスト -- Mochizuki Map Peninsula Fort Castle Lord Corpse Eating Test
+99107720 テストイベント段階フラグ操作 -- Test event stage flag manipulation
+99107721 テストイベントキャラ表示制御A -- Test event character display control A
+99107723 テストイベントキャラ表示制御B -- Test event character display control B
+99107724 テストイベントキャラ表示制御C -- Test event character display control C
+99107725 最終課題段階フラグ操作 -- Final assignment stage flag operation
+99107726 最終課題キャラ表示制御イベント段階１ -- Final task character display control event stage 1
+99107727 最終課題キャラ表示制御イベント段階２ -- Final task character display control event stage 2
+99107728 最終課題キャラ表示制御イベント段階３ -- Final task character display control event stage 3
+99107729 最終課題キャラ表示制御イベント段階４ -- Final task character display control event stage 4
+99107730 最終課題イベント段階３の領域設定 -- Area setting for final task event stage 3
+99107731 ぬくもり石の特殊効果判定 -- Warmth stone special effect determination
+99107732 戦場医師アニメ練習段階フラグ操作 -- battlefield doctor anime practice stage flag operation
+99107733 戦場医師アニメ練習 -- battlefield doctor anime practice
+99109720 テストイベント -- test event
+1000000000 敵リスポン -- enemy respawn

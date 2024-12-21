@@ -1,0 +1,22 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1035500700 NPC307傀儡師_NPC初期化イベント_本体 -- NPC307 Puppeteer_NPC initialization event_Body
+1035500701 NPC307傀儡師_NPC初期化イベント_ラニに呪われて死亡 -- NPC307 Puppeteer_NPC Initialization Event_Died due to curse from Rani
+1035500702 NPC307傀儡師_本体_購入数チェック -- NPC307 Puppet Master_Main Unit_Check number of purchases
+1035500703 NPC307傀儡師_自動会話キック_XX -- NPC307 Puppeteer_Automatic Conversation Kick_XX
+1035500800 ボス撃破 -- Defeat the boss
+1035502200 攻撃禁止エリア設定 -- Attack prohibited area setting
+1035502210 ニト剣トラップ_起動_XX -- Nito sword trap_activation_XX
+1035502400 思考ロジック有効化_領域二重判定 -- Enabling thought logic_domain double judgment
+1035502401 帰り道屍起動フラグ用 -- For the corpse activation flag on the way back
+1035502500 不要アセット一時無効化 -- Temporarily disable unnecessary assets
+1035502510 エレベータイベント起動 -- Elevator event activation
+1035502514 エレベーター初期フラグ -- Elevator initial flag
+1035502580 梯子登録 -- ladder registration
+1035502810 ボス出現 -- Boss appears
+1035502840 ツリーガード魔術師盾なし_ワープイベント_ワープ先を決める -- Tree Guard Magician No Shield_Warp Event_Determine the warp destination
+1035502841 ツリーガード魔術師盾なし_ワープイベント_ワープする -- Tree Guard Magician No Shield_Warp Event_Warp
+1035502842 ツリーガード魔術師盾なし_ワープイベント_タイマー -- Tree Guard Magician No Shield_Warp Event_Timer
+1035502849 ツリーガード魔術師盾なし_イベント起動 -- Tree Guard Magician No Shield_Event Trigger

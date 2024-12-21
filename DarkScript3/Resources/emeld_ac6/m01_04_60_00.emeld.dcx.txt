@@ -1,0 +1,158 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 準備イベント -- Preparation event
+2001 チェックポイント後のイベントキック -- Event kick after checkpoint
+2002 カメラマンに気づかれた -- noticed by the cameraman
+2003 カメラセリフ_ランダム -- Camera lines_random
+2004 カメラセリフ_ランダム特殊効果キック -- Camera dialogue_Random special effect kick
+2005 中央巡回スタートイベント -- Central patrol start event
+2006 道中ウォールハックイベント判定 -- Wall hack event determination along the way
+2007 ミッション失敗時処理 -- Processing when mission fails
+2008 戦闘状態が一体も居ないか判定 -- Determine whether there is any combat status
+2009 戦闘状態が一体以上になった判定 -- Judgment that the battle status has become one or more
+2011 信号弾投てき済み判定 -- Judgment that signal bomb has been thrown
+2012 後ろに下がって撃つ特殊効果 -- Special effect of standing back and shooting
+2014 カメラマンがPCを見失った -- The cameraman lost track of his computer.
+2015 PCを狙っていたカメラマンが死亡した -- The cameraman who was targeting the PC was killed.
+2016 BGM遷移条件_死亡スウィン -- BGM transition condition_Death Swine
+2017 BGM遷移条件_死亡六文銭 -- BGM transition conditions_Death Rokumonsen
+2018 信号弾さく裂した判定 -- Judgment that the signal bomb exploded
+2019 BGM遷移_死亡ステート入り -- BGM transition_Enter death state
+2020 崖際のTGT共有_東 -- TGT sharing by the cliff_east
+2021 崖際のTGT共有_西 -- TGT sharing near the cliff_west
+2022 中央道のTGT共有 -- Chuo Expressway TGT sharing
+2025 最初のTGTの近くに来た -- Came near the first TGT
+2030 塀の上に来た -- came over the wall
+2031 演出堀と最初のTGTの中間 -- Between the production moat and the first TGT
+2032 演出堀に近づいた -- Approaching the performance moat
+2040 サウンド_可聴距離対応 -- Sound_Audible distance compatible
+2041 サウンド_可聴距離対応_OFF -- Sound_Audible distance compatible_OFF
+2042 サウンド_六文銭可聴距離対応 -- Sound_Rokumonsen audible distance compatible
+2043 サウンド_六文銭可聴距離対応_OFF -- Sound_Rokubunsen audible distance compatible_OFF
+2050 作戦領域1_ON -- Operation area 1_ON
+2060 作戦領域2に切り替え -- Switch to operational area 2
+2070 作戦領域3に切り替え -- Switch to operational area 3
+2075 特別報酬カウント -- Special reward count
+2080 信号弾投てき_二重投てき防止 -- Signal bomb throwing_double throwing prevention
+2085 信号弾投擲てき_投てき再開 -- Throwing signal bombs_Resuming throwing
+2096 信号弾投てき_当たらなかった場合 -- Throwing a signal bomb_if it doesn't hit
+2097 信号弾投てき_当たった場合 -- Signal bomb throw_if hit
+2098 チェックポイント１キック -- Checkpoint 1 kick
+2099 チェックポイント１分岐フラグ -- Checkpoint 1 branch flag
+2100 NO2に一撃入れたら起動 -- Start by hitting NO2
+2101 会話用_NO2に一撃入れたら起動 -- For conversation_Start when you hit NO2
+2105 NO2の視界に入った -- I came into view of NO2
+2106 会話用_NO2の視界に入った -- For conversation_I came into view of NO2
+2107 NO2戦闘開始フラグ -- NO2 battle start flag
+2110 NO2死亡 -- NO2 death
+2130 NO2と戦闘中は信号弾上げない -- Do not raise signal bombs during battle with NO2
+2140 NO2に殺された -- killed by NO2
+2141 NO2に殺された_特殊効果チェック -- Killed by NO2_Special effects check
+2142 NO2_PC劣勢 -- NO2_PC inferiority
+2143 NO2_PC優勢 -- NO2_PC dominant
+2144 NO2_回復薬チェック_1個 -- NO2_Recovery medicine check_1 piece
+2202 NO2起動 -- NO2 start
+2203 NO2起動_奇襲時 -- NO2 activation_At the time of surprise attack
+2204 会話起動時は会話時にFEを消す -- When starting a conversation, turn off FE during conversation.
+2220 NO2体力低下_取引持ちかける -- NO2 physical strength decline_offering a deal
+2221 スウィンバーン_バリアを張り終わった判定 -- Swinburne_Judgment that the barrier has been put up
+2222 スウィンバーン交渉開始からa秒経過 -- a second has passed since the start of Swinburne negotiations
+2225 NO2に攻撃_取引もちかけ中 -- Attacking NO2_Proposing a deal
+2226 NO2無敵 -- NO2 invincible
+2227 NO2ターゲット外す -- Remove NO2 target
+2240 NO2逃走 -- NO2 escape
+2241 NO2逃走2 -- NO2 Escape 2
+2242 スウィンバーン逃走新 -- Swinburne Getaway New
+2245 NO2逃走中に攻撃判定 -- NO2 Attack judgment while running away
+2250 NO2攻撃停止 -- NO2 attack stopped
+2255 NO2攻撃再開 -- NO2 attack resumes
+2256 NO6にPCが断ったことを通知する -- Notify NO6 that the PC declined
+2260 NO2無効化 -- NO2 disabled
+2261 NO2有効化 -- NO2 enabled
+2265 NO2の更新頻度上昇 -- Increased update frequency of NO2
+2270 前半の敵の無効化 -- Disable enemies in the first half
+2280 エラーハンドリング用_NO2無敵 -- For error handling_NO2 invincible
+2300 刺客登場 -- Assassin appears
+2310 刺客死亡 -- Assassin death
+2320 刺客に殺された -- killed by an assassin
+2321 刺客に殺された_特殊効果チェック -- Killed by an assassin_Special effects check
+2323 刺客_PC優勢 -- Assassin_PC superiority
+2324 刺客_PCすごく優勢 -- Assassin_PC is very superior
+2325 刺客_回復薬チェック_1個 -- Assassin_Recovery medicine check_1 piece
+2326 刺客_回復薬チェック_2個 -- Assassin_Recovery medicine check_2 pieces
+2327 刺客_元気か判定_汎用COM用_元気じゃない -- Assassin_Determination of whether he is fine_For general purpose COM_Not well
+2328 刺客_元気か判定_汎用COM用_元気 -- Assassin_Vigor determination_General purpose COM_Vigor
+2330 刺客登場カットシーン再生 -- Assassin appearance cutscene playback
+2400 偽物TGTON -- fake TGTON
+2401 偽物TGTOFF -- Fake TGTOFF
+2410 NO2TGTON -- NO2TGTON
+2420 刺客TGTON -- Assassin TGTON
+2430 途中誘導ON -- En route guidance ON
+2431 途中誘導OFF条件 -- En route guidance OFF condition
+2432 途中誘導OFF -- En route guidance OFF
+2440 一体目_ボスゲージ -- First one_boss gauge
+2441 一体目_ボスゲージオフ -- First one_Boss gauge off
+2460 刺客_ボスゲージ -- Assassin_Boss Gauge
+2461 刺客_ボスゲージオフ -- Assassin_Boss gauge off
+2490 四脚の共有 -- quadruped sharing
+2500 共有コントロール -- shared control
+2560 共有コントロール_ドローン用調整 -- Shared control_adjustment for drones
+2600 セリフトリガー判定 -- Line trigger judgment
+2680 セリフトリガーまとめ -- Summary of line triggers
+2681 台詞トリガーフラグリセット -- Line trigger flag reset
+2700 演出テスト -- Direction test
+2701 堀の上演出_本線 -- Hori no Ue production_Main line
+2702 堀の上演出_続編チャンバラ -- Horiue production_sequel chambara
+2703 堀の上演出_続編弾丸 -- Horiue production_sequel bullet
+2704 堀の上演出_続編弾丸_左右ブレ -- Horiue production_sequel bullet_left and right blur
+2705 堀の上演出_続編グレネード -- Horiue production_Sequel Grenade
+2706 堀の上の演出_自機が堀の上or見える高さまで上がった -- Performance above the moat_Your aircraft has risen to a height where you can see or above the moat.
+2707 チャンバラ終了 -- chanbara ends
+2708 グレネード振動 -- grenade vibration
+2709 光演出用 -- For light production
+2710 光演出デバッグ用 -- For light production debugging
+2711 光演出デバッグ用削除 -- Deletion for light production debugging
+2720 演出用残骸ON -- Production debris ON
+2721 演出用残骸ON_チェックポイント -- Production debris ON_Checkpoint
+2780 演出テストキック用イベント_グレネード -- Production test kick event_Grenade
+2790 演出テストキック用イベント_トリガー1 -- Performance test kick event_trigger 1
+2800 FEトリガー -- FE trigger
+2898 FEトリガーまとめ -- FE trigger summary
+2899 FE強制消去 -- FE forced deletion
+2900 信号弾上がったフラグ -- Signal bullet raised flag
+2901 スタート会話済みフラグ -- Start conversation flag
+2902 前半進行フラグ -- First half progress flag
+2903 爆発に気づいた会話フラグ -- Conversation flag that noticed an explosion
+2905 ワイルドギースが先に気づいた会話フラグ -- Conversation flag that Wild Geese noticed first
+2910 ワイルドギースが死んだフラグ -- Wild Geese dead flag
+2913 NO2に近づいた会話フラグ -- Conversation flag approaching NO2
+2914 NO2が先に気づいた会話フラグ -- Conversation flag that NO2 noticed first
+2920 選択肢表示フラグ -- Choice display flag
+2923 取引に応じないルートフラグ -- Root flag that does not respond to transactions
+2925 取引を無視したフラグ -- Transaction ignored flag
+2927 取引に応じたフラグ -- Flags according to the transaction
+2928 取引に応じた後殴ったフラグ -- Flag hit after accepting the deal
+2930 NO2逃走会話終了フラグ -- NO2 escape conversation end flag
+2931 NO2逃走完了フラグ -- NO2 escape completion flag
+2932 NO2逃走会話_エアの会話開始フラグ -- NO2 Escape conversation_Air conversation start flag
+2933 刺客登場会話フラグ -- Assassin appearance conversation flag
+2934 刺客会話フラグ_接敵時会話完了 -- Assassin conversation flag_Conversation completed when approaching enemy
+2935 刺客会話フラグ_刺客劣勢その1 -- Assassin conversation flag_Assassin inferior part 1
+2936 刺客会話フラグ_刺客劣勢その2 -- Assassin conversation flag_Assassin inferior part 2
+2937 刺客会話フラグ_時間経過会話1 -- Assassin conversation flag_Time lapse conversation 1
+2938 刺客会話フラグ_時間経過会話2 -- Assassin conversation flag_Time lapse conversation 2
+2939 刺客会話フラグ_時間経過会話3 -- Assassin conversation flag_Time lapse conversation 3
+2940 会話終了フラグ -- Conversation end flag
+2950 ミッション目標切り替え_NO2 -- Mission target switching_NO2
+2951 ミッション目標切り替え_刺客 -- Mission objective switching_Assassin
+2970 信号弾上がって負けフラグ -- Signal bullet goes up and lose flag
+2980 仮会話フラグ -- Temporary conversation flag
+2990 初回ウォールハック会話完了 -- First wall hack conversation completed
+2991 道中ウォールハック会話完了 -- Wall hack conversation completed on the way
+2992 道中見つかってない会話１完了 -- Conversation 1 completed when not found on the way
+2993 道中見つかってない会話２完了 -- Conversation 2 completed when not found on the way
+2994 道中見つかってない会話３完了 -- Conversation 3 completed when not found on the way
+2995 爆発イベント会話完了 -- Explosion event conversation completed
+2996 爆発後の移動会話完了 -- Move conversation completed after explosion
+2997 堀の上会話開始している -- Hori no Ue has started a conversation.
+1000000000 敵リスポン -- enemy respawn

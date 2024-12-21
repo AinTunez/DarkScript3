@@ -1,0 +1,10 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2001 アニメ再生_ワンショット_カタパルト展開アニメ_ -- Anime play_One shot_Catapult deployment animation_
+2002 アニメ再生_ループ_カタパルト展開後アニメ -- Anime playback_loop_anime after catapult deployment
+2003 アニメ再生_ループ_カタパルト展開前アニメ -- Anime playback_Loop_Animation before catapult deployment
+2004 アニメ再生04 -- anime play 04
+2010 カタパルトイベント01 -- Catapult event 01
+2011 カタパルトイベント02 -- Catapult event 02
+2020 ギミックイベントフラグ降ろし -- Gimmick event flag lowering
+1000000000 敵リスポン -- enemy respawn

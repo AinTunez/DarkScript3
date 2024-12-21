@@ -1,0 +1,9 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+60446500 軌道エレベータ　開閉イベント -- Orbital elevator opening/closing event
+60446501 軌道エレベータ　開閉イベント　閉じるイベント_アニメがないので作成だけ -- Orbital elevator opening/closing event/closing event_There is no animation so just create it
+61000000 壁出現イベント -- wall appearance event
+62000000 間欠泉イベント -- geyser event
+63000000 天候変化イベント　InGame時間開始 -- Weather change event InGame time starts
+1000000000 敵リスポン -- enemy respawn

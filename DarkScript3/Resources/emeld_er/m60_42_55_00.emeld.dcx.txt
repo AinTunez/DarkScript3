@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1042553710 NPC348マレニアの娘_ﾌｪｰｽﾞ4_NPC初期化イベント -- NPC348 Marenia's Daughter_Phase 4_NPC initialization event
+1042553711 NPC348マレニアの娘_共闘して勝利イベント -- NPC348 Daughter of Marenia_Fight together and win event
+1042553712 NPC348マレニアの娘_神肌_ツリガ_ガーゴイル_白霊召喚停止イベント -- NPC348 Marenia's Daughter_Divine Skin_Tsuriga_Gargoyle_White Spirit Summoning Stop Event

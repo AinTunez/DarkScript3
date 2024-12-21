@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1035462145 NPC疑似マルチ_ある潰れ指_開始 -- NPC pseudo-multi_certain crushed finger_start
+1035462600 紋章ワープ_開始_XX -- Crest warp_start_XX
+1035462605 紋章ワープ_終了_XX -- Crest warp_end_XX
+1035463700 NPC318_混沌の宿主_NPC初期化イベント_ある潰れ指勝利後 -- NPC318_Host of Chaos_NPC initialization event_After victory with a crushed finger
+1035463701 NPC340_ある潰れ指_侵入サイン表示 -- NPC340_A certain crushed finger_Intrusion sign display
+1035463702 NPC318_混沌の宿主_死亡確認_ある潰れ指勝利後 -- NPC318_Host of Chaos_Death confirmation_After victory with a crushed finger

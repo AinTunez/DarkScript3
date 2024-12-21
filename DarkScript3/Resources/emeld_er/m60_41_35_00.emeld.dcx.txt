@@ -1,0 +1,7 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+1000000000 敵リスポン -- enemy respawn
+1041350700 竜餐ショップ初期化 -- Dragon restaurant shop initialization
+1041350701 竜餐ショップアニメ起動 -- Dragon restaurant shop anime launched
+1041352680 馬禁止領域用SFX -- SFX for horse prohibited area
+1041353702 竜餐教会血文字表示 -- Dragon Supper Church Blood Letter Display

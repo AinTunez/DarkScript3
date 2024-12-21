@@ -1,0 +1,4 @@
+0 コンストラクタ -- constructor
+900 BGM再生制御 -- BGM playback control
+1000000000 敵リスポン -- enemy respawn
+2100000000 アイテム取得用イベントフラグON -- Event flag for item acquisition ON

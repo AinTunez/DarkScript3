@@ -1,0 +1,60 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 初期設定 -- Initial settings
+2010 次世代プロト本体初期設定 -- Initial settings for the next generation prototype
+2011 ボス戦闘開始時設定 -- Boss battle start setting
+2012 ボス戦闘終了時設定 -- Setting at the end of boss battle
+2020 カットシーン再生 -- Cutscene playback
+2300 次世代プロト残像初期設定 -- Next generation proto afterimage initial settings
+2700 ボス_AP0判定 -- Boss_AP0 judgment
+2701 ボス_死亡判定 -- Boss_death judgment
+2702 ボスAP半減判定 -- Boss AP halved judgment
+2703 ボスHU特殊効果かけ -- Boss HU special effects
+2704 ボスHU特殊効果かけ2 -- Boss HU special effects 2
+2705 会話判定_HU1回目 -- Conversation Judgment_HU 1st time
+2706 会話判定_HU2回目 -- Conversation Judgment_HU 2nd time
+2707 会話判定_死亡アニメ -- Conversation Judgment_Death Animation
+2708 次世代撃破時_CS再生判定 -- When defeating the next generation_CS regeneration judgment
+2709 会話判定_HU2前よろけ時 -- Conversation judgment_HU2 front stagger
+2710 会話判定_HU2後よろけ時 -- Conversation judgment_When staggered after HU2
+2711 会話判定用_HU2前よろけ終了判定 -- For conversation judgment_HU2 front stagger end judgment
+2712 会話判定用_HU2後よろけ終了判定 -- For conversation determination_HU2 backward stagger end determination
+2713 会話判定用_HU2演技中よろけ終了判定 -- For conversation judgment_HU2 Stagger end judgment during performance
+2714 会話判定用_ミッション開始後よろけ終了判定 -- For conversation determination_Stagger end determination after mission start
+2720 会話判定用_ボスAP低下一回目 -- For conversation judgment_Boss AP decrease first time
+2724 会話判定用_ボスAP低下四回目 -- For conversation judgment_Boss AP decrease 4th time
+2750 会話判定用_HU2会話一回目 -- For conversation judgment_HU2 conversation first time
+2751 会話判定用_HU2会話二回目 -- For conversation judgment_HU2 conversation second time
+2752 会話判定用_HU2会話三回目 -- For conversation judgment_HU2 conversation third time
+3000 プロトAC_残像1召喚判定 -- Proto AC_Afterimage 1 Summoning Judgment
+3001 プロトAC_残像2召喚判定 -- Proto AC_Afterimage 2 Summon Judgment
+3002 プロトAC_残像3召喚判定 -- Proto AC_Afterimage 3 Summon Judgment
+3003 プロトAC_残像4召喚判定 -- Proto AC_Afterimage 4 Summon Judgment
+3020 プロトAC_残像1アタッチ判定 -- Proto AC_Afterimage 1 Attach Judgment
+3021 プロトAC_残像2アタッチ判定 -- Proto AC_Afterimage 2 Attach Judgment
+3022 プロトAC_残像3アタッチ判定 -- Proto AC_Afterimage 3 Attach Judgment
+3023 プロトAC_残像4アタッチ判定 -- Proto AC_Afterimage 4 Attach Judgment
+3030 プロトAC_残像1デタッチ判定 -- ProtoAC_Afterimage 1 Detachment Judgment
+3031 プロトAC_残像2デタッチ判定 -- ProtoAC_Afterimage 2 Detachment Judgment
+3032 プロトAC_残像3デタッチ判定 -- ProtoAC_Afterimage 3 Detachment Judgment
+3033 プロトAC_残像4デタッチ判定 -- ProtoAC_Afterimage 4 Detachment Judgment
+3100 プロトAC_残像1への命令イベント -- ProtoAC_Command event to afterimage 1
+3125 プロトAC_残像2への命令イベント -- ProtoAC_Command event to afterimage 2
+3150 プロトAC_残像3への命令イベント -- ProtoAC_Command event to afterimage 3
+3175 プロトAC_残像4への命令イベント -- ProtoAC_Command event to afterimage 4
+3750 会話用_よろけ会話再生許可フラグ_HU2前 -- Conversation_Stagger conversation playback permission flag_before HU2
+3751 会話用_よろけ会話再生許可フラグ_HU2後 -- Conversation_Stagger conversation playback permission flag_After HU2
+3800 会話フラグ_107500100_ミッション開始時 -- Conversation flag_107500100_At the start of the mission
+3801 会話フラグ_107500200_ミッション開始後 -- Conversation flag_107500200_After mission start
+3802 会話フラグ_107500500_AP低下1 -- Conversation flag_107500500_AP decrease 1
+3803 会話フラグ_107500520_AP低下2_HU一段階 -- Conversation flag_107500520_AP drop 2_HU level 1
+3804 会話フラグ_107500600_スタッガー発生_HU2前 -- Conversation flag_107500600_Stagger occurrence_HU2 ago
+3805 会話フラグ_107500900_AP低下3_HU二段階 -- Conversation flag_107500900_AP drop 3_HU two stages
+3806 会話フラグ_107500920_AP低下4 -- Conversation flag_107500920_AP decrease 4
+3807 会話フラグ_107501000_スタッガー発生_HU2後 -- Conversation flag_107501000_Stagger occurrence_After HU2
+3808 会話フラグ_107501300_撃破 -- Conversation flag_107501300_defeated
+3809 会話フラグ_107501400_自機死亡_HU２前 -- Conversation flag_107501400_Owner's death_HU2 ago
+3810 会話フラグ_107501700_自機死亡HU２以降 -- Conversation flag_107501700_Owner's death HU2 or later
+3900 リザルト遷移 -- Result transition
+3910 PS5用遷移 -- Transition for PS5
+1000000000 敵リスポン -- enemy respawn

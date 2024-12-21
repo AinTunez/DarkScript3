@@ -1,0 +1,24 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+31190600 魔法壁_XX -- Magic wall_XX
+31192210 思考ロジック有効化_領域／距離判定_集積部屋_XX -- Enabling thought logic_area/distance determination_accumulation room_XX
+31192800 ボス撃破 -- Defeat the boss
+31192810 ボス出現 -- Boss appears
+31192811 ボス激昂 -- boss rage
+31192830 ボス_黒き刃の末裔_姿隠し暴き -- Boss_Descendant of the Black Blade_Hidden figure revealed
+31192845 ホストがボス部屋入場_ガストも帰還する -- Host enters boss room_Gust also returns
+31192849 ボス_イベント起動 -- Boss_event activation
+31192850 隠しボス_ボス撃破 -- Hidden boss_defeat boss
+31192860 隠しボス_ボス出現 -- Hidden boss_boss appearance
+31192861 隠しボス激昂 -- Hidden boss rage
+31192862 隠しボス_敵ジェネレータAを有効化 -- Hidden boss_enable enemy generator A
+31192863 マルチドーピング対応_XX -- Multi-doping compatible_XX
+31192880 隠しボスマルチ権限対応 -- Hidden boss multi-authority support
+31192899 隠しボス_イベント起動 -- Hidden boss_event activation
+35002250 特殊待機_領域／距離判定_集積部屋_XX -- Special standby_area/distance determination_accumulation room_XX
+1000000000 敵リスポン -- enemy respawn

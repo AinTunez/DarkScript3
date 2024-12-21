@@ -1,0 +1,32 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+34112150 搭反転イベント -- Tower reversal event
+34112151 神の塔への移動 -- Move to the Tower of God
+34112152 反転後大EVの初期設定 -- Initial setting of large EV after reversal
+34112400 敵対NPC_反転前_出現 -- Hostile NPC_Before reversal_Appearance
+34112410 敵対NPC_反転前_一回目ワープ -- Hostile NPC_Before reversal_First warp
+34112420 敵対NPC_反転前_二回目ワープ -- Hostile NPC_Before reversal_Second warp
+34112430 敵対NPC_反転前_三回目ワープ -- Hostile NPC_Before reversal_Third warp
+34112439 敵対NPC_反転前_前半終了 -- Hostile NPC_Before reversal_First half ended
+34112440 敵対NPC_反転前_回廊追いかけ_XX -- Hostile NPC_Before reversal_Corridor chase_XX
+34112448 敵対NPC_反転前_梁の上 -- Hostile NPC_Before reversal_On the beam
+34112449 敵対NPC_反転前_回廊スタート -- Hostile NPC_Before reversal_Corridor start
+34112459 敵対NPC_反転前_追いかけ終了判定_ダメージ -- Hostile NPC_Before reversal_Chasing end determination_Damage
+34112460 敵対NPC_反転後_出現 -- Hostile NPC_After reversal_Appearance
+34112465 敵対NPC_反転後_一回目ワープ -- Hostile NPC_After reversal_First warp
+34112475 敵対NPC_投げられた後にワープ_XX -- Hostile NPC_Warp after being thrown_XX
+34112492 敵対NPC_反転後_上層梁へワープ -- Hostile NPC_After reversal_Warp to upper beam
+34112493 敵対NPC_反転後_下層梁へワープ -- Hostile NPC_After reversal_Warp to lower beam
+34112496 敵対NPC_反転後_大EVへワープ -- Hostile NPC_After reversal_Warp to large EV
+34112499 敵対NPC_特殊効果 -- Hostile NPC_Special effects
+34112510 エレベータ起動 -- elevator start
+34112519 エレベーター初期フラグ設定 -- Elevator initial flag setting
+34112580 梯子登録 -- ladder registration
+34112690 天候固定 -- weather fixed
+34112800 ボス撃破 -- Defeat the boss
+34112810 ボス出現 -- Boss appears
+34112849 ボスイベント起動 -- Boss event activation
+34112900 【専用】2フロア移動エレベータ_m34_11 -- [Exclusive] 2-floor moving elevator_m34_11
+34112910 【専用】2フロア移動エレベータ_反転後大エレベータ -- [Exclusive] 2-floor moving elevator_Large elevator after reversal
+1000000000 敵リスポン -- enemy respawn

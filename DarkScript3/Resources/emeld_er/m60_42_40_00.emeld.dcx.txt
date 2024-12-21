@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1042402390 闘技場_砂塵SFX切り替え -- Arena_dust SFX switching
+1042402650 チュートリアルメッセージ_マルチプレイ敵対 -- Tutorial message_Multiplayer adversarial
+1042402655 チュートリアルメッセージ_リムグレイブ闘技場 -- Tutorial message_Rimgrave Arena
+1042402656 闘技場入り口_マルチ中は稼働しない -- Arena entrance_does not operate during multiplayer
+1042402657 チュートリアルメッセージ_円卓のマリカ像 -- Tutorial message_Marika statue at the round table
+1042402658 マッチング中_チュートリアル制御 -- Matching_tutorial control
+1042402659 NPC700話す死体_非表示化 -- NPC700 Talking Corpse_Hide
+1042403700 NPC700話す死体③_NPC初期化イベント -- NPC700 talking corpse③_NPC initialization event

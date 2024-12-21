@@ -1,0 +1,18 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1042322220 オオカミ集合_領域判定_テスト -- Wolf gathering_area determination_test
+1042322230 雑兵ラッパ吹き_領域判定 -- Miscellaneous Trooper Trumpeter_Area Judgment
+1042322400 [小探索_塔1]封印の扉 -- [Small Exploration_Tower 1] Sealed Door
+1042322401 [小探索_塔1]封印の石碑_XX -- [Small Exploration_Tower 1] Seal Stone Monument_XX
+1042322402 [小探索_塔1]４月版の一時対応 -- [Small Exploration_Tower 1] Temporary support for April version
+1042322403 [小探索_塔1]兵士うずくまり解除_XX -- [Small Exploration_Tower 1] Soldier crouching release_XX
+1042322404 ランダム配置用_小隊削除 -- For random placement_platoon deletion
+1042322500 騎馬走行 -- horse riding
+1042322510 宝箱ワープトラップ -- treasure chest warp trap
+1042322580 梯子登録 -- ladder registration

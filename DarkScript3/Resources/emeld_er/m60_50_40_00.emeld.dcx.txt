@@ -1,0 +1,12 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1050402201 レッサーワイバーン初期設定_XX -- Lesser Wyvern initial settings_XX
+1050402202 巨大ワイバーンが死んだらレッサーも死ぬ_XX -- If the giant wyvern dies, the lesser will also die_XX
+1050402203 巨大ワイバーンが死んだら見えない壁が消える -- When the giant wyvern dies, the invisible wall disappears.
+1050402204 レッサーワイバーンHPゲージ表示対応_XX -- Lesser Wyvern HP gauge display supported_XX
+1050402205 竜餐メッセージ表示 -- Dragon meal message display
+1050402206 アセットを消すイベント -- Event that deletes assets
+1050402210 特殊待機_領域判定_巨大ワイバーンイベントアレンジ_XX -- Special standby_area determination_giant wyvern event arrangement_XX
+1050402800 巨大ワイバーン初期設定 -- Giant Wyvern initial settings

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using static DarkScript3.ScriptAst;
 
 namespace DarkScript3
 {
@@ -16,6 +17,7 @@ namespace DarkScript3
         public byte[] StringData { get; set; }
         public List<long> LinkedFileOffsets { get; set; }
         public string Version { get; set; }
+        public List<string> InitFiles { get; set; }
         // Should only be used by ScriptSettings
         public Dictionary<string, string> ExtraSettings { get; set; }
 
@@ -35,6 +37,17 @@ namespace DarkScript3
             };
         }
 
+        public EMEVD CreateEmevd()
+        {
+            return new EMEVD()
+            {
+                Compression = Compression,
+                Format = Game,
+                StringData = StringData,
+                LinkedFileOffsets = LinkedFileOffsets,
+            };
+        }
+
         public void Write(StringBuilder sb, InstructionDocs docs)
         {
             sb.AppendLine("// ==EMEVD==");
@@ -45,7 +58,10 @@ namespace DarkScript3
             sb.AppendLine($"// @linked    [{string.Join(",", LinkedFileOffsets)}]");
             foreach (KeyValuePair<string, string> extra in ExtraSettings)
             {
-                sb.AppendLine($"// @{extra.Key}    {extra.Value}");
+                if (ScriptSettings.ValidSettings.Contains(extra.Key))
+                {
+                    sb.AppendLine($"// @{extra.Key}    {extra.Value}");
+                }
             }
             // Hardcode this just to make sure we update it always
             sb.AppendLine($"// @version    {ProgramVersion.VERSION}");
@@ -97,6 +113,7 @@ namespace DarkScript3
                 // IsASCIIStringData, but InstructionDocs may not exist at this point
                 StringData = Unescape(headers["string"], docs.StartsWith("ds2")),
                 LinkedFileOffsets = linked,
+                // This includes the other data as well. Limit this on write.
                 ExtraSettings = headers,
                 Version = headers.TryGetValue("version", out string version) ? version : null,
             };
@@ -105,7 +122,9 @@ namespace DarkScript3
 
         public static string Trim(string text)
         {
-            return Regex.Replace(text, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==", "");
+            // Trimming end may not be necessary, but whitespace removal at start is.
+            // End trim could result in bad backtracking, so prefer the additional allocation instead, I suppose.
+            return Regex.Replace(text, @"(^|\n)\s*// ==EMEVD==(.|\n)*// ==/EMEVD==\s*", "").TrimEnd();
         }
 
         private static Dictionary<string, string> GetHeaderValues(string fileText)
@@ -133,7 +152,7 @@ namespace DarkScript3
             return ret;
         }
 
-        public static byte[] Unescape(string text, bool ds2)
+        internal static byte[] Unescape(string text, bool ds2)
         {
             if (text.StartsWith('"'))
             {
@@ -142,7 +161,7 @@ namespace DarkScript3
             return ds2 ? Encoding.ASCII.GetBytes(text) : Encoding.Unicode.GetBytes(text);
         }
 
-        public static string Escape(byte[] data, bool ds2)
+        internal static string Escape(byte[] data, bool ds2)
         {
             string text = ds2 ? Encoding.ASCII.GetString(data) : Encoding.Unicode.GetString(data);
             text = JsonConvert.SerializeObject(text);

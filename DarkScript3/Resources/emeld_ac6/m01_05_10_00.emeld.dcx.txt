@@ -1,0 +1,43 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2200 ボスのAIを停止 -- Stop boss AI
+2210 チェックポイント有効化 -- checkpoint enable
+2211 塹壕都市チェックポイント有効化 -- Enable Trench City Checkpoint
+2220 ミッション開始テキスト -- Mission start text
+2230 エリア3の増援準備 -- Preparing reinforcements for area 3
+2240 エリア3の増援 -- Reinforcements for area 3
+2300 砲台発射特殊効果 -- Artillery firing special effects
+2310 砲台発射停止効果 -- Artillery firing stop effect
+2500 壁面砲台攻撃範囲内判定 -- Wall turret attack range determination
+2510 壁面砲台攻撃範囲外判定 -- Wall turret attack out of range determination
+2515 砲台熾烈攻撃範囲判定 -- Artillery fierce attack range determination
+2560 エリア5ボス起動 -- Area 5 boss activation
+2570 エリア5ボス撃破 -- Defeat area 5 boss
+2580 エリア2終盤 -- End of area 2
+2590 飛んでいく個所に入った -- I entered a place where I could fly away.
+2600 砲台下に入った -- I went under the gun emplacement
+2610 高台に入った -- I entered the high ground
+2620 エレベーターに乗った -- got on the elevator
+2630 ボス前部屋に入った -- I entered the room in front of the boss.
+2640 エリア3の敵を一定数撃破 -- Defeat a certain number of enemies in area 3
+2645 ボスが戦闘状態になった -- The boss is in combat mode
+2650 エリア4中盤隠し敵 -- Area 4 midfield hidden enemy
+2660 砲台起動 -- turret activation
+2670 砲台停止 -- Battery stop
+2680 エリア2増援無効化 -- Area 2 reinforcements disabled
+2681 エリア2増援起動 -- Area 2 reinforcements activated
+2685 エリア2増援投下 -- Area 2 reinforcements dropped
+2690 エリア2増援ヘリ帰還 -- Area 2 reinforcement helicopter returns
+2700 エリア3ボス無効化 -- Area 3 boss disabled
+2705 エリア3ボス有効化 -- Area 3 boss enabled
+2706 エリア3ボス死亡判定 -- Area 3 boss death determination
+2710 目標地点_砲台有効化 -- Target point_turret activation
+2711 目標地点_砲台奥有効化 -- Target point_turret depth enabled
+2712 目標地点_エレベーター有効化 -- Target point_Elevator activation
+2713 目標地点_エレベーター無効化 -- Target point_elevator disabled
+2714 目標地点全非表示 -- All target points hidden
+2800 チェックポイント通過フラグ -- Checkpoint passing flag
+2810 チェックポイント通過後フラグ -- Flag after passing checkpoint
+2820 塹壕都市チェックポイント通過フラグ -- Trench city checkpoint passage flag
+2950 エリア3ボス登場会話 -- Area 3 boss appearance conversation
+1000000000 敵リスポン -- enemy respawn

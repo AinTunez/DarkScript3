@@ -1,0 +1,345 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 utl_マップ初期化 -- utl_map initialization
+2001 utl_プレイヤー初期化 -- utl_player initialization
+2002 次ステージ遷移 -- Next stage transition
+2003 判定_周回したか -- Judgment_Did you go around?
+2004 進行度_通常ルート -- Progress_Normal route
+2005 進行度_No2撃破ルート -- Progress_No2 defeat route
+2006 作戦失敗 -- Operation failure
+2010 utl_フェードアウト -- utl_fadeout
+2011 utl_フェードイン -- utl_fade in
+2015 廃墟用アセット有効化 -- Enabling assets for ruins
+2020 ALT_特別報酬_オールマインド勧誘受諾 -- ALT_Special Reward_All Mind Recruitment Accepted
+2021 ALT_特別報酬_ウォルター作戦放棄 -- ALT_Special Reward_Abandonment of Operation Walter
+2022 ALT_特別報酬_賞金首 -- ALT_Special Reward_Bounty Head
+2023 ALT_イグアス有効化フラグ -- ALT_Iguazu enable flag
+2030 会話ループ防止用フラグ_WGE撃破 -- Conversation loop prevention flag_Defeat WGE
+2031 会話ループ防止用フラグ_No5撃破 -- Conversation loop prevention flag_Defeat No.5
+2032 会話ループ防止用フラグ_スネイル撃破 -- Conversation loop prevention flag_Defeat Snail
+2033 会話ループ防止用フラグ_イグアス撃破 -- Conversation loop prevention flag_Defeat Iguazu
+2050 埋まり防止更新頻度設定 -- Fill prevention update frequency setting
+2070 企業連NPAC更新頻度設定 -- Corporate NPAC update frequency setting
+2075 序盤敵更新頻度設定 -- Early enemy update frequency setting
+2090 utl_チェックポイント生成_1 -- utl_checkpoint generation_1
+2091 utl_SF_チェックポイント生成したよフラグ_1 -- utl_SF_Checkpoint generated flag_1
+2092 utl_リトライ時初期化_1 -- utl_initialize on retry_1
+2093 ALTボス前チェックポイント有効化 -- Enable checkpoint before ALT boss
+2094 NPAC戦後チェックポイント有効化 -- NPAC post-war checkpoint enabled
+2095 NPAC線後チェックポイント有効化フラグ -- NPAC post-line checkpoint enable flag
+2096 共通イベント_成功リザルト_BGM無音化フラグ -- Common event_success result_BGM mute flag
+2100 bas_初期化 -- bas_initialization
+2101 bas_完了化 -- bas_completed
+2102 判定_オリジン -- Judgment_Origin
+2103 判定_ALT -- Judgment_ALT
+2104 開幕目標地点表示 -- Opening target point display
+2110 bas_B_ビューポイント1到達したか判定 -- bas_B_Determine whether viewpoint 1 has been reached
+2111 bas_B_橋終点側に到達したか判定 -- bas_B_Determine whether you have reached the end of the bridge
+2112 bas_B_ビューポイント2到達したか判定 -- bas_B_Determine whether viewpoint 2 has been reached
+2113 最初のNPAC全員倒したか判定 -- Determine if all first NPACs have been defeated
+2114 ナンバー5が攻撃された -- number 5 was attacked
+2115 ワイルドギースEが攻撃された -- Wild Geese E was attacked
+2120 bas_塔のマーカーON -- bas_tower marker ON
+2121 bas_塔のマーカーOFF -- bas_tower marker OFF
+2122 bas_B_塔に到達したか判定 -- bas_B_Determine whether you have reached the tower
+2123 bas_B_バオバブに接近したか判定 -- bas_B_Determine if you are close to a baobab
+2124 bas_最奥への誘導用マーカーON -- bas_Guidance marker to the deepest point ON
+2130 bas_カットシーン再生_ボス登場 -- bas_cutscene playback_boss appearance
+2131 bas_カットシーン再生_ボス退場 -- bas_cutscene playback_boss exit
+2132 オービット用ボスゲージ表示判定 -- Orbit boss gauge display judgment
+2133 オービット用HUBGM判定 -- HUBGM judgment for orbit
+2140 橋前目標ON -- Hashimae target ON
+2141 対岸目標ON -- Opposite target ON
+2142 パイプ前目標ON -- Pipe front target ON
+2143 橋前目標OFF -- Hashimae target OFF
+2144 対岸目標OFF -- Opposite target OFF
+2145 パイプ前目標OFF -- Target in front of pipe OFF
+2146 崩れビル目標ON -- Collapsed building target ON
+2147 崩れビル目標OFF -- Collapsed building target OFF
+2148 ALTシェルパ前目標ON -- ALT Sherpa front target ON
+2149 ALTボス前目標ON -- ALT boss pre-target ON
+2150 ALTシェルパ前目標OFF -- ALT Sherpa front target OFF
+2151 ALTボス前目標OFF -- ALT boss front target OFF
+2155 序盤市街地の敵を全て撃破した判定 -- Judgment that all enemies in the city area were defeated in the early stages
+2156 序盤NPACにTGT表示 -- TGT displayed on early NPAC
+2157 序盤NPACを倒したら残りの敵にTGT表示 -- After defeating the NPAC in the early stages, TGT will be displayed on the remaining enemies.
+2160 ミッション会話用特殊効果付与 -- Add special effects for mission conversations
+2161 ミッション会話用特殊効果解除 -- Special effect release for mission conversation
+2162 ALTイグアスボスゲージ表示用フラグ -- ALT Iguazu boss gauge display flag
+2200 nac_初期化 -- nac_initialization
+2201 nac_完了化 -- nac_completion
+2202 No2無効化 -- No2 disabled
+2203 ALT_Gparam切替 -- ALT_Gparam switching
+2204 オービット戦HU時カメラ前エフェクト有効化 -- Enable effect in front of camera during Orbit battle HU
+2210 nac_B_戦闘開始位置に来たか判定 -- nac_B_Determine whether you have reached the battle starting position
+2211 nac_B_戦闘状態に入ったか判定 -- nac_B_Determine whether it has entered a combat state
+2212 nac_SF_戦闘終わりましたフラグ -- nac_SF_battle over flag
+2220 nac_B_NPACのAPちょっと減り始めたか判定 -- Determine whether nac_B_NPAC's AP has started to decrease a little.
+2221 nac_B_NPACのAP大きく減らしたか判定 -- Determine whether nac_B_NPAC's AP has been significantly reduced
+2222 nac_B_NPACのAP0になったか判定 -- Determine whether nac_B_NPAC has become AP0
+2223 nac_B_NPACのタグ入手 -- Obtain tag for nac_B_NPAC
+2224 オービット撃破CS再生用判定 -- Orbit defeat CS replay judgment
+2230 nac_戦闘始める -- nac_Start battle
+2231 ボスロジック停止 -- Boss logic stopped
+2232 ボス戦闘開始処理 -- Boss battle start process
+2233 ボス有効化 -- boss enable
+2234 ALT_時間切れでNo2起動 -- ALT_ No2 starts when time is up
+2235 オービットロジック解除 -- Orbit logic cancellation
+2240 残骸を調べたら旧世界MT起動 -- After investigating the wreckage, start the old world MT
+2325 攻撃されたらNo2起動 -- Activate No2 when attacked
+2326 No2が先に死んだ -- No2 died first
+2327 No1が先に死んだ -- No1 died first
+2328 イグアス有効化 -- iguazu enabled
+2329 イグアスボスゲージ表示 -- iguazu boss gauge display
+2331 一部キャラの無効化 -- Disabling some characters
+2332 No2有効化 -- No2 activation
+2333 No2ボスゲージ表示 -- No2 boss gauge display
+2334 No2ボスゲージ非表示 -- No2 boss gauge hidden
+2335 サンフラワー非戦闘時走行 -- Sunflower non-combat driving
+2336 EvEセットアップ -- EvE setup
+2337 企業連NPACにTGT表示 -- TGT display on corporate association NPAC
+2338 イベントターゲット超連打 -- Event target super continuous hit
+2339 NPAC撃破でボスゲージ非表示 -- Boss gauge disappears after defeating NPAC
+2341 開始時爆発演出 -- Explosion at the start
+2345 No1撃破でボスゲージ非表示 -- Boss gauge disappears after defeating No.1
+2346 ALT_定期的に自機をタゲる -- ALT_Target own machine regularly
+2347 ALTボス無敵解除 -- ALT boss invincibility removed
+2348 ALTボス戦_嗅覚向上 -- ALT boss battle_Improved sense of smell
+2350 NPACロック判定 -- NPAC lock judgment
+2360 スネイル閉じ込め防止 -- Preventing snail entrapment
+2361 イグアス閉じ込め防止 -- Iguazu confinement prevention
+2378 イグアスにマーカー表示 -- Marker displayed on Iguazu
+2379 イグアスマーカー非表示 -- Iguazu marker hidden
+2400 自機爆発 -- Own aircraft explosion
+2401 ALT用シェルパ無効化特殊効果 -- Sherpa invalidation special effect for ALT
+2402 ALTサンフラワー無効化 -- ALT Sunflower disabled
+2800 判定_対岸についた -- Judgment: Arrived at the opposite shore
+2801 判定_パイプ前についた -- Judgment_I got in front of the pipe
+2802 判定_No2戦闘開始 -- Judgment_No2 battle begins
+2803 判定_ALTNPACを撃破した -- Judgment_Defeated ALTNPAC
+2804 判定_再開後動いた -- Judgment_It moved after restarting
+2805 判定_シェルパ前についた -- Judgment_I arrived in front of the Sherpa
+2810 判定_No_5に攻撃した -- Attacked judgment_No_5
+2811 判定_ワイルドギースEに攻撃した -- Judgment_Attacked Wild Geese E
+2812 判定_No_5を撃破 -- Defeat Judgment_No_5
+2813 判定_ワイルドギースEを撃破 -- Judgment_Defeat Wild Geese E
+2814 判定_序盤のNPACを倒した -- Verdict_Defeated NPAC in the early stages
+2815 判定_ボスがHUした -- Judgment_Boss got HU
+2816 判定_NPACが周辺を制圧した -- Judgment_NPAC has controlled the surrounding area
+2817 判定_サンフラワーと接近した -- Judgment_Close to Sunflower
+2818 判定_企業連ACいずれかに攻撃した -- Judgment: Attacked one of the corporate ACs
+2819 判定_NPACを一機撃破 -- Judgment_Defeat one NPAC
+2820 判定_NPACを二機撃破 -- Judgment_Destroyed two NPACs
+2821 判定_サンフラワー撃破 -- Judgment_Defeat Sunflower
+2822 判定_サンフラワー登場会話用 -- Judgment_Sunflower appearance conversation
+2823 判定_オービット撃破会話用 -- Judgment_Orbit defeat conversation
+2824 判定_カットシーン再生中か -- Judgment_Is a cutscene playing?
+2825 判定_No5体力半減 -- Judgment_No5 physical strength halved
+2826 判定_ワイルドギースE体力半減 -- Judgment_Wild Geese E physical strength halved
+2827 判定_No5体力75 -- Judgment_No5 physical strength 75
+2828 判定_ワイルドギースE体力75 -- Judgment_Wild Geese E physical strength 75
+2829 判定_オービット体力65 -- Judgment_Orbit physical strength 65
+2830 判定_ALT_下水範囲Aに入った -- Judgment_ALT_ Entered sewage range A
+2831 判定_ALT_下水範囲Bに入った -- Judgment_ALT_ Entered sewage range B
+2832 判定_ALT_下水範囲Cに入った -- Judgment_ALT_ Entered sewage range C
+2833 判定_ALT_ナンバー2に奇襲した -- Judgment_ALT_Number 2 was attacked by surprise.
+2834 判定_ALT_ナンバー2に奇襲失敗 -- Judgment_ALT_Surprise attack failed on number 2
+2835 判定_ALT_ナンバー2の体力半減 -- Judgment_ALT_Number 2's physical strength halved
+2836 判定_ALT_イグアスの体力半減 -- Judgment_ALT_Iguazu's physical strength halved
+2837 ラストヒット判定_ナンバー2 -- Last hit judgment_Number 2
+2838 ラストヒット判定_イグアス -- Last hit judgment_Iguazu
+2839 判定_イグアス撃破 -- Judgment_Defeat Iguazu
+2840 判定_No2撃破 -- Judgment_No.2 defeated
+2841 判定_ALT_四脚に発見された -- Judgment_ALT_Found by a quadruped
+2842 判定_ALT_共産に発見された -- Judgment_ALT_Discovered by communists
+2843 判定_ALT_イグアス有効化判定 -- Judgment_ALT_Iguazu activation judgment
+2844 判定_ALT_奇襲ポイントについた -- Judgment_ALT_Arrived at surprise attack point
+2845 判定_ALT_ナンバー2がトドメを刺した -- Judgment_ALT_Number 2 delivered the final blow
+2846 判定_ALT_イグアスがトドメを刺した -- Judgment_ALT_Iguazu dealt the final blow
+2847 判定_ALT_パイプエリアに侵入した -- Judgment_ALT_Entered the pipe area
+2848 判定_ALT_下水範囲B2に入った -- Judgment_ALT_Entered sewage range B2
+2849 判定_ALT_ラストヒット判定_ナンバー2スタンA -- Judgment_ALT_Last hit judgment_Number 2 stun A
+2850 判定_ALT_ラストヒット判定_ナンバー2スタンB -- Judgment_ALT_Last hit judgment_Number 2 stun B
+2851 判定_ALT_ナンバー2がスタンでトドメを刺した -- Judgment_ALT_Number 2 dealt the final blow with stun.
+2852 判定_サンフラワー登場演出用 -- Judgment_For Sunflower appearance production
+2853 汎用COM判定_ALT_ナンバー2 -- General-purpose COM judgment_ALT_number 2
+2854 汎用COM判定_ALT_イグアス -- General purpose COM judgment_ALT_Iguazu
+2860 会話判定_WGE_75用 -- Conversation judgment_WGE_75
+2861 会話判定_No5_75用 -- Conversation judgment_No5_75
+2862 会話判定_WGE_50用 -- Conversation judgment_WGE_50
+2863 会話判定_No5_50用 -- Conversation judgment_No5_50
+2864 会話判定_湖手前に来た -- Conversation judgment_I came in front of the lake
+2865 会話判定_自機死亡 -- Conversation Judgment_Ownership Death
+2870 会話判定_オービットHU会話00_特殊効果42502050がある -- Conversation judgment_Orbit HU conversation 00_Special effects 42502050 are available
+2871 会話判定_オービットHU会話01_特殊効果42502051がある -- Conversation judgment_Orbit HU conversation 01_Special effect 42502051 is present
+2872 会話判定_オービットHU会話02_特殊効果42502052がある -- Conversation judgment_Orbit HU conversation 02_Special effect 42502052 is present
+2873 会話判定_プラント発見位置についた -- Conversation Judgment_Arrived at the location where the plant was discovered
+2874 会話判定_ボス前半3割減 -- Conversation Judgment_Boss first half reduced by 30%
+2876 会話判定_ボス前半劣勢 -- Conversation judgment_Boss first half inferior
+2877 会話判定_ボス後半劣勢 -- Conversation judgment_Boss second half inferior
+2878 会話判定_ALT劣勢_ナンバー2A -- Conversation Judgment_ALT Inferiority_Number 2A
+2879 会話判定_ALT劣勢_ナンバー2B -- Conversation Judgment_ALT Inferiority_Number 2B
+2880 会話判定_ALT劣勢_イグアス -- Conversation Judgment_ALT inferiority_Iguazu
+2881 会話判定_目的地につかない -- Conversation Judgment_Cannot reach destination
+2882 会話判定_湖面サンフラワーが接近 -- Conversation Judgment_Lake sunflower approaches
+2883 会話判定_湖面サンフラワーいずれかを撃破 -- Conversation Judgment_Defeat one of the Lake Sunflowers
+2884 会話判定_WGEに撃破された -- Conversation judgment_Defeated by WGE
+2885 会話判定_ナンバー5に撃破された -- Conversation Judgment_Defeated by Number 5
+2886 会話判定_N2奇襲時共産全滅 -- Conversation Judgment_Communist annihilation during N2 surprise attack
+2887 会話判定_オービット回復完了 -- Conversation judgment_Orbit recovery complete
+2888 会話判定_ALT四脚会話スキップ -- Conversation Judgment_ALT Quadruped Conversation Skip
+2889 会話判定_ALT共産会話スキップ -- Conversation judgment_ALT communal conversation skip
+2890 回復薬判定_イグアス一個目 -- Recovery medicine judgment_Iguazu first
+2891 回復薬判定_イグアス二個目 -- Recovery medicine judgment_Iguazu second one
+2892 回復薬判定_スネイル一個目 -- Recovery medicine judgment_first Snail
+2893 回復薬判定_スネイル二個目 -- Recovery medicine judgment_Second Snail
+2894 回復薬判定_No5一個目 -- Recovery medicine judgment_No. 5 first item
+2895 回復薬判定_No5二個目 -- Recovery medicine judgment_No.5 second
+2896 回復薬判定_WGE一個目 -- Recovery medicine judgment_WGE first item
+2897 回復薬判定_WGE二個目 -- Recovery medicine judgment_WGE second
+2900 会話判定_イグアス有効化済 -- Conversation judgment_Iguazu enabled
+2901 会話判定_2機とも会話開始 -- Conversation judgment_Both machines start talking
+2902 会話判定_対岸についた会話用 -- Conversation Judgment_For conversations on the opposite shore
+3000 talk_出撃直後 -- talk_Immediately after sortie
+3001 talk_出撃直後2 -- talk_Immediately after sortie 2
+3002 talk_ワイルドギースE_出撃直後 -- talk_Wild Geese E_Immediately after sortie
+3003 talk_ワイルドギースEを攻撃 -- talk_Attack on Wild Geese E
+3004 talk_ナンバー5を攻撃 -- talk_attack number 5
+3005 talk_WGE体力75 -- talk_WGE physical strength 75
+3006 talk_WGE体力50 -- talk_WGE physical strength 50
+3007 talk_WGEを撃破 -- Defeat talk_WGE
+3008 talk_WGEを撃破2 -- Defeat talk_WGE 2
+3009 talk_No5体力75 -- talk_No5 physical strength 75
+3010 talk_No5体力50 -- talk_No5 physical strength 50
+3011 talk_No5を撃破 -- Defeat talk_No5
+3012 talk_No5を撃破2 -- Defeat talk_No5 2
+3013 talk_企業連AC2機撃破 -- talk_Company Federation AC 2 aircraft destroyed
+3014 talk_サンフラワー登場 -- talk_Sunflower appears
+3015 talk_サンフラワー接近 -- talk_Sunflower approach
+3016 talk_サンフラワー撃破 -- talk_Defeat Sunflower
+3017 talk_対岸エリアに来た -- talk_I came to the opposite shore area
+3018 talk_湖の手前に来た -- talk_I came in front of the lake
+3019 talk_メランジ湖に到着 -- talk_Arrived at Lake Melange
+3020 talk_ボス戦開始 -- talk_Boss battle begins
+3021 talk_ボス戦開始2 -- talk_Boss battle start 2
+3022 talk_ボスがHUした -- talk_boss HU
+3023 talk_ボスがHUした2 -- talk_boss HU 2
+3024 talk_ボスがHU後会話1 -- talk_Boss talks after HU 1
+3025 talk_ボスがHU後会話2 -- talk_Boss talks after HU 2
+3026 talk_ボスを撃破 -- talk_defeat the boss
+3027 talk_分岐前 -- talk_before branching
+3028 talk_分岐前2 -- talk_before branching 2
+3029 talk_分岐前3 -- talk_before branching 3
+3030 talk_分岐前4 -- talk_before branching 4
+3031 talk_移動中会話1 -- talk_Conversation on the move 1
+3032 talk_移動中会話2 -- talk_conversation on the move 2
+3033 talk_協商MTと戦闘 -- talk_Battle with Entente MT
+3034 talk_協商MTと戦闘2 -- talk_Entente MT and battle 2
+3035 talk_奇襲ポイントに到着 -- talk_Arrived at the surprise attack point
+3036 talk_奇襲ポイントに到着2 -- talk_Arrival at surprise attack point 2
+3037 talk_奇襲成功 -- talk_surprise attack success
+3038 talk_奇襲成功2 -- talk_surprise attack success 2
+3039 talk_奇襲成功3 -- talk_surprise attack success 3
+3040 talk_感づかれた -- talk_I felt it
+3041 talk_感づかれた2 -- talk_felt 2
+3042 talk_感づかれた3 -- talk_felt3
+3043 talk_感づかれた4 -- talk_felt 4
+3044 talk_No2戦闘開始 -- talk_No2 battle begins
+3045 talk_イグアス乱入 -- talk_Iguazu Intrusion
+3046 talk_イグアス乱入2 -- talk_Iguazu Intrusion 2
+3047 talk_乱入後会話 -- talk_Conversation after intrusion
+3048 talk_乱入後会話2 -- talk_Conversation after intrusion 2
+3049 talk_乱入後会話3 -- talk_Conversation after intrusion 3
+3050 talk_No2体力半減 -- talk_No2 stamina halved
+3051 talk_イグアス体力半減 -- talk_Iguazu physical strength halved
+3052 talk_No2撃破 -- talk_No2 defeated
+3053 talk_No2撃破2 -- talk_No2 defeated 2
+3054 talk_イグアス撃破 -- talk_Defeating Iguazu
+3055 talk_イグアス撃破2 -- talk_Defeating Iguazu 2
+3056 talk_ALT終了会話 -- talk_ALT end conversation
+3057 talk_ALT終了会話2 -- talk_ALT end conversation 2
+3058 talk_ALT終了会話3 -- talk_ALT end conversation 3
+3059 talk_ALT終了会話4 -- talk_ALT end conversation 4
+3060 talk_イグアスに倒された -- talk_Defeated by Iguazu
+3061 talk_No2に倒された -- Defeated by talk_No2
+3062 talk_移動中会話3 -- talk_Conversation on the move 3
+3063 talk_ボスがHU後会話3 -- talk_Boss talks after HU 3
+3064 talk_イグアス撃破1 -- talk_Defeat Iguazu 1
+3065 talk_AC部隊発見 -- talk_AC unit discovered
+3066 talk_WGE撃破への反応 -- talk_Reaction to defeating WGE
+3067 talk_No5撃破への反応 -- talk_Reaction to defeating No5
+3068 talk_プラント発見 -- talk_plant discovery
+3069 talk_プラント発見2 -- talk_Plant discovery 2
+3070 talk_なかなか湖につかない場合 -- talk_If you can't get to the lake
+3071 talk_ボス戦前半3割減 -- talk_30% reduction in the first half of the boss battle
+3072 talk_ボス戦前半6割減 -- talk_Boss battle first half 60% reduction
+3073 talk_ボス戦前半劣勢 -- talk_We are at a disadvantage in the first half of the boss battle
+3074 talk_ボスがHU後劣勢 -- talk_Boss is at a disadvantage after HU
+3075 talk_ボスに撃破された -- talk_Destroyed by boss
+3076 talk_ALT企業AC部隊撃破 -- talk_ALT Defeat corporate AC unit
+3077 talk_応じない場合 -- talk_if not responding
+3078 talk_応じない場合2 -- talk_if not responding 2
+3079 talk_応じない場合3 -- talk_if you don't respond 3
+3080 talk_応じる場合 -- talk_if you agree
+3081 talk_応じる場合2 -- talk_if you agree 2
+3082 talk_応じる場合3 -- talk_if you agree 3
+3083 talk_見つかった -- talk_found
+3084 talk_ALT劣勢1 -- talk_ALT inferior 1
+3085 talk_ALT劣勢2 -- talk_ALT inferior 2
+3086 talk_ALT劣勢2イグアス生存 -- talk_ALT Outnumbered 2 Survival in Iguazu
+3087 talk_安全を確保しろ -- talk_Stay safe
+3088 talk_安全を確保した -- talk_safety ensured
+3089 talk_湖面のサンフラワー登場 -- talk_ Sunflower appears on the lake surface
+3090 talk_企業連に撃破された_No5 -- talk_Defeated by the corporate group_No5
+3091 talk_企業連に撃破された_WGE -- talk_WGE defeated by corporate group
+3092 talk_ALT安全確保した -- talk_ALT secured
+3093 talk_時間稼ぎ -- talk_time gain
+3094 talk_ALT時間稼ぎ -- talk_ALT Earn time
+3500 フラグ_話を聞く -- flag_listen
+3501 フラグ_話を聞かない -- flag_don't listen
+3502 フラグ_周回をした -- Flag_Got a lap
+3503 フラグ_周回をしてない -- Flag_Not doing laps
+3510 フラグ_シェルパを起動した -- Flag_Sherpa started
+3511 フラグ_シェルパに近づいた -- Flag_Close to Sherpa
+3512 フラグ_シェルパ会話終わり -- Flag_Sherpa conversation end
+3513 フラグ_企業連が市街地を制圧 -- Flag_Corporations control the city area
+3514 フラグ_ALTボス前CP到達 -- Flag_ALT reached CP before boss
+3515 フラグ_ALT取り巻きに倒された -- Flag_ALT Defeated by his entourage
+3600 BGMトランジション_ステート番号00_通常 -- BGM transition_state number 00_normal
+3601 BGMトランジション_ステート番号01_戦闘中 -- BGM transition_state number 01_in battle
+3602 BGMトランジション_ステート番号02_ヒートアップ1 -- BGM transition_state number 02_heat up 1
+3603 BGMトランジション_ステート番号03_ヒートアップ2 -- BGM transition_state number 03_heat up 2
+3604 BGMトランジション_ステート番号04_ヒートアップ3 -- BGM transition_state number 04_heat up 3
+3605 BGMトランジション_ステート番号05_ヒートアップ4 -- BGM transition_state number 05_heat up 4
+3606 BGMトランジション_ステート番号06_ヒートアップ5 -- BGM transition_state number 06_heat up 5
+3607 BGMトランジション_ステート番号07_死亡 -- BGM transition_state number 07_death
+3620 BGM用HP判定_00以下 -- HP judgment for BGM_00 or less
+3621 BGM用HP判定_10以下 -- HP judgment for BGM_10 or less
+3622 BGM用HP判定_20以下 -- HP judgment for BGM_20 or less
+3623 BGM用HP判定_30以下 -- HP judgment for BGM_30 or less
+3624 BGM用HP判定_40以下 -- HP judgment for BGM_40 or less
+3625 BGM用HP判定_50以下 -- HP judgment for BGM_50 or less
+3626 BGM用HP判定_60以下 -- HP judgment for BGM_60 or less
+3627 BGM用HP判定_70以下 -- HP judgment for BGM_70 or less
+3628 BGM用HP判定_80以下 -- HP judgment for BGM_80 or less
+3629 BGM用HP判定_90以下 -- HP judgment for BGM_90 or less
+3800 ヒット有効化_デリーター撃破後 -- Hit activation_after defeating Deleteer
+3801 ヒット有効化_オービット戦 -- Hit enable_Orbit battle
+3802 ヒット有効化_No2戦 -- Hit activation_No2 battle
+3803 ヒット有効化_No2戦闘エリア -- Hit activation_No2 battle area
+3804 ヒット有効化_No2戦前閉じ込め用 -- Hit enablement_No2 for pre-war confinement
+3820 オービット用HU周り判定 -- Judgment around HU for orbit
+3825 サンフラワー更新頻度固定 -- Sunflower update frequency fixed
+3830 メーテルとウーフハイの視覚延長 -- Visual extension of Maetel and Woofhai
+3875 会話判定_ボス前半6割減 -- Conversation Judgment_Boss first half reduced by 60%
+3900 デバッグイベント -- debug event
+3905 サンフラワー登場 -- Sunflower appears
+3906 サンフラワーロジック分岐用特殊効果 -- Sunflower logic branching special effects
+3910 リザルト判定イベント -- Result judgment event
+3920 エースデリーター登場イベント_デバッグ -- Ace Deleter Appearance Event_Debug
+3921 エースデリーター登場イベント -- Ace Deleter Appearance Event
+3930 シェルパイベント_敵TGT表示 -- Sherpa event_enemy TGT display
+3931 シェルパイベント_敵表示 -- Sherpa event_enemy display
+3932 シェルパイベント_シェルパ有効化 -- Sherpa event_Sherpa enabled
+3950 デバッグ用イベントフラグ_サンフラワー -- Event flag for debugging_Sunflower
+3951 サンフラワー登場イベント -- Sunflower appearance event

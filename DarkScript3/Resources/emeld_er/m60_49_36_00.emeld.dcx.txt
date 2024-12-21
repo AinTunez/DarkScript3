@@ -1,0 +1,7 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1049362300 交戦後用巡回ルート付与_XX -- Add patrol route for battle_XX
+1049362400 砦前_交戦イベント_王軍 -- In front of the fort_Battle event_King's army
+1049362410 砦前_交戦イベント_野犬ティラノ -- In front of the fort_Battle event_Wild dog Tyranno

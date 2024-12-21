@@ -1,0 +1,7 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+99010000 迂回自機 -- Detour own aircraft
+99050000 初期化 -- Initialization
+99052500 迂回敵 -- detour enemy
+1000000000 敵リスポン -- enemy respawn

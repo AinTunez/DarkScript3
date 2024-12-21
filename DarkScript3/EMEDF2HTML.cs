@@ -46,6 +46,7 @@ namespace DarkScript3
             ["ds3"] = "Dark Souls III",
             ["sekiro"] = "Sekiro",
             ["er"] = "Elden Ring",
+            ["ac6"] = "Armored Core VI",
         };
         private readonly Dictionary<string, Regex> interestingEmevds = new Dictionary<string, Regex>()
         {
@@ -632,7 +633,7 @@ namespace DarkScript3
                 string showVal(object a) => Escape(arg.GetDisplayValue(a).ToString());
                 return $"<code>{Escape(arg.DisplayName)} = {showVal(val)}{(val2 == null ? "" : " or " + showVal(val2))}</code>";
             }
-            for (int i = 0; i < baseDoc.Arguments.Length; i++)
+            for (int i = 0; i < baseDoc.Arguments.Count; i++)
             {
                 if (v.ExtraArgs.TryGetValue(i, out int val))
                 {

@@ -1,0 +1,80 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+16000519 エレベータ初期フラグ -- Elevator initial flag
+16002185 敵対NPC帰還 -- Return of hostile NPC
+16002310 グールの子ら_初見演出 -- Children of Ghouls_First look production
+16002500 溶岩橋浮上 -- Lava bridge surfacing
+16002505 ナビメッシュ切り取り用アセット無効化 -- Disable assets for navimesh cutting
+16002510 エレベータイベント起動 -- Elevator event activation
+16002570 火山牢専用ワープ -- Warp for volcanic prison
+16002579 火山牢専用ワープ_ゲスト -- Volcanic Prison Warp_Guest
+16002580 梯子登録 -- ladder registration
+16002590 中ボスエレベータ初期対応 -- Initial response to mid-boss elevator
+16002620 火山館魔法壁_XX -- Volcano Hall Magic Wall_XX
+16002625 火山館魔法壁破壊不能対応 -- Volcano Hall magic wall indestructible support
+16002640 落ちる床 -- falling floor
+16002650 人攫い兵器イベント_ワープ禁止 -- Kidnapping Weapon Event_Warp Prohibited
+16002670 攻撃禁止区域設定 -- No-attack zone setting
+16002689 カメラ前火の粉SFX処理 -- Spark SFX processing in front of camera
+16002690 ストームルーラー宝死体_待機 -- Storm Ruler Treasure Corpse_Waiting
+16002691 ストームルーラー宝死体_取得 -- Storm Ruler Treasure Corpse_Obtained
+16002695 ストームルーラー派生武器所持チェック -- Storm Ruler derivative weapon possession check
+16002800 グールの王撃破 -- Defeat the Ghoul King
+16002810 グールの王出現 -- The Ghoul King Appears
+16002811 グールの王激昂 -- Ghoul King Fury
+16002812 グールの王覚醒 -- Awakening of the Ghoul King
+16002822 グールの王_メテオ判定段階１ -- King of Ghouls_Meteor Judgment Stage 1
+16002824 グールの王_メテオ判定段階２ -- King of Ghouls_Meteor Judgment Stage 2
+16002826 グールの王_メテオ判定段階３ -- King of Ghouls_Meteor Judgment Stage 3
+16002830 グールの王_メテオ発動イベント -- King of Ghouls_Meteor activation event
+16002832 グールの王_怨念斬り判定 -- Ghoul King_Grudge Slash Judgment
+16002836 グールの王_カメラ切り替えHU前 -- King of Ghouls_Before camera switching HU
+16002838 グールの王_カメラ切り替えHU後 -- King of Ghouls_After camera switching HU
+16002840 グールの王_ストームルーラー効果 -- King of Ghouls_Storm Ruler Effect
+16002842 グールの王_ストームルーラー割合ダメージ判定 -- King of Ghouls_Storm Ruler Percentage Damage Judgment
+16002846 グールの王_ホストがボス部屋入場 -- King of Ghouls_Host enters boss room
+16002849 大ボス戦イベント起動 -- Big boss battle event started
+16002850 中ボス撃破 -- Defeat mid-boss
+16002855 中ボス出現 -- Mid-boss appears
+16002860 洞窟脱出中ボス撃破 -- Defeat the boss while escaping the cave
+16002865 洞窟脱出中ボス出現 -- Boss appears while escaping the cave
+16002889 洞窟中ボス戦イベント起動 -- Cave boss battle event started
+16002899 中ボス戦イベント起動 -- Mid-boss battle event starts
+16002900 ロックカメラスロット切り替えテスト -- Lock camera slot switching test
+16003700 NPC300火山館の女主人_NPC初期化イベント_火山館 -- NPC300 Volcano Hall Mistress_NPC Initialization Event_Volcano Hall
+16003701 NPC300火山館の女主人_NPC初期化イベント_ライカード喰らい中 -- NPC300 Mistress of the Volcano Hall_NPC initialization event_Eating Rykard
+16003702 NPC300火山館の女主人_初期状態から依頼遂行中 -- NPC300 Mistress of the Volcano Hall_Currently fulfilling the request from the initial state
+16003703 NPC300火山館の女主人_依頼書の机破壊禁止 -- NPC300 Mistress of the Volcano Hall_Destruction of request form desk prohibited
+16003704 NPC300火山館の女主人_依頼達成カウント -- NPC300 Mistress of the Volcano Hall_Request achievement count
+16003705 NPC230女主人の護衛_戦闘準備 -- NPC230 Mistress Escort_Battle Preparation
+16003706 NPC230女主人の護衛_戦闘終了 -- NPC230 Mistress Escort_Battle ends
+16003707 NPC300火山館の女主人_ライカード撃破後に鍵出現 -- NPC300 Volcano Hall Mistress_Key appears after defeating Rykard
+16003708 NPC300火山館の女主人_護衛撃破後アイテム出現 -- NPC300 Mistress of the Volcano Hall_Items appear after defeating the escort
+16003709 NPC300火山館の女主人_依頼未達成でライカード撃破後対応 -- NPC300 Mistress of the Volcano Hall_Respond after defeating Rykard without completing the request.
+16003710 NPC309_盗賊の頭_NPC初期化イベント_火山館で再会 -- NPC309_Thief Head_NPC Initialization Event_Reunion at the Volcano Hall
+16003711 NPC309_盗賊の頭_火山館で再会_敵対状態リセット -- NPC309_Head of Thieves_Reunion at the Volcano Hall_Reset hostility status
+16003712 NPC309_盗賊の頭_ライカード撃破時_イベント状態チェック -- NPC309_Head of the Thief_When defeating Rykard_Event status check
+16003720 NPC313火山館の勧誘者_NPC初期化イベント_火山館で再会 -- NPC313 Volcano Hall Recruiter_NPC Initialization Event_Reunion at Volcano Hall
+16003721 NPC313火山館の勧誘者_火山館で再会_リアルタイム遷移 -- NPC313 Volcano Hall Recruiter_Reunited at the Volcano Hall_Real-time transition
+16003722 NPC313火山館の勧誘者_NPC初期化イベント_火山牢にいる -- NPC313 Volcano Hall Recruiter_NPC Initialization Event_In Volcano Prison
+16003723 NPC313火山館の勧誘者_火山牢にいる_死亡時の姿切り替え -- NPC313 Volcano Hall Recruiter_In Volcano Prison_Change appearance upon death
+16003724 NPC313火山館の勧誘者_火山牢の秘密を知った判定 -- NPC313 Volcano Hall Recruiter_Judgment of knowing the secret of the Volcano Prison
+16003725 NPC313火山館の勧誘者_アイテムを残して立ち去るフラグ立て -- NPC313 Volcano Hall Recruiter_ Flag to leave items behind
+16003726 NPC313火山館の勧誘者_PCがワープしてきたアニメ再生 -- NPC313 Volcano Hall Recruiter_Anime playback where the PC warped
+16003727 NPC313火山館の勧誘者_薬渡し後_火山館に人がいる監視 -- NPC313 Volcano Hall Recruiter_After delivering medicine_Monitoring if there are people in the Volcano Hall
+16003730 NPC314ムノウ_NPC初期化イベント_火山館にいる -- NPC314 Munou_NPC initialization event_In the volcano hall
+16003731 NPC314ムノウ_火山館を去る前_一時的にどこにもいない判定 -- NPC314 Munou_Before leaving the Volcano Hall_Temporarily nowhere to be found
+16003740 NPC326火山館最強の騎士_NPC初期化イベント_火山館で再会 -- NPC326 Volcano Hall Strongest Knight_NPC Initialization Event_Reunion at Volcano Hall
+16003741 NPC326火山館最強の騎士_火山館で再会_リアルタイム遷移 -- NPC326 Volcano Hall Strongest Knight_Reunion at Volcano Hall_Real Time Transition
+16003742 NPC326火山館最強の騎士_NPC初期化イベント_火山館を去った -- NPC326 Volcano Hall Strongest Knight_NPC Initialization Event_Leaved Volcano Hall
+16003743 NPC326火山館最強の騎士_アイテムを残して立ち去るフラグ立て -- NPC326 Volcano Pavilion's Strongest Knight_ Flag to leave and leave items behind
+16003750 NPC214ライカード_会話処理限界の距離変更 -- NPC214 Rykard_Changing the distance of conversation processing limit
+16003760 NPC332火山館の幽霊_初期状態_NPC初期化イベント -- NPC332 Ghost of the Volcano Hall_Initial state_NPC initialization event
+16003761 NPC332火山館の幽霊_未会話ショートワープ -- NPC332 Ghost of the Volcano Hall_Unconversated short warp
+16003762 NPC332火山館の幽霊_ジェスチャー用アイテム光 -- NPC332 Ghost of the Volcano Hall_Gesture item light
+16003763 NPC332火山館の幽霊_出現イベント -- NPC332 Volcano Hall Ghost Appearance Event
+16003764 NPC332火山館の幽霊_移動前_自動会話イベント -- NPC332 Ghost in the Volcano Hall_Before moving_Automatic conversation event
+16003765 NPC332火山館の幽霊_移動後_自動会話イベント -- NPC332 Ghost in the Volcano Hall_After movement_Automatic conversation event
+16009000 グールの王へワープ -- Warp to the Ghoul King
+1000000000 敵リスポン -- enemy respawn

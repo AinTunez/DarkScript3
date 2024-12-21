@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30202200 彫像無効化イベント -- Statue nullification event
+30202510 エレベータイベント起動 -- Elevator event activation
+30202520 洞窟_ボス部屋報酬宝箱の開放制限 -- Cave_Boss room reward treasure chest opening limit
+30202800 m30_20ボス撃破 -- m30_20 boss defeated
+30202810 m30_20ボス出現 -- m30_20 boss appears
+30202811 m30_20ボス激昂 -- m30_20 boss rage
+30202829 m30_20ボスイベント起動 -- m30_20 boss event activated
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,5 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+100 正式馬車アタッチ -- Official carriage attach
+102 仮？馬車扉開放済み -- tentative? Carriage door opened
+1000000000 敵リスポン -- enemy respawn

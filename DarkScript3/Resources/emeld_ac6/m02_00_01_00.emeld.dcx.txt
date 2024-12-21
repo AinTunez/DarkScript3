@@ -1,0 +1,10 @@
+0 コンストラクタ -- constructor
+2000 初期化 -- Initialization
+2001 幻影アタック開始判定イベント -- Phantom attack start judgment event
+2002 幻影アタック中判定用特殊効果 -- Special effects for determining during a phantom attack
+2003 幻影アタック中終了判定用特殊効果 -- Special effects for determining the end of a phantom attack
+2004 幻影アタック中断判定イベント -- Phantom attack interruption judgment event
+2005 幻影アタック上書き判定イベント -- Phantom attack overwrite judgment event
+2010 c4200幻影召還 -- c4200 Phantom summoning
+2015 c4200幻影帰還 -- c4200 phantom return
+2020 ギミックイベントフラグ降ろし -- Gimmick event flag lowering

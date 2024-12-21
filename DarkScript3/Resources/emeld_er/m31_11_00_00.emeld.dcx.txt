@@ -1,0 +1,23 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+31112208 鉱夫突進 -- miner rush
+31112240 蛇つむり止まらない_XX -- I can't stop spinning snakes_XX
+31112245 蛇つむり音に反応しない_XX -- Does not respond to snake spinning sounds_XX
+31112250 思考ロジック有効化_領域／距離判定_逆流対策_XX -- Enabling thought logic_Area/distance judgment_Backflow countermeasures_XX
+31112301 ナズグル突進 -- Nazgul Rush
+31112310 エネミーに視界拡張の特殊効果付与_XX -- Add special effect of expanded vision to enemy_XX
+31112400 輝石鍵の封印壁 -- Seal wall of pyroxene key
+31112800 ボス撃破 -- Defeat the boss
+31112801 結晶の部族_槍_死亡時の撃破演出 -- Crystal Tribe_Spear_Defeat performance upon death
+31112802 結晶の部族_チャクラム_死亡時の撃破演出 -- Crystal Tribe_Chakram_Defeat performance upon death
+31112803 結晶の部族_杖_死亡時の撃破演出 -- Crystal Tribe_Cane_Defeat performance upon death
+31112810 ボス出現 -- Boss appears
+31112811 ボス激昂 -- boss rage
+31112849 ボス_イベント起動 -- Boss_event activation
+31113700 NPC110ルーサット死亡 -- NPC 110 Lusat dies
+1000000000 敵リスポン -- enemy respawn

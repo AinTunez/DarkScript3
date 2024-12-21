@@ -1,0 +1,21 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+99000100 喪失バリスタ無効化 -- Disable lost ballista
+99000110 喪失バリスタ有効化 -- Enable Lost Ballista
+99000120 雑兵バリスタ無効化 -- Miscellaneous ballista disabled
+99000130 雑兵バリスタ有効化 -- Activate soldier ballista
+99000140 喪失火炎放射無効化 -- Disable lost flame radiation
+99000150 喪失火炎放射有効化 -- Enable lost flamethrower
+99000160 雑兵火炎放射無効化 -- Miscellaneous flamethrower disabled
+99000170 雑兵火炎放射有効化 -- Enable trooper flamethrower
+99000180 喪失爆風バリスタ無効化 -- Disable lost blast ballista
+99000190 喪失爆風バリスタ有効化 -- Enable lost blast ballista
+99000200 喪失大バリスタ無効化 -- Large loss ballista invalidation
+99000210 喪失大バリスタ有効化 -- Activate Lost Ballista
+99000220 雑兵大バリスタ無効化 -- Disable large soldier ballista
+99000230 雑兵大バリスタ有効化 -- Activate General Ballista
+99000400 スケルトン召喚 -- skeleton summon
+99000410 スケルトンバフ付与 -- Add skeleton buff
+99000420 スケルトンバフ解除 -- Skeleton buff removal
+1000000000 敵リスポン -- enemy respawn

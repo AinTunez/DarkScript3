@@ -8,23 +8,32 @@ using Esprima.Ast;
 using static DarkScript3.ScriptAst;
 using static DarkScript3.InstructionTranslator;
 using static SoulsFormats.EMEVD;
+using Esprima.Utils;
+using System.Text.RegularExpressions;
 
 namespace DarkScript3
 {
     public class FancyJSCompiler
     {
-        private EventCFG.CFGOptions options;
+        private readonly string fileName;
+        private readonly string code;
+        private readonly EventCFG.CFGOptions options;
+        // Filled in as necessary
+        private Esprima.Ast.Program program;
 
-        public FancyJSCompiler(EventCFG.CFGOptions options = null)
+        public FancyJSCompiler(string fileName, string code, EventCFG.CFGOptions options = null)
         {
+            this.fileName = fileName;
+            this.code = code;
             this.options = options;
         }
 
         public class SourceContext
         {
             public string Code { get; set; }
-            public List<(int, string)> Lines { get; set; }
-            public Stack<SourceDecoration> PendingDecorations { get; set; }
+            private List<(int, string)> Lines { get; set; }
+            private List<SourceDecoration> PendingDecorations { get; set; }
+            private int DecorationIndex {get; set;}
 
             private int GetOffset(Position pos)
             {
@@ -41,34 +50,113 @@ namespace DarkScript3
                 return Lines[index].Item2;
             }
 
-            public void SkipTo(Node node)
+            private bool HasDecorations()
             {
-                if (PendingDecorations.Count == 0) return;
-                int pos = GetOffset(node.Location.Start);
-                while (PendingDecorations.Count > 0 && PendingDecorations.Peek().Position < pos)
+                return DecorationIndex < PendingDecorations.Count;
+            }
+
+            private bool TryPeekDecoration(out SourceDecoration dec)
+            {
+                if (DecorationIndex < PendingDecorations.Count)
                 {
-                    PendingDecorations.Pop();
+                    dec = PendingDecorations[DecorationIndex];
+                    return true;
+                }
+                else
+                {
+                    dec = null;
+                    return false;
                 }
             }
 
-            public List<SourceDecoration> GetDecorationsForNode(Node node)
+            private void PopDecoration()
+            {
+                if (DecorationIndex < PendingDecorations.Count)
+                {
+                    DecorationIndex++;
+                }
+            }
+
+            public IEnumerable<SourceDecoration> MostRecentDecorations()
+            {
+                for (int i = DecorationIndex - 1; i >= 0; i--)
+                {
+                    yield return PendingDecorations[i];
+                }
+            }
+
+            public void SkipTo(Node node)
+            {
+                if (!HasDecorations()) return;
+                int pos = GetOffset(node.Location.Start);
+                while (TryPeekDecoration(out SourceDecoration dec) && dec.Position < pos)
+                {
+                    PopDecoration();
+                }
+            }
+
+            public List<SourceDecoration> GetDecorationsForNode(Node node, bool forCond = false)
             {
                 if (PendingDecorations.Count == 0) return null;
                 int endLine = node.Location.End.Line;
                 int lineStart = Lines[endLine - 1].Item1;
                 int nextLineStart = endLine < Lines.Count ? Lines[endLine].Item1 : Code.Length;
                 List<SourceDecoration> ret = null;
-                while (PendingDecorations.Count > 0 && PendingDecorations.Peek().Position < nextLineStart)
+                while (TryPeekDecoration(out SourceDecoration dec) && dec.Position < nextLineStart)
                 {
-                    SourceDecoration dec = PendingDecorations.Pop();
+                    PopDecoration();
                     if (dec.Position < lineStart && dec.Comment != null)
                     {
                         dec.Type = SourceDecoration.DecorationType.PRE_COMMENT;
                     }
-                    if (ret == null) ret = new List<SourceDecoration>();
+                    dec.ForCond = forCond;
+                    ret ??= new List<SourceDecoration>();
                     ret.Add(dec);
                 }
                 return ret;
+            }
+
+            public List<SourceDecoration> GetDecorationsBeforeNode(Node node)
+            {
+                if (PendingDecorations.Count == 0) return null;
+                int startLine = node.Location.Start.Line;
+                int lineStart = Lines[startLine - 1].Item1;
+                List<SourceDecoration> ret = null;
+                while (TryPeekDecoration(out SourceDecoration dec) && dec.Position < lineStart)
+                {
+                    PopDecoration();
+                    if (dec.Comment != null)
+                    {
+                        dec.Type = SourceDecoration.DecorationType.PRE_COMMENT;
+                    }
+                    ret ??= new List<SourceDecoration>();
+                    ret.Add(dec);
+                }
+                return ret;
+            }
+
+            public string GetMostRecentDocComment(Node annotatedNode)
+            {
+                int commentLine = annotatedNode.Location.Start.Line - 1;
+                string doc = null;
+                foreach (SourceDecoration dec in MostRecentDecorations())
+                {
+                    if (dec.Line != commentLine || dec.Comment == null)
+                    {
+                        break;
+                    }
+                    doc = dec.Comment;
+                    if (doc.StartsWith("/*"))
+                    {
+                        break;
+                    }
+                    commentLine--;
+                }
+                if (doc != null)
+                {
+                    doc = SourceContext.Decomment(doc);
+                }
+                return doc;
             }
 
             public string GetTextBetweenNodes(Node last, Node next, out int startLine)
@@ -117,13 +205,14 @@ namespace DarkScript3
                 return 0;
             }
 
-            public void TransformErrors(List<CompileError> errors, string header)
+            public void AnnotateErrors(List<CompileError> errors, string header)
             {
                 foreach (CompileError err in errors)
                 {
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine($"{header}{(err.Event == null ? "" : $" in event {err.Event}")}: {err.Message}");
-                    if (err.Loc is Position sourceLoc && Lines.Count > 0)
+                    // Sometimes the given position is out-of-bounds, TODO investigate
+                    if (err.Loc is Position sourceLoc && Lines.Count > 0 && sourceLoc.Line - 1 < Lines.Count)
                     {
                         (int _, string line) = Lines[sourceLoc.Line - 1];
                         int col = sourceLoc.Column;
@@ -146,12 +235,33 @@ namespace DarkScript3
                 }
             }
 
+            private static readonly Regex commentLineRegex = new Regex(@"^/\*+\s*|\s*\*+/$|^\s*\*\s*");
+            public static string Decomment(string comment)
+            {
+                if (comment.StartsWith("//"))
+                {
+                    return comment.Substring(2).Trim();
+                }
+                else if (comment.StartsWith("/*"))
+                {
+                    // Could alternatively use one mega-regex to handle this, but these comments shouldn't be that common
+                    return string.Join("\n", comment.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None)
+                        .Select(l => commentLineRegex.Replace(l, ""))
+                        .Where(l => l.Length > 0));
+                }
+                else
+                {
+                    return comment;
+                }
+            }
+
             // Possible feature: provide a range? Or do it before calling pack
             public static SourceContext FromText(string code, bool decorating)
             {
                 List<(int, string)> lines = new List<(int, string)>();
                 PositionTrackingReader reader = new PositionTrackingReader { Reader = new StringReader(code) };
                 List<SourceDecoration> decorations = new List<SourceDecoration>();
+                string prevLine = null;
                 while (true)
                 {
                     int position = reader.Position;
@@ -164,18 +274,22 @@ namespace DarkScript3
                     {
                         // Record all blank lines.
                         // Only blank lines within events are preserved. Blank lines between events will be skipped/filtered out later.
+                        // TODO remove
+                        // Console.WriteLine($"blank line at {position} after {prevLine}");
                         decorations.Add(new SourceDecoration
                         {
                             Type = SourceDecoration.DecorationType.PRE_BLANK,
                             Position = position,
+                            Line = lines.Count + 1,
                         });
                     }
                     lines.Add((position, line));
+                    prevLine = line;
                 }
                 if (decorating)
                 {
                     // For every line: Pre (# of blank lines, arbitrary comments), post (post-comment)
-                    Scanner commentScanner = new Scanner(code, new ParserOptions { Comment = true });
+                    Scanner commentScanner = new Scanner(code, new ScannerOptions { Comments = true });
                     Token token;
                     do
                     {
@@ -188,6 +302,7 @@ namespace DarkScript3
                                 // Post-comments to empty lines will be turned into pre-comments for the next line, as soon as they are attached to one
                                 Type = endline ? SourceDecoration.DecorationType.POST_COMMENT : SourceDecoration.DecorationType.PRE_COMMENT,
                                 Position = comment.Start,
+                                Line = comment.EndPosition.Line,
                                 Comment = text
                             });
                         }
@@ -199,7 +314,7 @@ namespace DarkScript3
                 {
                     Code = code,
                     Lines = lines,
-                    PendingDecorations = new Stack<SourceDecoration>(decorations.OrderByDescending(d => d.Position))
+                    PendingDecorations = decorations.OrderBy(d => d.Position).ToList(),
                 };
 
             }
@@ -210,39 +325,55 @@ namespace DarkScript3
             public Node Node { get; set; }
             public string Source { get; set; }
 
+            public bool GetName(out string name)
+            {
+                if (Node is Identifier id)
+                {
+                    name = id.Name;
+                    return true;
+                }
+                else
+                {
+                    name = null;
+                    return false;
+                }
+            }
+
+            private static bool GetNumExpr(Node expr, out double val)
+            {
+                bool negate = false;
+                if (expr is UnaryExpression ue && ue.Operator == UnaryOperator.Minus)
+                {
+                    expr = ue.Argument;
+                    negate = true;
+                }
+                if (expr is Literal lit && lit.NumericValue is double d)
+                {
+                    val = negate ? -(int)d : (int)d;
+                    return true;
+                }
+                val = 0;
+                return false;
+            }
+
+            public bool GetIntValue(out int val)
+            {
+                if (GetNumExpr(Node, out double dval))
+                {
+                    val = (int)dval;
+                    return true;
+                }
+                else if (Node is CallExpression lcall && lcall.Callee is Identifier lid && lid.Name == "floatArg"
+                    && lcall.Arguments.Count == 1 && GetNumExpr(lcall.Arguments[0], out dval))
+                {
+                    val = BitConverter.ToInt32(BitConverter.GetBytes((float)dval), 0);
+                    return true;
+                }
+                val = 0;
+                return false;
+            }
+
             public override string ToString() => Source;
-        }
-
-        public class CompileError
-        {
-            public Position? Loc { get; set; }
-            public int Line { get; set; }
-            public string Message { get; set; }
-            public object Event { get; set; }
-
-            public static CompileError FromNode(Node node, string message, object ev)
-            {
-                Position? loc = node == null ? (Position?)null : node.Location.Start;
-                return new CompileError
-                {
-                    Loc = loc,
-                    Line = loc?.Line ?? 0,
-                    Message = message,
-                    Event = ev,
-                };
-            }
-
-            public static CompileError FromInstr(Intermediate im, string message, object ev)
-            {
-                Position? loc = im?.LineMapping == null ? (Position?)null : new Position(im.LineMapping.SourceLine, 0);
-                return new CompileError
-                {
-                    Loc = loc,
-                    Line = loc?.Line ?? 0,
-                    Message = message,
-                    Event = ev,
-                };
-            }
         }
 
         public class WalkContext
@@ -266,9 +397,18 @@ namespace DarkScript3
             // Local properties for error reporting.
             // The preferred way to change this is with Copy, but can also be mutated in a single-thread context.
             public object Event { get; set; }
+            // Arg info, collected directly for regular compilation and after CFG processing for fancy compilation
+            // Can be ignored if there are errors
+            public ICollection<string> Params { get; set; }
+
+            public bool IsParam(string name)
+            {
+                return Params != null && Params.Contains(name);
+            }
 
             // Clone
-            public WalkContext Copy(object ev = null)
+            // Unused for now, would need merging logic as well.
+            internal WalkContext Copy(object ev = null)
             {
                 WalkContext other = (WalkContext)MemberwiseClone();
                 if (ev != null)
@@ -285,11 +425,104 @@ namespace DarkScript3
             return amount == 1 ? $"{amount} {s}" : (alt == null ? $"{amount} {s}s" : $"{amount} {alt}");
         }
 
+        private class ArgChecker : AstVisitor
+        {
+            public WalkContext Context { get; init; }
+
+            protected override object VisitIdentifier(Identifier identifier)
+            {
+                if (Context.IsParam(identifier.Name))
+                {
+                    Context.Error(identifier, "Cannot use event parameter outside of commands or conditions");
+                }
+                return identifier;
+            }
+        }
+
+        private class RegularArgVisitor : AstVisitor
+        {
+            public SourceContext Source { get; init; }
+            public WalkContext Context { get; init; }
+            public InstructionDocs Docs { get; init; }
+            public List<Intermediate> Instrs { get; } = new();
+
+            protected override object VisitIdentifier(Identifier identifier)
+            {
+                if (Context.IsParam(identifier.Name))
+                {
+                    Context.Error(identifier, "Cannot use event parameter outside of direct instruction usage");
+                }
+                return identifier;
+            }
+
+            protected override object VisitCallExpression(CallExpression call)
+            {
+                // Simpler variant of instruction parsing which should be compatible with plain JS execution
+                string f = null;
+                if (call.Callee is Identifier id)
+                {
+                    f = id.Name;
+                    if (Docs.DisplayAliases.TryGetValue(f, out string realName))
+                    {
+                        f = realName;
+                    }
+                }
+                if (f != null && Docs.Functions.TryGetValue(f, out (int, int) pos))
+                {
+                    EMEDF.InstrDoc instrDoc = Docs.DOC[pos.Item1][pos.Item2];
+                    string cmd = InstructionDocs.FormatInstructionID(pos.Item1, pos.Item2);
+                    // The actual docs are not needed here. EventInit will error out if there's a parameter in an invalid position.
+                    // IList<EMEDF.ArgDoc> argDocs = instrDoc.Arguments;
+                    // bool variableLength = Docs.IsVariableLength(instrDoc);
+                    object layers = null;
+                    List<Expression> args = call.Arguments.ToList();
+                    if (args.Count > 0 && args[args.Count - 1] is CallExpression lcall && lcall.Callee is Identifier lid && lid.Name == "$LAYERS")
+                    {
+                        layers = Source.GetSourceNode(lcall);
+                        args.RemoveAt(args.Count - 1);
+                    }
+                    // Variable length instructions are still added here so that they can be rejected later if they have args.
+                    // And also allow identifiers through
+                    List<object> sourceArgs = new(args.Count);
+                    foreach (Expression arg in args)
+                    {
+                        SourceNode node = Source.GetSourceNode(arg);
+                        if (arg is not Identifier)
+                        {
+                            Visit(arg);
+                        }
+                        // No need to clean up enums, it's only needed for fancy processing
+                        sourceArgs.Add(node);
+                    }
+                    Intermediate im = new Instr
+                    {
+                        Cmd = cmd,
+                        Name = f,
+                        Args = sourceArgs,
+                        Layers = layers
+                    };
+                    Instrs.Add(im);
+                    return call;
+                }
+                return base.VisitCallExpression(call);
+            }
+        }
+
         public class EventParser
         {
-            public SourceContext source { get; set; }
-            public WalkContext context { get; set; }
-            public InstructionDocs docs { get; set; }
+            public SourceContext source { get; private init; }
+            public WalkContext context { get; private init; }
+            public InstructionDocs docs { get; private init; }
+            private ArgChecker argChecker { get; init; }
+            private List<SourceDecoration> preDecs { get; set; } = new();
+
+            public EventParser(SourceContext source, WalkContext context, InstructionDocs docs)
+            {
+                this.source = source;
+                this.context = context;
+                this.docs = docs;
+                argChecker = new ArgChecker { Context = context };
+            }
 
             // State variables mean that this is not safe to use in parallel, but multiple instances can be created and used in parallel
             // (as long as error reporting is aggregated at the end)
@@ -322,6 +555,22 @@ namespace DarkScript3
                     context.Error(expr, $"Expected int but found {expr.Type}");
                 }
                 return 0;
+            }
+
+            private SourceNode PassThroughSource(Node node)
+            {
+                argChecker.Visit(node);
+                return source.GetSourceNode(node);
+            }
+
+            public SourceNode PassThroughArg(Node node)
+            {
+                // Args can be params directly, but params cannot be part of subexpressions
+                if (node is not Identifier)
+                {
+                    argChecker.Visit(node);
+                }
+                return source.GetSourceNode(node);
             }
 
             private bool CheckExpectedArgs(CallExpression call, IReadOnlyList<Expression> args, string f, int docArgs, int optionalArgs)
@@ -368,7 +617,11 @@ namespace DarkScript3
                 {
                     return null;
                 }
-                return new CmdCond { Name = f, Args = call.Arguments.Select(a => (object)source.GetSourceNode(a)).ToList() };
+                return new CmdCond
+                {
+                    Name = f,
+                    Args = call.Arguments.Select(a => (object)PassThroughArg(a)).ToList()
+                };
             }
 
             private static readonly Dictionary<BinaryOperator, ComparisonType> compares = new Dictionary<BinaryOperator, ComparisonType>
@@ -395,18 +648,19 @@ namespace DarkScript3
                 {
                     context.Error(id, $"Using function name {id.Name} as a condition variable");
                 }
-                else if (id.Name.StartsWith("X"))
+                else if (id.Name.StartsWith("X") || (context.IsParam(id.Name)))
                 {
-                    // TODO: May want to check actual parameters, especially if parameter names change
-                    context.Error(id, $"Condition variable {id.Name} looks like a parameter?");
+                    // X convention seems fine to use for now, since it's excluded from general argument tracking
+                    context.Error(id, $"Condition variable {id.Name} cannot be a parameter");
                 }
             }
 
             private Cond ConvertCondExpression(Expression expr)
             {
+                Cond c;
                 if (expr is UnaryExpression unary)
                 {
-                    Cond c = ConvertCondExpression(unary.Argument);
+                    c = ConvertCondExpression(unary.Argument);
                     if (unary.Operator == UnaryOperator.LogicalNot)
                     {
                         c.Negate = !c.Negate;
@@ -415,7 +669,6 @@ namespace DarkScript3
                     {
                         context.Error(expr, $"Operator {unary.Operator} used when only ! is supported for a condition");
                     }
-                    return c;
                 }
                 else if (expr is BinaryExpression bin)
                 {
@@ -433,21 +686,21 @@ namespace DarkScript3
                             context.Error(expr, $"Operator {bin.Operator} is not permitted, only || and && for conditions, or == != > < >= <= for comparisons");
                         }
                         // RHS should be a number, but this source is copied over so it can be a variable etc.
-                        CompareCond cmp = new CompareCond { Type = comp, Rhs = source.GetSourceNode(bin.Right) };
+                        CompareCond cmp = new CompareCond { Type = comp, Rhs = PassThroughArg(bin.Right) };
                         if (bin.Left is CallExpression call)
                         {
                             cmp.CmdLhs = ConvertCommandCond(call) ?? new CmdCond { Name = "Error" };
                         }
                         else
                         {
-                            cmp.Lhs = source.GetSourceNode(bin.Left);
+                            cmp.Lhs = PassThroughArg(bin.Left);
                         }
-                        return cmp;
+                        c = cmp;
                     }
                 }
                 else if (expr is CallExpression call)
                 {
-                    return (Cond)ConvertCommandCond(call) ?? new ErrorCond();
+                    c = (Cond)ConvertCommandCond(call) ?? new ErrorCond();
                 }
                 else if (expr is MemberExpression mem)
                 {
@@ -455,7 +708,7 @@ namespace DarkScript3
                         && stat.Property is Identifier propId && propId.Name == "Passed")
                     {
                         ValidateConditionVariable(objId);
-                        return new CondRef { Name = objId.Name, Compiled = true };
+                        c = new CondRef { Name = objId.Name, Compiled = true };
                     }
                     else
                     {
@@ -466,16 +719,23 @@ namespace DarkScript3
                 else if (expr is Identifier id)
                 {
                     ValidateConditionVariable(id);
-                    return new CondRef { Name = id.Name };
+                    c = new CondRef { Name = id.Name };
                 }
                 else
                 {
                     context.Error(expr, $"Unexpected condition {expr.Type}. Should be a function call, condition variable, comparison, or combination of these");
                     return new ErrorCond();
                 }
+                List<SourceDecoration> decs = source.GetDecorationsForNode(expr, true);
+                if (decs != null)
+                {
+                    c.Decorations = decs;
+                    // Console.WriteLine($"### {c} -> {string.Join("; ", decs)}");
+                }
+                return c;
             }
 
-            public CondAssign ConvertAssign(Expression lhs, AssignmentOperator assignOp, Expression rhs)
+            public CondAssign ConvertAssign(Node lhs, AssignmentOperator assignOp, Expression rhs)
             {
                 CondAssign assign = new CondAssign();
                 if (lhs is Identifier id)
@@ -525,7 +785,25 @@ namespace DarkScript3
                     extraLabels = new List<string>();
                 }
                 im.ID = cmdId++;
-                im.Decorations = source.GetDecorationsForNode(decorationNode);
+                if (preDecs.Count > 0)
+                {
+                    im.Decorations = preDecs.ToList();
+                    preDecs.Clear();
+                }
+                List<SourceDecoration> nodeDecs = source.GetDecorationsForNode(decorationNode);
+                if (nodeDecs != null)
+                {
+                    if (im.Decorations == null)
+                    {
+                        im.Decorations = nodeDecs;
+                    }
+                    else
+                    {
+                        im.Decorations.AddRange(nodeDecs);
+                    }
+                }
+                // if (im.Decorations != null && im.Decorations.Count > 0) Console.WriteLine($"Decorations for {im}: {string.Join(" // ", im.Decorations)}");
+                // else Console.WriteLine($"No decorations for {im} ({pending} pending)");
                 im.LineMapping = new LineMapping
                 {
                     SourceLine = decorationNode.Location.Start.Line,
@@ -564,6 +842,11 @@ namespace DarkScript3
 
             private List<Intermediate> ConvertStatement(Statement statement)
             {
+                List<SourceDecoration> statementDecs = source.GetDecorationsBeforeNode(statement);
+                if (statementDecs != null)
+                {
+                    preDecs.AddRange(statementDecs);
+                }
                 List<Intermediate> ret = new List<Intermediate>();
                 // Peel off labels into either label commands or synthetic labels.
                 while (statement is LabeledStatement labelStmt)
@@ -704,7 +987,7 @@ namespace DarkScript3
                             object layers = null;
                             if (args.Count > 0 && args[args.Count - 1] is CallExpression lcall && lcall.Callee is Identifier lid && lid.Name == "$LAYERS")
                             {
-                                layers = source.GetSourceNode(lcall);
+                                layers = PassThroughSource(lcall);
                                 args.RemoveAt(args.Count - 1);
                             }
                             if (variableLength || hasExpectedArgs(argDocs.Count, optionalArgs))
@@ -712,7 +995,7 @@ namespace DarkScript3
                                 // Getting the int value is required when compiling things with control/negate arguments etc.
                                 object getSourceArg(Expression arg)
                                 {
-                                    SourceNode node = source.GetSourceNode(arg);
+                                    SourceNode node = PassThroughArg(arg);
                                     if (docs.EnumValues.TryGetValue(node.Source, out int val))
                                     {
                                         return new DisplayArg { DisplayValue = node.Source, Value = val };
@@ -732,7 +1015,7 @@ namespace DarkScript3
                         else if (f != null && char.IsLower(f[0]))
                         {
                             // Allow function calls through unmodified if they are lowercase
-                            im = new JSStatement { Code = source.GetSourceNode(statement).ToString() };
+                            im = new JSStatement { Code = PassThroughSource(statement).ToString() };
                         }
                         else
                         {
@@ -742,11 +1025,17 @@ namespace DarkScript3
                             }
                             im = null;
                         }
+                        if (im != null)
+                        {
+                            ProcessIntermediate(im, statement);
+                        }
                         ret.Add(im);
                     }
                     else if (exprStmt.Expression is AssignmentExpression assign)
                     {
-                        ret.Add(ConvertAssign(assign.Left, assign.Operator, assign.Right));
+                        Intermediate im = ConvertAssign(assign.Left, assign.Operator, assign.Right);
+                        ProcessIntermediate(im, statement);
+                        ret.Add(im);
                     }
                     else
                     {
@@ -758,7 +1047,11 @@ namespace DarkScript3
                     if (decls.Kind == VariableDeclarationKind.Const)
                     {
                         // Allow const variable declarations through unmodified
-                        ret.Add(new JSStatement { Code = source.GetSourceNode(statement).ToString() });
+                        ret.Add(new JSStatement
+                        {
+                            Code = PassThroughSource(statement).ToString(),
+                            Declared = decls.Declarations.SelectMany(d => d.Id is Identifier id ? new[] { id.Name } : Array.Empty<string>()).ToList(),
+                        });
                     }
                     else
                     {
@@ -776,7 +1069,10 @@ namespace DarkScript3
                     // The decoration node is the test expression, not the whole thing
                     ProcessIntermediate(ifelse, ifs.Test);
                     ifelse.True = ConvertStatement(ifs.Consequent);
-                    if (ifs.Alternate != null) ifelse.False = ConvertStatement(ifs.Alternate);
+                    if (ifs.Alternate != null)
+                    {
+                        ifelse.False = ConvertStatement(ifs.Alternate);
+                    }
                     ret.Add(ifelse);
                 }
                 else if (statement is ForStatement fors)
@@ -786,7 +1082,7 @@ namespace DarkScript3
                         context.Error(fors.Init, $"For statement initialization should be of the form: let <variable> = <value>");
                     }
                     Node[] parts = new[] { fors.Init, fors.Test, fors.Update };
-                    string inner = string.Join("; ", parts.Select(p => p == null ? null : source.GetSourceNode(p).ToString().TrimEnd(';')));
+                    string inner = string.Join("; ", parts.Select(p => p == null ? null : PassThroughSource(p).ToString().TrimEnd(';')));
                     LoopStatement loop = new LoopStatement
                     {
                         Code = $"for ({inner})",
@@ -811,7 +1107,7 @@ namespace DarkScript3
                     }
                     LoopStatement loop = new LoopStatement
                     {
-                        Code = $"for ({source.GetSourceNode(forof.Left)} of {source.GetSourceNode(forof.Right)})",
+                        Code = $"for ({PassThroughSource(forof.Left)} of {PassThroughSource(forof.Right)})",
                     };
                     ProcessIntermediate(loop, forof.Left);
                     loop.Body = ConvertStatement(forof.Body);
@@ -825,49 +1121,109 @@ namespace DarkScript3
                 return ret;
             }
 
-            private EventFunction ConvertEvent(object id, Event.RestBehaviorType restBehavior, FunctionExpression func)
+            private void ProcessEvent(EventFunction eventFunc, FunctionExpression func, bool repack)
             {
                 // func.Id is currently meaningless, like making an anonymous function with function somename() {}
                 // Otherwise, should have plain params, block statement body, and no attributes like Generator/Expression/Async/Strict.
-                List<string> args = func.Params.Select(param =>
+
+                // Allow previous mode of using X0_4, but don't allow them to mix
+                bool partialParse = !eventFunc.Fancy && !repack;
+                if (eventFunc.Params.Count > 0)
                 {
-                    if (param is Identifier pid)
+                    List<string> args = eventFunc.Params;
+                    int xCount = args.Count(a => a.StartsWith('X'));
+                    if (xCount == 0 || repack)
                     {
-                        return pid.Name;
+                        HashSet<string> distinctParams = new(args);
+                        if (distinctParams.Count == args.Count)
+                        {
+                            context.Params = args;
+                        }
+                        else
+                        {
+                            IEnumerable<string> dupeArgs = args.GroupBy(a => a).Where(g => g.Count() > 1).Select(g => g.Key);
+                            context.Error(func, $"Duplicate names not allowed for named arguments, but found {string.Join(", ", dupeArgs)})");
+                        }
                     }
-                    context.Error(param, "Param not a plain identifier");
-                    return "error";
-                }).ToList();
-                EventFunction ret = new EventFunction { ID = id, RestBehavior = restBehavior, Params = args };
-                if (func.Body is BlockStatement block)
-                {
-                    // Reset state and parse
-                    extraLabels = new List<string>();
-                    cmdId = 0;
-                    ret.Body = ConvertStatement(block);
-                    ret.EndComments = source.GetDecorationsForNode(func);
-                    ret.LineMapping = new LineMapping { SourceLine = func.Location.Start.Line };
-                    if (extraLabels.Count > 0)
+                    else if (xCount != args.Count)
                     {
-                        context.Error(func, $"Extra labels {string.Join(",", extraLabels)} at the end not assigned to any instruction");
+                        context.Error(func, "Arguments should either all start with X, indicating position/width, or none start with X");
                     }
                 }
-                else
+                if (partialParse)
                 {
-                    context.Error(func.Body, $"Event function body should be a {{ bunch of statements }}, found {func.Body.Type}");
+                    if (context.Params == null)
+                    {
+                        return;
+                    }
+                    RegularArgVisitor visitor = new RegularArgVisitor { Source = source, Context = context, Docs = docs };
+                    visitor.Visit(func.Body);
+                    eventFunc.Body = visitor.Instrs;
+                    return;
+                }
+                // Reset state and parse
+                extraLabels = new List<string>();
+                cmdId = 0;
+                eventFunc.Body = ConvertStatement(func.Body);
+                eventFunc.EndComments = source.GetDecorationsForNode(func);
+                eventFunc.LineMapping = new LineMapping { SourceLine = func.Location.Start.Line };
+                if (extraLabels.Count > 0)
+                {
+                    context.Error(func, $"Extra labels {string.Join(",", extraLabels)} at the end not assigned to any instruction");
                 }
                 if (func.Generator || func.Async || func.Strict)
                 {
                     context.Error(func, "Event function shouldn't have extra annotations, but found generator/async/strict");
                 }
-                return ret;
             }
 
-            public static CallExpression GetEventCall(Statement stmt, bool allowVanilla)
+            public EventFunction ParseEventCall(CallExpression call, bool repack)
+            {
+                if (call.Callee is Identifier funcName
+                    && call.Arguments.Count == 3
+                    && call.Arguments[1] is Identifier rest
+                    && behaviorTypes.TryGetValue(rest.Name, out Event.RestBehaviorType restBehavior)
+                    && call.Arguments[2] is FunctionExpression funcExpr)
+                {
+                    object eventId = source.GetSourceNode(call.Arguments[0]);
+                    if (long.TryParse(eventId.ToString(), out long actualId))
+                    {
+                        eventId = InstructionDocs.FixEventID(actualId);
+                    }
+                    context.Event = eventId;
+                    context.Params = null;
+                    int errCount = 1;
+                    List<string> args = funcExpr.Params.Select(param =>
+                    {
+                        if (param is Identifier pid)
+                        {
+                            return pid.Name;
+                        }
+                        context.Error(param, "Param not a plain identifier");
+                        return $"#error_{errCount++}#";
+                    }).ToList();
+                    EventFunction eventFunc = new EventFunction
+                    {
+                        ID = eventId,
+                        RestBehavior = restBehavior,
+                        Params = args,
+                        Fancy = funcName.Name == "$Event",
+                    };
+                    ProcessEvent(eventFunc, funcExpr, repack);
+                    return eventFunc;
+                }
+                else
+                {
+                    context.Error(call, "Expected event call with three arguments: an integer id, a rest behavior, and a function expression");
+                    return null;
+                }
+            }
+
+            public static CallExpression GetEventCall(Statement stmt)
             {
                 if (stmt is ExpressionStatement exprStmt
                     && exprStmt.Expression is CallExpression call
-                    && call.Callee is Identifier id && (id.Name == "$Event" || allowVanilla && id.Name == "Event"))
+                    && call.Callee is Identifier id && (id.Name == "$Event" || id.Name == "Event"))
                 {
                     return call;
                 }
@@ -876,40 +1232,20 @@ namespace DarkScript3
 
             private static readonly Dictionary<string, Event.RestBehaviorType> behaviorTypes =
                 ((Event.RestBehaviorType[])Enum.GetValues(typeof(Event.RestBehaviorType))).ToDictionary(t => t.ToString(), t => t);
-
-            public EventFunction ParseEventCall(CallExpression call)
-            {
-                if (call.Arguments.Count == 3
-                    && call.Arguments[1] is Identifier rest
-                    && behaviorTypes.TryGetValue(rest.Name, out Event.RestBehaviorType restBehavior)
-                    && call.Arguments[2] is FunctionExpression funcExpr)
-                {
-                    object eventId = source.GetSourceNode(call.Arguments[0]);
-                    if (int.TryParse(eventId.ToString(), out int actualId))
-                    {
-                        eventId = actualId;
-                    }
-                    context.Event = eventId;
-                    return ConvertEvent(eventId, restBehavior, funcExpr);
-                }
-                else
-                {
-                    context.Error(call, "Expected event call with three arguments: an integer id, a rest behavior, and a function expression");
-                    return null;
-                }
-            }
         }
 
-        public CompileOutput Compile(string code, InstructionDocs docs, bool repack = false, bool printFancyEnums = true)
+        // May be reused for various operations
+        private void Parse()
         {
+            if (program != null)
+            {
+                return;
+            }
             WalkContext context = new WalkContext();
-
-            Esprima.Ast.Program program;
             try
             {
-                JavaScriptParser parser = new JavaScriptParser(code, new ParserOptions { });
-                program = parser.ParseScript(false);
-                // "ERROR: <message>\n{line}:{col}: line"
+                JavaScriptParser parser = new JavaScriptParser(new ParserOptions { Tokens = true, Comments = true });
+                program = parser.ParseScript(code);
             }
             catch (ParserException ex)
             {
@@ -919,11 +1255,11 @@ namespace DarkScript3
                     if (err.IsPositionDefined)
                     {
                         // These columns appear to be mostly 1-indexed, so change them to 0-indexed to match Node positions.
-                        pos = new Position(err.Position.Line, Math.Max(0, err.Position.Column - 1));
+                        pos = Position.From(err.Position.Line, Math.Max(0, err.Position.Column - 1));
                     }
                     context.Errors.Add(new CompileError { Line = err.LineNumber, Loc = pos, Message = err.Description });
                     SourceContext tempSource = SourceContext.FromText(code, decorating: false);
-                    tempSource.TransformErrors(context.Errors, "ERROR");
+                    tempSource.AnnotateErrors(context.Errors, "ERROR");
                 }
                 else
                 {
@@ -931,29 +1267,80 @@ namespace DarkScript3
                 }
                 throw new FancyCompilerException { Errors = context.Errors };
             }
+        }
 
-            SourceContext source = SourceContext.FromText(code, decorating: repack);
+        public enum Mode
+        {
+            // Do nothing but rewrite using EventFunction, to test decoration tracking
+            Reparse,
+            // Output for EventScripter
+            Pack,
+            // Output for EventScripter for preview
+            PackPreview,
+            // Compile then decompile for regular-to-fancy conversion
+            Repack,
+            // No text output, just return FileInit. For linked files and regular compilation
+            ParseOnly,
+        }
 
-            EventParser eventParser = new EventParser { context = context, source = source, docs = docs };
+        public CompileOutput Compile(InstructionDocs docs, Mode mode, InitData.Links repackLinks = null, Dictionary<long, string> repackNames = null)
+        {
+            Parse();
+
+            bool outputFull = mode == Mode.Repack || mode == Mode.Reparse;
+            bool writeAny = mode != Mode.ParseOnly;
+
+            WalkContext context = new WalkContext();
+            SourceContext source = SourceContext.FromText(code, decorating: mode != Mode.PackPreview);
+            EventParser eventParser = new EventParser(source, context, docs);
+            InitData.FileInit init = new(InitData.GetEmevdName(fileName), true);
 
             Node lastRewrittenNode = null;
             StringWriter stringOutput = new StringWriter();
-            LineTrackingWriter writer = new LineTrackingWriter { Writer = stringOutput };
-            int blockSourceLine;
+            LineTrackingWriter writer = writeAny ? new LineTrackingWriter { Writer = stringOutput } : null;
+            int blockSourceLine = 0;
+            List<EventFunction> functionsToProcess = mode == Mode.Repack ? new() : null;
             foreach (Statement stmt in program.Body)
             {
-                CallExpression call = EventParser.GetEventCall(stmt, allowVanilla: repack);
-                if (call == null) continue;
+                CallExpression call = EventParser.GetEventCall(stmt);
+                if (call == null)
+                {
+                    continue;
+                }
+                // This may include entire events if they were not rewritten
                 string header = source.GetTextBetweenNodes(lastRewrittenNode, stmt, out blockSourceLine);
+                if (outputFull)
+                {
+                    header = header.Replace("\t", SingleIndent);
+                }
+                // Any decorations in between should be already incorporated in header
                 source.SkipTo(call);
+                // Even when writeAny is false, we'd still like doc
+                string doc = source.GetMostRecentDocComment(call);
 
                 int errorCount = context.Errors.Count;
-                EventFunction func = eventParser.ParseEventCall(call);
+                EventFunction func = eventParser.ParseEventCall(call, repack: outputFull);
                 // Go to CFG compilation if there are no errors
                 // Should probably isolate contexts from eachother to make this less hacky and also enable parallelism
                 if (errorCount == context.Errors.Count)
                 {
-                    if (repack)
+                    func.Name = doc;
+                    func.Header = header;
+                    func.HeaderLine = new LineMapping { SourceLine = blockSourceLine };
+
+                    if (mode == Mode.Reparse)
+                    {
+                        func.Print(writer);
+                        lastRewrittenNode = stmt;
+                        continue;
+                    }
+                    if (!outputFull && !func.Fancy)
+                    {
+                        // Only has partial instructions, but enough to reconstruct params
+                        InitData.AddFromSource(init, docs, func);
+                        continue;
+                    }
+                    if (mode == Mode.Repack)
                     {
                         // Track extra cosmetic state
                         func.CondHints = new Dictionary<int, string>();
@@ -964,62 +1351,102 @@ namespace DarkScript3
                     {
                         foreach (EventCFG.ResultError err in res.Warnings)
                         {
-                            context.Warnings.Add(CompileError.FromInstr(err.Im, err.Message, func.ID));
+                            context.Warnings.Add(CompileError.FromInstr(err.Im, err.Message, func));
                         }
-                        if (printFancyEnums)
+                        InitData.AddFromSource(init, docs, func);
+                        if (mode == Mode.PackPreview)
                         {
                             // Do this here while everything is flat
+                            // Enum values emitted from expanding conditions are just numbers otherwise
                             foreach (Intermediate im in func.Body)
                             {
                                 if (!(im is Instr instr)) continue;
                                 docs.Translator.AddDisplayEnums(instr);
                             }
                         }
-                        if (repack)
+                        if (mode == Mode.Repack)
                         {
                             f = new EventCFG(func.ID, options);
                             try
                             {
                                 res = f.Decompile(func, docs.Translator);
                             }
-                            catch (FancyNotSupportedException fancyEx) when (!options.FailWarnings)
+                            catch (FancyNotSupportedException fancyEx)
                             {
                                 // Fallback to existing definition. Continue top-level loop to avoid updating lastRewrittenNode
-                                context.Warnings.Add(CompileError.FromInstr(fancyEx.Im, "Decompile skipped: " + fancyEx.Message, func.ID));
+                                // This is necessary for vanilla Bloodborne 12425250
+                                // TODO: This means that parameter names won't get changed to typed init
+                                context.Warnings.Add(CompileError.FromInstr(fancyEx.Im, "Decompile skipped: " + fancyEx.Message, func));
                                 continue;
                             }
-                            // res.Errors.Count should be 0, as we assume that if it's an emevd, it must be valid.
-                            // This might not necessarily be the case for repacking, it may throw an internal error, but we'll see.
+                            // Add event names if given
+                            if (doc == null && repackNames != null
+                                && (func.Header.EndsWith('\n') || func.Header == "")
+                                && func.ID is long nameId && repackNames.TryGetValue(nameId, out string newName))
+                            {
+                                func.Name = newName;
+                                func.Header += $"// {newName}{Environment.NewLine}";
+                            }
                         }
-                        if (repack)
+                        if (functionsToProcess != null)
                         {
-                            header = header.Replace("\t", SingleIndent);
+                            functionsToProcess.Add(func);
                         }
-                        writer.RecordMapping(new LineMapping { SourceLine = blockSourceLine });
-                        writer.Write(header);
-                        func.Print(writer);
+                        else if (writeAny)
+                        {
+                            func.Print(writer);
+                        }
                     }
                     else
                     {
                         foreach (EventCFG.ResultError err in res.Errors)
                         {
-                            context.Errors.Add(CompileError.FromInstr(err.Im, err.Message, func.ID));
+                            context.Errors.Add(CompileError.FromInstr(err.Im, err.Message, func));
                         }
                     }
                 }
                 lastRewrittenNode = stmt;
             }
-            string footer = source.GetTextBetweenNodes(lastRewrittenNode, null, out blockSourceLine);
-            if (repack)
+            if (functionsToProcess != null)
             {
-                footer = footer.Replace("\t", SingleIndent);
+                // Do this afterwards, after all event inits have been analyzed
+                if (repackLinks != null)
+                {
+                    repackLinks.Main = init;
+                    foreach (EventFunction func in functionsToProcess)
+                    {
+                        foreach (InitData.ConvertError err in InitData.ConvertEventFunction(func, init))
+                        {
+                            context.Warnings.Add(CompileError.FromInstr(err.Im, err.Message, func));
+                        }
+                    }
+                }
+                foreach (EventFunction func in functionsToProcess)
+                {
+                    if (repackLinks != null)
+                    {
+                        foreach (InitData.ConvertError err in InitData.RewriteInits(func, docs, repackLinks))
+                        {
+                            context.Warnings.Add(CompileError.FromInstr(err.Im, err.Message, func));
+                        }
+                    }
+                    func.Print(writer);
+                }
             }
-            writer.RecordMapping(new LineMapping { SourceLine = blockSourceLine });
-            writer.Write(footer);
+            if (writeAny)
+            {
+                string footer = source.GetTextBetweenNodes(lastRewrittenNode, null, out blockSourceLine);
+                if (outputFull)
+                {
+                    footer = footer.Replace("\t", SingleIndent);
+                }
+                writer.RecordMapping(new LineMapping { SourceLine = blockSourceLine });
+                writer.Write(footer);
+                writer.Mappings.Sort();
+            }
 
-            source.TransformErrors(context.Errors, "ERROR");
-            source.TransformErrors(context.Warnings, "WARNING");
-            writer.Mappings.Sort();
+            source.AnnotateErrors(context.Errors, "ERROR");
+            source.AnnotateErrors(context.Warnings, "WARNING");
 
             if (context.Errors.Count != 0)
             {
@@ -1029,27 +1456,34 @@ namespace DarkScript3
             {
                 return new CompileOutput
                 {
-                    Code = writer.ToString(),
-                    LineMappings = writer.Mappings,
+                    Code = writer?.ToString(),
+                    LineMappings = writer?.Mappings,
                     Warnings = context.Warnings,
                     SourceContext = source,
+                    MainInit = init,
                 };
             }
         }
 
         public class CompileOutput
         {
+            // Code for EventScripter
             public string Code { get; set; }
+            // Mapping from old code to new code, for errors
             public List<LineMapping> LineMappings { get; set; }
+            // Warnings to show
             public List<CompileError> Warnings { get; set; }
+            // Original source for errors and diffing
             public SourceContext SourceContext { get; set; }
+            // Declared events. Should set SourceInfo after writing the file
+            public InitData.FileInit MainInit { get; set; }
 
             // Utility methods
 
             public void RewriteStackFrames(JSScriptException ex, string fileFilter)
             {
                 List<LineMapping> mappings = LineMappings;
-                if (mappings.Count == 0) return;
+                if (mappings == null || mappings.Count == 0) return;
                 foreach (JSScriptException.StackFrame frame in ex.Stack)
                 {
                     if (frame.File != fileFilter) continue;
@@ -1101,8 +1535,9 @@ namespace DarkScript3
                 Stack<LineMapping> mappings = new Stack<LineMapping>(
                     LineMappings
                         .Concat(new[] { new LineMapping { SourceLine = leftSrc.LineCount + 1, PrintedLine = rightSrc.LineCount + 1 } })
-                        .OrderByDescending(l => l.PrintedLine));
-                Stack<CompileError> warnings = new Stack<CompileError>(Warnings.OrderByDescending(w => w.Line));
+                        .OrderBy(l => l.PrintedLine)
+                        .Reverse());
+                Stack<CompileError> warnings = new Stack<CompileError>(Warnings.OrderBy(w => w.Line).Reverse());
                 int left = 0;
                 int right = 0;
                 StringBuilder leftPart = new StringBuilder();
@@ -1123,14 +1558,14 @@ namespace DarkScript3
                     string rightStr = rightPart.ToString();
                     if (leftStr.Length > 0 || rightStr.Length > 0)
                     {
-                        diffs.Add(new DiffSegment { Left = leftStr, Right = rightStr });
-                        leftPart.Clear();
-                        rightPart.Clear();
-                        if (warnings.Count > 0 && left > warnings.Peek().Line)
+                        while (warnings.Count > 0 && left > warnings.Peek().Line)
                         {
                             CompileError warning = warnings.Pop();
                             diffs.Add(new DiffSegment { Left = warning.Message, Right = "", Warning = true });
                         }
+                        diffs.Add(new DiffSegment { Left = leftStr, Right = rightStr });
+                        leftPart.Clear();
+                        rightPart.Clear();
                     }
                 }
                 while (mappings.Count > 0)

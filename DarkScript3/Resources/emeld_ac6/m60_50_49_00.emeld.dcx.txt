@@ -1,0 +1,4 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50495000 namanaTest_ワラワラ蟲_起動 -- namanaTest_Wara Walla Mushi_Start
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+32110519 エレベーター初期フラグ設定 -- Elevator initial flag setting
+32112510 エレベータ起動 -- elevator start
+32112580 梯子登録 -- ladder registration
+32112800 ボス撃破 -- Defeat the boss
+32112810 ボス出現 -- Boss appears
+32112811 ボス激昂 -- boss rage
+32112820 分身体リセット_XX -- Clone body reset_XX
+32112830 分身体無効化_XX -- Clone body invalidation_XX
+32112849 ボスイベント起動 -- Boss event activation
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,19 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+32050519 エレベータ初期フラグ -- Elevator initial flag
+32052200 亡者鉱夫_採掘中止_XX -- Dead Miner_Mining Canceled_XX
+32052250 亡者鉱夫_採掘中止_武器強化素材_XX -- Dead Miner_Mining Canceled_Weapon Enhancement Materials_XX
+32052270 亡者鉱夫_採掘中止_武器強化素材_終了後待機_XX -- Dead Miner_Canceling mining_Weapon enhancement materials_Waiting after completion_XX
+32052400 アステール_坑道向け特殊効果の付与 -- Aster_Special effects for mine shafts
+32052510 エレベータイベント起動 -- Elevator event activation
+32052800 ボス撃破 -- Defeat the boss
+32052810 ボス出現 -- Boss appears
+32052811 ボス激昂 -- boss rage
+32052820 ボス閉鎖 -- boss closure
+32052849 ボスイベント起動 -- Boss event activation
+1000000000 敵リスポン -- enemy respawn

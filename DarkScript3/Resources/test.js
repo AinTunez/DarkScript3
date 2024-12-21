@@ -174,3 +174,12 @@ L0:
     EndEvent();
 });
 */
+
+$Event(1000, Default, function() {
+    $InitializeEvent(0, 1001, 31, 0, 3100974, 0, 7.5);
+});
+
+$Event(1001, Default, function(areaId, blockId, regionId, unusedSomething, waitTime) {
+    WaitFixedTimeSeconds(waitTime);
+    WarpPlayer(areaId, blockId, regionId);
+});

@@ -1,0 +1,34 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+12052200 鴉ティラノ用特殊待機距離判定 -- Special standby distance determination for Raven Tyrano
+12052201 戦場医師NPC世界侵入ワープ領域SFX -- Battlefield Doctor NPC World Invasion Warp Area SFX
+12052250 長柄棍棒_踊り始める_XX -- Long-handled club_Start dancing_XX
+12052251 長柄棍棒_踊り始める2_XX -- Long-handled club_Start dancing 2_XX
+12052360 巨大骸骨死亡_XX -- Giant skeleton death_XX
+12052510 エレベータ起動 -- elevator start
+12052600 間欠泉_弾丸オーナー作成 -- Geyser_Bullet owner created
+12052601 血の間欠泉_XX -- Blood geyser_XX
+12052620 血の泡_XX -- Blood bubbles_XX
+12052680 火の粉SFX処理 -- Spark SFX processing
+12052690 NPC疑似マルチ_バディ石碑使用禁止 -- NPC pseudo-multi_Buddy stone monument use prohibited
+12052800 ボス撃破 -- Defeat the boss
+12052810 ボス出現 -- Boss appears
+12052811 ボス激昂 -- boss rage
+12052820 カウント魔法イベント_PCにカウントSFX1をつける -- Count magic event_Attach count SFX1 to PC
+12052821 カウント魔法イベント_PCにカウントSFX2をつける -- Count magic event_Attach count SFX2 to PC
+12052822 カウント魔法イベント_PCにカウントSFX3をつける -- Count magic event_Attach count SFX3 to PC
+12052823 カウント魔法イベント_PCにダメージ1を与える -- Count magic event_Deals 1 damage to PC
+12052824 カウント魔法イベント_PCにダメージ2を与える -- Count magic event_Deals 2 damage to PC
+12052825 カウント魔法イベント_PCにダメージ3を与える -- Count magic event_Deals 3 damage to PC
+12052826 カウント魔法イベント_PCのカウントSFXを削除する -- Count magic event_Delete PC count SFX
+12052847 ボス_カットシーン用対応1 -- Boss_cutscene support 1
+12052848 ボス_カットシーン用対応2 -- Boss_cutscene support 2
+12052849 ボス_イベント起動 -- Boss_event activation
+12053700 NPC209グレーターデーモン_会話処理限界の距離変更 -- NPC209 Greater Demon_Distance change for conversation processing limit
+12053701 NPC209グレーターデーモン_死亡後一定時間バックリード内 -- NPC209 Greater Demon_backread for a certain period of time after death
+12053710 NPC301_戦場医師_NPC初期化イベント_地下迷宮で倒した -- NPC301_Battlefield doctor_NPC initialization event_Defeated in the underground labyrinth
+12053711 NPC301_戦場医師_地下迷宮で倒した_死亡実行 -- NPC301_Battlefield doctor_Defeated in the underground labyrinth_Death execution
+12053712 NPC301_戦場医師_地下迷宮での戦闘_侵入サイン表示 -- NPC301_Battlefield doctor_Battle in the underground labyrinth_Intrusion sign display
+1000000000 敵リスポン -- enemy respawn
+1039532145 NPC疑似マルチ_戦場医師_開始 -- NPC pseudo-multi_battlefield doctor_start

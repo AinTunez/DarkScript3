@@ -1,0 +1,12 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+12082800 祖霊撃破 -- Defeat ancestral spirits
+12082810 祖霊出現 -- Ancestral spirits appear
+12082848 地下迷宮平原へワープ -- Warp to the underground labyrinth plain
+12082849 祖霊戦イベント起動 -- Ancestral spirit battle event started
+1000000000 敵リスポン -- enemy respawn

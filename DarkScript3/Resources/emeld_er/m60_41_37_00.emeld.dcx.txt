@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1041372340 壊れたガーディアン初期イベント -- Broken Guardian Initial Event
+1041372670 星見台 -- Star viewing platform

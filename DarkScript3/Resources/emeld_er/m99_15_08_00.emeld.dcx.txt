@@ -1,0 +1,15 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+99152200 領域内侵入者への確定攻撃 -- Confirmed attack on intruders in the area
+99152210 毒花の領域にプレイヤーが触れる -- Player touches poison flower area
+99152211 毒花に触れると殴りかかってくる -- If you touch the poisonous flower, it will attack you.
+99152221 領域侵入者への確定攻撃：前方 -- Definite attack on area intruders: forward
+99152222 領域侵入者への確定攻撃：後方 -- Definite attack on area intruders: rear
+99157230 アイテムを取得したかのフラグ -- Flag indicating whether the item was obtained
+99157231 アイテム再取得不可 -- Items cannot be retrieved
+1000000000 敵リスポン -- enemy respawn

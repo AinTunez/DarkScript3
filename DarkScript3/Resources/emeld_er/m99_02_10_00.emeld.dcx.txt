@@ -1,0 +1,12 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+9000 着陸テスト -- landing test
+9010 【プロト】ナズグル出現消滅_全体制御 -- [Proto] Nazgul Appearance and Disappearance_Overall Control
+9020 【プロト】ナズグル出現_出現位置選択_XX -- [Proto] Nazgul Appearance_Select Appearance Position_XX
+9030 【プロト】ナズグル出現_出現_XX -- [Proto] Nazgul Appearance_Appearance_XX
+9100 AIテスト -- AI test
+9500 ★テスト：特殊待機 -- ★Test: Special standby
+9600 ★obj破壊 -- ★obj destruction
+9602 ★OBJ破壊復帰 -- ★OBJ destruction return
+1000000000 敵リスポン -- enemy respawn

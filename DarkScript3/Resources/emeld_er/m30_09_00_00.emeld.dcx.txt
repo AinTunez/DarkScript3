@@ -1,0 +1,21 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30090050 m30_09_00_00用初期フラグ設定 -- Initial flag setting for m30_09_00_00
+30090100 英雄の墓_扉開放_レバー無しver -- Tomb of the Hero_door open_no lever ver.
+30090519 エレベータ初期フラグ -- Elevator initial flag
+30090790 ボス部屋報酬宝箱の開放制限 -- Restrictions on opening boss room reward treasure chests
+30092300 チャリオットダメージ作成_中央 -- Chariot damage creation_center
+30092305 チャリオットダメージ作成_左右 -- Chariot damage creation_left and right
+30092399 チャリオット_乗れる化 -- Chariot_ridable
+30092400 英雄の墓_チャリオット初期設定 -- Hero's Tomb_Chariot initial settings
+30092410 チャリオット巡回ルート指定_XX -- Chariot patrol route specification_XX
+30092500 火吹き像起動 -- Fire-breathing statue activated
+30092510 エレベータイベント起動 -- Elevator event activation
+30092580 梯子登録 -- ladder registration
+30092610 英雄の墓_火吹き像_火炎処理_高山火山 -- Hero's Tomb_Fire-breathing statue_Flame treatment_Alpine volcano
+30092800 ボス撃破 -- Defeat the boss
+30092810 ボス出現 -- Boss appears
+30092811 ボス激昂 -- boss rage
+30092849 ルーンウルフ_大剣_イベント起動 -- Rune Wolf_Great Sword_Event activation
+1000000000 敵リスポン -- enemy respawn

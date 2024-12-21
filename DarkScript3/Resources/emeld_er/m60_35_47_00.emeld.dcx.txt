@@ -1,0 +1,15 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1035472200 魔術師塔イベント_霧対応 -- Magician Tower Event_Fog compatible
+1035472205 魔術師塔イベント_木の上亀 -- Magician Tower Event_Turtle on the Tree
+1035472206 魔術師塔イベント_カメ死亡演出_XX -- Magician Tower Event_Turtle Death Production_XX
+1035472207 魔術師塔イベント_カメ出現_XX -- Magician Tower Event_Turtle Appearance_XX
+1035472210 魔術師塔イベント_亡者出現 -- Magician Tower Event_Dead Appearance
+1035472220 魔術師塔イベント_扉解除 -- Magician Tower Event_Door Release
+1035472221 魔術師塔イベント_霧壁エラーメッセージ -- Magician Tower Event_Fog Wall Error Message
+1035472222 魔術師塔イベント_ヒントテキスト表示 -- Magician Tower Event_Hint text display
+1035472240 スカラベ_メタル個体ミニゲーム_イベント -- Scarab_Metal Individual Mini Game_Event
+1035472270 雷地帯_弾丸イベント_XX -- Thunder Zone_Bullet Event_XX
+1035472580 梯子登録 -- ladder registration

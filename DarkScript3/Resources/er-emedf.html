@@ -220,7 +220,7 @@ section {
 <p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_05_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m20_00_00_00, m20_01_00_00, m21_00_00_00, m21_01_00_00, m22_00_00_00, m28_00_00_00, and 25 others</p>
 <pre>IfElapsedSeconds(
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    float targetNumberOfSeconds)</pre><p>Condition function: <code><a href="#ElapsedSeconds">ElapsedSeconds</a></code></p>
+    float targetTimeSeconds)</pre><p>Condition function: <code><a href="#ElapsedSeconds">ElapsedSeconds</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
 <h3 id="IfElapsedFrames"><a href="#IfElapsedFrames" class="selfref"><code>IfElapsedFrames</code></a> <span class="sectioninfo">Instruction 1[01]</span></h3>
@@ -228,7 +228,7 @@ section {
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>IfElapsedFrames(
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
-    int targetNumberOfFrames)</pre><p>Condition function: <code><a href="#ElapsedFrames">ElapsedFrames</a></code></p>
+    int targetTimeFrames)</pre><p>Condition function: <code><a href="#ElapsedFrames">ElapsedFrames</a></code></p>
 </div></section>
 <section class="instr condinstr unused">
 <h3 id="IfRandomElapsedSeconds"><a href="#IfRandomElapsedSeconds" class="selfref"><code>IfRandomElapsedSeconds</code></a> <span class="sectioninfo">Instruction 1[02]</span></h3>
@@ -487,8 +487,8 @@ section {
 <pre>IfWeatherActive(
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     sbyte&lt;<a href="#Weather">Weather</a>&gt; weather, 
-    float unknown4, 
-    float unknown8)</pre><p>Condition function: <code><a href="#WeatherActive">WeatherActive</a></code></p>
+    float startDelayDuringChangeS, 
+    float endDelayDuringChangeS)</pre><p>Condition function: <code><a href="#WeatherActive">WeatherActive</a></code></p>
 </div></section>
 <section class="instr condinstr">
 <h3 id="IfMapHasPermissionToUpdate"><a href="#IfMapHasPermissionToUpdate" class="selfref"><code>IfMapHasPermissionToUpdate</code></a> <span class="sectioninfo">Instruction 3[32]</span></h3>
@@ -1144,27 +1144,27 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m12_05_00_00, m12_08_00_00, m12_09_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m20_00_00_00, m20_01_00_00, m21_00_00_00, m21_01_00_00, m21_02_00_00, m22_00_00_00, m25_00_00_00, m28_00_00_00, m34_10_00_00, m34_11_00_00, m34_12_00_00, m34_13_00_00, m34_14_00_00, m34_15_00_00, m35_00_00_00, m39_20_00_00, m45_00_00_00, m45_01_00_00, m45_02_00_00, and 276 others</p>
 <pre>WaitFixedTimeSeconds(
-    float numberOfSeconds)</pre></div></section>
+    float timeSeconds)</pre></div></section>
 <section class="instr">
 <h3 id="WaitFixedTimeFrames"><a href="#WaitFixedTimeFrames" class="selfref"><code>WaitFixedTimeFrames</code></a> <span class="sectioninfo">Instruction 1001[01]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_05_00_00, m12_09_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m20_00_00_00, m20_01_00_00, m21_00_00_00, m21_01_00_00, m22_00_00_00, m25_00_00_00, m28_00_00_00, m34_11_00_00, m35_00_00_00, m45_00_00_00, m45_01_00_00, m45_02_00_00, and 152 others</p>
 <pre>WaitFixedTimeFrames(
-    int numberOfFrames)</pre></div></section>
+    int timeFrames)</pre></div></section>
 <section class="instr">
 <h3 id="WaitRandomTimeSeconds"><a href="#WaitRandomTimeSeconds" class="selfref"><code>WaitRandomTimeSeconds</code></a> <span class="sectioninfo">Instruction 1001[02]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common_func, m12_03_00_00, m12_05_00_00, m12_09_00_00, m14_00_00_00, and 29 others</p>
 <pre>WaitRandomTimeSeconds(
-    float minNumberOfSeconds, 
-    float maxNumberOfSeconds)</pre></div></section>
+    float minTimeSeconds, 
+    float maxTimeSeconds)</pre></div></section>
 <section class="instr unused">
 <h3 id="WaitRandomTimeFrames"><a href="#WaitRandomTimeFrames" class="selfref"><code>WaitRandomTimeFrames</code></a> <span class="sectioninfo">Instruction 1001[03]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>WaitRandomTimeFrames(
-    int minNumberOfFrames, 
-    int maxNumberOfFrames)</pre></div></section>
+    int minTimeFrames, 
+    int maxTimeFrames)</pre></div></section>
 <section class="instr">
 <h3 id="WaitUntilTimeOfDayInRange"><a href="#WaitUntilTimeOfDayInRange" class="selfref"><code>WaitUntilTimeOfDayInRange</code></a> <span class="sectioninfo">Instruction 1001[05]</span></h3>
 <div class="sectioncontents">
@@ -1187,8 +1187,8 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m41_02_00_00</p>
 <pre>WaitRandomTimeRealFrames(
-    int minNumberOfFrames, 
-    int maxNumberOfFrames)</pre></div></section>
+    int minTimeFrames, 
+    int maxTimeFrames)</pre></div></section>
 <section class="instr">
 <h3 id="WaitUntilArenaHalfTime"><a href="#WaitUntilArenaHalfTime" class="selfref"><code>WaitUntilArenaHalfTime</code></a> <span class="sectioninfo">Instruction 1001[08]</span></h3>
 <div class="sectioncontents">
@@ -1714,7 +1714,7 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m10_00_00_00, m10_01_00_00, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_04_00_00, m12_05_00_00, m12_07_00_00, m12_08_00_00, m12_09_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m18_00_00_00, m19_00_00_00, m20_00_00_00, m20_01_00_00, m21_00_00_00, m21_01_00_00, m21_02_00_00, m22_00_00_00, m25_00_00_00, m28_00_00_00, m34_10_00_00, m34_11_00_00, m34_12_00_00, m34_13_00_00, m34_14_00_00, m34_15_00_00, m35_00_00_00, m39_20_00_00, m45_00_00_00, m45_01_00_00, m45_02_00_00, and 414 others</p>
 <pre>InitializeCommonEvent(
-    int unknown, 
+    int eventSlotId, 
     uint eventId, 
     uint... parameters)</pre></div></section>
 <section class="instr">
@@ -2416,7 +2416,7 @@ section {
 <pre>RotateCharacter(
     uint entityId, 
     uint relativeEntityId, 
-    int playAnimationId, 
+    int animationId, 
     bool shouldWaitForCompletion)</pre></div></section>
 <section class="instr">
 <h3 id="SetCharacterInvincibility"><a href="#SetCharacterInvincibility" class="selfref"><code>SetCharacterInvincibility</code></a> <span class="sectioninfo">Instruction 2004[15]</span></h3>
@@ -2624,7 +2624,7 @@ section {
 <p class="sectionusage usageinfo">Used in m30_03_00_00, m30_10_00_00, m60_44_52_00, m60_44_52_10, m60_48_56_00, m60_49_54_00</p>
 <pre>WarpCharacterAndSetFloor(
     uint entityId, 
-    byte&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; warpType, 
+    byte&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; warpEntityType, 
     uint warpDestinationEntityId, 
     int dummypolyId, 
     uint warpDestinationHitEntityId)</pre></div></section>
@@ -2634,7 +2634,7 @@ section {
 <p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_00_00_00, m12_01_00_00, m12_09_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m19_00_00_00, m20_00_00_00, m20_01_00_00, m21_00_00_00, m21_01_00_00, m22_00_00_00, m25_00_00_00, and 49 others</p>
 <pre>IssueShortWarpRequest(
     uint entityId, 
-    byte&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; warpType, 
+    byte&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; warpEntityType, 
     uint warpDestinationEntityId, 
     int dummypolyId)</pre></div></section>
 <section class="instr">
@@ -2643,7 +2643,7 @@ section {
 <p class="sectionusage usageinfo">Used in common_func, m11_00_00_00, m11_05_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m19_00_00_00, m20_01_00_00, m21_01_00_00, m28_00_00_00, m34_11_00_00, m34_14_00_00, and 35 others</p>
 <pre>WarpCharacterAndCopyFloor(
     uint entityId, 
-    byte&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; warpType, 
+    byte&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; warpEntityType, 
     uint warpDestinationEntityId, 
     int dummypolyId, 
     uint entityIdToCopyFloorFrom)</pre></div></section>
@@ -2789,7 +2789,7 @@ section {
 <p class="sectionusage usageinfo">Used in common, common_func, m12_02_00_00, m12_03_00_00, m13_00_00_00, m16_00_00_00, m19_00_00_00, m21_01_00_00, m21_02_00_00, m30_13_00_00, m34_14_00_00, m60_39_50_00, m60_42_33_00, m60_48_57_00, m60_51_37_00, m61_48_41_00, m61_49_44_00, m61_50_43_00, m61_51_45_00</p>
 <pre>WarpCharacterAndCopyFloorWithFadeout(
     uint entityId, 
-    byte&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; warpType, 
+    byte&lt;<a href="#TargetEntityType">TargetEntityType</a>&gt; warpEntityType, 
     uint warpDestinationEntityId, 
     int dummypolyId, 
     uint entityIdToCopyFloorFrom, 
@@ -3415,13 +3415,13 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m10_01_00_00, m11_10_00_00, m12_01_00_00, m12_02_00_00, m12_03_00_00, m12_05_00_00, m13_00_00_00, m14_00_00_00, m15_00_00_00, m16_00_00_00, m20_00_00_00, m20_01_00_00, m21_00_00_00, m21_01_00_00, m22_00_00_00, m28_00_00_00, and 25 others</p>
 <pre>ElapsedSeconds(
-    float targetNumberOfSeconds)</pre></div></section>
+    float targetTimeSeconds)</pre></div></section>
 <section class="cond unused">
 <h3 id="ElapsedFrames"><a href="#ElapsedFrames" class="selfref"><code>ElapsedFrames</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>ElapsedFrames(
-    int targetNumberOfFrames)</pre></div></section>
+    int targetTimeFrames)</pre></div></section>
 <section class="cond unused">
 <h3 id="RandomElapsedSeconds"><a href="#RandomElapsedSeconds" class="selfref"><code>RandomElapsedSeconds</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
@@ -3682,6 +3682,14 @@ section {
 </ul>
 </div></section>
 <section class="cond">
+<h3 id="WeatherActive"><a href="#WeatherActive" class="selfref"><code>WeatherActive</code></a> <span class="sectioninfo">Condition function</span></h3>
+<div class="sectioncontents">
+<p class="sectionusage usageinfo">Used in common, m20_00_00_00, m20_01_00_00, m34_10_00_00, m34_11_00_00, m60, m60_35_47_00, m60_54_56_00, m61</p>
+<pre>WeatherActive(
+    sbyte&lt;<a href="#Weather">Weather</a>&gt; weather, 
+    float startDelayDuringChangeS, 
+    float endDelayDuringChangeS)</pre></div></section>
+<section class="cond">
 <h3 id="PlayerGender"><a href="#PlayerGender" class="selfref"><code>PlayerGender</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in m19_00_00_00</p>
@@ -3696,14 +3704,6 @@ section {
     byte blockId, 
     byte regionId, 
     byte indexId)</pre></div></section>
-<section class="cond">
-<h3 id="WeatherActive"><a href="#WeatherActive" class="selfref"><code>WeatherActive</code></a> <span class="sectioninfo">Condition function</span></h3>
-<div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, m20_00_00_00, m20_01_00_00, m34_10_00_00, m34_11_00_00, m60, m60_35_47_00, m60_54_56_00, m61</p>
-<pre>WeatherActive(
-    sbyte&lt;<a href="#Weather">Weather</a>&gt; weather, 
-    float unknown4, 
-    float unknown8)</pre></div></section>
 <section class="cond">
 <h3 id="MapHasPermissionToUpdate"><a href="#MapHasPermissionToUpdate" class="selfref"><code>MapHasPermissionToUpdate</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
@@ -4090,10 +4090,10 @@ section {
 <p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m14_00_00_00, m18_00_00_00, m34_12_00_00, m34_13_00_00, m39_20_00_00, and 23 others</p>
 <pre>AssetDestroyedState(
     byte&lt;<a href="#DestructionState">DestructionState</a>&gt; damageState, 
-    uint targetAssetEntityId, 
-    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
-    float numberOfTargetAssets)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
-<li><code>AssetDestroyed(uint targetAssetEntityId, sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, float numberOfTargetAssets)</code>
+    uint targetAssetEntityId<span class="optarg">, 
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType = Equal, 
+    float numberOfTargetAssets = 1</span>)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
+<li><code>AssetDestroyed(uint targetAssetEntityId<span class="optarg">, sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, float numberOfTargetAssets</span>)</code>
 <br/><span class="conddetails">Where <code><code>damageState = DestructionState.Destroyed or DestructionState.Undestroyed</code></code></span></li>
 </ul>
 </div></section>
@@ -4117,10 +4117,10 @@ section {
 <pre>CompareAssetHP(
     uint targetEntityId, 
     sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
-    int hpThreshold, 
-    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
-    float numberOfTargetAssets)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
-<li><code>AssetHP(uint targetEntityId, sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, float numberOfTargetAssets) <span class="condcomp">== value</span></code>
+    int hpThreshold<span class="optarg">, 
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType = Equal, 
+    float numberOfTargetAssets = 1</span>)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
+<li><code>AssetHP(uint targetEntityId<span class="optarg">, sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, float numberOfTargetAssets</span>) <span class="condcomp">== value</span></code>
 <br/><span class="conddetails">Comparing <code>hpThreshold</code> (<code>== != &gt; &lt; &gt;= &lt;=</code>)</span></li>
 </ul>
 </div></section>
@@ -4144,10 +4144,10 @@ section {
 <pre>CompareAssetBurnState(
     uint targetEntityId, 
     byte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
-    byte burnStateUnknown, 
-    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
-    float numberOfTargetAssets)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
-<li><code>AssetBurnState(uint targetEntityId, sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, float numberOfTargetAssets) <span class="condcomp">== value</span></code>
+    byte burnStateUnknown<span class="optarg">, 
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType = Equal, 
+    float numberOfTargetAssets = 1</span>)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
+<li><code>AssetBurnState(uint targetEntityId<span class="optarg">, sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, float numberOfTargetAssets</span>) <span class="condcomp">== value</span></code>
 <br/><span class="conddetails">Comparing <code>burnStateUnknown</code> (<code>== != &gt; &lt; &gt;= &lt;=</code>)</span></li>
 </ul>
 </div></section>
@@ -4157,10 +4157,10 @@ section {
 <p class="sectionusage usageinfo">Used in common, common_func, m32_01_00_00, m34_11_00_00, m41_00_00_00, m41_01_00_00</p>
 <pre>AssetBackreadState(
     uint targetEntityId, 
-    bool isBackread, 
-    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
-    float numberOfTargetAssets)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
-<li><code>AssetBackread(uint targetEntityId, sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, float numberOfTargetAssets)</code>
+    bool isBackread<span class="optarg">, 
+    sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType = Equal, 
+    float numberOfTargetAssets = 1</span>)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
+<li><code>AssetBackread(uint targetEntityId<span class="optarg">, sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, float numberOfTargetAssets</span>)</code>
 <br/><span class="conddetails">Where <code>isBackread = true or false</code></span></li>
 </ul>
 </div></section>

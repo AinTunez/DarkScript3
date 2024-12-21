@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+10005100 イベント常駐弾丸テスト -- Event resident bullet test
+10005110 複合イベント領域テスト -- Complex event area test
+10005120 バディ受信演出テスト -- Buddy reception performance test
+10005130 「差し替える特殊効果」が、寿命以外の削除で動作するかテスト -- Test whether "replacement special effects" works when deleting something other than lifespan
+10005140 ゾンビガニ検証_ジェネレータON -- Zombie crab verification_generator ON
+10005150 ゾンビガニ検証_足元ワープ_XX -- Zombie crab verification_foot warp_XX
+10005160 騎乗キャラ片方だけイベント無効化テスト -- Event invalidation test for one mounted character
+10005170 ロックカメラスロット切り替えテスト -- Lock camera slot switching test
+10005180 イベントカメラ変更切り替えテスト -- Event camera change switching test
+10005190 イベント部位_材質変更切り替えテスト -- Event part_Material change switching test
+10005200 カットシーン明けカメラ変更テスト -- Cutscene end camera change test
+1000000000 敵リスポン -- enemy respawn

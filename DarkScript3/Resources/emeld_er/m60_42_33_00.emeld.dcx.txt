@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+101 デストラクタ_LOD1 -- Destructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1042332200 霊廟守りイベント -- Mausoleum protection event
+1042332575 ガーゴイル像_円形サークルボス開始 -- Gargoyle statue_Circular circle boss start
+1042332576 ガーゴイル像_円形サークルトリガー出現 -- Gargoyle statue_Circular circle trigger appears
+1042332800 [チャレンジバトル2]周囲の敵消し -- [Challenge Battle 2] Eliminate surrounding enemies

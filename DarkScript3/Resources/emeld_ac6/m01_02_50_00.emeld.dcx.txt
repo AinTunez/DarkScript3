@@ -1,0 +1,156 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッション開始時処理 -- Mission start process
+2001 必ず必要な初期イベント -- Initial events that are absolutely necessary
+2002 カットシーン再生 -- Cutscene playback
+2003 エレベーター起動時アニメ再生 -- Animation plays when the elevator starts
+2004 チェックポイント有効化_ボス戦から -- Checkpoint activation_from boss battle
+2007 味方の無効化 -- Disable allies
+2008 ボス戦用カメラ前SFXの有効化 -- Enabling in-camera SFX for boss battles
+2009 出撃カットシーン前に必要なイベント -- Events required before the sortie cutscene
+2010 部屋内部侵入時の扉設定 -- Door settings when entering the room
+2012 チェックポイント有効化_壁中侵入から -- Activate checkpoint_from entering the wall
+2013 壁中侵入前チェックポイント再開用イベント -- Event to restart the checkpoint before entering the wall
+2015 壁内部_敵無効化 -- Inside the wall_enemy nullification
+2016 壁進入時_逆走不可設定 -- When entering a wall_Reverse running prohibited setting
+2020 ジャガーノートボス戦開始処理 -- Juggernaut boss battle start process
+2021 ボス戦終了時_FE非表示 -- At the end of the boss battle_FE hidden
+2022 ボス戦開始時_ボスゲージ表示 -- At the start of a boss battle_Boss gauge display
+2030 ボスエリア透明壁有効化 -- Boss area transparent wall enabled
+2041 ボス部屋入口扉閉じるイベント -- Boss room entrance door closing event
+2050 ボス部屋Gparam切り替え_リトライ用 -- Boss room Gparam switching_for retry
+2051 ボス部屋Gparam切り替え_通常進行用 -- Boss room Gparam switching_for normal progression
+2060 ボス戦中死亡カウント開始 -- Death count starts during boss battle
+2061 ボス戦死亡時Tips表示有効化 -- Enable tips display when dying in boss battle
+2080 砲台攻撃範囲内特殊効果ON -- Special effects within artillery attack range ON
+2081 砲台攻撃範囲内特殊効果OFF -- Special effects within artillery attack range OFF
+2090 僚機撤退開始イベント_手前 -- Wingman withdrawal start event_front
+2091 僚機撤退開始イベント_中央 -- Wingman withdrawal start event_center
+2092 僚機撤退開始イベント_奥 -- Wingman withdrawal start event_back
+2099 僚機アサブ開始判定 -- Wingman Asabu start determination
+2100 僚機撤退開始イベント -- Wingman withdrawal start event
+2101 初期EvEシチュ_敵全滅後巣の更新 -- Initial EvE situation_Updating the nest after defeating all enemies
+2102 ボス戦_僚機残っている状態で終了時用イベント -- Boss battle_Event when ending with wingman remaining
+2103 ボス戦_自機狙い解除特殊効果セーフティ設定 -- Boss battle_Special effect safety setting to release aiming at own machine
+2200 マーカー制御_壁入口表示 -- Marker control_Wall entrance display
+2201 マーカー制御_壁入口無効化 -- Marker control_Wall entrance disabled
+2202 マーカー制御_部屋2入口表示 -- Marker control_Room 2 entrance display
+2203 マーカー制御_部屋2入口無効化 -- Marker control_Room 2 entrance disabled
+2204 マーカー制御_リフト部屋入口表示 -- Marker control_lift room entrance display
+2205 マーカー制御_リフト部屋入口無効化 -- Marker control_lift room entrance disabled
+2206 マーカー制御_ボス部屋入口表示 -- Marker control_Boss room entrance display
+2207 マーカー制御_ボス部屋入口無効化 -- Marker control_boss room entrance disabled
+2208 マーカー制御_橋シチュ移動制御マーカー表示 -- Marker control_Bridge situation movement control marker display
+2209 マーカー制御_四脚移動制御マーカー表示 -- Marker control_quadruped movement control marker display
+2210 マーカー制御_壁内部屋１入口表示 -- Marker control_intrawall room 1 entrance display
+2211 マーカー制御_壁内部屋１入口無効化 -- Marker control_Intrawall room 1 entrance disabled
+2220 マーカー制御_橋シチュ_目標TGT表示 -- Marker control_Bridge situation_Target TGT display
+2221 マーカー制御_中ボス_目標TGT表示 -- Marker control_Middle boss_Target TGT display
+2230 マーカー制御_僚機マーカー表示 -- Marker control_Consort aircraft marker display
+2231 マーカー制御_僚機マーカー無効化 -- Marker control_wingman marker invalidation
+2250 ジャガノ視界シリンダ判定 -- Jagano visibility cylinder judgment
+2251 ジャガノ砲撃イベント -- Jagano bombardment event
+2252 ジャガノ砲台_初期演出イベント -- Jagano Battery_Initial production event
+2253 開始時演出_敵味方起動 -- Start production_Enemy and ally activation
+2254 開始時演出_輸送ヘリ特殊効果かけ1 -- Start production_transport helicopter special effects 1
+2255 開始時演出_輸送ヘリ特殊効果かけ2 -- Start production_transport helicopter special effects 2
+2258 スナイパー砲台_中央範囲判定 -- Sniper battery_center range determination
+2259 スナイパー砲台_右範囲判定 -- Sniper turret_right range determination
+2260 スナイパー砲台_左範囲判定 -- Sniper turret_left range determination
+2261 スナイパー砲台_中央範囲判定_下 -- Sniper battery_center range determination_bottom
+2262 スナイパー砲台_右範囲判定_下 -- Sniper battery_right range determination_bottom
+2263 スナイパー砲台_左範囲判定_下 -- Sniper battery_Left range determination_Bottom
+2300 壁面砲台発射特殊効果 -- Wall turret firing special effects
+2700 進行管理用_開始後味方部隊起動判定 -- For progress management_Allied unit activation judgment after start
+2705 進行管理用_橋シチュエーション_目標撃破判定 -- For progress management_Bridge situation_Target destruction judgment
+2710 進行管理用_中ボス撃破判定 -- For progress management_Mid-boss defeat judgment
+2715 進行管理用_壁内部_通路侵入判定 -- For progress management_inside walls_passage intrusion detection
+2720 進行管理用_壁内部_部屋1侵入判定 -- For progress management_Inside wall_Room 1 intrusion detection
+2725 進行管理用_壁内部_部屋2侵入判定 -- For progress management_Inside wall_Room 2 intrusion detection
+2726 会話用_壁内部_部屋2敵接敵判定 -- Conversation_Inside the wall_Room 2 enemy contact detection
+2730 進行管理用_リフト前到達判定 -- For progress management_judgment of arrival before lift
+2735 進行管理用_リフト起動判定 -- For progress management_lift start judgment
+2736 進行管理用_リフトハッキング開始判定 -- For progress management_lift hacking start determination
+2740 進行管理用_リフト起動途中判定 -- For progress management_Lift start-up judgment
+2745 進行管理用_ボスエリア扉起動判定 -- For progress management_Boss area door activation judgment
+2746 進行管理用_ボスエリア扉ハッキング開始判定 -- For progress management_Boss area door hacking start determination
+2750 ボス戦中_HU判定 -- During boss battle_HU judgment
+2751 ボス戦中_僚機撤退判定 -- During a boss battle_determination for withdrawal of wingman
+2752 ボス戦中_ボスAP0判定 -- During boss battle_Boss AP0 judgment
+2753 ボス戦中_ボス死亡判定 -- During a boss battle_Boss death determination
+2754 ボス撃破時BGM遷移用判定 -- Judgment for BGM transition when defeating a boss
+2760 ボス戦会話用_ボス突進判定 -- For boss battle conversation_Boss rush judgment
+2761 ボス戦会話用_ボスAP減少判定 -- For boss battle conversation_Boss AP reduction judgment
+2762 ボス戦会話用_僚機AP減少判定 -- For boss battle conversation_wingman AP reduction judgment
+2770 僚機撤退制御_撤退時の位置判定_手前 -- Consort aircraft withdrawal control_Position determination during withdrawal_front
+2771 僚機撤退制御_撤退時の位置判定_中央 -- Consort aircraft withdrawal control_Position determination during withdrawal_Center
+2772 僚機撤退制御_撤退時の位置判定_奥 -- Consort aircraft withdrawal control_Position determination during withdrawal_back
+2780 マーカー切り替え判定_橋 -- Marker switching judgment_bridge
+2781 マーカー切り替え判定_四脚 -- Marker switching judgment_quadruped
+2782 マーカー切り替え用_通路下 -- For marker switching_under the aisle
+2783 マーカー切り替え用_通路上 -- For marker switching_on the passage
+2784 マーカー切り替え用_部屋1前 -- For marker switching_room 1 front
+2800 中ボスシチュ_初回攻撃用イベント -- Mid-boss situation_first attack event
+2801 中ボス_巣の更新判定 -- Mid-boss_nest update judgment
+2802 中ボス_自機が高い所にいる判定 -- Mid-boss_Determining that your machine is in a high place
+2820 初期EvEシチュ_敵部隊全滅判定 -- Initial EvE situation_enemy unit annihilation judgment
+2830 ボス戦用_自機安置判定 -- For boss battles_Self-placement judgment
+2831 ボス戦用_自機安置外判定 -- For boss battles_Determine if your machine is out of storage
+2832 ボス戦用_安置内用特殊効果設定 -- For boss battles_Special effects settings for inside the morgue
+2833 ボス戦用_安置内用特殊効果削除 -- For boss battles_Special effects removed for inside the morgue
+2840 会話判定用_市街地手前到着判定 -- For determining conversation_Determining arrival before the city area
+2841 会話判定用_市街地奥戦闘開始判定 -- For conversation determination_ Urban battle start determination
+2842 会話判定用_四脚戦闘開始判定 -- For conversation determination_quadruped combat start determination
+2843 会話判定用_四脚AP低下判定 -- For conversation judgment_quadruped AP drop judgment
+2904 スタート地点_味方輸送ヘリ左 -- Starting point_Left of ally transport helicopter
+2905 スタート地点_味方輸送ヘリ右 -- Starting point_Allied transport helicopter right
+2906 部屋1_出会え部隊登場イベント -- Room 1_Encounter unit appearance event
+3000 各扉ハッキング_開放イベント -- Each door hacking_opening event
+3010 各扉ハッキング_開放イベント_外扉 -- Each door hacking_opening event_outer door
+3400 チェックポイント通過フラグ_ボス戦から -- Checkpoint passing flag_from boss battle
+3401 チェックポイントから再開時フラグ_ボス戦から -- Flag when restarting from checkpoint_from boss battle
+3402 壁内部侵入時ミッション更新演出実行済みフラグ -- Mission update effect executed flag when entering the wall
+3403 チェックポイント通過フラグ_壁中侵入から -- Checkpoint passing flag_from entering the wall
+3404 チェックポイントから再開時フラグ_壁中侵入から -- Flag when restarting from checkpoint_from wall invasion
+3410 僚機撤退開始フラグ -- Wingman withdrawal start flag
+3420 会話用ステートマップ終了フラグ -- Conversation state map end flag
+3430 スタート地点_初回砲撃終了フラグ -- Start point_first bombardment end flag
+3431 砲台砲撃終了フラグ -- Artillery bombardment end flag
+3450 ボス戦用_僚機撤退フラグ -- Boss battle_wingman withdrawal flag
+3451 ボス戦用_僚機撤退しなかったフラグ -- For boss battle_Flag for wingman not retreating
+3452 ボス戦用_戦闘開始済みフラグ -- Boss battle_battle started flag
+3700 会話フラグ_102500100_ミッション開始会話 -- Conversation flag_102500100_Mission start conversation
+3701 会話フラグ_102500500_砲撃示唆会話 -- Conversation flag_102500500_Artillery suggestion conversation
+3702 会話フラグ_102500900_ガトリング撃破会話 -- Conversation flag_102500900_Gatling defeat conversation
+3703 会話フラグ_102501000_四脚示唆会話 -- Conversation flag_102501000_four-legged suggestion conversation
+3704 会話フラグ_102501300_四脚撃破会話2 -- Conversation Flag_102501300_Quadruped Destroy Conversation 2
+3705 会話フラグ_102501400_ガトリング示唆会話 -- Conversation flag_102501400_Gatling suggestion conversation
+3706 会話フラグ_102501700_前半終了会話 -- Conversation flag_102501700_First half end conversation
+3707 会話フラグ_102501800_壁内侵入_リマインド -- Conversation flag_102501800_Intrusion into walls_Reminder
+3708 会話フラグ_102502100_壁進入後会話 -- Conversation flag_102502100_Conversation after entering the wall
+3709 会話フラグ_102502500_壁内アッシュ会話 -- Conversation flag_102502500_Ash conversation within the wall
+3710 会話フラグ_102502900_リフト部屋到着会話 -- Conversation flag_102502900_Lift room arrival conversation
+3711 会話フラグ_102503300_エレベータ起動中会話 -- Conversation flag_102503300_Elevator startup conversation
+3712 会話フラグ_102503700_ボス戦開始会話 -- Conversation flag_102503700_Boss battle start conversation
+3713 会話フラグ_102504100_ボス戦中会話 -- Conversation flag_102504100_Boss battle conversation
+3714 会話フラグ_102504500_ボス戦突進会話 -- Conversation flag_102504500_Boss battle rush conversation
+3715 会話フラグ_102504600_ボスAP低下会話 -- Conversation flag_102504600_Boss AP lowering conversation
+3716 会話フラグ_102504620_自機AP低下会話 -- Conversation flag_102504620_own AP drop conversation
+3717 会話フラグ_102504640_僚機AP低下会話 -- Conversation flag _102504640_ Wingman AP lowering conversation
+3718 会話フラグ_102504900_僚機離脱_ボスのAP低下 -- Conversation Flag_102504900_Leave wingman_Boss AP decrease
+3719 会話フラグ_102505300_僚機離脱後会話 -- Conversation flag_102505300_Conversation after wingman leaves
+3720 会話フラグ_102505700_ミッションクリア会話 -- Conversation flag_102505700_Mission clear conversation
+3721 会話フラグ_102506100_ミッションクリア_僚機生存時 -- Conversation flag_102506100_Mission cleared_When wingman survives
+3722 会話フラグ_102506500_僚機撤退_僚機のAP低下 -- Conversation flag_102506500_Family aircraft withdrawal_Flight aircraft AP decrease
+3723 会話フラグ_102506900_僚機生存中に自機死亡 -- Conversation Flag_102506900_ Own aircraft died while wingman was alive
+3724 会話フラグ_102501200_四脚撃破時会話1 -- Conversation Flag_102501200_Conversation 1 when defeating quadruped
+3725 会話フラグ_102500700_市街地到着時会話 -- Conversation flag_102500700_Conversation upon arrival in the city
+3726 会話フラグ_102501100_橋突破後会話 -- Conversation flag_102501100_Conversation after breaking through the bridge
+3727 会話フラグ_102501120_四脚戦闘開始会話 -- Conversation Flag_102501120_Quadruped Battle Start Conversation
+3728 会話フラグ_102501140_四脚AP減少会話 -- Conversation flag_102501140_quadruped AP reduction conversation
+3810 スナ砲台弾丸発射_新型 -- Suna battery bullet firing_new model
+3830 スナ砲台レーザーサイト表示 -- Suna turret laser sight display
+3850 スナ砲台左_AI有効化 -- Suna turret left_AI enabled
+3851 スナ砲台中央_AI有効化 -- Suna Battery Center_AI Enabled
+3852 スナ砲台右_AI有効化 -- Suna turret right_AI enabled
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,8 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1038413700 NPC310城主の娘_NPC初期化イベント_ブドウ渡し場所B -- NPC310 Castle lord's daughter_NPC initialization event_Grape passing place B
+1038413710 NPC309_盗賊の頭_NPC初期化イベント_湖で再会 -- NPC309_Thief Head_NPC initialization event_Reunion at the lake
+1038413711 NPC309_盗賊の頭_湖で再会_土下座で敵対解除 -- NPC309_Head of the thieves_Reunion at the lake_Dismiss hostility by prostrate
+1038413712 NPC309_盗賊の頭_湖で再会_リアルタイム遷移 -- NPC309_Head of Thieves_Reunion at the lake_Real-time transition

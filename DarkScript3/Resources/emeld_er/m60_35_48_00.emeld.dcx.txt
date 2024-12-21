@@ -1,0 +1,10 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1035482210 キャラクター死体化イベント_XX -- Character corpse event_XX
+1035482260 気球待機イベント -- Balloon standby event
+1035482261 気球破壊イベント -- Balloon destruction event
+1035482262 人形兵解除イベント_XX -- Puppet soldier release event_XX
+1035482270 雷地帯_弾丸イベント1_XX -- Thunder Zone_Bullet Event 1_XX
+1035482280 雷地帯_弾丸イベント2_XX -- Thunder Zone_Bullet Event 2_XX

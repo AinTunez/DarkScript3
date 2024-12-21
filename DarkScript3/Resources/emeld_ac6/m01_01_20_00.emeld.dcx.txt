@@ -1,0 +1,82 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッションクリア判定 -- Mission clear judgment
+2001 SFXテスト -- SFX test
+2009 CP有効化 -- CP enable
+2010 初期イベント -- initial event
+2011 演出テスト -- Direction test
+2012 演出艦死亡判定_進行準拠 -- Performance ship death judgment_progress compliant
+2013 演出艦死亡判定_接近時 -- Performance ship death judgment_when approaching
+2014 レールガン艦隊起動 -- Launch of railgun fleet
+2020 艦橋アタッチ処理 -- Bridge attach processing
+2100 ミッション目標更新フラグ01 -- Mission target update flag 01
+2101 ミッション目標更新フラグ02 -- Mission target update flag 02
+2102 ミッション目標更新フラグ03 -- Mission objective update flag 03
+2103 ミッション目標更新フラグ04 -- Mission objective update flag 04
+2104 ミッション目標更新フラグ05 -- Mission objective update flag 05
+2210 二番艦子機展開判定 -- Determination of second aircraft deployment
+2220 二番艦子機投下イベ -- Second ship drop event
+2240 EN無限領域内か -- Is it within EN infinite area?
+2241 自機EN無限特効付与 -- Own machine EN infinite special effect granted
+2250 EN無限領域外か -- Is it outside the EN infinite area?
+2251 自機EN無限特効解除 -- Own machine EN infinite special effect removed
+2260 空中キャラ用バックリード_暫定 -- Back lead for aerial characters_tentative
+2300 自機EN効率上昇特殊効果 -- Own machine EN efficiency increase special effect
+2301 第01群撃破判定 -- Group 01 defeat judgment
+2302 第02群にTGTマーカー付与 -- TGT marker assigned to Group 02
+2303 雲開けた判定 -- Judgment that the clouds have opened
+2310 レールガン起動判定 -- Railgun activation determination
+2311 レールガン撃墜判定 -- Railgun shot down judgment
+2312 七番艦子機射出特効付与 -- Grants special effect for ejecting the 7th ship
+2314 レールガン用タゲイベ -- Tageibe for railgun
+2400 第02群撃破判定 -- 02th group defeat judgment
+2600 爆発演出SFX制禦 -- Explosive production SFX control
+2620 爆発演出終了判定 -- Explosion performance end judgment
+2630 にぎやかし弾丸発射準備 -- Preparing to launch lively bullets
+2631 にぎやかし爆発音01 -- Lively explosion sound 01
+2632 にぎやかし爆発音02 -- Lively explosion sound 02
+2640 にぎやかし弾丸発射制禦主砲 -- Lively bullet firing main gun
+2650 にぎやかし弾丸発射制禦チラシ -- Lively bullet firing control flyer
+2680 プラズマ爆発01 -- Plasma explosion 01
+2852 アッシュ登場CS再生処理 -- Ash appearance CS playback process
+2860 アッシュ撃破判定 -- Ash defeat judgment
+2861 アッシュAP70パー判定 -- Ash AP70 par judgment
+2862 アッシュAP30パー判定 -- Ash AP30 par judgment
+2901 通常会話再生済みフラグ01 -- Normal conversation played flag 01
+2902 通常会話再生済みフラグ02 -- Normal conversation played flag 02
+2903 通常会話再生済みフラグ03 -- Normal conversation played flag 03
+2904 通常会話再生済みフラグ04 -- Normal conversation played flag 04
+2905 通常会話再生済みフラグ05 -- Normal conversation played flag 05
+2906 通常会話再生済みフラグ06 -- Normal conversation played flag 06
+2907 通常会話再生済みフラグ07 -- Normal conversation played flag 07
+2908 通常会話再生済みフラグ08 -- Normal conversation played flag 08
+2909 通常会話再生済みフラグ09 -- Normal conversation played flag 09
+2910 通常会話再生済みフラグ10 -- Normal conversation played flag 10
+2911 通常会話再生済みフラグ11 -- Normal conversation played flag 11
+2912 通常会話再生済みフラグ12 -- Normal conversation played flag 12
+2913 通常会話再生済みフラグ13 -- Normal conversation played flag 13
+2914 通常会話再生済みフラグ14 -- Normal conversation played flag 14
+2915 通常会話再生済みフラグ15 -- Normal conversation played flag 15
+2916 通常会話再生済みフラグ16 -- Normal conversation played flag 16
+2917 通常会話再生済みフラグ17 -- Normal conversation played flag 17
+2918 通常会話再生済みフラグ18 -- Normal conversation played flag 18
+2919 通常会話再生済みフラグ19 -- Normal conversation played flag 19
+2920 通常会話再生済みフラグ20 -- Normal conversation played flag 20
+2921 通常会話再生済みフラグ21 -- Normal conversation played flag 21
+2922 通常会話再生済みフラグ22 -- Normal conversation played flag 22
+2923 通常会話再生済みフラグ23 -- Normal conversation played flag 23
+2924 通常会話再生済みフラグ24 -- Normal conversation played flag 24
+2925 通常会話再生済みフラグ25 -- Normal conversation played flag 25
+2926 通常会話再生済みフラグ26 -- Normal conversation played flag 26
+2927 通常会話再生済みフラグ27 -- Normal conversation played flag 27
+2928 通常会話再生済みフラグ28 -- Normal conversation played flag 28
+2929 通常会話再生済みフラグ29 -- Normal conversation played flag 29
+2950 撃破数カウント -- Count the number of defeats
+2970 撃破カウント会話再生済み -- Defeat count conversation played
+3000 戦闘開始特効付与 -- Battle start special effect added
+3020 揚陸艦死亡演技指定 -- Landing ship death performance designation
+3049 子機無効化 -- Disable handset
+3050 子機射出イベント準備 -- Child machine injection event preparation
+3120 揚陸艦死亡処理 -- Landing ship death processing
+3140 砲台ロック不可テスト -- Turret lock failure test
+1000000000 敵リスポン -- enemy respawn

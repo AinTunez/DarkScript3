@@ -1,0 +1,40 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッションクリア判定 -- Mission clear judgment
+2001 ダメージ倍率テスト -- damage multiplier test
+2002 砲台タゲ入れ -- gun turret holder
+2003 ボスゲージバグチェック -- boss gauge bug check
+2004 カメラ振動テスト -- camera vibration test
+2005 パッド振動上書きテスト -- Pad vibration overwrite test
+2010 SEイベントテスト -- SE event test
+2100 AS表示 -- AS display
+2110 ハッキングキャラ無効化デバッグ -- Hacking character invalidation debugging
+2200 アクティブ距離テスト準備イベント -- Active distance test preparation event
+2201 ワープ切り替え -- warp switch
+2203 属性ダメージ判定_イベント部位テスト -- Attribute damage judgment_event part test
+2210 実装テスト_最低HP値保証設定 -- Implementation test_Minimum HP value guarantee setting
+2211 実装テスト_最低HP値保証設定_比率版 -- Implementation test_Minimum HP value guarantee setting_Ratio version
+2212 実装テスト_最低HP値保証設定_比率版_強制死亡 -- Implementation test_Minimum HP value guarantee setting_Ratio version_Forced death
+2213 実装テスト_最低HP値保証設定_比率版_強制死亡02 -- Implementation test_Minimum HP value guarantee setting_Ratio version_Forced death 02
+2300 ワームテスト -- worm test
+2310 特攻MT用処理 -- Special attack MT processing
+2320 建機グモ特殊待機解除 -- Construction machine spider special standby canceled
+2400 護衛ヘリテスト_初期イベント -- Escort helicopter test_initial event
+2401 護衛ヘリテスト_イベントポイント制禦 -- Escort helicopter test_event point system
+2402 護衛ヘリテスト_巡回アニメ制禦 -- Escort helicopter test_patrol animation system
+2410 環境リセット_カットシーン再生 -- Environment reset_cutscene playback
+2411 環境リセット_カットシーン再生フラグ -- Environment reset_cutscene playback flag
+2412 環境リセット_シームレスカットシーン再生 -- Environment reset_Seamless cutscene playback
+2413 環境リセット_シームレスカットシーン再生フラグ -- Environment reset_Seamless cutscene playback flag
+2420 揚陸艦_艦橋アタッチ -- Landing ship_bridge attach
+2430 PA判定_50パー -- PA judgment_50 par
+2431 PA判定_0パー -- PA judgment_0 par
+2500 マーカー切り替え_接近 -- Marker switching_approach
+2501 マーカー切り替え_接近_消し -- Marker switching_approach_erase
+2510 マーカー切り替え_通り過ぎ -- Marker switching_passing
+2515 マーカー切り替え_通り過ぎ_消し -- Marker switching_passing_erase
+2520 マーカー切り替え_高さ_消し -- Marker switching_height_erase
+2600 チェックポイント有効化 -- checkpoint enable
+2601 チェックポイント判定フラグ -- Checkpoint judgment flag
+2700 新B_オブジェダメージ_開始 -- New B_object damage_start
+1000000000 敵リスポン -- enemy respawn

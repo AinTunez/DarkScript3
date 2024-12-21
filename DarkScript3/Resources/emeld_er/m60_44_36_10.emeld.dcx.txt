@@ -1,0 +1,23 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1044362300 キャラバン馬車_障害物アセット破壊ダメージ定期発生 -- Caravan carriage_Obstacle asset destruction damage occurs regularly
+1044362500 遺跡壁破壊不可 -- Ruins walls cannot be destroyed
+1044362650 チュートリアルメッセージ_サインだまり解放 -- Tutorial message_Release of signature pile
+1044362651 チュートリアルメッセージ_エストスカラベ撃破 -- Tutorial message_Defeating Esto Scarab
+1044362652 チュートリアルメッセージ_バディ召喚可能範囲 -- Tutorial message_Buddy summonable range
+1044362654 チュートリアルメッセージ_魔法杖所持 -- Tutorial message_Magic wand possession
+1044362800 ボス撃破 -- Defeat the boss
+1044362810 ボス出現 -- Boss appears
+1044362849 ボス_かぼちゃ頭_イベント起動 -- Boss_Pumpkin head_Event activation
+1044363700 赤目商人_初期化イベント -- Red Eye Merchant_Initialization event
+1044363701 赤目商人ランダム移動処理 -- Red-eyed merchant random movement process
+1044363702 赤目商人全体敵対 -- Entire enemy of red-eyed merchants
+1044363710 NPC316学院の女魔術師_幻影_NPC初期化イベント -- NPC316 Academy Female Magician_Phantom_NPC Initialization Event
+1044363711 NPC316学院の女魔術師NPC敵対化処理 -- NPC316 Academy female magician NPC hostile processing
+1044363712 NPC316学院の女魔術師_敵対と共に消える -- NPC316 Female magician of the academy_disappears with hostility
+1044363713 NPC316学院の女魔術師_購入魔術数チェック -- NPC316 Academy female magician_Check the number of purchased magics
+1044363714 NPC316学院の女魔術師_リアルタイム遷移 -- NPC316 Female magician of the academy_Real-time transition

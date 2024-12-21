@@ -1,0 +1,24 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1043343700 話す死体6_アニメ再生 -- Talking Corpse 6_Anime playback
+1043343701 話す死体6_ボス撃破後にいなくなる -- Talking Corpse 6_Disappears after defeating the boss
+1043343702 話す死体6_墓地に入った会話再生許可 -- Talking corpse 6_Conversation playback permission after entering the graveyard
+1043390724 壺マイヤー_穴に埋まっているフラグ操作 -- Tsubo Meyer_Flag operation buried in the hole
+1043392200 橋の上の死体化 -- corpse on the bridge
+1043392390 エジンバラ前砂塵SFX切り替え -- Edinburgh front dust SFX switching
+1043392600 テスト用イベント_鳴子作動_XX -- Test event_Naruko activation_XX
+1043392670 チュートリアルメッセージ_騎乗 -- Tutorial message_Riding
+1043392671 チュートリアルメッセージ_エストスカラベ撃破 -- Tutorial message_Defeating Esto Scarab
+1043393700 NPC802赤目商人3_初期化イベント -- NPC802 Red Eye Merchant 3_Initialization event
+1043393702 NPC802赤目商人3_ここで死亡監視 -- NPC802 Red Eye Merchant 3_Death monitoring here
+1043393703 NPC802赤目商人3_演奏管理 -- NPC802 Red Eye Merchant 3_Performance management
+1043393704 NPC802赤目商人3_地図ポイント発見 -- NPC802 Red Eye Merchant 3_Map point discovery
+1043393705 NPC802赤目商人3_集中演奏時ロジック管理 -- NPC802 Red Eye Merchant 3_Logic management during intensive performance
+1043393706 NPC802赤目商人3_ロバ被ダメ台詞再生 -- NPC802 Red-Eyed Merchant 3_ Donkey Damage Line Playback
+1043393707 NPC802赤目商人3_ロバ敵対監視 -- NPC802 Red-Eyed Merchant 3_Donkey Hostile Surveillance
+1043393720 壺マイヤー_NPC初期化イベント_初期状態 -- Tsubomeyer_NPC initialization event_Initial state
+1043393721 壺マイヤー_不死設定_初期状態 -- Pot Meyer_Immortality setting_Initial state
+1043393722 壺マイヤー_助けを呼ぶイベント_初期状態 -- Pot Mayor_Event that calls for help_Initial state
+1043393750 傭兵剣士_非表示イベント -- Mercenary swordsman_hidden event

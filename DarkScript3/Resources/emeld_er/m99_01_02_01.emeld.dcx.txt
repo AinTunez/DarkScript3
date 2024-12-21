@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+100 L_汎用_初期設定 -- L_General purpose_Initial settings
+3970 L_汎用_獣末裔_凶暴化 -- L_General Purpose_Beast Descendant_Ferocious
+4470 L_汎用_人攫い兵器_拘束ワープ用 -- L_General Purpose_Human Abduction Weapon_For Restraint Warp
+4710 L_汎用_グール王_モード切り替え判定 -- L_General Purpose_Ghoul King_Mode switching judgment
+4711 L_汎用_グール王_左足崩れ判定 -- L_General Purpose_Ghoul King_Left leg collapse detection
+4712 L_汎用_グール王_右足崩れ判定 -- L_General Purpose_Ghoul King_Right foot collapse detection
+4715 L_汎用_グール王_メテオ判定 -- L_General Purpose_Ghoul King_Meteor Judgment
+4750 L_汎用_接ぎ木の王_モード切り替え判定 -- L_General Purpose_King of Grafting_Mode Switching Judgment
+1000000000 敵リスポン -- enemy respawn

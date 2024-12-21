@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+19901234 GRテスト用イベント1 -- GR test event 1
+19901236 GRテスト用イベント3 -- GR test event 3
+19901247 引数テスト -- argument test
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,12 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30040050 m30_04_00_00用初期フラグ設定 -- Initial flag setting for m30_04_00_00
+30042500 火矢トラップイベント起動 -- Fire arrow trap event activated
+30042650 チュートリアルメッセージ_バディ解放 -- Tutorial message_Buddy release
+30042800 ボス撃破 -- Defeat the boss
+30042810 ボス出現 -- Boss appears
+30042811 ボス激昂 -- boss rage
+30042849 番犬ゴーレム_イベント起動 -- Watchdog Golem_Event activation
+30042900 チュートリアルメッセージ_サインだまり解放 -- Tutorial message_Release of signature pile
+1000000000 敵リスポン -- enemy respawn

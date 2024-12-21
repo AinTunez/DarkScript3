@@ -1,0 +1,8 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+34152500 エレベータ起動 -- elevator start
+34152800 ボス撃破 -- Defeat the boss
+34152810 ボス出現 -- Boss appears
+34152849 かぼちゃ頭_イベント起動 -- Pumpkin head_event activation
+1000000000 敵リスポン -- enemy respawn

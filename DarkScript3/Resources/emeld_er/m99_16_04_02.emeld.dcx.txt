@@ -1,0 +1,5 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+99162200 バディ召喚済みフラグ折る -- Fold the buddy summoned flag
+1000000000 敵リスポン -- enemy respawn

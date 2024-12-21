@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1035452500 ヒント地図入手時ダイアログ表示 -- Dialog displayed when obtaining hint map
+1035452600 紋章ワープ_開始 -- Crest warp_start
+1035452605 紋章ワープ_終了 -- Crest warp_end

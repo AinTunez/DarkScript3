@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50302800 ジャンプ台無効化 -- Disable jump platform
+50302900 高度計初期化イベント -- Altimeter initialization event
+340002210 坑道_雪SFX表示判定イベント -- Mine shaft_snow SFX display judgment event
+1000000000 敵リスポン -- enemy respawn

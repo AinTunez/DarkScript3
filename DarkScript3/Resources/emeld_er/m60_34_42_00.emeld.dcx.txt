@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1034420700 NPC334百智卿の娘_ﾌｪｰｽﾞ3_NPC初期化イベント -- NPC334 Momochi Lord's Daughter_Phase 3_NPC Initialization Event
+1034420701 NPC334百智卿の娘_ﾌｪｰｽﾞ3_白霊召喚停止イベント -- NPC334 Daughter of Lord Hyakuchi_Phase 3_White Spirit Summoning Stop Event
+1034422230 思考ロジック有効化_ダメージ判定 -- Enabling thought logic_damage judgment
+1034422600 ニト剣トラップ_起動_XX -- Nito sword trap_activation_XX
+1034422800 ワイバーン出現イベント -- Wyvern appearance event
+1034422801 ワイバーン飛行特殊効果設定 -- Wyvern flight special effects setting
+1034422802 ワイバーン後ろ下がり特殊効果設定 -- Wyvern backward special effect setting

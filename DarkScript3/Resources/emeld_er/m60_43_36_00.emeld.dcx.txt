@@ -1,0 +1,20 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+200 コンストラクタ_LOD2 -- constructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1043362210 貴人セリフ再生_XX -- Nobleman dialogue playback_XX
+1043362220 絵画イベント貴人_出現 -- Painting event nobleman_appearance
+1043362221 絵画イベント貴人_消滅 -- Painting event Nobleman_Disappearance
+1043362340 ワイバーン着地_ワープ判定_XX -- Wyvern landing_warp judgment_XX
+1043362380 ワイバーン初回出現後_貴人無効化 -- After Wyvern appears for the first time_nobility disabled
+1043362510 宝箱ワープトラップ -- treasure chest warp trap
+1043362651 チュートリアルメッセージ_サインだまり解放 -- Tutorial message_Release of signature pile
+1043362652 チュートリアルメッセージ_バディ召喚可能範囲 -- Tutorial message_Buddy summonable range
+1043362653 チュートリアルメッセージ_魔石取得 -- Tutorial message_Magic stone acquisition
+1043362654 チュートリアルメッセージ_バディ解放 -- Tutorial message_Buddy release
+1043363700 NPC318_混沌の宿主_飛竜アギールに攻撃した -- NPC318_Host of Chaos_Attacked the flying dragon Agir.
+1043363701 NPC318_混沌の宿主_白霊非表示 -- NPC318_Host of Chaos_White Spirit Hide
+1043363702 NPC318_混沌の宿主_アギール湖_召喚可否監視 -- NPC318_Host of Chaos_Lake Agir_Monitoring whether or not it is possible to summon
+1043363703 NPC318_混沌の宿主_召喚後にPCが範囲外に出た -- NPC318_Host of Chaos_PC went out of range after summoning
+1043363704 NPC318_混沌の宿主_竜撃破後処理 -- NPC318_Host of Chaos_Processing after defeating the dragon

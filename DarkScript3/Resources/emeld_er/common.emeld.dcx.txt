@@ -1,0 +1,194 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+130 レガシー到達チェック_XX -- Legacy achievement check_XX
+700 ゲーム開始フラグ操作 -- Game start flag operation
+701 ゲーム開始イベント -- Game start event
+702 ゲーム開始固定状況解除 -- Fixed game start status canceled
+703 ゲーム開始時間固定 -- Fixed game start time
+705 フラグリセット -- flag reset
+710 ホスト／ゲスト判定 -- Host/Guest Judgment
+711 ホストがマルチプレイかの判定 -- Determining whether the host is multiplayer
+715 レガシー／オープン判定 -- Legacy/Open Judgment
+716 レガシー／オープン判定（データ） -- Legacy/open judgment (data)
+720 大ルーン解放数チェック_XX -- Check number of large runes released_XX
+730 大ルーン所持数チェック_XX -- Check number of large runes in possession_XX
+740 カメラパラムリセット -- Camera param reset
+750 円形サークル撃破後帰還アニメ -- Return animation after defeating the circular circle
+810 時間帯監視イベント -- Time zone monitoring event
+820 天候監視イベント_XX -- Weather monitoring event_XX
+839 天候監視イベント_系列 -- Weather monitoring event_series
+840 天候変化_リセット -- Weather change_reset
+841 天候変化_霧 -- Weather change_fog
+900 天変地異_世界樹炎上 -- Natural disaster_World tree in flames
+901 天変地異_メリナ炎上 -- Natural disaster_Melina goes up in flames
+902 天変地異_メリナ炎上_救済 -- Natural disaster_Melina in flames_Relief
+910 天変地異_巨星墜つ -- Natural disaster_Giant star falls
+920 狂い火抑え_使用完了 -- Crazy fire suppression_Used completed
+921 狂い火抑え_使用可能 -- Crazy fire suppression_usable
+922 地底訪問 -- underground visit
+930 巨大エレベータ起動_XX -- Giant elevator starts_XX
+936 巨大エレベータ起動_禁域_XX -- Giant elevator starts_Forbidden area_XX
+945 拠点へのワープ -- Warp to base
+950 娘マリカとの出会い -- Meeting my daughter Marika
+960 娘マリカとの出会い_解放トリガー監視_XX -- Encounter with daughter Marika_Release trigger monitoring_XX
+970 地下地図解放 -- Underground map release
+980 いんちきランダム配置パターン選択 -- Bogus random placement pattern selection
+1020 BGM制御 -- BGM control
+1030 天候コントロール -- weather control
+1040 世界樹の恵み -- Blessings of the World Tree
+1050 疑似誓約_狂い火 -- Pseudo oath_crazy fire
+1080 転送禁止罠解除 -- Removal of transfer prohibition trap
+1088 闘技場マッチング中_転送禁止 -- During arena matching_transfer prohibited
+1100 ボス撃破_アイテム取得_XX -- Defeat boss_obtain item_XX
+1200 ボス撃破_アイテム取得_YY -- Defeat boss_obtain item_YY
+1400 ジェスチャー獲得_黄金律の輪のポーズ -- Gesture acquisition_Golden rule circle pose
+1401 ジェスチャー獲得_黄金律の輪のポーズ伝播 -- Gesture acquisition_Golden rule wheel pose propagation
+1410 ジェスチャー獲得_開戦の一礼 -- Gesture Acquisition_Start of War Bow
+1411 ジェスチャー獲得_よっ -- Gesture acquisition_Yo
+1412 ジェスチャー獲得_剣に誓って２ -- Gesture acquisition_swear on the sword 2
+1450 種火解禁_XX -- Pilot fire lifted_XX
+1460 ヒビ壺所持数カウント -- Count the number of crack pots owned
+1461 上位壺所持数カウント -- Count the number of top pots you own
+1462 調香瓶所持数カウント -- Count the number of perfume bottles owned
+1600 地図アイテム_入手演出_XX -- Map item_Obtainment effect_XX
+1630 地図アイテム_沿岸部開放_XX -- Map item_Coastal area opening_XX
+1700 時止めチュートリアル_死亡復帰 -- Time stop tutorial_Return from death
+1701 時止めチュートリアル_死亡復帰予約 -- Time Stop Tutorial_Death Return Reservation
+1702 時止めチュートリアル_バディ -- Time stop tutorial_buddy
+1703 時止めチュートリアル_クラフト -- Time stop tutorial_craft
+1704 時止めチュートリアル_ヒビ壺 -- Time stop tutorial_crack pot
+1705 時止めチュートリアル_魔石 -- Time stop tutorial_magic stone
+1720 時止めチュートリアル_汎用_XX -- Time stop tutorial_General purpose_XX
+1750 時止めチュートリアル_魔法予約 -- Time stop tutorial_Magic reservation
+1751 時止めチュートリアル_弓予約 -- Time stop tutorial_bow reservation
+1752 時止めチュートリアル_バディ召喚可能範囲予約 -- Timestop tutorial_Buddy summonable range reservation
+1770 一行チュートリアル_汎用_XX -- One line tutorial_General purpose_XX
+1790 一行チュートリアル_騎乗二段ジャンプ予約 -- One-line tutorial_riding double jump reservation
+1800 プレイヤー外見変化_眼 -- Player appearance change_eyes
+1801 プレイヤー外見変化_体 -- Player appearance change_body
+1910 イベントテスト_XX -- Event test_XX
+3040 ラダーン祭り状態管理 -- Ladhan festival status management
+3041 ミケラカットシーン再生 -- Michaela cutscene playback
+3042 篝火点灯監視_オープン緑 -- Bonfire lighting monitoring_open green
+3043 篝火点灯監視_オープン湖 -- Bonfire lighting monitoring_Open lake
+3044 篝火点灯監視_オープン高山 -- Bonfire lighting monitoring_Open Takayama
+3045 篝火点灯監視_オープン平原 -- Bonfire lighting monitoring_Open plains
+3046 篝火点灯監視_オープン雪山 -- Bonfire lighting monitoring_Open snow mountain
+3049 ラニ一味敵対 -- Rani gang is hostile
+3050 影狼頭アイテム処理 -- Shadow Wolf Head Item Processing
+3051 城主の娘殺害でモーグの誓布を血で染める -- Murdering the castle lord's daughter stains Moog's oath with blood.
+3052 ウルフライダーのバディ入手 -- Get Wolf Rider Buddy
+3053 ジェスチャー入手_土下座 -- Gesture acquisition_Dogeza
+3054 ジェスチャー入手_ひらめいた -- Get gesture _ inspired
+3055 NPC322ユリア_夜明けの光の徴デバフ -- NPC322 Yuria_sign of dawn debuff
+3056 暗黒円卓空間キックフラグ操作 -- Dark round table space kick flag operation
+3058 侵入回数カウント_他世界 -- Intrusion count_other world
+3059 侵入回数カウント_自世界 -- Count the number of intrusions_own world
+3080 PCの見た目変化_竜餐 -- PC appearance change_Dragon food
+3081 NPC313火山館の勧誘者_地図ポイント -- NPC313 Volcano Hall Recruiter_Map Points
+3082 NPC301戦場医師_地図ポイント -- NPC301 Battlefield Doctor_Map Points
+3083 NPC300火山館の女主人_地図ポイント -- NPC300 Volcano Hall Mistress_Map Points
+3084 NPC228ウルフライダー_地図ポイント -- NPC228 Wolf Rider_Map Points
+3085 NPC309盗賊の頭_地図ポイント -- NPC309 Thief Head_Map Points
+3086 NPC318混沌の宿主_地図ポイント -- NPC318 Host of Chaos_Map Points
+3087 NPC326火山館最強の騎士_地図ポイント -- NPC326 Volcano Hall Strongest Knight_Map Points
+3088 NPC331ならず者_地図ポイント -- NPC331 Rogue_Map Points
+3089 ロルドの大昇降機中間地点地図ポイント -- Roldo's Great Elevator Midway Map Point
+3090 NPC700話す死体_地図ポイント -- NPC700 Talking Corpse_Map Points
+3091 NPC106ラニ_地図ポイント -- NPC106 Rani_Map Point
+3092 NPC224爺や_地図ポイント -- NPC224 Old Man_Map Points
+3093 NPC307傀儡師_地図ポイント -- NPC307 Puppet Master_Map Points
+3094 NPC322ユリア_地図ポイント -- NPC322 Yuria_Map Point
+3095 NPC319ダヴィド_地図ポイント -- NPC319 David_Map Point
+3096 NPC310城主の娘_地図ポイント -- NPC310 Castle Lord's Daughter_Map Points
+3097 NPC312平原砦の領主_地図ポイント -- NPC312 Lord of Plains Fort_Map Points
+3098 NPC312平原砦の領主_セレン殺害までのボス撃破カウント -- NPC312 Lord of Plains Fort_Boss defeat count until Seren is killed
+3099 NPC223亜人針子_生まれ変わり会話までのボス撃破カウント -- NPC223 Demi-Shinko_Boss defeat count until reincarnation conversation
+3119 NPC300火山館の女主人_キャラ状態遷移 -- NPC300 Volcano Hall Mistress_Character state transition
+3179 NPC100娘マリカ_キャラ状態遷移 -- NPC100 Daughter Marika_Character state transition
+3199 NPC301戦場医師_キャラ状態遷移 -- NPC301 Battlefield Doctor_Character state transition
+3239 NPC213鍛冶屋_拠点_キャラ状態遷移 -- NPC213 Blacksmith_Base_Character state transition
+3259 NPC304傷剣士_キャラ状態遷移 -- NPC304 Wounded Swordsman_Character state transition
+3279 NPC302門衛_キャラ状態遷移 -- NPC302 Gatekeeper_Character state transition
+3299 NPC303傭兵剣士_キャラ状態遷移 -- NPC303 Mercenary Swordsman_Character state transition
+3379 NPC312平原砦の領主_キャラ状態遷移 -- NPC312 Lord of Plains Fort_Character state transition
+3399 NPC310城主の娘_キャラ状態遷移 -- NPC310 Castle Lord's Daughter_Character state transition
+3419 NPC311半島砦の城主_キャラ状態遷移 -- NPC311 Peninsula Fort Castle Lord_Character state transition
+3439 NPC313火山館の勧誘者_キャラ状態遷移 -- NPC313 Volcano Hall Recruiter_Character state transition
+3459 NPC314ムノウ_キャラ状態遷移 -- NPC314 Munou_Character state transition
+3479 NPC316学院の女魔術師_キャラ状態遷移 -- NPC316 Academy Female Magician_Character state transition
+3499 NPC102指読み_キャラ状態遷移 -- NPC102 finger reading_Character state transition
+3559 NPC219足萎え村のNPC_キャラ状態遷移 -- NPC219 NPC in the withered village_Character state transition
+3579 NPC307傀儡師_キャラ状態遷移 -- NPC307 Puppeteer_Character state transition
+3599 NPC321見張り塔の貴族_キャラ状態遷移 -- NPC321 Watchtower Noble_Character state transition
+3619 NPC216狼頭の戦士_キャラ状態遷移 -- NPC216 Wolf-Headed Warrior_Character state transition
+3639 NPC318混沌の宿主_キャラ状態遷移 -- NPC318 Host of Chaos_Character state transition
+3659 NPC202マリケス_キャラ状態遷移 -- NPC202 Marikes_Character state transition
+3679 NPC220壺マイヤー_キャラ状態遷移 -- NPC220 Tsubo Meyer_Character state transition
+3699 NPC309盗賊の頭_キャラ状態遷移 -- NPC309 Thief Head_Character state transition
+3719 NPC320ファルネーゼ_キャラ状態遷移 -- NPC320 Farnese_Character state transition
+3739 NPC330贖罪司祭_キャラ状態遷移 -- NPC330 Atonement Priest_Character state transition
+3759 NPC106ラニ_キャラ状態遷移 -- NPC106 Rani_Character state transition
+3779 NPC224爺や_キャラ状態遷移 -- NPC224 Grandpa_Character state transition
+3799 NPC332火山館の幽霊_キャラ状態遷移 -- NPC332 Ghost of the Volcano Hall_Character state transition
+3819 NPC333戻れない輝石魔術師_キャラ状態遷移 -- NPC333 Pyroxene magician who cannot return_Character state transition
+3839 NPC226生きている小壺_キャラ状態遷移 -- NPC226 Living Small Pot_Character state transition
+3859 NPC227霊クラゲの少女_キャラ状態遷移 -- NPC227 Spirit Jellyfish Girl_Character state transition
+3879 NPC337王都老人_キャラ状態遷移 -- NPC337 Royal Capital Old Man_Character state transition
+3899 NPC326火山館最強の騎士_キャラ状態遷移 -- NPC326 Volcano Hall Strongest Knight_Character state transition
+3919 NPC325ロジェール_キャラ状態遷移 -- NPC325 Roger_Character state transition
+3959 NPC223亜人針子_キャラ状態遷移 -- NPC223 Demi-Shimiko_Character state transition
+3979 NPC324百智卿_キャラ状態遷移 -- NPC324 Lord Hyakuchi_Character state transition
+4059 NPC319ダヴィド_キャラ状態遷移 -- NPC319 David_Character state transition
+4079 NPC319ダニー_キャラ状態遷移 -- NPC319 Danny_Character state transition
+4119 NPC228ウルフライダー_キャラ状態遷移 -- NPC228 Wolf Rider_Character state transition
+4139 NPC322ユリア_キャラ状態遷移 -- NPC322 Yuria_Character state transition
+4159 NPC331ならず者_キャラ状態遷移 -- NPC331 Rogue_Character state transition
+4179 NPC349腐敗長老_キャラ状態遷移 -- NPC349 Corrupt Elder_Character state transition
+4199 NPC348マレニアの娘_キャラ状態遷移 -- NPC348 Marenia's Daughter_Character state transition
+4219 NPC351金仮面の従者_キャラ状態遷移 -- NPC351 Gold Masked Servant_Character state transition
+4239 NPC334百智卿の娘_キャラ状態遷移 -- NPC334 Lord Momochi's daughter_Character state transition
+4259 NPC323糞喰い_キャラ状態遷移 -- NPC323 Shit-eater_Character state transition
+4600 NPC302門衛_地図ポイント -- NPC302 Gatekeeper_Map Points
+4601 NPC200レナラ_地図ポイント -- NPC200 Renala_Map Points
+4602 NPC314ムノウ_地図ポイント -- NPC314 Munou_Map Point
+4603 NPC323糞喰い_地図ポイント -- NPC323 Shit-eater_Map points
+4604 NPC348_マレニアの娘_地図ポイント -- NPC348_Marenia's Daughter_Map Points
+4606 NPC349_腐敗長老_地図ポイント -- NPC349_Corrupt Elder_Map Points
+4607 NPC220_壺マイヤー_地図ポイント -- NPC220_Tsubomair_Map Point
+4608 NPC226_生きている小壺_地図ポイント -- NPC226_Living pot_Map points
+4609 NPC223_亜人針子_地図ポイント -- NPC223_Ajin seamstress_Map points
+4611 NPC351_金仮面の従者_地図ポイント -- NPC351_Golden Masked Squire_Map Points
+4612 雪山霊廟救済 -- snowy mountain mausoleum relief
+4719 NPC800赤目商人カーレ_キャラ状態遷移 -- NPC800 Red-Eyed Merchant Kaare_Character state transition
+4739 NPC801赤目商人モブ_キャラ状態遷移 -- NPC801 Red Eye Merchant Mob_Character state transition
+4759 NPC802赤目商人3_キャラ状態遷移 -- NPC802 Red Eye Merchant 3_Character state transition
+4979 NPC800旧赤目商人1_キャラ状態遷移 -- NPC800 Old Red-Eyed Merchant 1_Character state transition
+4999 NPC8XX赤目商人全体_状態遷移 -- All NPC8XX red-eyed merchants_state transition
+6800 エリクサー救済対応_XX -- Elixir relief support_XX
+6900 救済対応_零 -- Relief response_Zero
+6901 救済対応_壱 -- Relief response_1
+6902 救済対応_弐 -- Relief response_2
+6903 救済対応_参 -- Relief response_see
+6904 救済対応_肆 -- Relief response_Shin
+6905 救済対応_伍 -- Relief response_5
+6906 救済対応_陸 -- Relief response_land
+6907 救済対応_漆 -- Relief response_lacquer
+6908 救済対応_捌 -- Relief response_handling
+9300 トロフィー取得_XX -- Trophy acquisition_XX
+9360 アクティビティ開始_XX -- Activity start_XX
+9375 アクティビティ終了_XX -- Activity finished_XX
+9390 アクティビティ進行カウント_XX -- Activity progress count_XX
+9820 アイテム使用監視_アイテム入手_XX -- Item usage monitoring_Item acquisition_XX
+9910 【18．2末版】小篝火補充数リセット -- [18.2 end version] Small bonfire replenishment number reset
+9930 【NT】なんちゃってマルチ報酬_XX -- [NT] What a multi-reward_XX
+9940 【デバッグ】地図全入手 -- [Debug] Obtain all maps
+9941 【デバッグ】篝火ワープ解禁 -- [Debug] Bonfire warp unlocked
+9943 【デバッグ】調合レシピ解禁 -- [Debug] Synthesis recipe unlocked
+9945 【デバッグ】ゲスト追従ワープ -- [Debug] Guest following warp
+9946 【4末版】地図入手フラグ対応_XX -- [Fourth edition] Map acquisition flag supported_XX
+9950 【4末版】地図入手フラグ対応1stAnniversary_XX -- [Fourth edition] Map acquisition flag supported 1stAnniversary_XX
+60701 遺灰_マップ報酬販売解禁同期_XX -- Ashes_Map reward sales lifted synchronous_XX
+65810 魔石所持監視_XX -- Magic stone possession monitoring_XX
+1000000000 敵リスポン -- enemy respawn

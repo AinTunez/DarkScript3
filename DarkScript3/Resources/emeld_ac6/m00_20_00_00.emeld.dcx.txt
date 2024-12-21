@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 アセンブリアニメ再生 -- assembly anime play
+2571 PCフォーカス_未読開始_02 -- PC focus_Start unread_02
+2572 ガレージ格納CS再生 -- Garage storage CS playback
+1000000000 敵リスポン -- enemy respawn

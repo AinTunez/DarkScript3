@@ -1,0 +1,33 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1042360684 英雄の墓_メッセージ表示 -- Hero's Tomb_Message Display
+1042360690 英雄の墓_指示像レーザー -- Hero's Tomb_Instruction Statue Laser
+1042360710 NPC106_ラニ_NPC初期化イベント -- NPC106_Rani_NPC initialization event
+1042360711 NPC106_ラニ_教会出現監視イベント -- NPC106_Rani_Church appearance monitoring event
+1042360712 NPC106_ラニ_教会から消える -- NPC106_Rani_Disappears from the church
+1042360713 NPC106_ラニ_出現したが帰る -- NPC106_Rani_appears but returns
+1042360724 NPC800_赤目商人カーレ_ラニがいなくなったので起きる -- NPC800_Red-Eyed Merchant Kaare_Wake up because Rani is gone
+1042360750 NPC602_下位鍛冶台_重力アタリ無効 -- NPC602_lower blacksmith table_gravity attack disabled
+1042362200 最初の教会前_コウモリ篝火点火後は無効化_XX -- In front of the first church_Disabled after lighting the bat bonfire_XX
+1042362215 コウモリ_視界拡大 -- Bat_Visibility expansion
+1042362650 チュートリアルメッセージ_地図 -- Tutorial message_map
+1042362652 チュートリアルメッセージ_騎乗 -- Tutorial message_Riding
+1042362656 チュートリアルメッセージ_鍛冶場台 -- Tutorial message_Blacksmith stand
+1042362660 チュートリアルメッセージ_地図ワープ -- Tutorial message_Map warp
+1042363700 NPC301戦場医師_NPC初期化イベント -- NPC301 Battlefield Doctor_NPC initialization event
+1042363701 NPC301_戦場医師_湖に移動した血文字出現 -- NPC301_Battlefield Doctor_Blood letters appear in the lake
+1042363702 NPC301_戦場医師_大ルーンを得た後_リアルタイム遷移 -- NPC301_Battlefield Doctor_After obtaining the Great Rune_Real-time transition
+1042363703 NPC301_戦場医師_NPC血文字でジェスチャー入手 -- NPC301_Battlefield Doctor_Get gesture with NPC blood letters
+1042363720 NPC800_赤目商人カーレ_NPC初期化イベント_初期状態 -- NPC800_Red-Eyed Merchant Kaare_NPC initialization event_Initial state
+1042363723 NPC800_赤目商人カーレ_ロバ敵対時アニメ再生 -- NPC800_Red-Eyed Merchant Kare_Donkey Anime playback when hostile
+1042363730 NPC700話す死体①_NPC初期化イベント -- NPC700 talking corpse①_NPC initialization event
+1042363740 NPC100娘マリカ_導き会話許可_スタート地点 -- NPC100 daughter Marika_Guide conversation permission_Starting point
+1042363741 NPC100娘マリカ_導き会話許可_最初の教会 -- NPC100 daughter Marika_Guided conversation permission_First church
+1042363742 NPC100娘マリカ_契約会話再生監視_スタート地点 -- NPC100 daughter Marika_Contract conversation playback monitoring_Start point
+1042363743 NPC100娘マリカ_導き会話再生監視_スタート地点 -- NPC100 daughter Marika_Guide conversation playback monitoring_Start point
+1042363744 NPC100娘マリカ_契約会話再生監視_最初の教会 -- NPC100 daughter Marika_Contract conversation playback monitoring_First church
+1042363745 NPC100娘マリカ_導き会話再生監視_最初の教会 -- NPC100 daughter Marika_Guide conversation playback monitoring_First church
+1042363746 NPC100娘マリカ_目的会話再生禁止_スタート地点 -- NPC100 Daughter Marika_Objective conversation playback prohibited_Start point
+1042363747 NPC100娘マリカ_目的会話再生禁止_最初の教会 -- NPC100 Daughter Marika_Objective conversation playback prohibited_First Church

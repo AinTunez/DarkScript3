@@ -1,0 +1,20 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1041382200 ストームオオカミ出現_XX -- Storm wolf appears_XX
+1041382650 チュートリアルメッセージ_騎乗 -- Tutorial message_Riding
+1041383700 NPC213鍛冶屋_NPC初期化イベント -- NPC213 Blacksmith_NPC initialization event
+1041383701 NPC213鍛冶屋_敵対状態モーション切り替えイベント -- NPC213 Blacksmith_hostile state motion switching event
+1041383710 NPC802赤目商人2_血文字出現管理 -- NPC802 Red-Eyed Merchant 2_Blood Letter Appearance Management
+1041383730 NPC320ファルネーゼ_NPC初期化イベント_初期状態 -- NPC320 Farnese_NPC initialization event_initial state
+1041383731 NPC320ファルネーゼ_被ダメ会話イベント -- NPC320 Farnese_Damage conversation event
+1041383750 傭兵剣士_非表示イベント -- Mercenary swordsman_hidden event
+1041383760 NPC100娘マリカ_導き会話許可_鍛冶屋小屋 -- NPC100 Daughter Marika_Guide conversation permission_Blacksmith hut
+1041383761 NPC100娘マリカ_契約会話再生監視_鍛冶屋小屋 -- NPC100 daughter Marika_Contract conversation playback monitoring_Blacksmith hut
+1041383762 NPC100娘マリカ_導き会話再生監視_鍛冶屋小屋 -- NPC100 daughter Marika_Guide conversation playback monitoring_Blacksmith hut
+1041383763 NPC100娘マリカ_目的会話再生禁止_鍛冶屋小屋 -- NPC100 Daughter Marika_Objective conversation playback prohibited_Blacksmith hut

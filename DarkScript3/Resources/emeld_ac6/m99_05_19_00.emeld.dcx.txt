@@ -1,0 +1,3 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+60200000 敵発見時視覚を伸ばすイベント_XX -- Event that increases visual acuity when detecting an enemy_XX

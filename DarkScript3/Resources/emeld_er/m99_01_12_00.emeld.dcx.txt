@@ -1,0 +1,224 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+3119 NPC300火山館の女主人_キャラ状態遷移 -- NPC300 Volcano Hall Mistress_Character state transition
+3199 NPC301戦場医師_キャラ状態遷移 -- NPC301 Battlefield Doctor_Character state transition
+3399 NPC310城主の娘_キャラ状態遷移 -- NPC310 Castle Lord's Daughter_Character state transition
+3439 NPC313火山館の勧誘者_キャラ状態遷移 -- NPC313 Volcano Hall Recruiter_Character state transition
+3459 NPC314ムノウ_キャラ状態遷移 -- NPC314 Munou_Character state transition
+3499 NPC102指読み_キャラ状態遷移 -- NPC102 finger reading_Character state transition
+3559 NPC219足萎え村のNPC_キャラ状態遷移 -- NPC219 NPC in the withered village_Character state transition
+3579 NPC319_D_キャラ状態遷移 -- NPC319_D_Character state transition
+3619 NPC216狼頭の戦士_キャラ状態遷移 -- NPC216 Wolf-Headed Warrior_Character state transition
+3639 NPC318混沌の宿主_キャラ状態遷移 -- NPC318 Host of Chaos_Character state transition
+3659 NPC202マリケス_キャラ状態遷移 -- NPC202 Marikes_Character state transition
+3699 NPC309盗賊の頭_キャラ状態遷移 -- NPC309 Thief Head_Character state transition
+3739 NPC330贖罪司祭_キャラ状態遷移 -- NPC330 Atonement Priest_Character state transition
+3779 NPC224爺や_キャラ状態遷移 -- NPC224 Grandpa_Character state transition
+3859 NPC227霊クラゲの少女_キャラ状態遷移 -- NPC227 Spirit Jellyfish Girl_Character state transition
+3879 NPC337王都老人_キャラ状態遷移 -- NPC337 Royal Capital Old Man_Character state transition
+3899 NPC326火山館最強の騎士_キャラ状態遷移 -- NPC326 Volcano Hall Strongest Knight_Character state transition
+3959 NPC223亜人針子_キャラ状態遷移 -- NPC223 Demi-Shimiko_Character state transition
+4099 NPC341狂った指巫女_キャラ状態遷移 -- NPC341 Crazy Finger Priestess_Character state transition
+4159 NPC331ならず者_キャラ状態遷移 -- NPC331 Rogue_Character state transition
+4719 NPC800赤目商人カーレ_キャラ状態遷移 -- NPC800 Red-Eyed Merchant Kaare_Character state transition
+37190 NPC320ファルネーゼ_キャラ状態遷移 -- NPC320 Farnese_Character state transition
+9931100 NPC311半島砦の城主_キャラ状態遷移 -- NPC311 Peninsula Fort Castle Lord_Character state transition
+9931110 半島砦の城主_NPC初期化イベント -- Peninsula Fort Castle Lord_NPC initialization event
+9931120 半島砦の城主_共闘後自動会話再生 -- Lord of the Peninsula Fort_Automatic conversation playback after joint battle
+9931130 半島砦の城主_移動処理_状態遷移 -- Castle lord of peninsula fort_movement process_state transition
+16003740 NPC326火山館最強の騎士_NPC初期化イベント_火山館で再会 -- NPC326 Volcano Hall Strongest Knight_NPC Initialization Event_Reunion at Volcano Hall
+99019300 グレーターデーモン_降伏受付前_初期化 -- Greater Demon_Before accepting surrender_Initialization
+99019301 グレーターデーモン_降伏受付開始 -- Greater Demon_ Surrender acceptance begins
+99019302 グレーターデーモン_降伏受付終了 -- Greater Demon_Surrender acceptance ended
+99019303 グレーターデーモン_PC土下座 -- Greater Demon_PC Dogeza
+99019304 グレーターデーモン_PC爆殺 -- Greater Demon_PC bombing
+99019311 NPC310城主の娘_イベント一括起動 -- NPC310 Castle Lord's Daughter_Event batch activation
+99019313 NPC310城主の娘_NPC初期化イベント_偽装死している -- NPC310 Castle Lord's Daughter_NPC initialization event_Fake death
+99019314 NPC310城主の娘_NPC初期化イベント_ブドウ渡し場所A -- NPC310 Castle lord's daughter_NPC initialization event_Grape passing place A
+99019315 NPC310城主の娘_NPC初期化イベント_ブドウ渡し場所B -- NPC310 Castle lord's daughter_NPC initialization event_Grape passing place B
+99019316 NPC310城主の娘_NPC初期化イベント_ブドウ渡し場所C -- NPC310 Castle Lord's Daughter_NPC Initialization Event_Grape Transfer Location C
+99019317 NPC310城主の娘_NPC初期化イベント_指痕のブドウ渡し -- NPC310 Castle Lord's Daughter_NPC Initialization Event_Fingerprint Grape Passing
+99019318 NPC310城主の娘_NPC初期化イベント_狂い火受領前後 -- NPC310 Castle Lord's Daughter_NPC initialization event_Before and after receiving crazy fire
+99019320 NPC310城主の娘_偽装死している_リアルタイム遷移 -- NPC310 Castle lord's daughter_disguised dead_real-time transition
+99019321 NPC310城主の娘_ブドウ渡しX個目_場所Aにいる_XX -- NPC310 Castle lord's daughter_X grapes passed_At location A_XX
+99019324 NPC310城主の娘_ブドウ渡しX個目_場所Bにいる_XX -- NPC310 Castle lord's daughter_X grapes passed_At location B_XX
+99019327 NPC310城主の娘_ブドウ渡しX個目_場所Cにいる_XX -- NPC310 Castle Lord's Daughter_Xth Grape Pass_At Location C_XX
+99019330 NPC310城主の娘_狂い火受領後_リアルタイム遷移 -- NPC310 Castle lord's daughter_After receiving crazy fire_Real-time transition
+99019335 NPC300火山館の女主人_イベント一括起動 -- NPC300 Volcano Hall Mistress_Event batch activation
+99019336 NPC300火山館の女主人_NPC初期化イベント_火山館 -- NPC300 Volcano Hall Mistress_NPC Initialization Event_Volcano Hall
+99019337 NPC300火山館の女主人_NPC初期化イベント_ライカード喰らい中 -- NPC300 Mistress of the Volcano Hall_NPC initialization event_Eating Rykard
+99019338 NPC300火山館の女主人_依頼遂行中_リアルタイム遷移 -- NPC300 Mistress of the Volcano Hall_Fulfilling the request_Real-time transition
+99019341 NPC314ムノウ_イベント一括起動 -- NPC314 Munou_Event batch activation
+99019342 NPC314ムノウ_NPC初期化イベント_初期状態 -- NPC314 Munou_NPC initialization event_Initial state
+99019343 NPC314ムノウ_NPC初期化イベント_従者の死 -- NPC314 Munou_NPC initialization event_Death of servant
+99019344 NPC314ムノウ_NPC初期化イベント_火山館に誘われている -- NPC314 Munou_NPC initialization event_Invited to the Volcano Hall
+99019345 NPC314ムノウ_NPC初期化イベント_火山館にいる -- NPC314 Munou_NPC initialization event_In the volcano hall
+99019347 NPC314ムノウ_NPC初期化イベント_壺のお世話 -- NPC314 Munou_NPC initialization event_Taking care of the pot
+99019348 NPC314ムノウ_NPC初期化イベント_壺を守って瀕死 -- NPC314 Munou_NPC initialization event_Dying while protecting the pot
+99019349 NPC314ムノウ_リアルタイム遷移_従者の死 -- NPC314 Munou_Real-time transition_Death of the servant
+99019350 NPC314ムノウ_火山館を去る前_一時的にどこにもいない判定 -- NPC314 Munou_Before leaving the Volcano Hall_Temporarily nowhere to be found
+99019351 NPC314ムノウ_壺を守って瀕死_死亡実行 -- NPC314 Munou_Dying while protecting the pot_Execution of death
+99019356 NPC313火山館の勧誘者_イベント一括起動 -- NPC313 Volcano Hall Recruiter_Event batch activation
+99019357 NPC313火山館の勧誘者_NPC初期化イベント_初期状態 -- NPC313 Volcano Hall Recruiter_NPC initialization event_Initial state
+99019358 NPC313火山館の勧誘者_NPC初期化イベント_火山館へ招待_遺跡 -- NPC313 Volcano Hall Recruiter_NPC Initialization Event_Invitation to Volcano Hall_Ruins
+99019359 NPC313火山館の勧誘者_NPC初期化イベント_火山館で再会 -- NPC313 Volcano Hall Recruiter_NPC Initialization Event_Reunion at Volcano Hall
+99019360 NPC313火山館の勧誘者_NPC初期化イベント_妖しい影を見た -- NPC313 Volcano Hall Recruiter_NPC Initialization Event_Saw a mysterious shadow
+99019361 NPC313火山館の勧誘者_NPC初期化イベント_火山牢にいる -- NPC313 Volcano Hall Recruiter_NPC Initialization Event_In Volcano Prison
+99019362 NPC313火山館の勧誘者_初期状態_二回目自動会話処理 -- NPC313 Volcano Hall Recruiter_Initial state_Second automatic conversation process
+99019363 NPC313火山館の勧誘者_火山館で再会_リアルタイム遷移 -- NPC313 Volcano Hall Recruiter_Reunited at the Volcano Hall_Real-time transition
+99019364 NPC313火山館の勧誘者_初期状態_初回自動会話処理 -- NPC313 Volcano Hall Recruiter_Initial state_First automatic conversation processing
+99019365 NPC313火山館の勧誘者_NPC初期化イベント_火山館へ招待_EV前 -- NPC313 Volcano Hall Recruiter_NPC Initialization Event_Invite to Volcano Hall_Before EV
+99019366 NPC313火山館の勧誘者_火山館へ招待_遺跡に近づいた判定 -- NPC313 Volcano Pavilion Recruiter_Invite to Volcano Pavilion_Judgment of approaching the ruins
+99019367 NPC313火山館の勧誘者_火山館へ招待_エレベーター前に近づいた判定 -- NPC313 Volcano Pavilion Recruiter_Invite to Volcano Pavilion_Judgment for approaching the elevator
+99019371 NPC102指読み_イベント一括起動 -- NPC102 finger reading_event batch activation
+99019372 NPC102指読み_NPC初期化イベント -- NPC102 finger reading_NPC initialization event
+99019386 NPC219足萎え村のNPC_イベント一括起動 -- NPC219 NPC_events in the withered village are activated all at once.
+99019387 NPC219_足萎え村のNPC_NPC初期化イベント_初期状態 -- NPC219_NPC of Withered Village_NPC initialization event_Initial state
+99019388 NPC219_足萎え村のNPC_擬態解除 -- NPC219_NPC of the withered village_Mimicry canceled
+99019389 NPC219_足萎え村のNPC_死亡アニメ再生 -- NPC219_NPC of the withered village_Death animation playback
+99019391 NPC219_足萎え村のNPC_NPCがX回攻撃されたらフラグを立てる処理 -- NPC219_NPC of Withered Village_Processing to set a flag when an NPC is attacked X times
+99019392 NPC219_足萎え村のNPC_NPC敵対化処理 -- NPC219_NPC of Withered Village_NPC hostile processing
+99019399 グレーターデーモン_キャラ状態遷移 -- Greater Demon_Character state transition
+99019400 NPC311半島砦の城主_キャラ実装 -- NPC311 Peninsula Fort Castle Lord_Character implementation
+99019410 NPCXXX死の巫女の妹_キャラ状態遷移 -- NPCXXX Sister of the Shrine Maiden of Death_Character state transition
+99019411 NPCXXX死の巫女の妹_イベント一括起動 -- NPCXXX Sister of the Shrine Maiden of Death_Event batch activation
+99019412 NPCXXX死の巫女の妹_NPC初期化イベント_初期状態 -- NPCXXX Sister of the Shrine Maiden of Death_NPC initialization event_Initial state
+99019413 NPCXXX死の巫女の妹_NPC初期化イベント_アンデッド村で再会 -- NPCXXX Sister of the Shrine Maiden of Death_NPC initialization event_Reunion at the undead village
+99019414 NPCXXX死の巫女の妹_NPC初期化イベント_姉の痕跡を探している -- NPCXXX Sister of the Shrine Maiden of Death_NPC initialization event_Looking for traces of her sister
+99019415 NPCXXX死の巫女の妹_NPC初期化イベント_Dと旅立つ直前 -- NPCXXX Death Shrine Maiden's Sister_NPC Initialization Event_Just before departing with D
+99019416 NPCXXX死の巫女の妹_NPC初期化イベント_死の勢力への道中 -- NPCXXX Sister of the Shrine Maiden of Death_NPC Initialization Event_On the way to the Force of Death
+99019417 NPCXXX死の巫女の妹_NPC初期化イベント_死の勢力本拠地手前 -- NPCXXX Sister of the Shrine Maiden of Death_NPC initialization event_In front of the death force's headquarters
+99019418 NPCXXX死の巫女の妹_NPC初期化イベント_Dが姉の元へ向かった -- NPCXXX Death Shrine Maiden's younger sister_NPC initialization event_D went to her sister.
+99019419 NPCXXX死の巫女の妹_NPC初期化イベント_死王子の母になった -- NPCXXX Sister of the Shrine Maiden of Death_NPC initialization event_became the mother of the Prince of Death
+99019420 NPC300火山館の女主人_手紙宝有効化_1 -- NPC300 Volcano Hall Mistress_Letter Treasure Activation_1
+99019421 NPC300火山館の女主人_手紙宝有効化_2 -- NPC300 Volcano Hall Mistress_Letter Treasure Activation_2
+99019422 NPC300火山館の女主人_手紙宝有効化_3 -- NPC300 Volcano Hall Mistress_Letter Treasure Activation_3
+99019423 仮処理_火山館の依頼X達成_XX -- Temporary processing_volcano hall request X accomplished_XX
+99019431 NPC319_D_イベント一括起動 -- NPC319_D_Event batch activation
+99019432 NPC319_D_NPC初期化イベント_拠点汎用 -- NPC319_D_NPC initialization event_base general purpose
+99019433 NPC319_D_NPC初期化イベント_拠点犯人捜し -- NPC319_D_NPC initialization event_Base culprit search
+99019434 NPC319_D_NPC初期化イベント_王都地下下水 -- NPC319_D_NPC initialization event_Royal capital underground sewage
+99019435 NPC319_D_NPC初期化イベント_王都地下迷宮 -- NPC319_D_NPC initialization event_Royal capital underground labyrinth
+99019436 NPC319_D_NPC初期化イベント_ユリア殺害 -- NPC319_D_NPC initialization event_Julia murder
+99019437 NPC319_D_ユリア殺害_敵対から時間経過を監視 -- NPC319_D_Killing Yuria_Monitoring the passage of time from the hostility
+99019451 NPC216_狼頭の戦士_イベント一括起動 -- NPC216_Wolf Head Warrior_Event batch activation
+99019452 NPC216_狼頭の戦士_NPC初期化イベント_初期状態 -- NPC216_Wolf Head Warrior_NPC initialization event_Initial state
+99019453 NPC216_狼頭の戦士_NPC初期化イベント_ダリウィルとの共闘直後 -- NPC216_Wolf-headed Warrior_NPC Initialization Event_Immediately after the joint fight with Daliwill
+99019454 NPC216_狼頭の戦士_NPC初期化イベント_入団の挨拶 -- NPC216_Wolf Head Warrior_NPC initialization event_Greetings for joining
+99019455 NPC216_狼頭の戦士_NPC初期化イベント_第二マリカ遺跡捜索中 -- NPC216_Wolf Head Warrior_NPC Initialization Event_Searching for the Second Marika Ruins
+99019456 NPC216_狼頭の戦士_NPC初期化イベント_ラダーン祭り参加待ち -- NPC216_Wolf-headed Warrior_NPC Initialization Event_Waiting to participate in the Radhan Festival
+99019457 NPC216_狼頭の戦士_NPC初期化イベント_星が落ちた後 -- NPC216_Wolf Head Warrior_NPC initialization event_After the stars fall
+99019458 NPC216_狼頭の戦士_NPC初期化イベント_牢に囚われている -- NPC216_Wolf Head Warrior_NPC initialization event_Captive in prison
+99019459 NPC216_狼頭の戦士_NPC初期化イベント_気が狂った -- NPC216_Wolf Head Warrior_NPC initialization event_crazy
+99019460 NPC216_狼頭の戦士_樹から飛び降りてくる -- NPC216_Wolf-Headed Warrior_Jumping down from the tree
+99019461 NPC216_狼頭の戦士_遠吠えX再生許可を立てる_XX -- NPC216_Wolf-Headed Warrior_Howl X Playback Permission Set_XX
+99019466 NPC216_狼頭の戦士_ダリウィル戦自動会話再生 -- NPC216_Wolf-Headed Warrior_Dariwill battle automatic conversation playback
+99019467 NPC216_狼頭の戦士_入団の挨拶_リアルタイム遷移 -- NPC216_Wolf-Headed Warrior_Joining Greetings_Real-time Transition
+99019468 NPC216_狼頭の戦士_星が落ちた後_リアルタイム遷移 -- NPC216_Wolf-Headed Warrior_After the Star Falls_Real-time transition
+99019469 NPC216_狼頭の戦士_牢に囚われている_リアルタイム遷移 -- NPC216_Wolf-Headed Warrior_Captive in a prison_Real-time transition
+99019470 NPC216_狼頭の戦士_牢に囚われている_封牢から解放 -- NPC216_Wolf-Headed Warrior_Captive in prison_Release from imprisonment
+99019473 NPC216_狼頭の戦士_気が狂った_敵対処理 -- NPC216_wolf-headed warrior_crazy_hostile processing
+99019481 NPC318_混沌の宿主_イベント一括起動 -- NPC318_Host of Chaos_Event batch activation
+99019482 NPC318_混沌の宿主_NPC初期化イベント_ネリウス勝利後 -- NPC318_Host of Chaos_NPC initialization event_After Nerius wins
+99019483 NPC318_混沌の宿主_NPC初期化イベント_初期状態 -- NPC318_Host of Chaos_NPC initialization event_Initial state
+99019484 NPC318_混沌の宿主_NPC初期化イベント_ある潰れ指勝利後 -- NPC318_Host of Chaos_NPC initialization event_After victory with a crushed finger
+99019485 NPC318_混沌の宿主_NPC初期化イベント_エレオノーラについて警告 -- NPC318_Host of Chaos_NPC initialization event_Warning about Eleonora
+99019486 NPC318_混沌の宿主_NPC初期化イベント_エレオノーラ捜索中 -- NPC318_Host of Chaos_NPC initialization event_Searching for Eleonora
+99019487 NPC318_混沌の宿主_NPC初期化イベント_エレオノーラにやられる -- NPC318_Host of Chaos_NPC initialization event_Defeated by Eleonora
+99019488 NPC318_混沌の宿主_NPC初期化イベント_混沌に乗っ取られた -- NPC318_Host of Chaos_NPC initialization event_Hijacked by Chaos
+99019489 NPC318_混沌の宿主_NPC初期化イベント_拠点に来た -- NPC318_Host of Chaos_NPC initialization event_Comed to base
+99019490 NPC318_混沌の宿主_ネリウス戦自動会話再生 -- NPC318_Host of Chaos_Nerius battle automatic conversation playback
+99019491 NPC318_混沌の宿主_エレオノーラにやられる_死亡処理 -- NPC318_Host of Chaos_Killed by Eleonora_Death processing
+99019492 NPC318_混沌の宿主_ネリウス勝利後_リアルタイム遷移 -- NPC318_Host of Chaos_After Nerius's victory_Real-time transition
+99019493 NPC318_混沌の宿主_エレオノーラについて警告_リアルタイム遷移 -- NPC318_Host of Chaos_Warning about Eleanora_Real-time transition
+99019494 NPC318_混沌の宿主_傍らのエレオノーラに攻撃した -- NPC318_Host of Chaos_Attacked Eleanora nearby.
+99019495 NPC318_混沌の宿主_ネリウス戦中_切り替え処理 -- NPC318_Host of Chaos_During the battle with Nerius_Switching process
+99019501 NPC301_戦場医師_イベント一括起動 -- NPC301_Battlefield Doctor_Event batch activation
+99019502 NPC301_戦場医師_NPC初期化イベント -- NPC301_Battlefield Doctor_NPC initialization event
+99019504 NPC301_戦場医師_最後の試しを終えた後_リアルタイム遷移 -- NPC301_Battlefield Doctor_After finishing the last trial_Real-time transition
+99019510 NPC311半島砦の城主_NPC初期化イベント_娘の死体発見 -- NPC311 Lord of the Peninsula Fort_NPC initialization event_Daughter's corpse discovered
+99019521 NPC202_マリケス_イベント一括起動 -- NPC202_Marikes_Event batch activation
+99019522 NPC202_マリケス_NPC初期化イベント -- NPC202_Marikes_NPC initialization event
+99019523 NPC202_マリケス_罪の証で正気に戻す -- NPC202_Marikes_ Return to sanity with proof of sin
+99019524 NPC202_マリケス_黄金樹に吠えるチェック -- NPC202_Marikes_Check howls at the golden tree
+99019525 NPC202_マリケス_死の根を全て渡したら消える -- NPC202_Marikes_Disappears after handing over all the roots of death
+99019526 NPC202_マリケス_敵対状態リセット -- NPC202_Marikes_hostile status reset
+99019527 NPC202_マリケス_混ぜ物入りを渡していたら免罪不可 -- NPC202_Marikes_If you give adulterated food, you cannot be exonerated.
+99019530 NPC202_マリケス_眠りチェック -- NPC202_Marikes_Sleep check
+99019531 NPC202_マリケス_アクションボタン表記切り替え -- NPC202_Marikes_Action button notation switching
+99019532 NPC202_マリケス_敵対時アニメ処理 -- NPC202_Marikes_Animation processing when hostile
+99019546 NPC309_盗賊の頭_イベント一括起動 -- NPC309_Thief Head_Event batch activation
+99019547 NPC309_盗賊の頭_NPC初期化イベント_初期状態 -- NPC309_Thief Head_NPC initialization event_Initial state
+99019548 NPC309_盗賊の頭_NPC初期化イベント_湖で再会 -- NPC309_Thief Head_NPC initialization event_Reunion at the lake
+99019549 NPC309_盗賊の頭_NPC初期化イベント_火山館蹴落とし -- NPC309_Thief's Head_NPC Initialization Event_Killing down the Volcano Hall
+99019550 NPC309_盗賊の頭_NPC初期化イベント_火山館で再会 -- NPC309_Thief Head_NPC Initialization Event_Reunion at the Volcano Hall
+99019551 NPC309_盗賊の頭_NPC初期化イベント_タニスへの贈り物を託す -- NPC309_Head of Thieves_NPC initialization event_Entrust a gift to Tanis
+99019552 NPC309_盗賊の頭_NPC初期化イベント_追い剥ぎとして再会 -- NPC309_Thief Head_NPC initialization event_Reunion as a robber
+99019553 NPC309_盗賊の頭_初期状態_敵対状態リセット -- NPC309_Thief Head_Initial state_Hostility state reset
+99019554 NPC309_盗賊の頭_初期状態_襲撃用宝箱を開けた -- NPC309_Thief Head_Initial state_Opened raid treasure chest
+99019555 NPC309_盗賊の頭_初期状態_降伏後の攻撃回数監視 -- NPC309_Thief Head_Initial state_Monitor the number of attacks after surrender
+99019556 NPC309_盗賊の頭_初期状態_降伏後の時間監視 -- NPC309_Thief Head_Initial state_Time monitoring after surrender
+99019557 NPC309_盗賊の頭_湖で再会_敵対状態リセット -- NPC309_Head of Thieves_Reunion at the lake_Reset hostility status
+99019558 NPC309_盗賊の頭_火山館蹴落とし_敵対状態リセット -- NPC309_Head of the thieves_Kicked down the volcano hall_Reset hostility status
+99019559 NPC309_盗賊の頭_火山館で再会_敵対状態リセット -- NPC309_Head of Thieves_Reunion at the Volcano Hall_Reset hostility status
+99019560 NPC309_盗賊の頭_タニスへの贈り物を託す_敵対状態リセット -- NPC309_Head of Thieves_Entrust a gift to Tanis_Reset hostility status
+99019561 NPC309_盗賊の頭_最後のショップ_敵対状態リセット -- NPC309_Thief Head_Last Shop_Hostility Status Reset
+99019563 NPC309_盗賊の頭_追い剥ぎとして再会_襲撃用宝箱を開けた -- NPC309_Head of Thieves_Reunited as a robber_Opened the raid treasure chest
+99019564 NPC309_盗賊の頭_追い剥ぎとして再会_襲撃相手に気付く -- NPC309_Head of the thieves_Reunited as a robber_Recognizes the attacker
+99019565 NPC309_盗賊の頭_追い剥ぎとして再会_降伏後の攻撃回数監視 -- NPC309_Head of the thieves_Reunited as a robber_Monitor the number of attacks after surrendering
+99019566 NPC309_盗賊の頭_追い剥ぎとして再会_降伏後の時間監視 -- NPC309_Head of the thieves_Reunited as a robber_Time monitoring after surrender
+99019567 NPC309_盗賊の頭_タニスへの贈り物を託す_死んだふり処理 -- NPC309_Head of Thieves_Entrust a gift to Tanis_Pretend to be dead
+99019568 NPC309_盗賊の頭_NPC初期化イベント_宝箱トラップ待ち -- NPC309_Thief Head_NPC initialization event_Waiting for treasure chest trap
+99019569 NPC309_盗賊の頭_NPC初期化イベント_最後のショップ -- NPC309_Thief Head_NPC Initialization Event_Last Shop
+99019570 マリケス_初期状態アニメーション管理 -- Marikes_Initial state animation management
+99019576 NPC320_ファルネーゼ_イベント一括起動 -- NPC320_Farnese_event batch activation
+99019577 NPC320_ファルネーゼ_NPC初期化イベント_初期状態 -- NPC320_Farnese_NPC initialization event_Initial state
+99019578 NPC320_ファルネーゼ_NPC初期化イベント_拠点に来た -- NPC320_Farnese_NPC initialization event_came to base
+99019579 NPC320_ファルネーゼ_NPC初期化イベント_調霊師 -- NPC320_Farnese_NPC initialization event_Soulmaster
+99019586 NPC800_赤目商人カーレ_イベント一括起動 -- NPC800_Red-Eyed Merchant Kare_Event batch activation
+99019587 NPC800_赤目商人カーレ_NPC初期化イベント_初期状態 -- NPC800_Red-Eyed Merchant Kaare_NPC initialization event_Initial state
+99019588 NPC800_赤目商人カーレ_NPC初期化イベント_手紙を探している -- NPC800_Red-Eyed Merchant Kaare_NPC Initialization Event_Looking for a letter
+99019589 NPC800_赤目商人カーレ_NPC初期化イベント_王都地下へ行きたい -- NPC800_Red-eyed merchant Kare_NPC initialization event_I want to go to the underground of the royal capital
+99019590 NPC800_赤目商人カーレ_NPC初期化イベント_王都地下で再会 -- NPC800_Red-Eyed Merchant Kare_NPC Initialization Event_Reunion in the Royal Capital Underground
+99019591 NPC800_赤目商人カーレ_NPC初期化イベント_三本指に祈っている -- NPC800_Red-Eyed Merchant Kaare_NPC Initialization Event_Praying to Three Fingers
+99019592 NPC800_赤目商人カーレ_NPC初期化イベント_三本指に握られ死ぬ -- NPC800_Red-Eyed Merchant Kaare_NPC Initialization Event_Dies in the grip of three fingers
+99019595 NPC800_赤目商人カーレ_王都地下へ行きたい_リアルタイム遷移 -- NPC800_Red-eyed merchant Kare_I want to go to the underground of the royal capital_Real-time transition
+99019596 NPC800_赤目商人カーレ_王都地下で再会_リアルタイム遷移 -- NPC800_Red-eyed Merchant Kare_Reunion in the underground of the royal capital_Real-time transition
+99019597 NPC800_赤目商人カーレ_三本指の前_リアルタイム遷移 -- NPC800_Red-Eyed Merchant Kare_In front of three fingers_Real-time transition
+99019598 NPC800_赤目商人カーレ_三本指に握られ死ぬ_死亡実行 -- NPC800_Red-Eyed Merchant Kare_Death being held by three fingers_Death execution
+99019611 NPC330_贖罪司祭_イベント一括起動 -- NPC330_Atonement Priest_Event batch activation
+99019612 NPC330_贖罪司祭_NPC初期化イベント_初期状態 -- NPC330_Atonement Priest_NPC initialization event_Initial state
+99019613 NPC330_贖罪司祭_免罪可能チェック -- NPC330_Atonement Priest_Exemption possible check
+99019621 NPC224爺や_イベント一括起動 -- NPC224 Grandpa_Event batch activation
+99019622 NPC224爺や_NPC初期化イベント_初期状態 -- NPC224 Grandpa_NPC initialization event_initial state
+99019623 NPC224爺や_NPC初期化イベント_幻影 -- NPC224 Old Man_NPC initialization event_phantom
+99019624 NPC224爺や_イベント状態遷移 -- NPC224 Grandpa_Event state transition
+99019625 NPC224爺や_幻影_リアルタイム遷移 -- NPC224 Old Man_Phantom_Real-time transition
+99019631 NPC227霊クラゲの少女_イベント一括起動 -- NPC227 Spirit Jellyfish Girl_Event batch activation
+99019632 NPC227霊クラゲの少女_NPC初期化イベント -- NPC227 Spirit Jellyfish Girl_NPC initialization event
+99019633 NPC227霊クラゲの少女_バディクラゲが近づいた判定 -- NPC227 Spirit jellyfish girl_Buddy jellyfish approaching judgment
+99019634 NPC227霊クラゲの少女_能動会話再生済リセット -- NPC227 Spirit Jellyfish Girl_Active conversation replayed reset
+99019635 NPC227霊クラゲの少女_テスト用_バディクラゲ召喚 -- NPC227 Spirit Jellyfish Girl_Test_Buddy Jellyfish Summon
+99019641 NPC337王都老人_イベント一括起動 -- NPC337 Royal Capital Old Man_Event batch activation
+99019642 NPC337王都老人_NPC初期化イベント_初期状態 -- NPC337 Royal Capital Old Man_NPC initialization event_Initial state
+99019643 NPC337王都老人_NPC初期化イベント_モーゴットを見た -- NPC337 Royal Capital Old Man_NPC Initialization Event_Saw Mogot
+99019644 NPC337王都老人_モーゴットを見た_憤死実行 -- NPC337 Royal Capital Old Man_Saw Mogot_Death of Fury
+99019645 NPC337王都老人_モーゴットを見た_リアルタイム遷移 -- NPC337 Royal Capital Old Man_Saw Mogot_Real-time transition
+99019646 NPC337王都老人_忌み子狩り未完了_ロードカウント -- NPC337 Royal Capital Old Man_Unfinished Child Hunting_Load Count
+99019655 NPC223亜人針子_NPC初期化イベント_初期状態 -- NPC223 Demi-Shimiko_NPC initialization event_Initial state
+99019656 NPC223亜人針子_初期状態_能動会話再生済リセット -- NPC223 Ajin seamstress_Initial state_Active conversation played reset
+99019657 NPC223亜人針子_初期状態_擬態解除 -- NPC223 Demi-human seamstress_initial state_mimetic release
+99019658 NPC223亜人針子_NPC初期化イベント_洞窟で倒れている -- NPC223 Demi-Shimiko_NPC initialization event_Collapsed in the cave
+99019659 NPC223亜人針子_洞窟で倒れている_能動会話再生済リセット -- NPC223 Ajin seamstress_Collapsed in the cave_Active conversation played reset
+99019670 NPC341狂った指巫女_NPC初期化イベント_初期状態 -- NPC341 Crazy Finger Priestess_NPC initialization event_Initial state
+99019671 NPC341狂った指巫女_NPC初期化イベント_火傷で瀕死になっている -- NPC341 Crazy Finger Priestess_NPC initialization event_On the verge of death from burns
+99019672 NPC341狂った指巫女_火傷で瀕死_会話後死亡処理 -- NPC341 Crazy Finger Priestess _ Near death from burns _ Death processing after conversation
+99099980 XXXボス_会話処理限界の距離変更 -- XXX Boss_Conversation processing limit distance change
+99099987 アセットを同じ位置に出すテスト_切り替え -- Test to put assets in the same position_switch
+99099988 ジェスチャー全取得 -- Get all gestures
+99099989 アイテム光SFXテスト -- Item light SFX test
+99099990 【共通】NPC敵対化処理_改 -- [Common] NPC hostile processing_revised
+99099991 【共通】NPCがX回攻撃されたらフラグを立てる処理_改 -- [Common] Process to set a flag when an NPC is attacked X times_Revised
+1000000000 敵リスポン -- enemy respawn
+1045343700 NPC310城主の娘_NPC初期化イベント_初期状態 -- NPC310 Castle Lord's Daughter_NPC initialization event_Initial state

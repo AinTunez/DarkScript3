@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30122300 死亡待機 -- Waiting for death
+30122500 忌み子奇襲_ボス部屋手前まで進んだ判定 -- Abominable child surprise attack_Judgment when progressing to the front of the boss room
+30122501 忌み子奇襲_本体 -- Abominable child surprise attack_main body
+30122502 忌み子用_思考ロジック有効化_ダメージ判定 -- For Abandoned Child_Thought Logic Activation_Damage Judgment
+30122520 洞窟_ボス部屋報酬宝箱の開放制限 -- Cave_Boss room reward treasure chest opening limit
+30122800 ボス撃破 -- Defeat the boss
+30122810 ボス出現 -- Boss appears
+30122811 ボス激昂 -- boss rage
+30122849 ボス_イベント起動 -- Boss_event activation
+1000000000 敵リスポン -- enemy respawn

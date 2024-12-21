@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1050572200 野生動物霊体化 -- wild animal spirit form
+1050572250 雷地帯_弾丸イベント_XX -- Thunder Zone_Bullet Event_XX
+1050572320 夜の王の眷属巨大骸骨_位置合わせ_XX -- Night King's Heir Giant Skeleton_Position_XX
+1050572330 夜の王の眷属巨大骸骨_遠隔用特殊効果 -- Night King's Heir Giant Skeleton_Remote Special Effects
+1050572340 夜の王の眷属巨大骸骨_思考ロジック有効化_領域判定_xx -- Night King's Heir Giant Skeleton_Thought Logic Activation_Area Judgment_xx
+1050572820 死の鳥_特殊待機_領域判定 -- Bird of Death_Special Standby_Area Judgment

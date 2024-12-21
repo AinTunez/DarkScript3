@@ -1,0 +1,15 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30000050 m30_00_00_00用初期フラグ設定 -- Initial flag setting for m30_00_00_00
+30002500 火吹き像エレベータ_移動 -- Fire-breathing statue elevator_move
+30002510 エレベータイベント起動 -- Elevator event activation
+30002570 消費鍵のガーゴイル像B_壁制御 -- Gargoyle statue of consumption key B_Wall control
+30002610 英雄の墓_火吹き像_火炎処理_緑後半 -- Hero's Tomb_Fire-breathing statue_Flame treatment_Late green
+30002611 火吹き像エレベータ_ブレス -- Fire-breathing statue elevator_breath
+30002800 m30_00ボス撃破 -- m30_00 boss defeated
+30002810 m30_00ボス出現 -- m30_00 boss appears
+30002811 m30_00ボス激昂 -- m30_00Boss rage
+30002829 m30_00ボスイベント起動 -- m30_00 boss event activated
+30009570 消費鍵のガーゴイル像B_会話 -- Consumption key gargoyle statue B_Conversation
+1000000000 敵リスポン -- enemy respawn

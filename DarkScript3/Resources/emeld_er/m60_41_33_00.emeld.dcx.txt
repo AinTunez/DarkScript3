@@ -1,0 +1,9 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1041332800 ボス撃破 -- Defeat the boss
+1041332810 ボス出現 -- Boss appears
+1041332849 ボス_壺蟻亜種_イベント起動 -- Boss_pot ant subspecies_event activation
+1041333700 NPC316学院の女魔術師_本体_NPC初期化イベント -- NPC316 Academy Female Magician_Main Body_NPC Initialization Event
+1041333705 NPC312平原砦の領主_ﾌｪｰｽﾞ5_NPC初期化イベント -- NPC312 Lord of Plains Fort_Phase 5_NPC initialization event

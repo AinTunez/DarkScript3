@@ -1,0 +1,31 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+3010 L_汎用_喪失騎士_バサーク発動 -- L_General Purpose_Lost Knight_Basserk activation
+3050 L_汎用_老いた宿将_バディ召喚 -- L_General Purpose_Old Commander_Buddy Summon
+4000 L_汎用_ナズグル従者_ナズグル王召喚 -- L_General Purpose_Nazgul Servant_Nazgul King Summon
+4001 L_汎用_ナズグル従者_ナズグルターゲット切り替え -- L_General purpose_Nazgul follower_Nazgul target switching
+4220 L_汎用_陸ダコ_右触手切断イベント -- L_General purpose_Land octopus_Right tentacle cutting event
+4221 L_汎用_陸ダコ_左触手切断イベント -- L_General purpose_Land octopus_Left tentacle cutting event
+4222 L_汎用_陸ダコ_出産イベント -- L_General purpose_Land octopus_Birth event
+4230 L_汎用_陸ダコ（小）_出産イベント -- L_General purpose_Land octopus (small)_Birth event
+4560 L_汎用_鴉T_投げイベント -- L_General purpose_Raven T_Throwing event
+4600 初期化_亜人昼夜変化 -- Initialization_Ajin day/night change
+4601 初期化_スカウト亜人 -- Initialization_Scout Ajin
+4610 逃走条件_リーダー殺し_テスト用 -- Escape Conditions_Leader Killing_For testing
+4650 取囲みテスト_初期化 -- Surrounding test_initialization
+4660 L_汎用_高路のガーディアン_左足崩れイベント -- L_General Purpose_Guardian of Takashi_Left leg collapse event
+4661 L_汎用_高路のガーディアン_右足崩れイベント -- L_General Purpose_Guardian of Takashi_Right leg collapse event
+4662 L_汎用_高路のガーディアン_左手崩れイベント -- L_General Purpose_Guardian of Takaji_Left hand collapse event
+4663 L_汎用_高路のガーディアン_右手崩れイベント -- L_General purpose_Guardian of Takashi_Right hand collapse event
+4697 テスト用_昼夜切り替え -- For testing_day/night switching
+4698 テスト用 -- for testing
+4699 ロジック切り替え（テスト） -- Logic switching (test)
+4710 L_汎用_グール王_モード切り替え判定 -- L_General Purpose_Ghoul King_Mode switching judgment
+4711 L_汎用_グール王_左足崩れ判定 -- L_General Purpose_Ghoul King_Left leg collapse detection
+4712 L_汎用_グール王_右足崩れ判定 -- L_General Purpose_Ghoul King_Right foot collapse detection
+4760 L_汎用_野生フラコン_決め打ち版 -- L_General Purpose_Wild Flacon_Definitive Edition
+4761 L_汎用_野生フラコン_ランダム版 -- L_General Purpose_Wild Flacon_Random Edition
+4765 L_汎用_野生動物初期化 -- L_General purpose_wild animal initialization
+4800 L_汎用_グレーターデーモンHU制御 -- L_General Purpose_Greater Demon HU Control
+4801 L_汎用_グレーターデーモン降伏勧告状態制御 -- L_General Purpose_Greater Demon Surrender Advisory State Control
+1000000000 敵リスポン -- enemy respawn

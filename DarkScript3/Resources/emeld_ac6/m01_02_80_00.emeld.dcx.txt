@@ -1,0 +1,255 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッションクリア判定 -- Mission clear judgment
+2001 ミッション成功時処理 -- Mission success process
+2002 ミッション失敗時処理 -- Processing when mission fails
+2010 特別報酬加算_0 -- Special reward addition_0
+2011 特別報酬加算_1 -- Special reward addition_1
+2012 特別報酬加算_2 -- Special reward addition_2
+2013 特別報酬加算_3 -- Special reward addition_3
+2014 特別報酬加算_4 -- Special reward addition_4
+2015 特別報酬加算_5 -- Special reward addition_5
+2016 特別報酬加算_6 -- Special reward addition_6
+2020 クリア時のヘリ残AP100パー -- Heli AP remaining at the time of clearing is 100%
+2021 クリア時のヘリ残AP90パー -- Heli AP remaining at the time of clearing is 90%
+2022 クリア時のヘリ残AP80パー -- Helicopter AP remaining at time of clearing: 80%
+2023 クリア時のヘリ残AP70パー -- Helicopter AP remaining at time of clearing: 70%
+2024 クリア時のヘリ残AP60パー -- Helicopter AP remaining at time of clearing: 60%
+2025 クリア時のヘリ残AP50パー -- Helicopter AP remaining at time of clearing: 50%
+2026 クリア時のヘリ残AP40パー -- Helicopter AP remaining at time of clearing: 40%
+2027 クリア時のヘリ残AP30パー -- Helicopter AP remaining at the time of clearing is 30%
+2028 クリア時のヘリ残AP20パー -- Heli AP remaining at the time of clearing is 20%
+2029 クリア時のヘリ残AP10パー -- Heli AP remaining at the time of clearing is 10%
+2030 撃破P加算_10000 -- Destruction P addition_10000
+2031 撃破P加算_20000 -- Destruction P addition_20000
+2032 撃破P加算_30000 -- Destruction P addition_30000
+2034 撃破P加算_40000 -- Destruction P addition_40000
+2040 演出状態用_ボスゲージ全消し対応 -- For production status_Compatible with boss gauge complete erasure
+2051 FEマーカー削除_第2拠点 -- FE marker deletion_2nd base
+2052 FEマーカー削除_第3拠点 -- FE marker deletion_3rd base
+2100 初期イベント -- initial event
+2101 出撃CS再生後処理 -- Sortie CS replay post-processing
+2110 目標マーカー01有効化 -- Target marker 01 enabled
+2111 目標マーカー01無効化 -- Target marker 01 disabled
+2112 目標マーカー02有効化 -- Target marker 02 enabled
+2113 目標マーカー02無効化 -- Target marker 02 disabled
+2114 目標マーカー03有効化 -- Target marker 03 enabled
+2115 目標マーカー03無効化 -- Target marker 03 disabled
+2116 目標マーカー04有効化 -- Target marker 04 enabled
+2117 目標マーカー04無効化 -- Target marker 04 disabled
+2118 目標マーカー05有効化 -- Target marker 05 enabled
+2119 目標マーカー05無効化 -- Target marker 05 disabled
+2200 s02_増援ヘリ起動処理 -- s02_Reinforcement helicopter activation process
+2201 s02_増援ヘリ01投下判定 -- s02_Reinforcement helicopter 01 drop judgment
+2202 s02_増援ヘリ01無効化判定 -- s02_Reinforcement helicopter 01 invalidation judgment
+2203 s02_増援ヘリ02投下判定 -- s02_Reinforcement helicopter 02 drop judgment
+2204 s02_増援ヘリ02無効化判定 -- s02_Reinforcement helicopter 02 invalidation judgment
+2220 s02_増援ヘリ起動判定 -- s02_Reinforcement helicopter activation judgment
+2250 s04_USドローンレザライ登場処理 -- s04_US drone Rezarai appearance process
+2260 s04_USドローンレザライ起動判定 -- s04_US Drone Rezarai activation judgment
+2261 s04_USドローンレザライ起動処理 -- s04_US Drone Rezarai startup process
+2300 s03_増援ドローン起動判定 -- s03_Reinforcement drone activation judgment
+2301 s03_増援ドローン起動処理 -- s03_Reinforcement drone activation process
+2310 s03_増援ドローン投下判定 -- s03_Reinforcement drone drop judgment
+2320 s03_増援ドローン無効化判定 -- s03_Reinforcement drone invalidation judgment
+2350 s04_地上増援部隊起動 -- s04_Start ground reinforcements
+2360 s04_USドローンその場浮上 -- s04_US drone surfacing on the spot
+2365 s04_USドローンその場浮上判定タイミング用特殊効果付与 -- s04_US Add special effects for drone levitation judgment timing
+2400 s05_ガトリング砲台に危険マーカー -- s05_Danger marker on Gatling battery
+2420 s05_目標地点マーカー04切り替え判定 -- s05_Target point marker 04 switching judgment
+2450 s06_垂直ミサイル砲台起動 -- s06_Vertical missile battery activation
+2451 s06_垂直ミサイル砲台_ミサイル発射 -- s06_vertical missile battery_missile launch
+2452 s06_垂直ミサイル砲台_イベタゲ -- s06_vertical missile battery_Ibetage
+2453 s06_垂直ミサイル砲台_危険マーカー -- s06_vertical missile battery_danger marker
+2460 s06_フレアイベント -- s06_flare event
+2470 s06_増援登場 -- s06_Reinforcements appear
+2471 s06_増援登場判定 -- s06_Reinforcement appearance determination
+2500 s08_NPAC起動判定 -- s08_NPAC startup determination
+2501 s08_NPAC板付き判定 -- s08_NPAC board judgment
+2502 s08_NPAC登場処理 -- s08_NPAC appearance processing
+2503 s08_NPAC戦闘開始 -- s08_NPAC battle begins
+2504 s08_NPACアサブ切り替え処理 -- s08_NPAC Asabu switching process
+2505 s08_NPAC作戦ラインあたり無効化切り替え -- s08_NPAC Disable switch per operation line
+2506 s08_NPACにマーカー -- Marker on s08_NPAC
+2510 s08_護衛ヘリのターゲット優先度加算_弱 -- s08_Escort helicopter target priority addition_Weak
+2511 s08_護衛ヘリのターゲット優先度加算_中 -- s08_Escort helicopter target priority addition_Medium
+2512 s08_護衛ヘリのターゲット優先度加算_強 -- s08_Escort helicopter target priority addition_Strong
+2515 s08_護衛ヘリのターゲット優先度加算判定_弱 -- s08_Escort helicopter target priority addition judgment_Weak
+2516 s08_護衛ヘリのターゲット優先度加算判定_中 -- s08_Escort helicopter target priority addition judgment_Medium
+2517 s08_護衛ヘリのターゲット優先度加算判定_強 -- s08_Escort helicopter target priority addition judgment_Strong
+2530 s08_増援01ドローン起動判定 -- s08_Reinforcement 01 Drone activation judgment
+2531 s08_増援01ドローン登場処理 -- s08_Reinforcement 01 Drone appearance processing
+2540 s08_増援01ドローン投下判定 -- s08_Reinforcement 01 Drone Drop Judgment
+2550 s08_増援01ドローン無効化判定 -- s08_Reinforcement 01 Drone invalidation judgment
+2600 s09_WAVE01開始処理 -- s09_WAVE01 start processing
+2601 s09_WAVE02開始処理 -- s09_WAVE02 start processing
+2602 s09_WAVE03開始処理 -- s09_WAVE03 start processing
+2610 s09_WAVE投下判定 -- s09_WAVE drop judgment
+2620 s09_増援ヘリ無効化判定 -- s09_Reinforcement helicopter invalidation judgment
+2650 s09_ボス撃破判定 -- s09_Boss defeat judgment
+2651 s09_ボス演出死亡_許可 -- s09_Boss production death_Permitted
+2652 s09_演出死亡許可_無効 -- s09_Performance death permission_Invalid
+2653 s09_演出死亡許可_切り替え判定 -- s09_Performance death permission_Switching judgment
+2655 s09_撃破必須モブ敵にTGTマーカー付与 -- s09_Give TGT marker to mob enemies that must be defeated
+2660 s09_s08敵まで殲滅 -- s09_s08 Eliminate even the enemy
+2661 s09_WAVE01まで殲滅 -- Eliminate up to s09_WAVE01
+2662 s09_WAVE02まで殲滅 -- Eliminate up to s09_WAVE02
+2663 s09_WAVE03まで殲滅 -- Eliminate up to s09_WAVE03
+2665 s09_s08敵まで殲滅用_FEマーカー付与タイミング判定 -- s09_s08 For annihilating enemies_FE marker application timing determination
+2666 s09_WAVE01まで殲滅用_FEマーカー付与タイミング判定 -- s09_WAVE01 for annihilation_FE marker addition timing determination
+2667 s09_WAVE02まで殲滅用_FEマーカー付与タイミング判定 -- s09_WAVE02 for annihilation_FE marker addition timing determination
+2668 s09_WAVE03まで殲滅用_FEマーカー付与タイミング判定 -- s09_WAVE03 for annihilation_FE marker addition timing determination
+2670 s09_敵殲滅判定 -- s09_Enemy annihilation judgment
+2671 s09_付近の敵生存判定 -- s09_Nearby enemy survival determination
+2700 護衛ヘリ移動停止_01 -- Escort helicopter movement stopped_01
+2701 護衛ヘリ移動停止_02 -- Escort helicopter movement stopped_02
+2702 護衛ヘリ移動停止_03 -- Escort helicopter movement stopped_03
+2703 護衛ヘリ移動停止_04 -- Escort helicopter movement stopped_04
+2710 護衛ヘリ待機タイマー_01 -- Escort helicopter standby timer_01
+2711 護衛ヘリ待機タイマー_02 -- Escort helicopter standby timer_02
+2712 護衛ヘリ待機タイマー_03 -- Escort helicopter standby timer_03
+2713 護衛ヘリ待機タイマー_04 -- Escort helicopter standby timer_04
+2720 護衛ヘリ移動再開_01 -- Escort helicopter movement resumes_01
+2721 護衛ヘリ移動再開_02 -- Escort helicopter movement resumes_02
+2722 護衛ヘリ移動再開_03 -- Escort helicopter movement resumes_03
+2723 護衛ヘリ移動再開_04 -- Escort helicopter movement resumes_04
+2730 護衛ヘリゴール判定 -- Escort helicopter goal judgment
+2731 護衛ヘリAP0判定 -- Escort helicopter AP0 judgment
+2732 護衛ヘリ死亡判定 -- Escort helicopter death determination
+2740 護衛ヘリカーブ制禦_01 -- Escort heli curve control_01
+2742 護衛ヘリカーブ制禦_03 -- Escort heli curve control_03
+2743 護衛ヘリカーブ制禦_04 -- Escort helicab control_04
+2749 護衛ヘリ降下制禦 -- Escort helicopter drop control
+2750 護衛ヘリ被弾SFX作成_小破 -- Escort helicopter hit SFX created_Small damage
+2751 護衛ヘリ被弾SFX作成_中破 -- Escort helicopter hit SFX creation_medium damage
+2760 護衛ヘリ_開幕離陸判定 -- Escort helicopter_opening takeoff judgment
+2770 護衛ヘリ_リプラン対策_初期イベ -- Escort helicopter_Replanning measures_Initial event
+2771 護衛ヘリ_リプラン対策_リスタート -- Escort helicopter_replanning measures_restart
+2898 会話_ヘリ残AP低下_50パー以上 -- Conversation_Remaining AP of helicopter_decrease_50% or more
+2899 会話_ヘリ残AP低下_50パー以下 -- Conversation_Helicopter remaining AP decrease_below 50%
+2900 会話_ヘリ残AP量判定 -- Conversation_Helicopter remaining AP amount determination
+2910 会話_T16再生可能フラグ -- Conversation_T16 playable flag
+2915 会話_T37再生不可フラグ -- Conversation_T37 Unplayable flag
+2920 会話_T152再生不可判定 -- Conversation_T152 Unplayable judgment
+2921 会話_T153再生不可判定 -- Conversation_T153 Unplayable judgment
+2970 T03再生判定 -- T03 regeneration judgment
+2971 T16再生判定 -- T16 regeneration judgment
+3500 BGM_ボス戦開始通知フラグ -- BGM_Boss battle start notification flag
+3600 会話済みフラグ00 -- Conversation completed flag 00
+3601 会話済みフラグ01 -- Conversation completed flag 01
+3602 会話済みフラグ02 -- Conversation completed flag 02
+3603 会話済みフラグ03 -- Conversation completed flag 03
+3604 会話済みフラグ04 -- Conversation completed flag 04
+3605 会話済みフラグ05 -- Conversation completed flag 05
+3606 会話済みフラグ06 -- Conversation completed flag 06
+3607 会話済みフラグ07 -- Conversation completed flag 07
+3608 会話済みフラグ08 -- Conversation completed flag 08
+3609 会話済みフラグ09 -- Conversation completed flag 09
+3610 会話済みフラグ10 -- Conversation completed flag 10
+3611 会話済みフラグ11 -- Conversation completed flag 11
+3612 会話済みフラグ12 -- Conversation completed flag 12
+3613 会話済みフラグ13 -- Conversation completed flag 13
+3614 会話済みフラグ14 -- Conversation completed flag 14
+3615 会話済みフラグ15 -- Conversation completed flag 15
+3616 会話済みフラグ16 -- Conversation completed flag 16
+3617 会話済みフラグ17 -- Conversation completed flag 17
+3618 会話済みフラグ18 -- Conversation completed flag 18
+3619 会話済みフラグ19 -- Conversation completed flag 19
+3620 会話済みフラグ20 -- Conversation completed flag 20
+3621 会話済みフラグ21 -- Conversation completed flag 21
+3622 会話済みフラグ22 -- Conversation completed flag 22
+3623 会話済みフラグ23 -- Conversation completed flag 23
+3624 会話済みフラグ24 -- Conversation completed flag 24
+3625 会話済みフラグ25 -- Conversation completed flag 25
+3626 会話済みフラグ26 -- Conversation completed flag 26
+3627 会話済みフラグ27 -- Conversation completed flag 27
+3628 会話済みフラグ28 -- Conversation completed flag 28
+3629 会話済みフラグ29 -- Conversation completed flag 29
+3630 会話済みフラグ30 -- Conversation completed flag 30
+3631 会話済みフラグ31 -- Conversation completed flag 31
+3632 会話済みフラグ32 -- Conversation completed flag 32
+3633 会話済みフラグ33 -- Conversation completed flag 33
+3634 会話済みフラグ34 -- Conversation completed flag 34
+3635 会話済みフラグ35 -- Conversation completed flag 35
+3636 会話済みフラグ36 -- Conversation completed flag 36
+3637 会話済みフラグ37 -- Conversation completed flag 37
+3638 会話済みフラグ38 -- Conversation completed flag 38
+3639 会話済みフラグ39 -- Conversation completed flag 39
+3640 会話済みフラグ40 -- Conversation completed flag 40
+3641 会話済みフラグ41 -- Conversation completed flag 41
+3642 会話済みフラグ42 -- Conversation completed flag 42
+3643 会話済みフラグ43 -- Conversation completed flag 43
+3644 会話済みフラグ44 -- Conversation completed flag 44
+3645 会話済みフラグ45 -- Conversation completed flag 45
+3646 会話済みフラグ46 -- Conversation completed flag 46
+3647 会話済みフラグ47 -- Conversation completed flag 47
+3648 会話済みフラグ48 -- Conversation completed flag 48
+3649 会話済みフラグ49 -- Conversation completed flag 49
+3650 会話済みフラグ50 -- Conversation completed flag 50
+3651 会話済みフラグ51 -- Conversation completed flag 51
+3652 会話済みフラグ52 -- Conversation completed flag 52
+3653 会話済みフラグ53 -- Conversation completed flag 53
+3654 会話済みフラグ54 -- Conversation completed flag 54
+3655 会話済みフラグ55 -- Conversation completed flag 55
+3656 会話済みフラグ56 -- Conversation completed flag 56
+3657 会話済みフラグ57 -- Conversation completed flag 57
+3658 会話済みフラグ58 -- Conversation completed flag 58
+3659 会話済みフラグ59 -- Conversation completed flag 59
+3660 会話済みフラグ60 -- Conversation completed flag 60
+3661 会話済みフラグ61 -- Conversation completed flag 61
+3662 会話済みフラグ62 -- Conversation completed flag 62
+3663 会話済みフラグ63 -- Conversation completed flag 63
+3664 会話済みフラグ64 -- Conversation completed flag 64
+3665 会話済みフラグ65 -- Conversation completed flag 65
+3666 会話済みフラグ66 -- Conversation completed flag 66
+3667 会話済みフラグ67 -- Conversation completed flag 67
+3668 会話済みフラグ68 -- Conversation completed flag 68
+3669 会話済みフラグ69 -- Conversation completed flag 69
+3670 会話済みフラグ70 -- Conversation completed flag 70
+3671 会話済みフラグ71 -- Conversation completed flag 71
+3672 会話済みフラグ72 -- Conversation completed flag 72
+3673 会話済みフラグ73 -- Conversation completed flag 73
+3674 会話済みフラグ74 -- Conversation completed flag 74
+3675 会話済みフラグ75 -- Conversation completed flag 75
+3676 会話済みフラグ76 -- Conversation completed flag 76
+3677 会話済みフラグ77 -- Conversation completed flag 77
+3678 会話済みフラグ78 -- Conversation completed flag 78
+3679 会話済みフラグ79 -- Conversation completed flag 79
+3680 会話済みフラグ80 -- Conversation completed flag 80
+3681 会話済みフラグ81 -- Conversation completed flag 81
+3682 会話済みフラグ82 -- Conversation completed flag 82
+3683 会話済みフラグ83 -- Conversation completed flag 83
+3684 会話済みフラグ84 -- Conversation completed flag 84
+3685 会話済みフラグ85 -- Conversation completed flag 85
+3686 会話済みフラグ86 -- Conversation completed flag 86
+3687 会話済みフラグ87 -- Conversation completed flag 87
+3688 会話済みフラグ88 -- Conversation completed flag 88
+3689 会話済みフラグ89 -- Conversation completed flag 89
+3690 会話済みフラグ90 -- Conversation completed flag 90
+3691 会話済みフラグ91 -- Conversation completed flag 91
+3692 会話済みフラグ92 -- Conversation completed flag 92
+3693 会話済みフラグ93 -- Conversation completed flag 93
+3694 会話済みフラグ94 -- Conversation completed flag 94
+3695 会話済みフラグ95 -- Conversation completed flag 95
+3696 会話済みフラグ96 -- Conversation completed flag 96
+3697 会話済みフラグ97 -- Conversation completed flag 97
+3698 会話済みフラグ98 -- Conversation completed flag 98
+3699 会話済みフラグ99 -- Conversation completed flag 99
+3700 会話済みフラグ152 -- Conversation completed flag 152
+3701 会話済みフラグ962 -- Conversation completed flag 962
+3702 会話済みフラグ972 -- Conversation completed flag 972
+3703 会話済みフラグ982 -- Conversation completed flag 982
+3704 会話済みフラグ491 -- Conversation completed flag 491
+3705 会話済みフラグ153 -- Conversation completed flag 153
+3800 出張対応_攻撃者指定 -- Business trip support_attacker designation
+3810 出張対応_追加攻撃者指定 -- Business trip support_Additional attacker designation
+3820 出張対応_攻撃者更新下げ -- Business trip support_attacker update lowered
+3840 出張対応_ガトリング砲 -- Business trip available_Gatling gun
+3841 出張対応_ガトリング砲_更新頻度下げ -- Business trip support_Gatling gun_Reduced update frequency
+3842 出張対応_ミサイル砲台 -- Business trip support_missile battery
+3843 出張対応_ミサイル砲台_更新頻度下げ -- Business trip support_Missile battery_Reduced update frequency
+3850 出張対応_距離判定_近い -- Business trip support_distance determination_close
+3851 出張対応_距離判定_遠い -- Business trip support_distance determination_far
+3855 出張対応_被ダメ調整_通常時 -- Business trip support_Damage adjustment_Normal times
+3856 出張対応_被ダメ調整_出張時 -- Business trip support_Damage adjustment_During a business trip
+1000000000 敵リスポン -- enemy respawn

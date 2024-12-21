@@ -1,0 +1,26 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 領域判定_チームA_01が領域内に居る -- Area determination_Team A_01 is within the area
+2001 領域判定_チームA_02が領域内に居る -- Area determination_Team A_02 is within the area
+2002 領域判定_チームA_03が領域内に居る -- Area determination_Team A_03 is within the area
+2003 領域判定_チームA_04が領域内に居る -- Area determination_Team A_04 is in the area
+2010 領域判定_チームB_01が領域内に居る -- Area determination_Team B_01 is within the area
+2011 領域判定_チームB_02が領域内に居る -- Area determination_Team B_02 is in the area
+2012 領域判定_チームB_03が領域内に居る -- Area determination_Team B_03 is in the area
+2013 領域判定_チームB_04が領域内に居る -- Area determination_Team B_04 is in the area
+2014 時間終了 -- time ends
+2100 領域判定_チームA_01 -- Area determination_Team A_01
+2101 領域判定_チームA_02 -- Area determination_Team A_02
+2102 領域判定_チームA_03 -- Area determination_Team A_03
+2103 領域判定_チームA_04 -- Area determination_Team A_04
+2110 領域判定_チームB_01 -- Area determination_Team B_01
+2111 領域判定_チームB_02 -- Area determination_Team B_02
+2112 領域判定_チームB_03 -- Area determination_Team B_03
+2113 領域判定_チームB_04 -- Area determination_Team B_04
+2120 初期化イベント_チーム分け -- Initialization event_team division
+2121 初期化イベント_領域制圧領域 -- Initialization event_area control area
+2130 制圧ゲージ制御_チームA優勢 -- Suppression gauge control_Team A dominates
+2131 制圧ゲージ制御_チームB優勢 -- Suppression gauge control_Team B has the upper hand
+2132 制圧ゲージ制御_チームAキルポイント加算 -- Suppression gauge control_Team A kill point addition
+2133 制圧ゲージ制御_チームBキルポイント加算 -- Suppression gauge control_Team B kill point addition
+1000000000 敵リスポン -- enemy respawn

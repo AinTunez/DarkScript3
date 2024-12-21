@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+32082200 亡者鉱夫_採掘中止_XX -- Dead Miner_Mining Canceled_XX
+32082498 蹴りおろし梯子_ナビメッシュ切り替え -- Kick down ladder_Navimesh switching
+32082580 梯子登録 -- ladder registration
+32082650 ワープトラップ_ワープ禁止特殊効果 -- Warp Trap_Warp Prohibition Special Effect
+32082800 ボス撃破 -- Defeat the boss
+32082810 ボス出現 -- Boss appears
+32082811 ボス激昂 -- boss rage
+32082820 ボス閉鎖 -- boss closure
+32082849 ボスイベント起動 -- Boss event activation
+1000000000 敵リスポン -- enemy respawn

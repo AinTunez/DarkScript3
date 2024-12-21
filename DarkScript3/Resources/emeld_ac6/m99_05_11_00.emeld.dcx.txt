@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+70005015 スティグロ初期化 -- Stiglo initialization
+70005020 強敵（デブ）初期化 -- Strong enemy (fat) initialization
+72125031 スティグロ_部位1ダメージ -- Stiglo_part 1 damage
+72125032 スティグロ_部位2ダメージ -- Stiglo_part 2 damage
+72125033 スティグロ_部位3ダメージ -- Stiglo_part 3 damage
+72125034 スティグロ_瀕死表現 -- Stiglo_dying expression
+72125040 強敵（デブ）_部位1HP① -- Strong enemy (fat)_part 1HP①
+72125041 強敵（デブ）_部位1HP② -- Strong enemy (fat)_part 1HP②
+72125042 強敵（デブ）_部位1HP③ -- Strong enemy (fat)_part 1HP③
+72125043 強敵（デブ）_部位1HP④ -- Strong enemy (fat)_part 1HP④
+72125044 強敵（デブ）_部位1HP⑤ -- Strong enemy (fat)_part 1HP⑤
+1000000000 敵リスポン -- enemy respawn

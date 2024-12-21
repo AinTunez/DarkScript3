@@ -1,0 +1,12 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30140519 エレベータ初期フラグ -- Elevator initial flag
+30142510 エレベータイベント起動 -- Elevator event activation
+30142520 洞窟_ボス部屋報酬宝箱の開放制限 -- Cave_Boss room reward treasure chest opening limit
+30142580 梯子登録 -- ladder registration
+30142800 ボス撃破 -- Defeat the boss
+30142801 ボス出現 -- Boss appears
+30142811 ボス激昂 -- boss rage
+30142849 番犬ゴーレム_イベント起動 -- Watchdog Golem_Event activation
+1000000000 敵リスポン -- enemy respawn

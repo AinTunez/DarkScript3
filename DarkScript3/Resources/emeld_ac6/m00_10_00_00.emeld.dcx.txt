@@ -1,0 +1,119 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 アセンブリアニメ再生 -- assembly anime play
+2010 ガレージ初期化処理 -- Garage initialization process
+2200 プレイヤカメラ制御_イベント開始パン -- Player camera control_Event start pan
+2210 プレイヤカメラ制御_イベント終了パン -- Player camera control_event end pan
+2220 プレイヤカメラ制御_BF開始カメラ -- Player camera control_BF start camera
+2300 映写機アニメ制御_初期待機 -- Projector animation control_Initial standby
+2310 映写機アニメ制御_稼働開始 -- Projector animation control_start of operation
+2320 映写機アニメ制御_稼働ループ -- Projector animation control_operation loop
+2330 映写機アニメ制御_稼働終了 -- Projector animation control_operation ended
+2400 スクリーンアニメ制御_初期待機 -- Screen animation control_Initial standby
+2410 スクリーンアニメ制御_起動開始 -- Screen animation control_Start startup
+2411 スクリーンアニメ制御_起動開始_3000001 -- Screen animation control_startup_3000001
+2420 スクリーンアニメ制御_起動後投影開始 -- Screen animation control_Start projection after startup
+2421 スクリーンアニメ制御_起動後投影開始_3000002 -- Screen animation control_Start projection after startup_3000002
+2430 スクリーンアニメ制御_東映中イベント01 -- Screen Animation Control_Toeichu Event 01
+2431 スクリーンアニメ制御_東映中イベント01_3000010 -- Screen Animation Control_Toeichu Event 01_3000010
+2440 スクリーンアニメ制御_東映中イベント02 -- Screen Animation Control_Toeichu Event 02
+2441 スクリーンアニメ制御_東映中イベント02_3000011 -- Screen Animation Control_Toeichu Event 02_3000011
+2450 スクリーンアニメ制御_東映中イベント03 -- Screen Animation Control_Toeichu Event 03
+2451 スクリーンアニメ制御_東映中イベント03_3000012 -- Screen Animation Control_Toeichu Event 03_3000012
+2460 スクリーンアニメ制御_東映中イベント04 -- Screen Animation Control_Toeichu Event 04
+2461 スクリーンアニメ制御_東映中イベント05 -- Screen Animation Control_Toeichu Event 05
+2462 スクリーンアニメ制御_東映中イベント04_二個目 -- Screen Animation Control_Toeichu Event 04_Second
+2463 スクリーンアニメ制御_東映中イベント05_二個目 -- Screen Animation Control_Toeichu Event 05_Second
+2470 スクリーンアニメ制御_東映中イベント04＿終了 -- Screen Animation Control_Toeichu Event 04_Ended
+2471 スクリーンアニメ制御_東映中イベント04＿終了_3000016 -- Screen Animation Control_Toeichu Event 04_End_3000016
+2480 スクリーンアニメ制御_企業ブリーフィング開始_1000010 -- Screen animation control_Corporate briefing start_1000010
+2481 スクリーンアニメ制御_企業ブリーフィング終了_1000011 -- Screen animation control_Corporate briefing finished_1000011
+2499 ガレージイベントリセット -- Garage event reset
+2510 ガレージアニメ_1000 -- Garage anime_1000
+2511 ガレージアニメ_1010 -- Garage anime_1010
+2512 ガレージアニメ_1020 -- Garage anime_1020
+2513 ガレージアニメ_1030 -- Garage anime_1030
+2514 ガレージアニメ_1040 -- Garage anime_1040
+2515 ガレージアニメ_1001 -- Garage anime_1001
+2520 ガレージアニメ_2000 -- Garage anime_2000
+2521 ガレージアニメ_2010 -- Garage anime_2010
+2522 ガレージアニメ_2020 -- Garage anime_2020
+2523 ガレージアニメ_2030 -- Garage anime_2030
+2524 ガレージアニメ_2040 -- Garage anime_2040
+2525 ガレージアニメ_2001 -- Garage anime_2001
+2530 ガレージアニメ_3000 -- Garage anime_3000
+2531 ガレージアニメ_3010 -- Garage anime_3010
+2532 ガレージアニメ_3020 -- Garage anime_3020
+2533 ガレージアニメ_3030 -- Garage anime_3030
+2534 ガレージアニメ_3040 -- Garage anime_3040
+2535 ガレージアニメ_3001 -- Garage anime_3001
+2540 ガレージアニメ_4000 -- Garage anime_4000
+2541 ガレージアニメ_4010 -- Garage anime_4010
+2542 ガレージアニメ_4020 -- Garage anime_4020
+2543 ガレージアニメ_4030 -- Garage anime_4030
+2544 ガレージアニメ_4040 -- Garage anime_4040
+2545 ガレージアニメ_4001 -- Garage anime_4001
+2550 ムービー再生_起動_ベイラム -- Movie play_start_bayrum
+2551 ムービー再生_起動_AC端末 -- Movie play_start_AC terminal
+2552 ムービー再生_起動_買物端末 -- Movie playback_launch_shopping terminal
+2553 ムービー再生_起動_出撃端末 -- Movie playback_startup_departure terminal
+2554 ムービー再生_起動_PC端末待機中 -- Movie playback_Start_Waiting for PC terminal
+2555 ムービー再生_起動_PC端末通信中 -- Movie playback_Start_Communicating with PC terminal
+2556 ムービー再生_停止 -- Movie play_stop
+2560 PC端末_未読メッセージポップ_ワンショット -- PC terminal_unread message pop_one shot
+2561 PC端末_未読メッセージポップ_ループ -- PC terminal_unread message pop_loop
+2562 PC端末_未読メッセージポップ_解除 -- PC terminal_Unread message pop_Cancel
+2565 PC端末_ブリーフィングAイベント開始 -- PC terminal_Briefing A event start
+2566 PC端末_ブリーフィングAイベント終了 -- PC terminal_Briefing A event ended
+2570 PCフォーカス_未読開始_01 -- PC focus_Start unread_01
+2571 PCフォーカス_未読開始_02 -- PC focus_Start unread_02
+2572 ガレージ格納CS再生 -- Garage storage CS playback
+2574 ガレージ格納CS専用ダム -- Garage storage CS exclusive dam
+2575 ガレージ格納CS専用壁越え -- Garage storage CS exclusive wall crossing
+2600 ヒロインフォーカスアニメ再生 -- heroine focus anime play
+2601 ヒロインフォーカス終了 -- Heroine focus ended
+2610 ヒロイン待機状態 -- Heroine standby
+2611 ヒロイン会話開始 -- Heroine conversation begins
+2612 ヒロイン会話中 -- Heroine conversation
+2613 ヒロイン会話終了 -- Heroine conversation ends
+2614 ヒロイン無効化 -- Disable heroine
+2615 ヒロイン有効化 -- heroine activation
+2700 フォーカスアニメ -- focus anime
+2750 クリックアニメ -- click anime
+2800 企業貢献度付与イベント -- Corporate contribution award event
+3310 プロローグ会話フラグ -- prologue conversation flag
+3410 BF01 -- BF01
+3411 BF02 -- BF02
+3412 BF03 -- BF03
+3413 BF04 -- BF04
+3414 BF05 -- BF05
+3415 BF06 -- BF06
+3460 任意BF01 -- Optional BF01
+3510 チャプター1終了 -- End of chapter 1
+3511 チャプター2終了 -- Chapter 2 ends
+3512 チャプター3終了 -- Chapter 3 ends
+3513 チャプター4終了 -- End of chapter 4
+3560 AIと会話を1回した -- Had one conversation with AI
+3561 AIと会話を2回した -- Had two conversations with AI
+3562 AIと会話を3回した -- Conversated with AI 3 times
+3563 AIと会話を4回した -- Conversated with AI 4 times
+3567 AIとの会話回数リセット -- Reset number of conversations with AI
+3570 既読後AIと会話を1回した -- Had a conversation with the AI ​​after reading it.
+3571 既読後AIと会話を2回した -- Had a conversation with the AI ​​twice after reading it.
+3572 既読後AIと会話を3回した -- Had a conversation with the AI ​​3 times after reading it.
+3573 既読後AIと会話を4回した -- Had a conversation with the AI ​​4 times after reading it.
+3577 既読後AIとの会話回数リセット -- Reset number of conversations with AI after reading
+3580 AIとの任意会話を1回した -- Had one optional conversation with AI
+3581 AIとの任意会話を2回した -- Had two optional conversations with AI.
+3582 AIとの任意会話を3回した -- Had 3 optional conversations with AI.
+3583 AIとの任意会話を4回した -- Had 4 random conversations with AI.
+3587 AIとの任意会話回数リセット -- Reset the number of optional conversations with AI
+3600 土着友好度フラグ立てた数 -- Number of native friendship flags raised
+3700 ガレージカメラ切り替え1 -- Garage camera switching 1
+3701 ガレージカメラ切り替え2 -- Garage camera switching 2
+3702 ガレージカメラ切り替え3 -- Garage camera switching 3
+3703 ガレージカメラ切り替え4 -- Garage camera switching 4
+3704 ガレージカメラ切り替え5 -- Garage camera switching 5
+3705 ガレージカメラ切り替え6 -- Garage camera switching 6
+3706 ガレージカメラ切り替え7 -- Garage camera switching 7
+1000000000 敵リスポン -- enemy respawn

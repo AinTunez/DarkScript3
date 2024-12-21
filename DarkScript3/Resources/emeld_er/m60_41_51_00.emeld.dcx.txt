@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1041512200 上位騎兵_視覚強化_XX -- High rank cavalry_Visual enhancement_XX
+1041512270 雷地帯_弾丸イベント_XX -- Thunder Zone_Bullet Event_XX
+1041512310 ツリーガード_お互いをターゲット指定する -- Tree Guard_Specify each other as targets
+1041512320 ツリーガード_BGMHU管理 -- Tree guard_BGMHU management
+1041512321 フィールドボス_HU通知_ボス2体用 -- Field boss_HU notification_for 2 bosses
+1041512800 ツリガ２体戦_フィールドボス撃破 -- Tsuriga 2-body battle_defeat field boss

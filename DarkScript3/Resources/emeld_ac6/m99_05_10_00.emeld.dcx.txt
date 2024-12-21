@@ -1,0 +1,5 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+201 強敵_新旧切り替え -- Strong enemy_switch between old and new
+99001010 強敵_BGM切り替えトライアル -- Strong enemy_BGM switching trial
+1000000000 敵リスポン -- enemy respawn

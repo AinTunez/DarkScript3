@@ -20,7 +20,7 @@ namespace DarkScript3
         public List<ClassDoc> Classes { get; set; }
 
         [JsonProperty(PropertyName = "enums", Order = 3)]
-        public EnumDoc[] Enums { get; set; }
+        public List<EnumDoc> Enums { get; set; }
 
         [JsonProperty(PropertyName = "darkscript", Order = 4)]
         public DarkScriptDoc DarkScript { get; set; }
@@ -71,9 +71,7 @@ namespace DarkScript3
             public long Index { get; set; }
 
             [JsonProperty(PropertyName = "args", Order = 3)]
-            public ArgDoc[] Arguments { get; set; }
-
-            public ArgDoc this[uint i] => Arguments[i];
+            public List<ArgDoc> Arguments { get; set; }
 
             // Calculated values
 
@@ -126,7 +124,7 @@ namespace DarkScript3
 
             // These fields are not present in the original EMEDF
 
-            // If an argument may be repeated zero or multiple times. Only used for display/documentation for the moment.
+            // If an argument may be repeated zero or multiple times. Required to identify vararg commands.
             // TODO: Move to DarkScript section?
             [JsonProperty(PropertyName = "vararg", Order = 99, DefaultValueHandling = DefaultValueHandling.Ignore)]
             public bool Vararg { get; set; }
@@ -140,6 +138,8 @@ namespace DarkScript3
 
             [JsonIgnore]
             public DarkScriptType MetaType { get; set; }
+
+            public ArgDoc Clone() => (ArgDoc)MemberwiseClone();
 
             public object GetDisplayValue(object val) => EnumDoc == null ? val : EnumDoc.GetDisplayValue(val);
         }
@@ -227,15 +227,27 @@ namespace DarkScript3
             [JsonProperty(PropertyName = "types", Order = 6)]
             public List<string> Types { get; set; }
 
-            // With MultiArgNames, when an enum is paired with a value, the enum name.
+            // With MultiNames, when an enum is paired with a value, the enum name.
             // This should be the DarkScript3 display name.
             [JsonProperty(PropertyName = "override_enum", Order = 7)]
             public string OverrideEnum { get; set; }
 
-            // With MultiArgNames, when an enum is paired with a value, a mapping from type to value.
+            // With MultiNames, when an enum is paired with a value, a mapping from type to value.
             // A value can have multiple overrides to allow for multiple types.
             [JsonProperty(PropertyName = "override_types", Order = 8)]
             public Dictionary<string, DarkScriptTypeOverride> OverrideTypes { get; set; }
+
+            // More specific name which can be used, for names derived from this one.
+            // This is just for naming parameters at the moment, because they are derived from meta types where possible.
+            [JsonProperty(PropertyName = "detail_name", Order = 9)]
+            public string DetailName { get; set; }
+
+            // Between two applicable types, the higher priority one takes precedence.
+            // This comes from the order of types in the config.
+            [JsonIgnore]
+            public int Priority { get; set; }
+
+            public DarkScriptType Clone() => (DarkScriptType)MemberwiseClone();
 
             public IEnumerable<string> AllTypes => (Type == null ? Array.Empty<string>() : new[] { Type }).Concat(Types ?? new List<string>());
         }

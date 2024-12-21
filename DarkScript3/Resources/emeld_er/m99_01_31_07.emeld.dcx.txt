@@ -1,0 +1,7 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 ボス準備ボスゲージ表示 -- Boss preparation boss gauge display
+110 ボス準備ボスゲージ非表示 -- Boss preparation boss gauge hidden
+120 ボス準備ボス死亡処理 -- Boss preparation boss death processing
+1000000000 敵リスポン -- enemy respawn

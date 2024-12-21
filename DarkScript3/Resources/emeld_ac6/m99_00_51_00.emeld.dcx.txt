@@ -1,0 +1,8 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+10009000 落下時復帰ワープイベント -- Fall return warp event
+10009001 落下判定領域 -- Fall judgment area
+10009002 帰還用ワープ -- return warp
+10009003 弾丸発射 -- bullet firing
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,220 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 utl_マップ初期化 -- utl_map initialization
+2001 utl_プレイヤー初期化 -- utl_player initialization
+2010 utl_フェードアウト -- utl_fadeout
+2011 utl_フェードイン -- utl_fade in
+2020 utl_電熱線で死亡 -- utl_Death from heating wire
+2090 utl_チェックポイント生成_1 -- utl_checkpoint generation_1
+2091 utl_SF_チェックポイント生成したよフラグ_1 -- utl_SF_Checkpoint generated flag_1
+2092 utl_リトライ時初期化_1 -- utl_initialize on retry_1
+2100 bas_初期化 -- bas_initialization
+2101 bas_完了化 -- bas_completed
+2110 bas_B_大扉開けるやつ -- bas_B_The one that opens the big door
+2111 bas_B_ビューポイント到達したか判定 -- bas_B_Determine whether the viewpoint has been reached
+2112 bas_B_炉に近づいたか判定 -- bas_B_ Determine whether you are close to the furnace
+2113 bas_B_炉の中に入ったか判定 -- bas_B_ Determine whether it entered the furnace
+2114 bas_B_破壊対象壊したか判定 -- bas_B_Determine whether the destruction target is destroyed
+2115 bas_B_冷却室に戻ってきたか判定 -- bas_B_ Determine whether it has returned to the cooling room
+2116 bas_B_ビューポイントから離れたか判定 -- bas_B_ Determine if you have left the viewpoint
+2117 bas_炉侵入口マーカーON -- bas_Furnace entry marker ON
+2118 bas_炉侵入口マーカーOFF -- bas_furnace entry marker OFF
+2119 bas_B_破壊対象目前まで来たか判定 -- bas_B_Determine whether you are close to the destruction target
+2120 破壊目標とダミーキャラの紐づけ -- Linking destruction targets and dummy characters
+2121 bas_B_時間切れか判定 -- bas_B_Determine whether time is up
+2122 bas_B_脱出完了したか判定 -- bas_B_Determine whether escape has been completed
+2123 bas_B_炉から出たか判定 -- bas_B_ Determine if it came out of the furnace
+2124 bas_炉大爆発 -- bas_furnace explosion
+2125 bas_炉からの脱出成功時_カットシーン再生 -- bas_When successfully escaping from the furnace_cutscene plays
+2126 bas_炉からの脱出失敗時_ホワイトアウト -- bas_Failure to escape from the furnace_Whiteout
+2127 bas_B_小部屋出口ハッキングで解放 -- bas_B_Freed by hacking the small room exit
+2128 bas_カウントダウン開始 -- bas_ countdown start
+2129 bas_B_炉入口まで戻ってきたか判定 -- bas_B_ Determine whether you have returned to the furnace entrance
+2130 bas_砲台射撃_mini -- bas_turret firing_mini
+2131 bas_B_砲台射撃ループ終了判定 -- bas_B_ Battery firing loop end determination
+2132 bas_B_砲台射撃ループ開始判定 -- bas_B_ Battery firing loop start determination
+2133 bas_砲台射撃_snipe -- bas_battery firing_snipe
+2134 bas_砲台射撃_共通ウェイト -- bas_turret firing_common weight
+2135 bas_B_射撃範囲内か判定_グレネード砲台 -- bas_B_Determine if within shooting range_Grenade turret
+2136 bas_B_射撃範囲外か判定_グレネード砲台 -- bas_B_Determine if out of firing range_Grenade turret
+2138 bas_B_射撃範囲内か判定_垂直ミサイル砲台 -- bas_B_Determine if within firing range_Vertical missile turret
+2139 bas_B_射撃範囲外か判定_垂直ミサイル砲台 -- bas_B_Determine if out of firing range_Vertical missile turret
+2140 bas_B_炉内ドローンA巡回開始 -- bas_B_In-reactor drone A patrol begins
+2141 bas_B_炉内ドローンB巡回開始 -- bas_B_In-reactor drone B patrol begins
+2143 bas_B_射撃範囲内か判定_垂直ミサイル砲台2 -- bas_B_Determine if within shooting range_Vertical missile battery 2
+2144 bas_B_射撃範囲外か判定_垂直ミサイル砲台2 -- bas_B_Determine if out of shooting range_Vertical missile battery 2
+2145 bas_炉への接近促しマーカーON -- bas_Turn on marker to encourage approach to furnace
+2146 bas_炉への接近促しマーカーOFF -- bas_The marker urging you to approach the furnace is OFF.
+2150 bas_B_円環右のガードメカ登場演出 -- bas_B_Guard mecha appearance on the right side of the circle
+2151 レザバズ射撃開始領域 -- Rezabuzz shooting starting area
+2152 レザバズ射撃無効化 -- Disable Reza Buzz shooting
+2155 レザバズ射撃開始命令 -- Order to start shooting Reza Buzz
+2160 レザバズ射撃終了命令 -- Rezabuzz shooting termination order
+2170 bas_B_決め打ち爆発A -- bas_B_Decisive explosion A
+2171 bas_B_決め打ち爆発B -- bas_B_decisive explosion B
+2172 bas_B_決め打ち爆発C -- bas_B_decisive explosion C
+2180 bas_小爆発ループA1 -- bas_small explosion loop A1
+2181 bas_小爆発ループA2 -- bas_small explosion loop A2
+2182 bas_小爆発ループA3 -- bas_small explosion loop A3
+2183 bas_小爆発ループB1 -- bas_small explosion loop B1
+2184 bas_小爆発ループB2 -- bas_small explosion loop B2
+2185 bas_小爆発ループB3 -- bas_small explosion loop B3
+2186 bas_小爆発ループC1 -- bas_small explosion loop C1
+2187 bas_小爆発ループC2 -- bas_small explosion loop C2
+2188 bas_小爆発ループC3 -- bas_small explosion loop C3
+2199 射撃範囲外ならロジックを切る -- If you are out of shooting range, turn off the logic.
+2200 nac_初期化 -- nac_initialization
+2201 nac_完了化 -- nac_completion
+2210 nac_B_戦闘開始位置に来たか判定 -- nac_B_Determine whether you have reached the battle starting position
+2211 nac_B_戦闘状態に入ったか判定 -- nac_B_Determine whether it has entered a combat state
+2212 nac_SF_戦闘終わりましたフラグ -- nac_SF_battle over flag
+2220 nac_B_NPACのAPちょっと減り始めたか判定 -- Determine whether nac_B_NPAC's AP has started to decrease a little.
+2221 nac_B_NPACのAP大きく減らしたか判定 -- Determine whether nac_B_NPAC's AP has been significantly reduced
+2222 nac_B_NPACのAP0になったか判定 -- Determine whether nac_B_NPAC has become AP0
+2223 nac_B_NPACのタグ入手 -- Obtain tag for nac_B_NPAC
+2224 会話判定_無人ACのAP1割きった判定 -- Conversation Judgment_Judgment of unmanned AC using 1 AP
+2225 会話判定_無人ACの回復薬一回使用判定 -- Conversation Judgment_One-time use of recovery medicine for unmanned AC
+2230 nac_戦闘始める -- nac_Start battle
+2240 炉内へのハッキング扉 -- Hacking door into the furnace
+2241 炉内レスター会話 -- Lester conversation in the furnace
+2242 炉内レスター会話2 -- Lester conversation in the furnace 2
+2243 ウィン避難誘導会話 -- Win evacuation guidance conversation
+2244 レザバズフラグ右側 -- Reza buzz flag right side
+2245 レザバズフラグ左側 -- Leather buzz flag left side
+2250 炉内ハッキング扉派生 -- Furnace hacking door derivative
+2900 目標地点ポイント１を消す -- Delete target point point 1
+2901 ガードメカ接敵会話用 -- Guard mecha for enemy conversation
+2999 デバッグ用演出確認９９９９ -- Confirm production for debugging 9999
+3000 talk_出撃直後 -- talk_Immediately after sortie
+3001 talk_ドア開けたら -- talk_When you open the door
+3002 talk_ビューポイントで -- talk_viewpoint
+3003 talk_最後の円環足場到達時 -- talk_When reaching the final circular platform
+3004 talk_炉内侵入時 -- talk_When entering the furnace
+3005 talk_オブジェクト破壊時 -- talk_When object is destroyed
+3006 talk_ビューポイント離れる -- talk_leave viewpoint
+3007 talk_炉から出た時 -- talk_When I came out of the furnace
+3008 talk_炉から出た時2 -- talk_When I came out of the furnace 2
+3009 talk_炉内のレスター会話 -- talk_Lester conversation in the furnace
+3010 talk_炉内のレスター会話2 -- talk_Lester conversation in the furnace 2
+3011 talk_ウィン避難誘導会話 -- talk_Win evacuation guidance conversation
+3100 talk_小部屋侵入時 -- talk_When breaking into a small room
+3101 talk_接敵時 -- talk_when approaching enemy
+3102 talk_HP減少時1 -- talk_When HP decreases 1
+3103 talk_HP減少時2 -- talk_When HP decreases 2
+3104 talk_撃破時 -- talk_When defeated
+3105 talk_PC死亡時1 -- talk_When PC dies 1
+3106 talk_PC死亡時2 -- talk_When PC dies 2
+3107 talk_締め会話 -- talk_closing conversation
+3170 レザバズ常に描画 -- Reza Buzz Always Draw
+3171 レザバズのバグ対処in強制タゲ -- Rezabuzz bug fix in forced target
+3180 FBによるMisslle修正版 -- Misslle modified version by FB
+3300 item_SF_NPAC撃破時のタグ取ったフラグ -- item_SF_Flag taken from tag when defeating NPAC
+3310 無人AC一体目撃破時扉開錠 -- Door unlocked when unmanned AC sighted
+3311 無人AC一体目撃破時扉開錠_通知フラグ -- Unmanned AC sighted, door unlocked_Notification flag
+3320 炉内アセット制御 -- In-core asset control
+3400 FBによる射撃特殊効果消し１ -- Shooting special effect erasure by FB 1
+3401 FBによる射撃特殊効果消し２ -- Shooting special effect erasure by FB 2
+3402 FBによる射撃特殊効果消し３ -- Shooting special effect erasure by FB 3
+3403 FBによる射撃特殊効果消し４ -- Shooting special effect erasure by FB 4
+3404 FBによる射撃特殊効果消し５ -- Shooting special effect erasure by FB 5
+3405 FBによる射撃特殊効果消し６ -- Shooting special effect erasure by FB 6
+3406 垂直ミサイルグループA完了 -- Vertical missile group A completed
+3407 垂直ミサイルグループB完了 -- Vertical missile group B completed
+3450 bas_砲台射撃_missile -- bas_battery firing_missile
+3500 会話判定_破壊対象を視認したか -- Conversation Judgment_Did you see the destruction target?
+3501 会話判定_炉心内強敵を撃破したか -- Conversation Judgment_Did you defeat the strong enemy in the core?
+3502 会話判定_炉内敵に接敵したか -- Conversation Judgment_Did you engage the enemy in the furnace?
+3503 会話判定_炉に接近したか -- Conversation judgment_Did you approach the furnace?
+3504 会話判定_炉心内強敵に接敵したか -- Conversation Judgment_Did you engage a strong enemy in the core?
+3510 会話判定_タイムカウンタ -- Conversation judgment_time counter
+3550 条件判定_脱出中_炉心内に入場したか -- Condition Judgment_Escape_Did you enter the reactor core?
+3551 会話実行_脱出パタン台詞切り替え -- Conversation Execution_Escape Pattern Line Switching
+3552 会話実行_カウントダウン台詞許可フラグ_ON -- Conversation execution_Countdown dialogue permission flag_ON
+3553 会話実行_カウントダウン台詞許可フラグ_OFF -- Conversation execution_Countdown dialogue permission flag_OFF
+3560 BGM制御用_BGM遷移用イベント -- BGM control_BGM transition event
+3561 BGM制御用_BGM遷移フラグ -- BGM control_BGM transition flag
+3600 会話フラグ_100700100_ミッション開始だ -- Conversation Flag_100700100_Mission begins
+3601 会話フラグ_100700200_レイヴンまずは内部への侵入 -- Conversation Flag_100700200_Raven First, intrude inside
+3602 会話フラグ_100700500_足下に注意を落下すれば餌食です -- Conversation Flag_100700500_If you drop your attention at your feet, you are prey.
+3603 会話フラグ_100700600_危険因子の侵入を検出脅威レベル8 -- Conversation flag_100700600_Detection of risk factor intrusion Threat level 8
+3604 会話フラグ_100700900_狙撃タイプの防衛兵器撃墜されないよう -- Conversation flag_100700900_Sniper type defensive weapon to avoid being shot down
+3605 会話フラグ_100701000_危険因子か侵入者から格上げ -- Conversation flag_100701000_Upgraded from risk factor or intruder
+3606 会話フラグ_100701100_企業の反応はない -- Conversation Flag_100701100_No response from company
+3607 会話フラグ_100701200_外周に沿って進め -- Conversation flag_100701200_Proceed along the outer circumference
+3608 会話フラグ_100701300_621変圧チャンバーを探せ -- Conversation flag_100701300_621 Find the transformation chamber
+3609 会話フラグ_100701400_危険因子の高炉侵入防衛フェーズ45 -- Conversation Flag_100701400_Risk Factor Blast Furnace Intrusion Defense Phase 45
+3610 会話フラグ_100701440_安全を確保しておきましょうレイヴン -- Conversation flag_100701440_Let's stay safe Raven
+3611 会話フラグ_100701500_危険因子を確認排除します -- Conversation Flag_100701500_Check and eliminate risk factors
+3612 会話フラグ_100701600_レイヴン応戦を -- Conversation flag_100701600_Raven fight back
+3613 会話フラグ_100701700_レーザー障壁にここまでジェネレータ用意 -- Conversation Flag_100701700_Generator prepared so far for laser barrier
+3614 会話フラグ_100701800_防衛兵器を撃破 -- Conversation flag_100701800_Defeat defense weapon
+3615 会話フラグ_100701900_それだ621目標を破壊しろ -- Conversation Flag_100701900_That's it 621 Destroy the target
+3616 会話フラグ_100702100_変圧チャンバーの破壊を確認した -- Conversation flag_100702100_Destruction of the transformation chamber was confirmed.
+3617 会話フラグ_100702300_隔壁が -- Conversation flag_100702300_Bulkhead
+3618 会話フラグ_100702500_防衛プロフェーズ5パターンC排除します -- Conversation Flag_100702500_Defense Pro Phase 5 Pattern C Eliminated
+3619 会話フラグ_100702520_防衛兵器ACか -- Conversation flag_100702520_Defense weapon AC?
+3620 会話フラグ_100702540_生体反応なし無人機体です -- Conversation flag_100702540_Unmanned aircraft with no biological reaction
+3621 会話フラグ_100702560_これは技研の -- Conversation flag_100702560_This is Giken's
+3622 会話フラグ_100702600_炉心溶融が進んでいます爆発までの残り時間は -- Conversation Flag_100702600_Core melting is progressing. How much time remains until explosion?
+3623 会話フラグ_100702700_レイヴン計算では4分しか -- Conversation Flag_100702700_Raven calculates it to be only 4 minutes
+3624 会話フラグ_100702710_レイヴン計算では3分30秒しか -- Conversation Flag_100702710_Raven's calculation is only 3 minutes and 30 seconds
+3625 会話フラグ_100702720_レイヴン計算では3分しか -- Conversation flag_100702720_Raven calculation only takes 3 minutes
+3626 会話フラグ_100702730_レイヴン計算では2分30秒しか -- Conversation Flag_100702730_Raven's calculation is only 2 minutes and 30 seconds
+3627 会話フラグ_100702740_レイヴン計算では2分しか -- Conversation flag_100702740_Raven calculation only takes 2 minutes
+3628 会話フラグ_100702780_目標脅威レベル9排除します -- Conversation Flag_100702780_Target Threat Level 9 Eliminate
+3629 会話フラグ_100702800_技研Ｘ市封鎖にＸ対るＸＸ深刻脅威と定ＸＸ -- Conversation flag_100702800_Giken
+3630 会話フラグ_100702900_やったか -- Conversation flag_100702900_Did you do it?
+3631 会話フラグ_100703000_レイヴン隔壁の解錠を -- Conversation Flag_100703000_Unlock Raven Bulkhead
+3632 会話フラグ_100703040_強Ｘ執行シＸテム最終プロトＸル -- Conversation Flag_100703040_Strong X Execution System Final Prototype
+3633 会話フラグ_100703100_爆発まであと3分 -- Conversation Flag_100703100_3 minutes left until explosion
+3634 会話フラグ_100703120_爆発まであと2分 -- Conversation Flag_100703120_2 minutes left until explosion
+3635 会話フラグ_100703140_爆発まであと1分30秒 -- Conversation Flag_100703140_1 minute 30 seconds left until explosion
+3636 会話フラグ_100703160_急いでくださいレイヴン -- Conversation flag_100703160_Please hurry Raven
+3637 会話フラグ_100703200_残り2分時間が -- Conversation flag_100703200_2 minutes remaining
+3638 会話フラグ_100703220_残り1分時間が -- Conversation flag_100703220_1 minute remaining
+3639 会話フラグ_100703240_621お前の仕事はまだ残っている -- Conversation flag_100703240_621 Your work still remains.
+3640 会話フラグ_100703300_あと1分 -- Conversation flag_100703300_1 minute left
+3641 会話フラグ_100703320_あと30秒 -- Conversation flag_100703320_30 seconds left
+3642 会話フラグ_100703340_時間がレイヴン -- Conversation Flag_100703340_Time is Raven
+3643 会話フラグ_100703400_あと30秒で爆発します -- Conversation flag_100703400_will explode in 30 seconds
+3644 会話フラグ_100703420_あと15秒で爆発します -- Conversation flag_100703420_will explode in 15 seconds
+3645 会話フラグ_100703440_621このままでは -- Conversation flag_100703440_621 As is
+3646 会話フラグ_100703700_レイヴン入口から離れてください -- Conversation Flag_100703700_Please stay away from Raven entrance
+3647 会話フラグ_100704100_レイヴン -- Conversation flag_100704100_Raven
+3670 会話用条件判定フラグ_その1_100703160_急いでくださいレイヴンを発話 -- Conversation condition judgment flag_Part 1_100703160_Use Hurry up Raven
+3671 会話用条件判定フラグ_その2_100703240_621お前の仕事はまだ残ってるを発話 -- Conversation condition judgment flag_Part 2_100703240_621 Say "Your work still remains"
+3672 会話用条件判定フラグ_その3_100703340_時間がレイヴンを発話 -- Conversation condition judgment flag_Part 3_100703340_Time speaks Raven
+3673 会話用条件判定フラグ_その4_100703440_621このままではを発話 -- Conversation condition judgment flag_Part 4_100703440_621 Say "As is"
+3680 会話用条件判定フラグ_残り240秒を切った -- Conversation condition judgment flag_Less than 240 seconds left
+3681 会話用条件判定フラグ_残り210秒を切った -- Conversation condition judgment flag_Less than 210 seconds left
+3682 会話用条件判定フラグ_残り180秒を切った -- Conversation condition judgment flag_Less than 180 seconds left
+3683 会話用条件判定フラグ_残り150秒を切った -- Conversation condition judgment flag_Less than 150 seconds left
+3684 会話用条件判定フラグ_残り120秒を切った -- Conversation condition judgment flag_Less than 120 seconds left
+3685 会話用条件判定フラグ_残り090秒を切った -- Conversation condition judgment flag_Less than 090 seconds left
+3686 会話用条件判定フラグ_残り060秒を切った -- Conversation condition judgment flag_less than 060 seconds remaining
+3687 会話用条件判定フラグ_残り030秒を切った -- Conversation condition judgment flag_Less than 030 seconds left
+3688 会話用条件判定フラグ_残り015秒を切った -- Conversation condition judgment flag_Less than 015 seconds left
+3690 会話用条件判定フラグ_その1起動 -- Conversation condition judgment flag_part 1 activation
+3691 会話用条件判定フラグ_その2起動 -- Conversation condition judgment flag_Part 2 activation
+3692 会話用条件判定フラグ_その3起動 -- Conversation condition judgment flag_part 3 activation
+3693 会話用条件判定フラグ_その4起動 -- Conversation condition judgment flag_part 4 activation
+3694 会話用条件判定フラグ_その1終了 -- Conversation condition judgment flag_Part 1 completed
+3695 会話用条件判定フラグ_その2終了 -- Conversation condition judgment flag_Part 2 completed
+3696 会話用条件判定フラグ_タイムカウンタ台詞喋り許可 -- Conversation condition judgment flag_Time counter dialogue speaking permission
+3697 会話用条件判定フラグ_その3終了 -- Conversation condition judgment flag_Part 3 completed
+3698 会話用条件判定フラグ_その4終了 -- Conversation condition judgment flag_Part 4 completed
+3700 マーカー制御_最後のマーカー -- Marker control_last marker
+3701 CPからきたよフラグ01 -- I came from CP flag 01
+3702 CPからきたよフラグ02 -- I came from CP flag 02
+3710 bas_B_ビューポイント到達したか判定_FEマーカー改修用 -- bas_B_Determine whether the viewpoint has been reached_For FE marker repair
+3720 会話制御判定_炉扉ハック完了 -- Conversation control judgment_Furnace door hack completed
+3721 会話制御判定_無人AC撃破後ハック開始 -- Conversation control judgment_Start hacking after defeating unmanned AC
+3730 イベント制御領域_自機が炉心内戦闘領域にいるか判定 -- Event control area_Determine if your aircraft is in the core combat area
+3735 炉心内デリータへのイベントポイント登録 -- Event point registration for in-core deleter
+3800 環境エフェクトイベント -- environmental effect event
+3801 環境エフェクトイベント_画面前効果 -- Environmental effect event_front effect
+3810 Gparam切り替えイベント -- Gparam switching event
+3900 テストイベント群 -- test event group
+3910 テストイベント_エフェクト確認用イベント_必ず消す -- Test event_Effect confirmation event_Make sure to delete
+3920 テストイベント_画面前効果確認用 -- Test event_For checking the effect in front of the screen
+3950 電熱線死亡_敵キャラ -- Heating wire death_enemy character

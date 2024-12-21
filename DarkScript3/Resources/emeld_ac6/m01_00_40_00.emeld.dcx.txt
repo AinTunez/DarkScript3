@@ -1,0 +1,9 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッションクリア判定 -- Mission clear judgment
+2001 ヒット削除 -- hit delete
+2010 本体初期化 -- Main unit initialization
+2100 残像初期化 -- Afterimage initialization
+2200 特殊効果監視 -- special effects monitoring
+2300 残像召喚 -- Afterimage summon
+2400 ヒートアップ -- heat up

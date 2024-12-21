@@ -1,0 +1,199 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 クリアフラグ -- clear flag
+2001 必要アセット表示 -- Display required assets
+2002 トライアル宝 -- trial treasure
+2010 テストイベ -- test event
+2020 リザルト_暗転開始通知フラグ -- Result_Dark start notification flag
+2030 チェックポイント有効化 -- checkpoint enable
+2031 チェックポイント有効化判定フラグ -- Checkpoint activation determination flag
+2090 サウンドステート切り替え_ボス撃破 -- Sound state switching_defeat boss
+2091 BGM_無音通知フラグ -- BGM_silence notification flag
+2100 初期イベント_共通 -- Initial event_common
+2101 初期イベント -- initial event
+2112 ナンバー2撃破判定 -- Number 2 defeat judgment
+2120 目標マーカー3表示判定 -- Target marker 3 display judgment
+2121 目標マーカー4表示判定 -- Target marker 4 display judgment
+2122 目標マーカー5表示判定 -- Target marker 5 display judgment
+2123 目標マーカー1表示判定 -- Target marker 1 display judgment
+2124 目標マーカー2表示判定 -- Target marker 2 display judgment
+2140 作戦ライン有効化_01 -- Operation line activation_01
+2141 作戦ライン有効化_02 -- Operation line activation_02
+2142 作戦ライン有効化_03 -- Operation line activation_03
+2200 s01_EVEダメ有効化 -- s01_EVE damage enabled
+2201 s01_EVE初期ダメ付与 -- s01_EVE initial damage added
+2310 s03_No2_初期イベント -- s03_No2_Initial event
+2311 s03_NO2にマーカー付与 -- Add marker to s03_NO2
+2312 s03_強敵ロジック起動判定 -- s03_Strong enemy logic activation judgment
+2320 s03_No2初回行動制御_AA発動 -- s03_No2 First action control_AA activation
+2510 s03_No2接敵判定 -- s03_No2 enemy contact judgment
+2520 s03_No2マーカー消し -- s03_No2 marker erase
+2530 s03_No2の自機タゲ優先度上げ用 -- For raising the target priority of s03_No2
+2540 s03_EVEダメ有効化 -- s03_EVE damage enabled
+2541 s03_EVE初期ダメ付与 -- s03_EVE initial damage added
+2550 s035_EVEダメ有効化処理_手前 -- s035_EVE damage enablement process_front
+2551 s035_EVEダメ有効化処理_奥 -- s035_EVE damage enablement process_back
+2601 s04_トラップ起動判定 -- s04_Trap activation determination
+2602 s04_トラップ起動失敗判定 -- s04_Trap activation failure determination
+2610 s04_出口閉鎖処理 -- s04_Exit closure processing
+2611 s04_トラップ起動処理 -- s04_Trap activation process
+2612 s04_隔壁開錠可能判定 -- s04_Bulkhead unlockable determination
+2613 s04_残りの敵にTGT表示 -- s04_TGT display for remaining enemies
+2614 s04_隔壁開錠可能会話再生判定 -- s04_Bulkhead unlockable conversation playback judgment
+2620 s04_隔壁閉鎖処理 -- s04_Bulkhead closing process
+2630 s04_隔壁開錠 -- s04_Bulkhead unlocking
+2700 s05_ドーム扉開錠判定 -- s05_Dome door unlock determination
+2705 s05_チャティ行動切り替え判定 -- s05_Chaty behavior switching judgment
+2710 s05_ボス登場CS再生 -- s05_Boss appearance CS playback
+2711 s05_カーラ演出死亡許可 -- s05_ Kara performance death permission
+2712 s05_カーラ部下演出死亡許可 -- s05_ Kara's subordinate performance death permission
+2713 s05_ボス戦開始処理 -- s05_Boss battle start process
+2720 s05_カーラAP66パー判定 -- s05_Cara AP66 Par Judgment
+2721 s05_カーラAP33パー判定 -- s05_Cara AP33 par judgment
+2722 s05_チャティAP70パー判定 -- s05_Chaty AP70 par judgment
+2723 s05_チャティAP50パー判定 -- s05_Chaty AP50 par judgment
+2730 s05_カーラ撃破判定 -- s05_Kara defeat judgment
+2731 s05_チャティ撃破判定 -- s05_Chaty defeat judgment
+2732 s05_ボス全滅判定 -- s05_Boss annihilation judgment
+2740 s05_エマージェンシーイベント発生 -- s05_Emergency event occurred
+2741 s05_エマージェンシーイベントSEフェード -- s05_Emergency event SE fade
+2742 s05_エマージェンシーイベント環境音フェード -- s05_Emergency event environment sound fade
+2743 s05_エマージェンシーイベント_シャットダウンSE再生 -- s05_Emergency event_Shutdown SE playback
+2950 会話_No2戦_No2AP3分の2 -- Conversation_No2 battle_No2 AP 2/3
+2951 会話_No2戦_No2AP3分の1 -- Conversation_No2 battle_No2 AP 1/3
+2953 会話_No2戦_No2スタッガー特殊効果付与 -- Conversation_No2 battle_No2 stagger special effect added
+2954 会話_No2戦_接敵回避 -- Conversation_No2 battle_Escape from enemy contact
+2956 会話_No2戦_No2スタッガー判定 -- Conversation_No2 Match_No2 Stagger Judgment
+2960 会話_s04_通路に出た -- Conversation_s04_Out in the aisle
+2970 s05_カーラスタッガー特殊効果付与_前半 -- s05_Karla Stagger special effects added_first half
+2971 s05_カーラスタッガー特殊効果付与_後半 -- s05_Karla Stagger special effect added_second half
+2972 s05_チャティスタッガー特殊効果付与_前半 -- s05_Chatty Stagger special effects added_first half
+2973 s05_チャティスタッガー特殊効果付与_後半 -- s05_Chatty Stagger special effects added_second half
+2980 会話_s05_カーラスタッガー判定_前半 -- Conversation_s05_Carla Stagger Judgment_First half
+2981 会話_s05_カーラスタッガー判定_後半 -- Conversation_s05_Carla Stagger Judgment_Second half
+2982 会話_s05_チャティスタッガー判定_前半 -- Conversation_s05_Chatty Stagger Judgment_First half
+2983 会話_s05_チャティスタッガー判定_後半 -- Conversation_s05_Chatty Stagger Judgment_Second half
+3400 回復薬使用判定_カーラ_1回目 -- Recovery medicine use judgment_Karla_1st time
+3401 回復薬使用判定_カーラ_2回目 -- Recovery medicine use judgment_Karla_2nd time
+3410 回復薬使用判定_チャティ_1回目 -- Recovery medicine use judgment_Chati_1st time
+3411 回復薬使用判定_チャティ_2回目 -- Recovery medicine use judgment_Chati_2nd time
+3415 回復薬使用判定_チャティ_1回目の後にAP50パー -- Recovery medicine use judgment_Chati_AP50 par after the first time
+3420 回復薬使用判定_スネイル_1回目 -- Recovery medicine use judgment_Snail_1st time
+3421 回復薬使用判定_スネイル_2回目 -- Recovery medicine use judgment_Snail_2nd time
+3500 t01_初期イベント -- t01_Initial event
+3510 t01_起動判定 -- t01_Start judgment
+3600 会話済みフラグ00 -- Conversation completed flag 00
+3601 会話済みフラグ01 -- Conversation completed flag 01
+3602 会話済みフラグ02 -- Conversation completed flag 02
+3603 会話済みフラグ03 -- Conversation completed flag 03
+3604 会話済みフラグ04 -- Conversation completed flag 04
+3605 会話済みフラグ05 -- Conversation completed flag 05
+3606 会話済みフラグ06 -- Conversation completed flag 06
+3607 会話済みフラグ07 -- Conversation completed flag 07
+3608 会話済みフラグ08 -- Conversation completed flag 08
+3609 会話済みフラグ09 -- Conversation completed flag 09
+3610 会話済みフラグ10 -- Conversation completed flag 10
+3611 会話済みフラグ11 -- Conversation completed flag 11
+3612 会話済みフラグ12 -- Conversation completed flag 12
+3613 会話済みフラグ13 -- Conversation completed flag 13
+3614 会話済みフラグ14 -- Conversation completed flag 14
+3615 会話済みフラグ15 -- Conversation completed flag 15
+3616 会話済みフラグ16 -- Conversation completed flag 16
+3617 会話済みフラグ17 -- Conversation completed flag 17
+3618 会話済みフラグ18 -- Conversation completed flag 18
+3619 会話済みフラグ19 -- Conversation completed flag 19
+3620 会話済みフラグ20 -- Conversation completed flag 20
+3621 会話済みフラグ21 -- Conversation completed flag 21
+3622 会話済みフラグ22 -- Conversation completed flag 22
+3623 会話済みフラグ23 -- Conversation completed flag 23
+3624 会話済みフラグ24 -- Conversation completed flag 24
+3625 会話済みフラグ25 -- Conversation completed flag 25
+3626 会話済みフラグ26 -- Conversation completed flag 26
+3627 会話済みフラグ27 -- Conversation completed flag 27
+3628 会話済みフラグ28 -- Conversation completed flag 28
+3629 会話済みフラグ29 -- Conversation completed flag 29
+3630 会話済みフラグ30 -- Conversation completed flag 30
+3631 会話済みフラグ31 -- Conversation completed flag 31
+3632 会話済みフラグ32 -- Conversation completed flag 32
+3633 会話済みフラグ33 -- Conversation completed flag 33
+3634 会話済みフラグ34 -- Conversation completed flag 34
+3635 会話済みフラグ35 -- Conversation completed flag 35
+3636 会話済みフラグ36 -- Conversation completed flag 36
+3637 会話済みフラグ37 -- Conversation completed flag 37
+3638 会話済みフラグ38 -- Conversation completed flag 38
+3639 会話済みフラグ39 -- Conversation completed flag 39
+3640 会話済みフラグ40 -- Conversation completed flag 40
+3641 会話済みフラグ41 -- Conversation completed flag 41
+3642 会話済みフラグ42 -- Conversation completed flag 42
+3643 会話済みフラグ43 -- Conversation completed flag 43
+3644 会話済みフラグ44 -- Conversation completed flag 44
+3645 会話済みフラグ45 -- Conversation completed flag 45
+3646 会話済みフラグ46 -- Conversation completed flag 46
+3647 会話済みフラグ47 -- Conversation completed flag 47
+3648 会話済みフラグ48 -- Conversation completed flag 48
+3649 会話済みフラグ49 -- Conversation completed flag 49
+3650 会話済みフラグ50 -- Conversation completed flag 50
+3651 会話済みフラグ51 -- Conversation completed flag 51
+3652 会話済みフラグ52 -- Conversation completed flag 52
+3653 会話済みフラグ53 -- Conversation completed flag 53
+3654 会話済みフラグ54 -- Conversation completed flag 54
+3655 会話済みフラグ55 -- Conversation completed flag 55
+3656 会話済みフラグ56 -- Conversation completed flag 56
+3657 会話済みフラグ57 -- Conversation completed flag 57
+3658 会話済みフラグ58 -- Conversation completed flag 58
+3659 会話済みフラグ59 -- Conversation completed flag 59
+3660 会話済みフラグ60 -- Conversation completed flag 60
+3661 会話済みフラグ61 -- Conversation completed flag 61
+3662 会話済みフラグ62 -- Conversation completed flag 62
+3663 会話済みフラグ63 -- Conversation completed flag 63
+3664 会話済みフラグ64 -- Conversation completed flag 64
+3665 会話済みフラグ65 -- Conversation completed flag 65
+3666 会話済みフラグ66 -- Conversation completed flag 66
+3667 会話済みフラグ67 -- Conversation completed flag 67
+3668 会話済みフラグ68 -- Conversation completed flag 68
+3669 会話済みフラグ69 -- Conversation completed flag 69
+3670 会話済みフラグ70 -- Conversation completed flag 70
+3671 会話済みフラグ71 -- Conversation completed flag 71
+3672 会話済みフラグ72 -- Conversation completed flag 72
+3673 会話済みフラグ73 -- Conversation completed flag 73
+3674 会話済みフラグ74 -- Conversation completed flag 74
+3675 会話済みフラグ75 -- Conversation completed flag 75
+3676 会話済みフラグ76 -- Conversation completed flag 76
+3677 会話済みフラグ77 -- Conversation completed flag 77
+3678 会話済みフラグ78 -- Conversation completed flag 78
+3679 会話済みフラグ79 -- Conversation completed flag 79
+3680 会話済みフラグ80 -- Conversation completed flag 80
+3681 会話済みフラグ81 -- Conversation completed flag 81
+3682 会話済みフラグ82 -- Conversation completed flag 82
+3683 会話済みフラグ83 -- Conversation completed flag 83
+3684 会話済みフラグ84 -- Conversation completed flag 84
+3685 会話済みフラグ85 -- Conversation completed flag 85
+3686 会話済みフラグ86 -- Conversation completed flag 86
+3687 会話済みフラグ87 -- Conversation completed flag 87
+3688 会話済みフラグ88 -- Conversation completed flag 88
+3689 会話済みフラグ89 -- Conversation completed flag 89
+3690 会話済みフラグ90 -- Conversation completed flag 90
+3691 会話済みフラグ91 -- Conversation completed flag 91
+3692 会話済みフラグ92 -- Conversation completed flag 92
+3693 会話済みフラグ93 -- Conversation completed flag 93
+3694 会話済みフラグ94 -- Conversation completed flag 94
+3695 会話済みフラグ95 -- Conversation completed flag 95
+3696 会話済みフラグ96 -- Conversation completed flag 96
+3697 会話済みフラグ97 -- Conversation completed flag 97
+3698 会話済みフラグ98 -- Conversation completed flag 98
+3699 会話済みフラグ99 -- Conversation completed flag 99
+3700 会話済みフラグ542 -- Conversation completed flag 542
+3701 会話済みフラグ544 -- Conversation completed flag 544
+3702 会話済みフラグ546 -- Conversation completed flag 546
+3703 会話済みフラグ547 -- Conversation completed flag 547
+3704 会話済みフラグ548 -- Conversation completed flag 548
+3705 会話済みフラグ551 -- Conversation completed flag 551
+3706 会話済みフラグ552 -- Conversation completed flag 552
+3707 会話済みフラグ553 -- Conversation completed flag 553
+3708 会話済みフラグ554 -- Conversation completed flag 554
+3709 会話済みフラグ556 -- Conversation completed flag 556
+3710 会話済みフラグ562 -- Conversation completed flag 562
+3800 p01_トラップ部屋前までの敵無効化 -- p01_Disable enemies up to the front of the trap room
+3810 p02_ドーム前までの敵無効化 -- p02_Disable enemies in front of the dome
+3900 s03固定砲台お互い狙わせ処理 -- s03 Fixed gun emplacement aiming at each other
+1000000000 敵リスポン -- enemy respawn

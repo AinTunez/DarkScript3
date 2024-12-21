@@ -1,0 +1,7 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+1000000000 敵リスポン -- enemy respawn
+1046380280 たき火消去 -- bonfire erasure
+1046380670 チュートリアルメッセージ_騎乗 -- Tutorial message_Riding
+1046380671 チュートリアルメッセージ_エリクサー瓶取得 -- Tutorial message_Elixir bottle acquisition
+1046382210 配置演出_敵死体化 -- Placement production_enemy corpse

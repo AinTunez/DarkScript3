@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1050383700 NPC349腐敗長老_NPC初期化イベント -- NPC349 Corrupt Elder_NPC initialization event
+1050383701 NPC349腐敗長老_ﾌｪｰｽﾞ3リアルタイム遷移 -- NPC349 Corrupt Elder_Phase 3 real-time transition
+1050383702 NPC349腐敗長老_購入魔術チェック -- NPC349 Corrupt Elder_Purchase magic check
+1050383703 NPC349腐敗長老_死体表示 -- NPC349 Rotten elder_corpse display
+1050383710 NPC348マレニアの娘_ﾌｪｰｽﾞ1_2_NPC初期化イベント -- NPC348 Marenia's Daughter_Phase 1_2_NPC initialization event
+1050383712 NPC348マレニアの娘_ﾌｪｰｽﾞ3_NPC初期化イベント -- NPC348 Marenia's Daughter_Phase 3_NPC initialization event
+1050383713 NPC348マレニアの娘_デモ再生 -- NPC348 Marenia's Daughter_Demo playback

@@ -1,0 +1,7 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1035442650 チュートリアルメッセージ_マルチプレイ侵入 -- Tutorial message_Multiplayer invasion
+1035443700 NPC301_戦場医師_NPC初期化イベント_バラの教会 -- NPC301_Battlefield Doctor_NPC Initialization Event_Rose Church
+1035443701 NPC301_戦場医師_バラの教会_敵対時アニメ再生 -- NPC301_Battlefield Doctor_Rose Church_Animation playback when hostile

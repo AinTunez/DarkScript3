@@ -91,7 +91,7 @@ namespace DarkScript3
             HideTip();
             Editors.Remove(editor);
             docBox.Clear();
-            currentDoc = (null, -1);
+            currentDoc = null;
             RefreshAuxiliaryStyles();
         }
 
@@ -100,7 +100,7 @@ namespace DarkScript3
             HideTip();
             BFF.tb = editor.editor;
             docBox.Clear();
-            currentDoc = (null, -1);
+            currentDoc = null;
             editor.RefreshGlobalStyles(docBox);
             // Add last as a hint for which global styles to use
             Editors.Remove(editor);
@@ -134,14 +134,19 @@ namespace DarkScript3
             }
         }
 
-        public bool JumpToCommonFunc(int eventId, EditorGUI sourceEditor)
+        public bool JumpToCommonFunc(long eventId, string commonFile, EditorGUI sourceEditor)
         {
             // If a common_func is open in the same directory, jump to it.
             // This is just based on the contents of the editor - initialization types would require something more robust.
             string path = sourceEditor.EMEVDPath;
             string[] parts = Path.GetFileName(path).Split(new[] { '.' }, 2);
-            if (parts.Length <= 1 || parts[0] == "common_func") return false;
-            string commonFuncPath = Path.Combine(Path.GetDirectoryName(path), "common_func." + parts[1]);
+            if (parts.Length <= 1 || parts[0] == commonFile) return false;
+            string commonFuncDir = Path.GetDirectoryName(path);
+            if (commonFile == "m29")
+            {
+                commonFuncDir = Path.GetDirectoryName(commonFuncDir);
+            }
+            string commonFuncPath = Path.Combine(commonFuncDir, $"{commonFile}.{parts[1]}");
             EditorGUI destEditor = Editors.Find(e => e.EMEVDPath == commonFuncPath);
             if (destEditor == null) return false;
             Action gotoEvent = destEditor.GetJumpToEventAction(eventId);
@@ -258,29 +263,30 @@ namespace DarkScript3
         {
             // Heuristic detection of oodle copying, for convenience
             string emedfName = Path.GetFileName(emedfPath);
-            if (!(emedfName.StartsWith("er-common") || emedfName.StartsWith("sekiro-common")))
+            if (!(emedfName.StartsWith("er-common") || emedfName.StartsWith("sekiro-common") || emedfName.StartsWith("ac6-common")))
             {
                 return;
             }
             // Assume current working directory is exe dir
-            string dll = "oo2core_6_win64.dll";
-            if (File.Exists(dll) || File.Exists($"lib/{dll}"))
+            List<string> dlls = new() { "oo2core_6_win64.dll", "oo2core_8_win64.dll" };
+            bool dllExists() => dlls.Any(dll => File.Exists(dll) || File.Exists($"lib/{dll}"));
+            if (dllExists())
             {
                 return;
             }
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = $"Select {dll} from the game directory";
-            ofd.Filter = $"Oodle DLL|{dll}";
+            ofd.Title = $"Select {dlls[0]} from the game directory";
+            ofd.Filter = $"Oodle DLL|*.dll";
             if (ofd.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
             string selected = ofd.FileName;
-            if (Path.GetFileName(selected) != dll || File.Exists(dll) || File.Exists($"lib/{dll}"))
+            if (!dlls.Contains(Path.GetFileName(selected)) || dllExists())
             {
                 return;
             }
-            File.Copy(selected, dll);
+            File.Copy(selected, Path.GetFileName(selected));
         }
 
         private void TipBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -289,54 +295,63 @@ namespace DarkScript3
             e.ChangedRange.SetStyle(TextStyles.EnumType, new Regex(@"[<>]"));
         }
 
-        private Action<(string, int, InstructionDocs)> loadDocTextDebounce;
+        private Action<LoadDocInput> loadDocTextDebounce;
         // Should probably make Debounce more idempotency-aware, but this is a cheap way to avoid cancelling unnecessarily
-        private (string, int) callingDoc;
-        public void LoadDocText(string func, int argIndex, InstructionDocs docs, bool immediate)
+        private DocArgID callingDoc;
+        public void LoadDocText(InitData.DocID func, int argIndex, InstructionDocs docs, InitData.Links links, bool immediate)
         {
             if (!Properties.Settings.Default.ArgDocbox)
             {
                 argIndex = -1;
             }
+            LoadDocInput input = new LoadDocInput(func, argIndex, docs, links);
             if (immediate)
             {
-                LoadDocTextInternal((func, argIndex, docs));
+                LoadDocTextInternal(input);
             }
             else
             {
                 if (loadDocTextDebounce == null)
                 {
-                    loadDocTextDebounce = Debounce((Action<(string, int, InstructionDocs)>)LoadDocTextInternal, 50);
+                    loadDocTextDebounce = Debounce((Action<LoadDocInput>)LoadDocTextInternal, 50);
                 }
-                (string, int) call = (func, argIndex);
+                DocArgID call = new DocArgID(func, argIndex);
                 if (call != callingDoc)
                 {
-                    loadDocTextDebounce((func, argIndex, docs));
+                    loadDocTextDebounce(input);
                     callingDoc = call;
                 }
             }
         }
 
-        private (string, int) currentDoc;
-        private void LoadDocTextInternal((string, int, InstructionDocs) input)
+        private record DocArgID(InitData.DocID ID, int ArgIndex);
+        private record LoadDocInput(InitData.DocID ID, int ArgIndex, InstructionDocs Docs, InitData.Links Links);
+
+        private DocArgID currentDoc;
+        private void LoadDocTextInternal(LoadDocInput input)
         {
-            (string func, int argIndex, InstructionDocs Docs) = input;
-            if (func == null)
+            // TODO: Init data
+            InitData.DocID docId = input.ID;
+            int argIndex = input.ArgIndex;
+            InstructionDocs Docs = input.Docs;
+            if (docId.Func == null)
             {
                 docBox.Clear();
                 return;
             }
             if (Docs == null) return;
-            if (Docs.AllAliases.TryGetValue(func, out string realName))
+            if (Docs.AllAliases.TryGetValue(docId.Func, out string realName))
             {
-                func = realName;
+                docId = new InitData.DocID(realName, docId.Event);
             }
             List<EMEDF.ArgDoc> args = null;
             ScriptAst.BuiltIn builtin = null;
-            if (!Docs.AllArgs.TryGetValue(func, out args) && !ScriptAst.ReservedWords.TryGetValue(func, out builtin)) return;
+            string func = docId.Func;
+            if (!Docs.LookupArgDocs(docId, input.Links, out args, out InitData.EventInit eventInit)
+                && !ScriptAst.ReservedWords.TryGetValue(func, out builtin)) return;
             if (builtin != null && builtin.Doc == null) return;
 
-            (string, int) newDoc = (func, argIndex);
+            DocArgID newDoc = new DocArgID(input.ID, argIndex);
             if (currentDoc == newDoc) return;
             currentDoc = newDoc;
             docBox.Clear();
@@ -380,6 +395,10 @@ namespace DarkScript3
             }
 
             docBox.AppendText($"{func}");
+            if (eventInit != null)
+            {
+                docBox.AppendText($"({eventInit.ID})");
+            }
             Place? argPlace = null;
 
             // Optional args are just the last n args, rather than per-arg, but so far this seems fine.
@@ -499,6 +518,10 @@ namespace DarkScript3
             if (shortText != null)
             {
                 docBox.AppendText(Environment.NewLine + Environment.NewLine + $"({shortText})");
+            }
+            if (eventInit?.Name != null)
+            {
+                docBox.AppendText(Environment.NewLine + Environment.NewLine + eventInit.Name, TextStyles.Comment);
             }
             Place jumpPlace = argPlace ?? docBox.Range.Start;
             docBox.Selection = docBox.GetRange(jumpPlace, jumpPlace);

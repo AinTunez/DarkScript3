@@ -1,0 +1,9 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+12042400 透明壁_ラニイベント用 -- Transparent wall_for Rani event
+12042680 胞子SFX処理 -- Spore SFX treatment
+12042800 アステール撃破 -- Defeat Aster
+12042810 アステール出現 -- Aster appears
+12042849 アステール戦イベント起動 -- Aster battle event starts
+1000000000 敵リスポン -- enemy respawn

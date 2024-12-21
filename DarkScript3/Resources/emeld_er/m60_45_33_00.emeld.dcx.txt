@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1045332220 オオカミ集合_領域判定_テスト -- Wolf gathering_area determination_test
+1045332250 魔術師の塔イベント扉 -- Magician's Tower Event Door
+1045332251 魔術師塔イベント_カメ死亡演出_XX -- Magician Tower Event_Turtle Death Production_XX
+1045332252 魔術師塔イベント_カメ出現_XX -- Magician Tower Event_Turtle Appearance_XX
+1045332253 魔術師塔イベント_霧壁エラーメッセージ -- Magician Tower Event_Fog Wall Error Message
+1045332254 魔術師塔イベント_ヒントテキスト表示 -- Magician Tower Event_Hint text display
+1045332255 魔術師の塔イベント梯子 -- Sorcerer's Tower Event Ladder
+1045332256 透明亀アニメ -- transparent turtle anime
+1045332260 隕石跡SFX制御_XX -- Meteorite trace SFX control_XX
+1045332265 隕石跡SFX制御_新演出版_XX -- Meteorite trace SFX control_New production version_XX
+1045332900 隕石跡イベント -- Meteorite trace event
+1045332920 隕石跡イベントボス出現 -- Meteorite Ruin Event Boss Appears

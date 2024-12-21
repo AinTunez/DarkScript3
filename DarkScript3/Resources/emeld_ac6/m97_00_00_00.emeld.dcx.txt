@@ -1,0 +1,17 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+9000000 レーダーハッキング -- radar hacking
+9000010 レーダーハッキング終了通知 -- Radar hacking completion notification
+9100000 レーダーハッキング完了時挙動 -- Behavior when radar hacking is completed
+9300000 電磁嵐 -- electromagnetic storm
+9400000 エレベーター -- elevator
+9500000 補給スタンド -- supply stand
+9600000 修理ステーション -- repair station
+9700000 強敵（デブ）初期化 -- Strong enemy (fat) initialization
+9700010 強敵（デブ）_部位1HP① -- Strong enemy (fat)_part 1HP①
+9700020 強敵（デブ）_部位1HP② -- Strong enemy (fat)_part 1HP②
+9700030 強敵（デブ）_部位1HP③ -- Strong enemy (fat)_part 1HP③
+9700040 強敵（デブ）_部位1HP④ -- Strong enemy (fat)_part 1HP④
+9700050 強敵（デブ）_部位1HP⑤ -- Strong enemy (fat)_part 1HP⑤
+9700900 ミサイル　更新頻度固定　暫定処理_XX -- Missile update frequency fixed provisional processing_XX
+1000000000 敵リスポン -- enemy respawn

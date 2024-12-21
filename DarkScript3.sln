@@ -4,7 +4,7 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DarkScript3", "DarkScript3\DarkScript3.csproj", "{26132F38-F7FC-465D-8044-4D45B5F79264}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoulsFormats", "..\SoulsFormats\SoulsFormats\SoulsFormats.csproj", "{580C3981-F179-4F17-858A-9469023BAF44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoulsFormats", "..\SoulsFormatsNEXT\SoulsFormats\SoulsFormats.csproj", "{580C3981-F179-4F17-858A-9469023BAF44}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoapstoneLib", "..\SoapstoneLib\SoapstoneLib\SoapstoneLib.csproj", "{7ADA6E29-EE8A-4829-A2D5-9C7B42D43601}"
 EndProject

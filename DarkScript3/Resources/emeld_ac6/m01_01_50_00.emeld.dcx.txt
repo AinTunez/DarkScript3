@@ -1,0 +1,228 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッション開始時イベント -- Mission start event
+2001 裏切り用_チェックポイント更新フラグ -- Checkpoint update flag for betrayal
+2002 裏切り用_チェックポイント更新 -- For betrayal_checkpoint update
+2003 裏切り用_チェックポイント再開時の僚機ワープ -- For betrayal_wingman warp when restarting checkpoint
+2004 撃破必須敵の更新頻度設定 -- Update frequency settings for enemies that must be defeated
+2005 撃破必須敵の更新頻度設定_解除 -- Update frequency setting for enemies that must be defeated_Cancellation
+2006 第三目標手前敵の無効化 -- Disable enemy in front of third target
+2007 第三目標手前敵の有効化 -- Enable enemy in front of third objective
+2008 破壊ルート敵ACの常時描画 -- Constant drawing of destruction route enemy AC
+2009 隠し強敵エリアの有効化 -- Enabling hidden enemy areas
+2010 破壊ルート_開始時イベント -- Destruction route_start event
+2011 破壊ルート_敵AC戦闘開始時イベント -- Destruction route_Enemy AC battle start event
+2012 破壊ルート_敵ACのボスゲージ有効化 -- Destruction route_enable enemy AC boss gauge
+2013 破壊ルート_敵ACのボスゲージ無効化 -- Destruction route_enemy AC boss gauge invalidation
+2014 第三施設手前雑魚_常時表示ON -- Small fish in front of the third facility_Always display ON
+2015 第三施設手前雑魚_常時表示OFF -- Small fish in front of the third facility_Always display OFF
+2016 第三施設手前雑魚_無敵ON -- Small fish in front of the third facility_Invincible ON
+2017 第三施設手前雑魚_無敵OFF -- Small fish in front of the third facility_Invincible OFF
+2020 裏切りルート_開始時イベント -- Betrayal route_Starting event
+2021 裏切りルート_ボスゲージの有効化 -- Betrayal route_boss gauge activation
+2022 裏切りルート_ボスゲージの無効化 -- Betrayal route_boss gauge invalidation
+2030 自機着弾用サウンドステートON -- Sound state ON for own aircraft landing
+2031 自機着弾用サウンドステートOFF -- Sound state OFF for own aircraft landing
+2100 マーカー制御_目標1と2に設定 -- Marker control_set to targets 1 and 2
+2101 マーカー制御_目標1と2の雑魚に設定 -- Marker control_set to target 1 and 2 small fry
+2102 マーカー制御_破壊ルート_目標3と4に設定 -- Marker control_destruction route_set to targets 3 and 4
+2103 マーカー制御_防衛ルート_僚機二人に設定 -- Marker control_defense route_set to two wingmen
+2110 移動目標マーカー設置_目標1 -- Moving target marker installation_target 1
+2111 移動目標マーカー設置_目標2 -- Moving target marker installation_target 2
+2112 移動目標マーカー設置_目標3 -- Moving target marker installation_target 3
+2113 移動目標マーカー設置_目標4 -- Moving target marker installation_target 4
+2114 移動目標マーカー設置_目標4の２ -- Moving target marker installation_target 4-2
+2120 TGTマーカー切り替え_目標1 -- TGT marker switching_goal 1
+2121 TGTマーカー切り替え_目標2 -- TGT marker switching_goal 2
+2122 TGTマーカー切り替え_目標3 -- TGT marker switching_goal 3
+2123 TGTマーカー切り替え_目標4 -- TGT marker switching_Goal 4
+2130 移動目標マーカー無効化_目標１ -- Disable moving target marker_target 1
+2131 移動目標マーカー無効化_目標２ -- Disable moving target marker_target 2
+2132 移動目標マーカー無効化_目標３ -- Disable moving target marker_target 3
+2133 移動目標マーカー無効化_目標４ -- Disable moving target marker_target 4
+2134 移動目標マーカー無効化_目標４の２ -- Disable moving target marker_target 4-2
+2201 裏切り可能時の僚機設定 -- Wingman settings when betrayal is possible
+2202 裏切り時の僚機設定 -- Wingman settings during betrayal
+2203 ブランコ登場時の僚機設定 -- Wingman settings when swing appears
+2204 僚機制御_イベントターゲット削除 -- Wingman control_Event target deletion
+2211 企業貢献度獲得_破壊ルート -- Acquisition of corporate contribution_destruction route
+2212 企業貢献度獲得_防衛ルート -- Acquisition of corporate contribution_defense route
+2217 防衛ルートボスゲージ非表示 -- Defense root boss gauge hidden
+2218 裏切り時自機イベタゲ設定 -- Own machine event game setting when betrayal
+2224 イグアス死亡演出有効 -- Iguazu death effect enabled
+2225 ヴォルタ死亡演出有効 -- Volta death effect enabled
+2231 防衛ルート追加報酬 -- Defense route additional reward
+2232 裏切りルート_雑魚AC無効化 -- Betrayal route_small fry AC invalidation
+2233 破壊ルート追加報酬 -- Destruction route additional reward
+2234 ミッションクリア時無敵処理 -- Invincibility when clearing a mission
+2235 道中作戦ライン無効化 -- Disable operational line on the way
+2250 僚機制御_第一施設へ -- Wingman control_to the first facility
+2251 僚機制御_第二施設へ -- Wingman control_to the second facility
+2252 僚機制御_第三施設手前右ルートへ -- Wingman control_Go to the right route in front of the third facility
+2253 僚機制御_第三施設手前左ルートへ -- Wingman control_Go to the left route in front of the third facility
+2254 僚機制御_破壊ルート_第三施設へ -- Wingman control_Destruction route_To the third facility
+2255 僚機制御_破壊ルート_第四施設手前へ -- Wingman control_Destruction route_In front of the fourth facility
+2256 僚機制御_破壊ルート_自機追従 -- Wingman control_Destruction route_Own aircraft following
+2502 裏切りルート_リトライ時僚機読み込み待機 -- Betrayal route_Retry convoy waiting to load
+2504 裏切りルート_イグアスAP0判定 -- Betrayal route_Iguazu AP0 judgment
+2505 裏切りルート_ヴォルタAP0判定 -- Betrayal route_Volta AP0 judgment
+2506 裏切りルート_イグアス死亡判定 -- Betrayal Route_Iguazu Death Judgment
+2507 裏切りルート_ヴォルタ死亡判定 -- Betrayal route_Volta death judgment
+2508 破壊ルート_敵AC死亡判定 -- Destruction route_enemy AC death judgment
+2509 破壊ルート_敵AC瀕死判定 -- Destruction route_Enemy AC moribund judgment
+2510 破壊ルート_敵ACAP0判定 -- Destruction route_enemy ACAP0 judgment
+2511 裏切りルート_イグアスAP半減判定 -- Betrayal route_Iguazu AP halved judgment
+2512 裏切りルート_ヴォルタAP半減判定 -- Betrayal route_Volta AP halved judgment
+2513 破壊ルート_自機が敵ACに攻撃を当てた -- Destruction route_Your aircraft attacked enemy AC
+2515 僚機制御_第一施設突破判定 -- Wingman control_First facility breakthrough determination
+2516 僚機制御_第二施設突破判定 -- Wingman control_Second facility breakthrough determination
+2517 僚機制御用_第四施設雑魚殲滅判定 -- For wingman control_4th facility small fry annihilation judgment
+2519 僚機制御_第三施設突破判定 -- Wingman control_third facility breakthrough judgment
+2520 破壊ルート_敵AC戦闘開始判定 -- Destruction route_Enemy AC battle start determination
+2523 裏切り判定_イグアス攻撃判定 -- Betrayal judgment_Iguazu attack judgment
+2524 裏切り判定_ヴォルタ攻撃判定 -- Betrayal judgment_Volta attack judgment
+2526 カステロ戦闘中会話判定 -- Conversation judgment during Castello battle
+2527 カステロAP0判定 -- Castelo AP0 judgment
+2530 防衛ルート_僚機死亡数1 -- Defense route_number of wingman deaths 1
+2531 防衛ルート_僚機死亡数2 -- Defense route_number of wingman deaths 2
+2532 死亡時会話用_パトリックに殺された判定 -- For death conversation_Judgment of being killed by Patrick
+2533 死亡時会話用_ヨッフェに殺された判定 -- For conversation upon death_Judgment of being killed by Ioffe
+2536 僚機制御用_僚機移動開始BOX判定 -- For wingman control_ wingman movement start box judgment
+2537 僚機戦闘開始BOX判定 -- Wingman battle start box judgment
+2539 第二施設イベント視界起動 -- Second facility event visibility activation
+2560 ミッション進行判定_前半の雑魚殲滅 -- Mission progress determination_Eradication of small fry in the first half
+2561 ミッション進行判定_前半の雑魚数減少判定 -- Mission progress determination_Decrease in the number of small fish in the first half
+2570 僚機制御用_自機第一施設接近判定 -- For wingman control_Determination of proximity of own aircraft's first facility
+2571 僚機制御用_裏切り二脚_第三施設進行判定 -- For wingman control_Betrayal Bipod_Third Facility Progress Judgment
+2580 TGTマーカー設置判定_目標1 -- TGT Marker Installation Judgment_Target 1
+2581 TGTマーカー設置判定_目標2 -- TGT Marker Installation Judgment_Target 2
+2582 TGTマーカー設置判定_目標3 -- TGT Marker Installation Judgment_Target 3
+2583 TGTマーカー設置判定_目標4 -- TGT Marker Installation Judgment_Target 4
+2584 TGTマーカー設置判定_目標４の２ -- TGT Marker Installation Judgment_Target 4-2
+2600 施設破壊判定 -- Facility destruction judgment
+2610 破壊目標とダミーキャラの紐づけ_目標1から3 -- Linking destruction targets and dummy characters_Targets 1 to 3
+2620 破壊目標とダミーキャラの紐づけ_目標_4 -- Linking destruction targets and dummy characters_Objective_4
+2630 破壊目標ダメージ時SFX再生 -- SFX playback when destroying target damage
+2700 二脚_AI起動 -- Bipod_AI start
+2701 タンク_AI起動 -- Tank_AI start
+2702 二脚_作戦ライン無効化 -- Bipod_Operation line disabled
+2703 タンク_作戦ライン無効化 -- Tank_Operation line disabled
+2704 二脚_作戦ライン有効化 -- Bipod_Operation Line Activation
+2705 タンク_作戦ライン有効化 -- Tank_Operation Line Activation
+2710 二脚制御_第一目標へ -- Bipod control_toward the first goal
+2711 二脚制御_第二目標へ -- Bipod control_to the second target
+2712 二脚制御_第二目標殲滅後 -- Bipod control_after second target annihilation
+2713 二脚制御_第三目標手前へ -- Bipod control_Toward the third target
+2714 二脚制御_第三目標へ -- Bipod control_to the third target
+2715 二脚制御_第四目標へ -- Bipod control_toward the fourth goal
+2716 二脚制御_第一目標端へ -- Bipod control_to the first target end
+2750 タンク制御_第一目標へ -- Tank control_first goal
+2751 タンク制御_第二目標へ -- Tank control_to the second goal
+2752 タンク制御_第二目標殲滅後 -- Tank control_after second target annihilation
+2753 タンク制御_第三目標手前道中へ -- Tank control_On the way to the third target
+2754 タンク制御_第三目標手前へ -- Tank control_Towards the third target
+2755 タンク制御_第三目標へ -- Tank control_to the third goal
+2756 タンク制御_第四目標へ -- Tank control_toward the fourth goal
+2757 タンク制御_第一目標端へ -- Tank control_to the first target end
+2770 僚機制御_第二施設移動判定 -- Wingman control_Second facility movement judgment
+2771 僚機制御_第三施設移動判定 -- Wingman control_Third facility movement judgment
+2772 僚機制御_第四施設移動判定 -- Wingman control_Fourth facility movement judgment
+2773 僚機制御_第一施設雑魚殲滅判定 -- Wingman control_First facility annihilation judgment
+2774 二脚制御_作戦ライン無視有効化判定 -- Bipod control_Operation line ignored activation judgment
+2775 タンク制御_作戦ライン無視有効化判定 -- Tank Control_Operation Line Ignore Activation Judgment
+2780 タンク制御_第三目標手前道中判定 -- Tank control_Judgment before third target
+2800 破壊ルート決定フラグ -- Destruction route determination flag
+2801 裏切りルート決定フラグ -- Betrayal route determination flag
+2802 パトリック攻撃フラグ -- patrick attack flag
+2803 ヨッフェ攻撃フラグ -- Yoffe attack flag
+2805 裏切り後テキスト演出更新フラグ -- Post-betrayal text production update flag
+2807 ヨッフェ撤退開始フラグ -- Ioffe withdrawal start flag
+2808 パトリック撤退開始フラグ -- Patrick withdrawal start flag
+2809 ブランコIDタグ入手フラグ -- Swing ID tag acquisition flag
+2810 会話ステートマップ終了フラグ -- Conversation state map end flag
+2830 ALT進行フラグ -- ALT progress flag
+2831 前半_雑魚殲滅で進行フラグ -- First half_Progress flag with annihilation of small fry
+2832 前半_目標破壊で進行フラグ -- First half_Progress flag with target destruction
+2833 前半_ミッション前半終了フラグ -- First half_Mission first half end flag
+2834 裏切り_イグアス先に撃破フラグ -- Betrayal_Iguazu defeated flag first
+2835 裏切り_ヴォルタ先に撃破フラグ -- Betrayal_Volta defeats first flag
+2840 破壊_敵AC自機が倒したフラグ -- Destruction_Flag defeated by enemy AC own aircraft
+2841 破壊_敵AC自機が倒していないフラグ -- Destruction_Flag not defeated by enemy AC own aircraft
+2900 裏切り暗号通信会話フラグ -- Betrayal encrypted communication conversation flag
+2902 裏切り後会話フラグ -- Post-betrayal conversation flag
+2903 パトリック瀕死会話フラグ -- patrick dying conversation flag
+2904 ヨッフェ瀕死会話フラグ -- Yoffe dying conversation flag
+2905 パトリック死亡会話フラグ -- patrick death conversation flag
+2906 ヨッフェ死亡会話フラグ -- Ioffe Death Conversation Flag
+2909 発電機三基破壊会話フラグ -- Three generators destroyed conversation flag
+2910 エルカノAC戦中会話フラグ -- Elkano AC battle conversation flag
+2911 エルカノACAP低下会話フラグ -- Elkano ACAP lower conversation flag
+2912 エルカノAC瀕死会話フラグ -- Elkano AC dying conversation flag
+2913 ミッション開始会話フラグ -- Mission start conversation flag
+2914 僚機移動開始時会話フラグ -- Conversation flag at the start of wingman movement
+2915 破壊ルート確定会話_目標無視版フラグ -- Destruction route confirmed conversation_target ignore version flag
+2916 破壊ルート確定会話_三基破壊版フラグ -- Destruction route confirmed conversation_triple destruction version flag
+2917 カステロ登場会話フラグ -- Castello appearance conversation flag
+2918 ヨッフェ撤退開始会話 -- Joffe withdrawal start conversation
+2919 発電機一基破壊会話フラグ -- One generator destroyed conversation flag
+2920 発電機二基破壊会話フラグ -- Two generators destroyed conversation flag
+2921 カステロ登場後会話フラグ -- Conversation flag after Castello appears
+2922 パトリック撤退会話フラグ -- patrick withdrawal conversation flag
+2923 ブランコ攻撃時会話フラグ -- Swing attack conversation flag
+2924 ブランコ移動開始会話フラグ -- Swing movement start conversation flag
+2925 僚機撤退開始会話フラグ -- Wingman withdrawal start conversation flag
+2926 ブランコ死亡後会話フラグ -- Conversation flag after swing death
+3000 会話フラグ_101500100_ミッション開始時 -- Conversation flag_101500100_At the start of the mission
+3001 会話フラグ_101500200_ミッション開始後 -- Conversation flag_101500200_After mission start
+3002 会話フラグ_101500300_目標破壊_リマインド -- Conversation flag_101500300_Target destruction_Reminder
+3003 会話フラグ_101500400_目標一基破壊 -- Conversation Flag_101500400_Destroy one target
+3004 会話フラグ_101500500_目標二基破壊 -- Conversation flag_101500500_Destroy two targets
+3005 会話フラグ_101500600_雑魚殲滅 -- Conversation flag_101500600_Eliminate small fry
+3006 会話フラグ_101500700_進行会話1_1 -- Conversation flag_101500700_Progress conversation 1_1
+3007 会話フラグ_101500800_進行会話1_2 -- Conversation flag_101500800_Progress conversation 1_2
+3008 会話フラグ_101500900_進行会話2 -- Conversation flag_101500900_Progress conversation 2
+3009 会話フラグ_101501000_前半_雑魚残り -- Conversation flag_101501000_first half_small fish remaining
+3010 会話フラグ_101501100_前半_雑魚殲滅して終了 -- Conversation flag_101501100_First half_End with annihilation of small fry
+3011 会話フラグ_101501200_前半_目標残り -- Conversation flag_101501200_first half_goal remaining
+3012 会話フラグ_101501300_前半_目標破壊して終了 -- Conversation flag_101501300_First half_Destroy the target and end
+3013 会話フラグ_101501400_前半終了時会話 -- Conversation flag_101501400_Conversation at the end of the first half
+3014 会話フラグ_101501500_破壊_ルート開始時会話 -- Conversation flag_101501500_Destruction_Route start conversation
+3015 会話フラグ_101501600_破壊_ルート開始後会話 -- Conversation Flag_101501600_Destruction_Conversation after starting route
+3016 会話フラグ_101501700_破壊_目標三基破壊 -- Conversation flag_101501700_Destruction_Destroy three targets
+3017 会話フラグ_101501800_破壊_敵AC登場時会話 -- Conversation Flag_101501800_Destruction_Conversation when enemy AC appears
+3018 会話フラグ_101501900_破壊_敵AC戦中会話 -- Conversation flag_101501900_Destruction_Enemy AC battle conversation
+3019 会話フラグ_101502000_破壊_敵AC撃破会話 -- Conversation flag_101502000_Destruction_Enemy AC destruction conversation
+3020 会話フラグ_101502100_破壊_敵AC撃破後会話1 -- Conversation Flag_101502100_Destruction_Conversation 1 after defeating enemy AC
+3021 会話フラグ_101502200_破壊_敵AC撃破後会話2 -- Conversation Flag_101502200_Destruction_Conversation 2 after defeating enemy AC
+3022 会話フラグ_101502300_破壊_敵AC残してミッションクリア -- Conversation Flag_101502300_Destruction_Clear mission while leaving enemy AC
+3023 会話フラグ_101502400_破壊_ミッションクリア時会話1 -- Conversation Flag_101502400_Destruction_Conversation 1 when clearing mission
+3024 会話フラグ_101502500_破壊_ミッションクリア時会話2_僚機生存版 -- Conversation flag_101502500_Destruction_Conversation when clearing mission 2_ Wingman survival version
+3025 会話フラグ_101502600_破壊_ミッションクリア時会話2_僚機死亡版 -- Conversation flag_101502600_Destruction_Conversation when clearing mission 2_ Wingman death version
+3026 会話フラグ_101502700_破壊_イグアス撤退時会話 -- Conversation Flag_101502700_Destruction_Conversation when retreating from Iguazu
+3027 会話フラグ_101502800_破壊_ヴォルタ撤退時会話 -- Conversation Flag_101502800_Destruction_Conversation when Volta retreats
+3028 会話フラグ_101502900_破壊_自機死亡会話 -- Conversation flag_101502900_Destruction_Ownership death conversation
+3029 会話フラグ_101503000_ALT_裏切り提案会話1 -- Conversation Flag_101503000_ALT_Betrayal Proposal Conversation 1
+3030 会話フラグ_101503100_ALT_裏切り提案会話2 -- Conversation Flag_101503100_ALT_Betrayal Proposal Conversation 2
+3031 会話フラグ_101503200_ALT_裏切り提案会話3 -- Conversation Flag_101503200_ALT_Betrayal Proposal Conversation 3
+3032 会話フラグ_101503300_ALT_破壊ルート選択 -- Conversation flag_101503300_ALT_Destruction route selection
+3033 会話フラグ_101503400_ALT_裏切りルート選択 -- Conversation flag_101503400_ALT_Betrayal route selection
+3034 会話フラグ_101503500_裏切り_ルート開始時会話 -- Conversation Flag_101503500_Betrayal_Route start conversation
+3035 会話フラグ_101503600_裏切り_イグアス攻撃会話1 -- Conversation flag_101503600_Betrayal_Iguazu attack conversation 1
+3036 会話フラグ_101503700_裏切り_イグアス攻撃会話2 -- Conversation flag_101503700_Betrayal_Iguazu attack conversation 2
+3037 会話フラグ_101503800_裏切り_ヴォルタ攻撃会話1 -- Conversation flag_101503800_Betrayal_Volta attack conversation 1
+3038 会話フラグ_101503900_裏切り_ヴォルタ攻撃会話2 -- Conversation flag_101503900_Betrayal_Volta attack conversation 2
+3039 会話フラグ_101504000_裏切り_イグアスAP半減会話 -- Conversation Flag_101504000_Betrayal_Iguazu AP halved conversation
+3040 会話フラグ_101504100_裏切り_ヴォルタ撃破後会話 -- Conversation Flag_101504100_Betrayal_Conversation after defeating Volta
+3041 会話フラグ_101504200_裏切り_ヴォルタAP半減会話 -- Conversation Flag_101504200_Betrayal_Volta AP halved conversation
+3042 会話フラグ_101504300_裏切り_イグアス撃破後会話 -- Conversation Flag_101504300_Betrayal_Conversation after defeating Iguazu
+3043 会話フラグ_101504400_裏切り_ヴォルタに殺された -- Conversation Flag_101504400_Betrayal_Killed by Volta
+3044 会話フラグ_101504500_裏切り_イグアスに殺された -- Conversation Flag_101504500_Betrayal_Killed by Iguazu
+3045 会話フラグ_101504600_裏切り_イグアス死亡時会話1 -- Conversation flag_101504600_Betrayal_Iguazu death conversation 1
+3046 会話フラグ_101504700_裏切り_イグアス死亡時会話2 -- Conversation flag_101504700_Betrayal_Iguazu death conversation 2
+3047 会話フラグ_101504800_裏切り_ヴォルタ死亡時会話1 -- Conversation Flag_101504800_Betrayal_Volta's death conversation 1
+3048 会話フラグ_101504900_裏切り_ヴォルタ死亡時会話2 -- Conversation Flag_101504900_Betrayal_Volta's death conversation 2
+3049 会話フラグ_101505000_裏切り_ミッションクリア時会話1 -- Conversation Flag_101505000_Betrayal_Conversation 1 when clearing mission
+3050 会話フラグ_101505100_裏切り_ミッションクリア時会話2 -- Conversation Flag_101505100_Betrayal_Conversation 2 when clearing the mission
+3800 CP再開用_OBJ破壊再現 -- For CP restart_OBJ destruction reproduction
+3999 仮_ALT分岐フラグ -- Temporary_ALT branch flag
+1000000000 敵リスポン -- enemy respawn

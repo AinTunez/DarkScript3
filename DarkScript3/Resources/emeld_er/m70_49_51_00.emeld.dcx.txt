@@ -1,0 +1,43 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+1030 BGM_森にいる判定 -- BGM_Detection of being in the forest
+5000 ぶら下がりイベント対応1 -- Hanging event support 1
+5001 ぶら下がりイベント対応2 -- Hanging event support 2
+5002 ぶら下がりイベント対応3 -- Hanging event support 3
+5003 ぶら下がりイベント対応4 -- Hanging event support 4
+5004 ぶら下がりイベント対応5 -- Hanging event support 5
+5005 ぶら下がりイベント対応6 -- Hanging event support 6
+5006 ぶら下がりイベント対応7 -- Hanging event support 7
+5007 ぶら下がりイベント対応8 -- Hanging event support 8
+5008 ぶら下がりイベント対応9 -- Hanging event support 9
+5009 ぶら下がりイベント対応10 -- Hanging event support 10
+5010 ぶら下がりイベント対応11 -- Hanging event support 11
+5011 ぶら下がりイベント対応12 -- Hanging event support 12
+5012 ぶら下がりイベント対応13 -- Hanging event support 13
+5013 ぶら下がりイベント対応14 -- Hanging event support 14
+5014 ぶら下がりイベント対応15 -- Hanging event support 15
+5015 ぶら下がりイベント対応16 -- Hanging event support 16
+5016 ぶら下がりイベント対応17 -- Hanging event support 17
+5017 ぶら下がりイベント対応18 -- Hanging event support 18
+5018 ぶら下がりイベント対応19 -- Hanging event support 19
+5019 ぶら下がりイベント対応20 -- Hanging event support 20
+5020 ぶら下がりイベント対応21 -- Hanging event support 21
+5021 ぶら下がりイベント対応22 -- Hanging event support 22
+5022 ぶら下がりイベント対応23 -- Hanging event support 23
+5100 【プロト】ナズグル出現_全体制御 -- [Proto] Nazgul Appearance_Overall Control
+5110 【プロト】ナズグル出現_出現位置抽選_XX -- [Proto] Nazgul Appearance_Appearance Location Lottery_XX
+5130 【プロト】ナズグル出現_出現消滅制御_XX -- [Proto] Nazgul appearance_appearance/disappearance control_XX
+495101 亜人_木の上待機 -- Ajin_Waiting on the tree
+495102 篝火NPC位置合わせ -- Bonfire NPC position alignment
+495110 草むら判定 -- Grass judgment
+495111 草むら特殊効果付与 -- Add grass special effects
+495120 森前半敵配置_街道時無効化処理 -- Enemy placement in the first half of the forest_Disabled processing when on the road
+495130 トロル部位怯み：頭 -- Troll part flinch: head
+495131 トロル部位怯み：胴 -- Troll part flinch: Torso
+495132 トロル部位怯み：右手 -- Troll part flinch: right hand
+495133 トロル部位怯み：左手 -- Troll part flinch: left hand
+495134 トロル部位怯み：右脚 -- Troll part flinch: right leg
+495135 トロル部位怯み：左脚 -- Troll part flinch: left leg
+495136 トロル頭被弾通知 -- Troll head hit notification
+495137 トロル頭部位素材変更（弱点） -- Troll head part material change (weakness)
+1000000000 敵リスポン -- enemy respawn

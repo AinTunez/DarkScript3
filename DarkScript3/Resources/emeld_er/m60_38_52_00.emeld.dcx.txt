@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1038522339 夜の王の眷属が巨大骸骨をターゲット認識できるようにするイベント -- An event that allows the Night King's followers to recognize giant skeletons as targets.
+1038522341 夜の王の眷属土葬スケルトン呼び_XX -- Night King's Heir Burial Skeleton Call_XX
+1038522342 夜の王の眷属ワープ処理_XX -- Night King's Heir Warp Process_XX
+1038522343 夜の王の眷属領域検索_XX -- Night King's Heir Domain Search_XX
+1038522344 夜の王の眷属死亡時イベント_XX -- Night King's Follower Death Event_XX
+1038522345 巨大スケルトン死亡アニメ再生 -- giant skeleton death anime play
+1038522346 夜の王の眷属ワープ処理_高山水没遺跡用 -- Night King's Heir Warp Processing_For Alpine Submerged Ruins
+1038522347 夜の王の眷属_ターゲットクリアイベント_XX -- Heir of the Night King_Target Clear Event_XX
+1038522349 眷属関連の非揮発フラグ立ちっぱなしになってたら折るイベント -- An event to fold if a non-volatile flag related to a dependent is left standing.
+1038522350 夜の王の眷属視界拡大 -- Expanded visibility of the Night King's followers

@@ -1,0 +1,7 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1037512208 忌み子_思考ロジック有効化_飛び降りる -- Abominable child_Thought logic enabled_Jumping down
+1037512301 守護者の末裔_飛び去り後の無効設定 -- Descendants of the Guardian_Disable settings after flying away
+1037512350 守護者の末裔_出現演出 -- Descendants of the Guardian_Appearance

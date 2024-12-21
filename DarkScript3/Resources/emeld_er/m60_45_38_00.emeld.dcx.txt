@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1045382390 キャンドルアセット一時無効 -- Candle assets temporarily disabled
+1045383700 NPC321見張り塔の貴人_初期状態_NPC初期化イベント -- NPC321 Watchtower Noble_Initial state_NPC initialization event

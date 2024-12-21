@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1035420200 霧仮対応 -- Temporary fog support
+1035420701 NPC219_足萎え村のNPC_擬態解除 -- NPC219_NPC of the withered village_Mimicry canceled
+1035420710 NPC106_ラニ_NPC初期化イベント_カットシーン直後 -- NPC106_Rani_NPC initialization event_Immediately after cutscene
+1035420711 NPC106_ラニ_カットシーン直後_会話後に消える -- NPC106_Rani_Immediately after cutscene_Disappears after conversation
+1035420712 NPC106_ラニ_カットシーン直後_現れる -- NPC106_Rani_Appears immediately after the cutscene
+1035420720 NPC334百智卿の娘_ﾌｪｰｽﾞ3_NPC初期化イベント -- NPC334 Momochi Lord's Daughter_Phase 3_NPC Initialization Event
+1035420721 NPC334百智卿の娘_ﾌｪｰｽﾞ3_白霊召喚停止イベント -- NPC334 Daughter of Lord Hyakuchi_Phase 3_White Spirit Summoning Stop Event
+1035422150 ラニとの契り -- Pact with Rani
+1035422151 裸ラニ_カットシーン後消す処理 -- Naked Rani_Erasing after cutscene
+1035423700 NPC219_足萎え村のNPC_NPC初期化イベント_初期状態 -- NPC219_NPC of Withered Village_NPC initialization event_Initial state
+1035423702 NPC219_足萎え村のNPC_死亡アニメ再生 -- NPC219_NPC of the withered village_Death animation playback
+1035423703 NPC219_足萎え村のNPC_敵対アニメ再生 -- NPC219_NPC of the withered village_hostile animation playback

@@ -1,0 +1,292 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッションクリア判定 -- Mission clear judgment
+2001 目標地点を非表示 -- Hide target point
+2002 一部的の無効化 -- Partial disablement
+2003 一部的のロジック停止 -- Partial logic outage
+2004 プレイヤー能力低下 -- Decreased player ability
+2005 脱出地点のヘリ処理 -- Heli processing at the escape point
+2006 一部アセット無効化 -- Disable some assets
+2007 一部敵にライト -- Light on some enemies
+2008 照明弾用ダミーキャラ処理 -- Dummy character processing for flare bullets
+2009 チェックポイント有効化 -- checkpoint enable
+2010 チェックポイント有効化_照明弾前 -- Checkpoint activation_before the flare
+2011 ミッション会話特殊効果追加 -- Mission conversation special effects added
+2012 ミッション会話特殊効果削除 -- Mission conversation special effects removed
+2215 照明弾打上イベント_左領域 -- Illumination bullet launch event_left area
+2216 照明弾打上イベント_右前領域 -- Flaming bullet launch event_front right area
+2217 照明弾打上イベント_右後領域 -- Flaming bullet launch event_right rear area
+2220 脱出地点に増援01 -- Reinforcements at the escape point 01
+2221 脱出地点に増援02 -- Reinforcements at the escape point 02
+2222 地下共産巡回開始 -- Underground communist patrol begins
+2223 地下共産巡回切り替え01 -- Underground communist patrol switching 01
+2224 増援偵察ヘリ有効化 -- Enable reinforcement reconnaissance helicopter
+2225 偵察ヘリからミサ砲台へターゲット共有 -- Target sharing from reconnaissance helicopter to Mass battery
+2230 脱出地点ヘリ降下演出 -- Escape point helicopter descent production
+2231 脱出地点ヘリ有効化 -- Escape point helicopter enabled
+2232 脱出地点ヘリストップ -- Escape point helistop
+2233 脱出地点標的用ダミーキャラ有効化 -- Enable dummy character for escape point target
+2240 照明弾打ち上げイベント_脱出用 -- Flaming bomb launch event_for escape
+2241 照明弾入り宝箱開封 -- Opening a treasure chest containing flares
+2242 照明弾宝箱ダミーキャラ有効化 -- Enable lighting bullet treasure box dummy character
+2243 アーカイブ取得判定 -- Archive acquisition judgment
+2250 戦闘状態になったらライト点灯 -- Light turns on when in combat mode
+2300 通報判定_崖前 -- Report judgment_In front of the cliff
+2310 通報判定_右側ビル群 -- Report judgment_buildings on the right
+2330 通報判定_左側ビル群 -- Report judgment_Buildings on the left
+2350 通報判定_右手前 -- Report judgment_front right
+2360 通報判定_パイプ外 -- Report judgment_outside the pipe
+2370 通報判定_右側ビル群B -- Report judgment_Right building group B
+2400 照明弾周辺ターゲットイベント01 -- Flaming round target event 01
+2401 照明弾周辺ターゲットイベント02 -- Flaming round target event 02
+2402 照明弾打ち上げ後ターゲットイベント01 -- Target event 01 after flare launch
+2410 ターゲット共有_崖前 -- Target sharing_In front of the cliff
+2411 ターゲットクリア_崖前 -- Target clear_In front of the cliff
+2412 ターゲット共有_右側ビル群 -- Target sharing_buildings on the right
+2413 ターゲットクリア_右側ビル群 -- Target clear_buildings on the right
+2414 ターゲット共有_左側ビル群 -- Target sharing_buildings on the left
+2415 ターゲットクリア_左側ビル群 -- Target clear_Buildings on the left
+2416 ターゲット共有_右手前 -- Target sharing_front right
+2417 ターゲットクリア_右手前 -- Target clear_right front
+2418 ターゲット共有_パイプ外 -- Target shared_outside pipe
+2419 ターゲットクリア_パイプ外 -- Target clear_outside pipe
+2420 ターゲット共有_右側ビル群B -- Target sharing_Right building group B
+2421 ターゲットクリア_右側ビル群B -- Target clear_right building group B
+2450 条件つきで脱出地点の共産の嗅覚拡大 -- Expansion of communal sense of escape point with conditions
+2500 中央橋上のライトを順番に有効化 -- Activate the lights on the central bridge in sequence
+2501 防衛ライン01のライトを有効化 -- Enable light for defense line 01
+2502 橋横のライトを有効化 -- Enable lights on the side of the bridge
+2503 ビル群のライトを有効化 -- Enable lights on buildings
+2510 サーチライトHP監視_41101400 -- Searchlight HP monitoring_41101400
+2511 サーチライトHP監視_41101401 -- Searchlight HP monitoring_41101401
+2600 目標_地下道出口 -- Goal_Underground exit
+2601 目標_地下道出口を非表示 -- Goal_Hide underground passage exit
+2602 目標_崖前 -- Goal_In front of the cliff
+2603 目標_崖前を非表示 -- Goal_Hide the front of the cliff
+2604 目標_橋前 -- Goal_Hashimae
+2605 目標_橋前を非表示 -- Goal_Hide the bridge
+2606 目標_ゴール地点 -- Goal_goal point
+2607 目標_ゴール地点非表示 -- Goal_Goal point hidden
+2608 目標_照明弾打ち上げ地点 -- Target_Flare launch point
+2609 目標_照明弾打ち上げ地点を非表示 -- Target_Hide flare launch point
+2700 判定_四脚の前まで来た -- Judgment_I came in front of the four legs
+2701 判定_地下道を抜けた -- Judgment_Goed through the underground passage
+2702 判定_橋の前に来た -- Judgment_I came in front of the bridge
+2703 判定_崖前に到着 -- Judgment_Arrived in front of the cliff
+2704 判定_橋前の崖を登った -- Judgment_Climbed the cliff in front of the bridge
+2705 判定_増援出現用 -- Judgment_For reinforcements to appear
+2706 判定_ジャミングチュートリアル表示 -- Judgment_Jamming tutorial display
+2710 判定_巡回中の敵に見つかった -- Judgment_Spotted by a patrolling enemy
+2730 判定_脱出地点に敵がいる -- Judgment_There is an enemy at the escape point
+2731 判定_脱出地点に到着 -- Judgment_Arrived at the escape point
+2732 判定_脱出地点付近に到着 -- Judgment_Arrived near the escape point
+2733 判定_増援撃破5401 -- Judgment_Reinforcements defeated 5401
+2734 判定_増援撃破5402 -- Judgment_Reinforcements defeated 5402
+2735 判定_増援撃破5400 -- Judgment_Reinforcement defeat 5400
+2736 判定_巡回中の敵に気づかれていない -- Judgment_ Not noticed by the patrolling enemy
+2737 判定_ラスト付近の敵をロックした -- Judgment_Locked the enemy near the end
+2738 判定_ラスト付近の敵が戦闘状態 -- Judgment_Enemies near the end are in battle state
+2739 判定_照明弾打ち上げ場所についた -- Judgment_ Arrived at the flare launch site
+2740 判定_脱出地点のヘリが破壊された -- Judgment_The helicopter at the escape point was destroyed.
+2741 判定_照明弾打ち上げビルから降りた -- Judgment_I got off the building that launched the flare.
+2742 判定_増援ヘリ有効化用 -- Judgment_For enabling reinforcement helicopters
+2750 ターゲットクリア判定_崖前 -- Target clear judgment_before the cliff
+2751 ターゲットクリア判定_右ビル群A -- Target clear judgment_right building group A
+2752 ターゲットクリア判定_左ビル群 -- Target clear judgment_left building group
+2753 ターゲットクリア判定_右手前 -- Target clear judgment_front right
+2754 ターゲットクリア判定_パイプ外 -- Target clear judgment_outside the pipe
+2755 ターゲットクリア判定_右ビル群B -- Target clear judgment_right building group B
+2760 判定_スタート地点の共産と戦闘 -- Judgment_Communist and battle at the starting point
+2761 判定_スタート地点の共産を撃破 -- Judgment_Defeat the Communist Party at the starting point
+2762 会話判定_下水出口についた -- Conversation Judgment_Arrived at the sewage exit
+2763 会話判定_スタート地点に戻った -- Conversation Judgment_Returned to starting point
+2764 会話判定_スタート地点から引き返した -- Conversation Judgment_ Returned from starting point
+2765 会話判定_下水から出た -- Conversation Judgment_Emerged from the sewer
+2766 会話判定_サーチライト注意喚起 -- Conversation judgment_Searchlight alert
+2767 会話判定_目標地点接近 -- Conversation judgment_approaching target point
+2768 会話判定_目標付近に到着 -- Conversation judgment_Arrived near the target
+2769 会話判定_下水四脚戦闘 -- Conversation Judgment_Sewer Quadruped Combat
+2770 会話判定_下水ジャミング -- Conversation judgment_Sewage jamming
+2771 会話判定_接敵A -- Conversation Judgment_Enemy Engagement A
+2772 会話判定_接敵崖前 -- Conversation judgment_In front of enemy cliff
+2773 会話判定_崖前の敵を殲滅 -- Conversation judgment_Eradicate the enemy in front of the cliff
+2774 会話判定_サーチライトA -- Conversation judgment_Searchlight A
+2775 会話判定_サーチライトB -- Conversation judgment_Searchlight B
+2776 会話判定_サーチライトB敵減 -- Conversation judgment_Searchlight B enemy reduction
+2777 会話判定_サーチライトB敵殲滅 -- Conversation judgment_Searchlight B enemy annihilation
+2778 会話判定_サーチライトC -- Conversation judgment_Searchlight C
+2779 会話判定_自機死亡 -- Conversation Judgment_Ownership Death
+2780 会話判定_増援減少 -- Conversation judgment_reinforcement decrease
+2781 会話判定_最初の横道 -- Conversation Judgment_First Sidewalk
+2782 会話判定_地下四脚スキップ -- Conversation Judgment_Underground Quadruple Skip
+2783 会話判定_ECMスキップ -- Conversation Judgment_ECM Skip
+2784 会話判定_通報Aスキップ -- Conversation Judgment_Report A Skip
+2785 会話判定_右ビルスキップ -- Conversation Judgment_Right Building Skip
+2786 会話判定_右ビルBスキップ -- Conversation Judgment_Right Building B Skip
+2787 会話判定_左ビルスキップ -- Conversation judgment_Left building skip
+2788 会話判定_崖前スキップ -- Conversation judgment_Skip in front of cliff
+2789 会話判定_増援減少スキップ -- Conversation Judgment_Reinforcement Reduction Skip
+2790 会話判定_パイプ内共産戦闘開始 -- Conversation Judgment_Communist Battle in Pipe Begins
+2791 会話判定_パイプ内共産戦闘開始スキップ -- Conversation Judgment_Skip start of communist battle in pipe
+2850 フラグ_増援01を呼んだ -- Flag_Reinforcements 01 called
+2851 フラグ_増援02を呼んだ -- Flag_Reinforcements 02 called
+2852 会話用フラグ_2790判定用 -- Conversation flag_2790 for judgment
+2860 フラグ_左領域_監視係へ通報された -- Flag_Left area_Reported to monitoring staff
+2861 フラグ_右前領域_監視係へ通報された -- Flag_Front right area_Reported to monitoring staff
+2862 フラグ_右後領域_監視係へ通報された -- Flag_Right rear area_Reported to monitoring staff
+2870 フラグ_左領域_監視係が非戦闘状態になった -- Flag_Left Area_Watcher has become non-combat state
+2871 フラグ_右前領域_監視係が非戦闘状態になった -- Flag_front right area_observer has become non-combat state
+2872 フラグ_右後領域_監視係が非戦闘状態になった -- Flag_Right Rear Area_Observer has become non-combat state
+2880 フラグ_左領域_監視係が戦闘状態になった -- Flag_Left area_The monitor has entered a combat state.
+2881 フラグ_右前領域_監視係が戦闘状態になった -- Flag_front right area_observer has entered combat status
+2882 フラグ_右後領域_監視係が戦闘状態になった -- Flag_Right Rear Area_The observer has entered a combat state.
+2883 フラグ_パイプ抜けエリアで照明弾を上げられた -- Flag_A flare was fired in the pipe exit area.
+2884 フラグ_パイプ抜けエリアで照明弾を上げられなかった -- Flag_Unable to raise flare in pipe exit area
+2885 フラグ_通報条件を満たした_崖前 -- Flag_Report conditions met_In front of the cliff
+2886 フラグ_通報条件を満たした_右側ビル群 -- Flag_Report conditions met_Buildings on the right
+2887 フラグ_通報条件を満たした_左側ビル群 -- Flag_Reporting conditions met_Buildings on the left
+2888 フラグ_通報条件を満たした_右側手前 -- Flag_Reporting conditions met_Front right side
+2889 フラグ_通報条件を満たした_パイプ外 -- Flag_Notification conditions met_Outside pipe
+2890 フラグ_通報条件を満たした_右側ビル群B -- Flag_Report conditions met_Right building group B
+2895 フラグ_敵に見つかっていない -- Flag_Not detected by enemy
+2896 フラグ_脱出用照明弾を打ち上げた -- Flag_Escape flare was launched.
+2897 フラグ_チェックポイント到達 -- Flag_Checkpoint reached
+2898 フラグ_照明弾前チェックポイント到達 -- Flag_Flight bomb checkpoint reached
+2900 会話_開幕会話 -- Conversation_Opening conversation
+2901 会話_開幕兵士会話 -- Conversation_Opening soldier conversation
+2902 会話_開幕兵士遭遇 -- Conversation_Opening soldier encounter
+2903 会話_戦闘回避推奨 -- Conversation_Combat avoidance recommended
+2904 会話_機体について -- Conversation_About the aircraft
+2905 会話_四脚発見 -- Conversation_Four legs found
+2906 会話_四脚に見つかった -- Conversation_Found by a quadruped
+2907 会話_ECM命中 -- Conversation_ECM hit
+2908 会話_ECM命中2 -- Conversation_ECM hit 2
+2909 会話_下水出口到着 -- Conversation_Arrival at sewage exit
+2910 会話_スタート地点に戻ってきた -- Conversation_Returned to starting point
+2911 会話_スタート地点から引き返した -- Conversation_I turned back from the starting point
+2912 会話_下水上に到着 -- Conversation_Arrival above the sewers
+2913 会話_警備隊に通達A -- Conversation_Notify the guard A
+2914 会話_警備隊に通達B -- Conversation_Notify the guard B
+2915 会話_敵が厳戒態勢 -- Conversation_Enemy is on high alert
+2916 会話_接敵A -- Conversation_Enemy contact A
+2917 会話_接敵_重A -- Conversation_Enemy contact_Heavy A
+2918 会話_接敵_重Aクリア -- Conversation_Enemy contact_Heavy A clear
+2919 会話_接敵_重Aクリア2 -- Conversation_Enemy contact_Heavy A clear 2
+2920 会話_サーチライトに注意 -- Conversation_Beware of searchlights
+2921 会話_捕捉A -- Conversation_Capture A
+2922 会話_捕捉A2 -- Conversation_Capture A2
+2923 会話_捕捉A3 -- Conversation_Capture A3
+2924 会話_捕捉B -- Conversation_Capture B
+2925 会話_捕捉B敵減 -- Conversation_Capture B enemy decrease
+2926 会話_捕捉Bクリア -- Conversation_Capture B Clear
+2927 会話_接敵_予備A -- Conversation_Enemy_Enemy_Preliminary A
+2928 会話_接敵_予備A2 -- Conversation_Enemy contact_Reserve A2
+2929 会話_リペアなし戦闘中 -- Conversation_No repair during battle
+2930 会話_リペアなし戦闘外 -- Conversation_Outside of battle without repair
+2931 会話_指定場所に近付いた -- Conversation_ Approaching the designated location
+2932 会話_指定場所接近 -- Conversation_Approach the designated place
+2933 会話_指定場所到着 -- Conversation_Arrival at designated location
+2934 会話_ビーコン起動 -- Conversation_beacon activation
+2935 会話_ビーコン起動2 -- Conversation_Beacon activation 2
+2936 会話_ビーコン起動3 -- Conversation_Beacon activation 3
+2937 会話_合流地点到着 -- Conversation_Arrival at the meeting point
+2938 会話_敵性反応 -- Conversation_hostile reaction
+2939 会話_敵出現 -- Conversation_Enemy appears
+2940 会話_最終通達A -- Conversation_Final Notice A
+2941 会話_最終通達B -- Conversation_Final Notice B
+2942 会話_敵が多い -- Conversation_Many enemies
+2943 会話_新たな反応 -- Conversation_New reaction
+2944 会話_CS後会話 -- Conversation_Conversation after CS
+2945 会話_CS後会話2 -- Conversation_Conversation after CS 2
+2946 会話_CS後会話3 -- Conversation_Post-CS conversation 3
+2947 会話_戦闘中会話 -- Conversation_Conversation during battle
+2948 会話_戦闘中会話2 -- Conversation_Conversation during battle 2
+2949 会話_残り僅か -- Conversation _ Only a few left
+2950 会話_終了会話 -- Conversation_End conversation
+2951 会話_自機死亡 -- Conversation_Death of own machine
+2952 会話_捕捉Bクリア2 -- Conversation_Capture B Clear 2
+2953 会話_一息ついたら -- Conversation_After taking a breather
+2990 会話_doonceフラグ00 -- conversation_doonce flag 00
+2991 会話_doonceフラグ01 -- conversation_doonce flag 01
+2992 会話_doonceフラグ02 -- conversation_doonce flag 02
+2993 会話_doonceフラグ03 -- conversation_doonce flag 03
+2994 会話_doonceフラグ04 -- conversation_doonce flag 04
+2995 会話_doonceフラグ05 -- conversation_doonce flag 05
+2996 会話_doonceフラグ06 -- conversation_doonce flag 06
+2997 会話_doonceフラグ07 -- conversation_doonce flag 07
+2998 会話_doonceフラグ08 -- conversation_doonce flag 08
+2999 会話_doonceフラグ09 -- conversation_doonce flag 09
+3010 最終地点敵撃破マーカー -- Final point enemy defeated marker
+3020 四脚ワープ -- quadruped warp
+3021 右前監視者ワープ -- Right front observer warp
+3022 右後監視者ワープ -- Right rear observer warp
+3023 右前監視者Bワープ -- Right Front Observer B Warp
+3030 脱出地点の敵キャラ制御 -- Enemy character control at escape point
+3031 敵キャラフェード -- enemy character fade
+3100 脱出地点増援01有効化 -- Escape point reinforcement 01 enabled
+3101 脱出地点増援01撃破判定 -- Escape point reinforcement 01 defeat judgment
+3102 脱出地点増援02有効化 -- Escape point reinforcement 02 enabled
+3103 脱出地点増援02撃破判定 -- Escape point reinforcement 02 defeat judgment
+3104 カーラ有効化 -- Carla enable
+3105 カーラ戦闘終了 -- Kara battle ends
+3106 カーラ着地したら起動 -- Start when Kara lands.
+3107 注意マーカー削除 -- Delete caution marker
+3108 増援ヘリA有効化 -- Reinforcement helicopter A enabled
+3109 増援ヘリA投下 -- Reinforcement helicopter A dropped
+3110 増援ヘリA消失 -- Reinforcement helicopter A disappears
+3111 カーライベントターゲット連打 -- Kara event target continuous hit
+3112 脱出地点の敵のタゲをカーラに向ける -- Point the enemy's target at Kara at the escape point.
+3113 ヘリ降下部隊撃破判定 -- Judgment for defeating helicopter drop squad
+3114 増援ヘリA待機 -- Reinforcement helicopter A waiting
+3118 脱出地点敵補充 -- Escape point enemy replenishment
+3119 脱出地点補充分撃破判定 -- Destroy judgment for replenishing escape point
+3120 カットシーン再生_カーラ登場 -- Cutscene playback_Kara appears
+3121 確認用デバッグイベント -- Confirmation debug event
+3122 確認用デバッグイベントフラグ -- Confirmation debug event flag
+3123 カットシーン明け位置リセット -- Cutscene end position reset
+3601 CPからきたよフラグ01 -- I came from CP flag 01
+3602 CPからきたよフラグ02 -- I came from CP flag 02
+3700 追加フラグ_会話_接敵A_戦闘台詞 -- Additional flags_Conversation_Enemy engagement A_Battle lines
+3710 追加フラグ_会話_接敵_重A_戦闘台詞 -- Additional flags_Conversation_Enemy engagement_Heavy A_Battle lines
+3720 追加フラグ_会話_捕捉B_戦闘台詞 -- Additional flag_Conversation_Capture B_Battle lines
+3730 追加フラグ_会話_接敵_予備A_戦闘台詞 -- Additional flags_Conversation_Enemy contact_Reserve A_Battle lines
+3800 発見会話通知用フラグ -- Discovery conversation notification flag
+3810 後続発見会話通知用フラグ -- Subsequent discovery conversation notification flag
+3831 会話通知制御_最終発話記憶_フラグ01 -- Conversation notification control_Last utterance memory_Flag 01
+3832 会話通知制御_最終発話記憶_フラグ02 -- Conversation notification control_Last utterance memory_Flag 02
+3833 会話通知制御_最終発話記憶_フラグ03 -- Conversation notification control_Last utterance memory_Flag 03
+3834 会話通知制御_最終発話記憶_フラグ04 -- Conversation notification control_Last utterance memory_Flag 04
+3835 会話通知制御_最終発話記憶_フラグ05 -- Conversation notification control_Last utterance memory_Flag 05
+3841 会話通知制御_フラグ01 -- Conversation notification control_flag 01
+3842 会話通知制御_フラグ02 -- Conversation notification control_flag 02
+3843 会話通知制御_フラグ03 -- Conversation notification control_flag 03
+3844 会話通知制御_フラグ04 -- Conversation notification control_flag 04
+3845 会話通知制御_フラグ05 -- Conversation notification control_flag 05
+3850 会話通知用フラグを折る -- Fold the conversation notification flag
+3871 通知用フラグ_会話判定_接敵A -- Notification flag_Conversation judgment_Enemy contact A
+3872 通知用フラグ_会話判定_接敵壁前 -- Notification flag_Conversation judgment_In front of enemy contact wall
+3873 通知用フラグ_会話判定_捕捉A -- Notification flag_conversation judgment_capture A
+3874 通知用フラグ_会話判定_捕捉B -- Notification flag_conversation judgment_capture B
+3875 通知用フラグ_会話判定_接敵予備A -- Notification flag_Conversation judgment_Enemy contact reserve A
+3880 各領域状態定義フラグ_戦闘状態_崖前 -- Each area state definition flag_Battle state_In front of the cliff
+3881 各領域状態定義フラグ_戦闘状態_右側ビル群 -- Each area state definition flag_Battle state_Right building group
+3882 各領域状態定義フラグ_戦闘状態_左側ビル群 -- Each area state definition flag_Battle state_Left building group
+3883 各領域状態定義フラグ_戦闘状態_右手前 -- Each area state definition flag_Battle state_Front right
+3884 各領域状態定義フラグ_戦闘状態_パイプ外 -- Each area state definition flag_Battle state_Outside pipe
+3885 各領域状態定義フラグ_戦闘状態_右側ビル群B -- Each area state definition flag_Battle state_Right building group B
+3890 各領域状態定義フラグ_フラグオフ_崖前 -- Each area state definition flag_flag off_before the cliff
+3891 各領域状態定義フラグ_フラグオフ_右側ビル群 -- Each area status definition flag_Flag off_Right building group
+3892 各領域状態定義フラグ_フラグオフ_左側ビル群 -- Each area status definition flag_Flag off_Left building group
+3893 各領域状態定義フラグ_フラグオフ_右手前 -- Each area state definition flag_Flag off_Right front
+3894 各領域状態定義フラグ_フラグオフ_パイプ外 -- Each area status definition flag_flag off_outside pipe
+3895 各領域状態定義フラグ_フラグオフ_右側ビル群B -- Each area status definition flag_Flag off_Right building group B
+3900 作戦ライン有効化 -- Operation line activation
+3901 作戦ライン有効化_最終戦 -- Operation line activation_final battle
+3910 状態監視制御 -- Condition monitoring control
+3920 状態定義フラグ_どこかが戦闘状態 -- Status definition flag_Somewhere is in combat status
+3930 四脚領域制御_四脚が安全領域にいる -- Quadruple area control_quadruped is in the safe area
+3931 四脚領域制御_四脚がのりしろ領域にいる -- Quadruple area control _ Quadruple legs are in the margin area
+3940 四脚領域制御_PCが安全領域にいる -- Quadruped area control_PC is in safe area
+3941 四脚領域制御_PCがのりしろ領域にいる -- Quadruped area control_PC is in the border area
+3950 四脚_巣の更新 -- Quadruped_nest update
+1000000000 敵リスポン -- enemy respawn

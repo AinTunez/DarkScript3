@@ -1,0 +1,8 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 テストイベント -- test event
+2001 テストSFX発生 -- Test SFX generation
+2002 テスト間欠泉ダメージ -- test geyser damage
+2003 間欠泉発生イベント -- Geyser occurrence event
+2004 間欠泉発生判定 -- Geyser occurrence determination
+1000000000 敵リスポン -- enemy respawn

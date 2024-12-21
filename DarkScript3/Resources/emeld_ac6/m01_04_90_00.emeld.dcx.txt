@@ -1,0 +1,384 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2200 ボスのAIを停止 -- Stop boss AI
+2210 チェックポイント有効化 -- checkpoint enable
+2211 塹壕都市チェックポイント有効化 -- Enable Trench City Checkpoint
+2212 重ガードメカ撃破後チェックポイント有効化 -- Activate checkpoint after defeating heavy guard mecha
+2213 重ガードメカ前落下復帰ポイント設定 -- Heavy guard mechanism front drop return point setting
+2214 共通イベント_成功リザルト_BGM無音化フラグ -- Common event_success result_BGM mute flag
+2216 CP再開時シェルパ使用不可能 -- Sherpa cannot be used when restarting CP
+2220 ミッション開始テキスト -- Mission start text
+2225 Gparam切替_中層都市A -- Gparam switching_Mid-tier city A
+2226 Gparam切替_中層都市B -- Gparam switching_Mid-tier city B
+2227 Gparam切替_塹壕都市C -- Gparam switching_trench city C
+2228 Gparam切替_塹壕都市D -- Gparam switching_trench city D
+2229 エマージェンシーランプ全点灯 -- All emergency lamps lit
+2250 作戦ライン設定_ボス前まで -- Strategy line setting_before the boss
+2251 作戦ライン設定_中層都市前半01 -- Operation line setting_Mid-tier city first half 01
+2252 作戦ライン設定_中層都市前半02 -- Operation line setting_Mid-tier city first half 02
+2253 作戦ライン設定_中ボス -- Operation line setting_Mid-boss
+2255 作戦ライン設定_ボス戦中 -- Operation line setting_during boss battle
+2256 作戦ライン設定_中層都市前半02無効化 -- Operation line setting_mid-tier city first half 02 invalidation
+2257 作戦ライン設定_ボス部屋入場可能 -- Operation line setting_Boss room entry possible
+2258 作戦ライン_破壊目標四個目 -- Operation line_fourth destruction target
+2260 一部敵の無効化 -- Disable some enemies
+2261 一部敵のロジック停止 -- Some enemies' logic stopped
+2262 一部敵の僚機化 -- Some enemies become wingmen
+2263 特攻MT特殊待機 -- Special attack MT special standby
+2264 正規軍AC狙撃の砲台化 -- Regular army AC sniper battery
+2265 塹壕都市建機クモ登場演出 -- Trench city construction machine spider appearance production
+2266 砲台タゲ用ダミー重力無効 -- Dummy gravity disabled for turret target
+2267 扉セットアップ -- door setup
+2268 初期イベント_天球制御 -- Initial event_celestial sphere control
+2270 作戦ライン_ボス前廊下A -- Strategy line_Boss front corridor A
+2271 作戦ライン_ボス前廊下B -- Strategy line_Boss front corridor B
+2300 砲台発射特殊効果 -- Artillery firing special effects
+2310 砲台発射停止効果 -- Artillery firing stop effect
+2315 砲台待機中判定 -- Artillery standby determination
+2316 砲台発射中判定 -- Judgment that the turret is firing
+2317 特殊効果4500判定 -- Special effects 4500 judgment
+2398 重ガードメカにアイコン表示 -- Icon displayed on heavy guard mechanism
+2399 重ガードメカアイコン消す -- Delete heavy guard mech icon
+2400 重ガードメカとアッシュを戦わせる -- Have Ash fight the heavy guard mecha
+2401 砲台下の部屋で援軍出現 -- Reinforcements will appear in the room below the battery.
+2402 足場後エリアの敵起動 -- Enemy activation in the area after the scaffolding
+2403 塹壕都市中盤の敵起動 -- Enemy activation in the middle of the trench city
+2404 塹壕都市終盤の敵起動 -- Enemy activation at the end of Trench City
+2405 重ガードメカ戦後アッシュ離脱 -- Ash leaves after the battle with the heavy guard mech.
+2406 重ガードメカ戦後揚陸艦登場演出 -- Heavy guard mecha post-war landing ship appearance production
+2407 重ガードメカ戦アッシュ途中抜け -- Heavy Guard Mech Battle Ash Partway Out
+2408 重ガードメカ有効化フラグ -- Heavy guard mecha enable flag
+2409 ラスティ離脱前無敵化 -- Rusty becomes invincible before leaving
+2410 砲台前増援起動 -- Activate reinforcements in front of the battery
+2411 増援ヘリ投下 -- Reinforcement helicopter drop
+2415 増援ヘリ撤退 -- Reinforcement helicopter withdrawal
+2420 エリア2増援出現 -- Area 2 reinforcements appear
+2425 エリア2増援撤退 -- Area 2 reinforcements withdrawn
+2430 強襲揚陸艦セットアップ -- Amphibious assault ship setup
+2440 重ガードメカドッスン攻撃判別用 -- Heavy guard mecha dossun attack detection
+2450 破壊目標とダミーキャラの紐づけ -- Linking destruction targets and dummy characters
+2455 ジェネレーターにマーキング -- Marking on the generator
+2456 バザードラムにマーキング -- Marking on buzzer drum
+2457 中層都市ジェネレーターのマークを消す -- Remove the mid-tier city generator mark
+2458 四個目ジェネレーター無敵化 -- 4th generator invincible
+2459 四個目ジェネレーター無敵解除 -- Fourth generator invincibility removed
+2461 塹壕都市破壊OBJマーキング01 -- Trench urban destruction OBJ marking 01
+2462 塹壕都市破壊OBJマーキング02 -- Trench urban destruction OBJ marking 02
+2463 破壊目標ダメージSFX -- Destruction target damage SFX
+2470 爆発演出Z_ループ -- Explosion effect Z_loop
+2471 爆発演出A_ループ -- Explosion production A_loop
+2472 爆発演出B_ループ -- Explosion effect B_loop
+2473 爆発演出C_ループ -- Explosion effect C_loop
+2474 爆発演出D_ループ -- Explosion production D_loop
+2480 電撃演出A_ループ -- Electric shock effect A_loop
+2481 電撃演出B_ループ -- Electric shock effect B_loop
+2482 電撃演出C_ループ -- Electric shock effect C_loop
+2483 電撃演出D_ループ -- Electric shock D_loop
+2484 電撃演出_廊下A_ループ -- Electric shock effect_corridor A_loop
+2485 電撃演出_廊下B_ループ -- Electric shock effect_corridor B_loop
+2490 決め打ちSFX_爆発A -- Decisive SFX_Explosion A
+2491 ボス部屋前スパーク_ループ -- Spark loop in front of boss room
+2500 壁面砲台攻撃範囲内判定 -- Wall turret attack range determination
+2510 壁面砲台攻撃範囲外判定 -- Wall turret attack out of range determination
+2515 砲台熾烈攻撃範囲判定 -- Artillery fierce attack range determination
+2520 判定_破壊目標撃破A -- Judgment_Destruction target destruction A
+2521 判定_破壊目標撃破B -- Judgment_Destruction target destruction B
+2522 判定_破壊目標撃破C -- Judgment_Destruction target destruction C
+2523 判定_破壊目標撃破D -- Judgment_Destruction target destruction D
+2525 判定_目標破壊数1 -- Judgment_Number of targets destroyed 1
+2526 判定_目標破壊数2 -- Judgment_Number of targets destroyed 2
+2527 判定_目標破壊数3 -- Judgment_Number of targets destroyed 3
+2528 判定_目標破壊数4 -- Judgment_Number of targets destroyed 4
+2560 エリア5ボス起動 -- Area 5 boss activation
+2570 エリア5ボス撃破 -- Defeat area 5 boss
+2590 飛んでいく個所に入った -- I entered a place where I could fly away.
+2600 砲台下に入った -- I went under the gun emplacement
+2610 高台に入った -- I entered the high ground
+2620 エレベーターに乗った -- got on the elevator
+2630 ボス前部屋に入った -- I entered the room in front of the boss.
+2640 エリア3の敵を一定数撃破 -- Defeat a certain number of enemies in area 3
+2645 ボスが戦闘状態になった -- The boss is in combat mode
+2646 共闘ポイント通過 -- Passing the cooperation point
+2647 判定_砲台上についた -- Judgment: Arrived on the turret
+2648 判定_塹壕都市建機クモ演出用 -- Judgment_Trench city construction machine spider production
+2649 判定_塹壕都市中盤敵起動用 -- Judgment_Trench City mid-game enemy activation
+2650 判定_塹壕都市終盤敵起動用 -- Judgment_For enemy activation in the final stage of trench city
+2651 判定_ボス戦闘範囲に入った -- Judgment_Entered boss battle range
+2652 判定_塹壕都市エレベーターで降りた -- Judgment_I got off in the trench city elevator
+2653 判定_足場を渡った -- Judgment_Crossed the scaffolding
+2654 判定_中層入口についた -- Judgment_ Arrived at the middle floor entrance
+2655 判定_ボス前部屋にいる -- Judgment_In the room in front of the boss
+2656 判定_第四目標からボス前部屋にいる -- Judgment_Be in the boss room from the fourth objective
+2657 判定_アッシュ離脱用 -- Judgment_For leaving Ash
+2658 判定_奥側の目標に近付いた -- Judgment_ Approaching the target on the back side
+2660 砲台起動 -- turret activation
+2661 砲台初期設定 -- Battery initial settings
+2670 砲台停止 -- Battery stop
+2680 アッシュ離脱時位置判定A -- Position judgment when Ash leaves A
+2681 アッシュ離脱時位置判定B -- Position determination B when Ash leaves
+2682 アッシュ離脱時位置判定C -- Position judgment when leaving Ash C
+2683 アッシュ離脱時位置判定D -- Position judgment when Ash leaves D
+2685 アッシュ離脱ルートα -- Ash withdrawal route α
+2686 アッシュ離脱ルートβ -- Ash withdrawal route β
+2687 アッシュ離脱ルートγ -- Ash withdrawal route γ
+2688 アッシュ離脱ルートδ -- Ash withdrawal route δ
+2695 エリア4最初の敵のロジックを停止 -- Stop area 4 first enemy logic
+2696 エリア4最初の敵ロジック有効化 -- Area 4 first enemy logic enabled
+2700 アッシュ初期化 -- Ash initialization
+2701 四脚砲台化 -- Quadruped turret
+2705 エリア3ボス有効化 -- Area 3 boss enabled
+2706 エリア3ボス死亡判定 -- Area 3 boss death determination
+2707 エリア3ボスゲージ非表示 -- Area 3 boss gauge hidden
+2708 エリア3シャッター開く -- Area 3 shutter opens
+2709 シャッター用ダミーキャラ有効化 -- Enable dummy character for shutter
+2710 目標地点_砲台有効化 -- Target point_turret activation
+2711 目標地点_砲台奥有効化 -- Target point_turret depth enabled
+2712 目標地点_共闘前無効化 -- Target point_Disable before cooperation
+2713 目標地点_エレベーター無効化 -- Target point_elevator disabled
+2714 目標地点全非表示 -- All target points hidden
+2715 目標地点_ボス部屋前有効化 -- Target point_enable in front of boss room
+2718 目標地点_エレベーター有効化 -- Target point_Elevator activation
+2719 中ボス前塞ぎヒットパッチアセット無効化 -- Disable block hit patch asset in front of mid-boss
+2720 目標地点_中層入口有効化 -- Target point_Enable middle level entrance
+2721 目標地点_中層入口無効化 -- Target point_middle level entrance disabled
+2723 ボス前扉開く -- Open the door in front of the boss
+2751 屋内エッジ01領域フラグ_アッシュ_0外側1内側 -- Indoor Edge 01 Area Flag_Ash_0 Outside 1 Inside
+2752 屋内エッジ02領域フラグ_アッシュ_0外側1内側 -- Indoor Edge 02 Area Flag_Ash_0 Outside 1 Inside
+2753 屋内エッジ01領域フラグ_PC_0外側1内側 -- Indoor edge 01 area flag_PC_0 outside 1 inside
+2754 屋内エッジ02領域フラグ_PC_0外側1内側 -- Indoor edge 02 area flag_PC_0 outside 1 inside
+2755 屋内落下01領域フラグ_アッシュ_0外側0内側1落下 -- Indoor Fall 01 Area Flag_Ash_0 Outside 0 Inside 1 Fall
+2756 屋内落下02領域フラグ_アッシュ_0外側0内側1落下 -- Indoor Fall 02 Area Flag_Ash_0 Outside 0 Inside 1 Fall
+2760 屋外00領域フラグ_アッシュ_0外側0内側1落下 -- Outdoor 00 Area Flag_Ash_0 Outside 0 Inside 1 Fall
+2761 屋外01領域フラグ_アッシュ_0外側0内側1落下 -- Outdoor 01 Area Flag_Ash_0 Outside 0 Inside 1 Fall
+2762 屋外02領域フラグ_アッシュ_0外側0内側1落下 -- Outdoor 02 Area Flag_Ash_0 Outside 0 Inside 1 Fall
+2763 屋外03領域フラグ_アッシュ_0外側0内側1落下 -- Outdoor 03 Area Flag_Ash_0 Outside 0 Inside 1 Fall
+2770 状態判定フラグ_近距離 -- Status determination flag_short distance
+2771 状態判定フラグ_遠距離 -- Status determination flag_long distance
+2773 状態判定フラグ_超遠距離 -- Status determination flag_ultra long distance
+2775 状態判定フラグ_場所再チェック -- Status determination flag_location recheck
+2780 屋外00領域フラグ_PC_0外側1内側 -- Outdoor 00 Area Flag_PC_0 Outside 1 Inside
+2781 屋外01領域フラグ_PC_0外側1内側 -- Outdoor 01 Area Flag_PC_0 Outside 1 Inside
+2782 屋外02領域フラグ_PC_0外側1内側 -- Outdoor 02 Area Flag_PC_0 Outside 1 Inside
+2783 屋外03領域フラグ_PC_0外側1内側 -- Outdoor 03 Area Flag_PC_0 Outside 1 Inside
+2785 屋内00領域フラグ_PC_0外側1内側 -- Indoor 00 Area Flag_PC_0 Outside 1 Inside
+2786 屋内01領域フラグ_PC_0外側1内側 -- Indoor 01 Area Flag_PC_0 Outside 1 Inside
+2787 屋内02領域フラグ_PC_0外側1内側 -- Indoor 02 Area Flag_PC_0 Outside 1 Inside
+2788 屋内03領域フラグ_PC_0外側1内側 -- Indoor 03 Area Flag_PC_0 Outside 1 Inside
+2790 屋外00領域フラグ_アッシュ_0外側1内側 -- Outdoor 00 Area Flag_Ash_0 Outside 1 Inside
+2791 屋外01領域フラグ_アッシュ_0外側1内側 -- Outdoor 01 Area Flag_Ash_0 Outside 1 Inside
+2792 屋外02領域フラグ_アッシュ_0外側1内側 -- Outdoor 02 Area Flag_Ash_0 Outside 1 Inside
+2793 屋外03領域フラグ_アッシュ_0外側1内側 -- Outdoor 03 Area Flag_Ash_0 Outside 1 Inside
+2795 屋内00領域フラグ_アッシュ_0外側1内側 -- Indoor 00 Area Flag_Ash_0 Outside 1 Inside
+2796 屋内01領域フラグ_アッシュ_0外側1内側 -- Indoor 01 Area Flag_Ash_0 Outside 1 Inside
+2797 屋内02領域フラグ_アッシュ_0外側1内側 -- Indoor 02 Area Flag_Ash_0 Outside 1 Inside
+2798 屋内03領域フラグ_アッシュ_0外側1内側 -- Indoor 03 Area Flag_Ash_0 Outside 1 Inside
+2800 チェックポイント通過フラグ -- Checkpoint passing flag
+2810 チェックポイント通過後フラグ -- Flag after passing checkpoint
+2820 塹壕都市チェックポイント通過フラグ -- Trench city checkpoint passage flag
+2830 ボス登場アニメフラグ -- Boss appearance anime flag
+2831 重ガードメカ撃破チェックポイントフラグ -- Heavy guard mech destruction checkpoint flag
+2832 アッシュ追従終了フラグ -- Ash following end flag
+2833 ラスティ途中離脱フラグ -- Rusty leaving flag
+2834 汎用COM掛け合い切替フラグ -- General-purpose COM interaction switching flag
+2835 汎用COM切替判定 -- General-purpose COM switching judgment
+2840 進行度_中層都市 -- Progression_Mid-tier city
+2841 進行度_重ガードメカ戦前 -- Progress_Heavy Guard Mech Before Battle
+2842 進行度_重ガードメカ戦 -- Progress_Heavy Guard Mech Battle
+2843 進行度_塹壕都市 -- Progress_Trench City
+2844 進行度_ヴァルキュリア戦 -- Progress_Valkyria Battle
+2850 ルート移動10_20成功したフラグ -- Route move 10_20 successful flag
+2851 ルート移動10_30成功したフラグ -- Route move 10_30 successful flag
+2860 ルート移動20_10成功したフラグ -- Route move 20_10 successful flag
+2861 ルート移動20_30成功したフラグ -- Route move 20_30 successful flag
+2870 ルート移動30_10成功したフラグ -- Route move 30_10 successful flag
+2871 ルート移動30_20成功したフラグ -- Route move 30_20 successful flag
+2890 移動指示1020 -- Movement instructions 1020
+2891 移動指示1030 -- Movement instructions 1030
+2892 移動指示2010 -- Moving instructions 2010
+2893 移動指示2030 -- Movement instructions 2030
+2894 移動指示3010 -- Movement instructions 3010
+2895 移動指示3020 -- Movement instructions 3020
+2899 移動指示リセット -- Movement instruction reset
+2900 会話判定_ジェネレーター確認 -- Conversation judgment_generator confirmation
+2901 会話判定_重ガードメカ体力半減 -- Conversation judgment_Heavy guard mecha physical strength halved
+2902 会話判定_ENヴァルがHUした -- Conversation Judgment_EN Val made HU
+2903 会話判定_ENヴァル体力70 -- Conversation judgment_EN Val physical strength 70
+2904 会話判定_自機死亡 -- Conversation Judgment_Ownership Death
+2905 会話判定_ENヴァル撃破 -- Conversation Judgment_Defeat EN Val
+2906 会話判定_ボス戦会話開始 -- Conversation judgment_Boss battle conversation start
+2907 会話判定_内部に進行した -- Conversation judgment_Proceeded inside
+2908 会話判定_ENヴァル体力25 -- Conversation judgment_EN Val physical strength 25
+2909 会話判定_自機劣勢_重ガードメカ用 -- Conversation judgment_Owner's inferiority_For heavy guard mecha
+2910 会話判定_自機劣勢_ENヴァル用 -- Conversation judgment_own machine inferiority_for EN Val
+2911 会話判定_最初のMT接敵 -- Conversation judgment_first MT contact
+2912 会話判定_重ガードメカ戦闘開始 -- Conversation Judgment_Heavy Guard Mecha Battle Starts
+2913 会話判定_ボス前会話開始用 -- Conversation judgment_For starting conversation before boss
+2914 会話判定_重ガードメカ35 -- Conversation Judgment_Heavy Guard Mecha 35
+2915 撤退会話再生中 -- Retreat conversation playing
+2916 撤退会話再生終了 -- End of withdrawal conversation playback
+2917 会話判定_撤退会話再生中 -- Conversation Judgment_Retreat Conversation Playing
+2918 ミッション会話開始 -- Mission conversation begins
+2920 ミッション会話終了 -- Mission conversation ends
+2921 会話判定_ミッション会話中 -- Conversation judgment_Mission conversation in progress
+2922 会話判定_MT接敵スキップ -- Conversation judgment_MT enemy contact skip
+2923 会話判定_重ガード35スキップ -- Conversation Judgment_Heavy Guard 35 Skip
+2924 BGM判定_スネイル死亡 -- BGM judgment_Snail death
+2925 会話判定_重ガードメカ発見 -- Conversation Judgment_Heavy Guard Mecha Found
+2926 会話判定_2機撃破スキップ -- Conversation Judgment_2 Machines Destroyed Skip
+2927 会話判定_3機撃破スキップ -- Conversation Judgment_3 Machines Destroyed Skip
+2928 地上会話2発話可能フラグ -- Ground conversation 2 utterance flag
+2929 会話判定_地上会話2_発話可能 -- Conversation judgment_Ground conversation 2_Able to speak
+2950 会話_開幕会話1 -- Conversation_Opening conversation 1
+2951 会話_開幕会話2 -- Conversation_Opening conversation 2
+2952 会話_急かす会話 -- Conversation_urgent conversation
+2953 会話_MTと接敵1 -- Conversation_MT and enemy engagement 1
+2954 会話_MTと接敵2 -- Conversation_MT and enemy contact 2
+2955 会話_ジェネレーター発見 -- Conversation_generator discovery
+2956 会話_ジェネレーター破壊1 -- Conversation_Generator destruction 1
+2957 会話_地上部隊会話1_1 -- Conversation_Ground troops conversation 1_1
+2958 会話_地上部隊会話1_2 -- Conversation_Ground Force Conversation 1_2
+2959 会話_地上部隊会話1_3 -- Conversation_Ground Force Conversation 1_3
+2960 会話_ジェネレーター破壊2 -- Conversation_Generator destruction 2
+2961 会話_地上部隊会話2_1 -- Conversation_Ground Force Conversation 2_1
+2962 会話_地上部隊会話2_2 -- Conversation_Ground Force Conversation 2_2
+2963 会話_地上部隊会話2_3領域 -- Conversation_Ground Force Conversation 2_3 Area
+2964 会話_地上部隊会話2_3スカベン -- Conversation_Ground Force Conversation 2_3 Skaven
+2965 会話_地上部隊会話2_4発電未 -- Conversation_Ground Force Conversation 2_4 No power generation
+2966 会話_地上部隊会話2_4発電済 -- Conversation_Ground Force Conversation 2_4 Generated
+2967 会話_地上部隊会話2_5 -- Conversation_Ground Force Conversation 2_5
+2968 会話_地上部隊会話2_6 -- Conversation_Ground Force Conversation 2_6
+2969 会話_中ボス会話1 -- Conversation_Mid-Boss Conversation 1
+2970 会話_中ボス会話2 -- Conversation_Mid-Boss Conversation 2
+2971 会話_中ボス会話3 -- Conversation_Middle boss conversation 3
+2972 会話_中ボス劣勢 -- Conversation_Mid-boss inferiority
+2973 会話_地上部隊会話3_1 -- Conversation_Ground troops conversation 3_1
+2974 会話_地上部隊会話3_2 -- Conversation_Ground troops conversation 3_2
+2975 会話_地上部隊会話3_3 -- Conversation_Ground troops conversation 3_3
+2976 会話_地上部隊会話3_4 -- Conversation_Ground Force Conversation 3_4
+2977 会話_中ボス優勢 -- Conversation_Mid-boss dominance
+2978 会話_中ボス撃破1 -- Conversation_Mid-boss defeat 1
+2979 会話_中ボス撃破2 -- Conversation_Mid-boss defeat 2
+2980 会話_中ボス撃破3 -- Conversation_Mid-boss defeat 3
+2981 会話_中枢侵入 -- Conversation_Central Intrusion
+2982 会話_ジェネレーター残り2 -- Conversation_generator remaining 2
+2983 会話_ジェネレーター破壊3_1 -- Conversation_Generator destruction 3_1
+2984 会話_ジェネレーター破壊3_2 -- Conversation_Generator destruction 3_2
+2985 会話_ジェネレーター破壊4_1 -- Conversation_Generator destruction 4_1
+2986 会話_接近する機影有り -- Conversation_There is a plane approaching
+2987 会話_先ずは退避を -- Conversation_Evacuate first
+2988 会話_ボス前口上 -- Conversation_Boss talk
+2989 会話_ボス登場1 -- Conversation_Boss appearance 1
+2990 会話_ボス登場2 -- Conversation_Boss appearance 2
+2991 会話_ボス情報解析 -- Conversation_Boss information analysis
+2992 会話_ボス挨拶 -- Conversation_Boss Greetings
+2993 会話_ボス挨拶_スト街で撃破1 -- Conversation_Boss Greeting_Defeated in Strike Town 1
+2994 会話_ボス挨拶_スト街で撃破2 -- Conversation_Boss Greeting_Defeated in Strike Town 2
+2995 会話_ボス挨拶_スト街で無視1 -- Conversation_Boss Greeting_Ignored on Strike Street 1
+2996 会話_ボス挨拶_スト街で無視2 -- Conversation_Boss Greeting_Ignored on Strike Street 2
+2997 会話_ボス紹介 -- Conversation_Boss introduction
+2998 会話_ボス体力75 -- Conversation_Boss physical strength 75
+2999 会話_ボスHU1 -- Conversation_Boss HU1
+3000 会話_ボスHU2 -- Conversation_Boss HU2
+3001 会話_ボスHU3 -- Conversation_Boss HU3
+3002 会話_ボスHP25_1 -- Conversation_Boss HP25_1
+3003 会話_ボスHP25_2 -- Conversation_Boss HP25_2
+3004 会話_ボス撃破1 -- Conversation_Boss Defeat 1
+3005 会話_ボス撃破2 -- Conversation_Boss Defeat 2
+3006 会話_ボス撃破3 -- Conversation_Boss Defeat 3
+3007 会話_終了会話1 -- Conversation_End conversation 1
+3008 会話_終了会話2 -- Conversation_End conversation 2
+3009 会話_ボスに撃破された -- Conversation_Defeated by the boss
+3010 会話_ラスティ離脱1 -- Conversation_Rusty leaving 1
+3011 会話_ラスティ離脱2 -- Conversation_Rusty leaving 2
+3012 会話_ラスティ離脱後ボス撃破 -- Conversation_Defeat the boss after Rusty leaves
+3013 会話_中ボス優勢2 -- Conversation_Mid-boss dominance 2
+3014 会話_ラスティ離脱後ボス撃破2 -- Conversation_Defeat the boss after Rusty leaves 2
+3200 砲台アクティブ化 -- turret activation
+3290 アッシュ移動_PC近くなった -- Ash moved_closer to PC
+3300 ラスティWP_EntID2801 -- RustyWP_EntID2801
+3301 ラスティWP_EntID2810 -- RustyWP_EntID2810
+3302 ラスティWP_EntID2816 -- RustyWP_EntID2816
+3303 ラスティWP_EntID2861 -- RustyWP_EntID2861
+3304 ラスティWP_EntID2827 -- RustyWP_EntID2827
+3305 ラスティWP_EntID2872 -- RustyWP_EntID2872
+3306 ラスティWP_EntID2838 -- RustyWP_EntID2838
+3307 ラスティWP_EntID2883 -- RustyWP_EntID2883
+3308 ラスティWP_EntID2856 -- RustyWP_EntID2856
+3309 ラスティWP_EntID2865 -- RustyWP_EntID2865
+3310 ラスティWP_EntID2878 -- RustyWP_EntID2878
+3311 ラスティWP_EntID2887 -- RustyWP_EntID2887
+3312 ラスティWP_EntID2814 -- RustyWP_EntID2814
+3313 ラスティWP_EntID2841 -- RustyWP_EntID2841
+3314 ラスティWP_EntID2824 -- RustyWP_EntID2824
+3315 ラスティWP_EntID2842 -- RustyWP_EntID2842
+3316 ラスティWP_EntID2867 -- RustyWP_EntID2867
+3317 ラスティWP_EntID2876 -- RustyWP_EntID2876
+3318 ラスティWP_EntID2890 -- RustyWP_EntID2890
+3319 ラスティWP_EntID2895 -- RustyWP_EntID2895
+3390 アッシュ移動_向かうシリーズのフラグリセット -- Ash movement_heading series flag reset
+3700 EN砲台制御_発射用特殊効果 -- EN turret control_special effects for firing
+3710 EN砲台制御_発射用可能判定 -- EN turret control_fireability determination
+3790 EN砲台制御_発射許可判定フラグ -- EN battery control_launch permission determination flag
+3800 カタパルトイベント -- catapult event
+3801 判定_カタパイベント開始 -- Judgment_Katapa event start
+3802 カタパイベント開始フラグ -- Katapa event start flag
+3803 カタパイベント_砲台起動 -- Katapa event_turret activation
+3804 カタパイベント_アッシュ次の位置へ -- Katapa Event_Ash to next position
+3810 カタパ_重ガードメカ前 -- Katapa_Heavy guard mechanism front
+3820 重ガードメカ後_アッシュ移動 -- After heavy guard mecha_Ash movement
+3821 カタパイベント_重ガードメカ後 -- Katapa Event_After Heavy Guard Mecha
+3830 開幕アッシュ移動 -- Opening Ash move
+3851 領域判定_アッシュ_屋内_エッジ01 -- Area determination_Ash_Indoor_Edge 01
+3852 領域判定_アッシュ_屋内_エッジ02 -- Area determination_Ash_Indoor_Edge 02
+3853 領域判定_PC_落下屋内_エッジ01 -- Area determination_PC_fall indoor_edge 01
+3854 領域判定_PC_落下屋内_エッジ02 -- Area determination_PC_fall indoor_edge 02
+3855 領域判定_アッシュ_屋内_落下01 -- Area judgment_Ash_Indoor_Fall 01
+3856 領域判定_アッシュ_屋内_落下02 -- Area judgment_Ash_Indoor_Fall 02
+3860 領域判定_アッシュ_落下屋外00 -- Area judgment_Ash_Falling outdoors 00
+3861 領域判定_アッシュ_落下屋外01 -- Area Judgment_Ash_Falling Outdoors 01
+3862 領域判定_アッシュ_落下屋外02 -- Area Judgment_Ash_Falling Outdoors 02
+3863 領域判定_アッシュ_落下屋外03 -- Area Judgment_Ash_Falling Outdoors 03
+3870 状態判定_アッシュと近い -- Status determination_close to Ash
+3871 状態判定_アッシュと遠い -- Status Judgment_Far from Ash
+3872 状態判定_場所再チェック -- Status determination_Recheck location
+3873 状態判定_アッシュと超遠い -- Status Judgment_Very far from Ash
+3880 領域判定_PC_屋外00 -- Area judgment_PC_Outdoor 00
+3881 領域判定_PC_屋外01 -- Area determination_PC_Outdoor 01
+3882 領域判定_PC_屋外02 -- Area determination_PC_Outdoor 02
+3883 領域判定_PC_屋外03 -- Area determination_PC_Outdoor 03
+3885 領域判定_PC_屋内00 -- Area judgment_PC_indoor 00
+3886 領域判定_PC_屋内01 -- Area determination_PC_indoor 01
+3887 領域判定_PC_屋内02 -- Area determination_PC_indoor 02
+3888 領域判定_PC_屋内03 -- Area determination_PC_indoor 03
+3890 領域判定_アッシュ_屋外00 -- Area judgment_Ash_Outdoor 00
+3891 領域判定_アッシュ_屋外01 -- Area judgment_Ash_Outdoor 01
+3892 領域判定_アッシュ_屋外02 -- Area judgment_Ash_Outdoor 02
+3893 領域判定_アッシュ_屋外03 -- Area judgment_Ash_Outdoor 03
+3895 領域判定_アッシュ_屋内00 -- Area judgment_Ash_indoor 00
+3896 領域判定_アッシュ_屋内01 -- Area judgment_Ash_Indoor 01
+3897 領域判定_アッシュ_屋内02 -- Area judgment_Ash_indoor 02
+3898 領域判定_アッシュ_屋内03 -- Area judgment_Ash_indoor 03
+3900 ミッション用初期化イベント_ボスゲージ -- Mission initialization event_Boss gauge
+3901 ボス戦開始イベント -- Boss battle start event
+3902 ボス戦用作戦ラインに変更 -- Changed to boss battle strategy line
+3910 ENヴァルキュリア登場アニメ -- EN Valkyria appearance anime
+3911 スネイル作戦ライン閉じ込め対策 -- Snail Operation Line Confinement Measures
+3920 ENヴァルキュリア_死亡判定 -- EN Valkyria_death judgment
+3930 ジェネレータの結果再現 -- Reproducing generator results
+3950 BGMトランジション_ステート番号00_通常 -- BGM transition_state number 00_normal
+3951 BGMトランジション_ステート番号01_戦闘中 -- BGM transition_state number 01_in battle
+3952 BGMトランジション_ステート番号02_ヒートアップ1 -- BGM transition_state number 02_heat up 1
+3953 BGMトランジション_ステート番号03_ヒートアップ2 -- BGM transition_state number 03_heat up 2
+3954 BGMトランジション_ステート番号04_ヒートアップ3 -- BGM transition_state number 04_heat up 3
+3955 BGMトランジション_ステート番号05_ヒートアップ4 -- BGM transition_state number 05_heat up 4
+3956 BGMトランジション_ステート番号06_ヒートアップ5 -- BGM transition_state number 06_heat up 5
+3957 BGMトランジション_ステート番号07_死亡 -- BGM transition_state number 07_death
+3970 デバッグ用フラグ_ボス戦開始フラグ -- Debugging flag_Boss battle start flag
+3971 デバッグ用フラグ_ボス戦ワープ処理 -- Debugging flag_Boss battle warp processing
+3972 デバッグ用フラグ_中ボス戦開始フラグ -- Debugging flag_Mid-boss battle start flag
+3973 デバッグ用_中ボスワープ処理 -- For debugging_middle boss warp processing
+3974 デバッグ用フラグ_破壊目標三個目 -- Debug flag_Third destruction target
+3975 デバッグ用_破壊目標三個目までワープ -- For debugging_Warp to the third destruction target
+3980 中ボス戦前アッシュ移動制御 -- Ash movement control before mid-boss battle
+3981 中ボス戦アッシュ墜落防止イベント -- Mid-boss battle Ash crash prevention event
+1000000000 敵リスポン -- enemy respawn

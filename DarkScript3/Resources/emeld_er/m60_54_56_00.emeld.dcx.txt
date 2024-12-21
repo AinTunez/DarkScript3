@@ -1,0 +1,12 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1054562200 野生動物霊体化 -- wild animal spirit form
+1054562500 バディ召喚距離を延ばすイベント -- Event that increases buddy summoning distance
+1054562815 氷の湖ブリザード風切り替え -- Ice Lake Blizzard Wind Switch
+1054562820 アイスワイバーン_特殊待機解除 -- Ice Wyvern_Special standby canceled

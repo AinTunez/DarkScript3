@@ -1,0 +1,17 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1044332230 死亡待機 -- Waiting for death
+1044332240 宝箱開けっ放し処理 -- Treasure chest left open
+1044332280 亜人擬態イベント_XX -- Demihuman mimicry event_XX
+1044332300 [亡霊ＮＰＣイベント1]開始 -- [Ghost NPC Event 1] Start
+1044332301 [亡霊ＮＰＣイベント1]クリアー -- [Ghost NPC Event 1] Cleared
+1044332302 [亡霊ＮＰＣイベント1]敵登場 -- [Ghost NPC Event 1] Enemy Appears
+1044332303 [亡霊ＮＰＣイベント1]敵撃破 -- [Ghost NPC Event 1] Defeating the enemy
+1044332304 [亡霊ＮＰＣイベント1]村人会話解除 -- [Ghost NPC Event 1] Villager conversation canceled
+1044333700 NPC101道標老婆_被ダメアニメ再生 -- NPC101 Signpost Old Woman_Damaged Anime Playback

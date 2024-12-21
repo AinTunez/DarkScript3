@@ -1,0 +1,7 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1033440700 NPC311半島砦の城主_NPC初期化イベント_闇霊化_キャラXX -- NPC311 Lord of the Peninsula Fort_NPC initialization event_Dark spiritization_Character XX
+1033440705 NPC311半島砦の城主_NPC初期化イベント_闇霊化_宝死体XX -- NPC311 Lord of the Peninsula Fort_NPC Initialization Event_Dark Spiritification_Treasure Corpse XX
+1033440710 NPC311半島砦の城主_NPC初期化イベント_闇霊化_血のりXX -- NPC311 Lord of the Peninsula Fort_NPC initialization event_Dark spiritization_Blood XX

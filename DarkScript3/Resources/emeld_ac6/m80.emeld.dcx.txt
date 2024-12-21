@@ -1,0 +1,55 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+8000000 ワラワラ虫土遁 -- Walla Walla Mushi Toton
+8000100 コロニー船敵出現 -- Colony ship enemy appears
+8000200 レビュ終了のお知らせ -- Notice of end of review
+9000000 レーダーハッキング -- radar hacking
+9000010 レーダーハッキング進捗通知 -- Radar hacking progress notification
+9100000 レーダーハッキング完了時挙動 -- Behavior when radar hacking is completed
+9200000 電磁嵐の索敵妨害効果発動 -- Activates electromagnetic storm's enemy search and interference effect.
+9300000 カタパルト起動 -- catapult launch
+9350000 エレベーター起動 -- elevator start
+9400000 補給スタンド -- supply stand
+9500000 修理ステーション -- repair station
+9600000 作戦領域外ペナルティ -- Outside operational area penalty
+9600010 作戦領域外ペナルティ通知 -- Out of Operation Area Penalty Notification
+9700000 谷爆撃機出現と無効化 -- Valley bomber appearance and invalidation
+9710000 ボス前爆撃機出現と無効化 -- Bomber appearance and invalidation in front of the boss
+9711000 ボス前爆撃機出現（メイン左ルート）と無効化 -- Bomber appears before boss (main left route) and disables
+9720000 ボス前爆撃機敵投下 -- Enemy drop bomber in front of boss
+9730000 ボス前爆撃機投下左 -- Bomber dropping left in front of boss
+9800000 強敵デブ出現 -- Strong enemy fat appears
+9800010 強敵デブ初期化 -- Strong enemy fat initialization
+9800020 強敵（デブ）_部位1HP① -- Strong enemy (fat)_part 1HP①
+9800030 強敵（デブ）_部位1HP② -- Strong enemy (fat)_part 1HP②
+9800040 強敵（デブ）_部位1HP③ -- Strong enemy (fat)_part 1HP③
+9800050 強敵（デブ）_部位1HP④ -- Strong enemy (fat)_part 1HP④
+9800060 強敵（デブ）_部位1HP⑤ -- Strong enemy (fat)_part 1HP⑤
+9810000 ボス起動 -- boss launch
+9810010 ボス初期化 -- Boss initialization
+9810020 ボス部位ダメージSFX_XX -- Boss part damage SFX_XX
+9810040 ボス部位死亡判定_1基目、2基目 -- Boss part death judgment_1st, 2nd
+9810041 ボス部位死亡判定_3基目 -- Boss part death judgment_3rd unit
+9810042 ボス足部位破壊ダウン判定 -- Boss leg part destruction down judgment
+9810043 ボス足場アタッチ -- boss scaffolding attach
+9810045 ボスダウン時砲台ロジック停止 -- Turret logic stops when boss is down
+9810046 ボスダウン復帰 -- boss down return
+9810050 ボス部位破壊時SFX_XX -- SFX_XX when destroying boss parts
+9810100 ボスアタッチマシンガン_各種設定_XX -- Boss attach machine gun_various settings_XX
+9810200 部位破壊時ロックオン不可_XX -- Cannot lock on when part is destroyed_XX
+9810300 部位破壊時ロックオン不可_YY -- Cannot lock on when part is destroyed_YY
+9810400 ドリル部位作製_XX -- Drill part preparation_XX
+9810410 ドリル部位破壊_XX -- Drill part destruction_XX
+9810420 ドリル部位ダメージSFX_XX -- Drill part damage SFX_XX
+9810430 ドリル部位アタリ無効_暫定 -- Drill part hit invalid_temporary
+9810440 採掘艦_よろけorダウン判定 -- Mining ship_Stagger or down judgment
+9900000 更新頻度向上 -- Improved update frequency
+9910000 分割マップのヒット対策 -- Countermeasures against split map hits
+9920000 砲台D_マシンガン_各種設定_XX -- Battery D_Machine gun_Various settings_XX
+9990000 デバッグ用_マシンガン停止 -- For debugging_machine gun stop
+9990010 デバッグ用_マシンガン更新頻度固定 -- For debugging_machine gun update frequency fixed
+9990020 デバッグ用_ドリル更新頻度固定 -- For debugging_Drill update frequency fixed
+9990030 配置テスト用　重力無効 -- For placement test Gravity disabled
+9990040 デバッグ採掘艦ON_OFF -- Debug mining ship ON_OFF
+1000000000 敵リスポン -- enemy respawn

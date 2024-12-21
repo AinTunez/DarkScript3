@@ -1,0 +1,25 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+39202145 NPC疑似マルチ_トラゴス_開始 -- NPC pseudo multi_tragos_start
+39202200 さまよえる卑兵_思考ロジック有効化_休憩部屋 -- Wandering Baseball_Thought Logic Activation_Rest Room
+39202220 亡者鉱夫_採掘中止_XX -- Dead Miner_Mining Canceled_XX
+39202230 亡者鉱夫_採掘中止_武器強化素材_XX -- Dead Miner_Mining Canceled_Weapon Enhancement Materials_XX
+39202240 亡者鉱夫_採掘中止_武器強化素材_終了後待機_XX -- Dead Miner_Canceling mining_Weapon enhancement materials_Waiting after completion_XX
+39202260 亡者鉱夫_更新頻度切り替え_XX -- Dead Miner_Update frequency switch_XX
+39202280 亡者鉱夫_特殊待機_XX -- Dead Miner_Special Standby_XX
+39202302 コウモリ_視界拡大_廃墟 -- Bat_Visibility expansion_Ruins
+39202306 コウモリ_視界拡大_屋根上広場前 -- Bats_Expanded visibility_In front of the roof plaza
+39202318 コウモリ_特殊奇襲 -- Bat_Special surprise attack
+39202351 コウモリの視界拡大_屋根上 -- Expanded visibility of bats_on the roof
+39202500 エレベータ起動 -- elevator start
+39202580 梯子登録 -- ladder registration
+39202670 敵対壁一時無効化 -- Temporarily disable enemy wall
+39202800 王の土竜_撃破 -- King's Earth Dragon_Defeated
+39202810 王の土竜_出現 -- King's Earth Dragon_Appearance
+39202829 王の土竜_ボスイベント起動 -- King's Earth Dragon_Boss event activated
+39203700 NPC344_トラゴス_侵入サイン出現フラグを立てる -- NPC344_Tragos_ Set intrusion sign appearance flag
+39203701 NPC344_トラゴス_侵入トラゴス戦を開始した -- NPC344_Tragos_ Invasion Tragos battle has started.
+39203710 NPC348マレニアの娘_土竜戦_白霊召喚停止イベント -- NPC348 Daughter of Marenia_Earth Dragon Battle_White Spirit Summoning Stop Event
+39203720 NPC331_ならず者_共闘サイン出現フラグを立てる -- NPC331_Rogue_Set the cooperation sign appearance flag
+1000000000 敵リスポン -- enemy respawn

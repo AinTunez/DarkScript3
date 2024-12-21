@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1047422600 チュートリアルメッセージ_ケイリッド闘技場 -- Tutorial message_Keilid Arena
+1047422601 闘技場入り口_マルチ中は稼働しない -- Arena entrance_does not operate during multiplayer
+1047422602 チュートリアルメッセージ_円卓のマリカ像 -- Tutorial message_Marika statue at the round table

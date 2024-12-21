@@ -1,0 +1,228 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッションクリアフラグ -- mission clear flag
+2001 ミッション時間切れ失敗時の個別処理 -- Individual processing when mission timeout fails
+2010 ワーム撃破判定 -- Worm defeat judgment
+2020 ワーム撃破CS再生 -- Worm defeat CS playback
+2100 初期イベント -- initial event
+2180 テスト_僚機顔以外攻撃イベント -- Test_Attack event other than wingman face
+2200 開幕起動処理 -- Opening startup process
+2210 アイスワーム戦闘開始処理 -- Iceworm battle start process
+2220 アイスワーム戦開始判定 -- Iceworm battle start judgment
+2230 ヘリ演出開幕処理 -- Helicopter performance opening process
+2700 僚機_初期イベント -- Wingman_Initial event
+2710 僚機_イグアス死亡許可 -- Wingman_Iguazu death permit
+2720 僚機_No2死亡許可 -- Wingman_No2 death permission
+2730 僚機_チャティ死亡許可 -- Wingman_Chati death permission
+2750 僚機_僚機マーカー付与 -- Wingman_Give wingman marker
+2751 僚機_僚機ゲージ消した判定_イグアス -- Wingman_Flyner aircraft gauge cleared_Iguazu
+2752 僚機_僚機ゲージ消した判定_No2 -- Wingman_Judgment that wingman gauge disappeared_No.2
+2753 僚機_僚機ゲージ消した判定_チャティ -- Wingman _ Determination of wingman gauge being erased _ Chatty
+2790 チャティ死亡判定 -- Chatty death determination
+2791 イグアス死亡判定 -- Iguazu death determination
+2792 ナンバー2死亡判定 -- Number 2 death determination
+2800 ドーラ砲撃制禦_ワーム顔面ヒット判定 -- Dora bombardment control_worm face hit detection
+2801 ドーラ砲撃制禦_ドーラ砲やられアニメ再生特効付与 -- Dora cannon attack control_Dora cannon hit animation playback special effect added
+2802 ドーラ砲撃制禦_HU後_専用武器ワーム顔面ヒット判定 -- Dora bombardment control_after HU_exclusive weapon worm face hit detection
+2803 ドーラ砲撃制禦_PA割れた判定 -- Dora bombardment control_PA cracked judgment
+2804 ドーラ砲撃制禦_PA被ダメ半分 -- Dora bombardment control_PA damage taken half
+2805 ドーラ砲撃制禦_ドーラ砲やられアニメ再生特効付与_HU版 -- Dora cannon attack control_Dora cannon hit animation playback special effect_HU version
+2806 ドーラ砲撃制禦_PA割れた判定_HU後 -- Dora bombardment control_PA cracked judgment_After HU
+2810 ドーラ砲撃制禦_ワーム顔面ヒット判定イベント再キック判定 -- Dora bombardment control_worm face hit judgment event re-kick judgment
+2811 ワーム無敵切り替え判定 -- Worm invincibility switching judgment
+2820 ワームHU判定 -- Worm HU judgment
+2821 ワーム再漏電判定 -- Worm re-leakage judgment
+2822 ワームHU時特殊効果スリープ解除判定 -- Special effect sleep wake judgment when worm HU
+2830 フェーズ1用AP保証 -- AP Assurance for Phase 1
+2831 フェーズ2用AP保証 -- AP Assurance for Phase 2
+2832 フェーズ3用AP保証 -- AP Assurance for Phase 3
+2840 フェーズ1突破判定 -- Phase 1 breakthrough determination
+2841 フェーズ2突破判定 -- Phase 2 breakthrough determination
+2842 フェーズ3突破判定 -- Phase 3 breakthrough determination
+2850 フェーズ1用爆発ダメ -- Phase 1 explosion damage
+2851 フェーズ2用爆発ダメ -- Phase 2 explosion damage
+2900 会話_ワームドーラ砲やられアニメ再生可能通知 -- Conversation_Wormdora cannon hit animation playable notification
+2901 会話_ワームドーラ砲やられアニメ再生可能通知_フラグオフ -- Conversation_Wormdora cannon attack animation replayable notification_Flag off
+2950 会話_チャティ死亡 -- Conversation_Chatty dies
+2951 会話_イグアス死亡 -- Conversation_Iguazu Death
+2952 会話_ナンバー2死亡 -- Conversation_Number 2 Death
+2954 会話_マーキング_HU後初回 -- Conversation_Marking_First time after HU
+2955 会話_マーキング -- Conversation_Marking
+2956 会話_ドーラ砲着弾 -- Conversation_Dora cannon landing
+2957 会話_ワーム復帰 -- Conversation_Worm return
+2958 会話_マーキング_HU後2段目判定 -- Conversation_Marking_2nd stage judgment after HU
+2959 会話_HU後PA半分 -- Conversation_PA half after HU
+2960 会話_ワームHU開始 -- Conversation_Worm HU start
+2961 会話_ワームHU終了 -- Conversation_Worm HU ends
+2962 会話_自機武器装備判定 -- Conversation_ Own weapon equipment determination
+2963 会話_ドーラ発射カウントダウン -- Conversation_Dora launch countdown
+2964 会話_ワーム最終ダウン煽り -- Conversation_ Worm final down agitation
+2965 会話_ワーム時間切れ失敗 -- Conversation_Worm timeout failure
+2966 会話_イグアス_AP低下 -- Conversation_Iguazu_AP decrease
+2967 会話_No2_AP低下 -- Conversation_No2_AP decrease
+2968 会話_チャティ_AP低下 -- Conversation_Chatty_AP decrease
+2969 会話_失敗差分01_再生したフラグ -- Conversation_Failure difference 01_Replayed flag
+2970 会話_失敗差分02_再生したフラグ -- Conversation_Failure difference 02_Replayed flag
+2971 会話_フェーズ1突破会話再生判定 -- Conversation_Phase 1 breakthrough conversation replay judgment
+2972 会話_フェーズ2突破会話再生判定 -- Conversation_Phase 2 breakthrough conversation replay judgment
+2973 会話_演出死亡会話再生判定_爆発 -- Conversation_Production death conversation replay judgment_Explosion
+2974 会話_自機_AP低下 -- Conversation_Owner_AP_Decrease
+2975 会話_演出死亡会話再生判定_イグアス -- Conversation_Production death conversation replay judgment_Iguazu
+3000 雑魚マシマシ開始判定 -- Small fry better start judgment
+3006 雑魚マシマシ特攻開始 -- Small fish mashimashi special attack begins
+3010 雑魚マシマシ終了判定 -- Small fry better end judgment
+3020 雑魚マシマシ中断判定 -- Judgment of suspension of miscellaneous fish
+3140 雑魚マシマシイベント -- Small fish better event
+3160 雑魚死亡処理 -- Small fish death treatment
+3210 ワーム_中央戻らせイベント -- Worm_central return event
+3300 開幕演出初期イベント -- Opening performance initial event
+3303 開幕演出_狙わせターゲット切り替え03 -- Opening production_Aim target switching 03
+3310 開幕演出_ワーム01 -- Opening performance_Worm 01
+3311 開幕演出_ワーム02 -- Opening performance_Worm 02
+3312 開幕演出_ワーム03 -- Opening performance_Worm 03
+3319 開幕演出_ワーム10 -- Opening performance_Worm 10
+3320 開幕演出_僚機起動 -- Opening performance _ wingman activation
+3400 カメラ乗っ取り判定 -- Camera hijacking detection
+3401 カメラ乗っ取り解除判定 -- Camera hijacking release determination
+3402 カメラ乗っ取りイベント -- camera hijack event
+3409 カメラ引き演出許可デバッグイベント -- Camera pull production permission debug event
+3450 BGMサウンドステート変更_HU -- BGM sound state change_HU
+3451 BGMサウンドステート変更_死亡 -- BGM sound state change_death
+3500 NAPC_初期イベント -- NAPC_Initial event
+3510 NPAC_第01フェーズ突破処理 -- NPAC_01st phase breakthrough process
+3511 NPAC_イグアス撤退 -- NPAC_Iguazu withdrawal
+3590 会話済みフラグ651 -- Conversation completed flag 651
+3600 会話済みフラグ00 -- Conversation completed flag 00
+3601 会話済みフラグ01 -- Conversation completed flag 01
+3602 会話済みフラグ02 -- Conversation completed flag 02
+3603 会話済みフラグ03 -- Conversation completed flag 03
+3604 会話済みフラグ04 -- Conversation completed flag 04
+3605 会話済みフラグ05 -- Conversation completed flag 05
+3606 会話済みフラグ06 -- Conversation completed flag 06
+3607 会話済みフラグ07 -- Conversation completed flag 07
+3608 会話済みフラグ08 -- Conversation completed flag 08
+3609 会話済みフラグ09 -- Conversation completed flag 09
+3610 会話済みフラグ10 -- Conversation completed flag 10
+3611 会話済みフラグ11 -- Conversation completed flag 11
+3612 会話済みフラグ12 -- Conversation completed flag 12
+3613 会話済みフラグ13 -- Conversation completed flag 13
+3614 会話済みフラグ14 -- Conversation completed flag 14
+3615 会話済みフラグ15 -- Conversation completed flag 15
+3616 会話済みフラグ16 -- Conversation completed flag 16
+3617 会話済みフラグ17 -- Conversation completed flag 17
+3618 会話済みフラグ18 -- Conversation completed flag 18
+3619 会話済みフラグ19 -- Conversation completed flag 19
+3620 会話済みフラグ20 -- Conversation completed flag 20
+3621 会話済みフラグ21 -- Conversation completed flag 21
+3622 会話済みフラグ22 -- Conversation completed flag 22
+3623 会話済みフラグ23 -- Conversation completed flag 23
+3624 会話済みフラグ24 -- Conversation completed flag 24
+3625 会話済みフラグ25 -- Conversation completed flag 25
+3626 会話済みフラグ26 -- Conversation completed flag 26
+3627 会話済みフラグ27 -- Conversation completed flag 27
+3628 会話済みフラグ28 -- Conversation completed flag 28
+3629 会話済みフラグ29 -- Conversation completed flag 29
+3630 会話済みフラグ30 -- Conversation completed flag 30
+3631 会話済みフラグ31 -- Conversation completed flag 31
+3632 会話済みフラグ32 -- Conversation completed flag 32
+3633 会話済みフラグ33 -- Conversation completed flag 33
+3634 会話済みフラグ34 -- Conversation completed flag 34
+3635 会話済みフラグ35 -- Conversation completed flag 35
+3636 会話済みフラグ36 -- Conversation completed flag 36
+3637 会話済みフラグ37 -- Conversation completed flag 37
+3638 会話済みフラグ38 -- Conversation completed flag 38
+3639 会話済みフラグ39 -- Conversation completed flag 39
+3640 会話済みフラグ40 -- Conversation completed flag 40
+3641 会話済みフラグ41 -- Conversation completed flag 41
+3642 会話済みフラグ42 -- Conversation completed flag 42
+3643 会話済みフラグ43 -- Conversation completed flag 43
+3644 会話済みフラグ44 -- Conversation completed flag 44
+3645 会話済みフラグ45 -- Conversation completed flag 45
+3646 会話済みフラグ46 -- Conversation completed flag 46
+3647 会話済みフラグ47 -- Conversation completed flag 47
+3648 会話済みフラグ48 -- Conversation completed flag 48
+3649 会話済みフラグ49 -- Conversation completed flag 49
+3650 会話済みフラグ50 -- Conversation completed flag 50
+3651 会話済みフラグ51 -- Conversation completed flag 51
+3652 会話済みフラグ52 -- Conversation completed flag 52
+3653 会話済みフラグ53 -- Conversation completed flag 53
+3654 会話済みフラグ54 -- Conversation completed flag 54
+3655 会話済みフラグ55 -- Conversation completed flag 55
+3656 会話済みフラグ56 -- Conversation completed flag 56
+3657 会話済みフラグ57 -- Conversation completed flag 57
+3658 会話済みフラグ58 -- Conversation completed flag 58
+3659 会話済みフラグ59 -- Conversation completed flag 59
+3660 会話済みフラグ60 -- Conversation completed flag 60
+3661 会話済みフラグ61 -- Conversation completed flag 61
+3662 会話済みフラグ62 -- Conversation completed flag 62
+3663 会話済みフラグ63 -- Conversation completed flag 63
+3664 会話済みフラグ64 -- Conversation completed flag 64
+3665 会話済みフラグ65 -- Conversation completed flag 65
+3666 会話済みフラグ66 -- Conversation completed flag 66
+3667 会話済みフラグ67 -- Conversation completed flag 67
+3668 会話済みフラグ68 -- Conversation completed flag 68
+3669 会話済みフラグ69 -- Conversation completed flag 69
+3670 会話済みフラグ70 -- Conversation completed flag 70
+3671 会話済みフラグ71 -- Conversation completed flag 71
+3672 会話済みフラグ72 -- Conversation completed flag 72
+3673 会話済みフラグ73 -- Conversation completed flag 73
+3674 会話済みフラグ74 -- Conversation completed flag 74
+3675 会話済みフラグ75 -- Conversation completed flag 75
+3676 会話済みフラグ76 -- Conversation completed flag 76
+3677 会話済みフラグ77 -- Conversation completed flag 77
+3678 会話済みフラグ78 -- Conversation completed flag 78
+3679 会話済みフラグ79 -- Conversation completed flag 79
+3680 会話済みフラグ80 -- Conversation completed flag 80
+3681 会話済みフラグ81 -- Conversation completed flag 81
+3682 会話済みフラグ82 -- Conversation completed flag 82
+3683 会話済みフラグ83 -- Conversation completed flag 83
+3684 会話済みフラグ84 -- Conversation completed flag 84
+3685 会話済みフラグ85 -- Conversation completed flag 85
+3686 会話済みフラグ86 -- Conversation completed flag 86
+3687 会話済みフラグ87 -- Conversation completed flag 87
+3688 会話済みフラグ88 -- Conversation completed flag 88
+3689 会話済みフラグ89 -- Conversation completed flag 89
+3690 会話済みフラグ90 -- Conversation completed flag 90
+3691 会話済みフラグ91 -- Conversation completed flag 91
+3692 会話済みフラグ92 -- Conversation completed flag 92
+3693 会話済みフラグ93 -- Conversation completed flag 93
+3694 会話済みフラグ94 -- Conversation completed flag 94
+3695 会話済みフラグ95 -- Conversation completed flag 95
+3696 会話済みフラグ96 -- Conversation completed flag 96
+3697 会話済みフラグ97 -- Conversation completed flag 97
+3698 会話済みフラグ98 -- Conversation completed flag 98
+3699 会話済みフラグ99 -- Conversation completed flag 99
+3700 SE_SE再生_チャージ開始 -- SE_SE playback_start charging
+3701 SE_SE再生_弾丸接近音 -- SE_SE play_Bullet approach sound
+3702 SE_SE再生_チャージ最終上昇 -- SE_SE regeneration_Final charge rise
+3703 SE_SE再生_発射 -- SE_SE playback_fire
+3704 SE_SE再生_着弾 -- SE_SE playback_landing
+3705 SE_アニメ_ドーラ砲演出_開始再生待ち -- SE_Anime_Dora cannon production_Waiting for start playback
+3706 SE_アニメ_ドーラ砲着弾待ち -- SE_Anime_Waiting for Dora cannon to hit
+3707 SE_アニメ_ドーラ砲接近音再生判定 -- SE_Anime_Dora cannon approach sound playback judgment
+3708 SE_イベント再開時処理 -- SE_Event restart processing
+3710 SE_SE再生_オーバーチャージSE_HU版 -- SE_SE playback_overcharge SE_HU version
+3711 SE_SE再生_チャージ最終上昇_HU版 -- SE_SE play_Final charge rise_HU version
+3713 SE_SE再生_発射_HU版 -- SE_SE playback_launch_HU version
+3714 SE_SE再生_着弾_HU版 -- SE_SE playback_landing_HU version
+3715 SE_会話_オーバーチャージSE_再生可能通知フラグ_HU版 -- SE_Conversation_Overcharge SE_Replayable notification flag_HU version
+3716 SE_会話_音量制御用ダミー_再生可能通知フラグ_HU版 -- SE_Conversation_Volume control dummy_Playable notification flag_HU version
+3718 SE_会話_発射_再生可能通知フラグ_HU版 -- SE_Conversation_Fire_Playable notification flag_HU version
+3720 カメラ振動_小 -- Camera vibration_small
+3721 カメラ振動_中 -- Camera vibration_medium
+3722 カメラ振動_大 -- Camera vibration_large
+3725 カメラ振動_通常版 -- Camera vibration_regular version
+3726 カメラ振動_HU版 -- Camera vibration_HU version
+3730 SE_会話判定_潜るアニメ完了 -- SE_Conversation judgment_Dive animation complete
+3731 SE_会話判定_チャージ音が上がりきったら -- SE_Conversation Judgment_When the charging sound reaches its peak
+3732 SE_会話判定_ワーム出てくる -- SE_Conversation judgment_Worm comes out
+3733 SE_会話判定_発射 -- SE_Conversation judgment_Fire
+3734 SE_会話済み_発射 -- SE_Conversated_Fired
+3735 SE_会話済み_発射_フラグオフ -- SE_Conversated_Fired_Flag off
+3736 SE_会話_差分01再生したフラグ -- SE_Conversation_Difference 01 Played flag
+3737 SE_会話_差分02再生したフラグ -- SE_Conversation_Difference 02 Played flag
+3740 SE_マズルフラッシュSFX作成 -- SE_muzzle flash SFX creation
+3741 SE_チャージSFX作成 -- SE_Charge SFX creation
+3742 SE_チャージSFX削除 -- SE_Charge SFX deleted
+3999 お試しSEフェード_リスタートしたか判定 -- Trial SE Fade_Determine whether restarted
+1000000000 敵リスポン -- enemy respawn

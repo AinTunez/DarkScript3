@@ -1,0 +1,116 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッションクリアフラグ -- mission clear flag
+2010 ワーム撃破判定 -- Worm defeat judgment
+2020 ワーム撃破CS再生 -- Worm defeat CS playback
+2100 初期イベント -- initial event
+2200 開幕起動処理 -- Opening startup process
+2210 アイスワーム戦闘開始処理 -- Iceworm battle start process
+2220 アイスワーム戦開始判定 -- Iceworm battle start judgment
+2230 ヘリ演出開幕処理 -- Helicopter performance opening process
+2800 ドーラ砲撃制禦_ワーム顔面ヒット判定 -- Dora bombardment control_worm face hit detection
+2801 ドーラ砲撃制禦_ドーラ砲やられアニメ再生特効付与 -- Dora cannon attack control_Dora cannon hit animation playback special effect added
+2810 ドーラ砲撃制禦_ワーム顔面ヒット判定イベント再キック判定 -- Dora bombardment control_worm face hit judgment event re-kick judgment
+2811 ワーム無敵切り替え判定 -- Worm invincibility switching judgment
+2820 ワームHU判定 -- Worm HU judgment
+2821 ワーム再漏電判定 -- Worm re-leakage judgment
+2830 フェーズ1用AP保証 -- AP Assurance for Phase 1
+2831 フェーズ2用AP保証 -- AP Assurance for Phase 2
+2832 フェーズ3用AP保証 -- AP Assurance for Phase 3
+2833 フェーズ4用AP保証_暫定 -- AP warranty for phase 4_tentative
+2840 フェーズ1突破判定 -- Phase 1 breakthrough determination
+2841 フェーズ2突破判定 -- Phase 2 breakthrough determination
+2842 フェーズ3突破判定 -- Phase 3 breakthrough determination
+2850 フェーズ1用爆発ダメ -- Phase 1 explosion damage
+2851 フェーズ2用爆発ダメ -- Phase 2 explosion damage
+2852 フェーズ3用爆発ダメ -- Phase 3 explosion damage
+2901 通常会話再生済みフラグ01 -- Normal conversation played flag 01
+2902 通常会話再生済みフラグ02 -- Normal conversation played flag 02
+2903 通常会話再生済みフラグ03 -- Normal conversation played flag 03
+2904 通常会話再生済みフラグ04 -- Normal conversation played flag 04
+2905 通常会話再生済みフラグ05 -- Normal conversation played flag 05
+2906 通常会話再生済みフラグ06 -- Normal conversation played flag 06
+2907 通常会話再生済みフラグ07 -- Normal conversation played flag 07
+2908 通常会話再生済みフラグ08 -- Normal conversation played flag 08
+2909 通常会話再生済みフラグ09 -- Normal conversation played flag 09
+2910 通常会話再生済みフラグ10 -- Normal conversation played flag 10
+2911 通常会話再生済みフラグ11 -- Normal conversation played flag 11
+2912 通常会話再生済みフラグ12 -- Normal conversation played flag 12
+2913 通常会話再生済みフラグ13 -- Normal conversation played flag 13
+2914 通常会話再生済みフラグ14 -- Normal conversation played flag 14
+2915 通常会話再生済みフラグ15 -- Normal conversation played flag 15
+2916 通常会話再生済みフラグ16 -- Normal conversation played flag 16
+2917 通常会話再生済みフラグ17 -- Normal conversation played flag 17
+2918 通常会話再生済みフラグ18 -- Normal conversation played flag 18
+2919 通常会話再生済みフラグ19 -- Normal conversation played flag 19
+2920 通常会話再生済みフラグ20 -- Normal conversation played flag 20
+2921 通常会話再生済みフラグ21 -- Normal conversation played flag 21
+2922 通常会話再生済みフラグ22 -- Normal conversation played flag 22
+2923 通常会話再生済みフラグ23 -- Normal conversation played flag 23
+2924 通常会話再生済みフラグ24 -- Normal conversation played flag 24
+2925 通常会話再生済みフラグ25 -- Normal conversation played flag 25
+2926 通常会話再生済みフラグ26 -- Normal conversation played flag 26
+2927 通常会話再生済みフラグ27 -- Normal conversation played flag 27
+2928 通常会話再生済みフラグ28 -- Normal conversation played flag 28
+2929 通常会話再生済みフラグ29 -- Normal conversation played flag 29
+2950 会話_ワイルドギースE死亡判定 -- Conversation_Wild Geese E death judgment
+2951 会話_ナンバー7死亡判定 -- Conversation_Number 7 death judgment
+2952 会話_カーラの部下死亡判定 -- Conversation_Kara's subordinate death determination
+2953 会話_マーキング_初回 -- Conversation_Marking_First time
+2954 会話_マーキング_HU後初回 -- Conversation_Marking_First time after HU
+2955 会話_マーキング_二回目以降 -- Conversation_Marking_After the second time
+2956 会話_ドーラ発射_初回から -- Conversation_Dora launch_From the first time
+2957 会話_ワーム復帰_初回から -- Conversation_Worm Return_From the first time
+2958 会話_マーキング_HU後2段目判定 -- Conversation_Marking_2nd stage judgment after HU
+2960 会話_ワームHU開始 -- Conversation_Worm HU start
+2961 会話_ワームHU終了 -- Conversation_Worm HU ends
+3000 雑魚マシマシ開始判定 -- Small fry better start judgment
+3006 雑魚マシマシ特攻開始 -- Small fish mashimashi special attack begins
+3010 雑魚マシマシ終了判定 -- Small fry better end judgment
+3020 雑魚マシマシ中断判定 -- Judgment of suspension of miscellaneous fish
+3140 雑魚マシマシイベント -- Small fish better event
+3160 雑魚死亡処理 -- Small fish death treatment
+3200 ワーム尻尾アタッチロック不可 -- Worm tail attach lock not possible
+3800 サウンドテスト_会話判定_潜るアニメ完了 -- Sound test_Conversation judgment_Dive animation completed
+3801 サウンドテスト_会話判定_チャージ音が上がりきったら -- Sound test_Conversation judgment_When the charging sound reaches its peak
+3802 サウンドテスト_会話判定_ワーム出てくる -- Sound test_conversation judgment_worms appear
+3803 サウンドテスト_会話判定_発射 -- Sound test_conversation judgment_launch
+3810 サウンドテスト_会話済み_発射 -- Sound test_conversation_launched
+3811 サウンドテスト_会話済み_発射_フラグオフ -- Sound test_conversation_launch_flag off
+3830 カメラ振動_小 -- Camera vibration_small
+3831 カメラ振動_中 -- Camera vibration_medium
+3832 カメラ振動_大 -- Camera vibration_large
+3840 マズルフラッシュSFX作成 -- Muzzle flash SFX creation
+3900 演出テスト_ワーム死亡 -- Performance test_worm death
+3901 演出テスト_ワーム死亡_フェードなし -- Production test_Worm death_No fade
+3910 アニメテスト_ワーム死亡 -- Anime test_worm death
+3920 SEテスト_ワームHU -- SE test_worm HU
+3921 SEテスト_ワーム時間切れ -- SE test_worm time out
+3930 カットシーンテスト -- cutscene test
+3940 カメラ乗っ取り判定 -- Camera hijacking detection
+3941 カメラ乗っ取り解除判定 -- Camera hijacking release determination
+3942 カメラ乗っ取りイベント -- camera hijack event
+3950 サウンドテスト_ドーラ砲演出_準備 -- Sound test_Dora cannon production_Preparation
+3951 サウンドテスト_ドーラ砲演出_起動 -- Sound test_Dora cannon production_launch
+3952 サウンドテスト_SE再生_チャージ開始 -- Sound test_SE playback_start charging
+3953 サウンドテスト_SE再生_継続部分開始 -- Sound test_SE playback_Continuation part start
+3954 サウンドテスト_SE再生_継続部分終了 -- Sound test_SE playback_Continuation part ends
+3955 サウンドテスト_SE再生_発射 -- Sound test_SE playback_launch
+3956 サウンドテスト_SE再生_着弾 -- Sound test_SE playback_landing
+3960 サウンドテスト_ターゲットガン着弾待ち -- Sound test_Waiting for target gun to hit
+3961 サウンドテスト_アニメ_ドーラ砲演出_開始再生待ち -- Sound test_Anime_Dora cannon production_Waiting for start playback
+3962 サウンドテスト_ドーラ砲発射待ち -- Sound test_Waiting for Dora cannon to fire
+3963 サウンドテスト_アニメ_ドーラ砲着弾待ち -- Sound test_Anime_Waiting for Dora cannon to land
+3970 サウンドテスト_HU_ドーラ砲演出_準備 -- Sound test_HU_Dora cannon production_Preparation
+3971 サウンドテスト_HU_ドーラ砲演出_起動 -- Sound test_HU_Dora cannon production_Start
+3972 サウンドテスト_HU_SE再生_チャージ開始 -- Sound test_HU_SE playback_Start charging
+3973 サウンドテスト_HU_SE再生_継続部分開始 -- Sound test_HU_SE playback_Continuation part start
+3974 サウンドテスト_HU_SE再生_継続部分終了 -- Sound test_HU_SE playback_Continuation part end
+3975 サウンドテスト_HU_SE再生_発射 -- Sound test_HU_SE playback_launch
+3976 サウンドテスト_HU_SE再生_着弾 -- Sound test_HU_SE playback_landing
+3980 サウンドテスト_HU_ターゲットガン着弾待ち -- Sound test_HU_Waiting for target gun to hit
+3981 サウンドテスト_HU_アニメ_ドーラ砲演出_開始再生待ち -- Sound test_HU_Anime_Dora cannon production_Waiting for start playback
+3982 サウンドテスト_HU_ドーラ砲発射待ち -- Sound test_HU_Waiting for Dora cannon to fire
+3983 サウンドテスト_HU_アニメ_ドーラ砲着弾待ち -- Sound test_HU_Anime_Waiting for Dora cannon to hit
+3999 テスト -- test
+1000000000 敵リスポン -- enemy respawn

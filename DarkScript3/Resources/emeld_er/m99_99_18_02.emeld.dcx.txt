@@ -1,0 +1,10 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+99992102 グレーターデーモン即死イベント -- Greater Demon Instant Death Event
+99992103 グレーターデーモン即死イベント2 -- Greater Demon Instant Death Event 2
+99992104 カメラ -- camera
+99992105 馬ワープ -- horse warp
+99992106 馬死亡 -- horse death
+99992110 蛇つむり召喚イベント -- Snake Tsumuri summoning event
+1000000000 敵リスポン -- enemy respawn

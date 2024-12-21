@@ -1,0 +1,10 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+31032650 チュートリアルメッセージ_エリクサー瓶取得 -- Tutorial message_Elixir bottle acquisition
+31032651 チュートリアルメッセージ_サインだまり解放 -- Tutorial message_Release of signature pile
+31032800 ボス撃破 -- Defeat the boss
+31032810 ボス出現 -- Boss appears
+31032811 ボス激昂 -- boss rage
+31032849 知性ある獣の末裔_イベント起動 -- Descendants of intelligent beasts_event activation
+1000000000 敵リスポン -- enemy respawn

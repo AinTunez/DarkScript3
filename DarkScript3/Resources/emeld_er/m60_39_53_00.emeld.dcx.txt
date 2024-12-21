@@ -1,0 +1,15 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+1000000000 敵リスポン -- enemy respawn
+1039532145 NPC疑似マルチ_火山館の依頼ターゲット2_開始 -- NPC pseudo-multi_volcano hall request target 2_start
+1039532300 魔術師の塔_椅子アセット破壊防止 -- Magician's Tower_Chair asset destruction prevention
+1039532400 魔術師の塔_本体アセットの消去 -- Magician's Tower_Delete main body assets
+1039532500 魔術師の塔_消滅演出 -- Magician's Tower_Disappearance Production
+1039532600 魔術師の塔_ヒント像 -- Magician's Tower_Hint Statue
+1039532610 ヒント地図入手時ダイアログ表示 -- Dialog displayed when obtaining hint map
+1039532650 魔術師の塔_ギミック装置の起動 -- Magician's Tower_Activation of gimmick device
+1039532660 魔術師の塔_ギミック装置の停止 -- Magician's Tower_Stopping the gimmick device
+1039532670 魔術師の塔_血痕回収 -- Magician's Tower_Bloodstain Collection
+1039533700 NPC346火山館ターゲット2_侵入許可フラグ立て -- NPC346 Volcano Hall Target 2_Intrusion permission flag setting

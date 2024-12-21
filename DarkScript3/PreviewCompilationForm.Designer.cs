@@ -32,159 +32,182 @@ namespace DarkScript3
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PreviewCompilationForm));
-            this.ofdFile = new System.Windows.Forms.OpenFileDialog();
-            this.fctb1 = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.fctb2 = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.action = new System.Windows.Forms.Button();
-            this.lineup = new System.Windows.Forms.CheckBox();
-            ((System.ComponentModel.ISupportInitialize)(this.fctb1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fctb2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            this.SuspendLayout();
+            ofdFile = new OpenFileDialog();
+            fctb1 = new FastColoredTextBox();
+            fctb2 = new FastColoredTextBox();
+            splitContainer1 = new SplitContainer();
+            action = new Button();
+            lineup = new CheckBox();
+            warningL = new Label();
+            ((System.ComponentModel.ISupportInitialize)fctb1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)fctb2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            SuspendLayout();
             // 
             // fctb1
             // 
-            this.fctb1.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.fctb1.AutoScrollMinSize = new System.Drawing.Size(27, 14);
-            this.fctb1.BackBrush = null;
-            this.fctb1.CaretVisible = false;
-            this.fctb1.CharHeight = 14;
-            this.fctb1.CharWidth = 8;
-            this.fctb1.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.fctb1.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.fctb1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctb1.Font = new System.Drawing.Font("Courier New", 9.75F);
-            this.fctb1.IsReplaceMode = false;
-            this.fctb1.Location = new System.Drawing.Point(0, 0);
-            this.fctb1.Name = "fctb1";
-            this.fctb1.Paddings = new System.Windows.Forms.Padding(0);
-            this.fctb1.ReadOnly = true;
-            this.fctb1.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.fctb1.ServiceColors = null;
-            this.fctb1.Size = new System.Drawing.Size(420, 510);
-            this.fctb1.TabIndex = 26;
-            this.fctb1.Zoom = 100;
-            this.fctb1.VisibleRangeChanged += new System.EventHandler(this.fctb_VisibleRangeChanged);
-            this.fctb1.ZoomChanged += new System.EventHandler(this.fctb1_ZoomChanged);
+            fctb1.AutoCompleteBracketsList = new char[]
+    {
+    '(',
+    ')',
+    '{',
+    '}',
+    '[',
+    ']',
+    '"',
+    '"',
+    '\'',
+    '\''
+    };
+            fctb1.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            fctb1.BackBrush = null;
+            fctb1.CaretVisible = false;
+            fctb1.CharHeight = 14;
+            fctb1.CharWidth = 8;
+            fctb1.Cursor = Cursors.IBeam;
+            fctb1.DisabledColor = System.Drawing.Color.FromArgb(100, 180, 180, 180);
+            fctb1.Dock = DockStyle.Fill;
+            fctb1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            fctb1.IsReplaceMode = false;
+            fctb1.Location = new System.Drawing.Point(0, 0);
+            fctb1.Margin = new Padding(4, 3, 4, 3);
+            fctb1.Name = "fctb1";
+            fctb1.Paddings = new Padding(0);
+            fctb1.ReadOnly = true;
+            fctb1.SelectionColor = System.Drawing.Color.FromArgb(60, 0, 0, 255);
+            fctb1.ServiceColors = null;
+            fctb1.Size = new System.Drawing.Size(489, 588);
+            fctb1.TabIndex = 26;
+            fctb1.Zoom = 100;
+            fctb1.VisibleRangeChanged += fctb_VisibleRangeChanged;
+            fctb1.ZoomChanged += fctb1_ZoomChanged;
             // 
             // fctb2
             // 
-            this.fctb2.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.fctb2.AutoScrollMinSize = new System.Drawing.Size(2, 14);
-            this.fctb2.BackBrush = null;
-            this.fctb2.CaretVisible = false;
-            this.fctb2.CharHeight = 14;
-            this.fctb2.CharWidth = 8;
-            this.fctb2.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.fctb2.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.fctb2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctb2.Font = new System.Drawing.Font("Courier New", 9.75F);
-            this.fctb2.IsReplaceMode = false;
-            this.fctb2.Location = new System.Drawing.Point(0, 0);
-            this.fctb2.Name = "fctb2";
-            this.fctb2.Paddings = new System.Windows.Forms.Padding(0);
-            this.fctb2.ReadOnly = true;
-            this.fctb2.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.fctb2.ServiceColors = null;
-            this.fctb2.ShowLineNumbers = false;
-            this.fctb2.Size = new System.Drawing.Size(436, 510);
-            this.fctb2.TabIndex = 27;
-            this.fctb2.Zoom = 100;
-            this.fctb2.VisibleRangeChanged += new System.EventHandler(this.fctb_VisibleRangeChanged);
-            this.fctb2.ZoomChanged += new System.EventHandler(this.fctb2_ZoomChanged);
+            fctb2.AutoCompleteBracketsList = new char[]
+    {
+    '(',
+    ')',
+    '{',
+    '}',
+    '[',
+    ']',
+    '"',
+    '"',
+    '\'',
+    '\''
+    };
+            fctb2.AutoScrollMinSize = new System.Drawing.Size(2, 14);
+            fctb2.BackBrush = null;
+            fctb2.CaretVisible = false;
+            fctb2.CharHeight = 14;
+            fctb2.CharWidth = 8;
+            fctb2.Cursor = Cursors.IBeam;
+            fctb2.DisabledColor = System.Drawing.Color.FromArgb(100, 180, 180, 180);
+            fctb2.Dock = DockStyle.Fill;
+            fctb2.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            fctb2.IsReplaceMode = false;
+            fctb2.Location = new System.Drawing.Point(0, 0);
+            fctb2.Margin = new Padding(4, 3, 4, 3);
+            fctb2.Name = "fctb2";
+            fctb2.Paddings = new Padding(0);
+            fctb2.ReadOnly = true;
+            fctb2.SelectionColor = System.Drawing.Color.FromArgb(60, 0, 0, 255);
+            fctb2.ServiceColors = null;
+            fctb2.ShowLineNumbers = false;
+            fctb2.Size = new System.Drawing.Size(509, 588);
+            fctb2.TabIndex = 27;
+            fctb2.Zoom = 100;
+            fctb2.VisibleRangeChanged += fctb_VisibleRangeChanged;
+            fctb2.ZoomChanged += fctb2_ZoomChanged;
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(12, 12);
-            this.splitContainer1.Name = "splitContainer1";
+            splitContainer1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            splitContainer1.Location = new System.Drawing.Point(14, 14);
+            splitContainer1.Margin = new Padding(4, 3, 4, 3);
+            splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.fctb1);
+            splitContainer1.Panel1.Controls.Add(fctb1);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.fctb2);
-            this.splitContainer1.Size = new System.Drawing.Size(860, 510);
-            this.splitContainer1.SplitterDistance = 420;
-            this.splitContainer1.TabIndex = 28;
+            splitContainer1.Panel2.Controls.Add(fctb2);
+            splitContainer1.Size = new System.Drawing.Size(1003, 588);
+            splitContainer1.SplitterDistance = 489;
+            splitContainer1.SplitterWidth = 5;
+            splitContainer1.TabIndex = 28;
             // 
             // action
             // 
-            this.action.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.action.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.action.Location = new System.Drawing.Point(775, 530);
-            this.action.Name = "action";
-            this.action.Size = new System.Drawing.Size(97, 30);
-            this.action.TabIndex = 30;
-            this.action.Text = "Convert";
-            this.action.UseVisualStyleBackColor = true;
-            this.action.Click += new System.EventHandler(this.action_Click);
+            action.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            action.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            action.Location = new System.Drawing.Point(904, 612);
+            action.Margin = new Padding(4, 3, 4, 3);
+            action.Name = "action";
+            action.Size = new System.Drawing.Size(113, 35);
+            action.TabIndex = 30;
+            action.Text = "Convert";
+            action.UseVisualStyleBackColor = true;
+            action.Click += action_Click;
             // 
             // lineup
             // 
-            this.lineup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lineup.AutoSize = true;
-            this.lineup.Checked = true;
-            this.lineup.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.lineup.Location = new System.Drawing.Point(27, 538);
-            this.lineup.Name = "lineup";
-            this.lineup.Size = new System.Drawing.Size(266, 17);
-            this.lineup.TabIndex = 31;
-            this.lineup.Text = "Insert ↪ lines to line up the diff (in the preview only)";
-            this.lineup.UseVisualStyleBackColor = true;
-            this.lineup.CheckedChanged += new System.EventHandler(this.lineup_CheckedChanged);
+            lineup.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lineup.AutoSize = true;
+            lineup.Checked = true;
+            lineup.CheckState = CheckState.Checked;
+            lineup.Location = new System.Drawing.Point(31, 619);
+            lineup.Margin = new Padding(4, 3, 4, 3);
+            lineup.Name = "lineup";
+            lineup.Size = new System.Drawing.Size(300, 19);
+            lineup.TabIndex = 31;
+            lineup.Text = "Insert ↪ lines to line up the diff (in the preview only)";
+            lineup.UseVisualStyleBackColor = true;
+            lineup.CheckedChanged += lineup_CheckedChanged;
+            // 
+            // warningL
+            // 
+            warningL.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            warningL.BackColor = System.Drawing.Color.Transparent;
+            warningL.ForeColor = System.Drawing.Color.Firebrick;
+            warningL.Location = new System.Drawing.Point(713, 620);
+            warningL.Name = "warningL";
+            warningL.Size = new System.Drawing.Size(184, 18);
+            warningL.TabIndex = 32;
+            warningL.Text = "No warnings produced";
+            warningL.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            warningL.Visible = false;
             // 
             // PreviewCompilationForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 565);
-            this.Controls.Add(this.lineup);
-            this.Controls.Add(this.action);
-            this.Controls.Add(this.splitContainer1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.KeyPreview = true;
-            this.Name = "PreviewCompilationForm";
-            this.Text = "Compilation Output Preview";
-            ((System.ComponentModel.ISupportInitialize)(this.fctb1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fctb2)).EndInit();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1031, 652);
+            Controls.Add(warningL);
+            Controls.Add(lineup);
+            Controls.Add(action);
+            Controls.Add(splitContainer1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            KeyPreview = true;
+            Margin = new Padding(4, 3, 4, 3);
+            Name = "PreviewCompilationForm";
+            Text = "Compilation Output Preview";
+            ((System.ComponentModel.ISupportInitialize)fctb1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)fctb2).EndInit();
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -194,5 +217,6 @@ namespace DarkScript3
         private System.Windows.Forms.SplitContainer splitContainer1;
         private Button action;
         private CheckBox lineup;
+        private Label warningL;
     }
 }

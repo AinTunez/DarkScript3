@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+10102000 天候イベント_雪切り替え -- Weather event_Snow change
+10102010 カタパルトキャラ読み込み -- Catapult character loading
+10102020 エレベータイベント01_前扉開ける -- Elevator event 01_Open the front door
+10102021 エレベータイベント01_後扉開ける -- Elevator event 01_Open the rear door
+10102030 エレベータイベント02_後扉閉める -- Elevator event 02_close the rear door
+10102031 エレベータイベント02_本体上昇開始 -- Elevator event 02_Start of main body ascent
+10102040 エレベータイベント03_本体上昇開始_周り扉00 -- Elevator event 03_Body ascending start_Surrounding door 00
+10102041 エレベータイベント03_本体上昇開始_周り扉01 -- Elevator event 03_Start of ascent_Surrounding door 01
+10102042 エレベータイベント03_本体上昇開始_周り扉02 -- Elevator event 03_Start of ascent_Surrounding door 02
+10102043 エレベータイベント03_本体上昇開始_周り扉03 -- Elevator event 03_Start of ascent_Surrounding door 03
+10102100 エレベータイベント01_本体制御 -- Elevator event 01_main unit control
+10102900 高度計初期化イベント -- Altimeter initialization event
+10202810 オンライン用イベント_作戦ライン無効化 -- Online event_Operation line disabled
+1000000000 敵リスポン -- enemy respawn

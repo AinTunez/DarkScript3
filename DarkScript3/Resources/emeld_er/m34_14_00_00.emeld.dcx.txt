@@ -1,0 +1,17 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+34140519 エレベーター初期フラグ設定 -- Elevator initial flag setting
+34140700 大昇降機中間地点地図ポイント非表示 -- Large elevator intermediate point map point hidden
+34140860 忌み子タッグ出現 -- Abandoned child tag appears
+34142250 成長スカラベ_撃破 -- Growth Scarab_Defeated
+34142251 成長スカラベ_成長 -- Growth scarab_growth
+34142252 成長スカラベ_AI変化 -- Growth scarab_AI change
+34142510 エレベータ起動 -- elevator start
+34142550 神の塔前_霧壁封印 -- In front of the Tower of God_Mist wall seal
+34142850 忌み子タッグ撃破 -- Defeat the Abominable Tag Team
+34142865 忌み子たち撃破後_ワープイベント -- After defeating the Abominable Children_Warp event
+34142870 神の塔から深淵へワープ -- Warp from the Tower of God to the Abyss
+34142875 深淵_血痕回収 -- Abyss_Bloodstain collection
+34142899 忌み子タッグ戦イベント起動 -- Ikiko tag battle event started
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1036472340 歩く霊廟_巡回切り替え -- Walking mausoleum_tour switching
+1036472490 歩く霊廟_フジツボを胡坐後無効化 -- Walking Mausoleum_Disable barnacles after sitting cross-legged
+1036472600 紋章ワープ_開始 -- Crest warp_start
+1036472605 紋章ワープ_終了 -- Crest warp_end

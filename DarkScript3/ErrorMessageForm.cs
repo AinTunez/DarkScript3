@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -28,22 +29,12 @@ namespace DarkScript3
             box.Font = (Font)font.Clone();
         }
 
-        public void SetMessage(string file, Exception ex, string extra)
+        public void SetMessage(string file, List<Exception> exs, string extra, bool isWarning)
         {
-            string errorText = ex.ToString() + extra;
+            string errorText = string.Join("\n", exs.Select(ex => ex + "\n")) + extra;
             SetTextAndResize(errorText.Trim());
-            placeRe = null;
-            bool isWarning = false;
-            if (ex is JSScriptException)
-            {
-                // Limit it to open file for the moment, as only one file open at a time
-                placeRe = new Regex($@"(?<={Regex.Escape(file)}:)\d+:\d+");
-            }
-            else if (ex is FancyJSCompiler.FancyCompilerException compEx)
-            {
-                placeRe = new Regex(@"(?<=\n)\d+:\d+(?=:)");
-                isWarning = compEx.Warning;
-            }
+            // Limit script exceptions to open file for the moment, as only one file open at a time
+            placeRe = new Regex($@"(?<={Regex.Escape(file)}:)\d+:\d+|(?<=\n)\d+:\d+(?=:)");
             if (placeRe != null)
             {
                 box.Range.SetStyle(linkStyle, placeRe);

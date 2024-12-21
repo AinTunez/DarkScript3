@@ -1,0 +1,10 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+4500 触発動 -- inspired
+4505 幽鬼召喚１ -- Ghost summoning 1
+4506 幽鬼召喚２ -- Ghost summoning 2
+4507 幽鬼召喚３ -- Ghost summoning 3
+4508 幽鬼召喚４ -- Ghost summoning 4
+4530 幽鬼消失イベント -- Ghost disappearance event
+4599 テストイベント１ -- Test event 1
+1000000000 敵リスポン -- enemy respawn

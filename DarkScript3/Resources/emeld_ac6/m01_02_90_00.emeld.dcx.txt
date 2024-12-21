@@ -1,0 +1,44 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2210 重ガードメカ無効化 -- Heavy guard mechanism disabled
+2211 重ガードメカ有効化 -- Heavy guard mechanism enabled
+2212 重ガードメカ戦開始 -- Heavy guard mecha battle begins
+2213 重ガードメカ撃破判定 -- Heavy guard mech defeat judgment
+2214 重ガードメカ死亡判定 -- Heavy guard mecha death judgment
+2215 シャッターボタンを押した -- pressed the shutter button
+2216 シャッター開ける -- open the shutter
+2217 重ガードメカ死亡時演出 -- Heavy guard mecha death performance
+2350 初期準備 -- Initial preparation
+2351 集団巡回を常に描画 -- Always draw group patrols
+2352 ボス部屋のシャッターを閉じる -- Close the shutter in the boss room
+2353 キルゾーン用の敵ワープ -- Enemy warp for killzone
+2370 飛び地帯の呼びガードメカと敵対したか -- Did you fight against the guard mecha called in the flying zone?
+2371 飛び地帯呼ばれる対象の無効化 -- Disabling targets called flying zones
+2410 屋内待ち伏せ敵AIオフ -- Indoor ambush enemy AI off
+2411 屋内ラスト地点に入る -- Enter the last indoor point
+2412 隠し部屋に入る -- enter the hidden room
+2414 最後の通路に入る -- enter the last passage
+2461 キルゾーン第一陣を倒す -- Defeat the first group of Killzone
+2462 キルゾーン第二陣増援 -- Killzone second reinforcements
+2463 キルゾーン第二陣を倒す -- Defeat the second group of killzone
+2464 キルゾーン第三陣増援 -- Killzone Third Reinforcement
+2465 キルゾーンミサイルを起動 -- launch killzone missile
+2466 キルゾーン全撃破 -- Defeat all kill zones
+2467 キルゾーン用シャッタースイッチの有効化 -- Enabling shutter switch for kill zone
+2468 キルゾーンミサイルがダメージを負う -- Killzone missile deals damage
+2469 キルゾーン敵と接敵したのでターゲット共有 -- Share the target because you have engaged with the enemy in the kill zone
+2510 ボス部屋前広場につく -- Get to the plaza in front of the boss room
+2511 ボス部屋の中に入る -- enter the boss room
+2512 誘導用ターゲット切り替え -- Guidance target switching
+2520 ポイントイベント切替 -- Point event switching
+2530 会話条件用座標に入ったかどうか判定 -- Determine whether it has entered the coordinates for conversation conditions
+2540 作戦領域を切り分けて屋内を必ず通るように -- Separate the operational area and make sure to go indoors
+2545 誘導用ターゲットON -- Guidance target ON
+2550 誘導用ターゲットOFF -- Guidance target OFF
+2560 重ガードメカ前チェックポイント -- Checkpoint in front of heavy guard mechanism
+2561 チェックポイントフラグ1 -- checkpoint flag 1
+2650 カタパルトにアクセスした -- Accessed the catapult
+2651 カタパルト射出シーン再生 -- Catapult ejection scene playback
+2653 カットシーン時にテキストを隠す -- Hide text during cutscenes
+2900 テスト1 -- test 1
+1000000000 敵リスポン -- enemy respawn

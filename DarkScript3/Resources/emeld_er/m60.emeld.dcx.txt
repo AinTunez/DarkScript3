@@ -1,0 +1,9 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+1000000000 敵リスポン -- enemy respawn
+1060002410 オープン緑_落葉SFX -- Open green_fallen leaves SFX
+1060002420 オープン湖_蛍SFX -- Open Lake_Fireflies SFX
+1060002430 オープン高山_立ち昇るSFX -- Open Takayama_Rising SFX
+1060002500 世界樹の恵み -- Blessings of the World Tree
+1060002501 世界樹の恵み_偽 -- Blessings of the World Tree_False
+1060002510 世界樹の呪い -- curse of the world tree

@@ -1,0 +1,20 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+12091000 敵キャラの無効化と初期化 -- Disabling and initializing enemy characters
+12091001 敵キャラの無効化と初期化2 -- Disabling and initializing enemy characters 2
+12091010 防衛起点変更 -- Defense starting point change
+12091011 狙撃地点変更 -- Sniper point change
+12091020 プレイヤ位置判定 -- Player position determination
+12091030 残員危険判定 -- Remaining staff danger judgment
+12091031 班21の死亡FE -- Unit 21 death FE
+12091040 時間判定 -- Time judgment
+12091050 ガンシップ用イベント -- Gunship events
+12091051 ハッキング対象イベント -- Events targeted for hacking
+12091052 無線会話イベント -- wireless conversation event
+12091053 無線会話イベント2 -- Wireless conversation event 2
+12091080 ミッション接近イベント -- Mission approaching event
+12091082 ウェーブイベント開始 -- Wave event starts
+12091084 ワープ処理 -- Warp processing
+12091090 ミッション失敗判定 -- Mission failure determination
+12091091 キャラ再無効化 -- Character re-invalidation
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30110790 ボス部屋報酬宝箱の開放制限 -- Restrictions on opening boss room reward treasure chests
+30112580 梯子登録 -- ladder registration
+30112800 m30_11ボス撃破 -- m30_11 boss defeated
+30112810 m30_11ボス出現 -- m30_11 boss appears
+30112811 ボス激昂 -- boss rage
+30112849 m30_11_ボス_イベント起動 -- m30_11_Boss_Event activation
+30112900 チュートリアルメッセージ_サインだまり解放 -- Tutorial message_Release of signature pile
+1000000000 敵リスポン -- enemy respawn

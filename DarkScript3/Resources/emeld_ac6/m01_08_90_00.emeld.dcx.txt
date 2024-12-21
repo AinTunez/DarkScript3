@@ -1,0 +1,173 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 初期設定イベント -- Initialization event
+2001 ハッキング前半終了イベント -- Hacking first half end event
+2002 揚陸艦の初期イベント -- Landing ship initial event
+2003 揚陸艦撃破後CS再生 -- CS replay after defeating landing ship
+2004 チェックポイント更新 -- Checkpoint update
+2005 チェックポイント更新フラグ -- Checkpoint update flag
+2006 ミッション後半用の目標無効化 -- Target nullification for the second half of the mission
+2007 ボスエリア_落下復帰位置固定 -- Boss area_fall return position fixed
+2008 ボスエリアチャンバラ雑魚有効化 -- Boss area chanbara small fish enabled
+2009 袋小路_増援解除 -- Cul-de-sac_reinforcement cancellation
+2010 袋小路_徒歩増援有効化 -- Cul-de-sac_Walking reinforcements enabled
+2011 ミッション後半_袋小路方面移動イベント -- Second half of the mission_Dead-end alley direction movement event
+2012 揚陸艦モックの初期イベント -- Landing ship mock initial event
+2013 揚陸艦モック登場イベント -- Landing ship mock appearance event
+2014 正規軍の数がある程度減った_揚陸艦再接近トリガー -- The number of regular troops has decreased to a certain extent_Landing ship re-approach trigger
+2015 正規軍AC死亡 -- Regular army AC death
+2016 揚陸艦_時間再登場 -- Landing ship_time reappearance
+2017 揚陸艦モック_レールガンイベント -- Landing ship mock_railgun event
+2018 揚陸艦モック_レールガン展開 -- Landing ship mock_railgun deployment
+2019 敵停止 -- enemy stopped
+2020 揚陸艦登場イベント -- Landing ship appearance event
+2021 揚陸艦イベント続き -- Landing ship event continuation
+2022 揚陸艦ミサイル発射イベント -- Landing ship missile launch event
+2023 揚陸艦レールガン発射イベント -- Landing ship railgun launch event
+2024 揚陸艦_艦橋にマーカー表示 -- Landing ship_Marker displayed on the bridge
+2025 揚陸艦_子機射出 -- Landing ship_Slave aircraft ejection
+2026 揚陸艦_レールガン展開 -- Landing ship_railgun deployment
+2027 揚陸艦子機_ターゲット登録 -- Landing ship child aircraft_Target registration
+2028 揚陸艦_ボスゲージ表示 -- Landing ship_boss gauge display
+2029 揚陸艦_ボスゲージ非表示 -- Landing ship_boss gauge hidden
+2030 揚陸艦_レーダーオン -- Landing ship_radar on
+2031 揚陸艦頭上乗り越えver_レーダーオン -- Getting over the landing ship ver_Radar on
+2041 揚陸艦_遠方待機レールガン -- Landing ship_distant standby railgun
+2046 戦闘フェーズ揚陸艦_破砕穴対応 -- Combat phase landing ship_Fracture hole support
+2050 クレーン下_ヘリターゲット登録 -- Under the crane_Helicopter target registration
+2051 クレーン下_キャノンMTターゲット登録 -- Under crane_Cannon MT target registration
+2055 揚陸艦襲撃フェーズ_共産ら演技コントロール -- Landing ship attack phase_Communist acting control
+2550 揚陸艦_副砲起動 -- Landing ship_secondary gun activation
+2560 揚陸艦_ミサイル制御_死んでいる敵に対応するミサイルは撃たない -- Landing ship_Missile control_Do not fire missiles corresponding to dead enemies
+2600 揚陸艦_子機ただ直進する -- Landing ship_Slave aircraft just go straight ahead
+2610 揚陸艦_子機射撃しつつ前へ進む -- Landing ship_moves forward while firing slave aircraft
+2620 揚陸艦_自機が近くに来た -- Landing ship_My aircraft came nearby
+2630 揚陸艦_子機飛び込む -- Landing ship_Slave aircraft jumps
+2640 揚陸艦_子機直進止め -- Landing ship_Slave aircraft straight ahead stop
+2650 子機死亡 -- Child unit died
+2660 子機起動判定 -- Slave device startup determination
+2670 子機起動 -- Slave device start
+2700 ボスエリア侵入判定_共産軍起動 -- Boss area intrusion judgment_Communist army activated
+2701 揚陸艦_レールガン展開完了判定 -- Landing ship_Railgun deployment completion judgment
+2702 揚陸艦_レールガン_射撃特殊効果残存判定 -- Landing ship_Railgun_Fire special effect residual determination
+2703 揚陸艦撃破判定 -- Landing ship destruction judgment
+2704 揚陸艦AP0判定 -- Landing ship AP0 judgment
+2706 揚陸艦_通り過ぎアニメ完了判定 -- Landing ship_passing animation completion judgment
+2707 揚陸艦_エリア侵入判定 -- Landing ship_area intrusion determination
+2708 揚陸艦_音が鳴り始めた判定 -- Landing ship_Judgment when the sound started
+2709 揚陸艦_ビグザム撃ち始めた判定 -- Landing ship_Judgment that Bigzam started shooting
+2710 袋小路目標_ハッキング中判定 -- Dead end target_Hacking detection
+2711 クレーン下目標_ハッキング中判定 -- Crane Lower Target_Hacking Judgment
+2712 クレーン下_ヘリ起動判定 -- Below the crane_helicopter activation determination
+2713 袋小路_増援殲滅判定 -- Cul-de-sac_Reinforcement annihilation judgment
+2714 揚陸艦_完全停止_通常戦闘移行判定 -- Landing ship_Complete stop_Normal combat transition judgment
+2720 ミッション進行_ベイラム混線会話発生判定 -- Mission progress_Bayram crosstalk conversation occurrence determination
+2730 台詞判定_敵が一体でも自機に気づいた -- Line judgment_Even if only one enemy noticed your aircraft
+2740 揚陸艦_音だけモーション_レールガン会話キッカケ -- Landing ship_Sound-only motion_Railgun conversation starter
+2742 揚陸艦初回登場_ぐわあのタイミング取り判定 -- First appearance of landing ship_Guwaa's timing judgment
+2743 揚陸艦音声アニメ完了判定 -- Landing ship audio animation completion judgment
+2744 揚陸艦再接近冒頭判定 -- Landing ship re-approach opening judgment
+2745 揚陸艦子機展開_台詞判定 -- Amphibious aircraft deployment_Line judgment
+2746 揚陸艦折り返しビーム_BGM用 -- Landing ship folded beam_for BGM
+2750 揚陸艦AP減少 -- Landing ship AP decrease
+2751 自機AP減少 -- Own machine AP decrease
+2755 甲板の上に立った判定 -- Judgment standing on deck
+2756 揚陸艦レールガン制御用_甲板の上に立った判定 -- Landing ship rail gun control_Judgment of standing on deck
+2757 揚陸艦レールガン制御用_甲板の上から降りた判定 -- Landing ship rail gun control_Judgment of getting off from the top of the deck
+2800 正規軍AC着地完了判定 -- Regular army AC landing completion determination
+2808 正規軍ACスナ_帰巣ポイント設定 -- Regular Army AC Suna_Return Point Setting
+2810 正規軍MT着地完了判定 -- Regular army MT landing completion determination
+2890 チェックポイント更新判定 -- Checkpoint update judgment
+2891 揚陸艦CS遷移判定 -- Landing ship CS transition judgment
+2892 BGM遷移_死亡ステート入り -- BGM transition_Enter death state
+2893 BGM遷移_HU -- BGM transition_HU
+2894 BGM遷移条件_ビグザム撃ち始め -- BGM transition conditions_Start shooting Big Zam
+2895 BGM遷移条件_死亡 -- BGM transition conditions_death
+2900 袋小路_初期配置雑魚反応イベント -- Cul-de-sac_Initial placement small fry reaction event
+2910 四脚落下防止特殊効果 -- Quadruped fall prevention special effects
+2950 作戦ライン制御 -- operational line control
+2951 作戦ライン制御_チェックポイント用 -- Operation line control_for checkpoints
+3000 ハッキングアセットとダミーの紐づけ -- Linking hacking assets and dummies
+3007 ハッキングアセットにTGT付け -- Attach TGT to hacking assets
+3008 ハッキング条件突破チェック用 -- For checking hacking condition breakthrough
+3010 袋小路増援ヘリ投下イベント -- Cul-de-sac reinforcement helicopter drop event
+3020 ボスエリア_揚陸艦子機帰巣展開 -- Boss area_Amphibious aircraft returning home deployment
+3021 ドローン付近に入ったらTGTONトリガー -- TGTON trigger when near the drone
+3030 目標の回収数判定 -- Determine the target number of collections
+3035 最後の回収が袋小路以外だった -- The last collection was outside of a dead end.
+3036 最後の回収が袋小路で殲滅した -- The last collection was wiped out in a dead end.
+3037 最後の回収が袋小路で殲滅せずに進むか時間経過した -- The time has passed until the final collection progresses without being annihilated at the dead end.
+3038 回収後ミッション進行トリガー -- Mission progress trigger after collection
+3050 ボスエリア_揚陸艦射撃開始判定 -- Boss area_Landing ship firing start determination
+3060 ハッキング開始会話 -- hacking start conversation
+3070 ハッキング開始会話フラグオフ -- Start hacking conversation flag off
+3075 CP使用時ハッキングアニメとダミーキャラOFF -- Hacking animation and dummy character OFF when using CP
+3076 パフォーマンス対応_前半の敵無効化 -- Performance compatible_disable enemies in the first half
+3077 CP_邪魔な敵を無効化 -- CP_Disable annoying enemies
+3080 正規軍AC1に特殊効果 -- Special effects for regular army AC1
+3085 揚陸艦と子機を戦闘状態に入れておく -- Keep the landing ship and child aircraft in combat status
+3090 ボスエリア敵固定砲台化 -- Boss area enemy fixed turret
+3091 ボスエリア4脚無敵化 -- Boss area 4 legs invincible
+3092 ボスエリア4脚無敵化_解除 -- Boss area 4 leg invincibility_release
+3093 ボスエリア敵固定化 -- Boss area enemy fixed
+3094 ボスエリア敵固定化_解除 -- Boss area enemy fixation_release
+3097 シェルパOFF -- Sherpa OFF
+3098 シェルパON -- Sherpa ON
+3400 ボス戦BGM切り替えフラグ -- Boss battle BGM switching flag
+3401 ボスエリア解放フラグ -- Boss area release flag
+3700 目標1ハッキング固有会話終了フラグ -- Goal 1 hacking specific conversation end flag
+3701 目標2ハッキング固有会話終了フラグ -- Goal 2 hacking specific conversation end flag
+3702 目標3ハッキング固有会話終了フラグ -- Goal 3 Hacking Unique Conversation End Flag
+3703 目標4ハッキング固有会話終了フラグ -- Objective 4 Hacking specific conversation end flag
+3704 全ての固有会話が終了した判定 -- Judgment that all unique conversations have ended
+3705 目標一つ目会話フラグ -- Goal first conversation flag
+3706 目標二つ目会話フラグ -- Goal second conversation flag
+3707 目標三つ目会話フラグ -- Goal third conversation flag
+3708 目標四つ目会話フラグ -- Goal 4th conversation flag
+3709 初接敵会話フラグ -- First enemy conversation flag
+3710 目標先食い会話終了フラグ -- Target preemption conversation end flag
+3711 最初の一つ目用会話終了フラグ -- Conversation end flag for first one
+3712 揚陸艦撃破後会話フラグ -- Conversation flag after defeating landing ship
+3713 目標1から4つ目回収後会話フラグ -- Conversation flag after collecting objectives 1 to 4
+3714 揚陸艦登場会話終了フラグ -- Landing ship appearance conversation end flag
+3715 正規軍AC撃破フラグ -- Regular army AC defeat flag
+3716 なんだこの音はフラグ_BGM切り替え用 -- What's this sound? Flag_BGM switching
+3720 プレイヤーAP減少会話 -- Player AP reduction conversation
+3725 揚陸艦AP減少会話 -- Landing ship AP reduction conversation
+3730 揚陸艦再登場_正面分が悪い会話 -- Amphibious ship reappears_Bad conversation from the front
+3735 揚陸艦再登場_弱点通知会話 -- Landing ship reappearance_weakness notification conversation
+3740 揚陸艦再登場_甲板に乗った -- Landing ship reappears_on deck
+3800 ターン後揚陸艦_レールガン射撃 -- Landing ship after turn_Railgun shooting
+3805 ターン後揚陸艦_腹部or腹部ミサイル -- Landing ship after turn_abdominal or abdominal missile
+3810 ターン後揚陸艦_レーザー中央 -- Landing ship after turn_laser center
+3811 ターン後揚陸艦_レーザー中央射撃 -- Landing ship after turn_laser center fire
+3820 ターン後揚陸艦_レーザー右 -- Landing ship after turn_laser right
+3821 ターン後揚陸艦_レーザー右射撃 -- Landing ship after turn_laser right fire
+3830 ターン後揚陸艦_レーザー左 -- Landing ship after turn_laser left
+3831 ターン後揚陸艦_レーザー左射撃 -- Landing ship after turn_Left laser fire
+3834 ターン後揚陸艦_その他の位置にいる -- Landing ship after turn_in other positions
+3835 ターン後揚陸艦_判定イベントリセット -- Landing ship after turn_judgment event reset
+3840 ターン後揚陸艦_子機減少 -- Landing ship after turn_Slave aircraft decrease
+3850 ターン後揚陸艦_ミサイル砲台射撃 -- Landing ship after turn_missile battery firing
+3851 ターン後揚陸艦_ミサイル停止 -- Landing ship after turn_missile stop
+3852 ターン後揚陸艦_ミサイル起動 -- Landing ship after turn_missile launch
+3900 デバッグ用_揚陸艦ワープ -- For debugging_landing ship warp
+3901 デバッグ_揚陸艦ループ用フラグ -- Debug_Landing Ship Loop Flag
+3902 デバッグ用_揚陸艦初期設定 -- For debugging_landing ship initial settings
+3903 デバッグ用_揚陸艦有効化 -- For debugging_Landing ship enabled
+3904 デバッグ用_復帰位置固定 -- For debugging_Fixed return position
+3905 デバッグ用_専用死亡アニメ強制再生 -- For debugging_Dedicated death animation forced playback
+3906 デバッグ用_専用死亡アニメ再生フラグ -- For debugging_Dedicated death animation playback flag
+3907 デバッグ用_投下フラグ -- Debugging_Drop flag
+3909 テスト用_デバッグフラグオフ -- For testing_debug flag off
+3910 デバッグ用_作戦ライン高さ確認用 -- For debugging_For checking the height of the strategy line
+3911 テスト用_デバッグフラグ_作戦ライン高さ確認用 -- For testing_Debug flag_For checking the height of the strategy line
+3920 デバッグ用_揚陸艦ワープ_戦闘フェーズ -- For debugging_Landing ship warp_Combat phase
+3921 デバッグ_揚陸艦ループ用フラグ_戦闘フェーズ -- Debug_Landing ship loop flag_Combat phase
+3922 デバッグ用_揚陸艦初期設定_戦闘フェーズ -- For debugging_Landing ship initial settings_Combat phase
+3923 デバッグ用_揚陸艦有効化_戦闘フェーズ -- For debugging_Landing ship enablement_Combat phase
+3929 テスト用_デバッグフラグオフ_戦闘フェーズ -- For testing_Debug flag off_Combat phase
+3930 揚陸艦死亡アニメ用 -- Landing ship death anime
+3931 テスト用_デバッグフラグオフ_アニメ -- For testing_Debug flag off_Animation
+3932 デバッグ用殺す -- kill for debugging
+1000000000 敵リスポン -- enemy respawn

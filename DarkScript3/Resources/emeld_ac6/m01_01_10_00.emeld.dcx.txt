@@ -1,0 +1,174 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2100 マップアセット初期化イベント -- Map asset initialization event
+2110 ボス戦用ファラオン初期化イベント -- Pharaon initialization event for boss battles
+2200 条件判定_チュートリアル部屋内部_敵全滅判定 -- Condition judgment_Tutorial room interior_Enemy annihilation judgment
+2201 条件判定_チュート移動部屋領域判定_移動 -- Condition judgment_Tute movement room area judgment_Movement
+2202 条件判定_チュート移動部屋領域判定_ブースト -- Condition judgment_Tute movement room area judgment_Boost
+2203 条件判定_チュート移動部屋領域判定_ジャンプ上昇 -- Condition judgment_Tute movement room area judgment_Jump rise
+2204 条件判定_チュート移動部屋領域判定_振り返りEN -- Condition judgment_Tute moving room area judgment_Look back EN
+2205 条件判定_チュート移動部屋領域判定_ロックオン -- Condition judgment_Tute movement room area judgment_Lock-on
+2206 条件判定_チュート移動部屋領域判定_橋上屋内移動判定 -- Condition judgment_Tute movement room area judgment_Indoor movement judgment on the bridge
+2207 条件判定_チュート橋上部屋領域判定_ブレQB -- Condition Judgment_Chute Bridge Room Area Judgment_Break QB
+2208 条件判定_チュート橋上部屋領域判定_ミサイル -- Condition Judgment_Chute Bridge Room Area Judgment_Missile
+2209 条件判定_チュート部屋外部領域判定_回復 -- Condition judgment_Tute room external area judgment_Recovery
+2210 条件判定_ハッキングカタパルト完了したか -- Condition Judgment_Hacking Catapult completed?
+2211 条件判定_チュート山岳手前領域判定_アサブ -- Condition Judgment_Chute Mountain Front Area Judgment_Asab
+2212 条件判定_チュート山岳奥側領域_ジャンプ台 -- Condition determination_Chute Mountain back area_Jumping platform
+2213 条件判定_チュート山岳左側A層領域判定_キーガイド -- Condition judgment_Chute Mountain left side A layer area judgment_Key guide
+2214 条件判定_チュート山岳中心大通り領域判定_キーガイド -- Condition Judgment_Chute Mountain Central Avenue Area Judgment_Key Guide
+2215 条件判定_チュート山岳奥側A層領域判定_キーガイド -- Condition Judgment_Juto Mountain Back A Layer Area Judgment_Key Guide
+2216 条件判定_チュート山岳左側A層_対象敵全滅したか -- Conditional judgment_Chute Mountain left side A layer_Was the target enemy completely annihilated?
+2217 条件判定_チュート山岳中心大通り_対象敵全滅したか -- Condition Judgment_Chute Mountain Central Boulevard_Was the target enemy completely annihilated?
+2218 条件判定_チュート山岳奥側A層_対象敵全滅したか -- Condition judgment_A layer on the back side of Chuto Mountain_Was the target enemy completely annihilated?
+2219 条件判定_チュート山岳手前A層_対象敵全滅したか -- Condition Judgment_A layer in front of Chuto Mountain_Was the target enemy completely annihilated?
+2220 条件判定_PC山岳の街に到着したか -- Condition Judgment_PC Have you arrived at the mountain town?
+2221 条件判定_山岳の街_マーカー表示判定 -- Condition judgment_Mountain town_Marker display judgment
+2222 条件判定_チュートA層_回復薬使用したか -- Condition judgment_Cute A layer_Did you use recovery medicine?
+2223 条件判定_チュートA層_HPチェック -- Condition judgment_Tute A layer_HP check
+2230 条件判定_ハッキング_左側A層残骸を完了した -- Condition Judgment_Hacking_Complete left side A layer debris
+2231 条件判定_ハッキング_中心大通を完了した -- Completed Condition Judgment_Hacking_Central Odori
+2232 条件判定_ハッキング_奥側A層残骸を完了した -- Condition Judgment_Hacking_Dear A layer debris completed.
+2234 条件判定_ハッキング_ボス戦用ダミーキャラ_ちょっとハッキング -- Condition judgment_Hacking_Dummy character for boss battle_Slight hacking
+2235 条件判定_ハッキング_ボス戦用ダミーキャラ_だいぶハッキング -- Condition judgment_Hacking_Dummy character for boss battle_Significant hacking
+2236 条件判定_山岳の街_ボス部屋領域に近づいた -- Condition Judgment_Mountain Town_Approaching the boss room area
+2240 条件判定_ファラオン戦開始か -- Condition judgment_Pharaon battle begins?
+2241 条件判定_ファラオンを倒したか -- Conditional judgment_Did you defeat Pharaon?
+2242 条件判定_ファラオンを倒したか_派生 -- Conditional judgment_Did you defeat Pharaon_Derivation
+2250 条件判定_会話判定_ファラオン登場会話 -- Condition judgment_Conversation judgment_Pharaon appearance conversation
+2251 条件判定_会話判定_ファラオン登場会話02 -- Condition Judgment_Conversation Judgment_Pharaon Appearance Conversation 02
+2252 条件判定_会話判定_山岳の街ガヤ会話01 -- Condition judgment_Conversation judgment_Mountain town Gaya conversation 01
+2253 条件判定_会話判定_山岳の街ガヤ会話01_攻撃を受けている -- Condition judgment_Conversation judgment_Mountain town Gaya conversation 01_Under attack
+2254 条件判定_会話判定_ハッキングOBJ会話01_近づいた -- Condition Judgment_Conversation Judgment_Hacking OBJ Conversation 01_ Approaching
+2255 条件判定_会話判定_ハッキングOBJ会話02_近づいた -- Condition Judgment_Conversation Judgment_Hacking OBJ Conversation 02_ Approaching
+2256 条件判定_会話判定_ハッキングOBJ会話03_近づいた -- Condition Judgment_Conversation Judgment_Hacking OBJ Conversation 03_ Approaching
+2257 条件判定_会話判定_山岳の街OBJ03_攻撃を受けている -- Condition judgment_Conversation judgment_Mountain town OBJ03_Under attack
+2260 条件判定_会話判定_ボス戦会話_グレネード撃った -- Condition judgment_Conversation judgment_Boss battle conversation_Grenade fired
+2261 条件判定_会話判定_ボス戦会話_スタッガーした -- Condition judgment_Conversation judgment_Boss battle conversation_Staggered
+2262 条件判定_会話判定_ボス戦会話_グレネード撃ったフラグ判定用 -- Condition Judgment_Conversation Judgment_Boss Battle Conversation_Grenade shot flag judgment
+2270 条件判定_会話判定_初回ガードメカ -- Condition judgment_Conversation judgment_First time guard mechanism
+2271 条件判定_追加イベント_山岳_アサブ終わり判定 -- Condition judgment_Additional event_Mountain_Asabu end judgment
+2280 条件判定_会話判定_山岳の街ガヤ会話02 -- Condition judgment_Conversation judgment_Mountain town Gaya conversation 02
+2281 条件判定_会話判定_山岳の街ガヤ会話02_対象全滅 -- Condition judgment_Conversation judgment_Mountain town Gaya conversation 02_Target annihilated
+2300 イベント実行_チュートA層屋外扉開け -- Event execution_Cute A layer outdoor door opening
+2301 イベント実行__チュートA層屋外扉開け_連動イベント01 -- Event execution_Opening the outdoor door of Tute A layer_Linked event 01
+2310 イベント実行_CP実行_山岳の街 -- Event execution_CP execution_Mountain town
+2311 イベント実行_CP実行_ファラオン -- Event execution_CP execution_Pharaon
+2315 イベント実行_CP結果再現_ボス前 -- Event execution_CP result reproduction_before boss
+2320 イベント実行_道中ファラオン襲撃 -- Event execution_Pharaon attack on the way
+2321 イベント実行_チュート山岳手前_共産MTにターゲット -- Event execution_Before Chute Mountain_Target Communist MT
+2322 イベント実行_道中ファラオン襲撃_派生イベント -- Event execution_Pharaon attack on the way_Derivative event
+2323 イベント実行_道中ファラオン襲撃_派生イベント_マーカ有効化_2850 -- Event execution_Pharaon attack on the way_Derivative event_Marker activation_2850
+2324 イベント実行_道中ファラオン襲撃_派生イベント_マーカ有効化_2851 -- Event execution_Pharaon attack on the way_Derivative event_Marker activation_2851
+2325 イベント実行_道中ファラオン襲撃_派生イベント_マーカ有効化_2852 -- Event execution_Pharaon attack on the way_Derivative event_Marker activation_2852
+2330 イベント実行_山岳の街初期化イベント -- Event execution_Mountain town initialization event
+2331 イベント実行_山岳の街最終地点ハッキング有効化 -- Event execution_Mountain town final point hacking enabled
+2332 イベント実行_山岳の街カタパルト_ダミーキャラ有効化 -- Event execution_Mountain town catapult_Dummy character enabled
+2370 イベント実行_目標地点マーカー有効化_Ent2900 -- Event execution_target point marker activation_Ent2900
+2371 イベント実行_目標地点マーカー有効化_Ent2905 -- Event execution_target point marker activation_Ent2905
+2372 イベント実行_目標地点マーカー有効化_Ent2903 -- Event execution_target point marker activation_Ent2903
+2380 イベント実行_目標地点マーカー有効化_Ent2850 -- Event execution_target point marker activation_Ent2850
+2381 イベント実行_目標地点マーカー有効化_Ent2851 -- Event execution_target point marker activation_Ent2851
+2382 イベント実行_目標地点マーカー有効化_Ent2852 -- Event execution_target point marker activation_Ent2852
+2385 イベント実行_目標地点マーカー有効化_Ent2930 -- Event execution_target point marker activation_Ent2930
+2386 イベント実行_目標地点マーカー有効化_Ent2932 -- Event execution_target point marker activation_Ent2932
+2390 フラグ_切り替え情報_Ent2850と2860 -- Flag_switching information_Ent2850 and 2860
+2391 フラグ_切り替え情報_Ent2851と2861 -- Flag_switching information_Ent2851 and 2861
+2392 フラグ_切り替え情報_Ent2852と2862 -- Flag_switching information_Ent2852 and 2862
+2500 イベント実行_ボスファラオン_初期化 -- Event execution_Boss Pharaon_Initialization
+2510 イベント実行_ボスファラオン_登場イベント -- Event execution_Boss Pharaon_appearance event
+2810 フラグ_CP有効化_山岳の街到着 -- Flag_CP enable_Mountain town arrival
+2811 フラグ_CP有効化_ファラオン戦 -- Flag_CP enable_Pharaon battle
+2820 フラグ_チュートA層扉開け -- Flag_Chute A layer door open
+2821 フラグ_回復キーガイド表示 -- Flag_Recovery key guide display
+2822 フラグ_ジャンプ台キーガイド表示 -- Flag_Jumping table key guide display
+2823 フラグ_左側A層キーガイド表示 -- Flag_Left A layer key guide display
+2824 フラグ_中心大通キーガイド表示 -- Flag_Central Odori key guide display
+2825 フラグ_奥側A層キーガイド表示 -- Flag_Back side A layer key guide display
+2826 フラグ_ジャンプ台キーガイド_アサブ表示 -- Flag_Jumping table key guide_Asab display
+2830 フラグ_ハッキング一段階完了 -- Flag_Hacking stage 1 completed
+2831 フラグ_ハッキング二段階完了 -- Flag_Hacking stage 2 completed
+2835 フラグ_ハッキング開始_左側A層 -- Flag_Start hacking_Left layer A
+2836 フラグ_ハッキング開始_中心大通 -- Flag_Start of hacking_Central street
+2837 フラグ_ハッキング開始_奥側A層 -- Flag_Start hacking_Back A layer
+2890 仮フラグ_10末用_00 -- Temporary flag_for end of October_00
+2891 仮フラグ_10末用_01 -- Temporary flag_for end of October_01
+2892 仮フラグ_10末用_02 -- Temporary flag_for end of October_02
+2893 仮フラグ_10末用_03 -- Temporary flag_for end of October_03
+2894 仮フラグ_10末用_04 -- Temporary flag_for end of October_04
+2895 仮フラグ_10末用_05 -- Temporary flag_for end of October_05
+2896 仮フラグ_10末用_06 -- Temporary flag_for end of October_06
+2897 仮フラグ_10末用_07 -- Temporary flag_for end of October_07
+2898 仮フラグ_10末用_08 -- Temporary flag_for end of October_08
+2899 仮フラグ_10末用_09 -- Temporary flag_for end of October_09
+2900 仮フラグ_10末用_10 -- Temporary flag_10 end_10
+2901 仮フラグ_10末用_11 -- Temporary flag_for end of October_11
+2902 仮フラグ_10末用_12 -- Temporary flag_for end of October_12
+2903 仮フラグ_10末用_13 -- Temporary flag_for end of October_13
+3000 会話フラグ_101100500_ガードメカは排除しろ -- Conversation flag_101100500_Eliminate the guard mecha
+3010 会話フラグ_101100900_機体損傷修復しておけ -- Conversation flag_101100900_Repair the damage to the aircraft.
+3011 会話フラグ_101100940_機体はもうおこなったようだな -- Conversation Flag_101100940_It seems the aircraft has already done so.
+3020 会話フラグ_101101000_621カタパルトはこの先だ -- Conversation Flag_101101000_621 The catapult is ahead
+3030 会話フラグ_101101020_見えるかあの汚染市街に降下 -- Conversation Flag_101101020_Can you see it descending into that polluted city?
+3040 会話フラグ_101101300_カタパルトにアクセスしろ -- Conversation flag_101101300_Access the catapult
+3050 会話フラグ_101101720_AC一体どこから -- Conversation flag_101101720_AC where on earth did it come from?
+3060 会話フラグ_101101740_解放戦線の武装ゲリラか -- Conversation Flag_101101740_Armed guerrilla of the Liberation Front?
+3070 会話フラグ_101101760_ACの残骸反応をいくつか検出した -- Conversation flag_101101760_Detected some remnant reactions of AC.
+3080 会話フラグ_101101780_マーカー地点を巡れ -- Conversation flag_101101780_Visit marker points
+3090 会話フラグ_101101810_企業の動きは何か聞いているか -- Conversation Flag_101101810_Are you listening to what the company is doing?
+3100 会話フラグ_101101815_敵襲 -- Conversation flag_101101815_Enemy attack
+3110 会話フラグ_101101830_慣れてきたようだな621 -- Conversation flag_101101830_Looks like you're getting used to it 621
+3120 会話フラグ_101101840_不明ACを確認企業の手先か -- Conversation flag_101101840_Confirm unknown AC Is it a stooge of a company?
+3130 会話フラグ_101101850_対処しろ621 -- Conversation Flag_101101850_Deal 621
+3140 会話フラグ_101101860_パイロ情報抜き取れ解析はこちら -- Conversation flag_101101860_Click here for pyro information extraction analysis
+3150 会話フラグ_101102100_このライセンスは既に停止されている -- Conversation Flag_101102100_This license has already been suspended
+3151 会話フラグ_101102105_次を当たれ -- Conversation flag_101102105_Next guess
+3160 会話フラグ_101102120_大豊工業とシュナイダーに危ないかもしれん -- Conversation flag_101102120_May be dangerous for Taiho Kogyo and Schneider
+3170 会話フラグ_101102130_企業ではない独立傭兵か -- Conversation flag_101102130_Independent mercenary not a company?
+3180 会話フラグ_101102140_数が多いミサイルを活用しろ -- Conversation Flag_101102140_Use missiles with large numbers
+3190 会話フラグ_101102160_解析していくぞ -- Let's analyze the conversation flag_101102160_
+3200 会話フラグ_101103700_ランク圏外のパイロットだ目当てのものではない -- Conversation Flag_101103700_Pilot is out of rank, not what you're looking for.
+3210 会話フラグ_101103720_残る残骸反応に向かえ -- Conversation flag_101103720_Go to the remaining debris reaction
+3220 会話フラグ_101103800_あれは -- Conversation flag_101103800_That is
+3230 会話フラグ_101103820_SGサブジェクトガードが来たぞ -- Conversation Flag_101103820_SG Subject Guard has arrived.
+3240 会話フラグ_101103840_封鎖機構の巡回だと -- Conversation flag_101103840_It's a patrol of the blockade mechanism.
+3250 会話フラグ_101103900_いたぞ報告のあった機体だ -- Conversation Flag_101103900_It's the reported aircraft.
+3260 会話フラグ_101103920_盾持ちがいるブレードを忘れるな -- Conversation Flag_101103920_Don't forget the blade that has a shield holder
+3270 会話フラグ_101103940_このライセンスはどうだ -- Conversation Flag_101103940_How about this license?
+3280 会話フラグ_101103960_企業所属では足が付く避けるぞ -- Conversation Flag_101103960_Avoid being affiliated with a company
+3290 会話フラグ_101104000_621もうひとつ反応を検出した -- Conversation Flag_101104000_621 Another reaction detected
+3300 会話フラグ_101104020_マーカー情報を送る当たってみろ -- Conversation flag_101104020_Send marker informationTry to guess
+3301 会話フラグ_101104040_高所への移動には垂直カタパ -- Conversation flag_101104040_Vertical catapult for moving to high places
+3310 会話フラグ_101104100_あれだあの残骸にアクセスしろ -- Conversation Flag_101104100_That's it, access that wreckage.
+3320 会話フラグ_101104500_ふむ -- Conversation flag_101104500_Hmm
+3330 会話フラグ_101104900_むっ -- Conversation flag_101104900_mm
+3331 会話フラグ_101104890_やは目 -- Conversation Flag_101104890_Yahame
+3340 会話フラグ_101105300_目当てのものは既に手に入った -- Conversation flag_101105300_I already got what I was looking for.
+3350 会話フラグ_101105400_爆撃は上昇で回避しろ地上では巻き込まれるぞ -- Conversation Flag_101105400_Avoid the bombing by climbing up; you'll get caught up on the ground.
+3360 会話フラグ_101105500_効いているぞ畳み掛けていけ -- Conversation flag_101105500_It's working, fold it up.
+3370 会話フラグ_101105700_惑星封鎖機構SG大型武装ヘリの撃墜を確認した -- Conversation Flag_101105700_Confirmed the shooting down of a Planetary Blockade Organization SG large armed helicopter.
+3380 会話フラグ_101106102_レイヴン -- Conversation flag_101106102_Raven
+3390 会話フラグ_101106124_おわり -- Conversation Flag_101106124_End
+3401 会話フラグ_ハッキング01 -- Conversation Flag_Hacking 01
+3402 会話フラグ_ハッキング02 -- Conversation Flag_Hacking 02
+3403 会話フラグ_ハッキング03 -- Conversation Flag_Hacking 03
+3701 CPからきたよフラグ01 -- I came from CP flag 01
+3702 CPからきたよフラグ02 -- I came from CP flag 02
+3800 アーカイブ付与 -- Archive grant
+3810 ジャンプ台キーガイド領域判定 -- Jumping table key guide area determination
+3811 アサブキーガイド領域判定 -- Asahi key guide area determination
+3812 ジャンプ台アサブキーガイド領域判定 -- Jumping platform sub key guide area determination
+3820 イベント用山岳の街完了会話識別子 -- Mountain town completion conversation identifier for events
+3830 ファラオン無敵処理 -- Pharaon invincibility treatment
+3840 ファラオンサーチライト用特殊効果監視 -- Special effects monitoring for Pharaon searchlight
+3850 ファラオンTips出すか確認イベント -- Event to confirm if Pharaon Tips will be released
+3855 ファラオンTips出すか確認イベント_専用秒数待機 -- Confirmation event to issue Pharaon Tips_Wait for a dedicated number of seconds
+3900 ボスイベント制御_青領域_ファラオンが内部 -- Boss event control_Blue area_Pharaon is inside
+3901 ボスイベント制御_黄領域_ファラオンが内部 -- Boss event control_yellow area_Pharaon is inside
+3902 ボスイベント制御_橙領域_ファラオンが内部 -- Boss event control_orange area_Pharaon is inside
+3903 ボスイベント制御_赤領域_ファラオンが外部 -- Boss event control_Red area_Pharaon is outside
+3910 ボスイベント制御_青領域_PCが内部 -- Boss event control_Blue area_PC is inside
+3920 イベントターゲット追加 -- Add event target
+3930 入場時SE抑制 -- SE suppression at entrance
+3980 更新頻度落ちキャラ殺しイベント -- Character killing event with low update frequency
+1000000000 敵リスポン -- enemy respawn

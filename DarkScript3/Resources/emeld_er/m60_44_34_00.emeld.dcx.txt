@@ -1,0 +1,20 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1044340650 チュートリアルメッセージ_騎乗 -- Tutorial message_Riding
+1044342200 毒花_起動_XX -- Poisonous flower_start_XX
+1044342203 特殊効果_バリスタ兵視界拡張 -- Special effects_Ballista soldier visibility expansion
+1044342230 死亡待機 -- Waiting for death
+1044342280 亜人_バリスタ恐れイベント -- Ajin_Barista Fear Event
+1044342300 亜人擬態イベント_XX -- Demihuman mimicry event_XX
+1044342502 梯子登録 -- ladder registration
+1044343700 NPC802赤目商人3_初期化イベント -- NPC802 Red Eye Merchant 3_Initialization event
+1044343701 NPC802赤目商人3_ここで死亡監視 -- NPC802 Red Eye Merchant 3_Death monitoring here
+1044343702 NPC802赤目商人3_演奏管理 -- NPC802 Red Eye Merchant 3_Performance management
+1044343703 NPC802赤目商人3_地図ポイント発見 -- NPC802 Red Eye Merchant 3_Map point discovery
+1044343704 NPC802赤目商人3_集中演奏時ロジック管理 -- NPC802 Red Eye Merchant 3_Logic management during intensive performance
+1044343705 NPC802赤目商人3_ロバ被ダメ台詞再生 -- NPC802 Red-Eyed Merchant 3_ Donkey Damage Line Playback
+1044343706 NPC802赤目商人3_ロバ敵対監視 -- NPC802 Red-Eyed Merchant 3_Donkey Hostile Surveillance
+1044343707 NPC802赤目商人3_血文字出現管理 -- NPC802 Red Eye Merchant 3_ Blood character appearance management
+1044343710 NPC216_狼頭の戦士_NPC初期化イベント_ダリウィルとの共闘直後 -- NPC216_Wolf-headed Warrior_NPC Initialization Event_Immediately after the joint fight with Daliwill

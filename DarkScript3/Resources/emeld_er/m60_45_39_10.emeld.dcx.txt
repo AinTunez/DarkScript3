@@ -1,0 +1,15 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+1000000000 敵リスポン -- enemy respawn
+1045390700 NPC319ダヴィド_NPC初期化イベント -- NPC319 David_NPC initialization event
+1045390701 NPC319ダヴィド_ボス撃破時リアルタイム遷移 -- NPC319 David_Real-time transition when defeating the boss
+1045392280 オオカミVSルーンベア_交戦イベント -- Wolf VS Rune Bear_Battle Event
+1045392281 ストームオオカミ出現_XX -- Storm wolf appears_XX
+1045392282 ルーンベア滝_オオカミ死体化 -- Runebear Falls_Wolf Corpse
+1045392341 夜の王の眷属土葬スケルトン呼び -- Night King's Heir Burial Skeleton Call
+1045392342 夜の王の眷属ワープ処理 -- Night King's Heir Warp Process
+1045392343 夜の王の眷属領域検索 -- Night King's Heir Area Search
+1045392345 夜の王の眷属死亡時イベント -- Night King's Follower Death Event
+1045392346 夜の王の眷属_ターゲットクリアイベント -- Heir of the Night King_Target Clear Event

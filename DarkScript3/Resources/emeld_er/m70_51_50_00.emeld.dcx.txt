@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+51500001 プロト用_ワイバントンネル内制御 -- For Proto_Wyvern tunnel control
+51500002 プロト用_ワイバン繰り返し戦闘 -- Prototype_Wyvern repeat battle
+51500003 プロト用_ワイバン部位弱点化 -- For Proto_Wyvern part weakness
+51500004 プロト用_ワイバーン破壊OBJ（入口側） -- For Proto_Wyvern destruction OBJ (entrance side)
+51500005 プロト用_ワイバーン破壊OBJ（橋上側） -- For Proto_Wyvern destruction OBJ (on the bridge side)
+51500020 橋の上でのBGM削除判定 -- BGM deletion judgment on the bridge
+51500021 ボスワイバーンBGM再生判定 -- Boss Wyvern BGM playback judgment
+51500030 篝火NPC位置合わせ -- Bonfire NPC position alignment
+1000000000 敵リスポン -- enemy respawn

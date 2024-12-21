@@ -19,31 +19,35 @@ namespace DarkScript3
 
         public bool IsASCIIStringData => ResourceString.StartsWith("ds2");
         public bool AllowRestrictConditionGroups => ResourceString.StartsWith("ds1");
+        public string ResourceGame => GameNameFromResourceName(ResourceString);
 
         public InstructionTranslator Translator { get; set; }
 
         // Instruction indices by display name. Used by fancy compiler (necessary?).
-        public Dictionary<string, (int classIndex, int instrIndex)> Functions = new Dictionary<string, (int classIndex, int instrIndex)>();
+        public Dictionary<string, (int classIndex, int instrIndex)> Functions = new();
 
         // Enums by display name
-        public Dictionary<string, EMEDF.EnumDoc> Enums = new Dictionary<string, EMEDF.EnumDoc>();
+        public Dictionary<string, EMEDF.EnumDoc> Enums = new();
 
         // Enum values by value display name. Used for autcomplete, and also in fancy compilation
         // where control/negate args etc. which must be read as ints.
-        public Dictionary<string, int> EnumValues = new Dictionary<string, int>();
+        public Dictionary<string, int> EnumValues = new();
 
         // Callable objects by display name, both instructions and condition functions, for autocomplete/docbox purposes
-        public Dictionary<string, List<EMEDF.ArgDoc>> AllArgs = new Dictionary<string, List<EMEDF.ArgDoc>>();
+        public Dictionary<string, List<EMEDF.ArgDoc>> CallArgs = new();
+
+        // Map from typed init display name to index of Event ID arg
+        public Dictionary<string, int> TypedInitIndex = new();
 
         // Mapping from function names to their newer versions.
         // This is populated automatically for Speffect/SpEffect before ER, and based on extra emedf metadata otherwise.
-        public Dictionary<string, string> DisplayAliases = new Dictionary<string, string>();
+        public Dictionary<string, string> DisplayAliases = new();
 
         // DisplayAliases merged with the one from InstructionTranslator
-        public Dictionary<string, string> AllAliases = new Dictionary<string, string>();
+        public Dictionary<string, string> AllAliases = new();
 
         // Byte offsets based on argument types. Used in decompilation and in building instructions.
-        public Dictionary<EMEDF.InstrDoc, List<int>> FuncBytePositions = new Dictionary<EMEDF.InstrDoc, List<int>>();
+        public Dictionary<EMEDF.InstrDoc, List<int>> FuncBytePositions = new();
 
         // Used for syntax highlighting.
         // These are hardcoded in unpack output as well as exported manually to JS, in order to set them on the Event class from JS.
@@ -62,7 +66,12 @@ namespace DarkScript3
 
         // Used for syntax highlighting and defining constants in JS.
         // Populated from individual members of globalized enums.
-        public Dictionary<string, int> GlobalEnumConstants = new Dictionary<string, int>();
+        public Dictionary<string, int> GlobalEnumConstants = new();
+
+        // Instructions which are messed up in vanilla files with manual fixes.
+        // Only used for invalid AC6 files without corresponding maps.
+        // Otherwise, alternate versions of instructions would need to be part of load/save.
+        private HashSet<(int, int)> ManualFixInstructions = new();
 
         // Special cases for enum display names.
         private static readonly Dictionary<string, string> EnumReplacements = new Dictionary<string, string>
@@ -83,7 +92,7 @@ namespace DarkScript3
                 foreach (KeyValuePair<string, InstructionTranslator.FunctionDoc> pair in Translator.CondDocs)
                 {
                     if (pair.Value.ConditionDoc.Hidden) continue;
-                    AllArgs[pair.Key] = pair.Value.Args;
+                    CallArgs[pair.Key] = pair.Value.Args;
                     string funcName = pair.Value.Name;
                     if (Enums.TryGetValue(funcName, out EMEDF.EnumDoc doc) && !EnumNamesForGlobalization.Contains(doc.Name))
                     {
@@ -98,7 +107,7 @@ namespace DarkScript3
                 foreach (KeyValuePair<string, string> pair in Translator.DisplayAliases)
                 {
                     string alias = pair.Key;
-                    if (AllArgs.ContainsKey(alias))
+                    if (CallArgs.ContainsKey(alias))
                     {
                         throw new Exception($"{alias} is both a condition alias and a command/condition");
                     }
@@ -110,48 +119,55 @@ namespace DarkScript3
                 }
                 foreach (KeyValuePair<string, InstructionTranslator.ShortVariant> pair in Translator.ShortDocs)
                 {
-                    if (AllArgs.ContainsKey(pair.Key) || AllAliases.ContainsKey(pair.Key))
+                    if (CallArgs.ContainsKey(pair.Key) || AllAliases.ContainsKey(pair.Key))
                     {
                         throw new Exception($"{pair.Key} is both a short instruction and function/condition");
                     }
-                    AllArgs[pair.Key] = pair.Value.Args;
+                    CallArgs[pair.Key] = pair.Value.Args;
                 }
             }
         }
         
         public bool IsVariableLength(EMEDF.InstrDoc doc)
         {
-            if (ResourceString.StartsWith("ds2"))
-                return doc == DOC[100130][1] || doc == DOC[100070][0];
-            else if (ResourceString.StartsWith("ds1"))
-                return doc == DOC[2000][0];
-            else if (ResourceString.StartsWith("ac6"))
-                return doc.Arguments.Length > 0 && doc.Arguments.Last().Vararg;
-            else
-                return doc == DOC[2000][0] || doc == DOC[2000][6];
+            return doc.Arguments.Count > 0 && doc.Arguments[doc.Arguments.Count - 1].Vararg;
         }
 
         private void InitDocsFromResource(string streamPath)
         {
             if (DOC == null)
             {
-                if (File.Exists(streamPath))
-                    DOC = EMEDF.ReadFile(streamPath);
-                else if (File.Exists(@"Resources\" + streamPath))
-                    DOC = EMEDF.ReadFile(@"Resources\" + streamPath);
+                // Previously this checked streamPath then Resources\streamPath, but this makes it very easy to
+                // leave copies of emedfs around. Use custom emedf for that, which is always an absolute path.
+                string resolvedPath = Path.Combine("Resources", streamPath);
+                if (File.Exists(resolvedPath))
+                {
+                    DOC = EMEDF.ReadFile(resolvedPath);
+                }
                 else
+                {
                     DOC = EMEDF.ReadStream(streamPath);
+                }
             }
 
             ResourceString = Path.GetFileName(streamPath);
 
+            bool displayNames = true;
 #if DEBUG
-            if (ResourceString.StartsWith("ac6"))
+            if (ResourceString.Contains("jp"))
             {
-                new CondTestingTool().AddUnknownValues(DOC, "unkac6.csv");
+                displayNames = false;
             }
 #endif
-
+            if (ResourceString.Contains("ac6"))
+            {
+                ManualFixInstructions = new() { (2008, 2), (2017, 2), (2004, 1010) };
+            }
+            string toDisplayName(string name)
+            {
+                if (!displayNames) return name;
+                return Regex.Replace(name, @"[^\w]", "");
+            }
             Dictionary<string, List<string>> aliasesByEnum = new Dictionary<string, List<string>>();
             if (DOC.DarkScript?.EnumAliases != null)
             {
@@ -175,14 +191,14 @@ namespace DarkScript3
             }
             foreach (EMEDF.EnumDoc enm in DOC.Enums)
             {
-                enm.DisplayName = Regex.Replace(enm.Name, @"[^\w]", "");
+                enm.DisplayName = toDisplayName(enm.Name);
                 Enums[enm.DisplayName] = enm;
 
                 string prefix = EnumNamesForGlobalization.Contains(enm.Name) ? "" : $"{enm.DisplayName}.";
                 enm.DisplayValues = new Dictionary<string, string>();
                 foreach (KeyValuePair<string, string> pair in enm.Values)
                 {
-                    string name = prefix + Regex.Replace(pair.Value, @"[^\w]", "");
+                    string name = prefix + toDisplayName(pair.Value);
                     name = EnumReplacements.TryGetValue(name, out string displayName) ? displayName : name;
                     enm.DisplayValues[pair.Key] = name;
                     // As part of this, update the global dictionary
@@ -236,23 +252,38 @@ namespace DarkScript3
                         }
                     }
                     instr.DisplayName = TitleCaseName(name);
-                    if (Functions.TryGetValue(instr.DisplayName, out (int, int) existing))
+                    if (Functions.TryGetValue(instr.DisplayName, out (int, int) existing) && displayNames)
                     {
                         throw new Exception($"Invalid emedf: {instr.DisplayName} refers to both {FormatInstructionID(bank.Index, instr.Index)} and {FormatInstructionID(existing.Item1, existing.Item2)}");
                     }
-                    Functions[instr.DisplayName] = ((int)bank.Index, (int)instr.Index);
                     FuncBytePositions[instr] = GetArgBytePositions(instr.Arguments.Select(i => (ArgType)i.Type).ToList());
+                    Functions[instr.DisplayName] = ((int)bank.Index, (int)instr.Index);
                     // Also filled in from conditions
-                    AllArgs[instr.DisplayName] = instr.Arguments.ToList();
+                    CallArgs[instr.DisplayName] = instr.Arguments.ToList();
+
+                    // Alternate init
+                    // This is a bit ad-hoc currently. TODO model this better if it's not good
+                    if (instr.Name.StartsWith("Initialize") && IsVariableLength(instr))
+                    {
+                        int idIndex = instr.Arguments.FindIndex(a => a.Name == "Event ID");
+                        if (idIndex == -1)
+                        {
+                            throw new Exception($"Invalid emedf: {instr.DisplayName} requires parameter named \"Event ID\"");
+                        }
+                        string altInit = "$" + instr.DisplayName;
+                        Functions[altInit] = ((int)bank.Index, (int)instr.Index);
+                        CallArgs[altInit] = instr.Arguments.ToList();
+                        TypedInitIndex[altInit] = idIndex;
+                    }
 
                     foreach (var arg in instr.Arguments)
                     {
                         // Arg name does not really matter, the only important thing is that it's a valid JS identifier
                         // Uniqueness is enforced later
-                        arg.DisplayName = TitleCaseName(arg.Name.Replace("Class", "Class Name").Replace("/", " "), true);
+                        arg.DisplayName = ArgCaseName(arg.Name);
                         if (arg.EnumName != null)
                         {
-                            string enumDisplayName = Regex.Replace(arg.EnumName, @"[^\w]", "");
+                            string enumDisplayName = toDisplayName(arg.EnumName);
                             if (!Enums.TryGetValue(enumDisplayName, out EMEDF.EnumDoc enumDoc))
                             {
                                 throw new Exception($"Invalid emedf: bad enum reference in {FormatInstructionID(bank.Index, instr.Index)} arg {arg.Name}: {arg.EnumName} ({enumDisplayName})");
@@ -306,11 +337,18 @@ namespace DarkScript3
             // ObjAct event flag?
             if (DOC?.DarkScript?.MetaTypes == null) return;
             Dictionary<string, List<EMEDF.DarkScriptType>> exactTypes = new Dictionary<string, List<EMEDF.DarkScriptType>>();
+            int index = 0;
             foreach (EMEDF.DarkScriptType metaType in DOC.DarkScript.MetaTypes)
             {
                 if (metaType.Name == null && (metaType.MultiNames == null || metaType.MultiNames.Count == 0))
                 {
                     throw new Exception($"EMEDF validation failure: Meta type defined without applicable arg name");
+                }
+                metaType.Priority = index++;
+                if (metaType.Name == null)
+                {
+                    // Dynamic names are less specific
+                    metaType.Priority -= 1000;
                 }
                 string name = metaType.Name ?? metaType.MultiNames[0];
                 if (!exactTypes.TryGetValue(name, out List<EMEDF.DarkScriptType> types))
@@ -338,13 +376,19 @@ namespace DarkScript3
                 types.Add(metaType);
             }
             bool printIds = false;
+            Dictionary<string, string> aliasNames = new();
             if (DOC.DarkScript.MetaAliases != null)
             {
                 foreach (KeyValuePair<string, List<string>> entry in DOC.DarkScript.MetaAliases)
                 {
                     foreach (string name in entry.Value)
                     {
+                        if (exactTypes.ContainsKey(name))
+                        {
+                            throw new Exception($"EMEDF validation failure: type alias {name}->{entry.Key} has a duplicate type definition");
+                        }
                         exactTypes[name] = exactTypes[entry.Key];
+                        aliasNames[name] = entry.Key;
                     }
                 }
             }
@@ -404,7 +448,9 @@ namespace DarkScript3
                             // It should also not overlap with any other meta types, but this is not enforced.
                             foreach (string argName in applicable.MultiNames)
                             {
-                                EMEDF.ArgDoc multiArg = instr.Arguments.Where(a => a.Name == argName).FirstOrDefault();
+                                EMEDF.ArgDoc multiArg = instr.Arguments
+                                    .Where(a => a.Name == argName || aliasNames.TryGetValue(a.Name, out string alias) && alias == argName)
+                                    .FirstOrDefault();
                                 if (multiArg == null)
                                 {
                                     break;
@@ -442,7 +488,7 @@ namespace DarkScript3
         /// <summary>
         /// Returns the byte length of an ArgType.
         /// </summary>
-        private static int ByteLengthFromType(long t)
+        public static int ByteLengthFromType(long t)
         {
             if (t == 0) return 1; //u8
             if (t == 1) return 2; //u16
@@ -455,10 +501,15 @@ namespace DarkScript3
             throw new Exception("Invalid type in argument definition.");
         }
 
+        internal static ArgType ArgTypeFromType(long type)
+        {
+            return type == 8 ? ArgType.UInt32 : (ArgType)type;
+        }
+
         /// <summary>
         /// Returns a list of byte positions for an ordered list of argument types, plus a final entry for the overall length.
         /// </summary>
-        private static List<int> GetArgBytePositions(IEnumerable<ArgType> argStruct, int startPos = 0)
+        internal static List<int> GetArgBytePositions(IEnumerable<ArgType> argStruct, int startPos = 0)
         {
             List<int> positions = new List<int>();
             int bytePos = startPos;
@@ -527,12 +578,14 @@ namespace DarkScript3
 
         public static string InstrDocDebugString(EMEDF.InstrDoc doc)
         {
-            string showType(EMEDF.ArgDoc argDoc)
-            {
-                string extra = argDoc.Vararg ? "*" : "";
-                return $"{((ArgType)argDoc.Type).ToString().ToLowerInvariant()}{extra}";
-            }
-            return string.Join(", ", doc.Arguments.Select(argDoc => $"{showType(argDoc)} {argDoc.DisplayName}"));
+            return string.Join(", ", doc.Arguments.Select(ArgDocDebugString));
+        }
+
+        public static string ArgDocDebugString(EMEDF.ArgDoc argDoc)
+        {
+            string extra = argDoc.Vararg ? "*" : "";
+            string type = $"{TypeString(argDoc.Type)}{extra}";
+            return $"{type} {argDoc.DisplayName}";
         }
 
         public static string TypeString(long type)
@@ -546,6 +599,51 @@ namespace DarkScript3
             if (type == 6) return "float";
             if (type == 8) return "uint";
             throw new Exception("Invalid type in argument definition.");
+        }
+
+        public static long FixEventID(long id)
+        {
+            // Special case in games before Elden Ring
+            if (id == -1)
+            {
+                return id;
+            }
+            // Negatives become uint
+            // It was previously incorrectly decompiled as int, causing issues in Elden Ring
+            return (uint)id;
+        }
+
+        /// <summary>
+        /// Returns a dictionary containing the textual names of an event's parameters, including analyzed names/types.
+        /// </summary>
+        public Dictionary<Parameter, string> InferredParamNames(Event evt, InitData.Links links)
+        {
+            if (links != null)
+            {
+                InitData.Lookup lookup = links.Main.TryGetEvent(evt.ID, out InitData.EventInit eventInit);
+                if (lookup == InitData.Lookup.Found)
+                {
+                    Dictionary<Parameter, string> altParamNames = new();
+                    // Populate the dictionary in argument order (parameters normally appear this way, but try to be safe)
+                    foreach (InitData.InitArg arg in eventInit.Args)
+                    {
+                        foreach (Parameter p in evt.Parameters)
+                        {
+                            if (p.SourceStartByte == arg.Offset && p.ByteCount == arg.Width)
+                            {
+                                altParamNames[p] = arg.Name;
+                            }
+                        }
+                    }
+                    if (altParamNames.Count == evt.Parameters.Count)
+                    {
+                        return altParamNames;
+                    }
+                    // Otherwise, somehow parameter didn't correspond to any analyzed ones
+                }
+                // Otherwise, invalid arg usage (shouldn't happen with vanilla scripts)
+            }
+            return ParamNames(evt);
         }
 
         /// <summary>
@@ -580,53 +678,144 @@ namespace DarkScript3
         /// <summary>
         /// Creates an argument list for an instruction, with parameters and formatting as well.
         /// </summary>
-        public List<object> UnpackArgsWithParams<T>(
+        public ScriptAst.Instr UnpackArgsWithParams<T>(
             Instruction ins,
             int insIndex,
             EMEDF.InstrDoc doc,
             Dictionary<Parameter, T> paramNames,
             Func<EMEDF.ArgDoc, object, object> formatArgFunc,
-            bool allowArgMismatch = false)
+            bool allowArgMismatch = false,
+            InitData.Links links = null)
         {
             List<object> args;
+            int expectedParams = paramNames.Keys.Count(p => p.InstructionIndex == insIndex);
+            List<int> positions = null;
+            bool namedInit = false;
             if (IsVariableLength(doc))
             {
+                // TODO: Handling for uint event ids, actually use the docs
                 IEnumerable<ArgType> argStruct = Enumerable.Repeat(ArgType.Int32, ins.ArgData.Length / 4);
-                args = UnpackArgsSafe(ins, argStruct);
-                // Note: this offsetting of params is likely not the case for variable-length DS2 commands.
-                List<int> positions = GetArgBytePositions(argStruct, 6);
-                for (int argIndex = 0; argIndex < argStruct.Count(); argIndex++)
+                args = UnpackArgsSafe(ins.ArgData, argStruct);
+                // To use special init, it has to have no params and init data for the event id
+                List<object> initArgs = null;
+                int idIndex = doc.Arguments.FindIndex(a => a.Name == "Event ID");
+                long eventId = -1;
+                if (idIndex >= 0 && idIndex < args.Count)
                 {
-                    int bytePos = positions[argIndex];
-                    foreach (Parameter prm in paramNames.Keys)
+                    eventId = FixEventID((int)args[idIndex]);
+                    // Keep it int only if it's -1 (appears in vanilla scripts before ER)
+                    args[idIndex] = eventId == -1 ? -1 : (uint)eventId;
+                }
+                if (links != null && expectedParams == 0 && eventId >= 0)
+                {
+                    InitData.Lookup lookup = links.TryGetEvent(eventId, out InitData.EventInit eventInit);
+                    if (lookup == InitData.Lookup.Found)
                     {
-                        if (prm.InstructionIndex == insIndex && bytePos == prm.TargetStartByte)
+                        int argOffset = (idIndex + 1) * 4;
+                        if (eventInit.ArgLength == 0)
                         {
-                            args[argIndex + 2] = paramNames[prm];
+                            argStruct = new[] { ArgType.Int32 };
+                        }
+                        else
+                        {
+                            argStruct = eventInit.Args.Select(a => ArgTypeFromType(a.ArgDoc.Type));
+                        }
+                        byte[] initArgData = new byte[ins.ArgData.Length - argOffset];
+                        Array.Copy(ins.ArgData, argOffset, initArgData, 0, ins.ArgData.Length - argOffset);
+                        try
+                        {
+                            initArgs = UnpackArgsSafe(initArgData, argStruct);
+                        }
+                        catch (Exception)
+                        {
+                            // This should also be an error on repack, since it doesn't produce typed init
+                        }
+                        if (initArgs != null)
+                        {
+                            if (eventInit.ArgLength == 0)
+                            {
+                                if ((int)initArgs[0] == 0)
+                                {
+                                    initArgs.Clear();
+                                }
+                                else
+                                {
+                                    // Otherwise, it's an error. Require empty init as 0 to avoid bytes changing
+                                    initArgs = null;
+                                }
+                            }
+                            else if (initArgData.Length > eventInit.ArgLength)
+                            {
+                                // This is also an error, initArgData.Length - eventInit.ArgLength excess bytes.
+                                // Can it be returned to caller?
+                                initArgs = null;
+                            }
+                            else
+                            {
+                                for (int argIndex = 0; argIndex < initArgs.Count; argIndex++)
+                                {
+                                    EMEDF.ArgDoc argDoc = eventInit.Args[argIndex].ArgDoc;
+                                    initArgs[argIndex] = formatArgFunc(argDoc, initArgs[argIndex]);
+                                }
+                            }
+                        }
+                    }
+                }
+                if (initArgs != null)
+                {
+                    namedInit = true;
+                    // Args before event id
+                    initArgs.InsertRange(0, args.Take(idIndex + 1));
+                    args = initArgs;
+                }
+                else
+                {
+                    // This previously offset positions by 6 (???)
+                    positions = GetArgBytePositions(argStruct);
+                    if (expectedParams > 0)
+                    {
+                        for (int argIndex = 0; argIndex < argStruct.Count(); argIndex++)
+                        {
+                            int bytePos = positions[argIndex];
+                            foreach (Parameter prm in paramNames.Keys)
+                            {
+                                if (prm.InstructionIndex == insIndex && bytePos == prm.TargetStartByte)
+                                {
+                                    args[argIndex] = paramNames[prm];
+                                    expectedParams--;
+                                }
+                            }
                         }
                     }
                 }
             }
             else
             {
-                List<int> positions = FuncBytePositions[doc];
-                List<ArgType> argStruct = doc.Arguments.Select(arg => arg.Type == 8 ? ArgType.UInt32 : (ArgType)arg.Type).ToList();
+                positions = FuncBytePositions[doc];
+                List<ArgType> argStruct = doc.Arguments.Select(a => ArgTypeFromType(a.Type)).ToList();
                 try
                 {
-                    args = UnpackArgsSafe(ins, argStruct);
+                    args = UnpackArgsSafe(ins.ArgData, argStruct);
                 }
-                catch when (allowArgMismatch)
+                catch when (ManualFixAC6(ins, out List<object> manualArgs) || allowArgMismatch)
                 {
-                    args = new List<object>();
-                    // Try to preserve as many valid args as possible in compatibility mode
-                    while (argStruct.Count > 1)
+                    if (manualArgs != null)
                     {
-                        argStruct.RemoveAt(argStruct.Count - 1);
-                        try
+                        args = manualArgs;
+                    }
+                    else
+                    {
+                        args = new List<object>();
+                        // Try to preserve as many valid args as possible in compatibility mode
+                        while (args.Count == 0 && argStruct.Count > 1)
                         {
-                            args = UnpackArgsSafe(ins, argStruct);
+                            argStruct.RemoveAt(argStruct.Count - 1);
+                            try
+                            {
+                                args = UnpackArgsSafe(ins.ArgData, argStruct);
+                            }
+                            catch { }
                         }
-                        catch { }
                     }
                 }
                 int expectedLength = positions[argStruct.Count];
@@ -634,8 +823,7 @@ namespace DarkScript3
                 {
                     throw new ArgumentException($"{ins.ArgData.Length - expectedLength} excess bytes of arg data at position {expectedLength}");
                 }
-                int expectedParams = paramNames.Keys.Count(p => p.InstructionIndex == insIndex);
-                for (int argIndex = 0; argIndex < args.Count(); argIndex++)
+                for (int argIndex = 0; argIndex < args.Count; argIndex++)
                 {
                     EMEDF.ArgDoc argDoc = doc.Arguments[argIndex];
                     int bytePos = positions[argIndex];
@@ -652,23 +840,77 @@ namespace DarkScript3
                     if (!isParam)
                     {
                         args[argIndex] = formatArgFunc(argDoc, args[argIndex]);
+#if DEBUG
+                        // For testing emedf completeness
                         if (argDoc.EnumDoc != null && args[argIndex] is not string)
                         {
                             // throw new ArgumentException($"Invalid value for {argDoc.EnumName}: {args[argIndex]}");
                         }
+#endif
                     }
                 }
-                if (expectedParams != 0)
-                {
-                    throw new ArgumentException($"Invalid parameter positions: couldn't match"
-                        + $" params [{string.Join(", ", paramNames.Keys.Where(p => p.InstructionIndex == insIndex).Select(p => p.TargetStartByte))}]"
-                        + $" against positions [{string.Join(", ", positions)}]");
-                }
             }
-            return args;
+            if (positions != null && expectedParams != 0)
+            {
+                throw new ArgumentException($"Invalid parameter positions: couldn't match"
+                    + $" params [{string.Join(", ", paramNames.Keys.Where(p => p.InstructionIndex == insIndex).Select(p => p.TargetStartByte))}]"
+                    + $" against positions [{string.Join(", ", positions)}], {expectedParams} remaining");
+            }
+            string funcName = doc.DisplayName;
+            if (namedInit)
+            {
+                funcName = "$" + funcName;
+            }
+            ScriptAst.Instr instr = new()
+            {
+                Inner = ins,
+                Cmd = FormatInstructionID(ins.Bank, ins.ID),
+                Name = funcName,
+                Args = args,
+            };
+            if (ins.Layer is uint layer)
+            {
+                instr.Layers = new ScriptAst.Layers { Mask = layer };
+            }
+            return instr;
         }
 
-        public bool LooksLikeCommonFunc(int id)
+        public bool ManualFixAC6(Instruction ins, out List<object> args)
+        {
+            args = null;
+            if (!ManualFixInstructions.Contains((ins.Bank, ins.ID)))
+            {
+                return false;
+            }
+            try
+            {
+                if (ins.Bank == 2008 && ins.ID == 2 && ins.ArgData.Length == 24)
+                {
+                    // SetCameraVibration missing hdVibrationId probably, like Elden Ring
+                    args = UnpackArgsSafe(ins.ArgData, new[] { ArgType.Int32, ArgType.Int32, ArgType.UInt32, ArgType.Int32, ArgType.Single, ArgType.Single });
+                    args.Insert(1, 0);
+                    return true;
+                }
+                else if (ins.Bank == 2017 && ins.ID == 2 && ins.ArgData.Length == 4)
+                {
+                    // RegisterMiningShipAnimationForRetry probably swapped out entities previously
+                    args = UnpackArgsSafe(ins.ArgData, new[] { ArgType.UInt32 });
+                    args.Add(0);
+                    return true;
+                }
+                else if (ins.Bank == 2004 && ins.ID == 1010 && ins.ArgData.Length == 12)
+                {
+                    // AttachCharacterToCharacter missing dummypoly id, probably rider id as that's often unspecified
+                    args = UnpackArgsSafe(ins.ArgData, new[] { ArgType.UInt32, ArgType.UInt32, ArgType.Int32 });
+                    args.Insert(2, -1);
+                    return true;
+                }
+            }
+            catch { }
+            return false;
+        }
+
+        public bool LooksLikeCommonFunc(long id)
         {
             // Heuristics
             if (ResourceString.StartsWith("ds3") || ResourceString.StartsWith("sekiro"))
@@ -679,11 +921,21 @@ namespace DarkScript3
             {
                 return (id >= 90000000 && id < 100000000) || (id >= 9000000 && id < 10000000);
             }
+            else if (ResourceString.StartsWith("ac6"))
+            {
+                return id >= 5000 && id < 6000;
+            }
+            else if (ResourceString.StartsWith("bb"))
+            {
+                // From either m29 or common
+                return (id >= 12900000 && id < 12910000) || (id >= 7000 && id < 8000) || (id >= 9200 && id <= 9350 && id != 9215);
+            }
             return false;
         }
 
         // Overly specific method for extracting multiple arg values, only knowing the function name.
         // For IDE-like functionality in the editor.
+        // This is for MetaType.MultiNames specifically, so it doesn't need to support inits.
         // Returns null if all args could not be found. All args must be non-null.
         public List<int> GetArgsAsInts(List<string> args, string funcName, List<string> argFilter)
         {
@@ -691,7 +943,7 @@ namespace DarkScript3
             {
                 name = funcName;
             }
-            if (AllArgs.TryGetValue(name, out List<EMEDF.ArgDoc> argDocs) && argDocs.Count > 0)
+            if (CallArgs.TryGetValue(name, out List<EMEDF.ArgDoc> argDocs) && argDocs.Count > 0)
             {
                 List<int> res = new List<int>();
                 foreach (string argName in argFilter)
@@ -723,26 +975,58 @@ namespace DarkScript3
             return null;
         }
 
-        public EMEDF.ArgDoc GetHeuristicArgDoc(string funcName, int funcArg)
+        // Wrapper for CallArgs which processes typed inits
+        public bool LookupArgDocs(InitData.DocID docId, InitData.Links links, out List<EMEDF.ArgDoc> args)
         {
-            if (funcName != null && funcArg >= 0)
+            return LookupArgDocs(docId, links, out args, out _);
+        }
+
+        public bool LookupArgDocs(InitData.DocID docId, InitData.Links links, out List<EMEDF.ArgDoc> args, out InitData.EventInit init)
+        {
+            init = null;
+            if (docId.Func == null)
             {
-                if (!AllAliases.TryGetValue(funcName, out string name))
+                args = null;
+                return false;
+            }
+            string name = AllAliases.TryGetValue(docId.Func, out string realName) ? realName : docId.Func;
+            if (CallArgs.TryGetValue(name, out args))
+            {
+                if (links != null
+                    && TypedInitIndex.TryGetValue(name, out int idIndex)
+                    && links.TryGetEvent(docId.Event, out InitData.EventInit eventInit) == InitData.Lookup.Found)
                 {
-                    name = funcName;
+                    args = args.Take(idIndex + 1).ToList();
+                    args.AddRange(eventInit.Args.Select(a => a.ArgDoc));
+                    init = eventInit;
                 }
-                if (AllArgs.TryGetValue(name, out List<EMEDF.ArgDoc> args) && args.Count > 0)
+                return true;
+            }
+            else if ((name == "Event" || name == "$Event")
+                && links != null
+                && links.TryGetEvent(docId.Event, out InitData.EventInit eventInit) == InitData.Lookup.Found)
+            {
+                args = eventInit.Args.Select(a => a.ArgDoc).ToList();
+                init = eventInit;
+                return true;
+            }
+            return false;
+        }
+
+        // Called after ParseFuncAtRange, for autocomplete/tooltips
+        public EMEDF.ArgDoc GetHeuristicArgDoc(InitData.DocID docId, int funcArg, InitData.Links links)
+        {
+            if (funcArg >= 0 && LookupArgDocs(docId, links, out List<EMEDF.ArgDoc> args) && args.Count > 0)
+            {
+                if (funcArg < args.Count)
                 {
-                    if (funcArg < args.Count)
-                    {
-                        return args[funcArg];
-                    }
-                    else if (args.Last().Vararg)
-                    {
-                        // This doesn't do anything at present - generic entity/flag etc autocomplete in future,
-                        // but initializations should actually have types at some point.
-                        return args.Last();
-                    }
+                    return args[funcArg];
+                }
+                else if (args.Last().Vararg)
+                {
+                    // This doesn't do anything at present - generic entity/flag etc autocomplete in future,
+                    // but initializations should actually have types at some point.
+                    return args.Last();
                 }
             }
             return null;
@@ -750,10 +1034,10 @@ namespace DarkScript3
 
         // TODO: Make this an extension method?
         // Altered version of Instruction.UnpackArgs (where else should this be used?)
-        private static List<object> UnpackArgsSafe(Instruction ins, IEnumerable<ArgType> argStruct, bool bigEndian = false)
+        internal static List<object> UnpackArgsSafe(byte[] argData, IEnumerable<ArgType> argStruct, bool bigEndian = false)
         {
             var result = new List<object>();
-            using (var ms = new MemoryStream(ins.ArgData))
+            using (var ms = new MemoryStream(argData))
             {
                 var br = new BinaryReaderEx(bigEndian, ms);
                 foreach (ArgType arg in argStruct)
@@ -837,15 +1121,22 @@ namespace DarkScript3
             return true;
         }
 
-        private static readonly List<string> Acronyms = new List<string>()
+        private static readonly HashSet<string> Acronyms = new()
         {
             // Do these need to be configured by game?
-            "AI","HP","SE","SP","SFX","FFX","NPC","BGM","PS5"
+            "AI", "HP", "SE", "SP", "SFX", "FFX", "NPC", "BGM", "PS5",
+            // New in AC6
+            "FE", "ESD",
         };
 
         #region Misc
 
-        private static string TitleCaseName(string s, bool camelCase = false)
+        public static string ArgCaseName(string s)
+        {
+            return TitleCaseName(s.Replace("Class", "Class Name").Replace("/", " "), true);
+        }
+
+        public static string TitleCaseName(string s, bool camelCase = false)
         {
             if (string.IsNullOrEmpty(s)) return s;
 
@@ -863,6 +1154,7 @@ namespace DarkScript3
                 else if (words[i] == "SpEffect")
                 {
                     // Leave as-is
+                    // This could also apply to AISound and ObjAct, but replacements are used for that for now
                 }
                 else
                 {

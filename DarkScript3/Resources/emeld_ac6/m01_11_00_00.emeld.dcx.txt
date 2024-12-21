@@ -1,0 +1,38 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2200 ミッション中初期化処理 -- Initialization process during mission
+2210 ミッション中_PC死亡時の処理 -- Processing when a PC dies during a mission
+2220 ミッション中_マーカー表示 -- During the mission_marker display
+2300 ミッション中_先代撃破判定 -- During the mission_predecessor defeat judgment
+2310 ミッション中_判定イベント_冒頭会話待機 -- During the mission_Judgment event_Waiting for opening conversation
+2311 ミッション中_判定イベント_PCのAP一定以下 -- During a mission_judgment event_PC's AP is below a certain level
+2312 ミッション中_判定イベント_スタッガー復帰 -- During the mission_judgment event_stagger return
+2313 ミッション中_判定イベント_ボスのAP一定以下 -- During the mission_Judgment event_Boss AP is below a certain level
+2314 ミッション中_判定イベント_ボスのAP75パーセント以下 -- During the mission_Judgment event_Boss AP 75% or less
+2315 ミッション中_判定イベント_ボスのAP25パーセント以下 -- During the mission_Judgment event_Boss AP 25% or less
+2800 判定用フラグ_ボス撃破 -- Judgment flag_Boss defeated
+2801 判定用フラグ_ボスAP0 -- Judgment flag_Boss AP0
+2802 判定用フラグ_死亡時ボイス -- Judgment flag_death voice
+2900 カットシーン再生判定 -- Cutscene playback judgment
+2910 BGM制御 -- BGM control
+3800 イベント通知用フラグ_会話棄却 -- Event notification flag_conversation rejection
+3900 会話フラグ_111000100_お仕事開始 -- Conversation flag_111000100_Start work
+3901 会話フラグ_111000500_AC単機でお片付け -- Conversation flag_111000500_Clean up with single AC
+3902 会話フラグ_111000900_強化人間ウォルタの猟犬 -- Conversation flag_111000900_Enhanced human Walta's hound
+3903 会話フラグ_111001300_ラインセンス持ち主か -- Conversation flag_111001300_license holder?
+3904 会話フラグ_111001700_自由こそ強さ -- Conversation flag_111001700_Freedom is strength
+3905 会話フラグ_111002100_私も感じているわ -- Conversation Flag_111002100_I feel it too
+3906 会話フラグ_111002500_このルビコン未だ縛られている -- Conversation Flag_111002500_This Rubicon is still tied up
+3907 会話フラグ_111002900_レイヴン反撃 -- Conversation Flag_111002900_Raven Counterattack
+3908 会話フラグ_111003300_所詮借り物の翼 -- Conversation flag_111003300_Borrowed wings after all
+3909 会話フラグ_111000120_状況を確認しろ621 -- Conversation flag_111000120_Check the status 621
+3910 会話フラグ_111000140_マーカー地点に向かってみてください -- Conversation Flag_111000140_Please head towards the marker point.
+3911 会話フラグ_111001400_企業の走狗かハンドラーの猟犬か -- Conversation Flag_111001400_Corporate running dog or handler's hound?
+3912 会話フラグ_111001500_「レイヴン」とは意志の表象 -- Conversation Flag_111001500_“Raven” is a representation of will
+3913 会話フラグ_111001520_戦いに集中しろ621 -- Conversation Flag_111001520_Concentrate on the battle 621
+3914 会話フラグ_111001600_ええレイヴン私も感じてるわ -- Conversation Flag_111001600_Yeah Raven, I feel it too.
+3915 会話フラグ_111001620_選び戦う意志 -- Conversation flag_111001620_Will to choose and fight
+3916 会話フラグ_111002000_敵機ACSダウン今ですレイヴン -- Conversation Flag_111002000_Enemy aircraft ACS is down now Raven
+3917 会話フラグ_111002905_無言 -- Conversation flag_111002905_silence
+3950 会話判定フラグ_スタッガーしたか -- Conversation judgment flag_staggered?
+1000000000 敵リスポン -- enemy respawn

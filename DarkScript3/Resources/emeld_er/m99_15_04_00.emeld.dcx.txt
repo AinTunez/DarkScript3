@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+1504001 【テスト】andとは何ぞや -- [Test] What is and?
+1504002 【テスト】orとは何ぞや -- [Test] What is or?
+1504003 【テスト】orとandの組み合わせ -- [Test] Combination of or and and
+1504004 【テスト】％とは何ぞや -- [Test] What is %?
+1504005 【テスト】オブジェアクト実行ID -- [Test] Object act execution ID
+1504007 【テスト】強制アニメ再生要求 -- [Test] Forced anime playback request
+9952200 【テスト】オブジェクト破壊要求 -- [Test] Object destruction request
+9952205 【テスト】オブジェ復帰要求 -- [Test] Object return request
+9952210 【テスト】オブジェ有効化 -- [Test] Object activation
+9952215 【テスト】オブジェアニメ再現 -- [Test] Object animation reproduction
+9952220 【テスト】オブジェダメージ作成 -- [Test] Object damage creation
+9952225 【テスト】オブジェイベント削除 -- [Test] Object event deletion
+9952230 【テスト】Objワープ要求 -- [Test] Obj warp request
+1000000000 敵リスポン -- enemy respawn

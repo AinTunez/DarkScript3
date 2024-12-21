@@ -1,0 +1,20 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1040532145 NPC疑似マルチ_マグナス_開始 -- NPC pseudo multi_Magnus_start
+1040532650 魔術師の塔_ギミック装置の起動 -- Magician's Tower_Activation of gimmick device
+1040532660 魔術師の塔_ギミック装置の停止 -- Magician's Tower_Stopping the gimmick device
+1040532665 魔術師の塔_ギミック装置の消去 -- Magician's Tower_Erasure of gimmick device
+1040532670 魔術師の塔_消える岩_出現 -- Magician's Tower_Disappearing Rock_Appearance
+1040532680 魔術師の塔_消える岩_攻撃 -- Magician's Tower_Disappearing Rock_Attack
+1040532685 魔術師の塔_消える岩_消去 -- Magician's Tower_Disappearing Rock_Erase
+1040532690 魔術師の塔_装置を防衛するゴーレム -- Magician's Tower_Golem defending the device
+1040532700 NPC疑似マルチ_サイン調べ -- NPC pseudo multi_sign investigation
+1040532800 ボス撃破 -- Defeat the boss
+1040532810 ボス出現 -- Boss appears
+1040532849 ボス_デーモンの血の信徒_イベント起動 -- Boss_Demon Blood Disciple_Event activation

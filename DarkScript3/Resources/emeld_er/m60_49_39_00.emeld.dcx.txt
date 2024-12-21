@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+1000000000 敵リスポン -- enemy respawn
+1049390800 ボス撃破 -- Defeat the boss
+1049392200 距離で現消する -- disappear with distance
+1049392201 距離で現消する_ループ -- Disappearing with distance_loop
+1049392210 間欠泉_弾丸オーナー作成 -- Geyser_Bullet owner created
+1049392211 間欠泉_XX -- Geyser_XX
+1049392300 魔法封印設置_小_XX -- Magic seal installation_small_XX
+1049392301 魔法封印設置_大_XX -- Magic seal installation_large_XX
+1049392302 焚火を起動_大用_XX -- Start a bonfire_important_XX
+1049392303 焚火を起動_小用_XX -- Start a bonfire_Small_XX
+1049392350 スカラベ_メタル個体ミニゲーム_イベント -- Scarab_Metal Individual Mini Game_Event
+1049392580 ハシゴ登録：町_XX -- Ladder registration: Town_XX
+1049392810 ボス出現 -- Boss appears
+1049392849 ボス_イベント起動 -- Boss_event activation

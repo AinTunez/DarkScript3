@@ -1,0 +1,8 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+150 コンストラクタ_LOD1 -- constructor_LOD1
+200 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+1000000000 敵リスポン -- enemy respawn
+1034410519 エレベータ初期フラグ -- Elevator initial flag
+1034412510 エレベータイベント起動 -- Elevator event activation

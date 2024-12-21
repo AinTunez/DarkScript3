@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Esprima" Version="2.0.0" />
+    <PackageReference Include="Esprima" Version="3.0.5" />
     <PackageReference Include="FCTB" Version="2.16.24" />
     <PackageReference Include="Microsoft.ClearScript" Version="7.3.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
@@ -26,7 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\SoapstoneLib\SoapstoneLib\SoapstoneLib.csproj" />
-    <ProjectReference Include="..\..\SoulsFormats\SoulsFormats\SoulsFormats.csproj" />
+    <ProjectReference Include="..\..\SoulsFormatsNEXT\SoulsFormats\SoulsFormats.csproj" />
   </ItemGroup>
 
   <ItemGroup>

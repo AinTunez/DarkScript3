@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+200 コンストラクタ_LOD2 -- constructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1033400519 エレベーター初期フラグ -- Elevator initial flag
+1033402510 エレベータイベント起動 -- Elevator event activation
+1033402610 魔術師の塔イベント扉 -- Magician's Tower Event Door
+1033402611 魔術師塔イベント_霧壁エラーメッセージ -- Magician Tower Event_Fog Wall Error Message
+1033402615 魔術師の塔_扉解除ダイアログ -- Magician's Tower_Door release dialog
+1034432612 魔術師塔イベント_ヒントテキスト表示 -- Magician Tower Event_Hint text display
+1034432613 魔術師塔イベント_カメ出現 -- Magician Tower Event_Turtle Appearance
+1034432614 魔術師塔イベント_カメ死亡演出 -- Magician Tower Event_Turtle Death Production

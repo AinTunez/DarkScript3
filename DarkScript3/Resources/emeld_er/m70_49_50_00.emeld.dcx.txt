@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+4950001 ぶら下がりポイント対応1 -- Hanging point compatible 1
+4950100 森前のBGM削除判定 -- Morimae BGM deletion judgment
+4950200 森入口の亜人_読み込み制御 -- Demi-human at the entrance to the forest_loading control
+1000000000 敵リスポン -- enemy respawn

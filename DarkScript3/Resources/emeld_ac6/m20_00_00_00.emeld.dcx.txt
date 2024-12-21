@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+20002000 ECM有カメラ前エフェクト発生 -- Effect in front of camera with ECM
+20002010 ECM無カメラ前エフェクト発生 -- ECM no-camera effect occurs
+20002900 高度計初期化イベント -- Altimeter initialization event
+1000000000 敵リスポン -- enemy respawn

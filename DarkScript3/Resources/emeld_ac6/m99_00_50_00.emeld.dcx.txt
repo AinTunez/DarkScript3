@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+9000 超巨大ラグドールテスト_アセットアタッチ -- Super huge ragdoll test_asset attach
+9001 超巨大ラグドールテスト_アセットアタッチ横 -- Super huge ragdoll test_Asset attach side
+9900 敵AC起動 -- Enemy AC activation
+9910 イベントフラグ切替 -- Event flag switching
+9920 死んだらロジック終了 -- Logic ends when you die
+9930 ガンタンク　合体テスト -- Guntank combination test
+9931 ガンタンク　合体テスト　サブ -- Guntank Combination Test Sub
+9932 レーザーサイトテスト -- laser sight test
+9933 強敵試作テスト -- Strong enemy prototype test
+9934 ダミポリ向き -- Suitable for Damipoly
+1000000000 敵リスポン -- enemy respawn

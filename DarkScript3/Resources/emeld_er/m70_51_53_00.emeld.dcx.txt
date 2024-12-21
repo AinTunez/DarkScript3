@@ -1,0 +1,7 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+515301 オオカミ_走行巡回用特殊効果付与 -- Wolf_Special effects for traveling patrol
+515302 オオカミ巡回_起動 -- Wolf Patrol_Start
+515310 騎馬傭兵_起動 -- Cavalry Mercenary_Start
+515320 篝火NPC位置合わせ -- Bonfire NPC position alignment
+1000000000 敵リスポン -- enemy respawn

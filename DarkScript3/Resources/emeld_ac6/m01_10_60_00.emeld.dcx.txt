@@ -1,0 +1,33 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 初期設定 -- Initial settings
+2100 ドアオープン -- door open
+2110 キルゾーン接敵 -- kill zone engagement
+2111 Phase2接敵 -- Phase 2 enemy contact
+2112 近い方のタゲ関連 -- Closer tag related
+2120 初期ガイド表示 -- Initial guide display
+2121 初期ガイド消去 -- Initial guide clear
+2122 視界下げを消す -- Eliminate visibility reduction
+2700 キルゾーン撃破判定 -- Kill zone defeat judgment
+2710 ガイドON -- Guide ON
+2711 ガイドON_2 -- Guide ON_2
+2712 ガイドON_3 -- Guide ON_3
+2720 Phase2撃破 -- Defeat Phase 2
+2730 建機クモ撃破 -- Defeat construction machine spider
+2740 初回行動用効果を剥がす -- Remove first action effect
+2750 作戦領域を変更 -- Change area of ​​operations
+3000 会話条件用_ドア -- Conversation condition_door
+3010 会話条件用_ドアでた -- For conversation conditions_I answered the door
+3020 会話条件用_Phase2 -- For conversation conditions_Phase2
+3030 会話条件用_撃破数判定 -- For conversation conditions_defeat count determination
+3040 会話条件用_ラスト1部隊 -- For conversation conditions_last 1 unit
+3041 会話条件用_ラスト1部隊_判定A -- For conversation conditions_Last 1 unit_Judgment A
+3042 会話条件用_ラスト1部隊_判定B -- For conversation conditions_Last 1 unit_Judgment B
+3043 会話条件用_ラスト1部隊_判定C -- For conversation conditions_Last 1 unit_Judgment C
+3044 会話条件用_ラスト1部隊_判定D -- For conversation conditions_Last 1 unit_Judgment D
+3100 ミッションクリア時の無敵 -- Invincibility when clearing a mission
+3700 ミッション開始会話フラグ -- Mission start conversation flag
+3701 ミッション途中会話フラグ_ドア開け -- Mid-mission conversation flag_door open
+3702 ミッション途中会話フラグ_キルゾーン撃破 -- Mid-mission conversation flag_Defeat the kill zone
+3710 ミッション終了会話フラグ -- Mission end conversation flag
+1000000000 敵リスポン -- enemy respawn

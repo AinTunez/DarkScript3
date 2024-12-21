@@ -1,0 +1,19 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1044523700 NPC331ならず者_再会カニ売り_アセット埋まり対策 -- NPC331 Rogue_Reunion crab seller_Asset filling measures
+1044523701 NPC331ならず者_NPC初期化イベント_再会カニ売り -- NPC331 Rogue_NPC initialization event_Reunion crab seller
+1044523702 NPC331ならず者_NPC初期化イベント_糞喰いに殺された -- NPC331 Rogue_NPC initialization event_Killed by a shit eater
+1044523703 NPC331ならず者_保険死体初期化イベント -- NPC331 Rogue_Insurance corpse initialization event
+1044523704 NPC331ならず者_糞喰いに殺された_会話で死亡実行 -- NPC331 Rogue_Killed by a shit eater_Death executed through conversation
+1044523705 NPC331ならず者_高山のショップラインナップ解放 -- NPC331 Rogue_Takayama shop lineup released
+1044523706 NPC331ならず者_糞喰いに殺された_アイテム光出現フラグ立て -- NPC331 Rogue_Killed by a shit eater_Item light appearance flag set
+1044523707 NPC331ならず者_カニ茹でアセット出し消し -- NPC331 Rogue_Crab boiled assets removed
+1044523710 NPC323糞喰い_侵入ショートワープ -- NPC323 Shit Eater_Invasion Short Warp
+1044523711 NPC323糞喰い_死体アセット表示 -- NPC323 Shit-eater_ Corpse asset display
+1044523712 NPC323糞喰い_侵入条件 -- NPC323 Shit-eater_Entry conditions

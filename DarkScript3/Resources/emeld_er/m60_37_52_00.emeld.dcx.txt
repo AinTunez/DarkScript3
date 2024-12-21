@@ -1,0 +1,10 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1035542210 ルーンの奴隷敗残兵起動_領域判定 -- Rune Slave Remnant Activation_Area Judgment
+1037522220 ルーンの奴隷死体化 -- Rune Slave Corpse
+1037522300 エネミー睡眠防止 -- Enemy sleep prevention
+1037522350 亜人_初手仲間呼び -- Ajin_First-time friend call
+1037522370 亜人_初手指さし -- Ajin_First hand pointing
+1037522900 篝火処理 -- Bonfire processing

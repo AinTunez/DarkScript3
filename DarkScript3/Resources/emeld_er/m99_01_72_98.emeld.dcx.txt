@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+99999950 マレニア幻影テスト_初期設定 -- Malenia Phantom Test_Initial Settings
+99999951 マレニア幻影テスト_幻影攻撃_XX -- Malenia Phantom Test_Phantom Attack_XX
+99999960 マレニア幻影テスト_幻影攻撃2_XX -- Marenia Phantom Test_Phantom Attack 2_XX
+99999970 マレニア幻影テスト_幻影ワープ制御 -- Malenia Phantom Test_Phantom Warp Control
+99999971 マレニア幻影テスト_幻影ワープ実行 -- Malenia Phantom Test_Phantom Warp Execution
+99999975 マレニア幻影テスト_本体が行動する -- Marenia illusion test_The main body acts
+99999976 マレニア幻影テスト_幻影がワープする -- Malenia Phantom Test_Phantom warps
+99999977 マレニア幻影テスト_幻影を消す -- Marenia Illusion Test_Erase the illusion
+99999990 調停者マレニアカメラ切り替え_XX -- Mediator Marenia camera switching_XX
+99999999 マレニアテスト -- Marenia test
+1000000000 敵リスポン -- enemy respawn

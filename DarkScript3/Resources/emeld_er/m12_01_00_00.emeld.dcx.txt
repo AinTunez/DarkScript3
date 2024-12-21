@@ -1,0 +1,45 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+12010509 エレベータ起動 -- elevator start
+12010519 エレベータ初期フラグ -- Elevator initial flag
+12010700 NPC106ラニ_篝火会話①再生許可コントロール -- NPC106 Rani_Bonfire conversation ① Playback permission control
+12010701 NPC106ラニ_篝火会話②再生許可コントロール -- NPC106 Rani_Bonfire conversation ② Playback permission control
+12010702 NPC106ラニ_篝火会話③再生許可コントロール -- NPC106 Rani_Bonfire conversation ③ Playback permission control
+12010705 NPC106ラニ_影狼頭出現コントロール -- NPC106 Rani_Shadow Wolf Head Appearance Control
+12010706 NPC106ラニ_影狼頭死亡監視 -- NPC106 Rani_Shadow Head Death Monitor
+12010707 NPC106ラニ_影狼頭戦開始会話キック -- NPC106 Rani_Shadow Head Battle Start Conversation Kick
+12010708 NPC106ラニ_影狼頭戦終了会話キック -- NPC106 Rani_Shadow Head Battle End Conversation Kick
+12012050 m12_01_00_00用初期フラグ設定 -- Initial flag setting for m12_01_00_00
+12012220 天井の蟻が落ちてくるイベント判定_XX -- Event determination where ants fall from the ceiling_XX
+12012231 天井の蟻が落ちてくるイベント_XX -- Event where ants fall from the ceiling_XX
+12012239 マザースライム階段上判定 -- Mother slime on stairs judgment
+12012240 マザースライムスライム生み -- mother slime slime creator
+12012249 マザースライムダメージ判別用 -- For determining mother slime damage
+12012256 マザースライム_閉じ込め部屋 -- Mother Slime_Confinement Room
+12012257 マザースライム_閉じ込め部屋開放 -- Mother slime_confinement room open
+12012288 マリカスライム_NPC変身_XX -- Marika slime_NPC transformation_XX
+12012301 ルーン喰らい聴覚制限 -- Rune Eater Hearing Restriction
+12012421 ダークウォーカー出現 -- Dark Walker Appears
+12012506 滝壺ダイブ -- Waterfall diving
+12012507 滝壺ダイブ_アステール撃破済み -- Waterfall diving_Aster defeated
+12012530 梯子登録 -- ladder registration
+12012569 ガーゴイル像_封印扉_XX -- Gargoyle statue_Sealed door_XX
+12012580 振動_0 -- Vibration_0
+12012581 振動_1 -- Vibration_1
+12012582 振動_2 -- Vibration_2
+12012583 振動_3 -- Vibration_3
+12012584 振動_4 -- Vibration_4
+12012590 大毒沼遺跡出現イベント0 -- Great poison swamp ruins appearance event 0
+12012591 大毒沼遺跡出現イベント1 -- Great poison swamp ruins appearance event 1
+12012593 大毒沼遺跡出現イベント2 -- Great poison swamp ruins appearance event 2
+12012594 大毒沼遺跡出現イベント3 -- Great poison swamp ruins appearance event 3
+12012595 大毒沼遺跡出現イベント4 -- Great poison swamp ruins appearance event 4
+12012800 ボス撃破 -- Defeat the boss
+12012810 ボス出現 -- Boss appears
+12012811 荒廃激昂 -- Desolation rage
+12012812 荒廃更新頻度固定 -- Desolation update frequency fixed
+12012820 荒廃飛翔時判定 -- Judgment when flying in ruins
+12012830 荒廃地上時判定 -- Ruined ground detection
+12012849 ボス_イベント起動 -- Boss_event activation
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,16 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+30010790 ボス部屋報酬宝箱の開放制限 -- Restrictions on opening boss room reward treasure chests
+30012330 腐った亡者_無限湧き_XX -- Rotten Dead_Infinite Spring_XX
+30012500 [小探索_墓3]トラップエレベータ -- [Small exploration_grave 3] Trap elevator
+30012505 [小探索_墓3]針ダメージ -- [Small exploration_grave 3] Needle damage
+30012506 [小探索_墓3]針ダメージ_特殊効果付与 -- [Small exploration_grave 3] Needle damage_special effects added
+30012520 針EVの非揮発フラグ立ちっぱなしになってたら折るイベント -- Event to fold if the needle EV non-volatile flag remains standing
+30012580 梯子登録 -- ladder registration
+30012800 m30_01ボス撃破 -- Defeat m30_01 boss
+30012810 m30_01ボス出現 -- m30_01 boss appears
+30012811 ボス激昂 -- boss rage
+30012849 m30_01_イベント起動 -- m30_01_Event activation
+30012910 [小探索_墓3]バディユニーク_思考ロジック有効化_領域／距離判定 -- [Small Exploration_Grave 3] Buddy Unique_Thought Logic Activation_Area/Distance Judgment
+1000000000 敵リスポン -- enemy respawn

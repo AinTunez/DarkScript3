@@ -1,0 +1,26 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 初期準備 -- Initial preparation
+2001 ADF起動 -- ADF launch
+2002 ADFが作戦ライン内に入る -- ADF enters the line of operations
+2100 ADF接敵 -- ADF engagement
+2101 ボスゲージON -- Boss gauge ON
+2110 ADFのHP半分 -- ADF's HP half
+2200 ADF撃破 -- Defeat ADF
+2300 会話フラグ1 -- conversation flag 1
+2301 会話フラグ2 -- conversation flag 2
+2302 会話フラグ3 -- conversation flag 3
+2303 会話フラグ4 -- conversation flag 4
+2304 会話フラグ5 -- conversation flag 5
+2310 会話条件_ADF弱点前 -- Conversation conditions_ADF weakness front
+2311 会話条件_ADF弱点 -- Conversation conditions_ADF weaknesses
+2312 会話条件_時間経過1 -- Conversation conditions_Time lapse 1
+2313 会話条件_時間経過2 -- Conversation conditions_Time lapse 2
+2314 会話条件_ADF劣勢 -- Conversation conditions_ADF inferiority
+2315 会話条件_ADFさらに劣勢 -- Conversation conditions_ADF is even worse
+2316 会話条件_発見 -- Conversation conditions_discovery
+2320 会話条件_時間経過1リセット -- Conversation conditions_Time elapsed 1 reset
+2321 会話条件_時間経過2リセット -- Conversation conditions_Time lapse 2 reset
+2400 デバッグ再生フラグ -- debug play flag
+2401 デバッグ再生 -- debug playback
+1000000000 敵リスポン -- enemy respawn

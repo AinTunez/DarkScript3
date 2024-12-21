@@ -1,0 +1,20 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+99002100 老いた宿将イベント_喪失の騎士①_召喚される -- Old Commander Event_Knight of Lost①_Summoned
+99002110 老いた宿将イベント_喪失の騎士②_召喚される -- Old Commander Event_Knight of Lost②_Summoned
+99002120 老いた宿将イベント_PC入場時に召喚を行う -- Old Innkeeper Event_Summon when entering the PC
+99002130 老いた宿将イベント_お供がやられたら宿将にHUさせる -- Old innkeeper event_If your companion is killed, let the innkeeper HU you
+99002140 老いた宿将イベント_宿将がHUしたら騎士①を帰還させる -- Old innkeeper event_If the innkeeper HUs, bring back the knight ①
+99002150 老いた宿将イベント_宿将がHUしたら騎士②を帰還させる -- Old innkeeper event_If the innkeeper HUs, bring back the knight ②
+99002200 白蛇つむり_ボスイベント_お供がやられたら -- White Snake Tsumuri_Boss Event_When the attendant is killed
+99002210 白蛇つむり_ボスイベント_召喚 -- White Snake Tsumuri_Boss Event_Summon
+99002220 白蛇つむり_ボスイベント_初期状態 -- White snake Tsumuri_Boss event_Initial state
+99002230 白蛇つむり_ボスイベント_白つむりが死んだら騎士を殺す -- White Snake Tsumuri_Boss Event_When White Snake Tsumuri dies, kill the knight
+99002300 世界樹のデーモン_分身体生成イベント_召喚① -- Demon of the World Tree_Duplicate Creation Event_Summoning ①
+99002310 世界樹のデーモン_分身体生成イベント_召喚② -- Demon of the World Tree_Duplicate Creation Event_Summoning ②
+99002320 世界樹のデーモン_分身体生成イベント_道連れ -- Etrian Odyssey Demon_Clone Creation Event_Companion
+99002330 世界樹のデーモン_分身体生成イベント_個別のHPゲージを表示させない -- Etrian Odyssey Demon_Duplicate Creation Event_Do not display individual HP gauges
+99002340 世界樹のデーモン_分身体生成イベント_ボスゲージ表示 -- Etrian Odyssey Demon_Duplicate Creation Event_Boss Gauge Display
+99002350 世界樹のデーモン_分身体生成イベント_強制死亡 -- Demon of the World Tree_Clone creation event_Forced death
+1000000000 敵リスポン -- enemy respawn

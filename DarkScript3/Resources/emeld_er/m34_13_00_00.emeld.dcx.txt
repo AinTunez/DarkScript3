@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+34130519 m34_13_00_00用初期フラグ設定 -- Initial flag setting for m34_13_00_00
+34132510 エレベータイベント起動 -- Elevator event activation
+34132515 エレベータイベント起動下層１ -- Elevator event activation lower layer 1
+34132520 エレベータイベント起動下層２ -- Elevator event activation lower layer 2
+34132580 梯子登録 -- ladder registration
+34132590 床落下 -- floor fall
+34132800 ボス撃破 -- Defeat the boss
+34132810 ボス出現 -- Boss appears
+34132849 神肌_イベント起動 -- Divine skin_event activation
+1000000000 敵リスポン -- enemy respawn

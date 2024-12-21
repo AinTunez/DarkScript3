@@ -1,0 +1,5 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+10202810 オンライン用イベント_作戦ライン無効化 -- Online event_Operation line disabled
+10202900 高度計初期化イベント -- Altimeter initialization event
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,4 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+515101 箱持ち誘導 -- Box holding guidance
+1000000000 敵リスポン -- enemy respawn

@@ -1,0 +1,119 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 準備イベント -- Preparation event
+2001 準備イベント2 -- Preparation event 2
+2002 ミッション失敗時処理 -- Processing when mission fails
+2010 スタート地点判定 -- Start point determination
+2020 作戦ライン切り替え_シチュ1 -- Operation line switching_Situation 1
+2021 作戦ライン切り替え_シチュ2 -- Operation line switching_Situation 2
+2022 作戦ライン切り替え_シチュ3切り替え中 -- Operation line switching_Situation 3 switching in progress
+2023 作戦ライン切り替え_シチュ3 -- Operation line switching_Situation 3
+2050 チェックポイント用イベント -- Checkpoint event
+2055 チェックポイントキック -- checkpoint kick
+2060 チェックポイント判定フラグ -- Checkpoint judgment flag
+2100 シチュ1_輸送ヘリ逃走 -- Situation 1_Transport helicopter escape
+2120 シチュ1_輸送ヘリ全滅 -- Situation 1_ Transport helicopter wiped out
+2123 シチュ1_輸送ヘリ一機死亡 -- Situation 1_One transport helicopter dies
+2124 シチュ1_輸送ヘリ三機死亡 -- Situation 1_Three transport helicopters died
+2140 シチュ1_輸送ヘリ第二段起動 -- Situation 1_Transport helicopter second stage activation
+2150 シチュ1_輸送ヘリ第二段起動条件 -- Situation 1_Transport helicopter second stage activation conditions
+2155 会話用_シチュ1_輸送ヘリ第二段_起動した -- Conversation_Situation 1_Transport helicopter second stage_Activated
+2160 シチュ1_敵起動 -- Situation 1_Enemy activation
+2170 シチュ1_敵起動_高いエリア -- Situation 1_Enemy activation_High area
+2175 シチュ1_敵起動_外壁 -- Situation 1_Enemy activation_Outer wall
+2180 シチュ1_敵起動_ダメージ監視 -- Situation 1_Enemy activation_Damage monitoring
+2210 シチュ2_準備イベント -- Situation 2_preparation event
+2211 シチュ2_TGT付与 -- Situation 2_TGT granted
+2212 シチュ2_無敵解除 -- Situation 2_Invincibility removed
+2220 シチュ2_輸送ヘリ逃走 -- Situation 2_Transport helicopter escape
+2230 シチュ2_メランジ輸送ヘリ全滅 -- Situation 2_Melange transport helicopter wiped out
+2240 シチュ2_FEをTGTに差し替え -- Replace situation 2_FE with TGT
+2250 シチュ2_敵起動 -- Situation 2_Enemy activation
+2255 シチュ2_敵起動第二陣 -- Situation 2_ Enemy activation second group
+2265 シチュ2_TGTが残り一体 -- Situation 2_TGT is the only one left
+2270 シチュ2_敵生存かつ輸送ヘリ撃破 -- Situation 2_Enemy survival and defeat the transport helicopter
+2271 シチュ2_敵生存かつ輸送ヘリ撃破_カウント -- Situation 2_Enemy survival and transport helicopter defeated_Count
+2300 シチュ3_シチュエーション移行判定 -- Situation 3_Situation transition judgment
+2301 シチュ3_ジャンプ台マーカーON -- Situation 3_Jumping platform marker ON
+2305 シチュ3_誘導P有効化 -- Situation 3_Induction P enabled
+2310 シチュ3_準備イベント -- situation 3_preparation event
+2311 シチュ3_梁の上の敵気づき -- Situation 3_ Enemy notices on the beam
+2320 シチュ3_輸送ヘリ逃走01 -- Situation 3_Transport helicopter escape 01
+2325 シチュ3_輸送ヘリ逃走02 -- Situation 3_Transport helicopter escape 02
+2327 シチュ3_輸送ヘリ逃走021 -- Situation 3_Transport helicopter escape 021
+2330 シチュ3_輸送ヘリ逃走031 -- Situation 3_Transport helicopter escape 031
+2331 シチュ3_輸送ヘリ逃走0311 -- Situation 3_Transport helicopter escape 0311
+2332 シチュ3_輸送ヘリ逃走04 -- Situation 3_Transport helicopter escape 04
+2333 シチュ3_輸送ヘリ逃走041 -- Situation 3_Transport helicopter escape 041
+2335 シチュ3_輸送ヘリ逃走05 -- Situation 3_Transport helicopter escape 05
+2336 シチュ3_輸送ヘリ逃走051 -- Situation 3_Transport helicopter escape 051
+2337 シチュ3_輸送ヘリ逃走052 -- Situation 3_Transport helicopter escape 052
+2338 シチュ3_輸送ヘリ逃走06 -- Situation 3_Transport helicopter escape 06
+2339 シチュ3_輸送ヘリ逃走061 -- Situation 3_Transport helicopter escape 061
+2340 シチュ3_メランジ輸送ヘリ全滅 -- Situation 3_Melange transport helicopter wiped out
+2345 シチュ3_輸送ヘリに逃げられる -- Situation 3_ Escaped by transport helicopter
+2350 シチュ3_最終wave輸送ヘリ死んだ_会話用 -- Situation 3_Final wave transport helicopter died_For conversation
+2400 敵制御_シチュ3 -- Enemy control situation 3
+2450 敵制御_シチュ3_輸送組 -- Enemy control_Situation 3_Transportation group
+2495 輸送ヘリ_ケイトが殺した数カウント -- Transport helicopter_Kate's number of kills
+2500 輸送ヘリ_一定数以上逃げた -- Transport helicopter_more than a certain number escaped
+2501 輸送ヘリ_逃げた数カウント -- Transport helicopter_counting the number of escapes
+2506 輸送ヘリ_カウント特殊効果解除 -- Transport helicopter_count special effect release
+2510 輸送ヘリ_全部死んだか逃げた -- Transport helicopter_all dead or escaped
+2511 輸送ヘリ_全部死んだか逃げた_シチュ1 -- Transport helicopter_all dead or escaped_Situation 1
+2512 輸送ヘリ_全部死んだか逃げた_シチュ2 -- Transport helicopter_all dead or escaped_Situation 2
+2513 輸送ヘリ_全部死んだか逃げた_シチュ3 -- Transport helicopter_all dead or escaped_situation 3
+2520 会話用_輸送ヘリ逃走カウント中 -- For conversation_Transport helicopter escape count
+2521 会話用_輸送ヘリ逃走カウントしていない -- For conversation_transport helicopter escape not counted
+2522 会話用_いずれかのカウント特殊効果あり -- For conversation_with any count special effects
+2525 会話用_カウントイベントフラグリセット -- Conversation_Count event flag reset
+2530 会話用_シチュ3_進行会話で上書きした時の処理 -- Conversation_Situation 3_Processing when overwritten in progress conversation
+2535 会話用_シチュ3_進行会話用特殊効果があるか判定 -- Conversation_Situation 3_ Determine if there are special effects for progressing conversation
+2536 会話用_シチュ進行時の輸送ヘリ会話スタック防止 -- For conversation_Prevents transport helicopter conversation from getting stuck when progressing into a situation
+2550 撃破報酬_メランジタンク -- Defeat Reward_Melange Tank
+2560 特別報酬_逃がした数 -- Special reward_Number of escapes
+2600 輸送ヘリ_逃げたかチェッカー_シチュ1 -- Transport helicopter_Escaped checker_Situation 1
+2610 輸送ヘリ_逃げたかチェッカー_シチュ2 -- Transport helicopter_Escaped checker_Situation 2
+2620 輸送ヘリ_逃げたかチェッカー_シチュ3 -- Transport helicopter_Escaped checker_Situation 3
+2700 輸送ヘリ_逃げたか死んだかチェッカー_シチュ1 -- Transport helicopter_Escape or death checker_Situation 1
+2710 輸送ヘリ_逃げたか死んだかチェッカー_シチュ2 -- Transport helicopter_Escape or death checker_Situation 2
+2720 輸送ヘリ_逃げたか死んだかチェッカー_シチュ3 -- Transport helicopter_Escape or death checker_Situation 3
+2750 輸送ヘリ_爆破_シチュ1 -- Transport helicopter_explosion_situation 1
+2760 輸送ヘリ_爆破_シチュ2 -- Transport helicopter_explosion_situation 2
+2770 輸送ヘリ_爆破_シチュ3 -- Transport helicopter_explosion_situation 3
+2800 ミッション失敗フラグ -- mission failure flag
+2810 waveコントロール会話フラグ1 -- wave control conversation flag 1
+2811 waveコントロール会話フラグ2 -- wave control conversation flag 2
+2812 waveコントロール会話フラグ3 -- wave control conversation flag 3
+2820 シチュ1_通常会話フラグ1 -- Situation 1_Normal conversation flag 1
+2821 シチュ1_通常会話フラグ2 -- Situation 1_Normal conversation flag 2
+2822 シチュ1_通常会話フラグ3 -- Situation 1_Normal conversation flag 3
+2823 シチュ1_差し込み会話フラグ -- Situation 1_Merge conversation flag
+2824 シチュ1_通常会話フラグ1_5 -- Situation 1_Normal conversation flag 1_5
+2830 シチュ2_通常会話フラグ1 -- Situation 2_Normal conversation flag 1
+2831 シチュ2_通常会話フラグ2 -- Situation 2_Normal conversation flag 2
+2832 シチュ2_通常会話フラグ3 -- Situation 2_Normal conversation flag 3
+2840 TGT補足用フラグ -- TGT supplementary flag
+2850 シチュ3誘導ONフラグ -- Situ 3 lead ON flag
+2870 シチュ3のセリフ終了判定 -- Situation 3 dialogue end determination
+2890 ミッション完了会話 -- Mission completion conversation
+2891 逃がした数用フラグ_1 -- Flag for number of escaped_1
+2892 逃がした数用フラグ_2 -- Flag for the number of escapes_2
+2893 逃がした数用フラグ_3 -- Flag for the number of escapes_3
+2894 逃がした数用フラグ_4 -- Flag for the number of escapes_4
+2900 台詞途中まで読んだフラグ -- Flag for reading part way through the line
+2910 シチュ3_再読防止1 -- Situation 3_Reread prevention 1
+2911 シチュ3_再読防止2 -- Situation 3_Reread prevention 2
+2912 シチュ3_再読防止3 -- Situation 3_Reread prevention 3
+2913 シチュ3_再読防止4 -- Situation 3_Reread prevention 4
+2914 シチュ3_再読防止5 -- Situation 3_Reread prevention 5
+2915 シチュ3_再読防止6 -- Situation 3_Reread prevention 6
+2916 シチュ3_再読防止7 -- Situation 3_Reread prevention 7
+2917 シチュ3_再読防止8 -- Situation 3_Reread prevention 8
+2918 シチュ3_再読防止9 -- Situation 3_Rereading prevention 9
+2919 シチュ3_再読防止10 -- Situation 3_Reread prevention 10
+2920 シチュ3_再読防止11 -- Situation 3_Reread prevention 11
+2921 シチュ3_再読防止12 -- Situation 3_Reread prevention 12
+2922 シチュ3_再読防止13 -- Situation 3_Reread prevention 13
+2923 シチュ3_再読防止14 -- Situation 3_Reread prevention 14
+1000000000 敵リスポン -- enemy respawn

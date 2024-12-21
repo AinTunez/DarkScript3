@@ -1,0 +1,7 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+9900 テストその１ -- Test 1
+9910 エレベータ登り -- elevator climb
+9920 テストその2 -- Test part 2
+9930 テストその3 -- Test 3
+1000000000 敵リスポン -- enemy respawn

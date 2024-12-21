@@ -1,0 +1,25 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1052382699 貴腐騎士_カットシーン再生用ダミー化 -- Noble Knight_dummy for cutscene playback
+1252380700 NPC216狼頭の戦士_NPC初期化イベント_ラダーン祭り後 -- NPC216 Wolf-Headed Warrior_NPC Initialization Event_After Ladan Festival
+1252380705 NPC220壺マイヤー_ﾌｪｰｽﾞ4_NPC初期化イベント -- NPC220 Jarmeyer_Phase 4_NPC initialization event
+1252380710 NPC344トラゴス_白霊召喚許可フラグ立て -- NPC344 Tragos_ White Spirit Summon Permission Flag Set
+1252380720 NPC309盗賊の頭_白霊召喚許可フラグ立て -- NPC309 Thief Head_ White Spirit Summon Permission Flag Set
+1252382200 なんちゃってNPC召喚_起動_XX -- What the heck NPC summon_start_XX
+1252382280 なんちゃってNPC召喚_召喚_XX -- NPC summoning_summoning_XX
+1252382360 なんちゃってNPC召喚_サイン出す_XX -- What the heck is NPC summoning_signing_XX
+1252382440 なんちゃってNPC召喚_サインに近づいたら幻影出す_XX -- What the heck is NPC summoned_If you get close to the sign, an illusion will appear_XX
+1252382520 なんちゃってNPC召喚_死んだらサイン復活_XX -- What the hell is NPC summoned_Sign resurrection after death_XX
+1252382600 なんちゃってNPC召喚_帰還_XX -- What the heck is NPC summoning_Return_XX
+1252382680 ラダーン砂漠の幟_表示_XX -- Radan Desert Flag_Display_XX
+1252382695 全共闘NPCバックリード制御 -- Zenkyodo NPC backread control
+1252382696 ジェスチャー入手用イベントフラグ制御 -- Event flag control for gesture acquisition
+1252382800 ボス撃破 -- Defeat the boss
+1252382810 ボス出現 -- Boss appears
+1252382820 ボス激昂_メテオ制御 -- Boss rage_meteo control
+1252382850 ラダーン_イベント起動 -- Radhan_event activation
+1252382860 ラダーン祭り状態_時間設定 -- Radhan festival status_time setting

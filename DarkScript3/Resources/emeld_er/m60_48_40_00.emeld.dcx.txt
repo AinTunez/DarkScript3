@@ -1,0 +1,7 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1048402800 ボス撃破 -- Defeat the boss
+1048402810 ボス出現 -- Boss appears
+1048402849 ボス_イベント起動 -- Boss_event activation

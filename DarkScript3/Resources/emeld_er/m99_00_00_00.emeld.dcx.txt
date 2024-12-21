@@ -1,0 +1,23 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1995050 ★NPC死亡テスト_平野 -- ★NPC death test_Hirano
+1995060 ★初期化イベント_孤独な老婆 -- ★Initialization event_Lonely old woman
+1995061 ★自世界ならばフラグを立てる -- ★If it is your own world, set a flag
+1995062 ★他世界ならばフラグを立てる -- ★If it's in another world, set a flag
+1995063 ★フラグの立つタイミグテスト -- ★Flag timing test
+1995064 ★ロード中のイベント同期テスト -- ★Event synchronization test during loading
+19901234 GRテスト用イベント1 -- GR test event 1
+19901235 GRテスト用イベント2 -- GR test event 2
+19901236 GRテスト用イベント3 -- GR test event 3
+19905000 ★NPC初期化テスト -- ★NPC initialization test
+19905001 ★NPC敵対テスト -- ★NPC hostile test
+19905002 ★NPCがX回攻撃された判定 -- ★Determined that the NPC has been attacked X times
+19905003 ★NPCのがX回攻撃されたフラグ -- ★Flag that NPC was attacked X times
+19905004 ★NPC死亡テスト -- ★NPC death test
+19905005 ★篝火_アニメテスト -- ★Bonfire_Anime Test
+19905010 ★NPC召喚テスト_XX -- ★NPC summoning test_XX
+19905020 ★アニメ再生テスト -- ★Anime playback test
+19905030 ★NPC初期化テスト_平野 -- ★NPC initialization test_Hirano
+19905040 ★NPC敵対テスト_平野 -- ★NPC Hostile Test_Hirano
+1000000000 敵リスポン -- enemy respawn

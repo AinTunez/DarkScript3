@@ -1,0 +1,7 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+99010000 開始処理 -- Start processing
+99010001 敵全滅 -- Enemy annihilation
+99010002 タンク全破壊 -- Tank completely destroyed
+99010003 クリア -- clear
+1000000000 敵リスポン -- enemy respawn

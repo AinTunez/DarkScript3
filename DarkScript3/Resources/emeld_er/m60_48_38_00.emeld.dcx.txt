@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1048382200 間欠泉_XX -- Geyser_XX
+1048382201 間欠泉_弾丸オーナー作成 -- Geyser_Bullet owner created

@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1041320300 [亡霊ＮＰＣイベント5]起動 -- [Ghost NPC Event 5] Activated
+1041320301 [亡霊ＮＰＣイベント5]クリアー -- [Ghost NPC Event 5] Cleared

@@ -1,0 +1,22 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+1000 testイベント00 -- test event 00
+1010 testイベント01 -- test event 01
+10291000 敵殲滅状態判定イベント -- Enemy annihilation status determination event
+10293000 ロード時処理 -- Load time processing
+10293001 マーカー表示判定 -- Marker display judgment
+10293002 マーカー表示解除判定 -- Marker display cancellation determination
+10293003 接敵判定 -- Enemy contact judgment
+10293004 接敵解除判定 -- Contact release judgment
+10293005 戦闘開始判定 -- Battle start determination
+10293006 警告判定 -- Warning judgment
+10293007 警告判定解除 -- Warning judgment canceled
+10293008 撤退判定 -- Withdrawal judgment
+10293009 撤退時処理 -- Processing upon withdrawal
+10293010 クリア時処理 -- Clear processing
+10293011 死亡時処理 -- Treatment at death
+10293012 作戦領域展開判定 -- Operation area deployment determination
+12090010 防衛起点変更 -- Defense starting point change
+12090030 残員危険判定 -- Remaining staff danger judgment
+12090031 残り対象判定 -- Remaining target determination
+1000000000 敵リスポン -- enemy respawn

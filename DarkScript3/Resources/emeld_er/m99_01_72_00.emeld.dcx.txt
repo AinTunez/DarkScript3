@@ -1,0 +1,23 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+9992400 イベントテスト_HPゲージ表示設定 -- Event test_HP gauge display settings
+9992410 イベントテスト_騎乗判定00 -- Event test_riding judgment 00
+9992411 イベントテスト_騎乗判定01 -- Event test_riding judgment 01
+9992420 イベントテスト_騎乗判定10 -- Event test_riding judgment 10
+9992600 イベントテスト_マップ再入場 -- Event test_map re-entry
+9992820 マレニア_草テスト_XX -- Marenia_grass test_XX
+9992910 アセット復帰テスト -- Asset reversion test
+9992920 暗転テスト -- blackout test
+9992921 防具取得テスト -- Armor acquisition test
+9999999 サンプル3_XX -- Sample 3_XX
+99002600 イベントテスト_アスィミちゃんの光 -- Event test_Asimi-chan's light
+99002601 イベントテスト_アスィミちゃんと一緒 -- Event test_with Asimi-chan
+99002610 強制死亡テストA -- Forced death test A
+99002611 強制死亡テストB -- Forced death test B
+99002612 強制死亡テストC -- Forced death test C
+99002620 ジェスチャ入手_XX -- Get gesture_XX
+99002640 アセットテスト0 -- Asset test 0
+99002641 アセットテスト1 -- Asset test 1
+1000000000 敵リスポン -- enemy respawn
+1035432390 変身スライム敵_変身 -- Transformation slime enemy_transformation
+1035432395 変身スライム敵_撃破 -- Transforming slime enemy_defeat

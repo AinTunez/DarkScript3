@@ -1,0 +1,204 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 初期準備 -- Initial preparation
+2010 会話完了フラグ1 -- Conversation complete flag 1
+2011 会話完了フラグ2 -- Conversation completion flag 2
+2012 会話完了フラグ3 -- Conversation completion flag 3
+2013 会話完了フラグ4 -- Conversation complete flag 4
+2014 会話完了フラグ5 -- Conversation completion flag 5
+2015 会話完了フラグ6 -- Conversation complete flag 6
+2016 会話完了フラグ7 -- Conversation complete flag 7
+2017 会話完了フラグ8 -- Conversation completion flag 8
+2018 会話完了フラグ9_CP再開用 -- Conversation completion flag 9_CP for restarting
+2050 時間制限 -- time limit
+2051 タイムアップ -- time up
+2052 カウントストップ -- count stop
+2060 ダミーリーダーの更新頻度固定 -- Fixed update frequency of dummy reader
+2100 最初の強敵撃破 -- Defeating the first strong enemy
+2101 拡散バズと接敵 -- Diffusion buzz and contact
+2102 ランドマーク周辺に来たのでガイド消し -- I came around the landmark, so I deleted the guide.
+2103 敵の目の前に来たのでタゲ設定 -- Now that I'm in front of the enemy, I set the target.
+2104 広場敵との接敵 -- Engagement with square enemies
+2105 広場拡散バズタゲ設定 -- Square spread buzz target setting
+2106 狙撃地帯に入る -- enter the sniper zone
+2107 狙撃AC_巣の更新 -- Sniper AC_nest update
+2108 シャトルに登った判定 -- Judgment of climbing on the shuttle
+2109 狙撃AC撃破 -- Defeat sniper AC
+2110 狙撃AC出現 -- Sniper AC appears
+2111 狙撃AC攻撃開始 -- Sniper AC attack begins
+2112 狙撃ACのワープ -- Sniper AC warp
+2113 揚陸艦4体倒したときにランドマーク側が残ってる -- When the 4 landing ships are defeated, the landmark side remains.
+2114 揚陸艦4体倒したときに地下側が残ってる -- After defeating 4 landing ships, the underground side remains.
+2115 狙撃AC追加部隊攻撃開始 -- Additional sniper AC unit attack begins
+2120 増援ヘリ起動 -- Reinforcement helicopter activated
+2130 増援ヘリ起動用ポイントに入る -- Enter the reinforcement helicopter activation point
+2131 正規軍にターゲット設定 -- Targeting the regular army
+2132 追加狙撃AC出現 -- Additional sniper AC appears
+2133 追加狙撃AC撃破 -- Defeat additional sniper AC
+2134 固定砲台役帰巣イベント -- Fixed battery return home event
+2135 敵撃破後増援ヘリ起動用ポイントに入る -- After defeating the enemy, enter the point to activate the reinforcement helicopter.
+2136 ランドマークでカバーに入らせる -- Cover with landmark
+2137 ヘリと正規軍起動 -- Helicopters and regular army activated
+2138 エリア入ったので巡回開始 -- Now that we have entered the area, we start patrolling.
+2139 ランドマーク近接起動 -- Landmark proximity activation
+2140 ヘリ部隊を倒しているか -- Are you defeating the helicopter squad?
+2153 狙撃AC一定数撃破 -- Defeated a certain number of sniper ACs
+2160 揚陸艦破壊用 -- For destroying landing ships
+2170 地下揚陸艦撃破時に警備MTを殺す -- Kill the security MT when destroying the underground landing ship
+2171 ランドマーク揚陸艦撃破時にMTを殺す -- Kill MT when destroying Landmark Landing Ship
+2180 揚陸艦の主砲と副砲を起動 -- Activate the landing ship's main and secondary guns.
+2190 揚陸艦の主砲と副砲を起動_地下 -- Activate the landing ship's main and secondary guns_underground
+2200 アセット揚陸艦_副砲特殊待機解除 -- Asset landing ship_secondary gun special standby canceled
+2210 広場揚陸艦_横ダメージ -- Square landing ship_lateral damage
+2220 狙撃ACに接近 -- Approaching sniper AC
+2230 シャトルより上に来た -- I came above the shuttle
+2300 シェルパ有効化 -- Enable Sherpa
+2301 チェックポイント有効化 -- checkpoint enable
+2302 チェックポイント判定用 -- For checkpoint judgment
+2303 マーカー消す -- erase marker
+2304 シェルパ使用不可にする -- Disable Sherpa
+2310 シェルパ広場マーカーON -- Sherpa square marker ON
+2311 シェルパシャトル横マーカーON -- Sherpa shuttle horizontal marker ON
+2312 シャトル横シェルパ使用 -- Shuttle side sherpa used
+2350 チェックポイント有効化_揚陸艦全破壊_地下 -- Checkpoint activation_Landing ship completely destroyed_Underground
+2351 チェックポイント有効化_揚陸艦全破壊_広場 -- Checkpoint activation_Landing ship completely destroyed_Piazza
+2352 チェックポイント有効化_揚陸艦全破壊_シャトル -- Checkpoint activation_Landing ship completely destroyed_Shuttle
+2355 チェックポイント判定用_揚陸艦全破壊 -- For checkpoint determination_Landing ship complete destruction
+2360 チェックポイント有効化_アイスワーム -- Checkpoint activation_Iceworm
+2361 チェックポイント判定用_アイスワーム -- Checkpoint judgment_Ice worm
+2499 敵の全滅 -- annihilation of the enemy
+2500 揚陸艦攻撃開始 -- Amphibious ship attack begins
+2501 誘導マーカー設定 -- Guidance marker settings
+2502 誘導マーカー解除 -- Guidance marker canceled
+2503 揚陸艦主砲攻撃開始 -- Landing ship main gun attack begins
+2504 揚陸艦移動開始 -- Landing ship movement begins
+2505 揚陸艦イベント開始時残存的無効化 -- Residual disablement at the start of landing ship event
+2506 揚陸艦2機目移動開始 -- Second landing ship begins movement
+2600 揚陸艦1破壊 -- 1 landing ship destroyed
+2601 揚陸艦2破壊 -- Landing ship 2 destroyed
+2996 揚陸艦到着2 -- Landing ship arrival 2
+2997 揚陸艦1台死亡 -- 1 landing ship killed
+2998 揚陸艦死亡 -- Landing ship death
+2999 揚陸艦到着 -- Landing ship arrives
+3000 ACが来る -- AC is coming
+3001 ACが到着 -- AC has arrived
+3002 自機が広場に入っているのでACが降りてくる -- Since your aircraft is in the square, AC will come down.
+3003 自機が広場に入る -- The aircraft enters the square
+3004 自機が広場中央に入る -- Your aircraft enters the center of the square.
+3005 敵機にターゲット -- target enemy aircraft
+3006 暫定用揚陸艦強制死亡 -- Temporary landing ship forced death
+3007 揚陸艦を倒しているか -- Are you defeating the landing ship?
+3008 アッシュワープ1 -- Ashwarp 1
+3009 アッシュワープ2 -- Ashwarp 2
+3010 敵保険用ワープ -- Warp for enemy insurance
+3100 味方ACが来る -- Ally AC comes
+3101 味方ACに常に揚陸艦タゲ設定 -- Always set landing ship target to ally AC
+3102 味方AC不死設定 -- Ally AC immortality setting
+3103 味方AC登場フラグ -- Ally AC appearance flag
+3104 味方撤退用 -- For ally withdrawal
+3105 撤退時バグ対応用 -- To deal with bugs when withdrawing
+3110 CP用僚機有効化 -- Enable CP wingman
+3111 CP用僚機無効化ver -- CP wingman invalidation version
+3120 CP用揚陸艦破壊 -- Destroy CP landing ship
+3200 CP再開用 -- For CP restart
+3210 CP後戦闘開始 -- Battle begins after CP
+3450 高機動AC_AP6割 -- High mobility AC_AP60%
+3451 重AC_AP3割 -- Heavy AC_AP30%
+3460 高機動AC_スタッガー -- High mobility AC_Stagger
+3461 重AC_スタッガー -- Heavy AC_Stagger
+3462 高機動AC_スタッガー監視 -- High Mobility AC_Stagger Monitoring
+3463 重AC_スタッガー監視 -- Heavy AC_Stagger monitoring
+3480 高機動AC撃破 -- Defeat high mobility AC
+3481 重AC撃破 -- Defeat heavy AC
+3482 高機動撃破フラグ -- High mobility defeat flag
+3483 重AC撃破フラグ -- Heavy AC defeat flag
+3490 戦闘中会話フラグ -- Battle conversation flag
+3498 敵AC1体撃破 -- Defeat 1 enemy AC
+3499 敵AC倒す -- Defeat enemy AC
+3500 アイスワーム起動 -- ice worm launch
+3501 アイスワーム登場待機 -- Waiting for ice worm to appear
+3502 アイスワーム撤退 -- ice worm withdrawal
+3503 アイスワーム撤退フラグ -- Iceworm withdrawal flag
+3504 セリフ再生タイミング用 -- For dialogue playback timing
+3505 地震エフェクトとSE -- Earthquake effect and SE
+3506 アイスワーム誘導用マーカーON -- Ice worm guidance marker ON
+3507 アイスワーム破壊でっちあげ -- ice worm destruction hoax
+3508 アイスワームイベント_会話中カメラ揺れ -- Ice worm event_Camera shaking during conversation
+3509 アイスワームイベント開始地点に近付く -- Approaching the ice worm event starting point
+3510 アイスワーム最初の飛び出しタイミング -- Ice worm first pop-up timing
+3520 鉄塔破壊連動 -- Interlocking tower destruction
+3600 アイスワームはじかれ -- ice worm repelled
+3800 破壊対象の破壊B1 -- Destruction target B1
+3801 破壊対象の破壊B2 -- Destruction target B2
+3802 破壊対象の破壊B3 -- Destruction target B3
+3805 地下ガイドON -- Underground guide ON
+3806 広場ガイドON -- Square guide ON
+3807 ランドマークガイドON -- Landmark guide ON
+3808 全ガイドOFF -- All guides OFF
+3810 破壊対象マーカー設定B1 -- Destruction target marker setting B1
+3811 破壊対象マーカー設定B2 -- Destruction target marker setting B2
+3812 破壊対象マーカー設定B3 -- Destruction target marker setting B3
+3813 地下TGT -- Underground TGT
+3814 広場TGT -- Square TGT
+3815 ランドマークTGT -- Landmark TGT
+3816 地下ガイドオフ -- underground guide off
+3817 広場ガイドオフ -- Square guide off
+3818 ランドマークガイドオフ -- landmark guide off
+3820 揚陸艦1つ破壊 -- 1 landing ship destroyed
+3821 揚陸艦3つ破壊 -- 3 landing ships destroyed
+3822 揚陸艦全破壊 -- Landing ship completely destroyed
+3823 揚陸艦2つ破壊 -- Destroyed 2 landing ships
+3824 揚陸艦4つ破壊 -- 4 landing ships destroyed
+3830 OBJ揚陸艦との接敵判定1 -- Contact determination with OBJ landing ship 1
+3831 OBJ揚陸艦との接敵判定2 -- Contact determination with OBJ landing ship 2
+3832 OBJ揚陸艦との接敵判定3 -- Contact judgment with OBJ landing ship 3
+3833 接敵1回目 -- 1st encounter
+3834 接敵2回目 -- 2nd encounter
+3835 接敵3回目 -- 3rd contact
+3840 会話済み判定1 -- Conversation completed judgment 1
+3841 会話済み判定2 -- Conversation completed judgment 2
+3842 会話済み判定3 -- Conversation completed judgment 3
+3843 会話済み判定4 -- Conversation completed judgment 4
+3844 会話済み判定5 -- Conversation completed judgment 5
+3845 会話済み判定6 -- Conversation completed judgment 6
+3846 会話済み判定7 -- Conversation completed judgment 7
+3847 会話済み判定8 -- Conversation completed judgment 8
+3848 会話済み判定9 -- Conversation completed judgment 9
+3849 会話済み判定10 -- Conversation completed judgment 10
+3850 会話済み判定11 -- Conversation completed judgment 11
+3851 会話済み判定12 -- Conversation completed judgment 12
+3852 会話済み判定13 -- Conversation completed judgment 13
+3860 揚陸艦1つ破壊_時間監視 -- Destroy one landing ship_time monitor
+3861 揚陸艦3つ破壊_時間監視 -- Destroyed 3 landing ships_Time monitoring
+3862 揚陸艦全破壊_時間監視 -- Complete destruction of landing ship_time monitoring
+3863 揚陸艦2つ破壊_時間監視 -- Destroyed two landing ships_time monitoring
+3864 揚陸艦4つ破壊_時間監視 -- Destroyed 4 landing ships_Time monitoring
+3865 接敵1回目_時間監視 -- 1st contact_time monitoring
+3866 接敵2回目_時間監視 -- 2nd contact_time monitoring
+3867 接敵3回目_時間監視 -- 3rd contact_time monitoring
+3868 揚陸艦1地点全滅 -- One landing ship annihilated
+3869 拡散バズと接敵_時間監視 -- Diffusion buzz and enemy contact_time monitoring
+3870 広場拡散バズタゲ設定_時間監視 -- Square spread buzz target setting_time monitoring
+3871 揚陸艦2地点全滅 -- Two landing ships destroyed
+3872 揚陸艦2地点全滅会話フラグ -- Landing ship 2 locations wiped out conversation flag
+3880 地下揚陸艦死亡判定 -- Underground landing ship death determination
+3881 シャトル揚陸艦死亡判定 -- Shuttle landing ship death determination
+3882 広場揚陸艦死亡判定_1 -- Square landing ship death judgment_1
+3883 広場揚陸艦死亡判定_2 -- Square landing ship death judgment_2
+3884 広場揚陸艦死亡判定_3 -- Square landing ship death judgment_3
+3890 揚陸艦搭乗員巣の更新 -- Landing ship crew nest update
+3900 揚陸艦_破砕孔表示 -- Landing ship_fracture hole display
+3980 敵初期化イベント用 -- For enemy initialization event
+3986 デバッグ判定用v6 -- v6 for debugging judgment
+3987 アイスワーム予兆確認用 -- For checking ice worm signs
+3988 デバッグ判定用v5 -- Debug judgment v5
+3989 デバッグ揚陸艦起動2 -- Debug landing ship launch 2
+3990 デバッグ判定用 -- For debugging judgment
+3991 デバッグ押されたのでワープ -- Warp because debug was pressed
+3993 アイスワーム演出確認用 -- For checking ice worm performance
+3994 デバッグ判定用v2 -- Debug judgment v2
+3995 デバッグ判定用v3 -- Debug judgment v3
+3996 デバッグ押されたので敵消去 -- Enemy deleted because debug was pressed
+3998 デバッグ判定用v4 -- Debug judgment v4
+3999 デバッグ揚陸艦起動 -- Debug landing ship launch
+1000000000 敵リスポン -- enemy respawn

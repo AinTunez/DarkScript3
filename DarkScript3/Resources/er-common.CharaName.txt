@@ -1,4 +1,4 @@
-20000 Unnamed Human
+﻿20000 Unnamed Human
 23000 Tanith
 23010 White Mask Varre
 23040 Roundtable Knight Vyke
@@ -133,3 +133,53 @@
 27002 Dragonbarrow Silent Spirit
 27900 Unnamed Human
 28500 Unnamed Human
+# Drake Warrior Igon
+2024030 Igon
+2024032 Igon
+2024060 Dragon Communion Priestess
+2024070 Ancient Dragon-Man
+2024071 Ancient Dragon-Man
+2024090 Swordhand of Night Jolán
+2024091 Swordhand of Night Jolán
+2024120 Swordhand of Night Anna
+2024121 Swordhand of Night Anna
+2024130 Fire Knight Queelign
+2024131 Fire Knight Queelign
+2024140 Hornsent
+2024141 Hornsent
+2024150 Moore
+2024151 Moore
+2024152 Moore
+2024160 Sir Ansbach
+2024161 Sir Ansbach
+# Also Pureblood Knight Ansbach
+2024162 Sir Ansbach
+2024170 Redmane Freyja
+2024171 Redmane Freyja
+2024173 Redmane Freyja
+2024174 Redmane Freyja
+2024180 Needle Knight Leda
+2024181 Needle Knight Leda
+2024182 Needle Knight Leda
+2024183 Needle Knight Leda
+2024190 Thiollier
+2024191 Thiollier
+2024192 Thiollier
+2024193 Thiollier
+2024194 Thiollier
+2024200 Count Ymir, High Priest
+2024201 Count Ymir, Mother of Fingers
+2024210 Red Bear
+2024220 Dancer of Ranah
+2024230 Rakshasa
+2024240 Knight of the Solitary Gaol
+2024250 Dryleaf Dane
+2024251 Dryleaf Dane
+2024252 Dryleaf Dane
+2024260 Sanguine Noble Nataan
+2024270 Lamenter
+2024271 Lamenter
+2024280 Greater Potentate
+2024290 Madding Hand
+2024310 Logur, the Beast Claw
+2024320 Moonrithyll, Carian Knight

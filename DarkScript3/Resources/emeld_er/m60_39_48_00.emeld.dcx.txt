@@ -1,0 +1,8 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1039480519 エレベーター初期フラグ -- Elevator initial flag
+1039482510 エレベータイベント起動 -- Elevator event activation
+1039482610 魔術師の塔扉解除 -- Sorcerer's Tower Door Unlocked
+1039482611 魔術師塔イベント_霧壁エラーメッセージ -- Magician Tower Event_Fog Wall Error Message

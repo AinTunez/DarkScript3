@@ -1,0 +1,37 @@
+0 コンストラクタ -- constructor
+50495000 namanaTest_ワラワラ蟲_起動 -- namanaTest_Wara Walla Mushi_Start
+50505000 鉱山イベント_c8060 -- Mine event_c8060
+60000001 環境エフェクト　壁下　2 -- Environmental Effects Under the Wall 2
+60000002 環境エフェクト　壁下　3 -- Environmental Effects Under the Wall 3
+60000011 環境エフェクト　壁上　2 -- Environmental effects on the wall 2
+60000012 環境エフェクト　壁上　3 -- Environmental effects on the wall 3
+60000100 環境効果　氷原 -- Environmental effect ice field
+60000140 FP版　環境効果　雪山 -- FP version environmental effect snowy mountain
+60000150 FP版　環境効果　グラキャニ -- FP version environmental effect Grakyani
+60000160 FP版　環境効果　共産党街 -- FP version Environmental effect Communist town
+60000170 FP版　環境効果　A層 -- FP version environmental effect A layer
+60100000 スキャニングタワー　情報開示 -- Scanning Tower Information Disclosure
+60200000 強敵戦闘イベント -- Strong enemy battle event
+60300000 ドロップシップイベント　テスト -- Dropship event test
+60400000 強襲シチュエーション用イベント -- Events for assault situations
+60500000 二点間移動用テストイベント　行き -- For point-to-point movement test event
+60500001 二点間移動用テストイベント　帰り -- Test event for point-to-point movement return
+60600000 ガレージヘリ　テストイベント　簡易アセン -- Garage helicopter test event simple assembly
+60600001 ガレージヘリ　テストイベント　弾薬補給 -- Garage helicopter test event ammunition supply
+60600002 ガレージヘリ　テストイベント　ビークル -- Garage helicopter test event vehicle
+60600003 ガレージヘリ　初期化 -- Garage helicopter initialization
+60700000 ガレージヘリごり押し -- garage helicopter push
+60700001 毎フレワープ -- Every Flewarp
+60701000 壁エレベータ上昇イベント -- Wall elevator rising event
+60702000 壁エレベータイベント下降 -- wall elevator event descending
+60800000 自機　カタパルトアニメの再生　射出高度低 -- Own aircraft catapult animation play low ejection altitude
+60800100 自機　カタパルトアニメの再生　射出行動高 -- Own machine catapult animation playback ejection action height
+60900100 PF版　A層間移動用イベント -- PF version A-layer movement event
+61000100 PF版　移動車両砲台　初期化 -- PF version mobile vehicle battery initialization
+61000101 PF版　移動車両砲台　移動車両死亡時イベント -- PF version Mobile vehicle battery Event when mobile vehicle dies
+62000000 PF版　A層砲台　砲台死亡時イベント -- PF version A layer battery Battery death event
+63000010 弾薬補給マーカー共有処理 -- Ammo supply marker sharing process
+63000015 補給マーカー共有処理 -- Supply marker sharing process
+63000020 拠点マーカー共有処理 -- Base marker sharing process
+63000030 ミッション02マーカー初期化処理 -- Mission 02 marker initialization process
+1000000000 敵リスポン -- enemy respawn

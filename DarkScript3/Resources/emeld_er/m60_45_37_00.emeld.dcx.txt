@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1045370650 チュートリアルメッセージ_エストスカラベ撃破 -- Tutorial message_Defeating Esto Scarab
+1045370710 NPC216_狼頭の戦士_NPC初期化イベント_初期状態 -- NPC216_Wolf Head Warrior_NPC initialization event_Initial state
+1045370711 NPC216_狼頭の戦士_樹から飛び降りてくる -- NPC216_Wolf-Headed Warrior_Jumping down from the tree
+1045370712 NPC216_狼頭の戦士_広範囲遠吠え再生 -- NPC216_Wolf Head Warrior_Wide range howling playback
+1045370713 NPC216_狼頭の戦士_近距離遠吠え再開 -- NPC216_Wolf-Headed Warrior_Resumes short-range howling
+1045370714 NPC216_狼頭の戦士_EzState処理限界距離管理 -- NPC216_Wolf Head Warrior_EzState processing limit distance management
+1045370720 NPC309_盗賊の頭_ワープ禁止実行 -- NPC309_Thief's Head_Warp prohibition execution
+1045372200 地図石碑光SFX切り替え -- Map stone monument light SFX switching
+1045372230 亜人死体 -- demihuman corpse
+1045372344 ルーンベア爪とぎの木復活イベント -- Runebear Scratching Tree Revival Event

@@ -1,0 +1,10 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+1000000000 敵リスポン -- enemy respawn
+1038430700 NPC310城主の娘_NPC初期化イベント_ブドウ渡し場所C -- NPC310 Castle Lord's Daughter_NPC Initialization Event_Grape Transfer Location C
+1038430701 NPC310城主の娘_場所C固定 -- NPC310 Castle Lord's Daughter_Location C fixed
+1038430702 NPC310城主の娘_ブドウ渡し場所C出現要求 -- NPC310 Castle Lord's Daughter_Grape passing place C appearance request
+1038432260 気球待機イベント -- Balloon standby event
+1038432261 気球破壊イベント -- Balloon destruction event
+1038432262 人形兵解除イベント_XX -- Puppet soldier release event_XX

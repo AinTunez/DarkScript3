@@ -1,0 +1,13 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+4220 陸ダコ_初期設定 -- Land Octopus_Initial Settings
+4221 陸ダコ_左触手破壊 -- Land Octopus_Left Tentacle Destruction
+4223 陸ダコ_右触手破壊 -- Land octopus_right tentacle destroyed
+4224 陸ダコ_出産 -- Land octopus_birth
+4710 L_汎用_グール王_モード切り替え判定 -- L_General Purpose_Ghoul King_Mode switching judgment
+4715 L_汎用_グール王_メテオ判定 -- L_General Purpose_Ghoul King_Meteor Judgment
+4716 L_汎用_グール王_メテオ発動イベント -- L_General Purpose_Ghoul King_Meteor activation event
+4717 L_汎用_グール王_怨念斬り判定 -- L_General Purpose_Ghoul King_Grudge Slash Judgment
+4730 グールの王出現イベント -- Ghoul King Appearance Event
+1000000000 敵リスポン -- enemy respawn

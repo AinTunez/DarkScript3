@@ -1,0 +1,40 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+15000050 m15_00_00_00用初期フラグ設定 -- Initial flag setting for m15_00_00_00
+15000700 NPC203_マレニア会話限界コントロール -- NPC203_Marenia conversation limit control
+15000701 NPC203_マレニア撃破後会話再生保証 -- Guaranteed conversation replay after defeating NPC203_Marenia
+15000702 NPC203マレニア_花化 -- NPC203 Marenia_Flower
+15000710 NPC348マレニアの娘_ﾌｪｰｽﾞ6_NPC初期化イベント -- NPC348 Marenia's Daughter_Phase 6_NPC Initialization Event
+15000711 NPC348マレニアの娘_ﾌｪｰｽﾞ7_NPC初期化イベント -- NPC348 Marenia's Daughter_Phase 7_NPC Initialization Event
+15000712 NPC348マレニアの娘_花化 -- NPC348 Marenia's Daughter_Flower
+15000713 NPC348マレニアの娘_針を供える -- NPC348 Daughter of Marenia_Offer a needle
+15000714 NPC348マレニアの娘_撃破 -- NPC348 Marenia's Daughter_Defeated
+15000715 NPC348マレニアの娘_シスターズ戦エリア到達 -- NPC348 Daughter of Marenia_Achieved the Sisters battle area
+15000716 NPC348マレニアの娘_リアルタイム遷移 -- NPC348 Marenia's Daughter_Real-time transition
+15002145 NPC疑似マルチ_マレニアの娘_開始 -- NPC pseudo-multi_Marenia's daughter_start
+15002155 NPC疑似マルチ_マレニアシスターズ開始 -- NPC pseudo multi_Marenia Sisters start
+15002200 ミケラ王軍_座り待機椅子破壊_XX -- King Michela's Army_Destruction of sitting chairs_XX
+15002310 結晶の部族_一蓮托生_XX -- Crystal Tribe_Ichiren Tsusei_XX
+15002344 蛇つむり_ジェネレートXX -- Snake Tsumuri_Generate XX
+15002520 エレベータイベント起動_腐れ -- Elevator event activation_rot
+15002550 椅子破壊不可_腐れ -- Chair cannot be destroyed_rot
+15002580 梯子登録_腐れ -- Ladder registration_rot
+15002620 エレベータイベント起動_大樹 -- Elevator event activation_Taiki
+15002680 梯子登録_大樹 -- Ladder registration_Taiki
+15002800 調停者マレニア撃破 -- Defeat Arbitrator Marenia
+15002810 調停者マレニア出現 -- Mediator Marenia appears
+15002811 調停者マレニア激昂 -- Mediator Marenia Fury
+15002812 調停者マレニア覚醒 -- Arbitrator Marenia awakens
+15002815 調整者マレニア激昂やられ -- Coordinator Marenia is furious
+15002820 調停者マレニア殺陣華_XX -- Arbitrator Marenia Satsujinka_XX
+15002830 調停者マレニア抗う意志_XX -- Mediator Marenia's Will to Resist_XX
+15002840 調停者マレニア空蝉_XX -- Mediator Marenia Utsusemi_XX
+15002842 調停者マレニア分身技_XX -- Mediator Marenia Clone Technique_XX
+15002848 調停者マレニアカメラ切り替え -- Mediator Marenia Camera Switch
+15002849 調停者マレニアイベント起動 -- Mediator Marenia event starts
+15002850 ツリーガード撃破 -- Defeat Tree Guard
+15002860 ツリーガード出現 -- Tree guard appears
+15002861 ツリーガード激昂 -- tree guard rage
+15002899 ツリーガードイベント起動 -- Tree guard event activation
+1000000000 敵リスポン -- enemy respawn

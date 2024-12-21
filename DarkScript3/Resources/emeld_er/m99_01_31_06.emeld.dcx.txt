@@ -1,0 +1,19 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 ボス準備ボスゲージ表示 -- Boss preparation boss gauge display
+110 ボス準備ボスゲージ非表示 -- Boss preparation boss gauge hidden
+120 ボス準備ボス死亡処理 -- Boss preparation boss death processing
+200 カメラテスト風圧 -- camera test wind pressure
+210 カメラテスト足元ブレス -- Camera test foot breath
+220 カメラテストナギナタ遷移 -- Camera test naginata transition
+230 カメラテスト武器攻撃 -- camera test weapon attack
+240 カメラテスト直下ブレス -- Camera test breath
+250 カメラテスト両手叩きつけ -- Camera test slap with both hands
+260 カメラテスト近距離 -- camera test close range
+270 カメラテスト首元 -- camera test neck
+280 カメラテスト通常 -- camera test normal
+290 カメラテストリセット -- camera test reset
+300 HU天候変化テスト -- HU weather change test
+400 自動ニト剣テスト -- automatic nit sword test
+1000000000 敵リスポン -- enemy respawn

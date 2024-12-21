@@ -1,0 +1,28 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2120 テストイベント -- test event
+2125 クモの死亡判定１ -- Spider death determination 1
+2140 ボスエリア侵入 -- Invading the boss area
+2150 ボスゲージ表示 -- boss gauge display
+2160 ボス撃破 -- Defeat the boss
+2200 輸送ヘリ発見判定 -- Transport helicopter detection determination
+2300 輸送ヘリ撃破数報付与 -- Report on number of transport helicopter defeats given
+2510 輸送ヘリ逃走判定 -- Transport helicopter escape judgment
+3040 輸送ヘリ撃墜数判定 -- Determining the number of transport helicopters shot down
+3050 輸送ヘリ個別死亡判定 -- Transport helicopter individual death determination
+3100 ハッキング無効化 -- Disable hacking
+3110 ハッキング有効化 -- hacking enabled
+3111 目標ハッキング開始判定 -- Target hacking start determination
+3112 目標ハッキング終了判定 -- Judgment of completion of target hacking
+3113 ハッキング有効化判定 -- Hacking validation determination
+3114 ハッキング途中会話発生判定 -- Conversation occurrence determination during hacking
+3200 目標地点マーカー有効化 -- Enable destination marker
+3201 ハッキング対象マーカー有効化 -- Enable hacking target marker
+3400 ハッキング会話終了 -- Hacking conversation ends
+3404 会話終了フラグ -- Conversation end flag
+3700 ミッション開始会話終了フラグ -- Mission start conversation end flag
+3801 撃破数フラグ1 -- Defeat count flag 1
+3802 撃破数フラグ2 -- Defeat count flag 2
+3803 撃破数フラグ3 -- Defeat count flag 3
+3804 撃破数フラグ4 -- Defeat count flag 4
+1000000000 敵リスポン -- enemy respawn

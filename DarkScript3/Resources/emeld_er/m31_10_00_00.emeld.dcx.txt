@@ -1,0 +1,21 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+31102200 動物なかなか逃げ出さない_XX -- Animals don't easily escape_XX
+31102250 思考ロジック有効化_領域／距離判定_逆流対策_XX -- Enabling thought logic_Area/distance judgment_Backflow countermeasures_XX
+31102255 オオカミ_巡回ルート設定_XX -- Wolf_Patrol route setting_XX
+31102360 ルーンベアの帰巣 -- Return of Rune Bear
+31102800 ボス撃破 -- Defeat the boss
+31102801 知性ある獣の末裔_大型武器_死亡時の撃破演出 -- Descendants of intelligent beasts_Large weapons_Defeat animation upon death
+31102802 知性ある獣の末裔_投擲＋盾_死亡時の撃破演出 -- Descendants of intelligent beasts_Throwing + Shield_Death effect upon death
+31102810 ボス出現 -- Boss appears
+31102811 ボス激昂 -- boss rage
+31102815 ホストがボス部屋入場 -- Host enters boss room
+31102830 ボス_ルート制御 -- Boss_root control
+31102849 ボス_イベント起動 -- Boss_event activation
+31102860 ホスト入場フラグ_2回目以上 -- Host entry flag_2nd or more time
+1000000000 敵リスポン -- enemy respawn

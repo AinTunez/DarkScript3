@@ -1,0 +1,65 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+11002548 奥の間の扉が開いている -- The door in the back room is open
+11100020 初回拠点訪問 -- First base visit
+11100030 次の周回へ行く -- go to next round
+11100031 クリア後拠点訪問 -- Visit base after clearing
+11100680 暗黒円卓空間_暗黒時 -- Dark Round Table Space_Dark Hours
+11100690 闘技場マリカ像_ハマり解消 -- Arena Marika Statue_Getting addicted
+11100704 NPC320_ファルネーゼ_頭巾アイテムに差し替え -- NPC320_Farnese_Replaced with hood item
+11100730 NPC319ダヴィド_NPC初期化イベント_拠点 -- NPC319 David_NPC initialization event_base
+11100731 NPC319ダヴィド_NPC初期化イベント_死体 -- NPC319 David_NPC initialization event_corpse
+11100732 NPC319ダヴィド_拠点移動時リアルタイム遷移 -- NPC319 David_Real-time transition when moving base
+11100735 NPC322ユリア_NPC初期化イベント_初期状態 -- NPC322 Yuria_NPC initialization event_initial state
+11100736 NPC322ユリア_NPC初期化イベント_聖痕を取り戻した -- NPC322 Yuria_NPC initialization event_Recovered stigmata
+11100737 NPC322ユリア_リアルタイム状態遷移 -- NPC322 Yuria_Real-time state transition
+11100740 NPC324百智卿_ﾌｪｰｽﾞ1_NPC初期化イベント -- NPC324 Lord Hyakuchi_Phase 1_NPC initialization event
+11100741 NPC324百智卿_ﾌｪｰｽﾞ2or3_NPC初期化イベント -- NPC324 Momochi Lord_Phase 2or3_NPC initialization event
+11100745 NPC351金仮面の従者_NPC初期化イベント -- NPC351 Gold Masked Squire_NPC initialization event
+11100750 NPC325ロジェール_NPC初期化イベント_拠点で再会 -- NPC325 Roger_NPC initialization event_Reunion at the base
+11100755 NPC323糞喰い_ﾌｪｰｽﾞ1_NPC初期化イベント -- NPC323 Shit-eating_Phase 1_NPC initialization event
+11100756 NPC323糞喰い_ﾌｪｰｽﾞ2_NPC初期化イベント -- NPC323 Shit-eating_Phase 2_NPC initialization event
+11100760 NPC334百智卿の娘_ﾌｪｰｽﾞ2_NPC初期化イベント -- NPC334 Momochi Lord's Daughter_Phase 2_NPC Initialization Event
+11100761 NPC334百智卿の娘_ﾌｪｰｽﾞ4_NPC初期化イベント -- NPC334 Momochi Lord's Daughter_Phase 4_NPC Initialization Event
+11100765 NPC339百智卿の手先_NPC初期化イベント -- NPC339 Lord Hyakuchi's minions_NPC initialization event
+11100790 篝火_拠点に居る判定 -- Bonfire_Judgment of being at the base
+11100791 遺灰ショップ_百智卿取り逃し対策_XX -- Ashes shop_Measures for missing Lord Hyakuchi_XX
+11100795 化粧台アニメ起動 -- Vanity table animation launch
+11100796 救済対応_大ルーン2個チェック系 -- Relief response_2 large runes checked
+11100797 救済対応_指読み -- Relief response_finger reading
+11102100 炎上時の変化 -- Changes during a fire
+11102569 消費鍵のガーゴイル像A_壁制御 -- Gargoyle statue of consumption key A_Wall control
+11102600 非戦闘エリア設定 -- Non-combat area setting
+11102602 位置非表示設定 -- Location hidden setting
+11102605 糞喰いの部屋解放 -- Shit-eater room released
+11102606 百智卿の部屋解放 -- Lord Hyakuchi's room released
+11102620 拠点1F脱出スペル -- Base 1F escape spell
+11102650 チュートリアルメッセージ_ホスト -- Tutorial message_host
+11102651 チュートリアルメッセージ_ゲスト -- Tutorial message_guest
+11102652 チュートリアルメッセージ_拠点到達 -- Tutorial message_reach base
+11102680 暗黒円卓空間_敵起動 -- Dark round table space_enemy activation
+11103700 NPC213鍛冶屋_NPC初期化イベント -- NPC213 Blacksmith_NPC initialization event
+11103702 NPC213鍛冶屋_自動会話イベント_祈り -- NPC213 Blacksmith_Automatic conversation event_Prayer
+11103703 NPC213鍛冶屋_自動会話イベント_足りぬ -- NPC213 Blacksmith_Automatic conversation event_Not enough
+11103705 NPC102指読み_NPC初期化イベント -- NPC102 finger reading_NPC initialization event
+11103706 NPC104二本指_ジェスチャー入手 -- NPC104 Two fingers_Gesture obtained
+11103707 NPC104二本指_待機アニメ再生 -- NPC104 Two fingers_standby animation playback
+11103710 NPC320_ファルネーゼ_NPC初期化イベント_拠点に来た -- NPC320_Farnese_NPC initialization event_came to base
+11103711 NPC320_ファルネーゼ_NPC初期化イベント_調霊師 -- NPC320_Farnese_NPC initialization event_Soulmaster
+11103712 NPC320_ファルネーゼ_NPC初期化イベント_世界樹が焼けた -- NPC320_Farnese_NPC initialization event_World Tree burnt
+11103713 NPC320_ファルネーゼ_調霊回数チェックイベント -- NPC320_Farnese_Number of spiritual training check event
+11103714 NPC320_ファルネーゼ_調霊師_ランダムアニメ再生 -- NPC320_Farnese_Soulmaster_Random animation playback
+11103715 NPC314ムノウ_NPC初期化イベント_初期状態 -- NPC314 Munou_NPC initialization event_Initial state
+11103716 NPC314ムノウ_NPC初期化イベント_火山館に誘われている -- NPC314 Munou_NPC initialization event_Invited to the Volcano Hall
+11103720 NPC318_混沌の宿主_NPC初期化イベント_拠点に来た -- NPC318_Host of Chaos_NPC initialization event_Comed to base
+11103770 王都到達済みチェック -- Check that you have reached the royal capital
+11103771 腐れ大樹到達済みチェック -- Check that the rotten tree has been reached
+11103772 平原奥地到達済みチェック -- Check that you have reached the plains hinterland
+11103775 拠点入場時ダイアログ表示 -- Dialog display when entering base
+11109575 消費鍵のガーゴイル像A_会話 -- Consumption key gargoyle statue A_Conversation
+1000000000 敵リスポン -- enemy respawn

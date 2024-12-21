@@ -1,0 +1,57 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2200 目標エリア1_移動マーカー有効化 -- Target area 1_Movement marker enabled
+2201 目標エリア1_移動マーカー無効化 -- Target area 1_Disable movement marker
+2202 目標エリア2_移動マーカー有効化 -- Target area 2_Movement marker enabled
+2203 目標エリア2_移動マーカー無効化 -- Target area 2_disable movement marker
+2204 目標エリア3_移動マーカー有効化 -- Target area 3_Movement marker enabled
+2205 目標エリア3_移動マーカー無効化 -- Target area 3_Disable movement marker
+2210 目標エリア1_TGT表示 -- Target area 1_TGT display
+2211 目標エリア2_TGT表示 -- Target area 2_TGT display
+2212 目標エリア3_TGT表示 -- Target area 3_TGT display
+2300 目標エリア1_撃破判定 -- Target area 1_defeat judgment
+2301 目標エリア2_撃破判定 -- Target area 2_defeat judgment
+2302 目標エリア3_撃破判定 -- Target area 3_defeat judgment
+2310 砲台殲滅判定 -- Battery annihilation judgment
+2311 砲台一か所撃破判定 -- Determined to destroy one battery
+2312 砲台二か所撃破判定 -- Determined to destroy two gun batteries
+2313 砲台三か所撃破判定 -- Judgment for destroying three gun batteries
+2320 目標エリア1_接近判定 -- Target area 1_approach judgment
+2321 目標エリア2_接近判定 -- Target area 2_approach judgment
+2322 目標エリア3_接近判定 -- Target area 3_approach judgment
+2330 目標エリア接近一回目判定 -- Judgment for the first time approaching the target area
+2331 目標エリア接近二回目判定 -- Second judgment of approaching target area
+2332 目標エリア接近三回目判定 -- Target area approach third judgment
+2400 会話用_市街地入口共産戦闘開始判定 -- For conversation_Communist battle start determination at city entrance
+2410 会話用_目標エリア3雑魚半壊判定 -- For conversation_Target area 3 small fish half destroyed judgment
+2411 会話用_目標エリア3雑魚壊滅判定 -- For conversation_Target area 3 small fish destruction judgment
+2412 会話用_目標エリア3道中_キャノンMT戦闘状態判定 -- For conversation_On the way to target area 3_Cannon MT combat status determination
+3000 戦闘ヘリリーダー無効化イベント -- Combat helicopter leader disabling event
+3020 目標破壊数判定 -- Judgment of target destruction number
+3400 砲台撃破フラグ_撃破1 -- Artillery Destruction Flag_Destruction 1
+3401 砲台撃破フラグ_撃破2 -- Artillery Destruction Flag_Destruction 2
+3402 砲台撃破フラグ_撃破3 -- Artillery Destruction Flag_Destruction 3
+3700 会話フラグ_111600100_ミッション開始時 -- Conversation flag_111600100_At the start of the mission
+3701 会話フラグ_111600500_初接敵 -- Conversation flag_111600500_First encounter
+3702 会話フラグ_111600900_第一目標接近1 -- Conversation flag_111600900_First target approach 1
+3703 会話フラグ_111601300_第一目標接近2 -- Conversation flag_111601300_First target approach 2
+3704 会話フラグ_111601700_目標一つ破壊 -- Conversation Flag_111601700_Destroy one target
+3705 会話フラグ_111602100_目標二つ破壊 -- Conversation flag_111602100_Destroy two targets
+3706 会話フラグ_111602200_目標突破一回目 -- Conversation Flag_111602200_First time exceeding the goal
+3707 会話フラグ_111602500_第二目標接近1 -- Conversation flag_111602500_Second target approach 1
+3708 会話フラグ_111602900_第二目標接近2 -- Conversation flag_111602900_Second target approach 2
+3709 会話フラグ_111603300_目標三基破壊 -- Conversation flag_111603300_Destroy three targets
+3710 会話フラグ_111603700_目標四基破壊 -- Conversation flag_111603700_Destroy four targets
+3711 会話フラグ_111604100_目標五基破壊 -- Conversation Flag_111604100_Destroy five targets
+3712 会話フラグ_111604200_目標突破二回目 -- Conversation flag_111604200_Goal exceeded second time
+3713 会話フラグ_111604500_第三目標接近1 -- Conversation flag_111604500_Third target approach 1
+3714 会話フラグ_111604900_第三目標接近2 -- Conversation flag_111604900_Third target approach 2
+3715 会話フラグ_111605300_第三目標の敵減ってきた時 -- Conversation Flag_111605300_When the number of enemies at the third target decreases
+3716 会話フラグ_111605700_第三目標壊滅寸前 -- Conversation flag_111605700_Third target on the verge of destruction
+3717 会話フラグ_111606100_目標六つ破壊 -- Conversation flag_111606100_Destroy six targets
+3718 会話フラグ_111606500_目標七つ破壊 -- Conversation flag_111606500_Destroy seven targets
+3719 会話フラグ_111606900_目標八つ破壊 -- Conversation Flag_111606900_Eight targets destroyed
+3720 会話フラグ_111607300_ミッションクリア会話 -- Conversation flag_111607300_Mission clear conversation
+3721 会話フラグ_111604300_目標３接近前会話 -- Conversation flag_111604300_Conversation before approaching target 3
+3722 会話フラグ_111604400_リマインド会話 -- Conversation flag_111604400_Reminder conversation
+1000000000 敵リスポン -- enemy respawn

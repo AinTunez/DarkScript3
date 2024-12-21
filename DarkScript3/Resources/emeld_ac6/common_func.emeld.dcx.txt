@@ -1,0 +1,71 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+5200 共通イベント_NPAC撤退用カタパルトイベント -- Common event_NPAC withdrawal catapult event
+5220 共通イベント_破壊OBJリアクションイベント -- Common event_Destruction OBJ reaction event
+5250 共通イベント_NPAC増援用カタパルトイベント -- Common event_NPAC reinforcement catapult event
+5260 共通イベント_周回突入前用カットシーン -- Common event_Cutscene before entering the orbit
+5270 共通イベント_AC用回復薬カウント -- Common event_AC recovery medicine count
+5280 共通イベント_弱スロー演出 -- Common event_light slow effect
+5300 共通イベント_ミッション前状態_CS_ガレージから出撃 -- Common event_Pre-mission state_CS_Sortie from garage
+5305 共通イベント_ミッション前状態_CS_ガレージから出撃_連続版 -- Common event_Pre-mission state_CS_Sortie from garage_Continuous version
+5306 共通イベント_ミッション前状態_CS_プロローグ専用出撃_連続版 -- Common event_Pre-mission state_CS_Prologue-only sortie_Continuous version
+5307 共通イベント_ミッション前状態_CS_プロローグ専用出撃_連続版_フリーミッション時 -- Common event_Pre-mission state_CS_Prologue-only sortie_Continuous version_Free mission
+5308 共通イベント_ミッション前状態_CS_ガレージから出撃_連続版_アイスワーム専用 -- Common event_Pre-mission state_CS_Sortie from garage_Continuous version_Ice worm only
+5310 共通イベント_ミッション中状態_チェックポイントから再開イベント -- Common events_Mission status_Restart event from checkpoint
+5320 共通イベント_ミッション中状態_シェルパから再開時カメラ指定イベント -- Common event_Mission status_Camera specified event when restarting from Sherpa
+5330 共通イベント_ミッション中状態_シェルパ使用済みフラグ -- Common events_Mission status_Sherpa used flag
+5350 共通イベント_成功終了状態_CS_ガレージへ帰還 -- Common event_Success completion status_CS_Return to garage
+5355 共通イベント_成功終了状態_CS_ガレージへ帰還_連続版 -- Common event_Successful completion status_CS_Return to garage_Continuous version
+5359 共通イベント_成功終了状態_CS_ガレージへ帰還_連続版_生体兵器ALT版 -- Common event_Successfully completed state_CS_Return to garage_Continuous version_Biological weapon ALT version
+5360 共通イベント_成功終了状態_CS_ガレージへ帰還_遷移フラグ -- Common event_Success completion state_CS_Return to garage_Transition flag
+5370 共通イベント_成功終了状態_暗転フェード会話終了_遷移フラグ -- Common event_Success completion status_Dark fade conversation end_Transition flag
+5380 共通イベント_失敗終了状態_大空洞と炉専用_遷移フラグ -- Common events_Failure end status_Great cavity and furnace only_Transition flag
+5385 共通イベント_失敗終了状態_ボスTIPS_遷移フラグ -- Common event_Failure end state_Boss TIPS_Transition flag
+5390 共通イベント_成功終了状態_コンプ表示無し -- Common event_Success completion status_No completion display
+5401 共通イベント_受諾状態完了_イベントフラグ -- Common event_Acceptance status complete_Event flag
+5402 共通イベント_ミッション中状態完了_イベントフラグ -- Common event_Mission status completion_Event flag
+5403 共通イベント_リザルト処理完了_成功 -- Common event_Result processing completed_Success
+5404 共通イベント_成功DeBF状態完了_イベントフラグ -- Common event_Success DeBF state completion_Event flag
+5405 共通イベント_成功終了状態完了_イベントフラグ -- Common event_Success completion status completion_Event flag
+5406 共通イベント_演出状態_成功完了_イベントフラグ -- Common event_Production status_Success completion_Event flag
+5413 共通イベント_リザルト処理完了_失敗 -- Common event_Result processing completed_Failure
+5414 共通イベント_失敗DeBF状態完了_イベントフラグ -- Common event_Failure DeBF state completion_Event flag
+5415 共通イベント_失敗終了状態完了_イベントフラグ -- Common event_Failure end status completion_Event flag
+5416 共通イベント_演出状態_失敗完了_イベントフラグ -- Common event_Production status_Failure completion_Event flag
+5420 共通イベント_ミッション開始演出 -- Common event_mission start effect
+5424 共通イベント_成功リザルト -- Common event_success result
+5425 共通イベント_失敗リザルト -- Common event_failure result
+5426 共通イベント_ミッション更新 -- Common event_mission update
+5427 共通イベント_失敗リザルト_大空洞と炉専用 -- Common event_Failure result_Exclusive for caverns and furnaces
+5430 共通イベント_領域外表示 -- Common event_outside area display
+5431 共通イベント_領域外なので殺す -- Common event_Kill because it is out of range
+5432 共通イベント_失敗時Tips用 -- Common events_For tips for failure
+5440 共通イベント_領域判定_内側 -- Common event_area determination_inside
+5450 共通イベント_領域判定_外側 -- Common event_Area determination_Outside
+5460 共通イベント_領域内判定_新版 -- Common event_area determination_new edition
+5461 共通イベント_領域外判定_新版 -- Common event_outside area judgment_new edition
+5462 共通イベント_領域離脱判定_新版 -- Common event_area departure determination_new edition
+5470 共通イベント_接続マップ移動 -- Common event_connection map movement
+5480 共通イベント_接続マップ_ヒット無効化 -- Common event_connection map_hit invalidation
+5481 共通イベント_接続マップ_ヒット有効化 -- Common Events_Connection Map_Hits Enabled
+5490 共通イベント_FE無効化 -- Common event_FE invalidation
+5491 共通イベント_FE有効化 -- Common Event_FE Enable
+5500 共通イベント_VOBモード用特殊効果 -- Common events_Special effects for VOB mode
+5501 共通イベント_VOBモード解除用特殊効果 -- Common events_Special effects for canceling VOB mode
+5550 共通イベント_ガレージイベント_強制ガレージIN -- Common events_Garage events_Forced garage IN
+5551 共通イベント_ガレージイベント_ガレージ初期化 -- Common events_Garage events_Garage initialization
+5560 共通イベント_ガレージイベント_ロケーション発見_ワンショット -- Common events_Garage events_Location discovery_One shot
+5561 共通イベント_ガレージイベント_ガレージアクセス_ワンショット -- Common events_Garage events_Garage access_One shot
+5562 共通イベント_ガレージイベント_自機固めアニメ -- Common event_Garage event_Uniform hardening animation
+5563 共通イベント_ガレージイベント_アクションボタン判定 -- Common event_Garage event_Action button determination
+5564 共通イベント_ガレージイベント_その場ホバリング -- Common event_Garage event_Hovering in place
+5565 共通イベント_ガレージイベント_ガレージ起動 -- Common event_Garage event_Garage start
+5600 共通イベント_トレーニング_開始演出 -- Common event_training_start production
+5610 共通イベント_トレーニング_ガレージ帰還 -- Common event_Training_Return to the garage
+5700 共通イベント_短距離ジャンプ台 -- Common event_Short distance jump hill
+5800 共通イベント_成功リザルト_BGM無音化フラグ -- Common event_success result_BGM mute flag
+5801 共通イベント_成功リザルト_BGM無音化ID3用フラグ -- Common event_success result_BGM mute ID3 flag
+5810 共通イベント_成功リザルト_BGMそのままフラグ -- Common event_success result_BGM flag as is
+5820 共通イベント_リトライ判定 -- Common event_retry judgment
+5900 テストマップ用初期化処理 -- Initialization process for test map

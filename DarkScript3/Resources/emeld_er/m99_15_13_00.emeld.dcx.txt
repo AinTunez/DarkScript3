@@ -1,0 +1,14 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+99150211 北の傭兵_距離反応_PCが3m以内に近づいてきたら思考開始_正面から来たら確定攻撃 -- Mercenary of the North_Distance Reaction_Start thinking when the PC approaches within 3m_Definite attack when coming from the front
+99151650 変色した落葉花を入手したら再入手出来なくする -- Once you obtain a discolored deciduous flower, you will not be able to obtain it again.
+99151651 変色した落葉花を入手したら再入手出来なくする_ホスト以外は最初から非表示 -- Once you obtain a discolored deciduous flower, you will not be able to obtain it again_Hide from the beginning to everyone other than the host
+99152202 喪失の兵士_特殊待機_味方側PCが領域内に入ったら戦闘態勢へ -- Lost Soldier_Special standby_When an allied PC enters the area, prepare for battle
+99152204 喪失の兵士_毒花_PCが毒花に近づいた後に近づいてきたら戦闘態勢へ -- Lost Soldier_Poisonous Flower_If the PC approaches the poisonous flower, prepare for battle.
+99152604 喪失の兵士_毒花_PCが毒花に近づいた -- Soldier of Loss_Poisonous Flower_PC approaches poisonous flower
+1000000000 敵リスポン -- enemy respawn

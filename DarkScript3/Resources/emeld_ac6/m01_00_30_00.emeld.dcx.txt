@@ -1,0 +1,34 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 初期設定 -- Initial settings
+2200 初期イベント -- initial event
+2201 初期イベント_後 -- After the initial event
+2202 初期イベント_SE -- Initial event_SE
+2400 敵のAIをONにする -- Turn on enemy AI
+2410 敵のAIをOFFにする -- Turn off enemy AI
+2500 敵の消去 -- Eliminate enemies
+2501 敵の消去_共産 -- Erasure of the enemy_communism
+2502 敵の消去_四脚 -- Eliminating enemies_quadrupeds
+2503 敵の消去_NPAC -- Eliminate enemies_NPAC
+2510 自機ワープとカメラ -- Own warp and camera
+2520 フラグリセット -- flag reset
+2600 ジェネレート中_共産 -- Generating_Communist
+2601 ジェネレートフラグOFF_共産 -- Generate flag OFF_Community
+2610 ジェネレート中_四脚 -- Generating_quadruped
+2611 ジェネレートフラグOFF_四脚 -- Generate flag OFF_quadruped
+2620 ジェネレート中_NPAC -- Generating_NPAC
+2621 ジェネレートフラグOFF_NPAC -- Generate flag OFF_NPAC
+2630 AI_ON中 -- AI_ON
+2631 AI_OFF中 -- AI_OFF
+2700 撃破判定 -- Destruction judgment
+2800 自機のAPが1 -- Own AP is 1
+2900 自機の展開用特殊効果がきれた -- The special effects for deploying your aircraft have expired.
+3000 共産ジェネ1 -- communist gene 1
+3001 共産ジェネ2 -- communist gene 2
+3002 共産ジェネ3 -- communist gene 3
+3010 四脚ジェネ -- quadruped gene
+3020 NPACジェネ -- NPAC Gene
+3030 空中ガードジェネ1 -- Aerial Guard Gene 1
+3031 空中ガードジェネ2 -- Aerial Guard Gene 2
+3700 ミッション開始会話フラグ -- Mission start conversation flag
+1000000000 敵リスポン -- enemy respawn

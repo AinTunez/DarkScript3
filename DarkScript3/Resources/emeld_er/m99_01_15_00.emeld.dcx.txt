@@ -1,0 +1,96 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+99218 NPC218しゃべスラ_キャラ実装 -- NPC218 Talking Sura_Character implementation
+99220 NPC220壺マイヤー_キャラ実装 -- NPC220 Tsubo Meyer_Character implementation
+99302 NPC302門衛_キャラ実装 -- NPC302 Gatekeeper_Character implementation
+99307 NPC307傀儡師_キャラ実装 -- NPC307 Puppeteer_Character implementation
+99311 NPC311半島砦の城主_キャラ実装 -- NPC311 Peninsula Fort Castle Lord_Character implementation
+99312 NPC312平原砦の領主_キャラ実装 -- NPC312 Lord of Plains Fort_Character implementation
+99316 NPC316学院の女魔術師_キャラ実装 -- NPC316 Female magician of the academy_Character implementation
+99321 NPC321見張り塔の貴人_キャラ実装 -- NPC321 Watchtower Noble_Character implementation
+99325 NPC325ロジェール_キャラ実装 -- NPC325 Roger_Character implementation
+99332 NPC332火山館の幽霊_キャラ実装 -- NPC332 Ghost of the Volcano Hall_Character implementation
+99335 NPC335ジコ坊_キャラ実装 -- NPC335 Jikobo_Character implementation
+99801 NPC801赤目商人モブ_キャラ実装 -- NPC801 Red Eye Merchant Mob_Character implementation
+9921800 NPC218しゃべスラ_キャラ状態遷移 -- NPC218 Talking Sura_Character state transition
+9921810 しゃべスラ_NPC初期化イベント -- Shabesura_NPC initialization event
+9921811 しゃべスラ_ダミー_NPC初期化イベント -- Chatsura_dummy_NPC initialization event
+9921812 しゃべスラ_専用NPC敵対化処理 -- Talking Sura_Dedicated NPC hostile processing
+9921813 しゃべスラ_専用NPCがX回攻撃されたらフラグを立てる処理 -- Chat Sura_Processing to set a flag when a dedicated NPC is attacked X times
+9921814 しゃべスラ_命乞いまでのダメージ -- Talking Sura_Damage to the point of begging for your life
+9921815 しゃべスラ_不死 -- Chatsura_Immortality
+9921820 しゃべスラ_変身 -- Shabesura_Transformation
+9921830 しゃべスラ_状態遷移 -- Shabesura_state transition
+9921831 しゃべスラ_聖杯イベント -- Shabesura_Holy Grail Event
+9921832 しゃべスラ_大聖杯イベント -- Shabesura_Great Holy Grail Event
+9921835 しゃべスラ_自動会話 -- Chatsura_Automatic conversation
+9922000 NPC220壺マイヤー_キャラ状態遷移 -- NPC220 Tsubo Meyer_Character state transition
+9922010 壺マイヤー_NPC初期化イベント_初期状態 -- Tsubomeyer_NPC initialization event_Initial state
+9922011 壺マイヤー_NPC初期化イベント_一方通行扉で再開 -- Tsubomayer_NPC initialization event_Restart with one-way door
+9922012 壺マイヤー_NPC初期化イベント_祭り開催待ち -- Tsubo Mayer_NPC initialization event_Waiting for the festival
+9922013 壺マイヤー_NPC初期化イベント_祭りの後 -- Tsubomayer_NPC initialization event_After the festival
+9922014 壺マイヤー_NPC初期化イベント_二回目の穴 -- Pot Meyer_NPC initialization event_Second hole
+9922015 壺マイヤー_NPC初期化イベント_溶岩風呂 -- Pot Mayor_NPC initialization event_Lava bath
+9922016 壺マイヤー_NPC初期化イベント_最後の戦い -- Tsubo Meyer_NPC initialization event_Last battle
+9922020 壺マイヤー_不死設定_初期状態 -- Pot Meyer_Immortality setting_Initial state
+9922021 壺マイヤー_助けを呼ぶイベント_初期状態 -- Pot Mayor_Event that calls for help_Initial state
+9922030 壺マイヤー_不死設定_二回目の穴 -- Pot Meyer_Immortality Setting_Second Hole
+9922031 壺マイヤー_助けを呼ぶイベント_二回目の穴 -- Pot Mayor_Event that calls for help_Second hole
+9922040 壺マイヤー_溶岩風呂での雄叫びイベント_溶岩風呂 -- Tsubomayer_Lava bath roar event_Lava bath
+9922050 壺マイヤー_不死設定_最後の戦い -- Pot Meyer_Immortality setting_The final battle
+9922051 壺マイヤー_敵対化_最後の戦い -- Tsubomayer_hostile_last battle
+9922052 壺マイヤー_届かない力_最後の戦い -- Tsubomayer_Unreachable Power_The Last Battle
+9922053 壺マイヤー_最後の戦い -- Tsubomayer_The Last Battle
+9922070 壺マイヤー_移動処理_一方通行扉前 -- Tsubo Meyer_Movement process_In front of one-way door
+9922075 壺マイヤー_移動処理_祭り開催待ち -- Tsubo Meyer_Moving process_Waiting for the festival
+9922080 壺マイヤー_祭り後_リアルタイム遷移 -- Tsubo Meyer_After the festival_Real-time transition
+9930200 門衛_NPC初期化イベント -- Gatekeeper_NPC initialization event
+9930700 NPC307傀儡師_キャラ状態遷移 -- NPC307 Puppeteer_Character state transition
+9930710 傀儡師_幻影_NPC初期化イベント -- Puppeteer_Phantom_NPC initialization event
+9930712 傀儡師_傀儡_NPC初期化イベント -- Puppeteer_Puppet_NPC initialization event
+9930714 傀儡師_本体_NPC初期化イベント -- Puppeteer_Main_NPC initialization event
+9930715 傀儡師_ラニに呪われたイベント -- Puppeteer_Rani's Cursed Event
+9930750 傀儡師_リアルタイム遷移 -- Puppeteer_Real-time transition
+9931110 半島砦の城主_NPC初期化イベント_初期状態 -- Peninsula Fort Castle Lord_NPC initialization event_Initial state
+9931111 半島砦の城主_NPC初期化イベント_娘の遺体発見 -- Lord of Peninsula Fort_NPC initialization event_Daughter's body discovered
+9931112 半島砦の城主_NPC初期化イベント_メンテ譲渡１ -- Lord of Peninsula Fort_NPC initialization event_Maintenance transfer 1
+9931113 半島砦の城主_NPC初期化イベント_メンテ譲渡２ -- Lord of Peninsula Fort_NPC initialization event_Maintenance transfer 2
+9931114 半島砦の城主_NPC初期化イベント_死体食い -- Lord of Peninsula Fort_NPC Initialization Event_Corpse Eater
+9931115 半島砦の城主_NPC初期化イベント_混種化 -- Peninsula Fort Castle Lord_NPC initialization event_hybridization
+9931120 半島砦の城主_共闘後自動会話再生 -- Lord of the Peninsula Fort_Automatic conversation playback after joint battle
+9931130 半島砦の城主_移動処理_状態遷移 -- Castle lord of peninsula fort_movement process_state transition
+9931135 半島砦の城主_メンテ１譲渡スキップ -- Lord of Peninsula Fort_Maintenance 1 Transfer Skip
+9931200 NPC312平原砦の領主_キャラ状態遷移 -- NPC312 Lord of Plains Fort_Character state transition
+9931210 平原砦の領主_初期状態_NPC初期化イベント -- Lord of Plains Fort_Initial state_NPC initialization event
+9931211 平原砦の領主_ラダーン祭開始_NPC初期化イベント -- Lord of Plains Fort_Radaan Festival Start_NPC Initialization Event
+9931212 平原砦の領主_ラダーン撃破後_NPC初期化イベント -- Lord of Plains Fort_After defeating Radhan_NPC initialization event
+9931220 平原砦の領主_ラダーン祭開始宣言_状態遷移 -- Lord of Plains Fort_Declaration of start of Radhan Festival_Status transition
+9931600 NPC316学院の女魔術師_キャラ状態遷移 -- NPC316 Academy Female Magician_Character state transition
+9931610 NPC316学院の女魔術師_幻_NPC初期化イベント -- NPC316 Academy Female Magician_Phantom_NPC Initialization Event
+9931612 NPC316学院の女魔術師_新しい身体_NPC初期化イベント -- NPC316 Academy Female Magician_New Body_NPC Initialization Event
+9931613 NPC316学院の女魔術師_学院_NPC初期化イベント -- NPC316 Academy Female Magician_Academy_NPC Initialization Event
+9931614 NPC316学院の女魔術師_魔術玉になった_NPC初期化イベント -- NPC316 Female magician of the academy_became a magic ball_NPC initialization event
+9931627 NPC316学院の女魔術師_幻消失リアルタイム遷移 -- NPC316 Female Magician of Academy_Illusion Disappearance Real-time Transition
+9932110 NPC321見張り塔の貴人_初期状態_NPC初期化イベント -- NPC321 Watchtower Noble_Initial state_NPC initialization event
+9932111 NPC321見張り塔の貴人_砦で再開_NPC初期化イベント -- NPC321 Watchtower Noble_Restart at the fort_NPC initialization event
+9932120 見張り塔の貴人_廃教会での叫びイベント -- Nobleman of the Watchtower_Shouting Event at the Abandoned Church
+9932121 見張り塔の貴人_ロード判定 -- Nobleman of the Watchtower_Load Judgment
+9932125 見張り塔の貴人_死亡イベント -- Nobleman of the Watchtower_Death Event
+9932510 NPC325ロジェール_エジンバラ_NPC初期化イベント -- NPC325 Roger_Edinburgh_NPC initialization event
+9932511 NPC325ロジェール_エジンバラ地下_NPC初期化イベント -- NPC325 Roger_Edinburgh Underground_NPC initialization event
+9932512 NPC325ロジェール_円卓_NPC初期化イベント -- NPC325 Roger_Roundtable_NPC initialization event
+9933200 NPC332火山館の幽霊_キャラ状態遷移 -- NPC332 Ghost of the Volcano Hall_Character state transition
+9933210 NPC332火山館の幽霊_初期状態_NPC初期化イベント -- NPC332 Ghost of the Volcano Hall_Initial state_NPC initialization event
+9933220 火山館の幽霊_呟き -- Ghost of the Volcano Hall_murmur
+9933510 NPC335ジコ坊_初期状態_NPC初期化イベント -- NPC335 Jikobo_Initial state_NPC initialization event
+9933511 NPC335ジコ坊_円卓に移動_NPC初期化イベント -- NPC335 Jikobo_Move to round table_NPC initialization event
+9934920 NPC349腐敗長老_死体表示 -- NPC349 Rotten elder_corpse display
+9999999 NPC案内人の味方化 -- Become an ally of NPC guide
+99099999 免罪キックフラグを折る -- Fold the exoneration kick flag
+1000000000 敵リスポン -- enemy respawn
+1041333700 NPC316学院の女魔術師_本体_NPC初期化イベント -- NPC316 Academy Female Magician_Main Body_NPC Initialization Event

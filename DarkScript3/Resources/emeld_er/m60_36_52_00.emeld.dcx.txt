@@ -1,0 +1,12 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+100 コンストラクタ_LOD1 -- constructor_LOD1
+150 プリコンストラクタ_LOD1 -- Preconstructor_LOD1
+200 コンストラクタ_LOD2 -- constructor_LOD2
+250 プリコンストラクタ_LOD2 -- Preconstructor_LOD2
+1000000000 敵リスポン -- enemy respawn
+1036522200 亜人初手ガス壺投げ -- Ajin's first gas pot throw
+1036522205 亜人複数回声上げ -- Demi-human raised his voice multiple times
+1036522210 視界特殊効果 -- vision special effects
+1036522215 ルーンベア用_思考ロジック有効化_領域／距離判定 -- For Runebear_Thought logic activation_Area/distance judgment

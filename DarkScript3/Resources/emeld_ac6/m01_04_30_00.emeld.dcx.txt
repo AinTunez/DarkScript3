@@ -1,0 +1,77 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+2000 ミッション開始時処理 -- Mission start process
+2001 リトライ時必要イベント -- Event required for retry
+2002 カットシーン再生 -- Cutscene playback
+2003 エレベーター起動時アニメ再生 -- Animation plays when the elevator starts
+2004 チェックポイント有効化 -- checkpoint enable
+2005 砲台のバックリード設定 -- Battery back lead setting
+2006 砲台のバックリード解除 -- Cannon back lead release
+2010 砲台ターゲット登録 -- Artillery target registration
+2011 砲台ターゲット解除 -- Cannon target removed
+2012 ジャガーノート砲撃特殊効果 -- juggernaut bombardment special effects
+2020 ジャガーノートボス戦開始処理 -- Juggernaut boss battle start process
+2023 ボス戦開始時イベント -- Event at the start of a boss battle
+2024 ボス戦終了時イベント -- Event at the end of the boss battle
+2025 ジャガノ僚機集中狙い -- Aim to focus on Jagano wingman
+2030 ボスエリア透明壁有効化 -- Boss area transparent wall enabled
+2040 ボス部屋入口扉開くアニメ -- Boss room entrance door opening animation
+2041 ボス部屋入口扉閉じるアニメ -- Boss room entrance door closing anime
+2050 CS後僚機有効化 -- CS rear wing aircraft enabled
+2052 ボス戦_戦闘開始時ターゲット登録 -- Boss battle_Target registration at the start of battle
+2060 正面目標地点マーカー有効化 -- Enable front target point marker
+2061 正面目標地点マーカー無効化 -- Disable front target point marker
+2070 企業貢献度設定 -- Corporate contribution setting
+2100 僚機撤退開始イベント -- Wingman withdrawal start event
+2300 壁面砲台発射特殊効果 -- Wall turret firing special effects
+2700 砲台攻撃範囲内判定 -- Judgment within artillery attack range
+2701 砲台攻撃範囲外判定 -- Judgment of out of range of turret attack
+2710 壁内部侵入判定 -- Intrusion detection inside the wall
+2711 ボス部屋侵入判定 -- Boss room intrusion detection
+2712 僚機ボス部屋侵入判定 -- Wingman boss room intrusion detection
+2713 ボス部屋_戦闘開始判定 -- Boss room_battle start determination
+2720 エレベーター起動判定 -- Elevator activation determination
+2730 ボスAP0判定 -- Boss AP0 judgment
+2731 ボスAP低下判定 -- Boss AP decrease judgment
+2732 ボスAP瀕死判定 -- Boss AP moribund judgment
+2733 ボス死亡判定 -- Boss death judgment
+2734 ジャガノボスエリア端判定 -- Jaganobos area edge determination
+2735 ジャガノ自機安置判定 -- Jagano machine placement judgment
+2740 僚機撤退判定 -- Consort aircraft withdrawal decision
+2741 僚機手抜きイベント -- wingman shoddy event
+2800 会話用_ボス正面装甲跳弾判定 -- For conversation_Boss frontal armor ricochet detection
+2801 会話用_ボス背面攻撃有効判定 -- For conversation_Boss rear attack effectiveness determination
+2802 会話用_ボス突進攻撃判定 -- For conversation_Boss rush attack judgment
+2803 会話用_突進時ターゲットが自機か判定 -- For conversation_Determine whether the target is your own aircraft when charging
+2804 会話用_突進時ターゲットが僚機か判定 -- For conversation_Determine whether the target is a wingman when charging
+2805 会話用_自機に突進が当たった判定 -- For conversation_Determining if your aircraft was hit by a charge
+2806 会話用_僚機に突進が当たった判定 -- For conversation_Judgment when a wingman is hit by a rush
+2807 会話用_ボスダウン判定 -- For conversation_Boss down detection
+2808 会話用_ボス初回攻撃判定 -- For conversation_Boss first attack judgment
+2809 会話用_市街地会話判定1 -- Conversation_Urban Conversation Judgment 1
+2810 会話用_市街地会話判定2 -- Conversation_Urban Conversation Judgment 2
+2811 会話用_壁内部会話判定1 -- For conversation_Inside wall conversation judgment 1
+2812 会話用_壁内部会話判定2 -- For conversation_Inside wall conversation judgment 2
+2900 跳ね橋共産帰巣ポイント更新左 -- Drawbridge communal homecoming point update left
+2901 跳ね橋共産帰巣ポイント更新右 -- Drawbridge communal homecoming point update right
+2902 壁内部2_盾共産帰巣 -- Inside the wall 2_shield communist return home
+2903 入口手前左_戦闘ヘリ起動 -- Left in front of entrance_Combat helicopter activation
+2999 保持用 -- For holding
+3400 チェックポイント通過フラグ -- Checkpoint passing flag
+3410 僚機撤退開始フラグ -- Wingman withdrawal start flag
+3420 会話用ステートマップ終了フラグ -- Conversation state map end flag
+3700 エレベーター起動会話フラグ -- Elevator start conversation flag
+3701 正面装甲跳弾会話フラグ -- Frontal Armor Ricochet Conversation Flag
+3702 正面装甲有効会話フラグ -- Frontal armor active conversation flag
+3703 突進攻撃会話1フラグ -- Charge attack conversation 1 flag
+3704 突進攻撃会話2フラグ -- Charge attack conversation 2 flag
+3705 僚機突進回避会話フラグ -- Wingman rush avoidance conversation flag
+3706 背面攻撃会話フラグ -- Rear attack conversation flag
+3707 僚機撤退会話フラグ -- Wingman withdrawal conversation flag
+3708 とどめ演出開始会話フラグ -- Finishing effect start conversation flag
+3709 ボス撃破会話フラグ -- Boss defeat conversation flag
+3710 ジャガノ突進爆弾発生会話フラグ -- Jagano Rush Bomb Occurrence Conversation Flag
+3711 ジャガノHP低下時会話フラグ -- Jagano conversation flag when HP decreases
+3712 ジャガノ突進被弾会話フラグ -- Jagano Rush Hit Conversation Flag
+3713 部屋内部侵入会話フラグ -- Room intrusion conversation flag
+1000000000 敵リスポン -- enemy respawn

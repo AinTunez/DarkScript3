@@ -1,0 +1,6 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+50 プリコンストラクタ -- preconstructor
+4000 地震テスト（HU前） -- Earthquake test (before HU)
+4010 地震テスト（HU後） -- Earthquake test (after HU)
+1000000000 敵リスポン -- enemy respawn

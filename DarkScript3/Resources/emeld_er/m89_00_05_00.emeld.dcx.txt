@@ -1,0 +1,11 @@
+0 コンストラクタ -- constructor
+1 デストラクタ -- destructor
+4800 初期化_亜人漁る -- Initialization_Ajin fishing
+4810 初期化_亜人スカウト全般 -- Initialization_Ajin Scout General
+4850 逃走条件_リーダー殺し -- Escape condition_kill the leader
+4910 汎用_亜人漁る -- General Purpose_Ajin Catch
+4911 汎用_亜人巡回漁る -- General Purpose_Ajin Patrol Fishing
+4920 汎用_亜人スカウト -- General Purpose_Ajin Scout
+4930 汎用_亜人リーダースカウト -- General Purpose_Ajin Leader Scout
+4940 汎用_亜人怯え逃走 -- General Purpose_Ajin Frightened and Runs Away
+1000000000 敵リスポン -- enemy respawn
