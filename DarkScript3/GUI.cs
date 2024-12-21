@@ -354,6 +354,8 @@ namespace DarkScript3
             }
             if (missingFiles.Count == 0)
             {
+                // Opening JS file can load emevd files via links
+                SharedControls.CheckOodle(metadata.GameDocs);
                 links = scripter.LoadLinks(initData);
                 // TODO: Do this asynchronous (and maybe periodically?)
                 if (jsText != null && !BatchOperation)
