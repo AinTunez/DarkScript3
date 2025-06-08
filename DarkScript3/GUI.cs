@@ -102,12 +102,16 @@ namespace DarkScript3
             // Load projects
             string projectJson = Settings.Default.ProjectJson;
             if (!string.IsNullOrEmpty(projectJson)
-                && File.Exists(projectJson)
-                && Path.GetFileName(projectJson) == "project.json")
+                && File.Exists(projectJson) )
             {
+                bool smithboxProject = false;
+                if ( Path.GetFileName(projectJson) != "project.json")
+                {
+                    smithboxProject = true;
+                }
                 try
                 {
-                    LoadProject(projectJson);
+                    LoadProject(projectJson, smithboxProject);
                 }
                 catch (Exception ex)
                 {
@@ -163,26 +167,31 @@ namespace DarkScript3
             }
             SharedControls.HideTip();
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "DSMapStudio Project File|project.json|All files|*.*";
+            ofd.Filter = "DSMapStudio Project File|project.json|Smithbox Project File|*.json|All files|*.*";
             if (ofd.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
             string projectJson = ofd.FileName;
-            if (Path.GetFileName(projectJson) != "project.json")
+
+            if (Path.GetExtension(projectJson) == ".json")
             {
-                return;
-            }
-            try
-            {
-                LoadProject(projectJson);
-                ManuallySelectedProject = true;
-                Settings.Default.ProjectJson = projectJson;
-                Settings.Default.Save();
-            }
-            catch (Exception ex)
-            {
-                ScrollDialog.Show(this, ex.ToString());
+                bool smithboxProject = false;
+                if (Path.GetFileName(projectJson) != "project.json")
+                {
+                    smithboxProject = true;
+                }
+                try
+                {
+                    LoadProject(projectJson, smithboxProject);
+                    ManuallySelectedProject = true;
+                    Settings.Default.ProjectJson = projectJson;
+                    Settings.Default.Save();
+                }
+                catch (Exception ex)
+                {
+                    ScrollDialog.Show(this, ex.ToString());
+                }
             }
         }
 
@@ -197,10 +206,10 @@ namespace DarkScript3
             clearProjectToolStripMenuItem.Enabled = false;
         }
 
-        private void LoadProject(string projectJson)
+        private void LoadProject(string projectJson, bool smithboxProject)
         {
             // projectJson should be a valid project file. Callers should handle exceptions.
-            CurrentDefaultProject = ProjectSettingsFile.LoadProjectFile(projectJson);
+            CurrentDefaultProject = ProjectSettingsFile.LoadProjectFile(projectJson, smithboxProject);
             if (CurrentDefaultProject.ProjectEventDirectory != null)
             {
                 DirectoryProjects[CurrentDefaultProject.ProjectEventDirectory] = CurrentDefaultProject;

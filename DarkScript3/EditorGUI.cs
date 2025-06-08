@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FastColoredTextBoxNS;
 using SoulsFormats;
+using SoulsFormats.Utilities;
 using static DarkScript3.DocAutocomplete;
 using Range = FastColoredTextBoxNS.Range;
 
@@ -293,7 +294,7 @@ namespace DarkScript3
                 }
                 if (File.Exists(Scripter.EmevdPath))
                 {
-                    SFUtil.Backup(Scripter.EmevdPath);
+                    PathHelper.Backup(Scripter.EmevdPath);
                 }
                 result.Write(Scripter.EmevdPath);
                 SaveJSFile();

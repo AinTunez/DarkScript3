@@ -16,6 +16,9 @@ namespace DarkScript3
         public ProjectSettings Settings { get; set; }
         // Project file path, which exists
         public string FilePath { get; set; }
+        // Project directory path, which is null if it it does not exist or is not supported.
+        // Used for Smithbox 2.0.0, which stores project files outside of the project directory.
+        public string ProjectDirectory { get; set; }
         // Project event directory path, which is null if it is not supported.
         // If present, it but may not exist, but the outer directory should.
         public string ProjectEventDirectory { get; set; }
@@ -63,6 +66,16 @@ namespace DarkScript3
             public GameType GameType { get; set; } = GameType.Undefined;
         }
 
+        // Smithbox 2.0 project files have a different structure
+        // https://github.com/vawser/Smithbox/blob/main/src/Smithbox.Program/Core/ProjectSettings.cs
+        public class SmithboxProjectSettings
+        {
+            public string ProjectName { get; set; } = "";
+            public string ProjectPath { get; set; } = "";
+            public string DataPath { get; set; } = "";
+            public GameType ProjectType { get; set; } = GameType.Undefined;
+        }
+
         private static readonly GameType[] eventDirGames = new[]
         {
             GameType.DarkSoulsPTDE, GameType.DarkSoulsRemastered,
@@ -85,12 +98,19 @@ namespace DarkScript3
 
         // Expects a fully specified valid project JSON path.
         // This may throw an exception.
-        public static ProjectSettingsFile LoadProjectFile(string projectJsonPath)
+        public static ProjectSettingsFile LoadProjectFile(string projectJsonPath, bool smithboxProject)
         {
             // Wrapper to rewrite exceptions
             try
             {
-                return LoadProject(projectJsonPath);
+                if (smithboxProject)
+                {
+                    return LoadSmithboxProject(projectJsonPath);
+                }
+                else
+                {
+                    return LoadDSMapStudioProject(projectJsonPath);
+                }
             }
             catch (JsonException je)
             {
@@ -116,8 +136,24 @@ namespace DarkScript3
                     string projectJson = Path.Combine(eventParent.FullName, "project.json");
                     if (File.Exists(projectJson))
                     {
-                        project = LoadProject(projectJson);
+                        project = LoadDSMapStudioProject(projectJson);
                         return true;
+                    }
+                    else
+                    {
+                        // Iterate through Smithbox's list of projects until one with the same project directory is found.
+                        string localAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Smithbox\\Projects");
+
+                        IEnumerable<string> projectFiles = Directory.EnumerateFiles(localAppDataPath, "*.json");
+
+                        foreach(string currentFile in projectFiles)
+                        {
+                            project = LoadSmithboxProject(Path.Combine(localAppDataPath, currentFile));
+                            if (project.ProjectDirectory == eventParent.FullName)
+                            {
+                                return true;
+                            }
+                        }
                     }
                 }
             }
@@ -129,8 +165,34 @@ namespace DarkScript3
             return false;
         }
 
-        private static ProjectSettingsFile LoadProject(string jsonPath)
+        private static ProjectSettingsFile LoadProject(ProjectSettingsFile file)
         {
+
+            if (eventDirGames.Contains(file.Settings.GameType))
+            {
+                file.ProjectEventDirectory = file.ProjectDirectory == null ?
+                    Path.Combine(Path.GetDirectoryName(file.FilePath), "event") :
+                    Path.Combine(file.ProjectDirectory, "event");
+
+                if (file.Settings.GameRoot != null && Directory.Exists(file.Settings.GameRoot))
+                {
+                    string gameDir = Path.Combine(Path.GetFullPath(file.Settings.GameRoot), "event");
+                    if (Directory.Exists(gameDir))
+                    {
+                        file.GameEventDirectory = gameDir;
+                    }
+                }
+            }
+            if (resourcePrefixHint.TryGetValue(file.Settings.GameType, out string prefix))
+            {
+                file.ResourcePrefix = prefix;
+            }
+            return file;
+        }
+
+        private static ProjectSettingsFile LoadDSMapStudioProject(string jsonPath)
+        {
+
             jsonPath = Path.GetFullPath(jsonPath);
             string input = File.ReadAllText(jsonPath);
             ProjectSettings settings = JsonConvert.DeserializeObject<ProjectSettings>(input);
@@ -139,23 +201,29 @@ namespace DarkScript3
                 Settings = settings,
                 FilePath = jsonPath,
             };
-            if (eventDirGames.Contains(settings.GameType))
+
+            return LoadProject(file);
+        }
+
+        private static ProjectSettingsFile LoadSmithboxProject(string jsonPath)
+        {
+            jsonPath = Path.GetFullPath(jsonPath);
+            string input = File.ReadAllText(jsonPath);
+            SmithboxProjectSettings smithboxSettings = JsonConvert.DeserializeObject<SmithboxProjectSettings>(input);
+            ProjectSettingsFile file = new ProjectSettingsFile
             {
-                file.ProjectEventDirectory = Path.Combine(Path.GetDirectoryName(jsonPath), "event");
-                if (settings.GameRoot != null && Directory.Exists(settings.GameRoot))
+                // Convert Smithbox 2.0.0 Project settings into DSMapStudio settings for easy compat.
+                Settings = new ProjectSettings
                 {
-                    string gameDir = Path.Combine(Path.GetFullPath(settings.GameRoot), "event");
-                    if (Directory.Exists(gameDir))
-                    {
-                        file.GameEventDirectory = gameDir;
-                    }
-                }
-            }
-            if (resourcePrefixHint.TryGetValue(settings.GameType, out string prefix))
-            {
-                file.ResourcePrefix = prefix;
-            }
-            return file;
+                    ProjectName = smithboxSettings.ProjectName,
+                    GameRoot = smithboxSettings.DataPath,
+                    GameType = smithboxSettings.ProjectType
+                },
+                FilePath = jsonPath,
+                ProjectDirectory = smithboxSettings.ProjectPath
+            };
+
+            return LoadProject(file);
         }
     }
 }
