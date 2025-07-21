@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 using SoulsFormats;
 using static DarkScript3.DocAutocomplete;
 using static DarkScript3.InitData;
@@ -312,6 +313,14 @@ namespace DarkScript3
             string name = Path.GetFileName(path);
             int dot = name.IndexOf('.');
             return dot == -1 ? name : name.Substring(0, dot);
+        }
+
+        public static int GetStableSortKey(string path)
+        {
+            // Stable sort key for decompilation order, assuming paths are in order too
+            // Make sure common_func goes before common due to Nightreign link
+            string name = GetEmevdName(path);
+            return name == "common_func" ? 0 : 1;
         }
 
         public static readonly List<string> ValidLinkedNames = new()

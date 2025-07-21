@@ -33,6 +33,7 @@ namespace DarkScript3
 
             public override string ToString() => $"{(Fancy ? "$" : "")}Event({ID}, {RestBehavior}, function({string.Join(",", Params)}) {{ {string.Join(" ", Body)} }});";
 
+            private static readonly HashSet<long> multiLabelEvents = new() { 11052860, 1600, 1601 };
             public void Print(TextWriter writer)
             {
                 LineTrackingWriter lineWriter = writer as LineTrackingWriter;
@@ -49,7 +50,7 @@ namespace DarkScript3
                 // It mainly seems to arise when two label commands are literally next to each other, and when declared
                 // in a parent scope right before a child scope which also includes it.
                 // Well, for now, hardcode the only vanilla event which causes this. Fix me :fatcat:
-                bool disambiguateLabels = "11052860" == ID.ToString();
+                bool disambiguateLabels = ID is long id && multiLabelEvents.Contains(id);
                 List<string> usedLabels = new List<string>();
                 string getLabelWithSuffix(string label)
                 {
@@ -91,17 +92,10 @@ namespace DarkScript3
                         }
                         else
                         {
-                            string fullLine = sp + prefix + im + suffix;
-                            if (true || fullLine.Length > columnLimit && Fancy)
-                            {
-                                TreeDecorator treeDec = new();
-                                writer.Write(im.GetStringTree().RenderLine(sp, prefix, suffix));
-                                lineWriter?.PostMapping(im.LineMapping);
-                            }
-                            else
-                            {
-                                writer.WriteLine(fullLine);
-                            }
+                            // Always use StringTree since it includes decorations
+                            // string fullLine = sp + prefix + im + suffix;
+                            writer.Write(im.GetStringTree().RenderLine(sp, prefix, suffix));
+                            lineWriter?.PostMapping(im.LineMapping);
                             if (im is IfElse ifIm)
                             {
                                 subprint(ifIm.True, indent + 1);
@@ -109,7 +103,7 @@ namespace DarkScript3
                                 {
                                     writer.WriteLine(sp + $"}}");
                                 }
-                                else if (ifIm.False.Count == 1 && ifIm.False[0] is IfElse)
+                                else if (ifIm.False.Count == 1 && ifIm.False[0] is IfElse elseIm && elseIm.Labels.Count == 0)
                                 {
                                     // Use recursion for this, to avoid duplicating StringTree etc call sites
                                     // Iteration could be possible if this becomes a performance problem, or if prefix is unsustainable

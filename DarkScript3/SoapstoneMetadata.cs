@@ -21,6 +21,7 @@ namespace DarkScript3
         private readonly CancellationTokenSource cancelSource;
 
         private volatile InnerData currentData;
+        private volatile ConcurrentDictionary<string, StaticData> staticData = new();
         private volatile bool resetData;
 
         public SoapstoneMetadata(NameMetadata nameMetadata)
@@ -148,10 +149,6 @@ namespace DarkScript3
             // Cached mapping from FMG enum to items
             public ConcurrentDictionary<string, List<DocAutocompleteItem>> FmgEntryItems =
                 new ConcurrentDictionary<string, List<DocAutocompleteItem>>();
-            // Combine autocomplete items and lookup items together for map names.
-            // Construct it lazily. It can only go from a null state to a non-null state.
-            public SortedDictionary<string, DocAutocompleteItem> MapIntItems;
-            public SortedDictionary<string, DocAutocompleteItem> MapPartsItems;
 
             public bool IsGameCompatible(string game)
             {
@@ -176,6 +173,8 @@ namespace DarkScript3
                         return game == "er";
                     case FromSoftGame.ArmoredCore6:
                         return game == "ac6";
+                    case FromSoftGame.Nightreign:
+                        return game == "nr";
                 }
                 return false;
             }
@@ -204,9 +203,20 @@ namespace DarkScript3
                         return "er";
                     case FromSoftGame.ArmoredCore6:
                         return "ac6";
+                    case FromSoftGame.Nightreign:
+                        return "nr";
                 }
                 return null;
             }
+        }
+
+        // Cache of data for a specific game based on local static resources
+        private sealed class StaticData
+        {
+            // Combine autocomplete items and lookup items together for map names.
+            // Construct it lazily. It can only go from a null state to a non-null state.
+            public SortedDictionary<string, DocAutocompleteItem> MapIntItems;
+            public SortedDictionary<string, DocAutocompleteItem> MapPartsItems;
         }
 
         public class DisplayData
@@ -400,6 +410,11 @@ namespace DarkScript3
             }
         }
 
+        private StaticData GetStaticData(string game)
+        {
+            return staticData.GetOrAdd(game, _ => new StaticData());
+        }
+
         // There is a bit of duplication here, but at 2-3 instances there's not too much need for advanced abstraction.
 
         // Fetch methods are all async, to allow for background loads (map data is not currently).
@@ -466,10 +481,7 @@ namespace DarkScript3
 
         public DisplayData GetMapNameData(string game, string mapId)
         {
-            if (!GetCompatibleData(game, out InnerData data))
-            {
-                return null;
-            }
+            StaticData data = GetStaticData(game);
             if (data.MapPartsItems == null)
             {
                 InitializeMapNameItems(game, data);
@@ -479,12 +491,8 @@ namespace DarkScript3
 
         public DisplayData GetEventFlagData(string game, int eventFlag)
         {
-            // For now, this uses a hardcoded list.
-            // TODO: make the list. Subsequent TODO: event flag metadata in DSMapStudio?
-            if (!GetCompatibleData(game, out InnerData data))
-            {
-                return null;
-            }
+            // For now, this uses a hardcoded static list.
+            // This could be fetched from other editors if they maintain such a resource.
             Dictionary<string, string> eventFlags = nameMetadata.GetEventFlagNames(game);
             if (eventFlags == null || !eventFlags.TryGetValue(eventFlag.ToString(), out string text))
             {
@@ -520,10 +528,6 @@ namespace DarkScript3
                 foreach (DocAutocompleteItem item in data.MapItems)
                 {
                     EntityData entity = item.SubType as EntityData;
-                    if (entity.ID == 10000)
-                    {
-                        Console.WriteLine($"considering {entity.Desc} with {entity.Namespace} {entity.Type} vs {string.Join(",", metaType.OverrideTypes.Keys)}");
-                    }
                     if (entity != null
                         && (metaType.OverrideTypes.TryGetValue(entity.Namespace, out EMEDF.DarkScriptTypeOverride over)
                             || metaType.OverrideTypes.TryGetValue(entity.Type, out over)))
@@ -588,10 +592,7 @@ namespace DarkScript3
 
         public IEnumerable<DocAutocompleteItem> GetMapNameIntItems(string game)
         {
-            if (!GetCompatibleData(game, out InnerData data))
-            {
-                return new List<DocAutocompleteItem>();
-            }
+            StaticData data = GetStaticData(game);
             if (data.MapIntItems == null)
             {
                 InitializeMapNameItems(game, data);
@@ -601,10 +602,7 @@ namespace DarkScript3
 
         public IEnumerable<DocAutocompleteItem> GetMapNamePartsItems(string game)
         {
-            if (!GetCompatibleData(game, out InnerData data))
-            {
-                return new List<DocAutocompleteItem>();
-            }
+            StaticData data = GetStaticData(game);
             if (data.MapPartsItems == null)
             {
                 InitializeMapNameItems(game, data);
@@ -612,7 +610,7 @@ namespace DarkScript3
             return data.MapPartsItems.Values;
         }
 
-        private void InitializeMapNameItems(string game, InnerData data)
+        private void InitializeMapNameItems(string game, StaticData data)
         {
             // Set map items, even if set before
             SortedDictionary<string, DocAutocompleteItem> intItems = new SortedDictionary<string, DocAutocompleteItem>();
@@ -1083,7 +1081,7 @@ namespace DarkScript3
                 int id = entry.Key;
                 // Very ad hoc
                 bool valid = true;
-                if (project.Game == FromSoftGame.ArmoredCore6) valid = id <= 20000;
+                if (project.Game == FromSoftGame.ArmoredCore6 || project.Game == FromSoftGame.Nightreign) valid = id <= 20000;
                 else if (project.Game != FromSoftGame.EldenRing) valid = id == 10000;
                 if (!valid) continue;
                 List<string> infixes = GetSpaceBasedMatchText(entry.Value);

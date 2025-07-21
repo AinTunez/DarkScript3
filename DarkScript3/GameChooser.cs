@@ -85,6 +85,12 @@ namespace DarkScript3
             Close();
         }
 
+        private void nrButton_Click(object sender, EventArgs e)
+        {
+            SetResult("nr-common.emedf.json");
+            Close();
+        }
+
         private void GameChooser_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)

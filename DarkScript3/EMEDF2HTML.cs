@@ -47,6 +47,7 @@ namespace DarkScript3
             ["sekiro"] = "Sekiro",
             ["er"] = "Elden Ring",
             ["ac6"] = "Armored Core VI",
+            ["nr"] = "Elden Ring Nightreign",
         };
         private readonly Dictionary<string, Regex> interestingEmevds = new Dictionary<string, Regex>()
         {
@@ -55,7 +56,7 @@ namespace DarkScript3
             ["ds3"] = new Regex(@"^(common|common_func|m[34].*)\.emevd\.dcx$"),
             ["sekiro"] = new Regex(@"^(common|common_func|m[12].*)\.emevd\.dcx$"),
         };
-        // Not shown unles all usages are in secondary files
+        // Not shown unless all usages are in secondary files
         private readonly Dictionary<string, Regex> secondaryEmevd = new Dictionary<string, Regex>()
         {
             ["bb"] = new Regex(@"^m21_01"),
@@ -68,6 +69,7 @@ namespace DarkScript3
         private readonly Dictionary<string, Regex> elidedEmevd = new Dictionary<string, Regex>()
         {
             ["er"] = new Regex(@"^(m60|m61|m3[0-2]|m4[0-3])"),
+            ["nr"] = new Regex(@"^(m60|m[2-4])"),
         };
         private readonly Dictionary<string, string> specialCommands = new Dictionary<string, string>
         {
@@ -331,7 +333,7 @@ namespace DarkScript3
                 if (mainRegex != null && !mainRegex.Match(Path.GetFileName(emevdPath)).Success) continue;
                 string name = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(emevdPath));
                 allFiles.Add(name);
-                Console.WriteLine($"--- {name}");
+                // Console.WriteLine($"--- {name}");
                 HashSet<string> symbols = symbolsByFile[name] = new HashSet<string>();
                 EMEVD emevd = EMEVD.Read(emevdPath);
                 foreach (EMEVD.Event evt in emevd.Events)
@@ -515,7 +517,16 @@ namespace DarkScript3
                     int elidedCount = Files.Count - alwaysReport.Count;
                     if (elidedCount > 10)
                     {
-                        return string.Join(", ", alwaysReport) + $", and {elidedCount} others" + restr;
+                        if (alwaysReport.Count < 10)
+                        {
+                            List<string> sample = Files.Intersect(ElidedFiles).Take(10 - alwaysReport.Count).ToList();
+                            alwaysReport.AddRange(sample);
+                            elidedCount -= sample.Count;
+                        }
+                        if (elidedCount > 0)
+                        {
+                            return string.Join(", ", alwaysReport) + $", and {elidedCount} others" + restr;
+                        }
                     }
                 }
                 return string.Join(", ", Files) + restr;

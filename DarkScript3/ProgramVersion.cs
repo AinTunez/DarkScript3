@@ -7,7 +7,7 @@ namespace DarkScript3
 {
     public class ProgramVersion
     {
-        public static readonly string VERSION = "3.5";
+        public static readonly string VERSION = "3.6";
 
         public static string GetCompatibilityMessage(string fileName, string resourceString, string fileVer)
         {
@@ -84,6 +84,8 @@ namespace DarkScript3
             new IncompatibilityEntry("3.2.2", "EndIfPlayerInoutsideArea requires additional arg numberOfTargetCharacters with default value 1", new List<string> { "sekiro" }),
             new IncompatibilityEntry("3.5", "Typed event initialization adds an extra parsing step before saving"),
             new IncompatibilityEntry("3.5", "Typed event initialization requires that arguments are passed into instructions directly, not modified or used elsewhere"),
+            new IncompatibilityEntry("3.6", "ModifyBowProperties is now ModifyBulletParam and the third argument type has been changed. Get the fixed lines from vanilla files.", new List<string> { "ds2scholar" }),
+            new IncompatibilityEntry("3.6", "JavaScript is now parsed in strict mode before being run. It is still being run in strict mode."),
         };
 
         private class IncompatibilityEntry

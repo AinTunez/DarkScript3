@@ -144,6 +144,12 @@ namespace DarkScript3
                 {
                     DOC = EMEDF.ReadFile(resolvedPath);
                 }
+#if DEBUG
+                else if (File.Exists(Path.Combine("DarkScript3", resolvedPath)))
+                {
+                    DOC = EMEDF.ReadFile(Path.Combine("DarkScript3", resolvedPath));
+                }
+#endif
                 else
                 {
                     DOC = EMEDF.ReadStream(streamPath);
@@ -446,18 +452,30 @@ namespace DarkScript3
                             // Normally, the main arg should be the first one, and the rest should be consecutive.
                             // TriggerAISound reverses the order, so it can't be used for type-aware autocomplete currently.
                             // It should also not overlap with any other meta types, but this is not enforced.
-                            foreach (string argName in applicable.MultiNames)
+                            // This used to find by name, but this doesn't work with aliases (e.g. for Warp Entity Type + Warp Destination Entity ID),
+                            // so rely on the index of the first found name.
+                            bool matchesAny(EMEDF.ArgDoc a, string argName) => a.Name == argName || aliasNames.TryGetValue(a.Name, out string alias) && alias == argName;
+                            int multiIndex = instr.Arguments.FindIndex(a => matchesAny(a, applicable.MultiNames[0]));
+                            if (multiIndex >= 0)
                             {
-                                EMEDF.ArgDoc multiArg = instr.Arguments
-                                    .Where(a => a.Name == argName || aliasNames.TryGetValue(a.Name, out string alias) && alias == argName)
-                                    .FirstOrDefault();
-                                if (multiArg == null)
+                                EMEDF.ArgDoc multiArg = instr.Arguments[multiIndex];
+                                multiArg.MetaType = applicable;
+                                for (int i = 1; i < applicable.MultiNames.Count; i++)
                                 {
-                                    break;
-                                }
-                                else
-                                {
-                                    multiArg.MetaType = applicable;
+                                    int extraIndex = multiIndex + i;
+                                    if (extraIndex >= instr.Arguments.Count)
+                                    {
+                                        break;
+                                    }
+                                    multiArg = instr.Arguments[extraIndex];
+                                    if (matchesAny(multiArg, applicable.MultiNames[i]))
+                                    {
+                                        multiArg.MetaType = applicable;
+                                    }
+                                    else
+                                    {
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -544,31 +562,60 @@ namespace DarkScript3
             return $"$LAYERS({string.Join(", ", bitList)})";
         }
 
+        private static string FormatUnknownType(byte[] args, int arg)
+        {
+            int i = arg * 4;
+            int ival = BitConverter.ToInt32(args, i);
+            if (ival == 0) return "0";
+            short sval1 = BitConverter.ToInt16(args, i);
+            short sval2 = BitConverter.ToInt16(args, i + 2);
+            string numStr = sval1 == ival && sval2 == 0 ? $"{ival}" : $"{ival} | {sval1} {sval2}";
+            float fval = BitConverter.ToSingle(args, i);
+            if (Math.Abs(fval) >= 0.00001 && Math.Abs(fval) < 10000)
+            {
+                numStr += $" | {fval}f";
+            }
+            return $"{args[i]:X2} {args[i + 1]:X2} {args[i + 2]:X2} {args[i + 3]:X2} | {numStr}";
+        }
+
         public static string InstrDebugStringFull(Instruction ins, string name, int insIndex = -1, Dictionary<Parameter, string> paramNames = null)
         {
             byte[] args = ins.ArgData;
             if (args.Length % 4 != 0) throw new Exception($"Irregular length {InstrDebugString(ins)}");
-            string multiformat(int arg)
-            {
-                int i = arg * 4;
-                int ival = BitConverter.ToInt32(args, i);
-                if (ival == 0) return "0";
-                short sval1 = BitConverter.ToInt16(args, i);
-                short sval2 = BitConverter.ToInt16(args, i + 2);
-                string numStr = sval1 == ival && sval2 == 0 ? $"{ival}" : $"{ival} | {sval1} {sval2}";
-                float fval = BitConverter.ToSingle(args, i);
-                if (Math.Abs(fval) >= 0.00001 && Math.Abs(fval) < 10000)
-                {
-                    numStr += $" | {fval}f";
-                }
-                return $"{args[i]:X2} {args[i + 1]:X2} {args[i + 2]:X2} {args[i + 3]:X2} | {numStr}";
-            }
             string paramStr = "";
             if (paramNames.Count > 0)
             {
                 paramStr = string.Join("", paramNames.Where(e => e.Key.InstructionIndex == insIndex).Select(e => $" ^({e.Key.TargetStartByte} <- {e.Value})"));
             }
-            return $"{name} {FormatInstructionID(ins.Bank, ins.ID)} ({string.Join(", ", Enumerable.Range(0, args.Length / 4).Select(multiformat))}){paramStr}";
+            string argStr = string.Join(", ", Enumerable.Range(0, args.Length / 4).Select(i => FormatUnknownType(args, i)));
+            return $"{name} {FormatInstructionID(ins.Bank, ins.ID)} ({argStr}){paramStr}";
+        }
+
+        public static ScriptAst.Instr InstrDebugObject(Instruction ins, string name, int insIndex = -1, Dictionary<Parameter, string> paramNames = null)
+        {
+            byte[] args = ins.ArgData;
+            List<object> argStrs = Enumerable.Range(0, args.Length / 4).Select(i => (object)FormatUnknownType(args, i)).ToList();
+            if (paramNames.Count > 0)
+            {
+                List<string> paramStrs = paramNames.Where(e => e.Key.InstructionIndex == insIndex).Select(e => $" ^({e.Key.TargetStartByte} <- {e.Value})").ToList();
+                if (paramStrs.Count > 0)
+                {
+                    argStrs.Add(string.Join("", paramStrs));
+                }
+            }
+            string cmdStr = FormatInstructionID(ins.Bank, ins.ID);
+            ScriptAst.Instr instr = new()
+            {
+                Inner = ins,
+                Cmd = cmdStr,
+                Name = $"{name} {cmdStr}",
+                Args = argStrs,
+            };
+            if (ins.Layer is uint layer)
+            {
+                instr.Layers = new ScriptAst.Layers { Mask = layer };
+            }
+            return instr;
         }
 
         public static string InstrDebugString(Instruction ins)
@@ -841,10 +888,10 @@ namespace DarkScript3
                     {
                         args[argIndex] = formatArgFunc(argDoc, args[argIndex]);
 #if DEBUG
-                        // For testing emedf completeness
+                        // For testing emedf completeness, non-fancy only
                         if (argDoc.EnumDoc != null && args[argIndex] is not string)
                         {
-                            // throw new ArgumentException($"Invalid value for {argDoc.EnumName}: {args[argIndex]}");
+                            // Console.WriteLine($"Invalid value for {argDoc.EnumName}: {args[argIndex]}");
                         }
 #endif
                     }
@@ -917,7 +964,7 @@ namespace DarkScript3
             {
                 return id >= 20000000 && id < 30000000;
             }
-            else if (ResourceString.StartsWith("er"))
+            else if (ResourceString.StartsWith("er") || ResourceString.StartsWith("nr"))
             {
                 return (id >= 90000000 && id < 100000000) || (id >= 9000000 && id < 10000000);
             }

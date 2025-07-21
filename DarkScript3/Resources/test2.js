@@ -1,0 +1,1 @@
+export const BossFlag = 1500800;

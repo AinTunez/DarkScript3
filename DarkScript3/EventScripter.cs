@@ -332,7 +332,7 @@ namespace DarkScript3
         private void InitAll()
         {
             v8.DocumentSettings.AccessFlags = DocumentAccessFlags.EnableFileLoading;
-            v8.DocumentSettings.SearchPath = Path.GetDirectoryName(EmevdPath);
+            v8.DocumentSettings.SearchPath = new FileInfo(EmevdPath).Directory.FullName;
 
             v8.AddHostObject("$$$_host", new HostFunctions());
             v8.AddHostObject("EVD", EVD);

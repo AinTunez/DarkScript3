@@ -1127,7 +1127,8 @@ namespace DarkScript3
                     if (metadata == null) return;
                     List<string> succeeded = new List<string>();
                     List<string> failed = new List<string>();
-                    foreach (var fileName in ofd.FileNames)
+                    List<string> files = ofd.FileNames.OrderBy(InitData.GetStableSortKey).ToList();
+                    foreach (var fileName in files)
                     {
                         if (File.Exists(fileName + ".js"))
                         {
@@ -1274,17 +1275,17 @@ namespace DarkScript3
 
         private void viewEMEVDTutorialToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenURL("http://soulsmodding.wikidot.com/tutorial:learning-how-to-use-emevd");
+            OpenURL("https://www.soulsmodding.com/doku.php?id=tutorial:learning-how-to-use-emevd");
         }
 
         private void viewFancyDocumentationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenURL("http://soulsmodding.wikidot.com/tutorial:mattscript-documentation");
+            OpenURL("https://www.soulsmodding.com/doku.php?id=tutorial:mattscript-documentation");
         }
 
         private void viewEldenRingEMEVDTutorialToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenURL("http://soulsmodding.wikidot.com/tutorial:intro-to-elden-ring-emevd");
+            OpenURL("https://www.soulsmodding.com/doku.php?id=tutorial:intro-to-elden-ring-emevd");
         }
 
         private void checkForDarkScript3UpdatesToolStripMenuItem_Click(object sender, EventArgs e)

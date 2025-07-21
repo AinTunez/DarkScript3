@@ -120,6 +120,10 @@ namespace DarkScript3
                     EMEDF.InstrDoc doc = docs.DOC[ins.Bank]?[ins.ID];
                     if (doc == null)
                     {
+#if DEBUG
+                        func.Body.Add(InstructionDocs.InstrDebugObject(ins, "Nodoc", insIndex, paramNames));
+                        continue;
+#endif
                         throw new Exception($"Unknown instruction in event {id}: {ins.Bank}[{ins.ID}] {string.Join(" ", ins.ArgData.Select(b => $"{b:x2}"))}");
                     }
                     string funcName = doc.DisplayName;
@@ -134,6 +138,10 @@ namespace DarkScript3
                     }
                     catch (Exception ex)
                     {
+#if DEBUG
+                        func.Body.Add(InstructionDocs.InstrDebugObject(ins, "Baddoc", insIndex, paramNames));
+                        continue;
+#endif
                         var sb = new StringBuilder();
                         sb.AppendLine($@"Unable to unpack arguments for {funcName} at Event {evt.ID}[{insIndex}]");
                         sb.AppendLine($@"Instruction arg data: {InstructionDocs.InstrDebugString(ins)}");

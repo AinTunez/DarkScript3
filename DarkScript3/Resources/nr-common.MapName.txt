@@ -1,0 +1,221 @@
+m10_00_00_00 Roundtable Hold
+m11_00_00_00 Roundtable Hold Ending
+m12_00_00_00 Spirit Shelter
+m13_00_00_00 Remembrance - Executor
+m13_20_00_00 Remembrance - Raider
+m14_00_00_00 
+m15_00_00_00 Remembrance - Revenant
+m18_00_00_00 Nightlord - Final Boss
+m19_00_00_00 Nightlord - Others
+m20_00_00_00 Map Event - Groveside
+m20_10_00_00 Map Event - Gatefront
+m20_20_00_00 Map Event - Stormhill North of Gate
+m20_30_00_00 Map Event - Northwest Stormhill
+m20_40_00_00 Map Event - South Lake
+m20_50_00_00 Map Event - Alexander Spot
+m20_60_00_00 Map Event - Northeast Stormhill
+m20_70_00_00 Map Event - Waypoint Ruins
+m20_80_00_00 Map Event - West Mistwood
+m20_90_00_00 Map Event - Northwest Mistwood
+m21_00_00_00 Map Event - Artist's Shack
+m21_10_00_00 Map Event - Summonwater Approach
+m21_20_00_00 Map Event - South Mistwood
+m21_30_00_00 Map Event - Minor Erdtree
+m21_40_00_00 Map Event - Northeast Mistwood
+m21_50_00_00 Map Event - Summonwater
+m30_00_00_00 Fort - Lordsworn Captain; Abductor Virgin
+m30_30_00_00 Fort - Guardian Golem; Crystalians
+m31_90_00_00 Fort - Soldiers
+m32_00_00_00 Camp - Banished Knights; Elder Lion
+m32_10_00_00 Camp - Leonine Misbegotten; Redmane Knights; Royal Army Knights
+m32_20_00_00 Camp - Flame Chariots; Frenzied Flame Troll
+m34_00_00_00 Ruins - Erdtree Burial Watchdogs; Sanguine Noble; Ancient Heroes of Zamor; Albinaurics
+m34_10_00_00 Ruins - Perfumer; Depraved Perfumer; Battlemages; Albinauric Archers; Runebear
+m34_20_00_00 Ruins - Wormface; Unused Beastmen of Farum Azula
+m34_30_00_00 Ruins - Beastmen of Farum Azula
+m35_90_00_00 Ruins - Tutorial and Revenant Encounter
+m37_90_00_00 Township
+m38_00_00_00 Great Church - Oracle Envoys; Guardian Golem
+m38_10_00_00 Great Church - Fire Monk; Mausoleum Knight
+m40_00_00_00 Sorcerer's Rise - Above Door; Imp Statue; Withered Trees; Pool Reflection; Fake Building; Windy Trees; Fog Door; Fleeing Stump; Unlit Candle; Missing Statue
+m40_90_00_00 Sorcerer's Rise - Above Door, Teleporting Trees, Missing Statue; Imp Statue, Teleporting Trees, Fleeing Stump; Pool Reflection, Teleporting Trees, Unlit Candle; Above Door, Rear Withered Trees, Second Floor; Fake Building, Pool Reflection, Second Floor; Imp Statue, Windy Trees, Second Floor; Windy Trees, Right of Door, Fleeing Stump; Fake Building, Right of Door, Unlit Candle; Rear Withered Trees, Right of Door, Missing Statue
+m41_00_00_00 Church - Normal
+m41_01_00_00 Church - Rats; Rats Alt
+m41_30_00_00 Church - Rotted
+m41_90_00_00 Church - Unknown
+m43_00_00_00 Small Camp - Dogs and Soldiers; Soldiers
+m43_01_00_00 Small Camp - Wandering Nobles; Nobles and Soldiers
+m43_02_00_00 Small Camp - Foot Soldiers
+m43_30_00_00 Small Camp - Putrid Ancestral Followers; Putrid Ancestral Followers Alt
+m43_40_00_00 Small Camp - Dogs; Misbegotten
+m43_41_00_00 Small Camp - Demi-Humans; Rats and Demi-Humans
+m43_50_00_00 Small Camp - Guilty; Guilty Alt
+m44_01_00_00 Small Camp - Shack
+m45_00_00_00 Small Camp - Caravans
+m45_01_00_00 Small Camp - Caravans and Nobles
+m45_51_00_00 Field Boss - Black Knife Assassin
+m45_52_00_00 Event - Maris
+m45_53_00_00 Event - Gnoster
+m45_55_00_00 Event - Libra
+m46_00_00_00 Night Horde - Trolls and Soldiers
+m46_01_00_00 Night Horde - Caelid Wildlife
+m46_02_00_00 Night Horde - Ants
+m46_03_00_00 Night Horde - Fingercreepers
+m46_04_00_00 Night Horde - Dragons
+m46_05_00_00 Night Horde - Guardian Golems
+m46_06_00_00 Night Horde - Revenant Followers
+m46_50_00_00 Evergaol - Unused Banished Knights; Unused Nox Duo; Omen; Grave Warden Duelist; Beastmen of Farum Azula; Beastly Brigade; Unused Bloodhound Knight
+m46_51_00_00 Field Boss - Red Wolf
+m46_52_00_00 Strong Field Boss - Draconic Tree Sentinel
+m46_53_00_00 Strong Field Boss - Tree Sentinel
+m46_54_00_00 Strong Field Boss - Royal Carian Knight
+m46_55_00_00 Field Boss - Leonine Misbegotten
+m46_56_00_00 Strong Field Boss - Bell Bearing Hunter
+m46_57_00_00 Field Boss - Elder Lion
+m46_58_00_00 Strong Field Boss - Flying Dragon
+m46_59_00_00 Field Boss - Royal Revenant
+m46_60_00_00 Evergaol - Crucible Knight with Sword; Crucible Knight with Spear; Crystalians; Stoneskin Lords; Banished Knights; Nox Warriors; Bloodhound Knight
+m46_62_00_00 Field Boss - Night's Cavalry
+m46_63_00_00 Strong Field Boss - Ulcerated Tree Spirit
+m46_64_00_00 Strong Field Boss - Ancestor Spirit
+m46_65_00_00 Field Boss - Grafted Scion
+m46_66_00_00 Strong Field Boss - Black Blade Kindred
+m46_67_00_00 Strong Field Boss - Erdtree Avatar
+m46_68_00_00 Strong Field Boss - Magma Wyrm
+m46_69_00_00 Field Boss - Ancient Hero of Zamor
+m46_70_00_00 Evergaol - Dragonkin Soldier; Godskin Apostle; Godskin Noble; Crucible Knight with Sword; Crucible Knight with Spear
+m46_71_00_00 Field Boss - Miranda Blossom
+m46_72_00_00 Field Boss - Golden Hippopotamus
+m46_74_00_00 Strong Field Boss - Death Rite Bird
+m46_77_00_00 Field Boss - Demi-Human Queen
+m46_78_00_00 Event - Morgott
+m46_80_00_00 Evergaol - Death Rite Bird; Ancient Dragon; Godskin Duo
+m46_81_00_00 Arena Boss - Black Knife Assassin
+m46_82_00_00 Arena Boss - Red Wolf
+m46_86_00_00 Arena Boss - Leonine Misbegotten
+m46_87_00_00 Arena Boss - Bell Bearing Hunter
+m46_88_00_00 Arena Boss - Royal Revenant
+m46_90_00_00 Arena Boss - Ancestor Spirit
+m46_91_00_00 Arena Boss - Grafted Scion
+m46_95_00_00 Arena Boss - Ancient Hero of Zamor
+m47_70_00_00 Night Boss - Tibia Mariner
+m47_80_00_00 Night Boss - Gaping Dragon
+m47_90_00_00 Night Boss - Centipede Demon
+m48_00_00_00 Night Boss - The Duke's Dear Freja
+m48_10_00_00 Night Boss - Smelter Demon
+m48_20_00_00 Night Boss - Nameless King
+m48_30_00_00 Night Boss - Dancer of the Boreal Valley
+m48_40_00_00 Night Boss - Morgott
+m48_50_00_00 Night Boss - Draconic Tree Sentinel and Royal Cavalrymen
+m48_60_00_00 Night Boss - Tree Sentinel and Royal Cavalrymen
+m48_70_00_00 Night Boss - Godskin Apostle
+m48_80_00_00 Night Boss - Godskin Duo
+m48_90_00_00 Night Boss - Wormface
+m49_10_00_00 Night Boss - Grafted Monarch
+m49_17_00_00 Night Boss - Valiant Gargoyle
+m49_18_00_00 Night Boss - Great Wyrm
+m49_19_00_00 Night Boss - Ancient Dragon
+m49_20_00_00 Night Boss - Fallingstar Beast
+m49_21_00_00 Night Boss - Death Rite Bird
+m49_23_00_00 Night Boss - Dragonkin Soldier
+m49_24_00_00 Night Boss - Bell Bearing Hunter
+m49_25_00_00 Night Boss - Crucible Knight and Golden Hippopotamus
+m49_26_00_00 Night Boss - Outland Commander
+m49_27_00_00 Night Boss - Battlefield Commander
+m49_28_00_00 Night Boss - Night's Cavalry Duo
+m49_29_00_00 Night Boss - Demi-Human Queen and Swordmaster
+m49_30_00_00 Night Boss - Royal Revenant
+m49_40_00_00 Event - Scale-Bearing Merchant
+m49_41_00_00 Castle - Banished Knights
+m49_42_00_00 Castle - Trolls
+m49_43_00_00 Castle - Crucible Knights
+m49_90_00_00 Night Boss - Ulcerated Tree Spirit
+m60_00_00_99 Overworld
+m60_10_09_02 Limveld - East
+m60_10_09_12 Limveld - East (Mountaintop)
+m60_10_09_22 Limveld - East (Crater)
+m60_10_09_52 Limveld - East (Noklateo)
+m60_11_09_02 Limveld - West
+m60_11_09_22 Limveld - West (Crater)
+m60_11_09_32 Limveld - West (Rotted Woods)
+m60_11_09_52 Limveld - West (Noklateo)
+m60_21_18_01 Limveld - Southwest
+m60_21_18_11 Limveld - Southwest (Mountaintop)
+m60_21_18_21 Limveld - Southwest (Crater)
+m60_21_18_51 Limveld - Southwest (Noklateo)
+m60_21_19_01 Limveld - Northwest
+m60_21_19_11 Limveld - Northwest (Mountaintop)
+m60_21_19_21 Limveld - Northwest (Crater)
+m60_21_19_51 Limveld - Northwest (Noklateo)
+m60_22_18_01 Limveld - Southeast
+m60_22_18_21 Limveld - Southeast (Crater)
+m60_22_18_31 Limveld - Southeast (Rotted Woods)
+m60_22_18_51 Limveld - Southeast (Noklateo)
+m60_22_19_01 Limveld - Northeast
+m60_22_19_21 Limveld - Northeast (Crater)
+m60_22_19_31 Limveld - Northeast (Rotted Woods)
+m60_22_19_51 Limveld - Northeast (Noklateo)
+m60_42_36_00 Limveld - Southwest Corner, West Lake
+m60_42_36_10 Limveld - Southwest Corner, West Lake (Mountaintop)
+m60_42_36_20 Limveld - Southwest Corner, West Lake (Crater)
+m60_42_36_50 Limveld - Noklateo Inner Tier (Noklateo)
+m60_42_37_00 Limveld - Gatefront
+m60_42_37_10 Limveld - Gatefront (Mountaintop)
+m60_42_37_20 Limveld - Gatefront (Crater)
+m60_42_37_50 Limveld - Noklateo North Wall (Noklateo)
+m60_42_38_00 Limveld - Southwest Stormhill
+m60_42_38_10 Limveld - Southwest Mountaintop (Mountaintop)
+m60_42_38_20 Limveld - Southwest Stormhill (Crater)
+m60_42_38_50 Limveld - Southwest Stormhill (Noklateo)
+m60_42_39_00 Limveld - Northwest Corner
+m60_42_39_10 Limveld - Northwest Mountaintop (Mountaintop)
+m60_42_39_20 Limveld - Northwest Corner (Crater)
+m60_42_39_50 Limveld - Northwest Corner (Noklateo)
+m60_43_36_00 Limveld - Central Lake
+m60_43_36_10 Limveld - Central Lake (Mountaintop)
+m60_43_36_20 Limveld - Central Lake (Crater)
+m60_43_36_50 Limveld - Noklateo East Wall, West Lake (Noklateo)
+m60_43_37_00 Limveld - Castle
+m60_43_37_10 Limveld - Castle (Mountaintop)
+m60_43_37_20 Limveld - Castle (Crater)
+m60_43_37_50 Limveld - Noklateo Entrance (Noklateo)
+m60_43_38_00 Limveld - West Murkwater, Southeast Stormhill
+m60_43_38_10 Limveld - Southeast Mountaintop (Mountaintop)
+m60_43_38_20 Limveld - Southwest Crater (Crater)
+m60_43_38_50 Limveld - West Murkwater, Southeast Stormhill (Noklateo)
+m60_43_39_00 Limveld - West Saintsbridge
+m60_43_39_10 Limveld - Northeast Mountaintop (Mountaintop)
+m60_43_39_20 Limveld - Northwest Crater (Crater)
+m60_43_39_50 Limveld - West Saintsbridge (Noklateo)
+m60_44_36_00 Limveld - East Lake
+m60_44_36_20 Limveld - East Lake (Crater)
+m60_44_36_30 Limveld - Southwest Rotted Woods (Rotted Woods)
+m60_44_36_50 Limveld - East Lake (Noklateo)
+m60_44_37_00 Limveld - Castle Front
+m60_44_37_20 Limveld - Castle Front (Crater)
+m60_44_37_30 Limveld - Northwest Rotted Woods (Rotted Woods)
+m60_44_37_50 Limveld - East of Noklateo Entrance (Noklateo)
+m60_44_38_00 Limveld - East Murkwater
+m60_44_38_20 Limveld - Southeast Crater (Crater)
+m60_44_38_30 Limveld - East Murkwater (Rotted Woods)
+m60_44_38_50 Limveld - East Murkwater (Noklateo)
+m60_44_39_00 Limveld - Saintsbridge to Summonwater
+m60_44_39_20 Limveld - Northeast Crater (Crater)
+m60_44_39_30 Limveld - Saintsbridge to Summonwater (Rotted Woods)
+m60_44_39_50 Limveld - Saintsbridge to Summonwater (Noklateo)
+m60_45_36_00 Limveld - South Mistwood
+m60_45_36_20 Limveld - South Mistwood (Crater)
+m60_45_36_30 Limveld - Southeast Rotted Woods (Rotted Woods)
+m60_45_36_50 Limveld - South Mistwood (Noklateo)
+m60_45_37_00 Limveld - Central Mistwood
+m60_45_37_20 Limveld - Central Mistwood (Crater)
+m60_45_37_30 Limveld - Northeast Rotted Woods (Rotted Woods)
+m60_45_37_50 Limveld - Central Mistwood (Noklateo)
+m60_45_38_00 Limveld - Road to Third Church
+m60_45_38_20 Limveld - Road to Third Church (Crater)
+m60_45_38_30 Limveld - Road to Third Church (Rotted Woods)
+m60_45_38_50 Limveld - Road to Third Church (Noklateo)
+m60_45_39_00 Limveld - Summonwater
+m60_45_39_20 Limveld - Summonwater (Crater)
+m60_45_39_30 Limveld - Summonwater (Rotted Woods)
+m60_45_39_50 Limveld - Summonwater (Noklateo)

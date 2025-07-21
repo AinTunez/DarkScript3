@@ -23,6 +23,7 @@ namespace DarkScript3
             ["sekiro"] = @"C:\Program Files (x86)\Steam\steamapps\common\Sekiro\event",
             ["er"] = @"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING\Game\event",
             ["ac6"] = @"C:\Program Files (x86)\Steam\steamapps\common\ARMORED CORE VI FIRES OF RUBICON\Game\event",
+            ["nr"] = @"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING NIGHTREIGN\Game\event",
         };
         private static readonly Dictionary<string, Game> gameTypes = new Dictionary<string, Game>
         {
@@ -33,6 +34,7 @@ namespace DarkScript3
             ["ds3"] = Game.DarkSouls3,
             ["er"] = Game.Sekiro,
             ["ac6"] = Game.Sekiro,
+            ["nr"] = Game.Sekiro,
         };
 
         public static void CommandLine(IEnumerable<string> args)
@@ -173,7 +175,9 @@ These arguments are supported:
             int errors = 0;
             if (flags["decompile"])
             {
-                List<string> emevdPaths = Directory.GetFiles(inDir, "*.emevd").Concat(Directory.GetFiles(inDir, "*.emevd.dcx")).ToList();
+                List<string> emevdPaths = Directory.GetFiles(inDir, "*.emevd").Concat(Directory.GetFiles(inDir, "*.emevd.dcx"))
+                    .OrderBy(InitData.GetStableSortKey)
+                    .ToList();
                 foreach (string emevdPath in emevdPaths)
                 {
                     if (game == "ds3" && Path.GetFileName(emevdPath).StartsWith("m2")) continue;
@@ -374,6 +378,7 @@ These arguments are supported:
             }
         }
 
+        // Migration to fancy inits in 3.5
         private static void InitTest(string game, string emevdDir, string outDir, List<string> flags)
         {
             DecompileTest(game, emevdDir, $"{outDir}/new", flags);
@@ -425,6 +430,29 @@ These arguments are supported:
             }
         }
 
+        // Scripts should be compilable and not break/change between versions
+        // Diffing requires not updating ProgramVersion yet
+        private static void VersionTest(string game, string emevdDir, string outDir, List<string> flags)
+        {
+            DecompileTest(game, emevdDir, $"{outDir}/new", flags);
+            string[] dirParts = outDir.Split('/');
+            dirParts[0] += "_prev";
+            string prevDir = string.Join('/', dirParts);
+            if (Directory.Exists(prevDir))
+            {
+                foreach (string type in new[] { "reg", "fancy", "repack" })
+                {
+                    // Test compile doesn't fail
+                    RecompileTest(game, $"{prevDir}/new_{type}", $"{outDir}/newold_{type}_out", flags);
+                    if (flags.Contains("-nofancy"))
+                    {
+                        return;
+                    }
+                }
+                RepackTest(game, $"{prevDir}/new", $"{outDir}/repackold", flags);
+            }
+        }
+
         public static void Run(string[] args)
         {
             string game = args[0];
@@ -438,7 +466,15 @@ These arguments are supported:
                 if (game == "ds1") cmdArgs.Add("-ptde");
                 else if (game.StartsWith("ds2")) cmdArgs.Add("-nofancy");
                 cmdArgs.Add("-force");
-                InitTest(docGame, inDir, $"{outDir}/{game}", cmdArgs);
+                cmdArgs.Add("-silent");
+                if (args.Contains("init"))
+                {
+                    InitTest(docGame, inDir, $"{outDir}/{game}", cmdArgs);
+                }
+                else
+                {
+                    VersionTest(docGame, inDir, $"{outDir}/{game}", cmdArgs);
+                }
                 return;
             }
             // Fancy recompilation
@@ -519,7 +555,11 @@ These arguments are supported:
                     FancyEventScripter fes = new FancyEventScripter(scripter, docs, options);
                     if (args.Contains("unit"))
                     {
-                        string testCases = Resource.Text("test.js");
+                        // Run from repo root. It must be on disk for modules
+                        string testPath = "DarkScript3/Resources/test.emevd";
+                        scripter = new EventScripter(testPath, docs, new EMEVD());
+                        fes = new FancyEventScripter(scripter, docs, options);
+                        string testCases = File.ReadAllText(testPath + ".js");
                         if (args.Contains("local"))
                         {
                             testCases = File.ReadAllText("test.js");

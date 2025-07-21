@@ -233,13 +233,13 @@ section {
     int lefthandWeaponId, 
     int powerstancedWeaponId)</pre></div></section>
 <section class="instr">
-<h3 id="ModifyBowProperties"><a href="#ModifyBowProperties" class="selfref"><code>ModifyBowProperties</code></a> <span class="sectioninfo">Instruction 1000[06]</span></h3>
+<h3 id="ModifyBulletParam"><a href="#ModifyBulletParam" class="selfref"><code>ModifyBulletParam</code></a> <span class="sectioninfo">Instruction 1000[06]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectArmor, SpEffectRing, SpEffectWeapon</p>
-<pre>ModifyBowProperties(
+<pre>ModifyBulletParam(
     short unknown1, 
     short&lt;<a href="#BowType">BowType</a>&gt; bowType, 
-    float unknown3, 
+    int status, 
     float unknown4, 
     float unknown5, 
     float unknown6, 
@@ -425,10 +425,10 @@ section {
     float unknown1, 
     float unknown2)</pre></div></section>
 <section class="instr">
-<h3 id="UnknownCommand10004004"><a href="#UnknownCommand10004004" class="selfref"><code>UnknownCommand10004004</code></a> <span class="sectioninfo">Instruction 100040[04]</span></h3>
+<h3 id="TimeShorteningResident"><a href="#TimeShorteningResident" class="selfref"><code>TimeShorteningResident</code></a> <span class="sectioninfo">Instruction 100040[04]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectAbnormalState, SpEffectEnemy, SpEffectWeapon</p>
-<pre>UnknownCommand10004004(
+<pre>TimeShorteningResident(
     int unknown1, 
     float unknown2)</pre></div></section>
 <section class="instr">
@@ -555,12 +555,12 @@ section {
     ushort&lt;<a href="#BuffType">BuffType</a>&gt; buffType, 
     ushort amount)</pre></div></section>
 <section class="instr">
-<h3 id="UnknownCommand10009006"><a href="#UnknownCommand10009006" class="selfref"><code>UnknownCommand10009006</code></a> <span class="sectioninfo">Instruction 100090[06]</span></h3>
+<h3 id="ModifyMovementRate"><a href="#ModifyMovementRate" class="selfref"><code>ModifyMovementRate</code></a> <span class="sectioninfo">Instruction 100090[06]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectAbnormalState, SpEffectCondition, SpEffectEnemy, SpEffectSpell, SpEffectWeapon</p>
-<pre>UnknownCommand10009006(
+<pre>ModifyMovementRate(
     float duration, 
-    float unknown1, 
+    float amount, 
     byte unknown2)</pre></div></section>
 <section class="instr">
 <h3 id="UnknownCommand10009007"><a href="#UnknownCommand10009007" class="selfref"><code>UnknownCommand10009007</code></a> <span class="sectioninfo">Instruction 100090[07]</span></h3>
@@ -604,15 +604,15 @@ section {
     byte unknown4, 
     byte unknown5)</pre></div></section>
 <section class="instr">
-<h3 id="UnknownCommand10011002"><a href="#UnknownCommand10011002" class="selfref"><code>UnknownCommand10011002</code></a> <span class="sectioninfo">Instruction 100110[02]</span></h3>
+<h3 id="RepairEquipment"><a href="#RepairEquipment" class="selfref"><code>RepairEquipment</code></a> <span class="sectioninfo">Instruction 100110[02]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectWideUse</p>
-<pre>UnknownCommand10011002()</pre></div></section>
+<pre>RepairEquipment()</pre></div></section>
 <section class="instr">
-<h3 id="UnknownCommand10011003"><a href="#UnknownCommand10011003" class="selfref"><code>UnknownCommand10011003</code></a> <span class="sectioninfo">Instruction 100110[03]</span></h3>
+<h3 id="DestroyOwnerEquipment"><a href="#DestroyOwnerEquipment" class="selfref"><code>DestroyOwnerEquipment</code></a> <span class="sectioninfo">Instruction 100110[03]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectRing</p>
-<pre>UnknownCommand10011003(
+<pre>DestroyOwnerEquipment(
     byte unknown1, 
     byte unknown2)</pre></div></section>
 <section class="instr">
@@ -700,10 +700,10 @@ section {
     uint mustsubEventId, 
     uint... evtarguments)</pre></div></section>
 <section class="instr">
-<h3 id="UnknownCommand10013002"><a href="#UnknownCommand10013002" class="selfref"><code>UnknownCommand10013002</code></a> <span class="sectioninfo">Instruction 100130[02]</span></h3>
+<h3 id="DisplayIcon"><a href="#DisplayIcon" class="selfref"><code>DisplayIcon</code></a> <span class="sectioninfo">Instruction 100130[02]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectActiveItem, SpEffectArmor, SpEffectRing, SpEffectSpell, SpEffectWeapon</p>
-<pre>UnknownCommand10013002(
+<pre>DisplayIcon(
     int unknown1, 
     int unknown2, 
     float unknown3)</pre></div></section>
@@ -716,10 +716,10 @@ section {
     byte unknown1, 
     int unknown2)</pre></div></section>
 <section class="instr">
-<h3 id="UnknownCommand10013004"><a href="#UnknownCommand10013004" class="selfref"><code>UnknownCommand10013004</code></a> <span class="sectioninfo">Instruction 100130[04]</span></h3>
+<h3 id="ApplyWeaponSFX"><a href="#ApplyWeaponSFX" class="selfref"><code>ApplyWeaponSFX</code></a> <span class="sectioninfo">Instruction 100130[04]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectActiveItem, SpEffectSpell, SpEffectWeapon</p>
-<pre>UnknownCommand10013004(
+<pre>ApplyWeaponSFX(
     int unknown1, 
     float unknown2, 
     int unknown3, 
@@ -727,10 +727,10 @@ section {
     int unknown5, 
     int unknown6)</pre></div></section>
 <section class="instr">
-<h3 id="UnknownCommand10013005"><a href="#UnknownCommand10013005" class="selfref"><code>UnknownCommand10013005</code></a> <span class="sectioninfo">Instruction 100130[05]</span></h3>
+<h3 id="DrawDisableFullBodySFX"><a href="#DrawDisableFullBodySFX" class="selfref"><code>DrawDisableFullBodySFX</code></a> <span class="sectioninfo">Instruction 100130[05]</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in SpEffectRing</p>
-<pre>UnknownCommand10013005(
+<pre>DrawDisableFullBodySFX(
     int unknown)</pre></div></section>
 <section class="instr">
 <h3 id="AddSpellDeflectChance"><a href="#AddSpellDeflectChance" class="selfref"><code>AddSpellDeflectChance</code></a> <span class="sectioninfo">Instruction 100130[06]</span></h3>
@@ -926,7 +926,7 @@ section {
 <li><code>AdditiveStatType.Faith = 13</code> <span class="enumusage usageinfo">Used in SpEffectActiveItem, SpEffectArmor, SpEffectRing, SpEffectWeapon</span></li>
 <li><code>AdditiveStatType.Adaptability = 14</code> <span class="enumusage usageinfo">Used in SpEffectArmor, SpEffectRing, SpEffectWeapon</span></li>
 <li><code>AdditiveStatType.Unknown17 = 17</code> <span class="enumusage usageinfo">Used in SpEffectAbnormalState</span></li>
-<li><code>AdditiveStatType.CurrentHP = 18</code> <span class="enumusage usageinfo">Used in SpEffectArmor, SpEffectRing, SpEffectWeapon</span></li>
+<li><code>AdditiveStatType.HPOnKill = 18</code> <span class="enumusage usageinfo">Used in SpEffectArmor, SpEffectRing, SpEffectWeapon</span></li>
 <li><code>AdditiveStatType.Unknown19 = 19</code> <span class="enumusage usageinfo">Used in SpEffectAbnormalState, SpEffectEnemy, SpEffectSpell</span></li>
 <li><code>AdditiveStatType.AttunementSlots = 20</code> <span class="enumusage usageinfo">Used in SpEffectArmor, SpEffectRing</span></li>
 <li><code>AdditiveStatType.AntiStabilityModifier = 21</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
@@ -943,7 +943,7 @@ section {
 <li><code>MultiplicativeStatType.Unknown2 = 2</code> <span class="enumusage usageinfo">Used in SpEffectSpell, SpEffectWideUse</span></li>
 <li><code>MultiplicativeStatType.CurseBuildup = 3</code> <span class="enumusage usageinfo">Used in SpEffectActiveItem, SpEffectSpell, SpEffectWideUse</span></li>
 <li><code>MultiplicativeStatType.IgniteBuildup = 4</code> <span class="enumusage usageinfo">Used in SpEffectActiveItem, SpEffectSpell, SpEffectWideUse</span></li>
-<li><code>MultiplicativeStatType.Unknown5 = 5</code> <span class="enumusage usageinfo">Used in SpEffectActiveItem, SpEffectSpell, SpEffectWideUse</span></li>
+<li><code>MultiplicativeStatType.ToxicityBuildup = 5</code> <span class="enumusage usageinfo">Used in SpEffectActiveItem, SpEffectSpell, SpEffectWideUse</span></li>
 <li><code>MultiplicativeStatType.PetrifyBuildup = 6</code> <span class="enumusage usageinfo">Used in SpEffectActiveItem, SpEffectSpell, SpEffectWideUse</span></li>
 <li><code>MultiplicativeStatType.MaxHP = 7</code> <span class="enumusage usageinfo">Used in SpEffectArmor, SpEffectEnemy, SpEffectRing, SpEffectSpell</span></li>
 <li><code>MultiplicativeStatType.MaxStamina = 8</code> <span class="enumusage usageinfo">Used in SpEffectAbnormalState, SpEffectRing</span></li>
@@ -978,8 +978,8 @@ section {
 <li><code>MultiplicativeStatType.HexPowerStaff = 55</code> <span class="enumusage usageinfo">Used in SpEffectArmor, SpEffectEnemy, SpEffectRing, SpEffectSpell, SpEffectWeapon</span></li>
 <li><code>MultiplicativeStatType.HexPowerChime = 56</code> <span class="enumusage usageinfo">Used in SpEffectArmor, SpEffectEnemy, SpEffectRing, SpEffectSpell, SpEffectWeapon</span></li>
 <li><code>MultiplicativeStatType.ShieldStability = 57</code> <span class="enumusage usageinfo">Used in SpEffectRing, SpEffectSpell</span></li>
-<li><code>MultiplicativeStatType.OutgoingDamageRateII = 58</code> <span class="enumusage usageinfo">Used in SpEffectActiveItem</span></li>
-<li><code>MultiplicativeStatType.IncomingDamageRateII = 59</code> <span class="enumusage usageinfo">Used in SpEffectActiveItem, SpEffectRing, SpEffectSpell</span></li>
+<li><code>MultiplicativeStatType.PvEDamage = 58</code> <span class="enumusage usageinfo">Used in SpEffectActiveItem</span></li>
+<li><code>MultiplicativeStatType.PvEDamageReduction = 59</code> <span class="enumusage usageinfo">Used in SpEffectActiveItem, SpEffectRing, SpEffectSpell</span></li>
 <li><code>MultiplicativeStatType.Unknown60 = 60</code> <span class="enumusage usageinfo">Used in SpEffectSpell</span></li>
 <li><code>MultiplicativeStatType.Unknown61 = 61</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
 <li><code>MultiplicativeStatType.Unknown62 = 62</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
@@ -991,21 +991,21 @@ section {
 <p class="sectionusage usageinfo">Used in SpEffectActiveItem, SpEffectArmor, SpEffectEnemy, SpEffectRing, SpEffectSpell, SpEffectWeapon, SpEffectWideUse</p>
 <ul class="enumlist">
 <li><code>StateInfoType.Unknown0 = 0</code> <span class="enumusage usageinfo">Used in SpEffectArmor</span></li>
-<li><code>StateInfoType.Unknown1 = 1</code> <span class="enumusage usageinfo">Used in SpEffectArmor, SpEffectEnemy, SpEffectRing</span></li>
-<li><code>StateInfoType.Unknown2 = 2</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
-<li><code>StateInfoType.Unknown3 = 3</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
+<li><code>StateInfoType.DisableBackstab = 1</code> <span class="enumusage usageinfo">Used in SpEffectArmor, SpEffectEnemy, SpEffectRing</span></li>
+<li><code>StateInfoType.DisableHollowingAndSoulLoss = 2</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
+<li><code>StateInfoType.DisableSoulLoss = 3</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
 <li><code>StateInfoType.Unknown4 = 4</code> <span class="enumusage usageinfo">Used in SpEffectArmor</span></li>
 <li><code>StateInfoType.Unknown6 = 6</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
-<li><code>StateInfoType.Unknown10 = 10</code> <span class="enumusage usageinfo">Used in SpEffectArmor, SpEffectRing, SpEffectSpell</span></li>
+<li><code>StateInfoType.DisableFootstepSound = 10</code> <span class="enumusage usageinfo">Used in SpEffectArmor, SpEffectRing, SpEffectSpell</span></li>
 <li><code>StateInfoType.Unknown15 = 15</code> <span class="enumusage usageinfo">Used in SpEffectActiveItem</span></li>
-<li><code>StateInfoType.Unknown17 = 17</code> <span class="enumusage usageinfo">Used in SpEffectRing, SpEffectSpell</span></li>
-<li><code>StateInfoType.Unknown18 = 18</code> <span class="enumusage usageinfo">Used in SpEffectRing, SpEffectSpell</span></li>
+<li><code>StateInfoType.HideWeaponLeft = 17</code> <span class="enumusage usageinfo">Used in SpEffectRing, SpEffectSpell</span></li>
+<li><code>StateInfoType.HideWeaponRight = 18</code> <span class="enumusage usageinfo">Used in SpEffectRing, SpEffectSpell</span></li>
 <li><code>StateInfoType.Unknown19 = 19</code> <span class="enumusage usageinfo">Used in SpEffectWeapon</span></li>
 <li><code>StateInfoType.Unknown22 = 22</code> <span class="enumusage usageinfo">Used in SpEffectActiveItem</span></li>
 <li><code>StateInfoType.Unknown23 = 23</code> <span class="enumusage usageinfo">Used in SpEffectActiveItem, SpEffectSpell, SpEffectWeapon</span></li>
 <li><code>StateInfoType.Unknown24 = 24</code> <span class="enumusage usageinfo">Used in SpEffectActiveItem, SpEffectSpell</span></li>
-<li><code>StateInfoType.Unknown25 = 25</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
-<li><code>StateInfoType.Unknown27 = 27</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
+<li><code>StateInfoType.ReduceBackDamage = 25</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
+<li><code>StateInfoType.DisableChrPhantomColor = 27</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
 <li><code>StateInfoType.Unknown28 = 28</code> <span class="enumusage usageinfo">Used in SpEffectEnemy</span></li>
 <li><code>StateInfoType.Unknown29 = 29</code> <span class="enumusage usageinfo">Used in SpEffectArmor</span></li>
 <li><code>StateInfoType.Unknown31 = 31</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
@@ -1024,12 +1024,12 @@ section {
 <li><code>StateInfoType.Unknown52 = 52</code> <span class="enumusage usageinfo">Used in SpEffectEnemy</span></li>
 <li><code>StateInfoType.Unknown53 = 53</code> <span class="enumusage usageinfo">Used in SpEffectEnemy</span></li>
 <li><code>StateInfoType.Unknown54 = 54</code> <span class="enumusage usageinfo">Used in SpEffectEnemy</span></li>
-<li><code>StateInfoType.Unknown55 = 55</code> <span class="enumusage usageinfo">Used in SpEffectEnemy, SpEffectWideUse</span></li>
+<li><code>StateInfoType.DisableLockOn = 55</code> <span class="enumusage usageinfo">Used in SpEffectEnemy, SpEffectWideUse</span></li>
 <li><code>StateInfoType.Unknown56 = 56</code> <span class="enumusage usageinfo">Used in SpEffectEnemy</span></li>
-<li><code>StateInfoType.Unknown57 = 57</code> <span class="enumusage usageinfo">Used in SpEffectEnemy</span></li>
+<li><code>StateInfoType.DisableHealthbar = 57</code> <span class="enumusage usageinfo">Used in SpEffectEnemy</span></li>
 <li><code>StateInfoType.Unknown58 = 58</code> <span class="enumusage usageinfo">Used in SpEffectArmor</span></li>
-<li><code>StateInfoType.Unknown59 = 59</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
-<li><code>StateInfoType.Unknown60 = 60</code> <span class="enumusage usageinfo">Used in SpEffectEnemy</span></li>
+<li><code>StateInfoType.DisableSoulAbsorption = 59</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
+<li><code>StateInfoType.EnableInvisibility = 60</code> <span class="enumusage usageinfo">Used in SpEffectEnemy</span></li>
 <li><code>StateInfoType.Unknown61 = 61</code> <span class="enumusage usageinfo">Used in SpEffectWideUse</span></li>
 </ul>
 </div></section>
@@ -1055,12 +1055,12 @@ section {
 <li><code>PlayerPropertyType.EquippedWeaponsDurability = 15</code> <span class="enumusage usageinfo">Used in SpEffectActiveItem</span></li>
 <li><code>PlayerPropertyType.EquippedArmorDurability = 16</code> <span class="enumusage usageinfo">Used in SpEffectActiveItem, SpEffectEnemy, SpEffectSpell, SpEffectWideUse</span></li>
 <li><code>PlayerPropertyType.EquippedRingsDurability = 17</code> <span class="enumusage usageinfo">Used in SpEffectActiveItem, SpEffectEnemy, SpEffectSpell, SpEffectWideUse</span></li>
-<li><code>PlayerPropertyType.Unknown18 = 18</code> <span class="enumusage usageinfo">Used in SpEffectEnemy, SpEffectRing</span></li>
-<li><code>PlayerPropertyType.Unknown19 = 19</code> <span class="enumusage usageinfo">Used in SpEffectSpell</span></li>
+<li><code>PlayerPropertyType.Appearence = 18</code> <span class="enumusage usageinfo">Used in SpEffectEnemy, SpEffectRing</span></li>
+<li><code>PlayerPropertyType.EmissiveLight = 19</code> <span class="enumusage usageinfo">Used in SpEffectSpell</span></li>
 <li><code>PlayerPropertyType.Unknown20 = 20</code> <span class="enumusage usageinfo">Used in SpEffectSpell</span></li>
 <li><code>PlayerPropertyType.Unknown21 = 21</code> <span class="enumusage usageinfo">Used in SpEffectAbnormalState, SpEffectArmor, SpEffectEnemy, SpEffectSpell</span></li>
-<li><code>PlayerPropertyType.Unknown22 = 22</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
-<li><code>PlayerPropertyType.Unknown23 = 23</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
+<li><code>PlayerPropertyType.SfxIDOnKill = 22</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
+<li><code>PlayerPropertyType.SfxOnKillOrigin = 23</code> <span class="enumusage usageinfo">Used in SpEffectRing</span></li>
 <li><code>PlayerPropertyType.Unknown25 = 25</code> <span class="enumusage usageinfo">Used in SpEffectSpell</span></li>
 <li><code>PlayerPropertyType.Unknown30 = 30</code> <span class="enumusage usageinfo">Used in SpEffectEnemy</span></li>
 <li><code>PlayerPropertyType.Unknown31 = 31</code> <span class="enumusage usageinfo">Used in SpEffectEnemy</span></li>

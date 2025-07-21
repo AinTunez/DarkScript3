@@ -530,7 +530,8 @@ namespace DarkScript3
             }
             // Can probably add variables at some point, but for now only respect int constants.
             // TODO: Some things are uints, like entity ids and event ids
-            if (int.TryParse(hoveredWord, out int value) && SharedControls.Metadata.IsOpen())
+            // This previously guarded SharedControls.Metadata.IsOpen(), but allow static data without an external editor
+            if (int.TryParse(hoveredWord, out int value))
             {
                 List<string> argList = new List<string>();
                 ParseFuncAtRange(tipRange, Docs, out InitData.DocID docId, out int argIndex, argList);
@@ -558,19 +559,20 @@ namespace DarkScript3
                             ShowTip(text, p, data: data);
                         }
                     }
-                    if (dataType == "entity")
+                    bool isOpen = SharedControls.Metadata.IsOpen();
+                    if (isOpen && dataType == "entity")
                     {
                         // Exact entity subtype should not matter, since it's all one namespace.
                         // TODO: Don't clear tooltip when hovering over it, in this particular case, if there's a button (done?)
                         SharedControls.Metadata.GetEntityData(AutoContext.Game, value)
                             .ContinueWith(result => showData(result.Result), TaskScheduler.FromCurrentSynchronizationContext());
                     }
-                    else if (dataType == "param" && argDoc.MetaType.Type != null)
+                    else if (isOpen && dataType == "param" && argDoc.MetaType.Type != null)
                     {
                         SharedControls.Metadata.GetParamRow(AutoContext.Game, argDoc.MetaType.Type, value)
                             .ContinueWith(result => showData(result.Result), TaskScheduler.FromCurrentSynchronizationContext());
                     }
-                    else if (dataType == "param" && argDoc.MetaType.MultiNames != null
+                    else if (isOpen && dataType == "param" && argDoc.MetaType.MultiNames != null
                         && argDoc.MetaType.MultiNames.Count == 2 && argDoc.MetaType.OverrideTypes != null)
                     {
                         List<int> multiArgs = Docs.GetArgsAsInts(argList, docId.Func, argDoc.MetaType.MultiNames);
@@ -590,7 +592,7 @@ namespace DarkScript3
                             }
                         }
                     }
-                    else if (dataType == "fmg" && argDoc.MetaType.Type != null)
+                    else if (isOpen && dataType == "fmg" && argDoc.MetaType.Type != null)
                     {
                         SharedControls.Metadata.GetFmgEntry(AutoContext.Game, argDoc.MetaType.Type, value)
                             .ContinueWith(result => showData(result.Result), TaskScheduler.FromCurrentSynchronizationContext());
