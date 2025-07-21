@@ -142,6 +142,7 @@ namespace DarkScript3
             public ArgDoc Clone() => (ArgDoc)MemberwiseClone();
 
             public object GetDisplayValue(object val) => EnumDoc == null ? val : EnumDoc.GetDisplayValue(val);
+            public override string ToString() => DisplayName + (MetaType == null ? "" : " " + MetaType);
         }
 
         public class EnumDoc
@@ -250,6 +251,7 @@ namespace DarkScript3
             public DarkScriptType Clone() => (DarkScriptType)MemberwiseClone();
 
             public IEnumerable<string> AllTypes => (Type == null ? Array.Empty<string>() : new[] { Type }).Concat(Types ?? new List<string>());
+            public override string ToString() => JsonConvert.SerializeObject(this, new JsonSerializerSettings() { DefaultValueHandling = DefaultValueHandling.Ignore });
         }
 
         public class DarkScriptTypeOverride

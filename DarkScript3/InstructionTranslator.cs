@@ -397,11 +397,11 @@ namespace DarkScript3
                 }
 #endif
             }
-            string undocError = string.Join(", ", condInstrs.Where(i => !visited.Contains(i)).Select(i => $"{i}:{instrs[i].Name}"));
+            string undocError = string.Join("\n", condInstrs.Where(i => !visited.Contains(i)).Select(i => $"{i}:{instrs[i].Name}"));
             if (undocError.Length > 0)
             {
                 // This doesn't have to be an error, but it does mean that condition group decompilation is impossible when these commands are present.
-                throw new ArgumentException($"Present in emedf but not condition config for {game}: {undocError}");
+                throw new ArgumentException($"Present in emedf but not condition config for {game}:\n{undocError}");
             }
             Dictionary<string, int> labels = new Dictionary<string, int>();
             EMEDF.ClassDoc labelClass = emedf[1014];

@@ -1,10 +1,10 @@
 # DarkScript3
 
-User-friendly editor for FromSoftware's EMEVD format with high-level language and project features. For basic usage instructions, visit the [general tutorial](http://soulsmodding.wikidot.com/tutorial:learning-how-to-use-emevd) or [Elden Ring-specific tutorial](http://soulsmodding.wikidot.com/tutorial:intro-to-elden-ring-emevd).
+User-friendly editor for FromSoftware's EMEVD format with high-level language and project features. For basic usage instructions, visit the [general tutorial](https://www.soulsmodding.com/doku.php?id=tutorial:learning-how-to-use-emevd) or [Elden Ring-specific tutorial](https://www.soulsmodding.com/doku.php?id=tutorial:intro-to-elden-ring-emevd).
 
-DarkScript3 also includes MattScript, a way of formatting scripts (except in DS2, which has no control flow) which adds even more high-level language features, making scripts easier to understand and edit. See [MattScript documentation](http://soulsmodding.wikidot.com/tutorial:mattscript-documentation).
+DarkScript3 also includes MattScript, a way of formatting scripts (except in DS2, which has no control flow) which adds even more high-level language features, making scripts easier to understand and edit. See [MattScript documentation](https://www.soulsmodding.com/doku.php?id=tutorial:mattscript-documentation).
 
-.NET 6.0 Desktop and ASP.NET Runtimes are required for 3.4.x. Install them from https://aka.ms/dotnet/6.0/windowsdesktop-runtime-win-x64.exe and https://aka.ms/dotnet/6.0/aspnetcore-runtime-win-x64.exe before attempting to run the tool.
+.NET 6.0 Desktop and ASP.NET Runtimes are required for 3.4 and later. Install them from https://aka.ms/dotnet/6.0/windowsdesktop-runtime-win-x64.exe and https://aka.ms/dotnet/6.0/aspnetcore-runtime-win-x64.exe before attempting to run the tool.
 
 ## Supported games
 
@@ -16,6 +16,7 @@ DarkScript3 also includes MattScript, a way of formatting scripts (except in DS2
 * Sekiro ([instruction list](https://soulsmods.github.io/emedf/sekiro-emedf.html))
 * Elden Ring ([instruction list](https://soulsmods.github.io/emedf/er-emedf.html))
 * Armored Core VI ([instruction list](https://soulsmods.github.io/emedf/ac6-emedf.html))
+* Nightreign ([instruction list](https://soulsmods.github.io/emedf/nr-emedf.html))
 * Aside from these, you can bring your own EMEDF JSON file
 
 ## Images

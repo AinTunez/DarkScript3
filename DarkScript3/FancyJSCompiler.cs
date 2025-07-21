@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using Esprima;
 using Esprima.Ast;
+using Esprima.Utils;
 using static DarkScript3.ScriptAst;
 using static DarkScript3.InstructionTranslator;
 using static SoulsFormats.EMEVD;
-using Esprima.Utils;
-using System.Text.RegularExpressions;
 
 namespace DarkScript3
 {
@@ -1171,9 +1171,10 @@ namespace DarkScript3
                 {
                     context.Error(func, $"Extra labels {string.Join(",", extraLabels)} at the end not assigned to any instruction");
                 }
-                if (func.Generator || func.Async || func.Strict)
+                // strict is now implied by ParseModule
+                if (func.Generator || func.Async)
                 {
-                    context.Error(func, "Event function shouldn't have extra annotations, but found generator/async/strict");
+                    context.Error(func, "Event function shouldn't have extra annotations, but found generator/async");
                 }
             }
 
@@ -1245,10 +1246,11 @@ namespace DarkScript3
             try
             {
                 JavaScriptParser parser = new JavaScriptParser(new ParserOptions { Tokens = true, Comments = true });
-                program = parser.ParseScript(code);
+                program = parser.ParseModule(code);
             }
             catch (ParserException ex)
             {
+                Console.WriteLine($"Ah {ex}");
                 if (ex.Error is ParseError err)
                 {
                     Position? pos = null;

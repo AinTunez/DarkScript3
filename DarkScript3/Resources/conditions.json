@@ -17,6 +17,9 @@
     },
     {
       "name":  "ac6"
+    },
+    {
+      "name":  "nr"
     }
   ],
   "no_control_flow": [
@@ -92,7 +95,7 @@
     {
       "name": "Compare",
       "category": "cmp",
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cond": "0[02]",
       "skip": "1000[10]",
       "end": "1000[11]",
@@ -106,7 +109,7 @@
     {
       "name": "CompareSigned",
       "category": "cmp",
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cond": "0[01]",
       "skip": "1000[05]",
       "end": "1000[06]",
@@ -119,7 +122,7 @@
     {
       "name": "CompareSignedAlt",
       "category": "cmp",
-      "games": ["er"],
+      "games": ["er", "nr"],
       "skip": "1000[109]",
       "end": "1000[111]",
       "as_compare": {
@@ -150,15 +153,27 @@
     },
     {
       "name": "TimeOfDay",
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "category": "time",
       "cond": "1[04]"
     },
     {
       "name": "TimeOfDayInRange",
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "category": "time",
       "cond": "1[05]"
+    },
+    {
+      "name": "PlayAreaCurrentTime",
+      "games": ["nr"],
+      "category": "time",
+      "cond": "1[06]"
+    },
+    {
+      "name": "PlayAreaCurrentTimeInRange",
+      "games": ["nr"],
+      "category": "time",
+      "cond": "1[07]"
     },
     // Cutscene
     {
@@ -300,7 +315,7 @@
     {
       "name": "PlayerInOutMap",
       "category": "map",
-      "games": ["ds1", "bb", "ds3", "sekiro", "er", "ac6"],
+      "games": ["ds1", "bb", "ds3", "sekiro", "er", "ac6", "nr"],
       "cond": "3[08]",
       "skip": "1003[07]",
       "end": "1003[08]",
@@ -452,13 +467,13 @@
     {
       "name": "HasDamageType",
       "category": "dmg",
-      "games": ["bb", "ds3", "sekiro", "er", "ac6"],
+      "games": ["bb", "ds3", "sekiro", "er", "ac6", "nr"],
       "cond": "3[23]"
     },
     {
       "name": "ActionButtonInArea",
       "category": "act",
-      "games": ["bb", "ds3", "sekiro", "er", "ac6"],
+      "games": ["bb", "ds3", "sekiro", "er", "ac6", "nr"],
       "cond": "3[24]"
     },
     {
@@ -487,7 +502,7 @@
     {
       "name": "PlayerIsInWorldType",
       "category": "online",
-      "games": ["er"],
+      "games": ["er", "nr"],
       "cond": "3[26]",
       "skip": "1003[12]",
       "goto": "1003[13]",
@@ -586,7 +601,7 @@
     },
     {
       "name": "MapLoaded",
-      "games": ["er"],
+      "games": ["er", "nr"],
       "cond": "3[30]"
     },
     {
@@ -597,12 +612,12 @@
     },
     {
       "name": "WeatherActive",
-      "games": ["er"],
+      "games": ["er", "nr"],
       "cond": "3[31]"
     },
     {
       "name": "MapHasPermissionToUpdateState",
-      "games": ["er"],
+      "games": ["er", "nr"],
       "category": "map",
       "cond": "3[32]",
       "skip": "1003[203]",
@@ -631,7 +646,7 @@
     },
     {
       "name": "FieldBattleBGMActiveState",
-      "games": ["er"],
+      "games": ["er", "nr"],
       "cond": "3[33]",
       "negate_field": "Is Active",
       "as_bool": {
@@ -650,7 +665,7 @@
     },
     {
       "name": "PlayerHasArmorEquipped",
-      "games": ["er"],
+      "games": ["er", "nr"],
       "cond": "3[34]"
     },
     {
@@ -661,7 +676,7 @@
     },
     {
       "name": "CeremonyActiveState",
-      "games": ["er"],
+      "games": ["er", "nr"],
       "cond": "3[35]",
       "skip": "1003[206]",
       "goto": "1003[207]",
@@ -689,7 +704,7 @@
     },
     {
       "name": "WeatherLotActiveState",
-      "games": ["er"],
+      "games": ["er", "nr"],
       "cond": "3[37]",
       "negate_field": "Is Active",
       "as_bool": {
@@ -709,7 +724,7 @@
     {
       "name": "PlayerGender",
       "category": "chr",
-      "games": ["er"],
+      "games": ["er", "nr"],
       "cond": "3[38]",
       "negate_field": "Gender"
     },
@@ -740,6 +755,11 @@
       "cond": "3[40]"
     },
     {
+      "name": "IsPlayMode",
+      "games": ["nr"],
+      "cond": "3[40]"
+    },
+    {
       "name": "CompareArenaSoloScore",
       "category": "online",
       "games": ["er"],
@@ -750,9 +770,19 @@
       }
     },
     {
+      "name": "IsGameMode",
+      "games": ["nr"],
+      "cond": "3[41]"
+    },
+    {
       "name": "ArenaTeamResults",
       "category": "online",
       "games": ["er"],
+      "cond": "3[42]"
+    },
+    {
+      "name": "EventFlagAndRandomCondition",
+      "games": ["nr"],
       "cond": "3[42]"
     },
     {
@@ -766,6 +796,11 @@
       }
     },
     {
+      "name": "TalkNPCEnabled",
+      "games": ["nr"],
+      "cond": "3[43]"
+    },
+    {
       "name": "HasArenaMatchType",
       "games": ["er"],
       "category": "online",
@@ -775,16 +810,185 @@
       "end": "1003[214]"
     },
     {
+      "name": "IsHotSpotState",
+      "games": ["nr"],
+      "cond": "3[44]",
+      "skip": "1003[215]",
+      "goto": "1003[216]",
+      "end": "1003[217]",
+      "negate_field": "Is Hot Spot",
+      "as_bool": {
+        "shortname": "IsHotSpot"
+      }
+    },
+    {
       "name": "PlayerRespawnedInArena",
       "category": "online",
       "games": ["er"],
       "cond": "3[45]"
     },
     {
+      "name": "InsidePlayAreaState",
+      "games": ["nr"],
+      "cond": "3[45]",
+      "skip": "1003[224]",
+      "goto": "1003[225]",
+      "end": "1003[226]",
+      "negate_field": "In Play Area",
+      "as_bool": {
+        "shortname": "InsidePlayArea"
+      }
+    },
+    {
       "name": "TutorialSeen",
       "games": ["er"],
       "category": "tutorial",
       "cond": "3[46]"
+    },
+    {
+      "name": "HasMissionStateValue",
+      "category": "mission",
+      "games": ["nr"],
+      "cond": "3[46]",
+      "skip": "1003[218]",
+      "goto": "1003[219]",
+      "end": "1003[220]",
+      "negate_field": "Has State",
+      "as_bool": {
+        "shortname": "HasMissionState"
+      }
+    },
+    {
+      "name": "MissionActiveState",
+      "category": "mission",
+      "games": ["nr"],
+      "cond": "3[47]",
+      "skip": "1003[221]",
+      "goto": "1003[222]",
+      "end": "1003[223]",
+      "negate_field": "Is Mission Active",
+      "as_bool": {
+        "shortname": "MissionActive"
+      }
+    },
+    {
+      "name": "InsidePlayAreaByTimeState",
+      "games": ["nr"],
+      "cond": "3[48]",
+      "negate_field": "In Play Area",
+      "as_bool": {
+        "shortname": "InsidePlayAreaByTime"
+      }
+    },
+    {
+      "name": "SmallBaseAttached",
+      "games": ["nr"],
+      "cond": "3[49]"
+    },
+    {
+      "name": "CompareMissionProgress",
+      "category": "mission",
+      "games": ["nr"],
+      "cond": "3[50]",
+      "skip": "1003[233]",
+      "goto": "1003[234]",
+      "end": "1003[235]",
+      "negate_field": "Comparison Type",
+      "as_compare": {
+        "shortname": "MissionProgress",
+        "rhs": "Target Amount"
+      }
+    },
+    {
+      "name": "MissionProgressAchieved",
+      "category": "mission",
+      "games": ["nr"],
+      "cond": "3[51]"
+    },
+    {
+      "name": "CutsceneEnded",
+      "games": ["nr"],
+      "cond": "3[52]"
+    },
+    {
+      "name": "CompareTeamOpenedBonfires",
+      "games": ["nr"],
+      "cond": "3[53]",
+      "negate_field": "Comparison Type",
+      "as_compare": {
+        "shortname": "TeamOpenedBonfires",
+        "rhs": "Target Amount"
+      }
+    },
+    {
+      "name": "CompareTeamBossesKilled",
+      "games": ["nr"],
+      "cond": "3[54]",
+      "negate_field": "Comparison Type",
+      "as_compare": {
+        "shortname": "TeamBossesKilled",
+        "rhs": "Target Amount"
+      }
+    },
+    {
+      "name": "CurrentScenarioSection",
+      "games": ["nr"],
+      "cond": "3[55]",
+      "skip": "1003[239]",
+      "goto": "1003[240]",
+      "end": "1003[241]"
+    },
+    {
+      "name": "IsRequestGameMode",
+      "games": ["nr"],
+      "cond": "3[56]",
+      "skip": "1003[242]",
+      "goto": "1003[243]",
+      "end": "1003[244]"
+    },
+    {
+      "name": "IsCampaignSessionState",
+      "games": ["nr"],
+      "cond": "3[57]",
+      "skip": "1003[245]",
+      "goto": "1003[246]",
+      "end": "1003[247]",
+      "negate_field": "In Session",
+      "as_bool": {
+        "shortname": "IsCampaignSession"
+      }
+    },
+    {
+      "name": "BonfireUsableState",
+      "games": ["nr"],
+      "cond": "3[58]",
+      "negate_field": "Is Usable",
+      "as_bool": {
+        "shortname": "BonfireUsable"
+      }
+    },
+    {
+      "name": "CompareSpecialSouls",
+      "games": ["nr"],
+      "cond": "3[59]",
+      "negate_field": "Comparison Type",
+      "as_compare": {
+        "shortname": "SpecialSouls",
+        "rhs": "Target Amount"
+      }
+    },
+    {
+      "name": "TargetingBoss",
+      "games": ["nr"],
+      "cond": "3[60]",
+      "skip": "1003[251]",
+      "goto": "1003[252]",
+      "end": "1003[253]"
+    },
+    {
+      "name": "ShowBlood",
+      "games": ["nr"],
+      "goto": "1003[254]"
     },
     {
       "name": "MapOffsetFlagState",
@@ -1040,7 +1244,7 @@
     {
       "name": "CharacterHasSpEffectState",
       "category": "sp",
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cond": "4[05]",
       "skip": "1004[00]",
       "goto": "1004[01]",
@@ -1151,7 +1355,7 @@
     {
       "name": "CharacterRatioDeadAlive",
       "category": "chr",
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cond": "4[15]",
       "negate_field": "Desired Life State",
       "opt_fields": ["Comparison Type", "Target Ratio"],
@@ -1174,7 +1378,7 @@
     {
       "name": "CompareCharacterRatioHPRatio",
       "category": "hp",
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cond": "4[16]",
       "opt_fields": ["Comparison Type", "Target Ratio"],
       "as_compare": {
@@ -1211,7 +1415,7 @@
     },
     {
       "name": "CharacterRatioHasSpEffectState",
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "category": "sp",
       "cond": "4[19]",
       "negate_field": "Should Have",
@@ -1222,7 +1426,7 @@
     },
     {
       "name": "CharacterRatioBackreadStatusState",
-      "games": ["ac6"],
+      "games": ["ac6", "nr"],
       "category": "chr",
       "cond": "4[20]",
       "negate_field": "Is Backread",
@@ -1251,14 +1455,14 @@
     },
     {
       "name": "CharacterRatioAIState",
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "category": "chr",
       "cond": "4[22]",
       "opt_fields": ["Comparison Type", "Target Ratio"]
     },
     {
       "name": "CompareCharacterRatioHPValue",
-      "games": ["ac6"],
+      "games": ["ac6", "nr"],
       "category": "hp",
       "cond": "4[23]",
       "opt_fields": ["Comparison Type", "Target Ratio"],
@@ -1286,13 +1490,13 @@
     {
       "name": "PlayerTargeted",
       "category": "chr",
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cond": "4[28]"
     },
     {
       "name": "CharacterInvadeType",
       "category": "online",
-      "games": ["er"],
+      "games": ["er", "nr"],
       "cond": "4[31]",
       "opt_fields": ["Comparison Type", "Number of Target Characters"]
     },
@@ -1328,13 +1532,13 @@
     },
     {
       "name": "NPCPartAttributeDamage",
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "category": "chr",
       "cond": "4[30]"
     },
     {
       "name": "CharacterRidingMountState",
-      "games": ["er"],
+      "games": ["er", "nr"],
       "category": "chr",
       "cond": "4[32]",
       "negate_field": "Is Mounted",
@@ -1351,7 +1555,7 @@
     {
       "name": "CharacterHasStateInfoState",
       "category": "chr",
-      "games": ["er"],
+      "games": ["er", "nr"],
       "cond": "4[34]",
       "opt_fields": ["Comparison Type", "Number of Target Characters"],
       "negate_field": "Should Have",
@@ -1371,7 +1575,7 @@
     },
     {
       "name": "SpecialStandbyEndedFlagState",
-      "games": ["er"],
+      "games": ["er", "nr"],
       "cond": "4[35]",
       "skip": "1004[03]",
       "goto": "1004[04]",
@@ -1386,6 +1590,7 @@
     {
       "name": "PlayerLockedOnState",
       "category": "chr",
+      "games": ["sekiro"],
       "cond": "4[36]",
       "negate_field": "Locked On",
       "as_bool": {
@@ -1393,8 +1598,15 @@
       }
     },
     {
+      "name": "CharacterHasTeamType",
+      "category": "chr",
+      "games": ["nr"],
+      "cond": "4[36]"
+    },
+    {
       "name": "CompareNumberOfCharacterHealthBars",
       "category": "chr",
+      "games": ["sekiro"],
       "cond": "4[37]",
       "opt_fields": ["Comparison Type", "Number of Target Characters"],
       "as_compare": {
@@ -1403,8 +1615,15 @@
       }
     },
     {
+      "name": "IsHero",
+      "category": "chr",
+      "games": ["nr"],
+      "cond": "4[37]"
+    },
+    {
       "name": "CompareNumberOfCharacterHealthBarsOther",
       "category": "chr",
+      "games": ["sekiro"],
       "cond": "4[38]",
       "opt_fields": ["Comparison Type", "Number of Target Characters"],
       "as_compare": {
@@ -1413,8 +1632,22 @@
       }
     },
     {
+      "name": "IsPlayerNoState",
+      "category": "chr",
+      "games": ["nr"],
+      "cond": "4[38]",
+      "skip": "1004[06]",
+      "goto": "1004[07]",
+      "end": "1004[08]",
+      "negate_field": "Is Player No",
+      "as_bool": {
+        "shortname": "IsPlayerNo"
+      }
+    },
+    {
       "name": "CompareCharacterPostureRatio",
       "category": "hp",
+      "games": ["sekiro"],
       "cond": "4[39]",
       "opt_fields": ["Comparison Type", "Number of Target Characters"],
       "as_compare": {
@@ -1423,8 +1656,22 @@
       }
     },
     {
+      "name": "RandomAppearLotState",
+      "category": "chr",
+      "games": ["nr"],
+      "cond": "4[39]",
+      "skip": "1004[09]",
+      "goto": "1004[10]",
+      "end": "1004[11]",
+      "negate_field": "Exists",
+      "as_bool": {
+        "shortname": "RandomAppearLot"
+      }
+    },
+    {
       "name": "CharacterInViewRangeState",
       "category": "chr",
+      "games": ["sekiro"],
       "cond": "4[43]",
       "negate_field": "Desired State",
       "as_bool": {
@@ -1435,6 +1682,7 @@
     {
       "name": "PlayerActionsEnabledState",
       "category": "chr",
+      "games": ["sekiro"],
       "cond": "4[44]",
       "negate_field": "Disabled/Enabled",
       "as_bool": {
@@ -1445,6 +1693,7 @@
     {
       "name": "EntityLoadedState",
       "category": "chr",
+      "games": ["sekiro"],
       "cond": "4[45]",
       "negate_field": "Is Loaded",
       "opt_fields": ["Comparison Type", "Number of Target Characters"],
@@ -1455,6 +1704,7 @@
     {
       "name": "CompareHackingDurability",
       "category": "chr",
+      "games": ["ac6"],
       "cond": "4[1000]",
       "negate_field": "Comparison Type",
       "as_compare": {
@@ -1465,6 +1715,7 @@
     {
       "name": "CompareHackingDurabilityRatio",
       "category": "chr",
+      "games": ["ac6"],
       "cond": "4[1001]",
       "negate_field": "Comparison Type",
       "as_compare": {
@@ -1475,41 +1726,49 @@
     {
       "name": "DummypolyInPlayerLocksight",
       "category": "chr",
+      "games": ["ac6"],
       "cond": "4[1002]"
     },
     {
       "name": "ZeroDamage",
       "category": "chr",
+      "games": ["ac6"],
       "cond": "4[1003]"
     },
     {
       "name": "CharacterLockedOn",
       "category": "chr",
+      "games": ["ac6"],
       "cond": "4[1004]"
     },
     {
       "name": "PlayerCanAttack",
       "category": "chr",
+      "games": ["ac6"],
       "cond": "4[1005]"
     },
     {
       "name": "ZeroDamageIncludingZeroAttackPower",
       "category": "chr",
+      "games": ["ac6"],
       "cond": "4[1006]"
     },
     {
       "name": "DeadFromFall",
       "category": "chr",
+      "games": ["ac6"],
       "cond": "4[1007]"
     },
     {
       "name": "HackingComplete",
       "category": "chr",
+      "games": ["ac6"],
       "cond": "4[1008]"
     },
     {
       "name": "ComparePulseArmorRatio",
       "category": "chr",
+      "games": ["ac6"],
       "cond": "4[1009]",
       "negate_field": "Comparison Type",
       "opt_fields": ["Comparison Type", "Number of Target Characters"],
@@ -1536,7 +1795,7 @@
     },
     {
       "name": "AssetDestroyedState",
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "category": "asset",
       "cond": "5[00]",
       "skip": "1005[01]",
@@ -1557,7 +1816,7 @@
     },
     {
       "name": "AssetHitBy",
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "category": "asset",
       "cond": "5[01]"
     },
@@ -1579,7 +1838,7 @@
     },
     {
       "name": "CompareAssetHP",
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "category": "asset",
       "cond": "5[03]",
       "opt_fields": ["Comparison Type", "Number of Target Assets"],
@@ -1590,7 +1849,7 @@
     },
     {
       "name": "AssetRatioDestroyedState",
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "category": "asset",
       "cond": "5[06]",
       "as_compare": {
@@ -1611,7 +1870,7 @@
     },
     {
       "name": "CompareAssetBurnState",
-      "games": ["er"],
+      "games": ["er", "nr"],
       "category": "asset",
       "cond": "5[09]",
       "opt_fields": ["Comparison Type", "Number of Target Assets"],
@@ -1633,7 +1892,7 @@
     },
     {
       "name": "AssetBackreadState",
-      "games": ["er"],
+      "games": ["er", "nr"],
       "category": "asset",
       "cond": "5[10]",
       "negate_field": "Is Backread",
@@ -1655,7 +1914,7 @@
     },
     {
       "name": "AssetRatioBackreadState",
-      "games": ["er"],
+      "games": ["er", "nr"],
       "category": "obj",
       "cond": "5[11]",
       "negate_field": "Is Backread",
@@ -1670,6 +1929,30 @@
       "category": "obj",
       "cond": "5[12]",
       "opt_fields": ["Comparison Type", "Number of Target Objects"]
+    },
+    // Sound
+    {
+      "name": "BGMCommonState",
+      "games": ["nr"],
+      "category": "bgm",
+      "cond": "10[01]"
+    },
+    {
+      "name": "BossBGMPlayingState",
+      "games": ["nr"],
+      "category": "bgm",
+      "cond": "10[02]",
+      "skip": "1010[04]",
+      "negate_field": "Is Playing",
+      "as_bool": {
+        "shortname": "BossBGMPlaying"
+      }
+    },
+    {
+      "name": "CompareBossBGMPriority",
+      "games": ["nr"],
+      "category": "bgm",
+      "cond": "10[03]"
     },
     // Hit
     {
@@ -1695,11 +1978,23 @@
     },
     {
       "name": "PlayerStandingOnHitGroup",
-      "games": ["er"],
+      "games": ["er", "nr"],
       "category": "hit",
       "cond": "11[03]"
     },
     // Map
+    {
+      "name": "IsMapVariationState",
+      "games": ["nr"],
+      "cond": "12[01]",
+      "skip": "1012[01]",
+      "goto": "1012[02]",
+      "end": "1012[03]",
+      "negate_field": "Is Variation",
+      "as_bool": {
+        "shortname": "IsMapVariation"
+      }
+    },
     {
       "name": "MapAlertMusicState",
       "category": "music",
@@ -1734,32 +2029,32 @@
   "shorts": [
     // Enable/Disable variants
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2000[02]",
       "enable": "NetworkSync"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2003[03]",
       "enable": "Generator"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2003[06]",
       "enable": "MapHit"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2003[07]",
       "enable": "MapVisibility"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2003[26]",
       "enable": "MessageVisibility"
     },
     {
-      "games": ["er"],
+      "games": ["er", "nr"],
       "cmd": "2003[80]",
       "enable": "TextOnLoadingScreen"
     },
@@ -1784,62 +2079,62 @@
       "enable": "DefeatEffect"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2004[01]",
       "enable": "CharacterAI"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2004[05]",
       "enable": "Character"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2004[10]",
       "enable": "CharacterGravity"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2004[12]",
       "enable": "CharacterImmortality"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2004[15]",
       "enable": "CharacterInvincibility"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2004[30]",
       "enable": "CharacterHPBarDisplay"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2004[35]",
       "enable": "CharacterDefaultBackread"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2004[39]",
       "enable": "CharacterCollision"
     },
     {
-      "games": ["er"],
+      "games": ["er", "nr"],
       "cmd": "2004[50]",
       "enable": "LockOnPoint"
     },
     {
-      "games": ["er"],
+      "games": ["er", "nr"],
       "cmd": "2004[69]",
       "enable": "CharacterDisableOnHitUnload"
     },
     {
-      "games": ["er"],
+      "games": ["er", "nr"],
       "cmd": "2004[70]",
       "enable": "DistancebasedNetworkUpdateAuthority"
     },
     {
-      "games": ["er"],
+      "games": ["er", "nr"],
       "cmd": "2004[73]",
       "enable": "CharacterFadeOnEnable"
     },
@@ -1854,27 +2149,27 @@
       "enable": "CharacterWithFade"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2005[03]",
       "enable": "Asset"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2005[04]",
       "enable": "AssetTreasure"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2005[06]",
       "enable": "ObjAct"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2005[13]",
       "enable": "AssetInvunerability"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2005[14]",
       "enable": "ObjActAssignIdx"
     },
@@ -1894,27 +2189,27 @@
       "enable": "Pause"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2011[01]",
       "enable": "Hit"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2011[02]",
       "enable": "HitBackreadMask"
     },
     {
-      "games": ["er"],
+      "games": ["er", "nr"],
       "cmd": "2011[03]",
       "enable": "Hitres"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2012[01]",
       "enable": "MapPart"
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2012[08]",
       "enable": "AreaWelcomeMessage"
     },
@@ -1925,12 +2220,12 @@
     },
     // Optional/dummy arguments
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2000[03]",
       "opt_fields": ["Dummy"]
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2000[05]",
       "opt_fields": ["Dummy"]
     },
@@ -1941,28 +2236,39 @@
       "opt_fields": ["Comparison Type", "Number of Target Characters"]
     },
     {
-      "games": ["er"],
+      "games": ["er", "nr"],
       // ForceAnimationPlayback
       "cmd": "2003[18]",
       "opt_fields": ["Comparison Type", "Number of Target Characters"]
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["nr"],
+      // ForceRatioAnimationPlayback
+      "cmd": "2003[51]",
+      "opt_fields": ["Comparison Type", "Target Ratio"]
+    },
+    {
+      "games": ["er", "ac6", "nr"],
       "cmd": "2003[21]",
       "opt_fields": ["Dummy"]
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["nr"],
+      "cmd": "2003[103]",
+      "opt_fields": ["Dummy"]
+    },
+    {
+      "games": ["er", "ac6", "nr"],
       "cmd": "2004[38]",
       "opt_fields": ["Dummy"]
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2009[06]",
       "opt_fields": ["Dummy"]
     },
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2009[11]",
       "opt_fields": ["Dummy"]
     },
@@ -1988,7 +2294,7 @@
     },
     // Event flag boilerplate
     {
-      "games": ["er", "ac6"],
+      "games": ["er", "ac6", "nr"],
       "cmd": "2003[66]",
       "shorts": [{
         "name": "SetEventFlagID",
@@ -2017,7 +2323,7 @@
       }]
     },
     {
-      "games": ["er"],
+      "games": ["er", "nr"],
       "cmd": "2003[69]",
       "shorts": [{
         "name": "SetNetworkconnectedEventFlagID",

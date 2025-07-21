@@ -39,6 +39,7 @@ namespace DarkScript3
             customBtn = new System.Windows.Forms.Button();
             eldenBtn = new System.Windows.Forms.Button();
             ac6Btn = new System.Windows.Forms.Button();
+            nrButton = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // ds1Btn
@@ -114,7 +115,7 @@ namespace DarkScript3
             fancy.Margin = new System.Windows.Forms.Padding(2);
             fancy.Name = "fancy";
             fancy.Size = new System.Drawing.Size(103, 19);
-            fancy.TabIndex = 9;
+            fancy.TabIndex = 10;
             fancy.Text = "Use MattScript";
             fancy.UseVisualStyleBackColor = true;
             fancy.CheckedChanged += fancy_CheckedChanged;
@@ -126,16 +127,16 @@ namespace DarkScript3
             fancyLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             fancyLabel.Name = "fancyLabel";
             fancyLabel.Size = new System.Drawing.Size(343, 27);
-            fancyLabel.TabIndex = 10;
+            fancyLabel.TabIndex = 11;
             fancyLabel.Text = "(Formats scripts to make them easier to understand)";
             // 
             // customBtn
             // 
-            customBtn.Location = new System.Drawing.Point(95, 145);
+            customBtn.Location = new System.Drawing.Point(186, 145);
             customBtn.Margin = new System.Windows.Forms.Padding(2);
             customBtn.Name = "customBtn";
             customBtn.Size = new System.Drawing.Size(164, 30);
-            customBtn.TabIndex = 8;
+            customBtn.TabIndex = 9;
             customBtn.Text = "Custom EMEDF...";
             customBtn.UseVisualStyleBackColor = true;
             customBtn.Click += customBtn_Click;
@@ -162,11 +163,23 @@ namespace DarkScript3
             ac6Btn.UseVisualStyleBackColor = true;
             ac6Btn.Click += ac6Btn_Click;
             // 
+            // nrButton
+            // 
+            nrButton.Location = new System.Drawing.Point(15, 146);
+            nrButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            nrButton.Name = "nrButton";
+            nrButton.Size = new System.Drawing.Size(164, 27);
+            nrButton.TabIndex = 8;
+            nrButton.Text = "Nightreign";
+            nrButton.UseVisualStyleBackColor = true;
+            nrButton.Click += nrButton_Click;
+            // 
             // GameChooser
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(367, 219);
+            Controls.Add(nrButton);
             Controls.Add(ac6Btn);
             Controls.Add(eldenBtn);
             Controls.Add(fancyLabel);
@@ -200,5 +213,6 @@ namespace DarkScript3
         private System.Windows.Forms.Button customBtn;
         private System.Windows.Forms.Button eldenBtn;
         private System.Windows.Forms.Button ac6Btn;
+        private System.Windows.Forms.Button nrButton;
     }
 }

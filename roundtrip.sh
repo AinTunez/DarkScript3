@@ -9,4 +9,5 @@ $CMD ds1r ds1r diff fancy pack
 $CMD ds3 ds3 diff fancy pack
 $CMD er "alt/ernt" diff fancy pack
 $CMD er er diff fancy pack
+$CMD nr nr diff fancy pack
 $CMD ds3 ds3 diff fancy unit validate

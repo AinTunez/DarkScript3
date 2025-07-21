@@ -350,7 +350,7 @@
           ]
         },
         {
-          "name": "Modify Bow Properties",
+          "name": "Modify Bullet Param",
           "index": 6,
           "args": [
             {
@@ -382,8 +382,8 @@
               "unk4": 0
             },
             {
-              "name": "Unknown3",
-              "type": 6,
+              "name": "Status",
+              "type": 5,
               "enum_name": null,
               "default": 0.0,
               "min": 0.0,
@@ -1741,7 +1741,7 @@
           ]
 		},
 		{
-          "name": "Unknown Command 100040[04]",
+          "name": "Time Shortening Resident",
           "index": 4,
           "args": [
             {
@@ -2433,7 +2433,7 @@
           ]
 		},
 		{
-          "name": "Unknown Command 100090[06]",
+          "name": "Modify Movement Rate",
           "index": 6,
           "args": [
             {
@@ -2451,7 +2451,7 @@
               "unk4": 0
             },
             {
-              "name": "Unknown1",
+              "name": "Amount",
               "type": 6,
               "enum_name": null,
               "default": 0.0,
@@ -2726,12 +2726,12 @@
           ]
 		},
 		{
-          "name": "Unknown Command 100110[02]",
+          "name": "Repair Equipment",
           "index": 2,
           "args": []
 		},
 		{
-          "name": "Unknown Command 100110[03]",
+          "name": "Destroy Owner Equipment",
           "index": 3,
           "args": [
             {
@@ -3350,7 +3350,7 @@
           ]
 		},
 		{
-          "name": "Unknown Command 100130[02]",
+          "name": "Display Icon",
           "index": 2,
           "args": [
             {
@@ -3446,7 +3446,7 @@
           ]
 		},
 		{
-          "name": "Unknown Command 100130[04]",
+          "name": "Apply Weapon SFX",
           "index": 4,
           "args": [
             {
@@ -3536,7 +3536,7 @@
           ]
 		},
 		{
-          "name": "Unknown Command 100130[05]",
+          "name": "Draw Disable Full Body SFX",
           "index": 5,
           "args": [
             {
@@ -4339,7 +4339,7 @@
         "13": "Faith",
         "14": "Adaptability",
         "17": "Unknown (17)",
-        "18": "Current HP",
+        "18": "HP On Kill",
         "19": "Unknown (19)",
         "20": "Attunement Slots",
         "21": "Anti-Stability Modifier",
@@ -4354,7 +4354,7 @@
         "2": "Unknown (2)",
         "3": "Curse Buildup",
         "4": "Ignite Buildup",
-        "5": "Unknown (5)",
+        "5": "Toxicity Buildup",
         "6": "Petrify Buildup",
         "7": "Max HP",
         "8": "Max Stamina",
@@ -4389,8 +4389,8 @@
         "55": "Hex Power (Staff)",
         "56": "Hex Power (Chime)",
         "57": "Shield Stability",
-        "58": "Outgoing Damage Rate II",
-        "59": "Incoming Damage Rate II",
+        "58": "PvE Damage",
+        "59": "PvE Damage Reduction",
         "60": "Unknown (60)",
         "61": "Unknown (61)",
         "62": "Unknown (62)"
@@ -4400,21 +4400,21 @@
       "name": "State Info Type",
       "values": {
         "0": "Unknown (0)",
-        "1": "Unknown (1)",
-        "2": "Unknown (2)",
-        "3": "Unknown (3)",
+        "1": "Disable Backstab",
+        "2": "Disable Hollowing And Soul Loss",
+        "3": "Disable Soul Loss",
         "4": "Unknown (4)",
         "6": "Unknown (6)",
-        "10": "Unknown (10)",
+        "10": "Disable Footstep Sound",
         "15": "Unknown (15)",
-        "17": "Unknown (17)",
-        "18": "Unknown (18)",
+        "17": "Hide Weapon Left",
+        "18": "Hide Weapon Right",
         "19": "Unknown (19)",
         "22": "Unknown (22)",
         "23": "Unknown (23)",
         "24": "Unknown (24)",
-        "25": "Unknown (25)",
-        "27": "Unknown (27)",
+        "25": "Reduce Back Damage",
+        "27": "Disable Chr Phantom Color",
         "28": "Unknown (28)",
         "29": "Unknown (29)",
         "31": "Unknown (31)",
@@ -4433,146 +4433,179 @@
         "52": "Unknown (52)",
         "53": "Unknown (53)",
         "54": "Unknown (54)",
-        "55": "Unknown (55)",
+        "55": "Disable Lock On",
         "56": "Unknown (56)",
-        "57": "Unknown (57)",
+        "57": "Disable Healthbar",
         "58": "Unknown (58)",
-        "59": "Unknown (59)",
-        "60": "Unknown (60)",
+        "59": "Disable Soul Absorption",
+        "60": "Enable Invisibility",
         "61": "Unknown (61)"
       }
 	},
-    {
+  {
 	  "name": "Bow Type",
 	  "values": {
 	    "0": "Regular Bows",
 	    "1": "Greatbows",
 	    "2": "Crossbows"
 	  }
-    },
-    {
+  },
+  {
 	  "name": "Player Property Type",
 	  "values": {
-		"11": "Hex Self-Damage (Staff)",
-		"12": "Hex Self-Damage (Chime)",
-		"13": "Equipped Right-Hand Weapon Durability",
-		"14": "Equipped Left-Hand Weapon Durability",
-		"15": "Equipped Weapons Durability",
-		"16": "Equipped Armor Durability",
-		"17": "Equipped Rings Durability",
-		"18": "Unknown (18)",
-		"19": "Unknown (19)",
-		"20": "Unknown (20)",
-		"21": "Unknown (21)",
-		"22": "Unknown (22)",
-		"23": "Unknown (23)",
-		"25": "Unknown (25)",
-		"30": "Unknown (30)",
-		"31": "Unknown (31)",
-		"32": "Unknown (32)",
-		"33": "Unknown (33)"
+		  "11": "Hex Self-Damage (Staff)",
+		  "12": "Hex Self-Damage (Chime)",
+		  "13": "Equipped Right-Hand Weapon Durability",
+		  "14": "Equipped Left-Hand Weapon Durability",
+		  "15": "Equipped Weapons Durability",
+		  "16": "Equipped Armor Durability",
+		  "17": "Equipped Rings Durability",
+      "18": "Appearence",
+      "19": "Emissive Light",
+      "20": "Unknown (20)",
+      "21": "Unknown (21)",
+      "22": "SfxIDOnKill",
+      "23": "SfxOnKillOrigin",
+      "25": "Unknown (25)",
+      "30": "Unknown (30)",
+      "31": "Unknown (31)",
+      "32": "Unknown (32)",
+      "33": "Unknown (33)"
 	  }
 	},
 	{
 	  "name": "Special Scaling Type",
 	  "values": {
-		"1": "Hollowing",
-		"2": "Sin"
+		  "1": "Hollowing",
+		  "2": "Sin"
 	  }
 	},
 	{
 	  "name": "Attribute Type",
 	  "values": {
-		"1": "Vigor",
-		"2": "Endurance",
-		"3": "Vitality",
-		"4": "Attunement",
-		"5": "Strength",
-		"6": "Dexterity",
-		"7": "Intelligence",
-		"8": "Faith",
-		"9": "Adaptability"  
+		  "1": "Vigor",
+		  "2": "Endurance",
+		  "3": "Vitality",
+		  "4": "Attunement",
+		  "5": "Strength",
+		  "6": "Dexterity",
+		  "7": "Intelligence",
+		  "8": "Faith",
+		  "9": "Adaptability"
 	  }
 	},
 	{
 	  "name": "Estus Modification Type",
 	  "values": {
-		"1": "Boost by 50",
-		"2": "Reduce to 0"
+		  "1": "Boost by 50",
+		  "2": "Reduce to 0"
 	  }
 	},
 	{
 	  "name": "SpEffect Scale Type",
 	  "values": {
-		"0": "Duration",
-		"1": "Value"
+		  "0": "Duration",
+		  "1": "Value"
 	  }
 	},
 	{
-      "name": "BOOL",
-      "values": {
-        "0": "FALSE",
-        "1": "TRUE"
-      }
-    },
+    "name": "BOOL",
+    "values": {
+      "0": "FALSE",
+      "1": "TRUE"
+    }
+  },
 	{
 	  "name": "Buff Type",
 	  "values": {
-		"0": "All Physical",
-		"1": "Magic",
-		"2": "Lightning",
-		"3": "Fire",
-		"4": "Dark",
-		"5": "Poison",
-		"6": "Bleed",
-		"7": "Unknown (7)",
-		"8": "Curse",
-		"9": "Petrify"
-      }  
+		  "0": "All Physical",
+		  "1": "Magic",
+		  "2": "Lightning",
+		  "3": "Fire",
+		  "4": "Dark",
+		  "5": "Poison",
+		  "6": "Bleed",
+		  "7": "Unknown (7)",
+		  "8": "Curse",
+		  "9": "Petrify"
+    }
 	},
 	{
 	  "name": "Client Item Type",
 	  "values": {
-		"0": "White Sign Soapstone",
-		"1": "Small White Sign Soapstone",
-		"2": "Red Sign Soapstone",
-		"3": "Dragon Eye"
+		  "0": "White Sign Soapstone",
+		  "1": "Small White Sign Soapstone",
+		  "2": "Red Sign Soapstone",
+		  "3": "Dragon Eye"
 	  }
 	},
 	{
 	  "name": "Server Item Type",
 	  "values": {
-		"0": "Cracked Blue Eye Orb",
-		"1": "Cracked Red Eye Orb"
+		  "0": "Cracked Blue Eye Orb",
+		  "1": "Cracked Red Eye Orb"
 	  }
 	},
 	{
 	  "name": "Passive Server Item Type",
 	  "values": {
-		"0": "Guardian's Seal",
-		"1": "Crest of the Rat",
-		"2": "Bell Keeper's Soul"
+		  "0": "Guardian's Seal",
+		  "1": "Crest of the Rat",
+		  "2": "Bell Keeper's Soul"
 	  }
 	},
 	{
 	  "name": "Status Effect Type",
 	  "values": {
-		"0": "Poison",
-		"1": "Bleed",
-		"2": "Unknown (2)",
-		"3": "Unknown (3)",
-		"4": "Unknown (4)",
-		"5": "Silence",
-		"6": "Unknown (6)",
-		"7": "Unknown (7)",
-		"8": "Toxic",
-		"9": "Unknown (9)",
-		"10": "Unknown (10)",
-		"11": "Unknown (11)",
-		"12": "Unknown (12)",
-		"13": "Unknown (13)",
-		"14": "Unknown (14)"
+		  "0": "Poison",
+		  "1": "Bleed",
+		  "2": "Unknown (2)",
+		  "3": "Unknown (3)",
+		  "4": "Unknown (4)",
+		  "5": "Silence",
+		  "6": "Unknown (6)",
+		  "7": "Unknown (7)",
+		  "8": "Toxic",
+		  "9": "Unknown (9)",
+		  "10": "Unknown (10)",
+		  "11": "Unknown (11)",
+		  "12": "Unknown (12)",
+		  "13": "Unknown (13)",
+		  "14": "Unknown (14)"
 	  }
 	}
-  ]
+  ],
+  "darkscript": {
+    "aliases": {
+      "UnknownCommand10004004": "100040[04]",
+      "UnknownCommand10009006": "100090[06]",
+      "UnknownCommand10011002": "100110[02]",
+      "UnknownCommand10011003": "100110[03]",
+      "UnknownCommand10013002": "100130[02]",
+      "UnknownCommand10013004": "100130[04]",
+      "UnknownCommand10013005": "100130[05]"
+    },
+    "enum_aliases": {
+      "AdditiveStatType.CurrentHP": 18,
+      "MultiplicativeStatType.Unknown5": 5,
+      "MultiplicativeStatType.OutgoingDamageRateII": 58,
+      "MultiplicativeStatType.IncomingDamageRateII": 59,
+      "StateInfoType.Unknown1": 1,
+      "StateInfoType.Unknown2": 2,
+      "StateInfoType.Unknown3": 3,
+      "StateInfoType.Unknown10": 10,
+      "StateInfoType.Unknown17": 17,
+      "StateInfoType.Unknown18": 18,
+      "StateInfoType.Unknown25": 25,
+      "StateInfoType.Unknown27": 27,
+      "StateInfoType.Unknown55": 55,
+      "StateInfoType.Unknown57": 57,
+      "StateInfoType.Unknown59": 59,
+      "StateInfoType.Unknown60": 60,
+      "PlayerPropertyType.Unknown18": 18,
+      "PlayerPropertyType.Unknown19": 19,
+      "PlayerPropertyType.Unknown22": 22,
+      "PlayerPropertyType.Unknown23": 23
+    }
+  }
 }

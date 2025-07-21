@@ -25,6 +25,7 @@ namespace DarkScript3
         public string ResourcePrefix { get; set; }
 
         // https://github.com/soulsmods/DSMapStudio/blob/master/StudioCore/GameType.cs
+        // https://github.com/vawser/Smithbox/blob/main/src/Smithbox.Program/Core/ProjectType.cs
         public enum GameType
         {
             Undefined = 0,
@@ -53,14 +54,23 @@ namespace DarkScript3
             ACFA = 12,
             ACV = 13,
             ACVD = 14,
+            NR = 15,
         }
 
         // https://github.com/soulsmods/DSMapStudio/blob/master/StudioCore/Editor/ProjectSettings.cs
+        // https://github.com/vawser/Smithbox/blob/main/src/StudioCore/Core/Project/ProjectConfiguration.cs
+        // Now https://github.com/vawser/Smithbox/blob/main/src/Smithbox.Program/Core/ProjectEntry.cs
         public class ProjectSettings
         {
-            public string ProjectName { get; set; } = "";
-            public string GameRoot { get; set; } = "";
+            // Shared
+            public string ProjectName { get; set; }
+            // DSMS/Smithbox
+            public string GameRoot { get; set; }
             public GameType GameType { get; set; } = GameType.Undefined;
+            // Smithbox
+            public string ProjectPath { get; set; }
+            public string DataPath { get; set; }
+            public GameType ProjectType { get; set; } = GameType.Undefined;
         }
 
         private static readonly GameType[] eventDirGames = new[]
@@ -68,7 +78,7 @@ namespace DarkScript3
             GameType.DarkSoulsPTDE, GameType.DarkSoulsRemastered,
             GameType.DarkSoulsIII, GameType.Bloodborne,
             GameType.Sekiro, GameType.EldenRing,
-            GameType.AC6
+            GameType.AC6, GameType.NR,
         };
         private static readonly Dictionary<GameType, string> resourcePrefixHint = new Dictionary<GameType, string>
         {
@@ -76,11 +86,12 @@ namespace DarkScript3
             [GameType.DarkSoulsRemastered] = "ds1",
             // DS2 has no resource files at present, but probably use scholar for both when that comes
             [GameType.DarkSoulsIISOTFS] = "ds2scholar",
-            [GameType.DarkSoulsIII] = "ds2scholar",
+            [GameType.DarkSoulsIII] = "ds3",
             [GameType.Bloodborne] = "bb",
             [GameType.Sekiro] = "sekiro",
             [GameType.EldenRing] = "er",
             [GameType.AC6] = "ac6",
+            [GameType.NR] = "nr",
         };
 
         // Expects a fully specified valid project JSON path.
@@ -139,19 +150,22 @@ namespace DarkScript3
                 Settings = settings,
                 FilePath = jsonPath,
             };
-            if (eventDirGames.Contains(settings.GameType))
+            string modDir = settings.ProjectPath ?? Path.GetDirectoryName(jsonPath);
+            GameType type = settings.ProjectType != GameType.Undefined ? settings.ProjectType : settings.GameType;
+            if (eventDirGames.Contains(type))
             {
-                file.ProjectEventDirectory = Path.Combine(Path.GetDirectoryName(jsonPath), "event");
-                if (settings.GameRoot != null && Directory.Exists(settings.GameRoot))
+                file.ProjectEventDirectory = Path.Combine(modDir, "event");
+                string baseGameDir = settings.GameRoot ?? settings.DataPath;
+                if (baseGameDir != null && Directory.Exists(baseGameDir))
                 {
-                    string gameDir = Path.Combine(Path.GetFullPath(settings.GameRoot), "event");
+                    string gameDir = Path.Combine(Path.GetFullPath(baseGameDir), "event");
                     if (Directory.Exists(gameDir))
                     {
                         file.GameEventDirectory = gameDir;
                     }
                 }
             }
-            if (resourcePrefixHint.TryGetValue(settings.GameType, out string prefix))
+            if (resourcePrefixHint.TryGetValue(type, out string prefix))
             {
                 file.ResourcePrefix = prefix;
             }

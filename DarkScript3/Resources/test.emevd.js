@@ -1,3 +1,5 @@
+import * as common from "test2.js";
+
 // Should produce warnings but otherwise work
 $Event(1, Default, function() {
     Goto(L0);
@@ -9,7 +11,7 @@ L2: L1:
 
 $Event(2, Default, function() {
     if (badcond) {
-        SetEventFlag(1, ON);
+        SetEventFlag(common.BossFlag, ON);
     }
     worsecond = worsecond;
     EndIf(worstcond.Passed);

@@ -1987,6 +1987,7 @@ namespace DarkScript3
                 else
                 {
                     ifFollow[node] = follow;
+                    if (debugPrint) Console.WriteLine($"Main {node} -> {follow}");
                     List<FlowNode> extraFollows = new List<FlowNode>();
                     foreach (FlowNode otherNode in unresolved)
                     {
@@ -2007,6 +2008,7 @@ namespace DarkScript3
                         if (extraFollows.Contains(otherNode))
                         {
                             ifFollow[otherNode] = follow;
+                            if (debugPrint) Console.WriteLine($"Other {otherNode} -> {follow}");
                             return true;
                         }
                         return false;
@@ -2029,7 +2031,10 @@ namespace DarkScript3
                     {
                         return ims;
                     }
-                    if (debugPrint && ifFollow.TryGetValue(node, out FlowNode f) && elses.Contains(f)) Console.WriteLine($"Nested follow {node}->{f} within [{string.Join(",", follows)}]");
+                    if (debugPrint && ifFollow.TryGetValue(node, out FlowNode f) && elses.Contains(f))
+                    {
+                        Console.WriteLine($"Nested follow {node}->{f} within [{string.Join(",", follows)}]");
+                    }
                     if (ifFollow.TryGetValue(node, out FlowNode follow) && !elses.Contains(follow))
                     {
                         if (debugPrint) Console.WriteLine($"Follow chain: {node} -> {follow}");
@@ -2052,7 +2057,7 @@ namespace DarkScript3
                             continue;
                         }
                         // Should be checked already
-                        if (node.Succ == null || node.AlwaysJump || node.JumpTo == null || !(node.Im is CondIntermediate))
+                        if (node.Succ == null || node.AlwaysJump || node.JumpTo == null || node.Im is not CondIntermediate)
                         {
                             throw new Exception($"Internal error: bad if/else starting node {node}");
                         }
@@ -2073,27 +2078,12 @@ namespace DarkScript3
                                 elses, depth+1);
                             ims.Add(im);
                         }
-                        else if (!(jump.Pred.Im is Goto g && g.Cond.Always && g.ToNode == follow.ID))
-                        {
-                            // We may get this point and have something which can't fit into an if/else,
-                            // because the if branch execution can end up in the else branch somehow.
-                            // In this case, there cannot be an else branch, and the goto cannot be excised.
-                            im.True = structure(
-                                next,
-                                follows.Concat(new[] { jump, follow }).ToList(),
-                                elses.Concat(new[] { jump, follow }).ToList(), depth+1);
-                            ims.Add(im);
-                            ims.AddRange(structure(
-                                jump,
-                                follows.Concat(new[] { follow }).ToList(),
-                                elses, depth+1));
-                        }
-                        else
+                        else if (jump.Pred.Im is Goto g && g.Cond.Always && g.ToNode == follow.ID)
                         {
                             im.True = structure(
                                 next,
                                 follows.Concat(new[] { jump, follow }).ToList(),
-                                elses.Concat(new[] { jump, follow }).ToList(), depth+1);
+                                elses.Concat(new[] { jump, follow }).ToList(), depth + 1);
                             if (im.True.Count > 0 && im.True[im.True.Count - 1] is Goto h && h.Cond.Always && h.ToNode == follow.ID)
                             {
                                 implicitGotos[h.ID] = h.ToNode;
@@ -2107,8 +2097,25 @@ namespace DarkScript3
                             im.False = structure(
                                 jump,
                                 follows.Concat(new[] { follow }).ToList(),
-                                elses, depth+1);
+                                elses, depth + 1);
                             ims.Add(im);
+                        }
+                        else
+                        {
+                            // We may get this point and have something which can't fit into an if/else,
+                            // because the if branch execution can end up in the else branch somehow.
+                            // In this case, there cannot be an else branch, and the goto cannot be excised.
+                            // Nightreign complicated this. else conditions with label jumps: 90015310, 90065900
+                            // The latter requires special syntax
+                            im.True = structure(
+                                next,
+                                follows.Concat(new[] { jump, follow }).ToList(),
+                                elses.Concat(new[] { jump, follow }).ToList(), depth + 1);
+                            ims.Add(im);
+                            ims.AddRange(structure(
+                                jump,
+                                follows.Concat(new[] { follow }).ToList(),
+                                elses, depth + 1));
                         }
                         node = follow;
                     }

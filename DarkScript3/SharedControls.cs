@@ -263,19 +263,20 @@ namespace DarkScript3
         {
             // Heuristic detection of oodle copying, for convenience
             string emedfName = Path.GetFileName(emedfPath);
-            if (!(emedfName.StartsWith("er-common") || emedfName.StartsWith("sekiro-common") || emedfName.StartsWith("ac6-common")))
+            if (!(emedfName.StartsWith("er-common") || emedfName.StartsWith("sekiro-common")
+                || emedfName.StartsWith("ac6-common") || emedfName.StartsWith("nr-common")))
             {
                 return;
             }
             // Assume current working directory is exe dir
-            List<string> dlls = new() { "oo2core_6_win64.dll", "oo2core_8_win64.dll" };
+            List<string> dlls = new() { "oo2core_6_win64.dll", "oo2core_8_win64.dll", "oo2core_9_win64.dll" };
             bool dllExists() => dlls.Any(dll => File.Exists(dll) || File.Exists($"lib/{dll}"));
             if (dllExists())
             {
                 return;
             }
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = $"Select {dlls[0]} from the game directory";
+            ofd.Title = $"Select oo2core dll from the game directory";
             ofd.Filter = $"Oodle DLL|*.dll";
             if (ofd.ShowDialog() != DialogResult.OK)
             {

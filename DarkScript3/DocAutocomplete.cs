@@ -198,12 +198,9 @@ namespace DarkScript3
                     List<string> argList = new List<string>();
                     EditorGUI.ParseFuncAtRange(fragment, Docs, out InitData.DocID docId, out int argIndex, argList);
                     EMEDF.ArgDoc argDoc = Docs.GetHeuristicArgDoc(docId, argIndex, Links);
-                    // Special case for events, which can work without game metadata
-                    if (argDoc?.MetaType?.Type == "eventid")
-                    {
-                        // TODO
-                    }
-                    else if (metadata.IsOpen() && argDoc?.MetaType != null)
+                    // eventid autocomplete is possible, but too noisy in practice
+                    // This previously checked metadata.IsOpen() but each method can potentially use static data
+                    if (argDoc?.MetaType != null)
                     {
                         // Name is only relevant for multi args, for looking up arg types
                         argItems.AddRange(GetTypeEnumerator(docId.Func, argDoc, argList));
@@ -242,6 +239,7 @@ namespace DarkScript3
             private IEnumerable<DocAutocompleteItem> GetTypeEnumerator(string funcName, EMEDF.ArgDoc argDoc, List<string> argList)
             {
                 EMEDF.DarkScriptType metaType = argDoc.MetaType;
+                bool isOpen = metadata.IsOpen();
                 // Map entity data. It is filtered per-map
                 if (metaType.DataType == "entity" && metadata.IsMapDataAvailable(context.Game, context.Map))
                 {
@@ -277,13 +275,12 @@ namespace DarkScript3
                         }
                     }
                 }
-                else if (metaType.DataType == "param" && metaType.Type != null)
+                else if (isOpen && metaType.DataType == "param" && metaType.Type != null)
                 {
                     return metadata.GetParamRowItems(context.Game, metaType.Type);
                 }
-                else if (metaType.DataType == "param" && metaType.OverrideTypes != null)
+                else if (isOpen && metaType.DataType == "param" && metaType.OverrideTypes != null)
                 {
-                    Console.WriteLine($"here with {argDoc.EnumDoc?.DisplayName} {metaType.OverrideEnum}");
                     // WaitFor(PlayerHasItem
                     // Override first arg, or override second arg (if it uniquely determines a param)
                     if (argDoc.EnumDoc?.DisplayName == metaType.OverrideEnum)
@@ -303,13 +300,13 @@ namespace DarkScript3
                         }
                     }
                 }
-                else if (metaType.DataType == "fmg" && metaType.Type != null)
+                else if (isOpen && metaType.DataType == "fmg" && metaType.Type != null)
                 {
                     return metadata.GetFmgEntryItems(context.Game, metaType.Type);
                 }
                 else if (metaType.DataType == "mapint")
                 {
-                    return metadata.GetMapNamePartsItems(context.Game);
+                    return metadata.GetMapNameIntItems(context.Game);
                 }
                 else if (metaType.DataType == "mapparts" && metaType.MultiNames != null)
                 {

@@ -34,13 +34,18 @@ namespace DarkScript3
             // scripts still basically applies to these as well.
             if (args.Contains("ac6"))
             {
-                // DumpAc6Unknown();
+                // DumpUnknown();
                 // DumpMixedEmedf(args);
                 CombineMixedEmedf(args);
             }
+            else if (args.Contains("nr"))
+            {
+                DumpUnknown();
+            }
             else if (args.Contains("gen"))
             {
-                DumpEldenNew(args);
+                // DumpEldenNew(args);
+                DumpWithDefaults(args);
             }
             else if (args.Contains("validate"))
             {
@@ -56,7 +61,8 @@ namespace DarkScript3
             }
             else
             {
-                RunEldenTests(args);
+                // RunEldenTests(args);
+                RunNightreignTests(args);
             }
         }
 
@@ -84,8 +90,8 @@ namespace DarkScript3
 
         public void DumpTypes(string[] args)
         {
-            InstructionDocs baseDocs = new InstructionDocs("ds3-common.emedf.json");
-            InstructionDocs docs = new InstructionDocs("ds1-common.emedf.json");
+            InstructionDocs baseDocs = new InstructionDocs("er-common.emedf.json");
+            InstructionDocs docs = new InstructionDocs("nr-common.emedf.json");
             Dictionary<string, List<string>> docCats = docs.DOC?.DarkScript?.MetaAliases ?? baseDocs.DOC.DarkScript.MetaAliases;
             List<string> cats = docCats.Keys.ToList();
             Dictionary<string, string> revCats = docCats.SelectMany(e => e.Value.Select(v => (v, e.Key))).ToDictionary(e => e.Item1, e => e.Item2);
@@ -230,6 +236,10 @@ namespace DarkScript3
                 Increment = 0,
                 FormatString = type == "float" ? "%0.3f" : "%d",
             };
+            if (argDoc.EnumName == null)
+            {
+                argDoc.Max = 10000000007;  // Sentinel value, used by FillDefaults
+            }
             if (argDoc.Name == "Parameters") argDoc.Vararg = true;
             return argDoc;
         }
@@ -394,6 +404,244 @@ namespace DarkScript3
             File.WriteAllText("new-er-common.emedf.json", output);
         }
 
+        // Standalone default filling after AddUnknownValues
+        public void DumpWithDefaults(string[] opt)
+        {
+            string getArgKey(EMEDF.ArgDoc argDoc)
+            {
+                List<string> parts = new List<string>();
+                if (argDoc.EnumName != null) parts.Add(argDoc.EnumName);
+                if (!RevTypes.TryGetValue((int)argDoc.Type, out string typeName)) throw new Exception($"Unknown type in {argDoc.Name}: {argDoc.Type}");
+                parts.Add(typeName);
+                parts.Add(argDoc.Name);
+                return string.Join(" ", parts);
+            }
+            EMEDF.ArgDoc makeDefaults(int min, int max, int inc = 1, int def = 0)
+            {
+                return new EMEDF.ArgDoc
+                {
+                    Min = min,
+                    Max = max,
+                    Increment = inc,
+                    Default = def,
+                };
+            }
+            string getMinorDetailDesc(EMEDF.ArgDoc argDoc)
+            {
+                return $"min {argDoc.Min} max {argDoc.Max} inc {argDoc.Increment} default {argDoc.Default}";
+            }
+            Dictionary<string, EMEDF.ArgDoc> exampleDocs = new Dictionary<string, EMEDF.ArgDoc>
+            {
+                ["short Mission ID"] = makeDefaults(0, 999),
+                ["float Souls Multiplier"] = makeDefaults(0, 100000000),
+                ["float Target Probability"] = makeDefaults(0, 1, 1, 0),
+            };
+            // From new name to existing one
+            Dictionary<string, string> copyDocs = new()
+            {
+                ["byte Unused Hours"] = "byte Hours",
+                ["byte Unused Minutes"] = "byte Minutes",
+                ["byte Unused Seconds"] = "byte Seconds",
+                ["float Fade to White Ratio"] = "float Fade to Black Ratio",
+                ["float Fade to White Time (s)"] = "float Fade to Black Time (s)",
+            };
+            EMEDF oldDoc = EMEDF.ReadFile($"DarkScript3/Resources/er-common.emedf.json");
+            foreach (EMEDF.ClassDoc classDoc in oldDoc.Classes)
+            {
+                foreach (EMEDF.InstrDoc instrDoc in classDoc.Instructions)
+                {
+                    foreach (EMEDF.ArgDoc argDoc in instrDoc.Arguments)
+                    {
+                        string key = getArgKey(argDoc);
+                        if (exampleDocs.TryGetValue(key, out EMEDF.ArgDoc old))
+                        {
+                            string oldDesc = getMinorDetailDesc(old);
+                            string newDesc = getMinorDetailDesc(argDoc);
+                            if (oldDesc != newDesc)
+                            {
+                                if (opt.Contains("defaults")) Console.WriteLine($"Different values for {key}: [{oldDesc}] old vs [{newDesc}] new");
+                            }
+                        }
+                        else
+                        {
+                            exampleDocs[key] = argDoc;
+                        }
+                    }
+                }
+            }
+            void updateArg(EMEDF.ArgDoc argDoc, string debugInfo = "")
+            {
+                // It seems enums don't get default values etc.
+                if (argDoc.EnumName != null)
+                {
+                    return;
+                }
+                string argKey = getArgKey(argDoc);
+                EMEDF.ArgDoc old = null;
+                if (argDoc.Max != 10000000007)
+                {
+                    // Require sentinel value I guess
+                    return;
+                }
+                if (!argDoc.Name.StartsWith("Unknown"))
+                {
+                    exampleDocs.TryGetValue(argKey, out old);
+                    if (old == null && copyDocs.TryGetValue(argKey, out string oldArgKey))
+                    {
+                        exampleDocs.TryGetValue(oldArgKey, out old);
+                    }
+                }
+                if (old == null)
+                {
+                    if (opt.Contains("defaults")) Console.WriteLine($"Unknown arg {argKey}{debugInfo}");
+                    string type = RevTypes[(int)argDoc.Type];
+                    argDoc.Increment = 1;
+                    if (type == "byte" || type == "sbyte")
+                    {
+                        argDoc.Max = 99;
+                    }
+                    else if (type == "short" || type == "ushort")
+                    {
+                        argDoc.Max = 9999;
+                    }
+                    else if (type == "int" || type == "uint")
+                    {
+                        argDoc.Max = 2000000000;
+                    }
+                    else if (type == "float")
+                    {
+                        argDoc.Max = 100000000;
+                    }
+                }
+                else
+                {
+                    if (opt.Contains("known")) Console.WriteLine($"Known arg {argKey}: {getMinorDetailDesc(old)}");
+                    argDoc.Min = old.Min;
+                    argDoc.Max = old.Max;
+                    argDoc.Increment = old.Increment;
+                    argDoc.Default = old.Default;
+                }
+            }
+            InstructionDocs docs = new InstructionDocs("nr-common.emedf.json");
+            doc = docs.DOC;
+            foreach (EMEDF.ClassDoc classDoc in doc.Classes)
+            {
+                foreach (EMEDF.InstrDoc instrDoc in classDoc.Instructions)
+                {
+                    foreach (EMEDF.ArgDoc argDoc in instrDoc.Arguments)
+                    {
+                        updateArg(argDoc, $" in {instrDoc.Name}");
+                    }
+                }
+            }
+            if (opt.Contains("dryrun")) return;
+            string output = JsonConvert.SerializeObject(doc, Formatting.Indented).Replace("\r\n", "\n");
+            File.WriteAllText("nr-new-common.emedf.json", output);
+        }
+
+        public void RunNightreignTests(string[] args)
+        {
+            string gameDir = $@"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING NIGHTREIGN\Game\event";
+            string modDir = $@"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING NIGHTREIGN\Game\testevent\event";
+            foreach (string emevdPath in Directory.GetFiles(modDir, "*.emevd.dcx"))
+            {
+                File.Delete(emevdPath);
+            }
+            InstructionDocs docs = new InstructionDocs("nr-common.emedf.json");
+            void addEvent(string file, params EMEVD.Event[] events)
+            {
+                EMEVD emevd = EMEVD.Read($@"{gameDir}\{file}.emevd.dcx");
+                EMEVD.Event constructor = emevd.Events[0];
+                foreach (EMEVD.Event ev in events)
+                {
+                    // Reverse order
+                    constructor.Instructions.InsertRange(0, new[]
+                    {
+                        new EMEVD.Instruction(2000, 0, new List<object> { 0, (uint)ev.ID, 0 }),
+                    });
+                    emevd.Events.Add(ev);
+                    string modFile = $@"{modDir}\{file}.emevd.dcx";
+                    Console.WriteLine(modFile);
+                    emevd.Write($@"{modDir}\{file}.emevd.dcx");
+                }
+            }
+            // string file = "m10_00_00_00";
+            // runner.Instructions.Add(ParseAdd($"IF Character Has SpEffect (0,10000,501000,1,0,1)"));
+            int id = 34905435;
+            doc = docs.DOC;
+            docByName = doc.Classes.SelectMany(c => c.Instructions.Select(i => (i, (int)c.Index))).ToDictionary(i => i.Item1.Name, i => (i.Item2, (int)i.Item1.Index));
+            EMEVD.Event ev = new EMEVD.Event(id++, EMEVD.Event.RestBehaviorType.Default);
+            ev.Instructions.AddRange(new[]
+            {
+                // --- First trigger
+                // ParseAdd("WAIT Fixed Time (Seconds) (15)"),
+                ParseAdd($"IF Character Has State Info (0,10000,275,1,0,1)"),
+                // ParseAdd("Record User Disp Log (11270, 20000, 0, -1)"), // Extra talisman slot
+                // --- Action
+                // new EMEVD.Instruction(2004, 88, new List<object>{ 10000, 50230 }),
+                // new EMEVD.Instruction(2007, 21, new List<object>{ 3000 }),
+                // new EMEVD.Instruction(2004, 90, new List<object>{ }),
+                // new EMEVD.Instruction(2004, 91, new List<object>{ 10000661, 912000080 }),
+                // new EMEVD.Instruction(2003, 14, new List<object> { (byte)60, (byte)43, (byte)38, (byte)00, 1043382200, 0 }),
+                // new EMEVD.Instruction(2003, 113, new List<object> { (byte)60, (byte)43, (byte)38, (byte)00, 1043382200, 0 }),
+                // new EMEVD.Instruction(2003, 110, new List<object> { 1f }),
+                // new EMEVD.Instruction(2003, 111, new List<object> { 100, 20000 }),
+                // new EMEVD.Instruction(2003, 113, new List<object> { 19, 0, 2 }),
+                // 1044360200
+                // new EMEVD.Instruction(2003, 116, new List<object> { 20000 }),
+                // new EMEVD.Instruction(2004, 86, new List<object> { }), // Add flask
+                ParseAdd($"IF Event Flag (0, 1, 0, 7700)"),
+                // --- Second trigger
+                // ParseAdd("WAIT Fixed Time (Seconds) (0.1)"),
+                // ParseAdd($"IF Character Has State Info (0,10000,275,1,0,1)"),
+                ParseAdd("Record User Disp Log (11210, 20000, 0, -1)"), // Condemned has invaded
+                // --- Action
+                // new EMEVD.Instruction(2004, 92, new List<object>{ (byte)3, 50230 }),
+                // new EMEVD.Instruction(2007, 19, new List<object>{ 4010 }),
+                // new EMEVD.Instruction(2004, 88, new List<object>{ 10000, 50730 }),
+                // new EMEVD.Instruction(2004, 87, new List<object> { }), // Refill flasks?
+                // ParseAdd("WAIT Fixed Time (Seconds) (0.1)"),
+                // ParseAdd("END Unconditionally (1)")
+            });
+            if (args.Contains("weather"))
+            {
+                ev.Instructions.Clear();
+                List<int> types = Enumerable.Range(0, 24).ToList();
+                types.Add(-1);
+                List<int> banners = new() { 82, 80, 81 };  // 0 1 2 -> 3 1 2
+                foreach (int type in types)
+                {
+                    ev.Instructions.AddRange(new[]
+                    {
+                        ParseAdd($"IF Character Has State Info (0,10000,275,1,0,1)"),
+                        ParseAdd($"Change Weather({type}, -1, 1)"),
+                        ParseAdd("WAIT Fixed Time (Seconds) (2)"),
+                        ParseAdd($"Refill Estus ()"),
+                        // ParseAdd("Add Estus Charge ()"),
+                    });
+                    if (type >= 0)
+                    {
+                        int banner = banners[type % banners.Count];
+                        ev.Instructions.Add(ParseAdd($"Display Text Effect ({banner})"));
+                    }
+                }
+            }
+
+            addEvent("common", ev);
+
+            if (args.Contains("warp"))
+            {
+                EMEVD.Event rtWarp = new EMEVD.Event(id++, EMEVD.Event.RestBehaviorType.Default);
+                // rtWarp.Instructions.Add(ParseAdd("Warp Player (60, 43, 38, 0, 1043382200, 0)"));
+                rtWarp.Instructions.Add(ParseAdd("Warp Player (18, 0, 0, 0, 18002200, 0)"));
+                addEvent("m10_00_00_00", rtWarp);
+            }
+
+            // constructor.Instructions.Insert(0, new EMEVD.Instruction(2003, 66, new List<object> { 0, 7602, 1 }));
+            // constructor.Instructions.Insert(0, new EMEVD.Instruction(2003, 14, new List<object> { (byte)60, (byte)43, (byte)38, (byte)00, 1043382200, 0 }));
+            // constructor.Instructions.Insert(0, new EMEVD.Instruction(2003, 14, new List<object> { (byte)19, (byte)00, (byte)00, (byte)00, 19002300, 0 }));
+        }
+
         private static readonly DCX.Type quickDcx = DCX.Type.DCX_DFLT_11000_44_9;
         public void RunEldenTests(IList<string> args)
         {
@@ -418,14 +666,15 @@ namespace DarkScript3
             }
         }
 
-        public void DumpAc6Unknown()
+        public void DumpUnknown()
         {
             InstructionDocs docs = new InstructionDocs("er-common.emedf.json");
             doc = docs.DOC;
             SortedSet<(int, int)> used = new();
             Dictionary<(int, int), int> bad = new();
             Dictionary<(int, int), SortedSet<int>> badBytes = new();
-            string dir = @"C:\Program Files (x86)\Steam\steamapps\common\ARMORED CORE VI FIRES OF RUBICON\Game\event";
+            // string dir = @"C:\Program Files (x86)\Steam\steamapps\common\ARMORED CORE VI FIRES OF RUBICON\Game\event";
+            string dir = @"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING NIGHTREIGN\Game\event";
             foreach (string path in Directory.GetFiles(dir, "*.emevd.dcx"))
             {
                 string fileName = Path.GetFileName(path);
@@ -460,6 +709,7 @@ namespace DarkScript3
                     }
                 }
             }
+            string prev = "";
             foreach (var insId in used)
             {
                 (int bank, int id) = insId;
@@ -492,7 +742,20 @@ namespace DarkScript3
                     name = instrDoc.Name;
                     args = instrDoc.Arguments.Select(a => (a.EnumName == null ? "" : $"{a.EnumName} ") + $"{RevTypes[(int)a.Type]} {a.Name}").ToList();
                 }
-                Console.WriteLine($"{insStr}, {name}{string.Join("", args.Select(s => $", {s}"))}");
+                string desc = $"{name}{string.Join("", args.Select(s => $", {s}"))}";
+                if (desc.Contains("XUnknown"))
+                {
+                    if (!prev.Contains("XUnknown")) Console.WriteLine();
+                    string hexId = $">0x{id:x}";
+                    Console.WriteLine($">{hexId.PadRight(insStr.Length)}, {desc}");
+                    Console.WriteLine($">{insStr}, {desc}");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine($"{insStr}, {desc}");
+                }
+                prev = desc;
             }
         }
 
@@ -724,13 +987,22 @@ namespace DarkScript3
             }
         }
 
+        // InstructionDocs helper
         public void AddUnknownValues(EMEDF emedf, string csv)
         {
             doc = emedf;
+            Dictionary<int, string> bankNames = new()
+            {
+                [10] = "Condition - Sound",
+                [1010] = "Control Flow - Sound",
+                [1012] = "Control Flow - Map",
+            };
             foreach (string line in File.ReadAllLines(csv))
             {
                 string[] cells = line.Split(",").Select(s => s.Trim()).ToArray();
                 string cmd = cells[0];
+                if (!cmd.StartsWith('>')) continue;
+                cmd = cmd.Substring(1);
                 int bank, id;
                 try
                 {
@@ -741,6 +1013,7 @@ namespace DarkScript3
                     continue;
                 }
                 string name = cells[1].Trim(new[] { '?', ' ' });
+                if (name.Contains("XUnknown")) continue;
                 List<EMEDF.ArgDoc> args = cells.Skip(2)
                     .Where(c => !string.IsNullOrWhiteSpace(c))
                     .Select(c => ParseArgType(c))
@@ -748,7 +1021,8 @@ namespace DarkScript3
                 EMEDF.ClassDoc classDoc = doc[bank];
                 if (classDoc == null)
                 {
-                    doc.Classes.Add(new EMEDF.ClassDoc { Name = "Unk", Index = bank, Instructions = new() });
+                    string bankName = bankNames[bank];  // $"Unk Bank {bank}"
+                    doc.Classes.Add(new EMEDF.ClassDoc { Name = bankName, Index = bank, Instructions = new() });
                 }
                 EMEDF.InstrDoc instrDoc = doc[bank][id];
                 if (instrDoc == null)
@@ -782,10 +1056,11 @@ namespace DarkScript3
                 ["er"] = @"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING\Game\event",
                 // ["er"] = @"C:\Users\matt\Downloads\ModData\event_erc",
                 ["ac6"] = @"C:\Program Files (x86)\Steam\steamapps\common\ARMORED CORE VI FIRES OF RUBICON\Game\event",
+                ["nr"] = @"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING NIGHTREIGN\Game\event",
             };
             foreach ((string game, string dir) in defaultGameDirs)
             {
-                // if (game != "er") continue;
+                if (game != "nr") continue;
                 List<string> paths = Directory.GetFiles(dir, "*.emevd").Concat(Directory.GetFiles(dir, "*.emevd.dcx")).ToList();
                 if (game == "ds3") paths.RemoveAll(p => Path.GetFileName(p).StartsWith("m2"));
                 Dictionary<string, EMEVD> emevds = paths.ToDictionary(
@@ -1085,11 +1360,12 @@ namespace DarkScript3
 
         public void ValidateEmedf(ICollection<string> opt)
         {
-            InstructionDocs docs = new InstructionDocs("ac6-common.emedf.json");
+            InstructionDocs docs = new InstructionDocs("nr-common.emedf.json");
             doc = docs.DOC;
             Dictionary<string, List<List<object>>> allArgs = new Dictionary<string, List<List<object>>>();
             // string dir = @"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING\Game\event";
-            string dir = @"C:\Program Files (x86)\Steam\steamapps\common\ARMORED CORE VI FIRES OF RUBICON\Game\event";
+            // string dir = @"C:\Program Files (x86)\Steam\steamapps\common\ARMORED CORE VI FIRES OF RUBICON\Game\event";
+            string dir = @"C:\Program Files (x86)\Steam\steamapps\common\ELDEN RING NIGHTREIGN\Game\event";
             foreach (string path in Directory.GetFiles(dir, "*.emevd.dcx"))
             {
                 string fileName = Path.GetFileName(path);
