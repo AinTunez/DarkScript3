@@ -225,7 +225,7 @@ section {
 <section class="instr condinstr">
 <h3 id="IfElapsedFrames"><a href="#IfElapsedFrames" class="selfref"><code>IfElapsedFrames</code></a> <span class="sectioninfo">Instruction 1[01]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m13_00_00_00, m15_00_00_00, m19_00_00_00, m30_30_00_00, m45_53_00_00, m48_50_00_00, m48_60_00_00, m49_42_00_00, m60_43_36_50, m60_43_39_10, m60_45_37_30</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m13_00_00_00, m15_00_00_00, m18_00_00_00, m19_00_00_00, m30_30_00_00, m45_53_00_00, m48_50_00_00, m48_60_00_00, m49_42_00_00, m60_43_36_50, m60_43_39_10, m60_45_37_30</p>
 <pre>IfElapsedFrames(
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     int targetTimeFrames)</pre><p>Condition function: <code><a href="#ElapsedFrames">ElapsedFrames</a></code></p>
@@ -565,7 +565,7 @@ section {
 <section class="instr condinstr">
 <h3 id="IfPlayMode"><a href="#IfPlayMode" class="selfref"><code>IfPlayMode</code></a> <span class="sectioninfo">Instruction 3[40]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in m12_00_00_00, m18_00_00_00, m19_00_00_00</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m12_00_00_00, m18_00_00_00, m45_51_00_00, m46_50_00_00, m46_51_00_00, m46_52_00_00, m46_53_00_00, m46_54_00_00, and 19 others</p>
 <pre>IfPlayMode(
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     byte unknownPlayMode)</pre><p>Condition function: <code><a href="#IsPlayMode">IsPlayMode</a></code></p>
@@ -713,10 +713,10 @@ section {
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     byte unknownRequestGameMode)</pre><p>Condition function: <code><a href="#IsRequestGameMode">IsRequestGameMode</a></code></p>
 </div></section>
-<section class="instr condinstr unused">
+<section class="instr condinstr">
 <h3 id="IfIsCampaignSession"><a href="#IfIsCampaignSession" class="selfref"><code>IfIsCampaignSession</code></a> <span class="sectioninfo">Instruction 3[57]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo sectionunused">Unused</p>
+<p class="sectionusage usageinfo">Used in common_func</p>
 <pre>IfIsCampaignSession(
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     bool inSession)</pre><p>Condition function: <code><a href="#IsCampaignSession">IsCampaignSession</a></code></p>
@@ -739,13 +739,21 @@ section {
     sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     int targetAmount)</pre><p>Condition function: <code><a href="#SpecialSouls">SpecialSouls</a></code></p>
 </div></section>
-<section class="instr condinstr unused">
+<section class="instr condinstr">
 <h3 id="IfTargetingBoss"><a href="#IfTargetingBoss" class="selfref"><code>IfTargetingBoss</code></a> <span class="sectioninfo">Instruction 3[60]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo sectionunused">Unused</p>
+<p class="sectionusage usageinfo">Used in common_func, m12_00_00_00</p>
 <pre>IfTargetingBoss(
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     byte&lt;<a href="#TargetBoss">TargetBoss</a>&gt; targetBoss)</pre><p>Condition function: <code><a href="#TargetingBoss">TargetingBoss</a></code></p>
+</div></section>
+<section class="instr condinstr">
+<h3 id="IfIsPlayerCount"><a href="#IfIsPlayerCount" class="selfref"><code>IfIsPlayerCount</code></a> <span class="sectioninfo">Instruction 3[61]</span></h3>
+<div class="sectioncontents">
+<p class="sectionusage usageinfo">Used in common</p>
+<pre>IfIsPlayerCount(
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    byte count)</pre><p>Condition function: <code><a href="#IsPlayerCount">IsPlayerCount</a></code></p>
 </div></section>
 <h2 id="4_Condition_Character"><a href="#4_Condition_Character" class="selfref">4 - Condition - Character</a></h2>
 <section class="instr condinstr">
@@ -820,7 +828,7 @@ section {
 <section class="instr condinstr">
 <h3 id="IfCharacterBackreadStatus"><a href="#IfCharacterBackreadStatus" class="selfref"><code>IfCharacterBackreadStatus</code></a> <span class="sectioninfo">Instruction 4[07]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m35_90_00_00, m60_43_36_50, m60_43_39_10</p>
+<p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m18_00_00_00, m35_90_00_00, m60_43_36_50, m60_43_39_10</p>
 <pre>IfCharacterBackreadStatus(
     sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
     uint targetEntityId, 
@@ -1054,6 +1062,17 @@ section {
     uint targetEntityId, 
     bool exists)</pre><p>Condition function: <code><a href="#RandomAppearLot">RandomAppearLot</a></code></p>
 </div></section>
+<section class="instr condinstr unused">
+<h3 id="IfHasEnemyMutation"><a href="#IfHasEnemyMutation" class="selfref"><code>IfHasEnemyMutation</code></a> <span class="sectioninfo">Instruction 4[40]</span></h3>
+<div class="sectioncontents">
+<p class="sectionusage usageinfo sectionunused">Unused</p>
+<pre>IfHasEnemyMutation(
+    sbyte&lt;<a href="#ConditionGroup">ConditionGroup</a>&gt; resultConditionGroup, 
+    short mutationId, 
+    uint unknown, 
+    byte unknown, 
+    bool hasMutation)</pre><p>Condition function: <code><a href="#HasEnemyMutation">HasEnemyMutation</a></code></p>
+</div></section>
 <h2 id="5_Condition_Asset"><a href="#5_Condition_Asset" class="selfref">5 - Condition - Asset</a></h2>
 <section class="instr condinstr">
 <h3 id="IfAssetDestroyed"><a href="#IfAssetDestroyed" class="selfref"><code>IfAssetDestroyed</code></a> <span class="sectioninfo">Instruction 5[00]</span></h3>
@@ -1223,7 +1242,7 @@ section {
 <section class="instr condinstr">
 <h3 id="SkipIfConditionGroupStateUncompiled"><a href="#SkipIfConditionGroupStateUncompiled" class="selfref"><code>SkipIfConditionGroupStateUncompiled</code></a> <span class="sectioninfo">Instruction 1000[01]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m12_00_00_00, m19_00_00_00, m32_00_00_00, m35_90_00_00, m40_90_00_00, m47_80_00_00, m48_90_00_00, and 7 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m12_00_00_00, m19_00_00_00, m32_00_00_00, m35_90_00_00, m40_90_00_00, m45_51_00_00, m46_50_00_00, and 32 others</p>
 <pre>SkipIfConditionGroupStateUncompiled(
     byte numberOfSkippedLines, 
     byte&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
@@ -1231,7 +1250,7 @@ section {
 <section class="instr condinstr">
 <h3 id="EndIfConditionGroupStateUncompiled"><a href="#EndIfConditionGroupStateUncompiled" class="selfref"><code>EndIfConditionGroupStateUncompiled</code></a> <span class="sectioninfo">Instruction 1000[02]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m40_00_00_00, m45_51_00_00, m46_51_00_00, m46_52_00_00, m46_53_00_00, m46_54_00_00, m46_55_00_00, and 28 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m18_00_00_00, m40_00_00_00, m45_51_00_00, m46_51_00_00, m46_52_00_00, m46_53_00_00, m46_54_00_00, and 29 others</p>
 <pre>EndIfConditionGroupStateUncompiled(
     byte&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
     byte&lt;<a href="#ConditionState">ConditionState</a>&gt; desiredConditionGroupState, 
@@ -1251,7 +1270,7 @@ section {
 <section class="instr condinstr">
 <h3 id="SkipIfComparison"><a href="#SkipIfComparison" class="selfref"><code>SkipIfComparison</code></a> <span class="sectioninfo">Instruction 1000[05]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common_func, m18_00_00_00, m19_00_00_00, m30_00_00_00, m30_30_00_00, m32_00_00_00, m32_10_00_00, m32_20_00_00, m34_00_00_00, m34_10_00_00, and 50 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m18_00_00_00, m19_00_00_00, m30_00_00_00, m30_30_00_00, m32_00_00_00, m32_10_00_00, m32_20_00_00, m34_00_00_00, and 51 others</p>
 <pre>SkipIfComparison(
     byte numberOfSkippedLines, 
     sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
@@ -2070,6 +2089,39 @@ section {
     uint targetEntityId, 
     bool exists)</pre><p>Condition function: <code><a href="#RandomAppearLot">RandomAppearLot</a></code></p>
 </div></section>
+<section class="instr condinstr unused">
+<h3 id="SkipIfHasEnemyMutation"><a href="#SkipIfHasEnemyMutation" class="selfref"><code>SkipIfHasEnemyMutation</code></a> <span class="sectioninfo">Instruction 1004[12]</span></h3>
+<div class="sectioncontents">
+<p class="sectionusage usageinfo sectionunused">Unused</p>
+<pre>SkipIfHasEnemyMutation(
+    byte numberOfSkippedLines, 
+    short mutationId, 
+    uint unknown, 
+    byte unknown, 
+    bool hasMutation)</pre><p>Condition function: <code><a href="#HasEnemyMutation">HasEnemyMutation</a></code></p>
+</div></section>
+<section class="instr condinstr unused">
+<h3 id="GotoIfHasEnemyMutation"><a href="#GotoIfHasEnemyMutation" class="selfref"><code>GotoIfHasEnemyMutation</code></a> <span class="sectioninfo">Instruction 1004[13]</span></h3>
+<div class="sectioncontents">
+<p class="sectionusage usageinfo sectionunused">Unused</p>
+<pre>GotoIfHasEnemyMutation(
+    byte&lt;<a href="#Label">Label</a>&gt; label, 
+    short mutationId, 
+    uint unknown, 
+    byte unknown, 
+    bool hasMutation)</pre><p>Condition function: <code><a href="#HasEnemyMutation">HasEnemyMutation</a></code></p>
+</div></section>
+<section class="instr condinstr">
+<h3 id="EndIfHasEnemyMutation"><a href="#EndIfHasEnemyMutation" class="selfref"><code>EndIfHasEnemyMutation</code></a> <span class="sectioninfo">Instruction 1004[14]</span></h3>
+<div class="sectioncontents">
+<p class="sectionusage usageinfo">Used in common_func</p>
+<pre>EndIfHasEnemyMutation(
+    byte&lt;<a href="#EventEndType">EventEndType</a>&gt; executionEndType, 
+    short mutationId, 
+    uint unknown, 
+    byte unknown, 
+    bool hasMutation)</pre><p>Condition function: <code><a href="#HasEnemyMutation">HasEnemyMutation</a></code></p>
+</div></section>
 <h2 id="1005_Control_Flow_Asset"><a href="#1005_Control_Flow_Asset" class="selfref">1005 - Control Flow - Asset</a></h2>
 <section class="instr unused">
 <h3 id="WaitForAssetDestroyed"><a href="#WaitForAssetDestroyed" class="selfref"><code>WaitForAssetDestroyed</code></a> <span class="sectioninfo">Instruction 1005[00]</span></h3>
@@ -2127,7 +2179,7 @@ section {
 <section class="instr condinstr">
 <h3 id="SkipIfMapVariationId"><a href="#SkipIfMapVariationId" class="selfref"><code>SkipIfMapVariationId</code></a> <span class="sectioninfo">Instruction 1012[01]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common_func, m19_00_00_00, m40_00_00_00, m47_70_00_00, m47_80_00_00, m47_90_00_00, m48_00_00_00, m48_10_00_00, m48_20_00_00, m48_30_00_00, and 21 others</p>
+<p class="sectionusage usageinfo">Used in common_func, m19_00_00_00, m30_00_00_00, m30_30_00_00, m32_00_00_00, m32_10_00_00, m32_20_00_00, m34_00_00_00, m34_10_00_00, m34_20_00_00, and 36 others</p>
 <pre>SkipIfMapVariationId(
     byte numberOfSkippedLines, 
     bool isVariation, 
@@ -2251,7 +2303,7 @@ section {
 <section class="instr">
 <h3 id="InitializeCommonEvent"><a href="#InitializeCommonEvent" class="selfref"><code>InitializeCommonEvent</code></a> <span class="sectioninfo">Instruction 2000[06]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, m10_00_00_00, m12_00_00_00, m18_00_00_00, m19_00_00_00, m20_00_00_00, m20_10_00_00, m20_20_00_00, m20_30_00_00, m20_40_00_00, and 166 others</p>
+<p class="sectionusage usageinfo">Used in common, m10_00_00_00, m12_00_00_00, m18_00_00_00, m19_00_00_00, m20_00_00_00, m20_10_00_00, m20_20_00_00, m20_30_00_00, m20_40_00_00, and 168 others</p>
 <pre>InitializeCommonEvent(
     int eventSlotId, 
     uint eventId, 
@@ -2535,7 +2587,7 @@ section {
 <section class="instr">
 <h3 id="ClearEventValue"><a href="#ClearEventValue" class="selfref"><code>ClearEventValue</code></a> <span class="sectioninfo">Instruction 2003[32]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in m10_00_00_00</p>
+<p class="sectionusage usageinfo">Used in common_func, m10_00_00_00</p>
 <pre>ClearEventValue(
     uint baseEventFlagId, 
     uint numberOfUsedFlagBits)</pre></div></section>
@@ -2636,7 +2688,7 @@ section {
 <section class="instr">
 <h3 id="SetEventFlag"><a href="#SetEventFlag" class="selfref"><code>SetEventFlag</code></a> <span class="sectioninfo">Instruction 2003[66]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m12_00_00_00, m13_00_00_00, m13_20_00_00, m15_00_00_00, m18_00_00_00, m19_00_00_00, and 77 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m13_00_00_00, m13_20_00_00, m15_00_00_00, m18_00_00_00, m19_00_00_00, m31_90_00_00, and 76 others</p>
 <pre>SetEventFlag(
     byte&lt;<a href="#TargetEventFlagType">TargetEventFlagType</a>&gt; targetEventFlagType, 
     uint targetEventFlagId, 
@@ -2972,6 +3024,18 @@ section {
 <p class="sectionusage usageinfo">Used in common_func</p>
 <pre>Unknown2003128(
     bool unknown)</pre></div></section>
+<section class="instr">
+<h3 id="OverrideCharacterCreateData"><a href="#OverrideCharacterCreateData" class="selfref"><code>OverrideCharacterCreateData</code></a> <span class="sectioninfo">Instruction 2003[129]</span></h3>
+<div class="sectioncontents">
+<p class="sectionusage usageinfo">Used in common_func</p>
+<pre>OverrideCharacterCreateData(
+    sbyte slot, 
+    uint entityId, 
+    uint entityId2, 
+    uint entityId3, 
+    int npcParamId, 
+    int npcThinkParamId, 
+    int characterParamId)</pre></div></section>
 <h2 id="2004_Character"><a href="#2004_Character" class="selfref">2004 - Character</a></h2>
 <section class="instr">
 <h3 id="SetCharacterAIState"><a href="#SetCharacterAIState" class="selfref"><code>SetCharacterAIState</code></a> <span class="sectioninfo">Instruction 2004[01]</span></h3>
@@ -3037,7 +3101,7 @@ section {
 <section class="instr">
 <h3 id="SetCharacterGravity"><a href="#SetCharacterGravity" class="selfref"><code>SetCharacterGravity</code></a> <span class="sectioninfo">Instruction 2004[10]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m30_30_00_00, m35_90_00_00, m47_70_00_00</p>
+<p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m18_00_00_00, m30_30_00_00, m35_90_00_00, m47_70_00_00</p>
 <pre>SetCharacterGravity(
     uint entityId, 
     byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
@@ -3124,7 +3188,7 @@ section {
 <p class="sectionusage usageinfo sectionunused">Unused</p>
 <pre>SetCharacterAIId(
     uint entityId, 
-    int aiId)</pre></div></section>
+    int npcThinkParamId)</pre></div></section>
 <section class="instr">
 <h3 id="RequestCharacterAIReplan"><a href="#RequestCharacterAIReplan" class="selfref"><code>RequestCharacterAIReplan</code></a> <span class="sectioninfo">Instruction 2004[20]</span></h3>
 <div class="sectioncontents">
@@ -3151,10 +3215,10 @@ section {
     float bodyDamageCompensation, 
     bool isInvincible, 
     bool startInStoppedState)</pre></div></section>
-<section class="instr unused">
+<section class="instr">
 <h3 id="SetNPCPartHP"><a href="#SetNPCPartHP" class="selfref"><code>SetNPCPartHP</code></a> <span class="sectioninfo">Instruction 2004[23]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo sectionunused">Unused</p>
+<p class="sectionusage usageinfo">Used in common_func</p>
 <pre>SetNPCPartHP(
     uint entityId, 
     int npcPartId, 
@@ -3248,7 +3312,7 @@ section {
 <section class="instr">
 <h3 id="SetCharacterDefaultBackreadState"><a href="#SetCharacterDefaultBackreadState" class="selfref"><code>SetCharacterDefaultBackreadState</code></a> <span class="sectioninfo">Instruction 2004[35]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m12_00_00_00, m30_30_00_00, m35_90_00_00</p>
+<p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m12_00_00_00, m18_00_00_00, m30_30_00_00, m35_90_00_00</p>
 <pre>SetCharacterDefaultBackreadState(
     uint entityId, 
     byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; disabledEnabled)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
@@ -3446,7 +3510,7 @@ section {
 <section class="instr">
 <h3 id="SetCharacterFadeOnEnable"><a href="#SetCharacterFadeOnEnable" class="selfref"><code>SetCharacterFadeOnEnable</code></a> <span class="sectioninfo">Instruction 2004[73]</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m13_00_00_00, m60_44_39_00, m60_44_39_30, m60_44_39_50</p>
+<p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m13_00_00_00, m18_00_00_00, m60_44_39_00, m60_44_39_30, m60_44_39_50</p>
 <pre>SetCharacterFadeOnEnable(
     uint characterEntityId, 
     byte&lt;<a href="#DisabledEnabled">DisabledEnabled</a>&gt; state)</pre><p class="liststart cond">Simpler versions:</p><ul class="condlist cond">
@@ -3576,6 +3640,17 @@ section {
 <pre>ChangeHeroGarbMenuSelection(
     byte&lt;<a href="#Hero">Hero</a>&gt; hero, 
     int characterParamId)</pre></div></section>
+<section class="instr">
+<h3 id="UnknownNPCPart200493"><a href="#UnknownNPCPart200493" class="selfref"><code>UnknownNPCPart200493</code></a> <span class="sectioninfo">Instruction 2004[93]</span></h3>
+<div class="sectioncontents">
+<p class="sectionusage usageinfo">Used in common_func</p>
+<pre>UnknownNPCPart200493(
+    uint entityId, 
+    int npcPartId, 
+    int npcPartId2, 
+    int npcPartId3, 
+    int npcPartId4, 
+    int npcPartId5)</pre></div></section>
 <h2 id="2005_Asset"><a href="#2005_Asset" class="selfref">2005 - Asset</a></h2>
 <section class="instr">
 <h3 id="RequestAssetDestruction"><a href="#RequestAssetDestruction" class="selfref"><code>RequestAssetDestruction</code></a> <span class="sectioninfo">Instruction 2005[01]</span></h3>
@@ -3857,6 +3932,12 @@ section {
 <p class="sectionusage usageinfo">Used in common</p>
 <pre>UnknownTextEffect200721(
     int textEffectParamId)</pre></div></section>
+<section class="instr">
+<h3 id="UnknownText200722"><a href="#UnknownText200722" class="selfref"><code>UnknownText200722</code></a> <span class="sectioninfo">Instruction 2007[22]</span></h3>
+<div class="sectioncontents">
+<p class="sectionusage usageinfo">Used in m10_00_00_00</p>
+<pre>UnknownText200722(
+    int unknown)</pre></div></section>
 <h2 id="2008_Camera"><a href="#2008_Camera" class="selfref">2008 - Camera</a></h2>
 <section class="instr">
 <h3 id="ChangeCamera"><a href="#ChangeCamera" class="selfref"><code>ChangeCamera</code></a> <span class="sectioninfo">Instruction 2008[01]</span></h3>
@@ -4105,7 +4186,7 @@ section {
 <section class="cond">
 <h3 id="Signed"><a href="#Signed" class="selfref"><code>Signed</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common_func, m18_00_00_00, m19_00_00_00, m30_00_00_00, m30_30_00_00, m32_00_00_00, m32_10_00_00, m32_20_00_00, m34_00_00_00, m34_10_00_00, and 50 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m18_00_00_00, m19_00_00_00, m30_00_00_00, m30_30_00_00, m32_00_00_00, m32_10_00_00, m32_20_00_00, m34_00_00_00, and 51 others</p>
 <pre>CompareSigned(
     sbyte&lt;<a href="#ComparisonType">ComparisonType</a>&gt; comparisonType, 
     int lefthandSide, 
@@ -4135,7 +4216,7 @@ section {
 <section class="cond">
 <h3 id="ElapsedFrames"><a href="#ElapsedFrames" class="selfref"><code>ElapsedFrames</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m13_00_00_00, m15_00_00_00, m19_00_00_00, m30_30_00_00, m45_53_00_00, m48_50_00_00, m48_60_00_00, m49_42_00_00, m60_43_36_50, m60_43_39_10, m60_45_37_30</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m13_00_00_00, m15_00_00_00, m18_00_00_00, m19_00_00_00, m30_30_00_00, m45_53_00_00, m48_50_00_00, m48_60_00_00, m49_42_00_00, m60_43_36_50, m60_43_39_10, m60_45_37_30</p>
 <pre>ElapsedFrames(
     int targetTimeFrames)</pre></div></section>
 <section class="cond">
@@ -4491,7 +4572,7 @@ section {
 <section class="cond">
 <h3 id="IsPlayMode"><a href="#IsPlayMode" class="selfref"><code>IsPlayMode</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in m12_00_00_00, m18_00_00_00, m19_00_00_00</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m12_00_00_00, m18_00_00_00, m45_51_00_00, m46_50_00_00, m46_51_00_00, m46_52_00_00, m46_53_00_00, m46_54_00_00, and 19 others</p>
 <pre>IsPlayMode(
     byte unknownPlayMode)</pre></div></section>
 <section class="cond">
@@ -4640,7 +4721,7 @@ section {
 <section class="cond">
 <h3 id="IsCampaignSession"><a href="#IsCampaignSession" class="selfref"><code>IsCampaignSession</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common</p>
+<p class="sectionusage usageinfo">Used in common, common_func</p>
 <pre>IsCampaignSessionState(
     bool inSession)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
 <li><code>IsCampaignSession()</code>
@@ -4672,9 +4753,15 @@ section {
 <section class="cond">
 <h3 id="TargetingBoss"><a href="#TargetingBoss" class="selfref"><code>TargetingBoss</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m12_00_00_00</p>
 <pre>TargetingBoss(
     byte&lt;<a href="#TargetBoss">TargetBoss</a>&gt; targetBoss)</pre></div></section>
+<section class="cond">
+<h3 id="IsPlayerCount"><a href="#IsPlayerCount" class="selfref"><code>IsPlayerCount</code></a> <span class="sectioninfo">Condition function</span></h3>
+<div class="sectioncontents">
+<p class="sectionusage usageinfo">Used in common</p>
+<pre>IsPlayerCount(
+    byte count)</pre></div></section>
 <section class="cond">
 <h3 id="ShowBlood"><a href="#ShowBlood" class="selfref"><code>ShowBlood</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
@@ -4761,7 +4848,7 @@ section {
 <section class="cond">
 <h3 id="CharacterBackreadStatus"><a href="#CharacterBackreadStatus" class="selfref"><code>CharacterBackreadStatus</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m35_90_00_00, m60_43_36_50, m60_43_39_10</p>
+<p class="sectionusage usageinfo">Used in common_func, m10_00_00_00, m18_00_00_00, m35_90_00_00, m60_43_36_50, m60_43_39_10</p>
 <pre>CharacterBackreadStatusState(
     uint targetEntityId, 
     bool isBackread<span class="optarg">, 
@@ -5006,6 +5093,19 @@ section {
 </ul>
 </div></section>
 <section class="cond">
+<h3 id="HasEnemyMutation"><a href="#HasEnemyMutation" class="selfref"><code>HasEnemyMutation</code></a> <span class="sectioninfo">Condition function</span></h3>
+<div class="sectioncontents">
+<p class="sectionusage usageinfo">Used in common_func</p>
+<pre>HasEnemyMutationState(
+    short mutationId, 
+    uint unknown, 
+    byte unknown, 
+    bool hasMutation)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
+<li><code>HasEnemyMutation(short mutationId, uint unknown, byte unknown)</code>
+<br/><span class="conddetails">Where <code>hasMutation = true or false</code></span></li>
+</ul>
+</div></section>
+<section class="cond">
 <h3 id="AssetDestroyed"><a href="#AssetDestroyed" class="selfref"><code>AssetDestroyed</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common_func, m40_00_00_00, m40_90_00_00, m60_42_36_00, m60_42_36_10, m60_42_36_20</p>
@@ -5150,7 +5250,7 @@ section {
 <section class="cond">
 <h3 id="IsMapVariation"><a href="#IsMapVariation" class="selfref"><code>IsMapVariation</code></a> <span class="sectioninfo">Condition function</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common_func, m19_00_00_00, m32_20_00_00, m34_00_00_00, m34_10_00_00, m34_20_00_00, m40_00_00_00, m40_90_00_00, m46_50_00_00, m46_60_00_00, and 29 others</p>
+<p class="sectionusage usageinfo">Used in common_func, m19_00_00_00, m30_00_00_00, m30_30_00_00, m32_00_00_00, m32_10_00_00, m32_20_00_00, m34_00_00_00, m34_10_00_00, m34_20_00_00, and 37 others</p>
 <pre>IsMapVariationState(
     bool isVariation, 
     byte mapVariationId)</pre><p class="liststart">Simpler version:</p><ul class="condlist">
@@ -5207,7 +5307,7 @@ section {
 <p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m15_00_00_00</p>
 <ul class="enumlist">
 <li><code>LogicalOperationType.AllON = 0</code> <span class="enumusage usageinfo">Used in common_func, m10_00_00_00, m15_00_00_00</span></li>
-<li><code>LogicalOperationType.AllOFF = 1</code> <span class="enumusage usageinfo">Used in common, m10_00_00_00</span></li>
+<li><code>LogicalOperationType.AllOFF = 1</code> <span class="enumusage usageinfo">Used in common, common_func, m10_00_00_00</span></li>
 <li><code>LogicalOperationType.NotAllOFF = 2</code> <span class="enumusage usageinfo">Used in common, common_func, m10_00_00_00</span></li>
 <li><code>LogicalOperationType.NotAllON = 3</code> <span class="enumusage usageinfo">Used in common_func</span></li>
 </ul>
@@ -5228,7 +5328,7 @@ section {
 <section class="enum">
 <h3 id="ConditionGroup"><a href="#ConditionGroup" class="selfref"><code>ConditionGroup</code></a> <span class="sectioninfo">Enum</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m12_00_00_00, m13_00_00_00, m13_20_00_00, m15_00_00_00, m18_00_00_00, m19_00_00_00, and 145 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m12_00_00_00, m13_00_00_00, m13_20_00_00, m15_00_00_00, m18_00_00_00, m19_00_00_00, and 146 others</p>
 <ul class="enumlist">
 <li><code>OR_15 = -15</code></li>
 <li><code>OR_14 = -14</code></li>
@@ -5299,7 +5399,7 @@ section {
 <section class="enum">
 <h3 id="ConditionState"><a href="#ConditionState" class="selfref"><code>ConditionState</code></a> <span class="sectioninfo">Enum</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m12_00_00_00, m13_20_00_00, m15_00_00_00, m18_00_00_00, m19_00_00_00, m20_80_00_00, and 113 others</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m12_00_00_00, m13_20_00_00, m15_00_00_00, m18_00_00_00, m19_00_00_00, m20_80_00_00, and 114 others</p>
 <ul class="enumlist">
 <li><code>FAIL = 0</code></li>
 <li><code>PASS = 1</code></li>
@@ -5363,14 +5463,15 @@ section {
 <li><code>TeamType.FriendlyNPC = 26</code> <span class="enumusage usageinfo">Used in m10_00_00_00, m13_00_00_00, m18_00_00_00</span></li>
 <li><code>TeamType.HostileNPC = 27</code> <span class="enumusage usageinfo">Used in common_func</span></li>
 <li><code class="enumunused">TeamType.CoopNPC = 28</code></li>
-<li><code>TeamType.Indiscriminate = 29</code> <span class="enumusage usageinfo">Used in common</span></li>
+<li><code>TeamType.Indiscriminate = 29</code> <span class="enumusage usageinfo">Used in common, common_func</span></li>
 <li><code>TeamType.Object = 30</code> <span class="enumusage usageinfo">Used in common_func, m18_00_00_00</span></li>
 <li><code class="enumunused">TeamType.WhiteBerserker = 31</code></li>
 <li><code class="enumunused">TeamType.RedBerserker = 32</code></li>
-<li><code class="enumunused">TeamType.ArchEnemyTeam = 33</code></li>
+<li><code>TeamType.ArchEnemyTeam = 33</code> <span class="enumusage usageinfo">Used in common_func</span></li>
 <li><code class="enumunused">TeamType.Unknown67 = 67</code></li>
 <li><code class="enumunused">TeamType.Unknown70 = 70</code></li>
 <li><code>TeamType.Unknown77 = 77</code> <span class="enumusage usageinfo">Used in common, common_func</span></li>
+<li><code>TeamType.Unknown79 = 79</code> <span class="enumusage usageinfo">Used in common_func</span></li>
 </ul>
 </div></section>
 <section class="enum">
@@ -5798,11 +5899,11 @@ section {
 <div class="sectioncontents">
 <p class="sectionusage usageinfo">Used in common, common_func, m10_00_00_00, m11_00_00_00, m13_00_00_00, m13_20_00_00, m15_00_00_00, m18_00_00_00</p>
 <ul class="enumlist">
-<li><code>Hero.Wylder = 1</code> <span class="enumusage usageinfo">Used in m10_00_00_00, m18_00_00_00</span></li>
+<li><code>Hero.Wylder = 1</code> <span class="enumusage usageinfo">Used in common_func, m10_00_00_00, m18_00_00_00</span></li>
 <li><code>Hero.Guardian = 2</code> <span class="enumusage usageinfo">Used in common_func, m10_00_00_00</span></li>
-<li><code>Hero.Ironeye = 3</code> <span class="enumusage usageinfo">Used in common, m10_00_00_00</span></li>
-<li><code>Hero.Duchess = 4</code> <span class="enumusage usageinfo">Used in m10_00_00_00</span></li>
-<li><code>Hero.Raider = 5</code> <span class="enumusage usageinfo">Used in m10_00_00_00, m13_20_00_00</span></li>
+<li><code>Hero.Ironeye = 3</code> <span class="enumusage usageinfo">Used in common, common_func, m10_00_00_00</span></li>
+<li><code>Hero.Duchess = 4</code> <span class="enumusage usageinfo">Used in common_func, m10_00_00_00</span></li>
+<li><code>Hero.Raider = 5</code> <span class="enumusage usageinfo">Used in common_func, m10_00_00_00, m13_20_00_00</span></li>
 <li><code>Hero.Revenant = 6</code> <span class="enumusage usageinfo">Used in common, common_func, m10_00_00_00, m15_00_00_00</span></li>
 <li><code>Hero.Recluse = 7</code> <span class="enumusage usageinfo">Used in common_func, m10_00_00_00, m11_00_00_00</span></li>
 <li><code>Hero.Executor = 8</code> <span class="enumusage usageinfo">Used in common, common_func, m10_00_00_00, m13_00_00_00</span></li>
@@ -5827,16 +5928,16 @@ section {
 <section class="enum">
 <h3 id="TargetBoss"><a href="#TargetBoss" class="selfref"><code>TargetBoss</code></a> <span class="sectioninfo">Enum</span></h3>
 <div class="sectioncontents">
-<p class="sectionusage usageinfo">Used in common</p>
+<p class="sectionusage usageinfo">Used in common, common_func, m12_00_00_00</p>
 <ul class="enumlist">
-<li><code>TargetBoss.Gladius = 0</code></li>
-<li><code>TargetBoss.Adel = 1</code></li>
-<li><code>TargetBoss.Gnoster = 2</code></li>
-<li><code>TargetBoss.Maris = 3</code></li>
-<li><code>TargetBoss.Libra = 4</code></li>
-<li><code>TargetBoss.Fulghor = 5</code></li>
-<li><code>TargetBoss.Caligo = 6</code></li>
-<li><code>TargetBoss.Heolstor = 7</code></li>
+<li><code>TargetBoss.Gladius = 0</code> <span class="enumusage usageinfo">Used in common, common_func</span></li>
+<li><code>TargetBoss.Adel = 1</code> <span class="enumusage usageinfo">Used in common</span></li>
+<li><code>TargetBoss.Gnoster = 2</code> <span class="enumusage usageinfo">Used in common</span></li>
+<li><code>TargetBoss.Maris = 3</code> <span class="enumusage usageinfo">Used in common</span></li>
+<li><code>TargetBoss.Libra = 4</code> <span class="enumusage usageinfo">Used in common, common_func</span></li>
+<li><code>TargetBoss.Fulghor = 5</code> <span class="enumusage usageinfo">Used in common</span></li>
+<li><code>TargetBoss.Caligo = 6</code> <span class="enumusage usageinfo">Used in common</span></li>
+<li><code>TargetBoss.Heolstor = 7</code> <span class="enumusage usageinfo">Used in common, m12_00_00_00</span></li>
 </ul>
 </div></section>
 <section class="enum">
