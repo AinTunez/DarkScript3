@@ -986,6 +986,11 @@
       "end": "1003[253]"
     },
     {
+      "name": "IsPlayerCount",
+      "games": ["nr"],
+      "cond": "3[61]"
+    },
+    {
       "name": "ShowBlood",
       "games": ["nr"],
       "goto": "1003[254]"
@@ -1666,6 +1671,19 @@
       "negate_field": "Exists",
       "as_bool": {
         "shortname": "RandomAppearLot"
+      }
+    },
+    {
+      "name": "HasEnemyMutationState",
+      "category": "chr",
+      "games": ["nr"],
+      "cond": "4[40]",
+      "skip": "1004[12]",
+      "goto": "1004[13]",
+      "end": "1004[14]",
+      "negate_field": "Has Mutation",
+      "as_bool": {
+        "shortname": "HasEnemyMutation"
       }
     },
     {

@@ -668,7 +668,7 @@ namespace DarkScript3
 
         public void DumpUnknown()
         {
-            InstructionDocs docs = new InstructionDocs("er-common.emedf.json");
+            InstructionDocs docs = new InstructionDocs("nr-common.emedf.json");
             doc = docs.DOC;
             SortedSet<(int, int)> used = new();
             Dictionary<(int, int), int> bad = new();
