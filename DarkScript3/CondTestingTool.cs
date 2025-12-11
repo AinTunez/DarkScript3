@@ -445,7 +445,7 @@ namespace DarkScript3
                 ["float Fade to White Ratio"] = "float Fade to Black Ratio",
                 ["float Fade to White Time (s)"] = "float Fade to Black Time (s)",
             };
-            EMEDF oldDoc = EMEDF.ReadFile($"DarkScript3/Resources/er-common.emedf.json");
+            EMEDF oldDoc = EMEDF.ReadFile($"DarkScript3/Resources/nr-common.emedf.json");
             foreach (EMEDF.ClassDoc classDoc in oldDoc.Classes)
             {
                 foreach (EMEDF.InstrDoc instrDoc in classDoc.Instructions)

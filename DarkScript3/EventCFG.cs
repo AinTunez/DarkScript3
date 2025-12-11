@@ -968,6 +968,9 @@ namespace DarkScript3
             bool debugPrintEvent = debugPrint;
             if (debugPrint) Console.WriteLine($"$Event({func.ID}, {func.RestBehavior}, function({string.Join(", ", func.Params)}) {{");
 
+            // Temporay for Nightreign, this is a very long event
+            bool forceMin = func.ID.ToString() == "90015446";
+
             // Rewrite control flow operators and initialize CFG
             List<Intermediate> cmds = func.Body;
 
@@ -1537,7 +1540,7 @@ namespace DarkScript3
             // ConditionDAG is not updated here so it can't be used afterwards.
             foreach (FlowNode node in NodeList())
             {
-                if (!options.InlineDefinitions)
+                if (!options.InlineDefinitions || forceMin)
                 {
                     break;
                 }

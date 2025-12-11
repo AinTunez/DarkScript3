@@ -11059,7 +11059,7 @@
               "unk4": 0
             },
             {
-              "name": "Unknown",
+              "name": "Should Multiplayer Restrictions Apply",
               "type": 0,
               "enum_name": "BOOL",
               "default": 0,

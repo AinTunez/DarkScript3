@@ -441,9 +441,13 @@ namespace DarkScript3
             return EventNames;
         }
 
+        // Debugging for "no definition" error, since this is highly stateful.
+        private static readonly TextWriter linkLogger = null;
+
         public InitData.Links LoadLinks(InitData initData)
         {
             List<string> names = new();
+            linkLogger?.WriteLine($"[{initData.BaseDir}] Initializing links for {EmevdPath}, preexisting [{string.Join("; ", initData.Files.Values.Select(f => $"{f.Name}=[source {f.IsSource}, auth {f.IsAuthoritative()}]"))}]");
             foreach (string linkPath in GetLinkedFiles())
             {
                 string name = InitData.GetEmevdName(linkPath);
@@ -464,12 +468,18 @@ namespace DarkScript3
             links.Main = InitData.FromEmevd(docs, EVD, EmevdPath, EventNames);
             if (links.Main.IsAuthoritative())
             {
+                linkLogger?.WriteLine($"[{links.Data.BaseDir}] Unpack: Updating links for authoritative {EmevdPath}, source {links.Main.IsSource}");
                 links.UpdateInitData();
+            }
+            else
+            {
+                linkLogger?.WriteLine($"[{links.Data.BaseDir}] Unpack: Skipping updating links for non-authoritative {EmevdPath}, source {links.Main.IsSource}");
             }
         }
 
         public void UpdateLinksBeforePack(InitData.Links links, string code, InitData.FileInit mainInit = null)
         {
+            linkLogger?.WriteLine($"[{links.Data.BaseDir}] Before pack: Updating links for {EmevdPath + ".js"} (no-op: {mainInit != null})");
             if (mainInit == null)
             {
                 FancyJSCompiler.CompileOutput output = new FancyJSCompiler(JsFileName, code, EventCFG.CFGOptions.GetDefault())
@@ -485,9 +495,18 @@ namespace DarkScript3
             {
                 return;
             }
-            if (links.Main.IsAuthoritative() && links.Main.SetSourceInfo(EmevdPath + ".js"))
+            if (!links.Main.SetSourceInfo(EmevdPath + ".js"))
             {
+                linkLogger?.WriteLine($"[{links.Data.BaseDir}] After pack: Could not update source info for {EmevdPath + ".js"}, source {links.Main.IsSource}");
+            }
+            if (links.Main.IsAuthoritative())
+            {
+                linkLogger?.WriteLine($"[{links.Data.BaseDir}] After pack: Updated init data for {EmevdPath + ".js"}, source {links.Main.IsSource}");
                 links.UpdateInitData();
+            }
+            else
+            {
+                linkLogger?.WriteLine($"[{links.Data.BaseDir}] After pack: Links not authoritative for {EmevdPath}, source {links.Main.IsSource}");
             }
         }
 
@@ -521,12 +540,21 @@ namespace DarkScript3
         {
             if (!InitData.TryGetLinkedFilePath(initData.BaseDir, name, out string linkPath))
             {
-                throw new Exception($"Missing linked file {name} in {initData.BaseDir}");
+                throw new Exception($"[{initData.BaseDir}] Missing linked file {name} in {initData.BaseDir}");
             }
-            if (initData.Files.TryGetValue(name, out InitData.FileInit linkedInit) && !linkedInit.IsStale())
+            if (initData.Files.TryGetValue(name, out InitData.FileInit linkedInit))
             {
-                return;
+                if (linkedInit.IsStale())
+                {
+                    linkLogger?.WriteLine($"- Link {name} was stale, reacquiring");
+                }
+                else
+                {
+                    linkLogger?.WriteLine($"- Link {name} was found");
+                    return;
+                }
             }
+            linkLogger?.WriteLine($"- Link {name} acquired from {linkPath}");
             if (linkPath.EndsWith(".js"))
             {
                 string code = File.ReadAllText(linkPath);

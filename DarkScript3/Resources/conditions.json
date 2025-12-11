@@ -875,6 +875,9 @@
       "name": "InsidePlayAreaByTimeState",
       "games": ["nr"],
       "cond": "3[48]",
+      "skip": "1003[227]",
+      "goto": "1003[228]",
+      "end": "1003[229]",
       "negate_field": "In Play Area",
       "as_bool": {
         "shortname": "InsidePlayAreaByTime"
@@ -883,7 +886,10 @@
     {
       "name": "SmallBaseAttached",
       "games": ["nr"],
-      "cond": "3[49]"
+      "cond": "3[49]",
+      "skip": "1003[230]",
+      "goto": "1003[231]",
+      "end": "1003[232]"
     },
     {
       "name": "CompareMissionProgress",
@@ -994,6 +1000,43 @@
       "name": "ShowBlood",
       "games": ["nr"],
       "goto": "1003[254]"
+    },
+    {
+      "name": "IsPlayerCount",
+      "games": ["nr"],
+      "cond": "3[61]",
+      "skip": "1003[255]",
+      "goto": "1003[256]",
+      "end": "1003[257]"
+    },
+    {
+      "name": "IsMapStableState",
+      "games": ["nr"],
+      "cond": "3[62]",
+      "negate_field": "Is Stable",
+      "as_bools": [{
+        "shortname": "IsEventMapStable",
+        "required": [{
+          "field": "Area ID",
+          "value": 0
+        }, {
+          "field": "Block ID",
+          "value": 0
+        }, {
+          "field": "Region ID",
+          "value": 0
+        }, {
+          "field": "Index ID",
+          "value": 0
+        }]
+      }, {
+          "shortname": "IsMapStable"
+      }]
+    },
+    {
+      "name": "ItemSlotAvailable",
+      "games": ["nr"],
+      "skip": "1003[258]"
     },
     {
       "name": "MapOffsetFlagState",
@@ -1961,6 +2004,8 @@
       "category": "bgm",
       "cond": "10[02]",
       "skip": "1010[04]",
+      "goto": "1010[05]",
+      "end": "1010[06]",
       "negate_field": "Is Playing",
       "as_bool": {
         "shortname": "BossBGMPlaying"
@@ -2278,6 +2323,11 @@
     {
       "games": ["er", "ac6", "nr"],
       "cmd": "2004[38]",
+      "opt_fields": ["Dummy"]
+    },
+    {
+      "games": ["nr"],
+      "cmd": "2008[05]",
       "opt_fields": ["Dummy"]
     },
     {

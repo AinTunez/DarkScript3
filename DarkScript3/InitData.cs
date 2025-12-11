@@ -154,7 +154,7 @@ namespace DarkScript3
                     return false;
                 }
                 string linkEmevd = filePath.EndsWith(".js") ? filePath[..^3] : filePath;
-                return filePath == EmevdPath;
+                return linkEmevd == EmevdPath;
             }
 
             public bool IsAuthoritative() => IsAuthoritative(out _);
