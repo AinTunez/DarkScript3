@@ -755,14 +755,21 @@ namespace DarkScript3
                 return;
             }
             string gameDir = project?.GameEventDirectory;
-            SortedSet<string> allFiles = new SortedSet<string>();
+            SortedSet<string> allFiles = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
             HashSet<string> baseFiles = new HashSet<string>();
             HashSet<string> jsFiles = new HashSet<string>();
+            IEnumerable<string> getDirFiles(string directory)
+            {
+                if (!Directory.Exists(directory))
+                {
+                    return Array.Empty<string>();
+                }
+                return Directory.GetFiles(directory);
+            }
             if (directory != null)
             {
                 // directory need not exist, as gameDir might exist
-                string[] dirFiles = Directory.Exists(directory) ? Directory.GetFiles(directory) : Array.Empty<string>();
-                foreach (string path in dirFiles)
+                foreach (string path in getDirFiles(directory))
                 {
                     string name = Path.GetFileName(path);
                     if (name.EndsWith(".emevd") || name.EndsWith(".emevd.dcx"))
@@ -777,8 +784,7 @@ namespace DarkScript3
                         jsFiles.Add(name);
                     }
                 }
-                string[] gameFiles = gameDir != null && Directory.Exists(gameDir) ? Directory.GetFiles(gameDir) : Array.Empty<string>();
-                foreach (string path in gameFiles)
+                foreach (string path in getDirFiles(gameDir))
                 {
                     string name = Path.GetFileName(path);
                     if (name.EndsWith(".emevd") || name.EndsWith(".emevd.dcx"))
@@ -855,7 +861,6 @@ namespace DarkScript3
                 }
                 fileView.Nodes.Add(node);
             }
-            fileView.Sort();
             fileView.EndUpdate();
             SetWatcherDirectory(Watcher, directory);
             SetWatcherDirectory(GameWatcher, gameDir);

@@ -149,6 +149,10 @@ namespace DarkScript3
                 {
                     DOC = EMEDF.ReadFile(Path.Combine("DarkScript3", resolvedPath));
                 }
+                else if (streamPath.Contains('/') && File.Exists(streamPath))
+                {
+                    DOC = EMEDF.ReadFile(streamPath);
+                }
 #endif
                 else
                 {

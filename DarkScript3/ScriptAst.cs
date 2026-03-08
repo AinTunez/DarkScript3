@@ -33,7 +33,7 @@ namespace DarkScript3
 
             public override string ToString() => $"{(Fancy ? "$" : "")}Event({ID}, {RestBehavior}, function({string.Join(",", Params)}) {{ {string.Join(" ", Body)} }});";
 
-            private static readonly HashSet<long> multiLabelEvents = new() { 11052860, 1600, 1601 };
+            private static readonly HashSet<long> multiLabelEvents = new() { 11052860, 1600, 1601, 90075865, 90075866 };
             public void Print(TextWriter writer)
             {
                 LineTrackingWriter lineWriter = writer as LineTrackingWriter;

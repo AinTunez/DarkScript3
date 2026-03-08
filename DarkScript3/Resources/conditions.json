@@ -992,11 +992,6 @@
       "end": "1003[253]"
     },
     {
-      "name": "IsPlayerCount",
-      "games": ["nr"],
-      "cond": "3[61]"
-    },
-    {
       "name": "ShowBlood",
       "games": ["nr"],
       "goto": "1003[254]"
