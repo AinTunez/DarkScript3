@@ -179,9 +179,16 @@ L0:
 
 $Event(1000, Default, function() {
     $InitializeEvent(0, 1001, 31, 0, 3100974, 0, 7.5);
+    InitializeEvent(0, 1002, 1, 2, 3);
 });
 
 $Event(1001, Default, function(areaId, blockId, regionId, unusedSomething, waitTime) {
     WaitFixedTimeSeconds(waitTime);
     WarpPlayer(areaId, blockId, regionId);
 });
+
+$Event(1002, Default, function(X0_4, X4_4, X8_4) {
+    WaitFixedTimeSeconds(10);
+    InitializeEvent(0, 1002, X8_4, X0_4, X4_4);
+});
+

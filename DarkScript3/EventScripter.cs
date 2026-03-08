@@ -69,7 +69,7 @@ namespace DarkScript3
             try
             {
                 EMEDF.InstrDoc doc = docs.DOC[bank][index];
-                string instr() => $"Instruction {bank}[{index}] ({doc.DisplayName})";
+                string instr() => $"Instruction {bank}[{index:d2}] ({doc.DisplayName})";
                 bool isVar = namedInit || docs.IsVariableLength(doc);
                 if (!namedInit && args.Length < doc.Arguments.Count)
                 {
@@ -91,7 +91,7 @@ namespace DarkScript3
                         // AC6 9810200 requires nested inits, but it's disallowed from named init still
                         if (namedInit)
                         {
-                            throw new Exception("Linked event initializers cannot be dependent on parameters.");
+                            throw new Exception($"Typed event initializer for {instr()} cannot use parameters recursively");
                         }
 
                         if (!InitData.TryParseParam(pstr, out int sourceStartByte, out int length))
@@ -99,23 +99,40 @@ namespace DarkScript3
                             throw new Exception($"Invalid parameter string: {pstr}");
                         }
 
-                        int targetStartByte = docs.FuncBytePositions[doc][i];
+                        EMEDF.ArgDoc argDoc;
+                        int targetStartByte;
+                        List<int> offsets = docs.FuncBytePositions[doc];
+                        if (isVar && i >= doc.Arguments.Count)
+                        {
+                            // Validate explicitly what UnpackArgsWithParams assumes, that all args are int-sized if namedInit is false
+                            EMEDF.ArgDoc nonInt = doc.Arguments.Find(a => InstructionDocs.ByteLengthFromType(a.Type) != 4);
+                            if (nonInt != null)
+                            {
+                                throw new Exception($"{instr()} cannot use parameters as it has non-int-sized argument {nonInt.DisplayName}");
+                            }
+                            targetStartByte = i * 4;
+                            // isVar implies this argument is Vararg
+                            argDoc = doc.Arguments.Last();
+                        }
+                        else
+                        {
+                            targetStartByte = offsets[i];
+                            argDoc = doc.Arguments[i];
+                        }
+
+                        args[i] = argDoc.Default;
+                        // Warn about common error with byte-sized argumnets
+                        int argWidth = InstructionDocs.ByteLengthFromType(argDoc.Type);
+                        if (argWidth != length && !InitData.SideNames.Contains(argDoc.Name))
+                        {
+                            string issue = length > argWidth ? "Other arguments" : "This argument";
+                            AddPackWarning($"Parameter {pstr} has width {length} but is used in {doc.DisplayName} arg #{i + 1} with width {argWidth}. {issue} may be corrupted as a result.");
+                        }
 
                         Parameter p = new Parameter(evt.Instructions.Count, targetStartByte, sourceStartByte, length);
                         evt.Parameters.Add(p);
-                        // This will effectively be quadratic. Can it be done after all instructions are processed?
+                        // This will effectively be quadratic. Can it be done after all instructions are processed? Faster if arguments are mostly sorted, at least.
                         evt.Parameters = evt.Parameters.OrderBy(prm => prm.SourceStartByte).ToList();
-
-                        args[i] = doc.Arguments[i].Default;
-                        if (!isVar)
-                        {
-                            int argWidth = InstructionDocs.ByteLengthFromType(doc.Arguments[i].Type);
-                            if (argWidth != length && !InitData.SideNames.Contains(doc.Arguments[i].Name))
-                            {
-                                string issue = length > argWidth ? "Other arguments" : "This argument";
-                                AddPackWarning($"Parameter {pstr} has width {length} but is used in {doc.DisplayName} arg #{i + 1} with width {argWidth}. {issue} may be corrupted as a result.");
-                            }
-                        }
                     }
                 }
 

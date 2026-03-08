@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -41,8 +42,17 @@ namespace DarkScript3
                     allNames[namesFile] = names = new Dictionary<string, string>();
                     try
                     {
-                        // Best-effort
-                        string fileText = Resource.Text(namesFile);
+                        // Use local file as best-effort
+                        string fileText;
+                        string resolvedPath = Path.Combine("Resources", namesFile);
+                        if (File.Exists(resolvedPath))
+                        {
+                            fileText = File.ReadAllText(resolvedPath);
+                        }
+                        else
+                        {
+                            fileText = Resource.Text(namesFile);
+                        }
                         foreach (string line in fileText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None))
                         {
                             if (line.StartsWith("#")) continue;
@@ -53,9 +63,10 @@ namespace DarkScript3
                             }
                         }
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
                         // Resource not exist, usually
+                        Console.WriteLine($"Failed to read {namesFile}: {e}");
                     }
                 }
                 return names;
